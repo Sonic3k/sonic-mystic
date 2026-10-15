@@ -1,7 +1,8 @@
 // Builds the Nhân số học bundle the API imports (kb/bundle/numerology):
-//   book.json      Lê Đỗ Quỳnh Hương's book section by section and paragraph by paragraph, each paragraph with what it is
-//                  to a reader: the book describing a person (rule), its advice, its words about children, an
-//                  explanation (general), how to compute (method), an example of someone, a figure, a footnote
+//   book.json      Lê Đỗ Quỳnh Hương's book section by section and paragraph by paragraph, each section with the numbers
+//                  it is about, each paragraph with what it is to a reader: the book describing a person (rule), its
+//                  advice, its words about children, an explanation (general), how to compute (method), an example of
+//                  someone, a figure (its chart is read back by the engine's figureOf), a footnote
 //   rules.json     every paragraph that speaks of a person, with the condition under which it does — checked here
 //                  against the engine's condition language
 //   tables.json    the book's tables as data
@@ -13,7 +14,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { TOPICS, parse, symbolsOf } from '@mystic/engine/numerology';
+import { TOPICS, figureOf, parse, symbolsOf } from '@mystic/engine/numerology';
 
 const kb = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const srcDir = process.env.NUMEROLOGY_SOURCE_DIR ?? path.join(kb, 'sources/numerology');
@@ -44,7 +45,10 @@ let cur = null;
 for (const b of blocks) {
   if (b.kind === 'heading') {
     const e = byAt.get(b.id);
-    cur = { code: e.code, title: e.title, parent: e.parent ?? null, kind: e.parent ? 'section' : (/^p\d+$/.test(e.code) ? 'part' : 'section'), page: b.page, at: b.id, topic: inherit(e, 'topic') ?? null, when: inherit(e, 'when') ?? null, paras: [] };
+    const when = inherit(e, 'when') ?? null;
+    const parsed = when ? parse(when) : null;
+    if (parsed?.errors.length) errors.push(`${e.code}: điều kiện lỗi — ${parsed.errors.join('; ')} — ${when}`);
+    cur = { code: e.code, title: e.title, parent: e.parent ?? null, kind: e.parent ? 'section' : (/^p\d+$/.test(e.code) ? 'part' : 'section'), page: b.page, at: b.id, topic: inherit(e, 'topic') ?? null, symbols: [...symbolsOf(parsed?.node)], paras: [] };
     entries.push(cur);
     continue;
   }
@@ -55,7 +59,8 @@ for (const b of blocks) {
   if (!ROLES.has(role) && role !== 'figure' && role !== 'note') errors.push(`đoạn ${b.id}: kind "${role}"`);
   const p = { id: b.id, kind: b.kind, role, page: b.page, text: b.text };
   if (b.pages && b.pages.length > 1) p.pages = b.pages;
-  if (b.kind === 'figure') p.figure = figureOf(b.text);
+  // a figure that draws a birth chart ("3 | - | 9 / 2 | 5 | 8 / …") must read back as one
+  if (b.kind === 'figure' && /^[\d\-(][^/]*\|[^/]*\//.test(b.text.split('||')[1]?.trim() ?? '') && !figureOf(b.text).grid) errors.push(`hình ở khối ${b.id}: không đọc được biểu đồ "${b.text.slice(0, 80)}"`);
   const when = o.when ?? inherit(e, 'when') ?? null, topic = o.topic ?? inherit(e, 'topic') ?? null;
   if (['rule', 'advice', 'child'].includes(role) || (role === 'general' && o.when === 'any()')) {
     if (!when) errors.push(`đoạn ${b.id} (${role}) chưa có điều kiện: "${b.text.slice(0, 70)}"`);
@@ -63,18 +68,6 @@ for (const b of blocks) {
     else p.rule = { when, topic };
   }
   cur.paras.push(p);
-}
-
-/** "[Hình] Hình 4: Biểu đồ ngày sinh 27/5/1983 || 3 | - | 9 / 2 | 5 | 8 / 1 | - | 7 || notes" → caption, grid, notes */
-function figureOf(text) {
-  const parts = text.split('||').map(s => s.trim());
-  const caption = parts[0] || null;
-  let grid = null, notes = parts.slice(1);
-  if (parts[1] && /^[\d\-()]+(\s*\|\s*[\d\-()]+){2}(\s*\/\s*[\d\-()]+(\s*\|\s*[\d\-()]+){2}){2}$/.test(parts[1])) {
-    grid = parts[1].split('/').map(r => r.split('|').map(c => c.trim()));
-    notes = parts.slice(2);
-  }
-  return { caption, grid, notes: notes.join(' · ') || null };
 }
 
 // rules: the paragraphs that speak of a person, each with its parsed condition
@@ -93,7 +86,7 @@ for (const t of tables.tables) if (!byCode.has(t.entry)) errors.push(`bảng ${t
 if (errors.length) { for (const m of errors) console.log(`✗ ${m}`); process.exit(1); }
 
 fs.mkdirSync(out, { recursive: true });
-const book = { source: map.source, entries: entries.map(({ when: _w, ...e }) => ({ ...e, paras: e.paras.map(({ rule: _r, ...p }) => p) })) };
+const book = { source: map.source, entries: entries.map(e => ({ ...e, paras: e.paras.map(({ rule: _r, ...p }) => p) })) };
 fs.writeFileSync(path.join(out, 'book.json'), JSON.stringify(book));
 fs.writeFileSync(path.join(out, 'rules.json'), JSON.stringify({ rules }));
 fs.writeFileSync(path.join(out, 'tables.json'), JSON.stringify(tables));

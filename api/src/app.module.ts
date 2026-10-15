@@ -7,9 +7,11 @@ import { AccessGuard } from './common/access.js';
 import { APP_CONFIG } from './common/tokens.js';
 import type { AppConfig } from './config.js';
 import { createDb, DB, PG_POOL } from './db/db.js';
-import { BooksController, HealthController, MetaController, PeopleController, TuViController } from './http/controllers.js';
+import { BooksController, HealthController, MetaController, NumerologyController, PeopleController, TuViController } from './http/controllers.js';
 import { KnowledgeService } from './kb/knowledge.service.js';
+import { NumerologyService } from './numerology/numerology.service.js';
 import { PeopleService } from './people/people.service.js';
+import { ReadingsService } from './readings/readings.service.js';
 import { SonicHubClient } from './sync/sonic-hub.client.js';
 import { SyncService } from './sync/sync.service.js';
 import { TuViService } from './tuvi/tuvi.service.js';
@@ -26,7 +28,7 @@ export class AppModule {
   static forRoot(config: AppConfig, pool: pg.Pool): DynamicModule {
     return {
       module: AppModule,
-      controllers: [HealthController, MetaController, BooksController, TuViController, PeopleController],
+      controllers: [HealthController, MetaController, BooksController, TuViController, NumerologyController, PeopleController],
       providers: [
         { provide: APP_CONFIG, useValue: config },
         { provide: PG_POOL, useValue: pool },
@@ -35,10 +37,12 @@ export class AppModule {
         PoolLifecycle,
         KnowledgeService,
         TuViService,
+        NumerologyService,
         BooksService,
         SonicHubClient,
         SyncService,
         PeopleService,
+        ReadingsService,
         AiService,
       ],
     };

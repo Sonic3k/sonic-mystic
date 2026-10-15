@@ -1,12 +1,36 @@
-/* The knowledge the engine reads, built from the database and kept in memory until something is edited or imported.
-   Grandma's rules become the engine's 'ba' rules; every other source (the supplement now, other books later) 'bo-sung'. */
+/* The knowledge the engines read, built from the database and kept in memory until something is edited or imported.
+   Tử vi: grandma's rules become the engine's 'ba' rules; every other source (the supplement now, other books later)
+   'bo-sung'. Nhân số học: Lê Đỗ Quỳnh Hương's book, each rule read with its paragraph's text (so rewording a passage
+   rewords what a reading shows). */
 import { createHash } from 'node:crypto';
 import { Inject, Injectable } from '@nestjs/common';
 import { and, asc, eq, inArray, like } from 'drizzle-orm';
 import { compile, type Kb, type Principle, type Rule, type Tone } from '@mystic/engine/tuvi';
-import type { RuleDto, SourceKind } from '@mystic/engine/api';
+import {
+  BOOK_SOURCE, TOPICS, compile as compileNumerology, parse as parseNumerology, symbolsOf,
+  type Kb as NumerologyKb, type RuleKind, type Topic,
+} from '@mystic/engine/numerology';
+import type { NumerologyRuleDto, NumerologySourceDto, RuleDto, SourceKind } from '@mystic/engine/api';
 import { DB, type Db } from '../db/db.js';
 import { entries, passages, ruleTargets, rules, sources, symbols } from '../db/schema.js';
+
+export interface NumerologyEntry { id: number; code: string; title: string; parent: string | null; page: number | null; ordinal: number; depth: number }
+export interface NumerologyKnowledge {
+  kb: NumerologyKb;
+  version: string;
+  /** every rule by code (inactive ones too, marked), as the API shows it */
+  rules: Map<string, NumerologyRuleDto>;
+  /** the numbers and arrows each rule's condition speaks of */
+  symbols: Map<string, string[]>;
+  /** passage id → the code of the rule it is */
+  ruleOfPassage: Map<number, string>;
+  entries: Map<string, NumerologyEntry>;
+  /** entries in the book's order */
+  order: NumerologyEntry[];
+  source: NumerologySourceDto & { id: number; access: 'public' | 'owner' };
+}
+const TOPIC_CODES = new Set<string>(TOPICS.map(t => t.code));
+const RULE_KINDS = new Set(['rule', 'advice', 'child', 'general']);
 
 export interface Knowledge {
   kb: Kb;
@@ -19,14 +43,67 @@ export interface Knowledge {
 @Injectable()
 export class KnowledgeService {
   private cache: Promise<Knowledge> | null = null;
+  private numerologyCache: Promise<NumerologyKnowledge | null> | null = null;
 
   constructor(@Inject(DB) private readonly db: Db) {}
 
-  invalidate(): void { this.cache = null; }
+  invalidate(): void { this.cache = null; this.numerologyCache = null; }
 
   get(): Promise<Knowledge> {
     this.cache ??= this.load().catch(e => { this.cache = null; throw e; });
     return this.cache;
+  }
+
+  /** Nhân số học: the book as the engine reads it — null while the book is not loaded */
+  numerology(): Promise<NumerologyKnowledge | null> {
+    this.numerologyCache ??= this.loadNumerology().catch(e => { this.numerologyCache = null; throw e; });
+    return this.numerologyCache;
+  }
+
+  private async loadNumerology(): Promise<NumerologyKnowledge | null> {
+    const db = this.db;
+    const [src] = await db.select().from(sources).where(eq(sources.code, BOOK_SOURCE));
+    if (!src) return null;
+    const es = await db.select({ id: entries.id, code: entries.code, title: entries.title, parentId: entries.parentId, page: entries.sourceRef, ordinal: entries.ordinal })
+      .from(entries).where(eq(entries.sourceId, src.id)).orderBy(asc(entries.ordinal));
+    const codeOf = new Map(es.map(e => [e.id, e.code]));
+    const order: NumerologyEntry[] = es.map(e => ({ id: e.id, code: e.code, title: e.title, parent: e.parentId !== null ? codeOf.get(e.parentId) ?? null : null, page: e.page, ordinal: e.ordinal, depth: 0 }));
+    const byCode = new Map(order.map(e => [e.code, e]));
+    for (const e of order) { let d = 0; for (let p = e.parent; p; p = byCode.get(p)?.parent ?? null) d++; e.depth = d; }
+
+    const rows = await db.select({
+      id: rules.id, code: rules.code, entryId: rules.entryId, passageId: rules.passageId, ordinal: rules.ordinal, ruleText: rules.text, when: rules.condition,
+      active: rules.active, ruleEdited: rules.editedAt, text: passages.text, passageEdited: passages.editedAt, role: passages.role, page: passages.sourceRef,
+    }).from(rules).leftJoin(passages, eq(passages.id, rules.passageId)).where(eq(rules.sourceId, src.id)).orderBy(asc(rules.ordinal));
+    const topicOf = new Map<number, string>();
+    const ids = rows.map(r => r.id);
+    for (let i = 0; i < ids.length; i += 5000) {
+      const part = await db.select({ ruleId: ruleTargets.ruleId, target: ruleTargets.target }).from(ruleTargets).where(inArray(ruleTargets.ruleId, ids.slice(i, i + 5000)));
+      for (const t of part) if (TOPIC_CODES.has(t.target)) topicOf.set(t.ruleId, t.target);
+    }
+
+    const dtos = new Map<string, NumerologyRuleDto>(), syms = new Map<string, string[]>(), ruleOfPassage = new Map<number, string>();
+    const raw: Parameters<typeof compileNumerology>[0] = [];
+    const hash = createHash('sha256');
+    for (const e of order) hash.update(`${e.code}|${e.title}|${e.parent ?? ''}\n`);
+    for (const r of rows) {
+      const topic = topicOf.get(r.id) as Topic | undefined, entry = codeOf.get(r.entryId);
+      if (!topic || !entry) continue;
+      const kind = (r.role && RULE_KINDS.has(r.role) ? r.role : 'rule') as RuleKind;
+      const text = r.text ?? r.ruleText, when = r.when ?? '';
+      const dto: NumerologyRuleDto = { code: r.code, text, page: r.page, kind, topic, entry, when, edited: !!(r.ruleEdited || r.passageEdited), active: r.active };
+      hash.update(`${r.code}|${text}|${when}|${r.active}|${topic}|${kind}|${entry}\n`);
+      dtos.set(r.code, dto);
+      if (r.passageId !== null) ruleOfPassage.set(r.passageId, r.code);
+      syms.set(r.code, when ? [...symbolsOf(parseNumerology(when).node)] : []);
+      if (r.active && when) raw.push({ id: r.code, topic, entry, ord: r.ordinal, page: r.page ?? undefined, kind, text, when });
+    }
+    return {
+      kb: { rules: compileNumerology(raw), entries: Object.fromEntries(order.map(e => [e.code, { code: e.code, title: e.title, parent: e.parent ?? undefined, ord: e.ordinal }])) },
+      version: hash.digest('hex').slice(0, 16),
+      rules: dtos, symbols: syms, ruleOfPassage, entries: byCode, order,
+      source: { id: src.id, code: src.code, title: src.title, author: src.author, description: src.description, note: src.note, access: src.access },
+    };
   }
 
   private async load(): Promise<Knowledge> {

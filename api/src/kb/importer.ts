@@ -47,6 +47,12 @@ export interface ImportReport { skipped: boolean; version: string; written: numb
 const slug = (s: string) => fold(s).replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
 const now = sql`now()`;
 
+/** every discipline the engine knows, so pages can list what is coming (a description edited here is kept) */
+export async function upsertDisciplines(tx: DbExecutor): Promise<void> {
+  await tx.insert(disciplines).values(DISCIPLINES.map((d, i) => ({ code: d.code, name: d.name, ready: d.ready, sortOrder: i, description: DESCRIPTIONS[d.code] ?? null })))
+    .onConflictDoUpdate({ target: disciplines.code, set: { name: sql`excluded.name`, ready: sql`excluded.ready`, sortOrder: sql`excluded.sort_order`, description: sql`coalesce(${disciplines.description}, excluded.description)`, updatedAt: now } });
+}
+
 /** the bundle as files on disk */
 export function readBundle(dir: string) {
   const d = join(dir, 'tuvi');
@@ -69,9 +75,7 @@ export async function importTuvi(db: Db, bundleDir: string, opts: { force?: bool
   const report = await db.transaction(async tx => {
     let written = 0;
 
-    // disciplines — every one the engine knows, so pages can list what is coming
-    await tx.insert(disciplines).values(DISCIPLINES.map((d, i) => ({ code: d.code, name: d.name, ready: d.ready, sortOrder: i, description: DESCRIPTIONS[d.code] ?? null })))
-      .onConflictDoUpdate({ target: disciplines.code, set: { name: sql`excluded.name`, ready: sql`excluded.ready`, sortOrder: sql`excluded.sort_order`, description: sql`coalesce(${disciplines.description}, excluded.description)`, updatedAt: now } });
+    await upsertDisciplines(tx);
 
     // sources
     const src = await tx.insert(sources).values([

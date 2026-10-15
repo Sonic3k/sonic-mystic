@@ -51,6 +51,24 @@ test('every number the book writes about has its passages', opts, () => {
   for (let n = 1; n <= 11; n++) { assert.ok(has(`dinh:${n}`), `đỉnh ${n}`); assert.ok(has(`linh-hon:${n}`) && has(`bieu-dat:${n}`), `tên ${n}`); }
   assert.ok(has('bieu-dat:22'));
   for (const s of [1, 2, 3]) assert.ok(has(`giai-doan:${s}`), `giai đoạn ${s}`);
+  // a full arrow and the same arrow empty are looked up apart
+  for (const a of N.ARROWS) {
+    assert.ok(has(`muiten:${a.code}`), `muiten:${a.code}`);
+    if (a.empty) assert.ok(has(`muiten-trong:${a.code}`), `muiten-trong:${a.code}`);
+  }
+  assert.ok(rules.filter(r => r.e === 'p7.456-trong').every(r => !r.s.includes('muiten:4-5-6')));
+});
+
+test('sections carry what they are about, and figures read back into charts', opts, () => {
+  const { book } = load();
+  const by = new Map(book.entries.map(e => [e.code, e]));
+  assert.deepEqual(by.get('p5.9.tom-lai').symbols, ['chu-dao:9']);
+  assert.deepEqual(by.get('p7.456-trong').symbols, ['muiten-trong:4-5-6']);
+  const figures = book.entries.flatMap(e => e.paras).filter(p => p.kind === 'figure');
+  const grids = figures.map(p => N.figureOf(p.text).grid).filter(Boolean);
+  assert.ok(grids.length >= 79, `${grids.length} charts`);
+  assert.deepEqual(grids[0], [['3', '6', '9'], ['2', '5', '8'], ['1', '4', '7']]);
+  for (const g of grids) assert.ok(g.length === 3 && g.every(r => r.length === 3));
 });
 
 test('the book\'s own examples read as the book reads them', opts, () => {

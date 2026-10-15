@@ -1,10 +1,11 @@
 /* The knowledge as something to read and search: sources, their entries paragraph by paragraph, the rules each
    paragraph became, the setup tables, and a few edits (rewording a passage or a rule keeps the imported text). */
-import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { and, asc, count, eq, gt, inArray, isNotNull, lt, sql } from 'drizzle-orm';
 import { CUC, STARS, findStar, parse, starsOf, tuViPosition, type Tone } from '@mystic/engine/tuvi';
+import { parse as parseNumerology, symbolsOf as numerologySymbolsOf } from '@mystic/engine/numerology';
 import type {
-  CatalogDto, EntryDto, EntrySummaryDto, LookupResultDto, PassageDto, RuleDto, SearchResultDto, SetupDto, SourceDto, SymbolDto, TableDto,
+  CatalogDto, EntryDto, EntrySummaryDto, LookupResultDto, NumerologyRuleDto, PassageDto, RuleDto, SearchResultDto, SetupDto, SourceDto, SymbolDto, TableDto,
 } from '@mystic/engine/api';
 import { fold } from '../common/text.js';
 import { DB, type Db } from '../db/db.js';
@@ -35,19 +36,26 @@ export class BooksService {
     return s;
   }
 
+  /** a source whose text the caller may read (a source marked for the owner answers a 401 to anyone else) */
+  private async readable(code: string, owner: boolean): Promise<SourceRow> {
+    const s = await this.sourceRow(code);
+    if (s.access === 'owner' && !owner) throw new UnauthorizedException('Nguồn này chỉ chủ nhà đọc được (cần mã chủ nhà)');
+    return s;
+  }
+
   private async sourceDto(s: SourceRow): Promise<SourceDto> {
     const [e] = await this.db.select({ n: count() }).from(entries).where(eq(entries.sourceId, s.id));
     const [p] = await this.db.select({ n: count() }).from(passages).innerJoin(entries, eq(entries.id, passages.entryId)).where(eq(entries.sourceId, s.id));
     const [r] = await this.db.select({ n: count(), review: sql<number>`count(${rules.reviewNote})::int` }).from(rules).where(and(eq(rules.sourceId, s.id), eq(rules.active, true)));
     return {
       code: s.code, discipline: s.disciplineCode, title: s.title, author: s.author, kind: s.kind, description: s.description, note: s.note, sourceFile: s.sourceFile,
-      entries: e.n, passages: p.n, rules: r.n, reviewNotes: r.review,
+      access: s.access, entries: e.n, passages: p.n, rules: r.n, reviewNotes: r.review,
     };
   }
 
   /** the entries of a source in order, each with its symbols and how much it holds */
-  async entries(code: string): Promise<EntrySummaryDto[]> {
-    const s = await this.sourceRow(code);
+  async entries(code: string, owner = true): Promise<EntrySummaryDto[]> {
+    const s = await this.readable(code, owner);
     const rows = await this.db.select().from(entries).where(eq(entries.sourceId, s.id)).orderBy(asc(entries.ordinal));
     if (!rows.length) return [];
     const ids = rows.map(e => e.id);
@@ -64,15 +72,16 @@ export class BooksService {
     const symOf = new Map<number, string[]>();
     for (const x of syms) { const l = symOf.get(x.entryId) ?? []; l.push(x.code); symOf.set(x.entryId, l); }
     const pn = new Map(pc.map(x => [x.entryId, x.n])), rn = new Map(rc.map(x => [x.entryId, x]));
+    const codeOf = new Map(rows.map(e => [e.id, e.code]));
     return rows.map(e => ({
-      id: e.id, code: e.code, ref: e.sourceRef, kind: e.kind, title: e.title, symbols: symOf.get(e.id) ?? [],
+      id: e.id, code: e.code, ref: e.sourceRef, kind: e.kind, title: e.title, symbols: symOf.get(e.id) ?? [], parent: e.parentId !== null ? codeOf.get(e.parentId) ?? null : null,
       passages: pn.get(e.id) ?? 0, rules: rn.get(e.id)?.n ?? 0, reviewNotes: rn.get(e.id)?.review ?? 0, firstLine: first.get(e.id) ?? null,
     }));
   }
 
   /** one entry, found by its line in the source (grandma's book) or by its code */
-  async entry(code: string, key: string): Promise<EntryDto> {
-    const s = await this.sourceRow(code);
+  async entry(code: string, key: string, owner = true): Promise<EntryDto> {
+    const s = await this.readable(code, owner);
     const where = /^\d+$/.test(key) ? and(eq(entries.sourceId, s.id), eq(entries.sourceRef, Number(key))) : and(eq(entries.sourceId, s.id), eq(entries.code, key));
     const [e] = await this.db.select().from(entries).where(where).orderBy(asc(entries.ordinal)).limit(1);
     if (!e) throw new NotFoundException('Không có mục này');
@@ -127,11 +136,11 @@ export class BooksService {
 
   // ── tra cứu ──
 
-  async search(q: string, discipline = 'tuvi', limit = 120): Promise<SearchResultDto> {
+  async search(q: string, discipline = 'tuvi', limit = 120, owner = true): Promise<SearchResultDto> {
     const needle = fold(q);
     if (needle.length < 2) return { query: q, total: 0, hits: [] };
     const pattern = `%${needle.replace(/[\\%_]/g, m => `\\${m}`)}%`;
-    const where = and(eq(sources.disciplineCode, discipline), sql`${passages.searchText} like ${pattern}`);
+    const where = and(eq(sources.disciplineCode, discipline), sql`${passages.searchText} like ${pattern}`, owner ? undefined : eq(sources.access, 'public'));
     const [{ n }] = await this.db.select({ n: count() }).from(passages).innerJoin(entries, eq(entries.id, passages.entryId)).innerJoin(sources, eq(sources.id, entries.sourceId)).where(where);
     const rows = await this.db.select({
       passageId: passages.id, passageRef: passages.sourceRef, sourceCode: sources.code, sourceKind: sources.kind, entryRef: entries.sourceRef, entryCode: entries.code, entryTitle: entries.title, section: passages.section, text: passages.text,
@@ -216,9 +225,10 @@ export class BooksService {
     return { id: p.id, key: p.key, kind: p.kind, section: p.section, ref: p.sourceRef, text: p.text, originalText: p.editedAt ? p.originalText : null, rules: [] };
   }
 
-  async editRule(code: string, patch: { text?: string; context?: string | null; condition?: string | null; tone?: string; active?: boolean; reviewNote?: string | null }): Promise<RuleDto> {
+  async editRule(code: string, patch: { text?: string; context?: string | null; condition?: string | null; tone?: string; active?: boolean; reviewNote?: string | null }): Promise<RuleDto | NumerologyRuleDto> {
     const [r] = await this.db.select().from(rules).where(eq(rules.code, code));
     if (!r) throw new NotFoundException(`Không có câu ${code}`);
+    if (r.disciplineCode === 'numerology') return this.editNumerologyRule(r, patch);
     const set: Partial<typeof rules.$inferInsert> = { editedAt: new Date() };
     if (patch.text !== undefined) { const t = patch.text.trim(); if (!t) throw new BadRequestException('Câu luận không được để trống'); set.text = t; }
     if (patch.context !== undefined) set.context = patch.context?.trim() || null;
@@ -247,6 +257,37 @@ export class BooksService {
     if (dto) return dto;
     const [after] = await this.db.select().from(rules).where(eq(rules.id, r.id));
     return { code, source: 'ba', sourceCode: '', text: after.text, ctx: after.context, when: after.condition, tone: after.tone as Tone, review: after.reviewNote, at: [], star: null, entryRef: null, paraRef: null, edited: true, active: after.active };
+  }
+
+  /** a rule of the numerology book: its condition (checked with the book's condition language), whether it is read,
+      a review note. Its text is its paragraph's — reword the passage instead. */
+  private async editNumerologyRule(r: typeof rules.$inferSelect, patch: { text?: string; condition?: string | null; active?: boolean; reviewNote?: string | null }): Promise<NumerologyRuleDto> {
+    if (patch.text !== undefined) throw new BadRequestException('Câu của sách là chính đoạn văn: sửa đoạn văn thay vì sửa câu');
+    const set: Partial<typeof rules.$inferInsert> = { editedAt: new Date() };
+    if (patch.active !== undefined) set.active = !!patch.active;
+    if (patch.reviewNote !== undefined) set.reviewNote = patch.reviewNote?.trim() || null;
+    if (patch.condition !== undefined) {
+      const c = patch.condition?.trim();
+      if (!c) throw new BadRequestException('Câu của sách cần một điều kiện');
+      const p = parseNumerology(c);
+      if (!p.node) throw new BadRequestException(`Điều kiện chưa đúng: ${p.errors.join('; ')}`);
+      set.condition = c;
+    }
+    await this.db.transaction(async tx => {
+      await tx.update(rules).set(set).where(eq(rules.id, r.id));
+      if (set.condition !== undefined) {
+        await tx.delete(ruleSymbols).where(eq(ruleSymbols.ruleId, r.id));
+        const codes = [...numerologySymbolsOf(parseNumerology(set.condition!).node)];
+        if (codes.length) {
+          const syms = await tx.select({ id: symbols.id }).from(symbols).where(and(eq(symbols.disciplineCode, 'numerology'), inArray(symbols.code, codes)));
+          if (syms.length) await tx.insert(ruleSymbols).values(syms.map(s => ({ ruleId: r.id, symbolId: s.id })));
+        }
+      }
+    });
+    this.knowledge.invalidate();
+    const dto = (await this.knowledge.numerology())?.rules.get(r.code);
+    if (!dto) throw new NotFoundException(`Không có câu ${r.code}`);
+    return dto;
   }
 
   async editSymbol(discipline: string, code: string, description: string | null): Promise<SymbolDto> {

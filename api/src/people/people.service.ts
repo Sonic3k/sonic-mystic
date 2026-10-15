@@ -4,10 +4,13 @@ import { BadGatewayException, BadRequestException, Inject, Injectable, NotFoundE
 import { and, asc, count, desc, eq, inArray, isNull } from 'drizzle-orm';
 import { z } from 'zod';
 import { ENGINE_VERSION } from '@mystic/engine';
-import type { BirthDto, Gender, LinkDto, ProfileDto, ProfileSummaryDto, SonicHubPersonDto, SubjectDto, TuViReadingDto, TuViSettings } from '@mystic/engine/api';
+import type {
+  BirthDto, Gender, LinkDto, NumerologyNameDto, NumerologyReadingDto, ProfileDto, ProfileSummaryDto, SonicHubPersonDto, SubjectDto, TuViReadingDto, TuViSettings,
+} from '@mystic/engine/api';
 import { DB, type Db } from '../db/db.js';
-import { accounts, outbox, profiles, readings, subjectLinks, subjects, tuviProfileSettings } from '../db/schema.js';
+import { accounts, numerologyProfileNames, outbox, profiles, readings, subjectLinks, subjects, tuviProfileSettings } from '../db/schema.js';
 import { KnowledgeService } from '../kb/knowledge.service.js';
+import { NameBody, NumerologyService, defaultNames, normalizeNames, numerologyOf, type Computed } from '../numerology/numerology.service.js';
 import { SyncService } from '../sync/sync.service.js';
 import { SonicHubClient, type SonicHubPerson } from '../sync/sonic-hub.client.js';
 import { TuViService, chartOf, optionsOf } from '../tuvi/tuvi.service.js';
@@ -34,7 +37,7 @@ export const SettingsBody = z.object({
 
 export const ProfileBody = z.object({
   subjectId: z.string().uuid(),
-  discipline: z.literal('tuvi').default('tuvi'),
+  discipline: z.enum(['tuvi', 'numerology']).default('tuvi'),
   label: z.string().trim().max(200).nullable().default(null),
   viewYear: z.number().int().min(1800).max(2200).nullable().default(null),
   note: z.string().max(2000).nullable().default(null),
@@ -42,6 +45,8 @@ export const ProfileBody = z.object({
   gender: z.enum(['male', 'female']).nullable().default(null),
   birth: BirthBody.partial().nullable().default(null),
   settings: SettingsBody.default(SettingsBody.parse({})),
+  /** nhân số học: the names to read (default: from the person's name — the given name first, then the fuller forms) */
+  names: z.array(NameBody).max(8).nullable().default(null),
 });
 export type ProfileInput = z.infer<typeof ProfileBody>;
 
@@ -50,6 +55,7 @@ export const ProfilePatch = z.object({
   viewYear: z.number().int().min(1800).max(2200).nullable().optional(),
   note: z.string().max(2000).nullable().optional(),
   settings: SettingsBody.partial().optional(),
+  names: z.array(NameBody).max(8).optional(),
 });
 
 type SubjectRow = typeof subjects.$inferSelect;
@@ -69,6 +75,7 @@ export class PeopleService {
     @Inject(DB) private readonly db: Db,
     @Inject(KnowledgeService) private readonly knowledge: KnowledgeService,
     @Inject(TuViService) private readonly tuvi: TuViService,
+    @Inject(NumerologyService) private readonly numerology: NumerologyService,
     @Inject(SonicHubClient) private readonly hub: SonicHubClient,
     @Inject(SyncService) private readonly sync: SyncService,
   ) {}
@@ -192,6 +199,7 @@ export class PeopleService {
   async createProfile(input: ProfileInput): Promise<ProfileDto> {
     const [s] = await this.db.select().from(subjects).where(eq(subjects.id, input.subjectId));
     if (!s) throw new NotFoundException('Không tìm thấy người này');
+    if (input.discipline === 'numerology') return this.createNumerologyProfile(input, s);
     const gender = input.gender ?? s.gender;
     if (!gender) throw new BadRequestException('Chưa có giới tính của người này');
     const birth = withOffset({ ...birthDto(s), ...stripNulls(input.birth ?? {}) } as BirthDto);
@@ -211,6 +219,32 @@ export class PeopleService {
     return this.profile(id);
   }
 
+  /** a nhân số học profile: the solar date (converted when the family wrote it in the lunar calendar) and the names
+      read — by default the person's given name, then the fuller forms; gender is kept when known, not required */
+  private async createNumerologyProfile(input: ProfileInput, s: SubjectRow): Promise<ProfileDto> {
+    const gender = input.gender ?? s.gender ?? null;
+    const birth = withOffset({ ...birthDto(s), ...stripNulls(input.birth ?? {}) } as BirthDto);
+    const names = normalizeNames(input.names ?? defaultNames(s.displayName));
+    numerologyOf(birth, gender, names);
+    const k = await this.knowledge.numerology();
+    const id = await this.db.transaction(async tx => {
+      const [p] = await tx.insert(profiles).values({
+        subjectId: s.id, disciplineCode: 'numerology', label: input.label, viewYear: input.viewYear, note: input.note, gender,
+        ...birthColumns(birth), engineVersion: ENGINE_VERSION, knowledgeVersion: k?.version ?? 'chua-nap',
+      }).returning({ id: profiles.id });
+      if (names.length) await tx.insert(numerologyProfileNames).values(names.map((n, i) => ({ profileId: p.id, ordinal: i, label: n.label, text: n.text, primary: n.primary })));
+      await tx.update(subjects).set({ updatedAt: new Date() }).where(eq(subjects.id, s.id));
+      return p.id;
+    });
+    await this.sync.briefChanged(s.id);
+    return this.profile(id);
+  }
+
+  private async namesOf(profileId: string): Promise<NumerologyNameDto[]> {
+    const rows = await this.db.select().from(numerologyProfileNames).where(eq(numerologyProfileNames.profileId, profileId)).orderBy(asc(numerologyProfileNames.ordinal));
+    return rows.map(n => ({ label: n.label, text: n.text, primary: n.primary }));
+  }
+
   private async profileRows(id: string): Promise<{ p: ProfileRow; s: SubjectRow; settings: SettingsRow | undefined }> {
     const [row] = await this.db.select({ p: profiles, s: subjects, settings: tuviProfileSettings }).from(profiles)
       .innerJoin(subjects, eq(subjects.id, profiles.subjectId)).leftJoin(tuviProfileSettings, eq(tuviProfileSettings.profileId, profiles.id)).where(eq(profiles.id, id));
@@ -221,23 +255,47 @@ export class PeopleService {
   async profile(id: string): Promise<ProfileDto> {
     const { p, s, settings } = await this.profileRows(id);
     const links = await this.db.select().from(subjectLinks).where(eq(subjectLinks.subjectId, s.id));
-    const k = await this.knowledge.get();
+    const numerology = p.disciplineCode === 'numerology';
+    const version = numerology ? (await this.knowledge.numerology())?.version : (await this.knowledge.get()).version;
     return {
       id: p.id, discipline: p.disciplineCode, label: p.label, viewYear: p.viewYear, note: p.note,
       subject: { id: s.id, displayName: s.displayName, links: links.map(linkDto) },
-      gender: p.gender, birth: birthDto(p), settings: settingsDto(settings),
-      engineVersion: p.engineVersion, knowledgeVersion: p.knowledgeVersion, knowledgeChanged: p.knowledgeVersion !== k.version,
+      gender: p.gender, birth: birthDto(p),
+      settings: p.disciplineCode === 'tuvi' ? settingsDto(settings) : null,
+      names: numerology ? await this.namesOf(p.id) : null,
+      engineVersion: p.engineVersion, knowledgeVersion: p.knowledgeVersion, knowledgeChanged: version !== undefined && p.knowledgeVersion !== version,
       createdAt: p.createdAt.toISOString(), updatedAt: p.updatedAt.toISOString(),
     };
   }
 
-  /** the engine input and settings of a profile */
+  /** the profile and its person (any discipline) */
+  async profileHead(id: string): Promise<{ profile: ProfileRow; subject: SubjectRow }> {
+    const { p, s } = await this.profileRows(id);
+    return { profile: p, subject: s };
+  }
+
+  /** the engine input and settings of a tử vi profile */
   async profileInput(id: string) {
     const { p, s, settings } = await this.profileRows(id);
+    if (p.disciplineCode !== 'tuvi') throw new BadRequestException('Đây không phải profile tử vi');
     return { profile: p, subject: s, birth: birthInputOf(p.gender, birthDto(p)), settings: settingsDto(settings) };
   }
 
-  async profileReading(id: string, year?: number): Promise<TuViReadingDto> {
+  /** a nhân số học profile computed: its chart (as of today in Vietnam) and the names it reads */
+  async numerologyInput(id: string): Promise<{ profile: ProfileRow; subject: SubjectRow; names: NumerologyNameDto[]; computed: Computed }> {
+    const { p, s } = await this.profileRows(id);
+    if (p.disciplineCode !== 'numerology') throw new BadRequestException('Đây không phải profile nhân số học');
+    const names = await this.namesOf(p.id);
+    return { profile: p, subject: s, names, computed: numerologyOf(birthDto(p), p.gender, names) };
+  }
+
+  async profileReading(id: string, year?: number): Promise<TuViReadingDto | NumerologyReadingDto> {
+    const { p } = await this.profileRows(id);
+    if (p.disciplineCode === 'numerology') {
+      const { computed, profile } = await this.numerologyInput(id);
+      const k = await this.numerology.book(true);
+      return this.numerology.readingOf(computed, k, year ?? profile.viewYear ?? null);
+    }
     const { profile, birth, settings } = await this.profileInput(id);
     return this.tuvi.reading(birth, settings, year ?? profile.viewYear ?? thisYear());
   }
@@ -248,7 +306,15 @@ export class PeopleService {
     if (patch.label !== undefined) set.label = patch.label;
     if (patch.viewYear !== undefined) set.viewYear = patch.viewYear;
     if (patch.note !== undefined) set.note = patch.note;
-    if (patch.settings) {
+    if (patch.names && p.disciplineCode === 'numerology') {
+      const names = normalizeNames(patch.names);
+      numerologyOf(birthDto(p), p.gender, names);
+      await this.db.transaction(async tx => {
+        await tx.delete(numerologyProfileNames).where(eq(numerologyProfileNames.profileId, id));
+        if (names.length) await tx.insert(numerologyProfileNames).values(names.map((n, i) => ({ profileId: id, ordinal: i, label: n.label, text: n.text, primary: n.primary })));
+      });
+    }
+    if (patch.settings && p.disciplineCode === 'tuvi') {
       const next = { ...settingsDto(settings), ...patch.settings };
       chartOf(birthInputOf(p.gender, birthDto(p)), optionsOf(next, p.viewYear ?? thisYear()));
       await this.db.insert(tuviProfileSettings).values({ profileId: id, ...next }).onConflictDoUpdate({ target: tuviProfileSettings.profileId, set: { ...next, updatedAt: new Date() } });

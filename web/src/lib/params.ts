@@ -57,10 +57,13 @@ export const settingsOf = (o: ChartOptions): TuViSettings => ({
   variant: o.variant, leapMonth: o.leapMonth, tyNextDay: o.tyNextDay, lunarCalendar: o.lunarCalendar ?? 'auto', hourBasis: o.hourBasis ?? 'clock',
 });
 
+/** how a tử vi profile places its stars (the defaults for a profile that stored none) */
+export const tuviSettings = (p: ProfileDto): TuViSettings => p.settings ?? { variant: 'ba', leapMonth: 'same', tyNextDay: true, lunarCalendar: 'auto', hourBasis: 'clock' };
+
 export const fromProfile = (p: ProfileDto, viewYear = p.viewYear ?? thisYear()): ChartParams => ({
   name: p.subject.displayName,
   input: birthInputOf(p.gender, p.birth),
-  options: { ...p.settings, viewYear },
+  options: { ...tuviSettings(p), viewYear },
 });
 
 export const blankParams = (): ChartParams => ({

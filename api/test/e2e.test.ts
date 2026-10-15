@@ -1,12 +1,19 @@
 import assert from 'node:assert/strict';
+import { existsSync, readFileSync } from 'node:fs';
 import type { AddressInfo } from 'node:net';
+import { join } from 'node:path';
 import { after, before, describe, test } from 'node:test';
+import { gzipSync } from 'node:zlib';
 import pg from 'pg';
-import type { EntryDto, ProfileDto, SearchResultDto, SourceDto, SubjectDto, TuViReadingDto } from '@mystic/engine/api';
+import type {
+  AiReadingDto, BriefDto, EntryDto, NumerologyBookDto, NumerologyEntryDto, NumerologyLookupDto, NumerologyReadingDto, ProfileDto, SearchResultDto, SourceDto,
+  SubjectDto, TuViReadingDto,
+} from '@mystic/engine/api';
 import { jsonIn, scopeOk } from '../src/ai/ai.service.js';
 import { loadConfig } from '../src/config.js';
 import { createDb, createPool, ensureDatabase } from '../src/db/db.js';
 import { importTuvi } from '../src/kb/importer.js';
+import { importNumerology, readNumerologyBundle } from '../src/kb/numerology-importer.js';
 import { createApp } from '../src/main.js';
 
 /*
@@ -14,25 +21,30 @@ import { createApp } from '../src/main.js';
  * is imported, then the HTTP API is driven. Needs TEST_DATABASE_URL (a superuser connection to any database).
  */
 const adminUrl = process.env.TEST_DATABASE_URL;
+const numerologyDir = join(loadConfig({ DATABASE_URL: 'x' }).kbBundleDir, 'numerology');
+const hasBook = existsSync(join(numerologyDir, 'manifest.json'));
 const dbName = `mystic_e2e_${process.pid}`;
 const role = `mystic_e2e_${process.pid}`;
+const ADMIN = 'e2e-admin-token';
 let base = '';
 let close: () => Promise<void> = async () => {};
 let appUrl = '';
 
-async function api<T>(path: string, body?: unknown, method?: string): Promise<{ status: number; data: T }> {
+/** a call as the owner (with the admin token), or as anyone when anon */
+async function api<T>(path: string, body?: unknown, method?: string, opts: { anon?: boolean } = {}): Promise<{ status: number; data: T }> {
   const res = await fetch(`${base}/api${path}`, {
     method: method ?? (body === undefined ? 'GET' : 'POST'),
-    headers: { 'content-type': 'application/json' },
+    headers: { 'content-type': 'application/json', ...(opts.anon ? {} : { 'x-admin-token': ADMIN }) },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
   const text = await res.text();
   return { status: res.status, data: (text ? JSON.parse(text) : undefined) as T };
 }
+const anon = <T>(path: string, body?: unknown, method?: string) => api<T>(path, body, method, { anon: true });
 
 describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () => {
   before(async () => {
-    const env = { ...process.env, DATABASE_URL: '', DATABASE_ADMIN_URL: adminUrl, MYSTIC_DB_NAME: dbName, MYSTIC_DB_USER: role, MYSTIC_DB_PASSWORD: 'e2e-pass', SONIC_HUB_API_URL: '', SYNC_WORKER: 'false', ANTHROPIC_API_KEY: '', NODE_ENV: 'test' };
+    const env = { ...process.env, DATABASE_URL: '', DATABASE_ADMIN_URL: adminUrl, MYSTIC_DB_NAME: dbName, MYSTIC_DB_USER: role, MYSTIC_DB_PASSWORD: 'e2e-pass', SONIC_HUB_API_URL: '', SYNC_WORKER: 'false', ANTHROPIC_API_KEY: '', ADMIN_TOKEN: ADMIN, NODE_ENV: 'test' };
     const config = loadConfig(env);
     appUrl = await ensureDatabase(config.db);
     const app = await createApp(config);
@@ -112,7 +124,7 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
     const p1 = await api<ProfileDto>('/profiles', { subjectId: s.data.id, label: 'Năm 2026', viewYear: 2026 });
     assert.equal(p1.status, 201);
     const p2 = await api<ProfileDto>('/profiles', { subjectId: s.data.id, label: 'Theo sách', viewYear: 2027, settings: { variant: 'sach' } });
-    assert.equal(p2.data.settings.variant, 'sach');
+    assert.equal(p2.data.settings?.variant, 'sach');
     const subject = await api<SubjectDto>(`/subjects/${s.data.id}`);
     assert.equal(subject.data.profiles.length, 2);
     const reading = await api<TuViReadingDto>(`/profiles/${p1.data.id}/reading`);
@@ -131,6 +143,120 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
     const r = await api('/links/sonic-hub/abc', { name: 'X' }, 'PUT');
     assert.equal(r.status, 403);
     assert.equal((await api('/links/sonic-hub/abc', undefined, 'DELETE')).status, 403);
+  });
+
+  test('the family\'s own data needs the admin token once it is set', async () => {
+    assert.equal((await anon('/subjects')).status, 401);
+    assert.equal((await anon('/tuvi/catalog')).status, 200);
+  });
+
+  /* Nhân số học: the book's bundle is not in the repository, so these run where it is built (npm run kb:numerology) */
+  describe('nhân số học', { skip: !hasBook && 'the numerology bundle is not built here' }, () => {
+    const quynh = { birth: { year: 1974, month: 5, day: 1 }, gender: 'female', names: [{ text: 'Quỳnh' }] };
+
+    test('the book is imported once, and its text is the owner\'s', async () => {
+      const h = await api<{ numerology: { rules: number } | null }>('/health');
+      assert.equal(h.data.numerology?.rules, 585);
+      const src = await api<SourceDto[]>('/sources?discipline=numerology');
+      assert.equal(src.data[0].code, 'numerology.ldqh');
+      assert.equal(src.data[0].access, 'owner');
+      const pool = createPool(appUrl, false);
+      const again = await importNumerology(createDb(pool), readNumerologyBundle(numerologyDir)!);
+      await pool.end();
+      assert.equal(again.skipped, true);
+      // anyone may compute the numbers; the book's words are the owner's
+      const c = await anon<{ chart: { ruling: number } }>('/numerology/chart', quynh);
+      assert.equal(c.status, 200);
+      assert.equal(c.data.chart.ruling, 9);
+      for (const path of ['/numerology/book', '/numerology/book/p5.9', '/numerology/catalog', '/numerology/lookup?symbols=chu-dao:9', '/sources/numerology.ldqh/entries']) assert.equal((await anon(path)).status, 401, path);
+      assert.equal((await anon('/numerology/reading', quynh)).status, 401);
+      const s1 = await anon<SearchResultDto>(`/search?discipline=numerology&q=${encodeURIComponent('kim tự tháp')}`);
+      assert.equal(s1.data.total, 0);
+      const s2 = await api<SearchResultDto>(`/search?discipline=numerology&q=${encodeURIComponent('kim tự tháp')}`);
+      assert.ok(s2.data.total > 0);
+    });
+
+    test('a reading reads as the book reads the author\'s own chart', async () => {
+      const r = await api<NumerologyReadingDto>('/numerology/reading', quynh);
+      assert.equal(r.status, 200);
+      assert.deepEqual(r.data.sections.map(s => s.topic), ['chu_dao', 'ngay_sinh', 'bieu_do', 'mui_ten', 'ten', 'dinh', 'dinh', 'dinh', 'dinh', 'giai_doan', 'nam']);
+      for (const s of r.data.sections) for (const g of s.groups) for (const m of g.matches) assert.ok(r.data.rules[m.rule], m.rule);
+      assert.ok(r.data.sections[0].groups.some(g => g.entry === 'p5.9.tom-lai'));
+      const y = await api<NumerologyReadingDto>('/numerology/reading', { ...quynh, viewYear: 2019 });
+      assert.equal(y.data.pyear, 9);
+      const lunar = await api<NumerologyReadingDto>('/numerology/reading', { birth: { calendar: 'lunar', year: 1962, month: 3, day: 12 } });
+      assert.deepEqual([lunar.data.solar.day, lunar.data.solar.month, lunar.data.solar.year, lunar.data.solar.fromLunar], [16, 4, 1962, true]);
+      assert.equal((await api('/numerology/reading', { birth: { year: 1990, month: 2, day: 30 } })).status, 400);
+    });
+
+    test('the book, section by section, and lookups', async () => {
+      const toc = await api<NumerologyBookDto>('/numerology/book');
+      assert.equal(toc.data.toc.length, 315);
+      assert.equal(toc.data.topics.find(t => t.code === 'chu_dao')?.entry, 'p5');
+      const e = await api<NumerologyEntryDto>('/numerology/book/p5.9');
+      assert.deepEqual(e.data.sections.map(s => s.code), ['p5.9', 'p5.9.muc-dich', 'p5.9.dieu-kien', 'p5.9.dac-diem', 'p5.9.khac-phuc', 'p5.9.phat-trien', 'p5.9.nghe-nghiep', 'p5.9.tom-lai']);
+      assert.equal(e.data.next?.code, 'p5.10');
+      assert.ok(e.data.sections.flatMap(s => s.passages).every(p => p.role === 'rule' || p.role === 'advice' || p.rule === null));
+      assert.equal((await api('/numerology/book/khong-co')).status, 404);
+      const l = await api<NumerologyLookupDto>('/numerology/lookup?symbols=muiten-trong:4-5-6');
+      assert.ok(l.data.groups.some(g => g.entry === 'p7.456-trong'));
+      assert.ok(l.data.groups.flatMap(g => g.rules).every(r => !r.entry.startsWith('p7.456') || r.entry.startsWith('p7.456-trong')));
+    });
+
+    test('an edit of the book survives a new import, and the reading shows it', async () => {
+      const e = await api<NumerologyEntryDto>('/numerology/book/p5.9.tom-lai');
+      const p = e.data.sections[0].passages[0];
+      assert.equal((await api(`/passages/${p.id}`, { text: `${p.text} (đã sửa)` }, 'PATCH')).status, 200);
+      const bad = await api(`/rules/${p.rule!.code}`, { condition: 'ruling(12)' }, 'PATCH');
+      assert.equal(bad.status, 400);
+      const bundle = JSON.parse(JSON.stringify(readNumerologyBundle(numerologyDir)));
+      const gz = (b: unknown) => gzipSync(JSON.stringify(b));
+      const put = (body: Buffer, type = 'application/gzip', q = '?force=1') => fetch(`${base}/api/numerology/bundle${q}`, { method: 'PUT', headers: { 'content-type': type, 'x-admin-token': ADMIN }, body });
+      assert.equal((await put(gz(bundle), 'application/json')).status, 400);
+      const broken = JSON.parse(JSON.stringify(bundle));
+      broken.rules[0].t = 'chữ khác';
+      assert.equal((await put(gz(broken))).status, 400);
+      assert.equal((await fetch(`${base}/api/numerology/bundle?force=1`, { method: 'PUT', headers: { 'content-type': 'application/gzip' }, body: gz(bundle) })).status, 401);
+      const re = await put(gz(bundle));
+      assert.equal(re.status, 200);
+      const report = await re.json() as { skipped: boolean; keptEdited: number };
+      assert.equal(report.skipped, false);
+      assert.ok(report.keptEdited >= 1);
+      const r = await api<NumerologyReadingDto>('/numerology/reading', quynh);
+      assert.ok(r.data.rules[p.rule!.code].text.endsWith('(đã sửa)'));
+      assert.equal((await api(`/passages/${p.id}`, { text: p.text }, 'PATCH')).status, 200);
+    });
+
+    test('profiles: the names read, a reading written with Claude, staleness, the brief', async () => {
+      const s = await api<SubjectDto>('/subjects', { displayName: 'Lê Thị Quỳnh', gender: 'female', birth: { calendar: 'solar', year: 1974, month: 5, day: 1 } });
+      const p = await api<ProfileDto>('/profiles', { subjectId: s.data.id, discipline: 'numerology' });
+      assert.equal(p.status, 201);
+      assert.deepEqual(p.data.names?.map(n => [n.text, n.primary]), [['Quỳnh', true], ['Thị Quỳnh', false], ['Lê Thị Quỳnh', false]]);
+      assert.equal(p.data.settings, null);
+      const r = await api<NumerologyReadingDto>(`/profiles/${p.data.id}/reading`);
+      assert.equal(r.data.chart.ruling, 9);
+      const codes = r.data.sections[0].groups.flatMap(g => g.matches.map(m => m.rule));
+      const w = await api<AiReadingDto>(`/profiles/${p.data.id}/readings/tong-hop`, {
+        viewYear: 2026, caution: 'Chỉ để tham khảo.',
+        sections: [{ title: 'Con số chủ đạo 9', items: [{ layer: 'primary', text: 'Tóm lược.', refs: [codes[0], 'ldqh.b0'] }, { layer: 'primary', text: 'Không dẫn.', refs: [] }, { layer: 'added', text: 'Luận thêm.' }] }],
+      }, 'PUT');
+      assert.equal(w.status, 200);
+      assert.deepEqual(w.data.dropped, ['ldqh.b0']);
+      assert.deepEqual(w.data.sections[0].items.map(i => i.layer), ['primary', 'added', 'added']);
+      assert.equal(w.data.author, 'claude');
+      const list = await api<AiReadingDto[]>(`/profiles/${p.data.id}/ai-readings`);
+      assert.deepEqual(list.data.map(x => [x.scope, x.stale]), [['tong-hop', false]]);
+      const b = await api<BriefDto>(`/subjects/${s.data.id}/brief?discipline=numerology`);
+      assert.equal(b.data.facts.find(f => f.label === 'Con số chủ đạo')?.value, '9');
+      assert.deepEqual(b.data.lines.map(l => l.layer), ['primary', 'added']);
+      const renamed = await api<ProfileDto>(`/profiles/${p.data.id}`, { names: [{ label: 'Tên ở nhà', text: 'Bông', primary: true }] }, 'PATCH');
+      assert.deepEqual(renamed.data.names, [{ label: 'Tên ở nhà', text: 'Bông', primary: true }]);
+      const after = await api<AiReadingDto[]>(`/profiles/${p.data.id}/ai-readings`);
+      assert.equal(after.data[0].stale, true);
+      assert.equal((await api(`/profiles/${p.data.id}/readings/han-2026`, { sections: [{ title: 'x', items: [{ layer: 'added', text: 'y' }] }] }, 'PUT')).status, 400);
+      assert.equal((await api(`/profiles/${p.data.id}/ai-readings`, { scope: 'tong-hop' })).status, 503);
+      assert.equal((await api(`/subjects/${s.data.id}`, undefined, 'DELETE')).status, 204);
+    });
   });
 });
 

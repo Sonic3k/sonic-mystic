@@ -15,7 +15,7 @@
      male() · female() · any()
    joined with & | ! and ( ). Every call says why it held, in the book's words. */
 import type { NumerologyChart, NameReading, Peak } from './chart.js';
-import { ARROW_BY_CODE, COUNT_WORDS, PLANES, cellText, findArrow, label, parseNumber, type Plane } from './numbers.js';
+import { ARROWS, COUNT_WORDS, PLANES, cellText, findArrow, label, parseNumber, type Plane } from './numbers.js';
 
 export type Node = { t: 'and' | 'or'; a: Node[] } | { t: 'not'; a: Node } | { t: 'call'; fn: string; args: string[] };
 export interface Parsed { node?: Node; errors: string[] }
@@ -202,7 +202,8 @@ export function evaluate(node: Node, x: Ctx): Result {
   }
 }
 
-/** the numbers and arrows a condition speaks of ("so:7", "muiten:1-5-9", "chu-dao:22"…), for looking passages up */
+/** the numbers and arrows a condition speaks of ("so:7", "muiten:1-5-9", "muiten-trong:4-5-6", "chu-dao:22"…), for
+    looking passages up — a full arrow and the same arrow empty are two different things in the book */
 export function symbolsOf(node: Node | undefined): Set<string> {
   const out = new Set<string>();
   const walk = (n: Node | undefined): void => {
@@ -215,7 +216,8 @@ export function symbolsOf(node: Node | undefined): Set<string> {
       case 'day': each('ngay-sinh', a); break;
       case 'count': case 'isolated': each('so', [a[0]]); break;
       case 'has': case 'lacks': each('so', a); break;
-      case 'arrow': case 'empty': case 'double': case 'name_breaks': { const ar = findArrow(a[0]); if (ar) out.add(`muiten:${ar.code}`); break; }
+      case 'arrow': case 'double': { const ar = findArrow(a[0]); if (ar) out.add(`muiten:${ar.code}`); break; }
+      case 'empty': case 'name_breaks': { const ar = findArrow(a[0]); if (ar) out.add(`muiten-trong:${ar.code}`); break; }
       case 'pyear': each('nam', a); break;
       case 'peak': each('dinh', a); break;
       case 'peak_at': each('dinh', a.slice(1)); break;
@@ -235,7 +237,8 @@ export function symbolCatalogue(): { code: string; name: string; kind: string }[
   for (const n of [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22]) out.push({ code: `chu-dao:${n}`, name: `Con số chủ đạo ${label(n)}`, kind: 'chu-dao' });
   for (const n of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22]) out.push({ code: `ngay-sinh:${n}`, name: `Con số ngày sinh ${label(n)}`, kind: 'ngay-sinh' });
   for (let n = 1; n <= 9; n++) out.push({ code: `so:${n}`, name: `Số ${n} trong Biểu đồ ngày sinh`, kind: 'so' });
-  for (const a of Object.values(ARROW_BY_CODE)) out.push({ code: `muiten:${a.code}`, name: a.empty ? `${a.full} · ${a.empty}` : a.full, kind: 'muiten' });
+  for (const a of ARROWS) out.push({ code: `muiten:${a.code}`, name: `${a.full} (${a.code})`, kind: 'muiten' });
+  for (const a of ARROWS) if (a.empty) out.push({ code: `muiten-trong:${a.code}`, name: `${a.empty} (trống ${a.code})`, kind: 'muiten-trong' });
   for (let n = 1; n <= 9; n++) out.push({ code: `nam:${n}`, name: `Năm cá nhân ${n}`, kind: 'nam' });
   for (let n = 1; n <= 11; n++) out.push({ code: `dinh:${n}`, name: `Đỉnh cao mang số ${n}`, kind: 'dinh' });
   for (const n of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22]) out.push({ code: `linh-hon:${n}`, name: `Con số linh hồn ${label(n)}`, kind: 'linh-hon' });
