@@ -9,3 +9,7 @@ dist-test/
 # knowledge pipeline scratch output
 kb/work/
 kb/sources/**/*-report.txt
+# the numerology book's own text (copyrighted) stays out of this public repo until decided: the source blocks and the
+# built bundle; the API can also take the bundle from NUMEROLOGY_BUNDLE_DIR or an owner upload
+kb/sources/numerology/*.jsonl
+kb/bundle/numerology/

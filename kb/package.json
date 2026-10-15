@@ -9,7 +9,9 @@
     "bundle": "node scripts/validate-rules.mjs && node scripts/validate-supplement.mjs && node scripts/build-bundle.mjs",
     "reach": "node scripts/check-reach.mjs",
     "read": "node scripts/test-reading.mjs",
-    "test": "node --test --test-concurrency=1 test/"
+    "test": "node --test --test-concurrency=1 test/",
+    "numerology": "node scripts/build-numerology.mjs",
+    "read:numerology": "node scripts/test-numerology.mjs"
   },
   "dependencies": {
     "@mystic/engine": "*"

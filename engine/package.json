@@ -15,6 +15,10 @@
       "default": "./dist/tuvi/index.js"
     },
     "./tuvi/stars.json": "./dist/tuvi/stars.json",
+    "./numerology": {
+      "types": "./dist/numerology/index.d.ts",
+      "default": "./dist/numerology/index.js"
+    },
     "./api": {
       "types": "./dist/api.d.ts",
       "default": "./dist/api.js"
