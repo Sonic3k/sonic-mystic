@@ -167,10 +167,20 @@ export class PeopleController {
   @HttpCode(200)
   link(@Param('personId') personId: string) { return this.people.linkSonicHub(personId); }
 
-  /** Sonic Hub pushes a person's identity after an edit there */
+  /** Sonic Hub pushes a person's identity after an edit there; only someone already linked here is updated */
   @Put('links/sonic-hub/:personId')
   @Access('sync')
-  push(@Param('personId') personId: string, @Body() body: SonicHubPerson) { return this.people.upsertFromSonicHub(personId, { ...body, id: personId }); }
+  async push(@Param('personId') personId: string, @Body() body: SonicHubPerson) {
+    const s = await this.people.refreshFromSonicHub(personId, { ...body, id: personId });
+    if (!s) throw new NotFoundException('Người này chưa được liên kết');
+    return s;
+  }
+
+  /** the person was deleted in Sonic Hub: the subject stays here with its profiles, no longer linked */
+  @Delete('links/sonic-hub/:personId')
+  @Access('sync')
+  @HttpCode(204)
+  async unlink(@Param('personId') personId: string) { await this.people.unlinkSonicHub(personId); }
 
   @Post('profiles')
   createProfile(@Body(new ZodPipe(ProfileBody)) body: ProfileInput) { return this.people.createProfile(body); }

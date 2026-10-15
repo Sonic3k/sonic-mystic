@@ -14,6 +14,11 @@ export interface SonicHubPerson {
   birthPlace?: string | null; birthLatitude?: number | null; birthLongitude?: number | null;
 }
 
+/** a call Sonic Hub answered with an error (404: no such person there) */
+export class SonicHubError extends Error {
+  constructor(message: string, readonly status: number) { super(message); }
+}
+
 @Injectable()
 export class SonicHubClient {
   constructor(@Inject(APP_CONFIG) private readonly config: AppConfig) {}
@@ -26,7 +31,7 @@ export class SonicHubClient {
     const headers: Record<string, string> = { accept: 'application/json', ...(init.body ? { 'content-type': 'application/json' } : {}) };
     if (this.config.syncToken) headers['x-sync-token'] = this.config.syncToken;
     const res = await fetch(`${base}/api${path}`, { ...init, headers: { ...headers, ...(init.headers as Record<string, string> | undefined) }, signal: AbortSignal.timeout(20_000) });
-    if (!res.ok) throw new Error(`Sonic Hub ${init.method ?? 'GET'} ${path}: ${res.status} ${(await res.text().catch(() => '')).slice(0, 200)}`);
+    if (!res.ok) throw new SonicHubError(`Sonic Hub ${init.method ?? 'GET'} ${path}: ${res.status} ${(await res.text().catch(() => '')).slice(0, 200)}`, res.status);
     return (res.status === 204 ? undefined : await res.json()) as T;
   }
 

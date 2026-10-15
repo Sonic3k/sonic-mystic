@@ -130,6 +130,7 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
   test('Sonic Hub pushes need the sync token', async () => {
     const r = await api('/links/sonic-hub/abc', { name: 'X' }, 'PUT');
     assert.equal(r.status, 403);
+    assert.equal((await api('/links/sonic-hub/abc', undefined, 'DELETE')).status, 403);
   });
 });
 

@@ -11,7 +11,7 @@ import { outbox, profiles, readingItems, readingSections, readings, subjectLinks
 import { KnowledgeService } from '../kb/knowledge.service.js';
 import { birthDto, birthInputOf } from '../people/birth.js';
 import { chartOf, optionsOf } from '../tuvi/tuvi.service.js';
-import { SonicHubClient } from './sonic-hub.client.js';
+import { SonicHubClient, SonicHubError } from './sonic-hub.client.js';
 
 const GIO_SPAN = (b: number) => (b === 0 ? '23–1 giờ' : `${2 * b - 1}–${2 * b + 1} giờ`);
 const LEVEL = { M: 'miếu', V: 'vượng', D: 'đắc', B: 'bình', H: 'hãm' } as const;
@@ -72,6 +72,12 @@ export class SyncService implements OnModuleInit, OnModuleDestroy {
           await this.db.update(outbox).set({ sentAt: new Date(), lastError: null }).where(eq(outbox.id, row.id));
           sent++;
         } catch (e) {
+          if (e instanceof SonicHubError && e.status === 404) {
+            // the person is not (or no longer) in Sonic Hub: nothing to deliver to, so this one is done
+            await this.db.update(outbox).set({ sentAt: new Date(), lastError: e.message.slice(0, 500) }).where(eq(outbox.id, row.id));
+            this.log.warn(`brief for ${row.externalId} (${row.disciplineCode}) dropped: ${e.message}`);
+            continue;
+          }
           const attempts = row.attempts + 1, wait = Math.min(3600, 30 * 2 ** Math.min(attempts, 7));
           await this.db.update(outbox).set({ attempts, lastError: (e as Error).message.slice(0, 500), nextAttemptAt: new Date(Date.now() + wait * 1000) }).where(eq(outbox.id, row.id));
           this.log.warn(`brief for ${row.externalId} (${row.disciplineCode}) failed, retry in ${wait}s: ${(e as Error).message}`);

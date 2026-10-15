@@ -1,12 +1,12 @@
 /* The people a reading is about, their links to Sonic Hub, and their profiles — one reading of one person at one
    moment. A profile keeps the birth exactly as it was read; editing the person later never changes an old profile. */
 import { BadGatewayException, BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { and, asc, count, desc, eq, inArray } from 'drizzle-orm';
+import { and, asc, count, desc, eq, inArray, isNull } from 'drizzle-orm';
 import { z } from 'zod';
 import { ENGINE_VERSION } from '@mystic/engine';
 import type { BirthDto, Gender, LinkDto, ProfileDto, ProfileSummaryDto, SonicHubPersonDto, SubjectDto, TuViReadingDto, TuViSettings } from '@mystic/engine/api';
 import { DB, type Db } from '../db/db.js';
-import { accounts, profiles, readings, subjectLinks, subjects, tuviProfileSettings } from '../db/schema.js';
+import { accounts, outbox, profiles, readings, subjectLinks, subjects, tuviProfileSettings } from '../db/schema.js';
 import { KnowledgeService } from '../kb/knowledge.service.js';
 import { SyncService } from '../sync/sync.service.js';
 import { SonicHubClient, type SonicHubPerson } from '../sync/sonic-hub.client.js';
@@ -167,6 +167,19 @@ export class PeopleService {
     }
     await this.sync.briefChanged(id);
     return this.subject(id);
+  }
+
+  /** a push from Sonic Hub: refreshes a linked person, and ignores anyone not linked here (null) */
+  async refreshFromSonicHub(personId: string, person: SonicHubPerson): Promise<SubjectDto | null> {
+    const [link] = await this.db.select({ id: subjectLinks.subjectId }).from(subjectLinks).where(and(eq(subjectLinks.system, SONIC_HUB), eq(subjectLinks.externalId, personId)));
+    return link ? this.upsertFromSonicHub(personId, person) : null;
+  }
+
+  /** the person is gone from Sonic Hub: drop the link (and any brief still waiting to go there); the subject keeps its own copy */
+  async unlinkSonicHub(personId: string): Promise<void> {
+    const [link] = await this.db.delete(subjectLinks).where(and(eq(subjectLinks.system, SONIC_HUB), eq(subjectLinks.externalId, personId))).returning({ subjectId: subjectLinks.subjectId });
+    await this.db.delete(outbox).where(and(eq(outbox.system, SONIC_HUB), eq(outbox.externalId, personId), isNull(outbox.sentAt)));
+    if (link) await this.db.update(subjects).set({ updatedAt: new Date() }).where(eq(subjects.id, link.subjectId));
   }
 
   async subjectOfSonicHub(personId: string): Promise<SubjectDto | null> {
