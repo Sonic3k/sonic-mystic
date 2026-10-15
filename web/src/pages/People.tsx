@@ -4,14 +4,15 @@
 import { Fragment, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { BirthDto, Gender, SubjectDto } from '@mystic/engine/api';
+import type { BirthDto, BriefDto, Gender, SubjectDto } from '@mystic/engine/api';
 import { PLACES } from '@mystic/engine/birth';
 import { api } from '../api';
 import { Failed, errorText } from '../components/Owner';
 import { Sheet } from '../components/Sheet';
 import { GIO, thisYear } from '../lib/params';
-import { SONIC_HUB, birthComplete, birthLine, genderName } from '../lib/people';
+import { SONIC_HUB, birthComplete, birthLine, dateComplete, genderName, profilesLine } from '../lib/people';
 import { dateVi, useTitle } from '../lib/text';
+import { nsFacts } from './ns/Home';
 
 const hubLink = (s: SubjectDto) => s.links.find(l => l.system === SONIC_HUB);
 
@@ -38,7 +39,7 @@ export function PeoplePage() {
         <Link key={s.id} className="hh-person" to={`/nguoi/${s.id}`}>
           <b>{s.displayName}{hubLink(s) && <span className="hh-tag">Sonic Hub</span>}</b>
           <small>{[genderName(s.gender), birthLine(s.birth)].filter(Boolean).join(' · ') || 'chưa có ngày sinh'}</small>
-          <small>{s.profiles.length ? `${s.profiles.length} lá số` : 'chưa có lá số'}</small>
+          <small>{profilesLine(s)}</small>
         </Link>))}</div>
 
       {hub.length > 0 && (
@@ -62,32 +63,39 @@ export function SubjectPage() {
   const { id = '' } = useParams();
   const q = useQuery({ queryKey: ['subject', id], queryFn: () => api.subject(id), retry: false });
   const s = q.data;
-  const brief = useQuery({ queryKey: ['brief', id], queryFn: () => api.brief(id), retry: false, enabled: !!s?.profiles.length });
+  const tuvi = s?.profiles.filter(p => p.discipline === 'tuvi') ?? [], ns = s?.profiles.filter(p => p.discipline === 'numerology') ?? [];
+  const brief = useQuery({ queryKey: ['brief', id], queryFn: () => api.brief(id), retry: false, enabled: tuvi.length > 0 });
+  const nsBrief = useQuery({ queryKey: ['brief', id, 'numerology'], queryFn: () => api.brief(id, 'numerology'), retry: false, enabled: ns.length > 0 });
   const [editing, setEditing] = useState(false);
   const nav = useNavigate(), qc = useQueryClient();
   const refreshAll = () => ['subject', 'subjects', 'brief'].forEach(k => void qc.invalidateQueries({ queryKey: [k] }));
   const make = useMutation({
-    mutationFn: () => api.createProfile({ subjectId: id, label: s!.profiles.length ? null : 'Lá số gốc', viewYear: thisYear() }),
+    mutationFn: () => api.createProfile({ subjectId: id, label: tuvi.length ? null : 'Lá số gốc', viewYear: thisYear() }),
     onSuccess: p => { refreshAll(); nav(`/tu-vi/profile/${p.id}`); },
+  });
+  /* nhân số học needs only the date; the names read come from the person's name (the given name first) */
+  const makeNs = useMutation({
+    mutationFn: () => api.createProfile({ subjectId: id, discipline: 'numerology' }),
+    onSuccess: p => { refreshAll(); nav(`/nhan-so-hoc/profile/${p.id}`); },
   });
   const pull = useMutation({ mutationFn: () => api.linkSonicHub(hubLink(s!)!.externalId), onSuccess: refreshAll });
   useTitle(s?.displayName ?? 'Người');
   if (q.isError) return <div className="wrap page tv"><Failed error={q.error}><Link className="tv-link" to="/nguoi">Về danh sách</Link></Failed></div>;
   if (!s) return <div className="wrap page tv"><div className="card empty">Đang mở…</div></div>;
-  const link = hubLink(s), ready = birthComplete(s.gender, s.birth);
+  const link = hubLink(s), ready = birthComplete(s.gender, s.birth), dated = dateComplete(s.birth);
   return (
     <div className="wrap page tv">
       <div className="ptitle"><h1>{s.displayName}</h1><span>{[genderName(s.gender), birthLine(s.birth)].filter(Boolean).join(' · ')}</span></div>
       <div className="tv-subject">
         <div>
-          <div className="hd"><h2>Lá số tử vi</h2><span>{s.profiles.length}</span></div>
+          <div className="hd"><h2>Lá số tử vi</h2><span>{tuvi.length}</span></div>
           <div className="tv-profiles">
-            {s.profiles.filter(p => p.discipline === 'tuvi').map(p => (
+            {tuvi.map(p => (
               <Link key={p.id} className="tv-profile-item" to={`/tu-vi/profile/${p.id}`}>
                 <b>{p.label || 'Lá số'}</b><span>{p.aiReadings ? `${p.aiReadings} bài AI` : ''}</span>
                 <small>{[p.viewYear ? `xem năm ${p.viewYear}` : '', `lưu ${dateVi(p.createdAt)}`].filter(Boolean).join(' · ')}</small>
               </Link>))}
-            {!s.profiles.length && <div className="tv-empty">Chưa có lá số nào.</div>}
+            {!tuvi.length && <div className="tv-empty">Chưa có lá số nào.</div>}
           </div>
           <div className="tv-acts" style={{ marginTop: 14 }}>
             <button type="button" className="tv-btn son" disabled={!ready || make.isPending} onClick={() => make.mutate()} title={ready ? undefined : 'Cần giới tính, ngày tháng năm và giờ sinh'}>
@@ -97,19 +105,27 @@ export function SubjectPage() {
           {!ready && <p className="tv-muted" style={{ fontSize: 13 }}>Còn thiếu {[!s.gender && 'giới tính', !(s.birth.year && s.birth.month && s.birth.day) && 'ngày sinh', !(s.birth.time || s.birth.hourBranch !== null) && 'giờ sinh'].filter(Boolean).join(', ')}{link ? ' — sửa ở Sonic Hub rồi bấm «Cập nhật từ Sonic Hub».' : '.'}</p>}
           {make.isError && <p className="tv-err">{errorText(make.error)}</p>}
 
-          {brief.data && (
-            <section className="tv-brief" style={{ marginTop: 28 }}>
-              <div className="hd"><h2>{brief.data.title}</h2>{brief.data.profileLabel && <span>theo «{brief.data.profileLabel}»</span>}</div>
-              <div className="tv-card">
-                <dl className="tv-facts">{brief.data.facts.map(f => <Fragment key={f.label}><dt>{f.label}</dt><dd>{f.value}</dd></Fragment>)}</dl>
-                {brief.data.lines.map((l, i) => (
-                  <p key={i} className={l.layer === 'primary' ? 'tv-brief-ba' : 'tv-brief-bs'}>
-                    <span className={`tv-voice ${l.layer === 'primary' ? 'ba' : 'bs'}`}>{l.layer === 'primary' ? 'Lời bà' : 'Bổ sung'}</span> {l.text}
-                  </p>))}
-                {link && <p className="tv-muted" style={{ fontSize: 12.5, margin: '10px 0 0' }}>Bản tóm tắt này cũng hiện ở trang người trong Sonic Hub.</p>}
-              </div>
-            </section>
-          )}
+          {brief.data && <Brief b={brief.data} linked={!!link} voice={l => (l.layer === 'primary' ? 'Lời bà' : 'Bổ sung')} />}
+
+          <section className="ns" style={{ marginTop: 36 }}>
+            <div className="hd"><h2>Nhân số học</h2><span>{ns.length}</span></div>
+            <div className="tv-profiles">
+              {ns.map(p => (
+                <Link key={p.id} className="tv-profile-item" to={`/nhan-so-hoc/profile/${p.id}`}>
+                  <b>{p.name ?? 'Hồ sơ'}{p.label && <span className="hh-tag">{p.label}</span>}</b><span>{p.aiReadings ? 'có bài tổng hợp' : ''}</span>
+                  <small>{[nsFacts(p).line, `lưu ${dateVi(p.createdAt)}`].filter(Boolean).join(' · ')}</small>
+                </Link>))}
+              {!ns.length && <div className="tv-empty">Chưa có hồ sơ nhân số học.</div>}
+            </div>
+            <div className="tv-acts" style={{ marginTop: 14 }}>
+              <button type="button" className="tv-btn son" disabled={!dated || makeNs.isPending} onClick={() => makeNs.mutate()} title={dated ? undefined : 'Cần ngày tháng năm sinh'}>
+                {makeNs.isPending ? 'Đang lập…' : 'Lập hồ sơ nhân số học'}</button>
+              <Link className="tv-btn ghost" to={`/nhan-so-hoc?nguoi=${s.id}`}>Xem với tên hoặc ngày khác…</Link>
+            </div>
+            {!dated && <p className="tv-muted" style={{ fontSize: 13 }}>Còn thiếu ngày sinh{link ? ' — sửa ở Sonic Hub rồi bấm «Cập nhật từ Sonic Hub».' : '.'}</p>}
+            {makeNs.isError && <p className="tv-err">{errorText(makeNs.error)}</p>}
+            {nsBrief.data && <Brief b={nsBrief.data} linked={!!link} voice={l => (l.layer === 'added' ? 'Luận thêm' : l.source.startsWith('Tóm lược') ? 'Tóm lược sách' : 'Lời sách')} />}
+          </section>
         </div>
         <aside className="tv-card" style={{ padding: '16px 18px' }}>
           <dl className="tv-facts">
@@ -130,6 +146,23 @@ export function SubjectPage() {
       </div>
       {editing && <SubjectSheet subject={s} onClose={() => setEditing(false)} onSaved={() => refreshAll()} onDeleted={() => nav('/nguoi', { replace: true })} />}
     </div>
+  );
+}
+
+/** the brief a person's newest profile in a discipline keeps (it also goes to their page in Sonic Hub) */
+function Brief({ b, linked, voice }: { b: BriefDto; linked: boolean; voice: (l: BriefDto['lines'][number]) => string }) {
+  return (
+    <section className="tv-brief" style={{ marginTop: 28 }}>
+      <div className="hd"><h2>{b.title}</h2>{b.profileLabel && <span>theo «{b.profileLabel}»</span>}</div>
+      <div className="tv-card">
+        <dl className="tv-facts">{b.facts.map(f => <Fragment key={f.label}><dt>{f.label}</dt><dd>{f.value}</dd></Fragment>)}</dl>
+        {b.lines.map((l, i) => (
+          <p key={i} className={l.layer === 'primary' ? 'tv-brief-ba' : 'tv-brief-bs'}>
+            <span className={`tv-voice ${l.layer === 'primary' ? 'ba' : 'bs'}`}>{voice(l)}</span> {l.text}
+          </p>))}
+        {linked && <p className="tv-muted" style={{ fontSize: 12.5, margin: '10px 0 0' }}>Bản tóm tắt này cũng hiện ở trang người trong Sonic Hub.</p>}
+      </div>
+    </section>
   );
 }
 

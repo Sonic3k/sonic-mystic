@@ -1,6 +1,7 @@
 /* The Mystic API, typed by the contract in @mystic/engine/api. */
 import type {
   AiReadingDto, AiStatusDto, BirthDto, BriefDto, CatalogDto, DisciplineDto, EntryDto, EntrySummaryDto, Gender, LookupResultDto,
+  NumerologyBookDto, NumerologyCatalogDto, NumerologyEntryDto, NumerologyLookupDto, NumerologyNameDto, NumerologyReadingDto, NumerologyRequest,
   PassageDto, ProfileDto, RuleDto, SearchResultDto, SetupDto, SonicHubPersonDto, SourceDto, SubjectDto, TuViReadingDto, TuViRequest, TuViSettings,
 } from '@mystic/engine/api';
 
@@ -39,18 +40,20 @@ const q = (o: Record<string, string | number | undefined | null>) => {
 export interface SubjectInput { displayName: string; gender: Gender | null; birth: Partial<BirthDto>; note?: string | null }
 export interface RulePatch { text?: string; context?: string | null; condition?: string | null; tone?: RuleDto['tone']; active?: boolean; reviewNote?: string | null }
 export interface ProfileInput {
-  subjectId: string; label?: string | null; viewYear?: number | null; note?: string | null;
+  subjectId: string; discipline?: 'tuvi' | 'numerology'; label?: string | null; viewYear?: number | null; note?: string | null;
   gender?: Gender | null; birth?: Partial<BirthDto> | null; settings?: Partial<TuViSettings>;
+  /** nhân số học: the names read */
+  names?: NumerologyNameDto[] | null;
 }
 
-export interface ProfilePatch { label?: string | null; viewYear?: number | null; note?: string | null; settings?: Partial<TuViSettings> }
+export interface ProfilePatch { label?: string | null; viewYear?: number | null; note?: string | null; settings?: Partial<TuViSettings>; names?: NumerologyNameDto[] }
 
 export const api = {
   disciplines: () => get<DisciplineDto[]>('/disciplines'),
   sources: (discipline = 'tuvi') => get<SourceDto[]>(`/sources${q({ discipline })}`),
   entries: (source: string) => get<EntrySummaryDto[]>(`/sources/${encodeURIComponent(source)}/entries`),
   entry: (source: string, key: string | number) => get<EntryDto>(`/sources/${encodeURIComponent(source)}/entries/${encodeURIComponent(String(key))}`),
-  search: (text: string, limit = 150) => get<SearchResultDto>(`/search${q({ q: text, limit })}`),
+  search: (text: string, limit = 150, discipline = 'tuvi') => get<SearchResultDto>(`/search${q({ q: text, limit, discipline })}`),
   lookup: (stars: string[], target?: string) => get<LookupResultDto>(`/tuvi/lookup${q({ stars: stars.join(','), target })}`),
   setup: () => get<SetupDto>('/tuvi/setup'),
   catalog: () => get<CatalogDto>('/tuvi/catalog'),
@@ -63,7 +66,7 @@ export const api = {
   createSubject: (b: SubjectInput) => call<SubjectDto>('POST', '/subjects', b),
   updateSubject: (id: string, b: SubjectInput) => call<SubjectDto>('PUT', `/subjects/${id}`, b),
   deleteSubject: (id: string) => call<void>('DELETE', `/subjects/${id}`),
-  brief: (id: string) => get<BriefDto>(`/subjects/${id}/brief`),
+  brief: (id: string, discipline = 'tuvi') => get<BriefDto>(`/subjects/${id}/brief${q({ discipline })}`),
   sonicHubPersons: () => get<SonicHubPersonDto[]>('/links/sonic-hub/persons'),
   linkSonicHub: (personId: string) => call<SubjectDto>('POST', `/links/sonic-hub/${encodeURIComponent(personId)}`),
 
@@ -72,6 +75,14 @@ export const api = {
   profileReading: (id: string, year?: number) => get<TuViReadingDto>(`/profiles/${id}/reading${q({ year })}`),
   updateProfile: (id: string, b: ProfilePatch) => call<ProfileDto>('PATCH', `/profiles/${id}`, b),
   deleteProfile: (id: string) => call<void>('DELETE', `/profiles/${id}`),
+
+  // nhân số học
+  nsReading: (r: NumerologyRequest) => call<NumerologyReadingDto>('POST', '/numerology/reading', r),
+  nsProfileReading: (id: string, year?: number | null, name?: number | null) => get<NumerologyReadingDto>(`/profiles/${id}/reading${q({ year, name })}`),
+  nsBook: () => get<NumerologyBookDto>('/numerology/book'),
+  nsEntry: (code: string) => get<NumerologyEntryDto>(`/numerology/book/${encodeURIComponent(code)}`),
+  nsLookup: (symbols: string[], topic?: string) => get<NumerologyLookupDto>(`/numerology/lookup${q({ symbols: symbols.join(','), topic })}`),
+  nsCatalog: () => get<NumerologyCatalogDto>('/numerology/catalog'),
 
   aiStatus: () => get<AiStatusDto>('/ai/status'),
   aiReadings: (profileId: string) => get<AiReadingDto[]>(`/profiles/${profileId}/ai-readings`),

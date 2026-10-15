@@ -112,7 +112,13 @@ export interface BirthDto {
   place: string | null; latitude: number | null; longitude: number | null;
 }
 export interface LinkDto { system: string; externalId: string; ownsIdentity: boolean; syncedAt: string | null }
-export interface ProfileSummaryDto { id: string; discipline: string; label: string | null; viewYear: number | null; createdAt: string; updatedAt: string; aiReadings: number }
+export interface ProfileSummaryDto {
+  id: string; discipline: string; label: string | null; viewYear: number | null; createdAt: string; updatedAt: string; aiReadings: number;
+  /** the birth this profile reads (kept as it was saved: it may differ from the person's) */
+  gender: Gender | null; birth: BirthDto;
+  /** nhân số học: the name the profile reads (null for other disciplines) */
+  name: string | null;
+}
 export interface SubjectDto {
   id: string; displayName: string; gender: Gender | null; birth: BirthDto; note: string | null;
   links: LinkDto[]; profiles: ProfileSummaryDto[]; createdAt: string; updatedAt: string;
@@ -203,6 +209,8 @@ export interface NumerologyReadingDto {
   chart: NumerologyChart;
   /** the personal year read, and the calendar year it is asked for (null: the one lived today) */
   pyear: number; viewYear: number | null;
+  /** the name read: its index in chart.names (null: no name) */
+  name: number | null;
   sections: NumerologySectionDto[];
   /** every rule the sections cite, by code */
   rules: Record<string, NumerologyRuleDto>;

@@ -1,16 +1,16 @@
-/* The front page: what this is, the disciplines (tử vi now, the others to come), and the people looked at lately. */
+/* The front page: what this is, the disciplines (those ready, and the others to come), and the people looked at lately. */
 import { Link } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import { DISCIPLINES } from '@mystic/engine';
 import { api } from '../api';
-import { SONIC_HUB, birthLine, genderName } from '../lib/people';
+import { SONIC_HUB, birthLine, genderName, profilesLine } from '../lib/people';
 import { useTitle } from '../lib/text';
 
-const PATH: Record<string, string> = { tuvi: '/tu-vi' };
+const PATH: Record<string, string> = { tuvi: '/tu-vi', numerology: '/nhan-so-hoc' };
 const ABOUT: Record<string, string> = {
   tuvi: 'Lập lá số và luận từng cung theo sổ tay «Luận Tử Vi» bà viết năm 2011.',
   astrology: 'Lá số chiêm tinh theo ngày giờ và nơi sinh.',
-  numerology: 'Các con số từ tên và ngày sinh.',
+  numerology: 'Các con số từ ngày sinh và tên, theo sách «Thay đổi cuộc sống với Nhân số học» của Lê Đỗ Quỳnh Hương.',
   iching: 'Gieo quẻ và đọc 64 quẻ Kinh Dịch.',
   tarot: 'Trải bài và đọc các lá Tarot.',
 };
@@ -26,10 +26,12 @@ export default function Home() {
         <div className="card hh-intro">
           <h1>Huyền học</h1>
           <p>Những gì bà ghi chép về tử vi — giữ nguyên lời bà, số hoá để so được với từng lá số. Phần nào không phải của bà (sách phổ thông, AI) luôn được ghi rõ và để riêng.</p>
+          <p>Nhân số học đọc theo sách «Thay đổi cuộc sống với Nhân số học» của Lê Đỗ Quỳnh Hương, cũng tách lời sách khỏi phần luận thêm.</p>
           <p>Mỗi người có thể có nhiều lá số ở những thời điểm khác nhau; bản tóm tắt của lá số mới nhất hiện cả ở trang người trong Sonic Hub.</p>
           <div className="tv-acts" style={{ marginTop: 6 }}>
             <Link className="tv-btn son" to="/tu-vi">Lập lá số tử vi</Link>
             <Link className="tv-btn ghost" to="/tu-vi/sach">Đọc sách của bà</Link>
+            <Link className="tv-btn ghost" to="/nhan-so-hoc">Xem các con số</Link>
           </div>
         </div>
         <div className="hh-disc">
@@ -46,7 +48,7 @@ export default function Home() {
             <Link key={s.id} className="hh-person" to={`/nguoi/${s.id}`}>
               <b>{s.displayName}{s.links.some(l => l.system === SONIC_HUB) && <span className="hh-tag">Sonic Hub</span>}</b>
               <small>{[genderName(s.gender), birthLine(s.birth)].filter(Boolean).join(' · ') || 'chưa có ngày sinh'}</small>
-              <small>{s.profiles.length ? `${s.profiles.length} lá số` : 'chưa có lá số'}</small>
+              <small>{profilesLine(s)}</small>
             </Link>))}</div>
         </section>
       )}

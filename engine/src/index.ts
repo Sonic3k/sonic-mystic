@@ -6,7 +6,7 @@ export const ENGINE_VERSION = '1.1.0';
 export const DISCIPLINES = [
   { code: 'tuvi', name: 'Tử vi', ready: true },
   { code: 'astrology', name: 'Chiêm tinh', ready: false },
-  { code: 'numerology', name: 'Nhân số học', ready: false },
+  { code: 'numerology', name: 'Nhân số học', ready: true },
   { code: 'iching', name: 'Kinh Dịch', ready: false },
   { code: 'tarot', name: 'Tarot', ready: false },
 ] as const;
