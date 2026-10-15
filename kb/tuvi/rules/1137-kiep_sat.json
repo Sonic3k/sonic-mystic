@@ -1,0 +1,26 @@
+{
+  "entry": 1137,
+  "star": "kiep_sat",
+  "rules": [
+    { "id": "kiep_sat.1141.1", "para": 1141, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: nóng nảy, độc ác, bất chính; chủ sự phá hoại, hình thương, tai nguy, hung hoạ, mổ sẻ.", "when": "in(Kiếp Sát)", "tone": "hung" },
+    { "id": "kiep_sat.1142.1", "para": 1142, "palaces": ["Hạn"], "text": "Lưu hạn vãn niên là lâm trọng bệnh, vì chủ sự chết chóc, có hiếu tang không lành.", "ctx": "Kiếp Sát", "when": "in(Kiếp Sát)", "tone": "hung", "review": "hiểu là hạn có Kiếp Sát (sao gốc; máy không xét lưu Kiếp Sát); điều kiện «vãn niên» (tuổi già) không viết được nên luật áp cho mọi hạn có Kiếp Sát" },
+    { "id": "kiep_sat.1143.1", "para": 1143, "palaces": ["Mệnh", "Thân"], "text": "Hội với Phá Toái mà gặp Kiếp Không Linh Hoả thì như kẻ phụ giúp cho Kiếp Hoả, tăng tính hung ác.", "ctx": "Kiếp Sát", "when": "in(Kiếp Sát) & meet(Phá Toái) & meet(Địa Kiếp/Địa Không/Linh Tinh/Hỏa Tinh)", "tone": "hung", "review": "hiểu là gặp một trong Kiếp Không Linh Hoả (cũng có thể bà muốn nói đủ cả bốn)" },
+    { "id": "kiep_sat.1144.1", "para": 1144, "palaces": ["Hạn"], "text": "Lưu nhị hạn hội Hoả Tang Hổ- chủ cháy nhà, hung hoạ hình thương hoặc hoán cải nghề nghiệp.", "ctx": "Kiếp Sát", "when": null, "tone": "hung", "review": "theo cách an sao, Kiếp Sát luôn cách chi năm sinh một số lẻ cung còn Tang Môn, Bạch Hổ cách một số chẵn, nên Kiếp Sát không bao giờ hội Tang Môn hay Bạch Hổ gốc; có lẽ bà nói Tang Hổ lưu niên của năm hạn, máy chưa xét sao lưu nên không viết được điều kiện; cần xem lại" },
+    { "id": "kiep_sat.1145.1", "para": 1145, "palaces": ["Hạn"], "text": "Nữ nhân lưu hạn khi lâm bồn khó tránh mổ sẻ châm chích.", "ctx": "Kiếp Sát", "when": "female() & in(Kiếp Sát)", "tone": "hung", "review": "hiểu là số nữ, hạn có Kiếp Sát (sao gốc); «khi lâm bồn» là lúc sinh đẻ, không xét trên lá số" },
+    { "id": "kiep_sat.1146.1", "para": 1146, "palaces": ["Mệnh", "Thân"], "text": "Phá Toái Kiếp Sát hội Thất Sát Phá Quân, gia Lộc Dương Đà- là người làm đồ tể, chài lưới.", "when": "in(Kiếp Sát) & meet(Phá Toái, Thất Sát, Phá Quân, Lộc, Kình Dương/Đà La)", "tone": "trung", "review": "cung có Kiếp Sát mà hội Phá Toái thì không bao giờ hội đủ cả Kình lẫn Đà; hiểu «gia Lộc Dương Đà» là gặp Lộc (Lộc Tồn hay Hoá Lộc) và Kình hay Đà" },
+    { "id": "kiep_sat.1147.1", "para": 1147, "palaces": ["Mệnh"], "text": "có Kiếp Sát - người bất chính.", "when": "in(Kiếp Sát)", "tone": "hung" },
+    { "id": "kiep_sat.1148.1", "para": 1148, "palaces": ["Mệnh"], "text": "Nhị Sát trùng nhiêu: cuồng ngôn, loạn thuyết.", "when": "in(Kiếp Sát) & meet(Thất Sát)", "tone": "hung", "review": "«Nhị Sát» hiểu là Kiếp Sát và Thất Sát; «trùng nhiêu» hiểu là hai sao gặp nhau (cùng cung hay hội chiếu)" },
+    { "id": "kiep_sat.1149.1", "para": 1149, "palaces": ["Mệnh"], "text": "Sát Kỵ- gian nan nhục nhã.", "when": "in(Kiếp Sát) & meet(Hóa Kỵ)", "tone": "hung", "review": "Sát hiểu là Kiếp Sát (sao của mục)" },
+    { "id": "kiep_sat.1150.1", "para": 1150, "palaces": ["Tử Tức"], "text": "Sát Hình Hổ - không có con.", "when": "meet(Thất Sát, Thiên Hình, Bạch Hổ)", "tone": "hung", "review": "Kiếp Sát không bao giờ hội Bạch Hổ (Kiếp Sát luôn cách chi năm sinh một số lẻ cung, Bạch Hổ một số chẵn), nên hiểu Sát là Thất Sát (như «Hổ Hình Sát - Không con» ở mục Bạch Hổ); cung Tử hội đủ ba sao" },
+    { "id": "kiep_sat.1151.1", "para": 1151, "palaces": ["Tử Tức"], "text": "Sát Đà Không Kiếp - sinh con ngớ ngẩn.", "when": "in(Kiếp Sát) & meet(Đà La, Không Kiếp)", "tone": "hung", "review": "Sát hiểu là Kiếp Sát (sao của mục); ở mục Bạch Hổ câu tương tự được hiểu là Thất Sát" },
+    { "id": "kiep_sat.1152.1", "para": 1152, "palaces": ["Tật Ách"], "text": "Kiếp Sát ngộ Tứ sát hay Cơ Kỵ - bị giết hay bị ác bệnh.", "when": "in(Kiếp Sát) & (meet(Tứ Sát) | meet(Thiên Cơ, Hóa Kỵ))", "tone": "hung" },
+    { "id": "kiep_sat.1153.1", "para": 1153, "palaces": ["Quan Lộc"], "text": "Nhị Sát - can đảm oai hùng.", "when": "in(Kiếp Sát) & meet(Thất Sát)", "tone": "cat", "review": "«Nhị Sát» hiểu là Kiếp Sát và Thất Sát gặp nhau" },
+    { "id": "kiep_sat.1154.1", "para": 1154, "palaces": ["Điền Trạch"], "text": "có Kiếp Sát Phục Binh - vô sản", "when": "in(Kiếp Sát) & meet(Phục Binh)", "tone": "hung" },
+    { "id": "kiep_sat.1155.1", "para": 1155, "palaces": ["Phúc Đức"], "text": "Kiếp Sát Liêm Trinh - bần yểu", "when": "in(Kiếp Sát) & meet(Liêm Trinh)", "tone": "hung" }
+  ],
+  "skip": [
+    { "para": 1138, "kind": "meta" },
+    { "para": 1139, "kind": "meta" },
+    { "para": 1140, "kind": "meta" }
+  ]
+}

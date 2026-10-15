@@ -1,0 +1,15 @@
+{
+  "entry": 3197,
+  "star": "thien_la",
+  "rules": [
+    { "id": "thien_la.3199.1", "para": 3199, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: ác, táo bạo, gan góc. Chủ sự giam bắt, cản trở.", "when": "in(Thiên La)", "tone": "hung" },
+    { "id": "thien_la.3200.1", "para": 3200, "palaces": ["Mệnh", "Thân"], "text": "La Võng ngộ Hung tinh thành Cát", "when": "in(Thiên La/Địa Võng) & meet(La Võng, Hung tinh)", "tone": "cat", "review": "Thiên La (Thìn) và Địa Võng (Tuất) luôn xung chiếu nhau; hiểu «La Võng» là một trong hai sao thủ cung (cung ở Thìn hay Tuất)" },
+    { "id": "thien_la.3200.2", "para": 3200, "palaces": ["Mệnh", "Thân"], "text": "ngộ Cát thành Hung.", "ctx": "La Võng", "when": "in(Thiên La/Địa Võng) & meet(La Võng, Cát tinh)", "tone": "hung" },
+    { "id": "thien_la.3201.1", "para": 3201, "palaces": ["Mệnh"], "text": "La Võng, thêm Kình Không Kiếp có Nhật Nguyệt giao huy -đắc thời.", "when": "in(Thiên La/Địa Võng) & meet(La Võng, Kình Dương, Không Kiếp, Nhật Nguyệt) & bright(Thái Dương, Thái Âm)", "tone": "cat", "review": "hiểu là Mệnh ở Thìn Tuất (La Võng) hội đủ Kình, Không, Kiếp; «Nhật Nguyệt giao huy» hiểu là Nhật Nguyệt cùng sáng chiếu nhau — với Mệnh ở Thìn Tuất chỉ có thể là Nhật ở Thìn, Nguyệt ở Tuất; nếu bà không đòi Nhật Nguyệt sáng thì bỏ bright" },
+    { "id": "thien_la.3202.1", "para": 3202, "palaces": ["Mệnh"], "text": "La Linh Đà Mã, Mệnh có Tham Liêm - bị tử hình.", "when": "in(Thiên La) & meet(Linh Tinh, Đà La, Thiên Mã, Tham Lang, Liêm Trinh)", "tone": "hung", "review": "Thiên La cố định ở Thìn còn Tham Liêm chỉ đồng cung ở Tỵ Hợi, nên hiểu «Mệnh có Tham Liêm» là Mệnh có Thiên La (ở Thìn) hội Tham Lang và Liêm Trinh; cũng có thể bà muốn nói Mệnh Tham Liêm còn La Linh Đà Mã ở cung khác (hạn), cần xem lại" }
+  ],
+  "skip": [
+    { "para": 3198, "kind": "meta" },
+    { "para": 3203, "kind": "xref" }
+  ]
+}

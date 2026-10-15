@@ -1,0 +1,13 @@
+{
+  "entry": 688,
+  "star": "duong_phu",
+  "rules": [
+    { "id": "duong_phu.690.1", "para": 690, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: Ưu tĩnh, điềm đạm, khiêm nhường, chủ sự thanh tịnh.", "when": "in(Đường Phù)", "tone": "cat" },
+    { "id": "duong_phu.692.1", "para": 692, "palaces": ["Mệnh", "Quan Lộc", "Phúc Đức"], "text": "Có Đường, Tướng, Tấu, Long, Phượng, Quan Phù - đi tu thành đạt, có danh vị, làm thầy cúng cũng có tiếng.", "when": "in(Đường Phù) & meet(Thiên Tướng, Tấu Thư, Long Phượng, Quan Phù)", "tone": "cat", "review": "Tướng hiểu là Thiên Tướng (Tướng Quân không bao giờ hội Đường Phù); Long Phượng là Long Trì, Phượng Các" },
+    { "id": "duong_phu.693.1", "para": 693, "palaces": ["Điền Trạch"], "text": "Có Dưỡng Cự Đường Tam Hoá - có nhà cao cửa rộng vững bền.", "when": "in(Đường Phù) & meet(Dưỡng, Cự Môn, Tam Hóa)", "tone": "cat", "review": "Cự hiểu là Cự Môn, Tam Hoá là đủ Hoá Lộc, Hoá Quyền, Hoá Khoa" }
+  ],
+  "skip": [
+    { "para": 689, "kind": "meta" },
+    { "para": 691, "kind": "heading" }
+  ]
+}

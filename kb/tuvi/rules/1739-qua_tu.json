@@ -1,0 +1,38 @@
+{
+  "entry": 1739,
+  "star": "qua_tu",
+  "rules": [
+    { "id": "qua_tu.1742.1", "para": 1742, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: lạnh lùng, cô độc, keo kiệt.", "when": "in(Quả Tú)", "tone": "hung" },
+    { "id": "qua_tu.1743.1", "para": 1743, "palaces": ["Mệnh", "Thân"], "text": "Chủ sự cô đơn, chủ can trường dũng mãnh.", "ctx": "Quả Tú", "when": "in(Quả Tú)", "tone": "mixed" },
+    { "id": "qua_tu.1744.1", "para": 1744, "palaces": ["Mệnh"], "text": "Nam kỵ Cô, Nữ kỵ Quả cư Mệnh.", "when": "(male() & in(Cô Thần)) | (female() & in(Quả Tú))", "tone": "hung" },
+    { "id": "qua_tu.1744.2", "para": 1744, "palaces": ["Mệnh", "Thân"], "text": "Hội với Cố Thần là 2 sao hung ác.", "ctx": "Quả Tú", "when": "in(Quả Tú) & meet(Cô Thần)", "tone": "hung", "review": "Cố Thần hiểu là Cô Thần; Cô Thần luôn ở tam hợp với Quả Tú nên điều kiện đúng mỗi khi có Quả Tú" },
+    { "id": "qua_tu.1745.1", "para": 1745, "palaces": ["Mệnh", "Thân"], "text": "Quả Cô cư Thìn Tuất Sửu Mùi cung vô chính diệu, riêng người Hoả hay Thổ Mệnh, cùng Tả Hữu Thai Toạ nên phân luận tuỳ theo phú quý hay văn tinh hội chiếu", "when": "in(Quả Tú) & at(Tứ Mộ) & empty() & menh(Hỏa, Thổ) & meet(Tả Hữu, Thai Tọa)", "tone": "trung", "review": "bà không nói kết quả, chỉ dặn xét thêm sao phú quý hay văn tinh hội chiếu; Cô Thần luôn ở Tứ Sinh nên chỉ Quả Tú cư Tứ Mộ được; «cùng Tả Hữu Thai Toạ» hiểu là có gặp Tả Hữu Thai Toạ (cũng có thể là so sánh: Tả Hữu Thai Toạ cũng phải luận như vậy) — đọc như mục Cô Thần" },
+    { "id": "qua_tu.1746.1", "para": 1746, "palaces": ["Mệnh", "Thân"], "text": "Quả Cô hội Vũ Khúc (tối kỵ đối với Nữ Mệnh) - phu quân yểu triết mà tử tức hình khắc, buồn vì con bất hiếu.", "when": "female() & in(Quả Tú/Cô Thần) & meet(Cô Quả, Vũ Khúc)", "tone": "hung" },
+    { "id": "qua_tu.1747.1", "para": 1747, "palaces": ["Mệnh", "Thân"], "text": "Hội với Tử Phủ là Vượng tướng nhưng phải có Cát tinh phù trì", "ctx": "Quả Tú", "when": "in(Quả Tú) & meet(Tử Phủ, Cát tinh)", "tone": "cat" },
+    { "id": "qua_tu.1747.2", "para": 1747, "palaces": ["Mệnh", "Thân"], "text": "cũng như Phụ Bật Quả Cô hội Cát phù Cát", "when": "in(Quả Tú) & meet(Cát tinh)", "tone": "cat" },
+    { "id": "qua_tu.1747.3", "para": 1747, "palaces": ["Mệnh", "Thân"], "text": "hội Hung phù Hung mà tác hại.", "ctx": "Quả Cô", "when": "in(Quả Tú) & meet(Hung tinh)", "tone": "hung" },
+    { "id": "qua_tu.1748.1", "para": 1748, "palaces": ["Mệnh"], "text": "Quả Tú thủ chiếu - lạnh lùng cô độc ( nên cung Tử xấu thì cô độc suốt đời )", "when": "meet(Quả Tú)", "tone": "hung", "review": "thủ chiếu hiểu là Quả Tú ở Mệnh hoặc chiếu về Mệnh; lời trong ngoặc (cung Tử xấu) giữ trong lời văn, không viết thành điều kiện" },
+    { "id": "qua_tu.1748.2", "para": 1748, "palaces": ["Mệnh", "Thân"], "text": "Tại Mệnh Thân cung mà không có Cát tinh - chủ cô quả.", "ctx": "Quả Tú", "when": "in(Quả Tú) & !meet(Cát tinh)", "tone": "hung" },
+    { "id": "qua_tu.1749.1", "para": 1749, "palaces": ["Mệnh"], "text": "Quả Phục = hay nói xấu, nói nhảm.", "when": "in(Quả Tú) & meet(Phục Binh)", "tone": "hung" },
+    { "id": "qua_tu.1749.2", "para": 1749, "palaces": ["Mệnh"], "text": "Quả Kỵ = thường bị người ta ghét bỏ.", "when": "in(Quả Tú) & meet(Hóa Kỵ)", "tone": "hung" },
+    { "id": "qua_tu.1749.3", "para": 1749, "palaces": ["Mệnh"], "text": "Quả Đào ngộ Mã = đàn bà số phận lênh đênh.", "when": null, "tone": "hung", "review": "theo cách an sao Thiên Mã luôn cách Đào Hoa 5 cung nên hai sao không bao giờ cùng hội một cung (dù có hay không có Quả Tú), không viết được điều kiện; cần xem lại" },
+    { "id": "qua_tu.1750.1", "para": 1750, "palaces": ["Huynh Đệ"], "text": "Quả Tú - không có anh em.", "when": "in(Quả Tú)", "tone": "hung" },
+    { "id": "qua_tu.1751.1", "para": 1751, "palaces": ["Huynh Đệ"], "text": "Quả Tồn - con một.", "when": "in(Quả Tú) & meet(Lộc Tồn)", "tone": "hung" },
+    { "id": "qua_tu.1752.1", "para": 1752, "palaces": ["Phu Thê"], "text": "Quả Phá Không - nhân duyên trắc trở", "when": "in(Quả Tú) & meet(Phá Quân, Địa Không)", "tone": "hung", "review": "Phá hiểu là Phá Quân (mục Phá Quân ghi «Phá Quả Không - nhân duyên trắc trở»); Không hiểu là Địa Không, cũng có thể là Thiên Không hay Tuần Triệt" },
+    { "id": "qua_tu.1753.1", "para": 1753, "palaces": ["Phu Thê"], "text": "Tú Các tương phùng - vợ chồng hiền lương giúp ích cho nhau.", "when": "in(Quả Tú/Phượng Các) & meet(Quả Tú, Phượng Các)", "tone": "cat", "review": "Các hiểu là Phượng Các (mục Phượng Các ghi «Các Tú tương phùng»); tương phùng hiểu là một trong hai sao ở cung Thê và sao kia cùng hội" },
+    { "id": "qua_tu.1754.1", "para": 1754, "palaces": ["Tử Tức"], "text": "Có Quả Tú - có con nuôi.", "when": "in(Quả Tú)", "tone": "trung" },
+    { "id": "qua_tu.1754.2", "para": 1754, "palaces": ["Tử Tức"], "text": "Tú Hình - không có con.", "when": "in(Quả Tú) & meet(Thiên Hình)", "tone": "hung" },
+    { "id": "qua_tu.1754.3", "para": 1754, "palaces": ["Tử Tức"], "text": "Có Quả Cô: vất vả về đường con cái", "when": "in(Quả Tú/Cô Thần) & meet(Cô Quả)", "tone": "hung" },
+    { "id": "qua_tu.1755.1", "para": 1755, "palaces": ["Tài Bạch"], "text": "Có Quả Tú - giữ được của khỏi hao tán.", "when": "in(Quả Tú)", "tone": "cat" },
+    { "id": "qua_tu.1756.1", "para": 1756, "palaces": ["Thiên Di"], "text": "Quả Phá - đi đường hay bị nguy hiểm.", "when": "in(Quả Tú) & meet(Phá Quân)", "tone": "hung", "review": "Phá hiểu là Phá Quân (như «Quả Phá Không» ở cung Thê); cũng có thể là Phá Toái" },
+    { "id": "qua_tu.1757.1", "para": 1757, "palaces": ["Quan Lộc"], "text": "Quả Tú - công danh hèn kém.", "when": "in(Quả Tú)", "tone": "hung" },
+    { "id": "qua_tu.1758.1", "para": 1758, "palaces": ["Điền Trạch"], "text": "Quả Tú - điền sản không hao tán.", "when": "in(Quả Tú)", "tone": "cat" },
+    { "id": "qua_tu.1759.1", "para": 1759, "palaces": ["Phúc Đức"], "text": "Có Quả Tang - trong họ thường có quả phụ.", "when": "in(Quả Tú) & meet(Tang Môn)", "tone": "hung" },
+    { "id": "qua_tu.1759.2", "para": 1759, "palaces": ["Phúc Đức"], "text": "Quả Triệt Dưỡng - đời nào cũng có nhà thất tự và có con nuôi.", "when": "in(Quả Tú) & meet(Triệt, Dưỡng)", "tone": "hung" },
+    { "id": "qua_tu.1759.3", "para": 1759, "palaces": ["Phúc Đức"], "text": "Quả Tồn - độc đinh.", "when": "in(Quả Tú) & meet(Lộc Tồn)", "tone": "hung" }
+  ],
+  "skip": [
+    { "para": 1740, "kind": "meta" },
+    { "para": 1741, "kind": "meta" }
+  ]
+}

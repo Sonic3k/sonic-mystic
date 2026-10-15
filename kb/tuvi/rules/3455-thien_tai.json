@@ -1,0 +1,173 @@
+{
+ "entry": 3455,
+ "star": "thien_tai",
+ "rules": [
+  {
+   "id": "thien_phu.3458.1",
+   "para": 3458,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Chủ: phúc thọ, tăng tài lộc và nhân từ.",
+   "ctx": "Thiên Tài, Thiên Thọ",
+   "when": "in(Thiên Tài/Thiên Thọ)",
+   "tone": "cat",
+   "review": "các đoạn 3455–3468 là mục riêng của hai sao Thiên Tài, Thiên Thọ chép liền trong mục Thiên Phủ, nên chủ thể là Thiên Tài hoặc Thiên Thọ"
+  },
+  {
+   "id": "thien_phu.3459.1",
+   "para": 3459,
+   "palaces": [
+    "*"
+   ],
+   "text": "Thiên Tài: Phù suy không phù thịnh, chế ngự các sao xấu mà ngăn ngừa cả sao tốt.",
+   "when": "in(Thiên Tài)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_phu.3460.1",
+   "para": 3460,
+   "palaces": [
+    "*"
+   ],
+   "text": "Gặp Âm Dương hãm thì làm cho sáng rạng ra",
+   "ctx": "Thiên Tài",
+   "when": "in(Thiên Tài) & meet(Nhật Nguyệt) & dim(Thái Dương, Thái Âm)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3460.2",
+   "para": 3460,
+   "palaces": [
+    "*"
+   ],
+   "text": "gặp Âm Dương đắc địa thì che bớt đi.",
+   "ctx": "Thiên Tài",
+   "when": "in(Thiên Tài) & meet(Nhật Nguyệt) & bright(Thái Dương, Thái Âm)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3461.1",
+   "para": 3461,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Mệnh có Tài ấn Tồn - phú quý.",
+   "when": "in(Thiên Tài) & meet(Quốc Ấn, Lộc Tồn)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3462.1",
+   "para": 3462,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tài ngộ Nhật hãm - nói năng không cẩn trọng, nhạo báng, không tín ngưỡng, không giữ thuần phong mỹ tục.",
+   "when": "in(Thiên Tài) & meet(Thái Dương) & dim(Thái Dương)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3463.1",
+   "para": 3463,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Thiên Thọ tính cách hiền hậu vui vẻ, điềm đạm.",
+   "when": "in(Thiên Thọ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3464.1",
+   "para": 3464,
+   "palaces": [
+    "Mệnh",
+    "Tật Ách",
+    "Phúc Đức"
+   ],
+   "text": "Cư Mệnh ách Phúc thì thọ",
+   "ctx": "Thiên Thọ",
+   "when": "in(Thiên Thọ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3464.2",
+   "para": 3464,
+   "palaces": [
+    "*"
+   ],
+   "text": "cư cung nào cũng đẹp",
+   "ctx": "Thiên Thọ",
+   "when": "in(Thiên Thọ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3464.3",
+   "para": 3464,
+   "palaces": [
+    "Phúc Đức",
+    "Phụ Mẫu"
+   ],
+   "text": "nhưng hợp cách là cư cung Phúc và Phụ.",
+   "ctx": "Thiên Thọ",
+   "when": "in(Thiên Thọ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3465.1",
+   "para": 3465,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Hội Lương - càng tăng phúc thọ",
+   "ctx": "Thiên Thọ",
+   "when": "in(Thiên Thọ) & meet(Thiên Lương)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3466.1",
+   "para": 3466,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Hội Nhật Nguyệt miếu thì bị chiết giảm đi chút.",
+   "ctx": "Thiên Thọ",
+   "when": "in(Thiên Thọ) & meet(Nhật Nguyệt) & bright(Thái Dương, Thái Âm)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3467.1",
+   "para": 3467,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Mệnh có Tài Thọ - phúc thọ đa năng.",
+   "when": "in(Thiên Tài/Thiên Thọ) & meet(Tài Thọ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3468.1",
+   "para": 3468,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "Cư Tài, Thiên Tài hội Tả Hữu - làm thầy thuốc mà giàu.",
+   "when": "in(Thiên Tài) & meet(Tả Hữu)",
+   "tone": "cat"
+  }
+ ],
+ "skip": [
+  {
+   "para": 3456,
+   "kind": "meta"
+  },
+  {
+   "para": 3457,
+   "kind": "meta"
+  }
+ ]
+}

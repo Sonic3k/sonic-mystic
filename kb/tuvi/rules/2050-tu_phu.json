@@ -1,0 +1,14 @@
+{
+  "entry": 2050,
+  "star": "tu_phu",
+  "rules": [
+    { "id": "tu_phu.2052.1", "para": 2052, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: ác vừa, biểu hiện sự chết. Chủ sự nguy cùng, về bệnh tật.", "when": "in(Tử Phù)", "tone": "hung" },
+    { "id": "tu_phu.2053.1", "para": 2053, "palaces": ["Mệnh", "Thân"], "text": "Hội với Thiên Cơ hay sinh đau mắt.", "ctx": "Tử Phù", "when": "in(Tử Phù) & meet(Thiên Cơ)", "tone": "hung" },
+    { "id": "tu_phu.2054.1", "para": 2054, "palaces": ["Mệnh", "Thân"], "text": "Hội Thiên Lương Đà La - hay bị đau ruột, gan và chứng kiết lỵ", "ctx": "Tử Phù", "when": "in(Tử Phù) & meet(Thiên Lương, Đà La)", "tone": "hung" },
+    { "id": "tu_phu.2055.1", "para": 2055, "palaces": ["Hạn"], "text": "Lưu hạn gặp Tang Hổ Hoả Linh Địa Kiếp phải phòng hoả tai.", "ctx": "Tử Phù", "when": "in(Tử Phù) & meet(Tang Môn/Bạch Hổ/Hỏa Tinh/Linh Tinh/Địa Kiếp)", "tone": "hung", "review": "hiểu là gặp một trong các sao Tang Hổ Hoả Linh Địa Kiếp; Tử Phù không bao giờ hội Tang Môn, Bạch Hổ của lá số gốc (có thể bà nói lưu Tang Hổ của năm hạn, engine chưa tính), nên thực ra chỉ xét Hoả Tinh, Linh Tinh, Địa Kiếp" },
+    { "id": "tu_phu.2056.1", "para": 2056, "palaces": ["*"], "text": "Gặp Hư Toái thì ở cung nào cũng xấu.", "ctx": "Tử Phù", "when": null, "tone": "hung", "review": "Tử Phù luôn ở cung kề trước Thiên Hư (Thiên Hư cùng cung Tuế Phá) nên không bao giờ gặp Thiên Hư; không viết được điều kiện cho «Hư Toái»; nếu bà chỉ muốn nói Phá Toái thì là in(Tử Phù) & meet(Phá Toái); cần xem lại" }
+  ],
+  "skip": [
+    { "para": 2051, "kind": "meta" }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "sonic-mystic",
+  "private": true,
+  "type": "module",
+  "description": "Huyền học — Tử vi from grandma's notes, and later chiêm tinh, nhân số học, Kinh Dịch, tarot: one engine package, one API, one web.",
+  "workspaces": [
+    "engine",
+    "kb",
+    "api",
+    "web"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build:engine": "npm run build -w @mystic/engine",
+    "build:api": "npm run build:engine && npm run build -w @mystic/api",
+    "build:web": "npm run build:engine && npm run build -w @mystic/web",
+    "build": "npm run build:engine && npm run build -w @mystic/api && npm run build -w @mystic/web",
+    "typecheck": "npm run build:engine && npm run typecheck -w @mystic/api && npm run typecheck -w @mystic/web",
+    "test": "npm run build:engine && npm run test -w @mystic/engine && npm run test -w @mystic/kb && npm run test -w @mystic/api",
+    "kb:book": "npm run build:engine && npm run book -w @mystic/kb",
+    "kb:bundle": "npm run build:engine && npm run bundle -w @mystic/kb",
+    "db:generate": "npm run db:generate -w @mystic/api",
+    "start": "npm run start -w @mystic/api",
+    "dev:web": "npm run dev -w @mystic/web"
+  }
+}

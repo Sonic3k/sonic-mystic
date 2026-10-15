@@ -1,0 +1,35 @@
+{
+  "entry": 1653,
+  "star": "phong_cao",
+  "rules": [
+    { "id": "phong_cao.1655.1", "para": 1655, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: tự đắc. Chủ bằng sắc công danh; chủ phù trợ, gia tăng sự phú quý hiển đạt.", "when": "in(Phong Cáo)", "tone": "cat" },
+    { "id": "phong_cao.1656.1", "para": 1656, "palaces": ["Mệnh", "Thân"], "text": "Hội với Thai Phụ, 2 sao này chỉ bằng sắc, ấn tín.", "ctx": "Phong Cáo", "when": "in(Phong Cáo) & meet(Thai Phụ)", "tone": "cat", "review": "Thai Phụ luôn tam hợp với Phong Cáo nên điều kiện đúng mỗi khi Phong Cáo ở Thân Mệnh" },
+    { "id": "phong_cao.1657.1", "para": 1657, "palaces": ["Mệnh", "Thân"], "text": "Hội với Binh Hình Tướng ấn là hợp cách, ví như gươm đao, cờ biểu, ấn tín của vị nguyên soái.", "ctx": "Phong Cáo", "when": "in(Phong Cáo) & meet(Phục Binh, Thiên Hình, Tướng Quân, Quốc Ấn)", "tone": "cat", "review": "Binh Hình Tướng ấn hiểu là Phục Binh, Thiên Hình, Tướng Quân, Quốc Ấn (bộ võ cách, như «ấn tín của vị nguyên soái»); Tướng ở đây hiểu là Tướng Quân, không phải Thiên Tướng" },
+    { "id": "phong_cao.1658.1", "para": 1658, "palaces": ["Mệnh"], "text": "Tướng Cáo thủ Mệnh gia hội Hồng Loan Hoa Cái thì thiếu niên toại chí, sớm thành đạt, có uy quyền võ nghiệp, giữ quyền chức chính vị; Về văn làm quản đốc, lưu trữ, ngành chuyên về thăng thưởng, phong tặng.", "when": null, "tone": "cat", "review": "theo cách an sao Hồng Loan và Hoa Cái không bao giờ cùng ở tam phương tứ chính của một cung, nên không bao giờ hội đủ bộ này; không viết được điều kiện, cần xem lại (Tướng có thể là Thiên Tướng hay Tướng Quân)" },
+    { "id": "phong_cao.1659.1", "para": 1659, "palaces": ["Mệnh"], "text": "Có Phong Cáo - vinh hiển.", "when": "in(Phong Cáo)", "tone": "cat" },
+    { "id": "phong_cao.1660.1", "para": 1660, "palaces": ["Mệnh"], "text": "Cáo ấn chiếu - có địa vị xã hội.", "when": "meet(Phong Cáo) & aim(Quốc Ấn)", "tone": "cat", "review": "ấn hiểu là Quốc Ấn; hiểu là Quốc Ấn chiếu Mệnh, Phong Cáo thủ Mệnh hay cũng chiếu Mệnh" },
+    { "id": "phong_cao.1661.1", "para": 1661, "palaces": ["Mệnh"], "text": "Ngộ Sương Khúc Khoa Quyền - vinh hiển tột bậc.", "ctx": "Phong Cáo", "when": null, "tone": "cat", "review": "theo cách an sao Phong Cáo luôn cách Văn Khúc hai cung nên không bao giờ hội Văn Khúc, bộ Sương Khúc không bao giờ hội đủ; không viết được điều kiện, cần xem lại (có thể bà muốn nói Cáo gặp Văn Xương cùng Khoa Quyền)" },
+    { "id": "phong_cao.1662.1", "para": 1662, "palaces": ["Mệnh"], "text": "Cáo ngộ Âm hay Dương - đối diện triều đẩu - quý cách.", "when": "in(Phong Cáo) & opp(Thái Âm/Thái Dương)", "tone": "cat", "review": "«đối diện» hiểu là Thái Âm hay Thái Dương ở cung xung chiếu; cũng có thể bà chỉ muốn nói Cáo gặp Âm hay Dương ở tam phương" },
+    { "id": "phong_cao.1663.1", "para": 1663, "palaces": ["Mệnh"], "text": "Phong Tướng - hiển đạt", "when": "in(Phong Cáo) & meet(Thiên Tướng)", "tone": "cat", "review": "Tướng hiểu là Thiên Tướng (cũng có thể là Tướng Quân)" },
+    { "id": "phong_cao.1663.2", "para": 1663, "palaces": ["Mệnh"], "text": "gia Khoa Quyền,hay Quang Quý -phát.", "ctx": "Phong Tướng", "when": "in(Phong Cáo) & meet(Thiên Tướng) & (meet(Hóa Khoa, Hóa Quyền) | meet(Quang Quý))", "tone": "cat", "review": "Tướng hiểu là Thiên Tướng (cũng có thể là Tướng Quân)" },
+    { "id": "phong_cao.1663.3", "para": 1663, "palaces": ["Mệnh"], "text": "Thai Cáo - hưởng phúc phụ tổ.", "when": "in(Thai Phụ/Phong Cáo) & meet(Thai Cáo)", "tone": "cat", "review": "Thai Phụ và Phong Cáo luôn tam hợp nhau, nên hiểu là một trong hai sao thủ Mệnh" },
+    { "id": "phong_cao.1664.1", "para": 1664, "palaces": ["Tử Tức"], "text": "Có Phong ấn Quang Quý - con hiển đạt.", "when": "in(Phong Cáo) & meet(Quốc Ấn, Quang Quý)", "tone": "cat", "review": "ấn hiểu là Quốc Ấn" },
+    { "id": "phong_cao.1665.1", "para": 1665, "palaces": ["Nô Bộc"], "text": "Phong Cáo - có người giúp đỡ", "when": "in(Phong Cáo)", "tone": "cat" },
+    { "id": "phong_cao.1666.1", "para": 1666, "palaces": ["Nô Bộc"], "text": "Phong Cáo hội Thiên Quan Thiên Phúc - có quý nhân giúp làm nên.", "when": "in(Phong Cáo) & meet(Quan Phúc)", "tone": "cat" },
+    { "id": "phong_cao.1667.1", "para": 1667, "palaces": ["Quan Lộc"], "text": "Phong ấn Quang Quý - làm nên vinh hiển, có tước phong.", "when": "in(Phong Cáo) & meet(Quốc Ấn, Quang Quý)", "tone": "cat", "review": "ấn hiểu là Quốc Ấn" },
+    { "id": "phong_cao.1667.2", "para": 1667, "palaces": ["Quan Lộc"], "text": "Phong Tướng = con hiển đạt", "when": "in(Phong Cáo) & meet(Thiên Tướng)", "tone": "cat", "review": "Tướng hiểu là Thiên Tướng (cũng có thể là Tướng Quân); bà ghi «con hiển đạt» ngay ở cung Quan, giữ nguyên" },
+    { "id": "phong_cao.1668.1", "para": 1668, "palaces": ["Điền Trạch"], "text": "Phong ấn = có điền sản.", "when": "in(Phong Cáo) & meet(Quốc Ấn)", "tone": "cat", "review": "ấn hiểu là Quốc Ấn" },
+    { "id": "phong_cao.1668.2", "para": 1668, "palaces": ["Điền Trạch"], "text": "Phong ấn ngộ Tử Phủ - giàu điền sản.", "when": "in(Phong Cáo) & meet(Quốc Ấn, Tử Phủ)", "tone": "cat" },
+    { "id": "phong_cao.1668.3", "para": 1668, "palaces": ["Điền Trạch"], "text": "Phong Phượng Tử Phủ - giàu nhà cửa.", "when": "in(Phong Cáo) & meet(Phượng Các, Tử Phủ)", "tone": "cat" },
+    { "id": "phong_cao.1669.1", "para": 1669, "palaces": ["Phúc Đức"], "text": "Phong Cáo ( là Thổ đới Thuỷ ) là hình cái chiếu vuông vắn.", "when": "in(Phong Cáo)", "tone": "trung" },
+    { "id": "phong_cao.1670.1", "para": 1670, "palaces": ["Phúc Đức"], "text": "Phong Cáo gặp Tham Vũ Khoa Quyền là địa khí cát tú, huyệt toạ nơi nguy nga đẹp đẽ, được công danh hiển hách, vinh hoa, phong tặng.", "when": "in(Phong Cáo) & meet(Tham Lang, Vũ Khúc, Hóa Khoa, Hóa Quyền)", "tone": "cat" },
+    { "id": "phong_cao.1671.1", "para": 1671, "palaces": ["Phúc Đức"], "text": "Nếu gặp Tuần Triệt Đà Kỵ Hư Hoả Kiếp ắt cả đời bôn tẩu, không thì ở chốn Thiền môn.", "ctx": "Phong Cáo", "when": "in(Phong Cáo) & meet(Tuần/Triệt/Đà La/Hóa Kỵ/Thiên Hư/Hỏa Tinh/Địa Kiếp)", "tone": "hung", "review": "hiểu là gặp một trong các sao Tuần Triệt Đà Kỵ Hư Hoả Kiếp; vì danh sách dài nên gần như mọi cung Phúc có Phong Cáo đều gặp" },
+    { "id": "phong_cao.1672.1", "para": 1672, "palaces": ["Phúc Đức"], "text": "Phong ấn Quang Quý - vinh hiển.", "when": "in(Phong Cáo) & meet(Quốc Ấn, Quang Quý)", "tone": "cat", "review": "ấn hiểu là Quốc Ấn" },
+    { "id": "phong_cao.1673.1", "para": 1673, "palaces": ["Phúc Đức"], "text": "Phong Cáo Thai Toạ - hưởng phúc tổ phụ.", "when": "in(Phong Cáo) & meet(Thai Tọa)", "tone": "cat", "review": "Thai Toạ hiểu là Tam Thai, Bát Toạ; cũng có thể bà muốn nói Thai Phụ (như «Thai Cáo - hưởng phúc phụ tổ» ở cung Mệnh)" },
+    { "id": "phong_cao.1674.1", "para": 1674, "palaces": ["Phúc Đức"], "text": "Phong Cáo - đại thọ.", "when": "in(Phong Cáo)", "tone": "cat" },
+    { "id": "phong_cao.1675.1", "para": 1675, "palaces": ["Phụ Mẫu"], "text": "Phong Cáo - cha mẹ có chức vị.", "when": "in(Phong Cáo)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 1654, "kind": "meta" }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "entry": 702,
+  "star": "hoa_cai",
+  "rules": [
+    { "id": "hoa_cai.705.1", "para": 705, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: đẹp, ưa sa hoa, lộng lẫy, hay làm bộ.", "when": "in(Hoa Cái)", "tone": "mixed" },
+    { "id": "hoa_cai.707.1", "para": 707, "palaces": ["Mệnh", "Thân"], "text": "Hợp với Thiên Mã thành cách giáp biên, tiền Cái hậu Mã; chấp chưởng oai quyền, tiền hô hậu ủng.", "ctx": "Hoa Cái", "when": "flank(Hoa Cái, Thiên Mã)", "tone": "cat", "review": "hiểu là Hoa Cái và Thiên Mã giáp hai bên cung (theo cách an sao Hoa Cái và Thiên Mã luôn cách nhau hai cung nên cách này luôn có ở một cung Tý Ngọ Mão Dậu)" },
+    { "id": "hoa_cai.708.1", "para": 708, "palaces": ["Mệnh", "Thân"], "text": "Hoa Cái thủ Thân Mệnh hãm thì tốt nhất là \"Thí phát xuất gia, chứ không hợp với nếp sinh hoạt trần hoàn.", "when": "in(Hoa Cái) & !bright(Hoa Cái)", "tone": "mixed", "review": "bảng của bà chỉ ghi Hoa Cái vượng ở Tý Thìn Mùi, không ghi cung hãm; hiểu hãm là Hoa Cái ở ngoài các cung ấy (Hoa Cái chỉ đóng ở Thìn Tuất Sửu Mùi nên là Tuất, Sửu)" },
+    { "id": "hoa_cai.709.1", "para": 709, "palaces": ["Mệnh"], "text": "Có Hoa Hỷ, gia Tử Dương chiếu thì giàu sang phú quý.", "when": null, "tone": "cat", "review": "Tử Dương hiểu là Tử Vi, Thái Dương — Thái Dương luôn cách Tử Vi ba cung nên hai sao không bao giờ cùng chiếu một cung; không viết được điều kiện, cần xem lại (cũng có thể bà muốn nói Tử Vi hay Thái Dương chiếu)" },
+    { "id": "hoa_cai.710.1", "para": 710, "palaces": ["Thân"], "text": "Hoa Cái thủ Thân - đàn ông ra ngoài nhiều người thương yêu.", "when": "male() & in(Hoa Cái)", "tone": "cat" },
+    { "id": "hoa_cai.710.2", "para": 710, "palaces": ["Mệnh"], "text": "Nữ Mệnh có Hoa Cái Tấu Thư - là người thanh cao.", "when": "female() & in(Hoa Cái) & meet(Tấu Thư)", "tone": "cat" },
+    { "id": "hoa_cai.711.1", "para": 711, "palaces": ["Mệnh"], "text": "Hoa Cái Thái Tuế Diêu Đà - nói lắp, ngọng.", "when": "in(Hoa Cái) & meet(Thái Tuế, Thiên Diêu, Đà La)", "tone": "hung" },
+    { "id": "hoa_cai.712.1", "para": 712, "palaces": ["Mệnh"], "text": "Nữ Mệnh có Mộc Dục Hoa Cái - dâm.", "when": "female() & in(Hoa Cái) & meet(Mộc Dục)", "tone": "hung" },
+    { "id": "hoa_cai.713.1", "para": 713, "palaces": ["Mệnh"], "text": "Hoa Cái ngộ phúc tinh - rất tốt, có địa vị.", "when": "in(Hoa Cái) & meet(Tử Vi/Thái Âm/Thiên Đức/Thiên Quan/Thiên Phúc)", "tone": "cat", "review": "phúc tinh hiểu là các sao bà ghi «Phúc tinh» ở đầu mục: Tử Vi, Thái Âm, Thiên Đức, Thiên Quan, Thiên Phúc" },
+    { "id": "hoa_cai.714.1", "para": 714, "palaces": ["Mệnh"], "text": "Ngộ Thương, Quyền,Tướng, ấn, Long, Phượng - được trọng dụng làm nên việc lớn.", "ctx": "Hoa Cái", "when": null, "tone": "cat", "review": "Thương chỉ có thể là Thiên Thương, mà sao này luôn ở cung Nô nên không bao giờ hội cung Mệnh; không viết được điều kiện, cần xem lại (nếu bỏ Thương thì là: in(Hoa Cái) & meet(Hóa Quyền, Tướng Quân, Quốc Ấn, Long Phượng) — Tướng ấn hiểu là Tướng Quân, Quốc Ấn)" },
+    { "id": "hoa_cai.715.1", "para": 715, "palaces": ["Mệnh"], "text": "Hoa Phượng Đào Hồng - chê vợ chê chồng, muốn bỏ.", "when": null, "tone": "hung", "review": "theo cách an sao, Hoa Cái và Phượng Các luôn cách Đào Hoa, Hồng Loan một số lẻ cung nên không bao giờ hội nhau; không viết được điều kiện, cần xem lại" },
+    { "id": "hoa_cai.716.1", "para": 716, "palaces": ["Mệnh"], "text": "Hoa Cái Thiên Lương - bần tiện.", "when": "in(Hoa Cái) & meet(Thiên Lương)", "tone": "hung" },
+    { "id": "hoa_cai.717.1", "para": 717, "palaces": ["Mệnh"], "text": "Cái Long Phượng - đẹp, thông minh.", "when": "in(Hoa Cái) & meet(Long Phượng)", "tone": "cat" },
+    { "id": "hoa_cai.718.1", "para": 718, "palaces": ["Mệnh"], "text": "Cái Hổ Long Phượng ( Tứ Linh ) - gặp nhiều may mắn.", "when": "in(Hoa Cái) & meet(Tứ Linh)", "tone": "cat" },
+    { "id": "hoa_cai.719.1", "para": 719, "palaces": ["Huynh Đệ"], "text": "có Hoa Đào Hồng ngộ Tướng Phá Phục mà Trực Phù chiếu - anh chị em có người dâm đãng.", "when": null, "tone": "hung", "review": "theo cách an sao, Hoa Cái luôn cách Đào Hoa, Hồng Loan một số lẻ cung nên không bao giờ hội nhau; không viết được điều kiện, cần xem lại" },
+    { "id": "hoa_cai.720.1", "para": 720, "palaces": ["Phu Thê"], "text": "Hoa Phượng Đào Hồng - trai có ý muốn bỏ vợ, buồn rầu, suy tư.", "when": null, "tone": "hung", "review": "theo cách an sao, Hoa Cái và Phượng Các luôn cách Đào Hoa, Hồng Loan một số lẻ cung nên không bao giờ hội nhau; không viết được điều kiện, cần xem lại" },
+    { "id": "hoa_cai.721.1", "para": 721, "palaces": ["Thiên Di"], "text": "Hoa Hỷ Tả Hữu - thân cận người quyền quý và được trọng dụng.", "when": "in(Hoa Cái) & meet(Thiên Hỷ/Hỷ Thần, Tả Hữu)", "tone": "cat", "review": "Thiên Hỷ không bao giờ hội Hoa Cái (luôn cách nhau một số lẻ cung) nên trên lá số chỉ Hỷ Thần làm điều kiện đúng" },
+    { "id": "hoa_cai.721.2", "para": 721, "palaces": ["Thiên Di"], "text": "Hoa Cái - Xuất ngoại ở nơi quyền quý.", "when": "in(Hoa Cái)", "tone": "cat" },
+    { "id": "hoa_cai.722.1", "para": 722, "palaces": ["Phúc Đức"], "text": "Cái Đào ngộ Tử Vi, Thái Dương - đàn bà đại quý hiển.", "when": null, "tone": "cat", "review": "theo cách an sao, Hoa Cái không bao giờ hội Đào Hoa (luôn cách nhau một số lẻ cung), và Tử Vi với Thái Dương cũng không bao giờ cùng hội một cung (luôn cách nhau ba cung); không viết được điều kiện, cần xem lại" },
+    { "id": "hoa_cai.723.1", "para": 723, "palaces": ["Phúc Đức"], "text": "Coi về mồ mả: Hoa cái hình tựa như cái hoa, cái bát, cái cày.", "when": "in(Hoa Cái)", "tone": "trung" },
+    { "id": "hoa_cai.724.1", "para": 724, "palaces": ["Phúc Đức"], "text": "Hai bên cung phúc có Hoa Cái Thiên Mã - mả phát.", "when": "flank(Hoa Cái, Thiên Mã)", "tone": "cat" },
+    { "id": "hoa_cai.725.1", "para": 725, "palaces": ["Tật Ách"], "text": "có Cái gặp Kình Đà Dưỡng - Hay bị bệnh truyền nhiễm.", "when": "in(Hoa Cái) & meet(Kình Đà, Dưỡng)", "tone": "hung" },
+    { "id": "hoa_cai.726.1", "para": 726, "palaces": ["Tật Ách"], "text": "Nữ có Cái Thai hội Đào Hồng Diêu Hỷ - Dâm ô, ngoại tình.", "when": null, "tone": "hung", "review": "theo cách an sao, Hoa Cái luôn cách Đào Hoa, Hồng Loan một số lẻ cung nên không bao giờ hội nhau; không viết được điều kiện, cần xem lại" }
+  ],
+  "skip": [
+    { "para": 703, "kind": "meta" },
+    { "para": 704, "kind": "meta" },
+    { "para": 706, "kind": "theory" }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "entry": 2057,
+  "star": "truc_phu",
+  "rules": [
+    { "id": "truc_phu.2059.1", "para": 2059, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: gian tà, nhỏ mọn.", "when": "in(Trực Phù)", "tone": "hung" },
+    { "id": "truc_phu.2060.1", "para": 2060, "palaces": ["Mệnh", "Thân"], "text": "Tử Phù đi với Trực Phù - chủ sự nguy khốn, tật bệnh.", "when": "in(Tử Phù/Trực Phù) & meet(Tử Phù, Trực Phù)", "tone": "hung", "review": "Tử Phù và Trực Phù luôn xung chiếu nhau, nên hiểu là một trong hai sao thủ cung, sao kia xung chiếu" },
+    { "id": "truc_phu.2061.1", "para": 2061, "palaces": ["Mệnh"], "text": "Có Trực Phù - người xấu, lòng gian tà", "when": "in(Trực Phù)", "tone": "hung" },
+    { "id": "truc_phu.2062.1", "para": 2062, "palaces": ["Huynh Đệ"], "text": "Trực Tang Tuế - khiếm hoà.", "when": null, "tone": "hung", "review": "Trực Phù, Tang Môn, Thái Tuế cùng vòng Thái Tuế: Trực Phù kề trước Thái Tuế, Tang Môn cách Thái Tuế hai cung, nên ba sao này không bao giờ hội nhau (Tuế Phá cũng không hội Trực Phù); không viết được điều kiện; câu này cũng có ở mục Thái Tuế và Tang Môn; cần xem lại" },
+    { "id": "truc_phu.2063.1", "para": 2063, "palaces": ["Huynh Đệ"], "text": "Trực Phù chiếu, chính cung có Đào Hồng Cái Phục Tướng Phá - anh em có người dâm đãng.", "when": null, "tone": "hung", "review": "Đào Hoa và Hoa Cái không bao giờ hội nhau, Thiên Tướng và Phá Quân luôn xung chiếu nhau (Phục Binh và Tướng Quân cũng vậy), nên chính cung không thể có đủ các sao ấy; không viết được điều kiện; có thể bà liệt kê các sao dâm tinh chỉ cần có vài sao (mục Phục Binh, Thiên Tướng có câu tương tự); cần xem lại" }
+  ],
+  "skip": [
+    { "para": 2058, "kind": "meta" }
+  ]
+}

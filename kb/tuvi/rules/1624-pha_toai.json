@@ -1,0 +1,20 @@
+{
+  "entry": 1624,
+  "star": "pha_toai",
+  "rules": [
+    { "id": "pha_toai.1626.1", "para": 1626, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: táo bạo, ngang ngược. Chủ sự phá hoại, hao tán điền trạch tiền của.", "when": "in(Phá Toái)", "tone": "hung", "review": "câu «Về cơ thể Phá Toái là cái cuống họng» là lời giảng về tượng thân thể, không thành luật riêng" },
+    { "id": "pha_toai.1627.1", "para": 1627, "palaces": ["Mệnh", "Thân"], "text": "Cùng Kiếp Sát là bộ hung tinh, chủ hình thương, tai nguy, hung hoạ, mổ sẻ.", "ctx": "Phá Toái", "when": "in(Phá Toái) & meet(Kiếp Sát)", "tone": "hung", "review": "hiểu là Phá Toái gặp Kiếp Sát (hai sao chỉ đồng cung khi tuổi Tý)" },
+    { "id": "pha_toai.1628.1", "para": 1628, "palaces": ["Mệnh", "Thân"], "text": "Hai sao này hội với Không Kiếp Hoả Linh thì như kẻ phụ giúp cho Kiếp Hoả tăng tính hung ác.", "ctx": "Phá Toái, Kiếp Sát", "when": "in(Phá Toái) & meet(Kiếp Sát) & meet(Địa Không/Địa Kiếp/Hỏa Tinh/Linh Tinh)", "tone": "hung", "review": "«hai sao này» hiểu là Phá Toái và Kiếp Sát; hiểu là gặp một trong các sao Không Kiếp Hoả Linh (bà kể liền các cặp sát tinh), cũng có thể bà muốn nói đủ cả bốn" },
+    { "id": "pha_toai.1629.1", "para": 1629, "palaces": ["Hạn"], "text": "Lưu nhị hạn hội Hoả Linh Tang Hổ - chủ cháy nhà, hung hoạ hình thương hoặc hoán cải nghề nghiệp.", "ctx": "Phá Toái", "when": null, "tone": "hung", "review": "theo cách an sao, Phá Toái chỉ hội được Tang Hổ ở lá số tuổi âm (Sửu Mão Tỵ Mùi Dậu Hợi), mà theo cách an Hoả Linh của bà các tuổi ấy không cung nào hội đủ cả Hoả lẫn Linh, nên không viết được điều kiện; có thể bà nói Tang Hổ lưu (lưu Tang Môn, lưu Bạch Hổ của năm hạn) mà máy không tính; cần xem lại" },
+    { "id": "pha_toai.1630.1", "para": 1630, "palaces": ["Hạn"], "text": "Lưu hạn vãn niên là lâm trọng bệnh, vì chỉ sự chết chóc, có hiếu tang không lành.", "ctx": "Phá Toái", "when": "in(Phá Toái)", "tone": "hung", "review": "hiểu là Phá Toái ở cung hạn; máy không xét được «vãn niên» (tuổi già) nên câu hiện ở mọi hạn có Phá Toái; cũng có thể bà nối ý câu trên (hạn hội Hoả Linh Tang Hổ)" },
+    { "id": "pha_toai.1631.1", "para": 1631, "palaces": ["Hạn"], "text": "Nữ nhân lưu hạn khi sinh đẻ khó tránh mổ xẻ châm chích.", "ctx": "Phá Toái", "when": "female() & in(Phá Toái)", "tone": "hung", "review": "hiểu là lá số nữ có Phá Toái ở cung hạn" },
+    { "id": "pha_toai.1632.1", "para": 1632, "palaces": ["Mệnh", "Thân"], "text": "Phá Toái Kiếp Sát hội Thất Sát Phá Quân gia Lộc Dương Đà - làm nghề đồ tể, chài lưới.", "when": "in(Phá Toái) & meet(Kiếp Sát, Thất Sát, Phá Quân, Lộc, Kình Đà)", "tone": "trung", "review": "Lộc Tồn luôn đứng giữa Kình Đà nên ba sao không bao giờ cùng hội một cung; Lộc hiểu là Lộc Tồn hay Hoá Lộc (thực tế chỉ Hoá Lộc hội được cùng Kình Đà)" },
+    { "id": "pha_toai.1633.1", "para": 1633, "palaces": ["Mệnh"], "text": "Có Phá Toái - mọi việc thường trắc trở", "when": "in(Phá Toái)", "tone": "hung" },
+    { "id": "pha_toai.1633.2", "para": 1633, "palaces": ["Mệnh"], "text": "gặp Hỷ Thần thì đỡ xấu.", "ctx": "Có Phá Toái", "when": "in(Phá Toái) & meet(Hỷ Thần)", "tone": "mixed" },
+    { "id": "pha_toai.1634.1", "para": 1634, "palaces": ["Thân"], "text": "Toái cư Thân phùng Diêu, cập Phúc cung cư Việt Kỵ Vũ - bị câm.", "when": "in(Phá Toái) & meet(Thiên Diêu) & pal(Phúc Đức, in(Thiên Việt, Hóa Kỵ, Vũ Khúc))", "tone": "hung", "review": "Phá Toái chỉ ở Tỵ Dậu Sửu nên «cư Thân» hiểu là ở cung an Thân; «Phúc cung cư Việt Kỵ Vũ» hiểu là cung Phúc Đức có Thiên Việt, Hoá Kỵ, Vũ Khúc" },
+    { "id": "pha_toai.1634.2", "para": 1634, "palaces": ["Mệnh"], "text": "Mệnh Quan có Toái Quân lưỡng Phá - uy quyền hống hách.", "when": "(in(Phá Toái) | pal(Quan Lộc, in(Phá Toái))) & (in(Phá Quân) | pal(Quan Lộc, in(Phá Quân)))", "tone": "mixed", "review": "hiểu là hai sao Phá (Phá Toái, Phá Quân) ở cung Mệnh hay cung Quan Lộc (mỗi sao ở một trong hai cung, hoặc cùng một cung)" }
+  ],
+  "skip": [
+    { "para": 1625, "kind": "meta" }
+  ]
+}

@@ -1,0 +1,44 @@
+import 'reflect-metadata';
+import { Logger } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import type { NestExpressApplication } from '@nestjs/platform-express';
+import compression from 'compression';
+import { pathToFileURL } from 'node:url';
+import { AppModule } from './app.module.js';
+import { loadConfig, type AppConfig } from './config.js';
+import { createDb, createPool, ensureDatabase, runMigrations } from './db/db.js';
+import { importTuvi } from './kb/importer.js';
+
+/** the database first (created on the shared server when missing), its schema, the knowledge, then the app */
+export async function createApp(config: AppConfig): Promise<NestExpressApplication> {
+  const log = new Logger('mystic-api');
+  const url = await ensureDatabase(config.db);
+  const pool = createPool(url, config.db.ssl);
+  const db = createDb(pool);
+  await runMigrations(db);
+  const report = await importTuvi(db, config.kbBundleDir);
+  log.log(report.skipped ? `knowledge ${report.version} already imported` : `imported knowledge ${report.version}: ${report.written} rows, ${report.keptEdited} edited kept, ${report.removed} removed (${report.ms} ms)`);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule.forRoot(config, pool), {
+    logger: process.env.NODE_ENV === 'test' ? ['error'] : ['log', 'warn', 'error'],
+  });
+  app.setGlobalPrefix('api');
+  app.enableCors({ origin: config.corsOrigins });
+  app.use(compression());
+  app.useBodyParser('json', { limit: '1mb' });
+  app.enableShutdownHooks();
+  return app;
+}
+
+async function bootstrap(): Promise<void> {
+  const config = loadConfig();
+  const app = await createApp(config);
+  await app.listen(config.port, '0.0.0.0');
+  new Logger('mystic-api').log(`listening on :${config.port}`);
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  bootstrap().catch(e => {
+    console.error(e);
+    process.exit(1);
+  });
+}

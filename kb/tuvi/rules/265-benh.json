@@ -1,0 +1,25 @@
+{
+  "entry": 265,
+  "star": "benh",
+  "rules": [
+    { "id": "benh.267.1", "para": 267, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: già, ốm, bệnh tật, khù khờ, lầm lẫn.", "when": "in(Bệnh)", "tone": "hung" },
+    { "id": "benh.269.1", "para": 269, "palaces": ["Mệnh", "Thân"], "text": "Hội với Liêm trinh miếu thường thiên về võ nghiệp, có quyền bính.", "ctx": "Bệnh", "when": "in(Bệnh) & meet(Liêm Trinh) & bright(Liêm Trinh)", "tone": "cat" },
+    { "id": "benh.270.1", "para": 270, "palaces": ["Mệnh", "Thân"], "text": "Hội với Vũ Khúc, Thiên tướng hãm địa: trai hay mắc nạn binh đao, hình thương tàn tật", "ctx": "Bệnh", "when": "in(Bệnh) & meet(Vũ Khúc, Thiên Tướng) & (!bright(Vũ Khúc) | !bright(Thiên Tướng)) & male()", "tone": "hung", "review": "bảng của bà không ghi Vũ Khúc hãm ở đâu, Thiên Tướng chỉ hãm ở Dậu (khi đó không hội Vũ Khúc); hiểu «hãm địa» là Vũ Khúc hay Thiên Tướng không ở nơi miếu vượng đắc" },
+    { "id": "benh.270.2", "para": 270, "palaces": ["Mệnh", "Thân"], "text": "nữ hay xẩy ra việc hoại thai, sinh đẻ thiếu tháng.", "ctx": "Bệnh hội với Vũ Khúc, Thiên tướng hãm địa", "when": "in(Bệnh) & meet(Vũ Khúc, Thiên Tướng) & (!bright(Vũ Khúc) | !bright(Thiên Tướng)) & female()", "tone": "hung", "review": "bảng của bà không ghi Vũ Khúc hãm ở đâu, Thiên Tướng chỉ hãm ở Dậu (khi đó không hội Vũ Khúc); hiểu «hãm địa» là Vũ Khúc hay Thiên Tướng không ở nơi miếu vượng đắc" },
+    { "id": "benh.271.1", "para": 271, "palaces": ["Mệnh"], "text": "Cư Mệnh hãm là người dáng hơi ốm, da xám, vòng quanh con mắt bị đen", "ctx": "Bệnh", "when": "in(Bệnh)", "tone": "trung", "review": "bảng của bà không ghi miếu hãm cho sao Bệnh nên không xét được chữ «hãm»; luật đang áp cho mọi trường hợp Bệnh cư Mệnh" },
+    { "id": "benh.271.2", "para": 271, "palaces": ["Mệnh"], "text": "gia Hình hãm thường bị lao, Kinh phong, có khi bị phong cùi.", "ctx": "Bệnh cư Mệnh hãm", "when": "in(Bệnh) & meet(Thiên Hình) & !bright(Thiên Hình)", "tone": "hung", "review": "bảng của bà không ghi miếu hãm cho sao Bệnh, và Thiên Hình chỉ có cung vượng (Dần Mão Dậu Tuất); hiểu «Hình hãm» là Thiên Hình ở ngoài các cung ấy" },
+    { "id": "benh.272.1", "para": 272, "palaces": ["Mệnh"], "text": "có Bệnh: bất tín dụng", "when": "in(Bệnh)", "tone": "hung" },
+    { "id": "benh.272.2", "para": 272, "palaces": ["Mệnh"], "text": "nếu không có anh tinh thì thêm bất tài", "ctx": "có Bệnh", "when": "in(Bệnh) & !meet(Cát tinh)", "tone": "hung", "review": "không có nhóm «anh tinh»; tạm hiểu là cát tinh" },
+    { "id": "benh.272.3", "para": 272, "palaces": ["Mệnh"], "text": "Gập Đà: người có tật", "ctx": "có Bệnh", "when": "in(Bệnh) & meet(Đà La)", "tone": "hung" },
+    { "id": "benh.273.1", "para": 273, "palaces": ["Tử Tức"], "text": "có Bệnh Phá: sát con.", "when": "in(Bệnh) & meet(Phá Quân)", "tone": "hung" },
+    { "id": "benh.274.1", "para": 274, "palaces": ["Tật Ách"], "text": "có Bệnh Không Kiếp; bệnh hoả hư, huyết xấu.", "when": "in(Bệnh) & meet(Không Kiếp)", "tone": "hung" },
+    { "id": "benh.275.1", "para": 275, "palaces": ["Tật Ách"], "text": "Bệnh gặp Địa Kiếp, Thiên Cơ: có bệnh đường ruột, tri tức nguy hiểm ( Mật, gan )", "when": "in(Bệnh) & meet(Địa Kiếp, Thiên Cơ)", "tone": "hung" },
+    { "id": "benh.276.1", "para": 276, "palaces": ["Tật Ách"], "text": "Bệnh (và Tử) gặp Song Hao, Tang Hổ, Bệnh phù mà không có Tuần Triệt án ngữ, sẽ mắc bệnh nan y.", "when": "in(Bệnh/Tử) & (meet(Song Hao, Tang Hổ) | meet(Song Hao, Bệnh Phù) | meet(Tang Hổ, Bệnh Phù)) & !in(Tuần) & !in(Triệt)", "tone": "hung", "review": "«(và Tử)» hiểu là sao Bệnh hay sao Tử (vòng Tràng Sinh) đều vậy; theo cách an sao Song Hao và Bệnh Phù không bao giờ cùng hội đủ cả ba bộ, nên hiểu là gặp ít nhất hai trong ba bộ Song Hao, Tang Hổ, Bệnh Phù; «án ngữ» hiểu là Tuần, Triệt không đóng ở cung này" },
+    { "id": "benh.277.1", "para": 277, "palaces": ["Tật Ách"], "text": "Gặp Âm Cơ: mắc bệnh tê liệt về già", "ctx": "Bệnh", "when": "in(Bệnh) & meet(Thái Âm, Thiên Cơ)", "tone": "hung" },
+    { "id": "benh.277.2", "para": 277, "palaces": ["Tật Ách"], "text": "gặp Hình: mắc bệnh phong", "ctx": "Bệnh", "when": "in(Bệnh) & meet(Thiên Hình)", "tone": "hung", "review": "hiểu là vế song song: Bệnh gặp Hình; cũng có thể là Bệnh gặp Âm Cơ lại gặp Hình" }
+  ],
+  "skip": [
+    { "para": 266, "kind": "meta" },
+    { "para": 268, "kind": "theory" }
+  ]
+}

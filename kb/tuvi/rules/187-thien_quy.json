@@ -1,0 +1,34 @@
+{
+  "entry": 187,
+  "star": "thien_quy",
+  "rules": [
+    { "id": "thien_quy.190.1", "para": 190, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: nghĩa hiệp, phong độ, trượng phu, người đẹp mà oai nghiêm. Chủ sự may mắn, gặp thời.", "when": "in(Thiên Quý)", "tone": "cat" },
+    { "id": "thien_quy.191.1", "para": 191, "palaces": ["Mệnh", "Thân"], "text": "Là bộ sao phúc thiện, đưa tới sự may mắn, hay gặp vận tốt - không sợ hung tinh, giải trừ hung hoạ.", "when": "in(Thiên Quý)", "tone": "cat" },
+    { "id": "thien_quy.192.1", "para": 192, "palaces": ["Mệnh", "Thân"], "text": "Hợp với Phụ Bật Khúc Sương Thai Toạ là tăng thêm sự tốt đẹp sáng sủa của bộ sao Quang Quý.", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý) & (meet(Tả Hữu) | meet(Xương Khúc) | meet(Thai Tọa))", "tone": "cat", "review": "hiểu là gặp một trong các bộ Phụ Bật, Khúc Sương, Thai Toạ thì thêm tốt; cũng có thể bà muốn nói gặp đủ cả ba bộ" },
+    { "id": "thien_quy.193.1", "para": 193, "palaces": ["Mệnh", "Thân"], "text": "Có Thiên Quý- bậc tú khí, hào hiệp, thiếu niên kim bảng danh đề hiển hách, có phong độ trượng phu, hưởng phúc nhà, lộc nước, hoặc được người quý chuộng", "when": "in(Thiên Quý)", "tone": "cat" },
+    { "id": "thien_quy.193.2", "para": 193, "palaces": ["Mệnh", "Thân"], "text": "ở miếu vượng (Sửu Mùi) - chủ vi nhân xuất chúng, danh cao lộc thịnh", "ctx": "Có Thiên Quý", "when": "in(Thiên Quý) & at(Sửu, Mùi)", "tone": "cat" },
+    { "id": "thien_quy.193.3", "para": 193, "palaces": ["Mệnh", "Thân"], "text": "tam hợp gặp Văn Xương là người thông minh tuấn tú tuyệt vời", "ctx": "Có Thiên Quý", "when": "in(Thiên Quý) & tri(Văn Xương)", "tone": "cat" },
+    { "id": "thien_quy.193.4", "para": 193, "palaces": ["Mệnh", "Thân"], "text": "Ngộ Thiên Phúc Quyền Lộc - làm quan cao", "ctx": "Có Thiên Quý", "when": "in(Thiên Quý) & meet(Thiên Phúc, Hóa Quyền, Lộc)", "tone": "cat" },
+    { "id": "thien_quy.193.5", "para": 193, "palaces": ["Mệnh", "Thân"], "text": "gặp Tứ Sát - phúc lộc kém", "ctx": "Có Thiên Quý", "when": "in(Thiên Quý) & meet(Tứ Sát)", "tone": "hung" },
+    { "id": "thien_quy.195.1", "para": 195, "palaces": ["Phụ Mẫu"], "text": "Có Quang Quý có bố mẹ nuôi.", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý)", "tone": "trung" },
+    { "id": "thien_quy.196.1", "para": 196, "palaces": ["Tài Bạch"], "text": "Có Quang Lộc -giàu có vinh hiển", "when": "in(Ân Quang) & meet(Lộc)", "tone": "cat", "review": "trong mục Thiên Quý bà ghi «Quang Lộc»; giữ đúng chữ: Ân Quang gặp Lộc (có thể ý là Quang Quý gặp Lộc)" },
+    { "id": "thien_quy.197.1", "para": 197, "palaces": ["Tài Bạch"], "text": "Có Quang Quý là khi nghèo có người giúp đỡ.", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý)", "tone": "cat" },
+    { "id": "thien_quy.198.1", "para": 198, "palaces": ["Điền Trạch"], "text": "Có Quang Quý Hồng Đào - có cô dì để ruộng đất của cải lại cho, hoặc của người trong họ.", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý, Hồng Đào)", "tone": "cat" },
+    { "id": "thien_quy.199.1", "para": 199, "palaces": ["Thiên Di"], "text": "Có Quang Quý - bạn bè tốt.", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý)", "tone": "cat" },
+    { "id": "thien_quy.200.1", "para": 200, "palaces": ["Thiên Di"], "text": "Có Quang Quý Tả Hữu- có quý nhân giúp đỡ, làm nên", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý, Tả Hữu)", "tone": "cat" },
+    { "id": "thien_quy.201.1", "para": 201, "palaces": ["Nô Bộc"], "text": "Có Quang Quý, Sương, Khúc, Quốc ấn - được người giúp đỡ rất tốt; tôi tớ đắc lực, và khôn ngoan hơn chủ.", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý, Xương Khúc, Quốc Ấn)", "tone": "cat" },
+    { "id": "thien_quy.202.1", "para": 202, "palaces": ["Quan Lộc"], "text": "Có Quang Quý Cơ Lương ở Thìn Tuất hay Quang Quý Cơ Việt ở Sửu Mùi = Quang Quý Thiên Tướng- đại quý, làm to.", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý) & ((in(Thiên Cơ, Thiên Lương) & at(Thìn, Tuất)) | (in(Thiên Cơ) & at(Sửu, Mùi) & meet(Thiên Việt)) | in(Thiên Tướng))", "tone": "cat" },
+    { "id": "thien_quy.203.1", "para": 203, "palaces": ["Quan Lộc"], "text": "Quang Quý Cơ Việt Tấu Hồng Âm - hiển đạt, được trên tín nhiệm.", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý, Thiên Cơ, Thiên Việt, Tấu Thư, Hồng Loan, Thái Âm)", "tone": "cat" },
+    { "id": "thien_quy.204.1", "para": 204, "palaces": ["Quan Lộc"], "text": "Quang Quý Tả Hữu ngộ Thiên Lương cư Ngọ - văn võ toàn tài", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý, Tả Hữu, Thiên Lương) & pos(Thiên Lương, Ngọ)", "tone": "cat" },
+    { "id": "thien_quy.204.2", "para": 204, "palaces": ["Quan Lộc"], "text": "Ngộ Lộc - có nhà ruộng.", "ctx": "Quang Quý", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý, Lộc)", "tone": "cat", "review": "hiểu «Ngộ Lộc» là Quang Quý ngộ Lộc; cũng có thể bà muốn nói cả bộ Quang Quý Tả Hữu Thiên Lương cư Ngọ ngộ Lộc" },
+    { "id": "thien_quy.205.1", "para": 205, "palaces": ["Tật Ách"], "text": "có Quang Quý - ốm đau gặp thầy giỏi.", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý)", "tone": "cat" },
+    { "id": "thien_quy.206.1", "para": 206, "palaces": ["Phúc Đức"], "text": "Có Quang Quý - có người để mả cho", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý)", "tone": "cat" },
+    { "id": "thien_quy.207.1", "para": 207, "palaces": ["Phúc Đức"], "text": "Quang Quý Thiên Thọ: Thọ.", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý, Thiên Thọ)", "tone": "cat" },
+    { "id": "thien_quy.208.1", "para": 208, "palaces": ["Phúc Đức"], "text": "Quang Quý Quyền ấn - hiển đạt lớn, có quý nhân giúp, giải cứu hạn hoạ; Mưu sự ắt thành, họ hàng khá, vượng.", "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý, Hóa Quyền, Quốc Ấn)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 188, "kind": "meta" },
+    { "para": 189, "kind": "meta" },
+    { "para": 194, "kind": "xref" }
+  ]
+}

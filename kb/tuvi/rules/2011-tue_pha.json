@@ -1,0 +1,14 @@
+{
+  "entry": 2011,
+  "star": "tue_pha",
+  "rules": [
+    { "id": "tue_pha.2013.1", "para": 2013, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: cứng đầu, ngang ngược. Chủ sự phá hoại.", "when": "in(Tuế Phá)", "tone": "hung" },
+    { "id": "tue_pha.2015.1", "para": 2015, "palaces": ["Mệnh"], "text": "Có Tuế Phá Thiên Diêu - chơi bời lếu láo", "when": "in(Tuế Phá) & meet(Thiên Diêu)", "tone": "hung" },
+    { "id": "tue_pha.2016.1", "para": 2016, "palaces": ["Mệnh"], "text": "Tuế Phá là răng, ngộ Kình - răng vẩu.", "when": "in(Tuế Phá) & meet(Kình Dương)", "tone": "hung" },
+    { "id": "tue_pha.2017.1", "para": 2017, "palaces": ["Mệnh"], "text": "Ngộ Khốc Hư - đau răng, sâu răng.", "ctx": "Tuế Phá", "when": "in(Tuế Phá) & meet(Khốc Hư)", "tone": "hung" }
+  ],
+  "skip": [
+    { "para": 2012, "kind": "meta" },
+    { "para": 2014, "kind": "meta" }
+  ]
+}

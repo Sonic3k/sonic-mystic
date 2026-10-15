@@ -1,0 +1,34 @@
+{
+  "entry": 496,
+  "star": "dai_hao",
+  "rules": [
+    { "id": "dai_hao.499.1", "para": 499, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: lơ đễnh, chủ sự hao tán.", "when": "in(Đại Hao)", "tone": "hung" },
+    { "id": "dai_hao.501.1", "para": 501, "palaces": ["Mệnh"], "text": "Cư Mệnh - mũi hơi bị hếch, lỗ mũi hướng lên trời một chút. ở tướng học gọi là trư truỵ (mũi heo).", "ctx": "Đại Hao", "when": "in(Đại Hao)", "tone": "trung" },
+    { "id": "dai_hao.502.1", "para": 502, "palaces": ["Mệnh"], "text": "Lâm Mệnh hãm là người bé nhỏ, ưa thích cờ bạc, đam mê rượu chè.", "ctx": "Đại Hao", "when": "in(Đại Hao) & !bright(Đại Hao)", "tone": "hung", "review": "bảng của bà chỉ ghi Đại Hao miếu Mão Dậu, vượng Tý Ngọ, không ghi cung hãm; hiểu hãm là Đại Hao ở ngoài các cung ấy (tức Dần Thân Tỵ Hợi)" },
+    { "id": "dai_hao.503.1", "para": 503, "palaces": ["Mệnh", "Thân"], "text": "Hội với Mã Diêu là tình như đáy giếng, hoang tàn, chỉ dong chơi mà phá bại tổ nghiệp.", "ctx": "Đại Hao", "when": "in(Đại Hao) & meet(Thiên Mã, Thiên Diêu)", "tone": "hung" },
+    { "id": "dai_hao.504.1", "para": 504, "palaces": ["Mệnh", "Thân", "Quan Lộc"], "text": "Lâm Mão Dậu cư Mệnh Quan lại là văn tinh, rất thông minh, lanh lợi, tháo vát, lập nên cơ nghiệp. ( ở Quan Lộc đắc cách hơn Mệnh Thân ).", "ctx": "Đại Hao", "when": "in(Đại Hao) & at(Mão, Dậu)", "tone": "cat" },
+    { "id": "dai_hao.506.1", "para": 506, "palaces": ["Mệnh"], "text": "Có Song Hao Mão Dậu - phát tài phát lộc.", "when": "in(Đại Hao/Tiểu Hao) & meet(Song Hao) & at(Mão, Dậu)", "tone": "cat" },
+    { "id": "dai_hao.507.1", "para": 507, "palaces": ["Mệnh"], "text": "Gặp Đại Tiểu Hao phải ly hương, bỏ tổ nghiệp.", "when": "in(Đại Hao/Tiểu Hao) & meet(Song Hao)", "tone": "hung" },
+    { "id": "dai_hao.507.2", "para": 507, "palaces": ["Mệnh"], "text": "Nếu ngộ Cát tinh, có sự hoà giải.", "ctx": "Gặp Đại Tiểu Hao", "when": "in(Đại Hao/Tiểu Hao) & meet(Song Hao) & meet(Cát tinh)", "tone": "cat" },
+    { "id": "dai_hao.508.1", "para": 508, "palaces": ["Mệnh"], "text": "Song Hao Tị Hợi ngộ Sát Hình - người dương nữ tuổi Giáp Canh bần và yểu.", "when": "in(Đại Hao/Tiểu Hao) & meet(Song Hao) & at(Tỵ, Hợi) & meet(Thất Sát, Thiên Hình) & female() & stem(Giáp, Canh)", "tone": "hung", "review": "Sát hiểu là Thất Sát (cũng có thể là sát tinh); tuổi Giáp Canh là tuổi dương nên «dương nữ» đã nằm trong điều kiện; với tuổi Giáp Canh Song Hao luôn ở Tỵ Hợi" },
+    { "id": "dai_hao.509.1", "para": 509, "palaces": ["Mệnh"], "text": "Song Hao Mão Dậu tuổi Dần - thân thể lông bông làm nên phú quý.", "when": null, "tone": "mixed", "review": "theo cách an sao, Song Hao chỉ ở Mão Dậu với tuổi Đinh, Kỷ, Quý (can âm), còn tuổi Dần luôn là can dương (Giáp, Bính, Mậu, Canh, Nhâm), nên không lá số nào có Song Hao Mão Dậu mà tuổi Dần; không viết được điều kiện, cần xem lại (ở sao Tiểu Hao bà ghi «tuổi Thân», cũng không xảy ra được)" },
+    { "id": "dai_hao.510.1", "para": 510, "palaces": ["Mệnh"], "text": "Hao Kỵ - vất vả, lao đao.", "when": "in(Đại Hao) & meet(Hóa Kỵ)", "tone": "hung" },
+    { "id": "dai_hao.511.1", "para": 511, "palaces": ["Mệnh"], "text": "Song Hao Mão Dậu gặp Cự hay Vũ, có Quyền ở Mệnh hay Quan thì đi trấn thủ phương xa.", "when": "in(Đại Hao/Tiểu Hao) & meet(Song Hao) & at(Mão, Dậu) & meet(Cự Môn/Vũ Khúc) & (in(Hóa Quyền) | pal(Quan Lộc, in(Hóa Quyền)))", "tone": "cat", "review": "hiểu là Mệnh có Song Hao Mão Dậu, gặp Cự Môn hoặc Vũ Khúc, và Hoá Quyền ở cung Mệnh hay cung Quan; cũng có thể bà muốn nói cả bộ ấy ở cung Mệnh hay cung Quan" },
+    { "id": "dai_hao.512.1", "para": 512, "palaces": ["Mệnh"], "text": "Cự Kỵ Đại Hao - Phá hại tổ nghiệp.", "when": "in(Đại Hao) & meet(Cự Môn, Hóa Kỵ)", "tone": "hung" },
+    { "id": "dai_hao.513.1", "para": 513, "palaces": ["Mệnh"], "text": "Hao Tham - có của mà kín đáo, có vàng mà phải đói ăn.", "when": "in(Đại Hao) & meet(Tham Lang)", "tone": "mixed" },
+    { "id": "dai_hao.514.1", "para": 514, "palaces": ["Tài Bạch"], "text": "Đại Hao - tán tài, nghèo khó, tán tụ bất thường.", "when": "in(Đại Hao)", "tone": "hung" },
+    { "id": "dai_hao.515.1", "para": 515, "palaces": ["Nô Bộc"], "text": "Hao, Quan Phù hay Quan Phủ - bị trộm cắp, hao tán", "when": "in(Đại Hao) & meet(Quan Phù/Quan Phủ)", "tone": "hung", "review": "Quan Phủ (vòng Bác Sĩ) luôn cách Đại Hao hai cung nên không bao giờ hội Đại Hao; trên lá số chỉ Quan Phù (vòng Thái Tuế) làm điều kiện đúng" },
+    { "id": "dai_hao.515.2", "para": 515, "palaces": ["Nô Bộc"], "text": "Thêm Sát Phá Tham Hình - Bị cướp.", "ctx": "Hao, Quan Phù hay Quan Phủ", "when": "in(Đại Hao) & meet(Quan Phù/Quan Phủ) & meet(Sát Phá Tham, Thiên Hình)", "tone": "hung", "review": "hiểu là hội thêm đủ bộ Sát Phá Tham và Thiên Hình; cũng có thể bà muốn nói gặp một trong các sao Sát, Phá, Tham, Hình" },
+    { "id": "dai_hao.516.1", "para": 516, "palaces": ["Quan Lộc"], "text": "Hao Quyền - người dưới khinh ghét, công danh hèn kém.", "when": "in(Đại Hao) & meet(Hóa Quyền)", "tone": "hung" },
+    { "id": "dai_hao.517.1", "para": 517, "palaces": ["Điền Trạch"], "text": "Song Hao Không Kiếp - Vô điền sản, nghèo hèn, tán tụ bất thường.", "when": "in(Đại Hao/Tiểu Hao) & meet(Song Hao, Không Kiếp)", "tone": "hung" },
+    { "id": "dai_hao.518.1", "para": 518, "palaces": ["Phúc Đức"], "text": "Đại Tiểu Hao - Chủ sự giảm chiết, giảm cả phúc, thọ. Nên tha phương lập nghiệp, họ hàng đa số nghèo túng, tha phương cầu thực.", "when": "in(Đại Hao/Tiểu Hao) & meet(Song Hao)", "tone": "hung" },
+    { "id": "dai_hao.519.1", "para": 519, "palaces": ["Phúc Đức"], "text": "Hao Kiếp - Cô đơn, bần hàn.", "when": "in(Đại Hao) & meet(Địa Kiếp)", "tone": "hung" },
+    { "id": "dai_hao.519.2", "para": 519, "palaces": ["Phúc Đức"], "text": "Nếu Mệnh có quý tinh thì làm nên mà không bền.", "ctx": "Hao Kiếp", "when": "in(Đại Hao) & meet(Địa Kiếp) & pal(Mệnh, in(Quý tinh))", "tone": "mixed" }
+  ],
+  "skip": [
+    { "para": 497, "kind": "meta" },
+    { "para": 498, "kind": "meta" },
+    { "para": 500, "kind": "theory" },
+    { "para": 505, "kind": "theory" }
+  ]
+}

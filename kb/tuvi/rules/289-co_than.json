@@ -1,0 +1,35 @@
+{
+  "entry": 289,
+  "star": "co_than",
+  "rules": [
+    { "id": "co_than.291.1", "para": 291, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: lạnh lùng, khó tính, ít người ưa, chủ sự cô đơn - can trường dũng mãnh.", "when": "in(Cô Thần)", "tone": "mixed" },
+    { "id": "co_than.292.1", "para": 292, "palaces": ["Mệnh"], "text": "Nam kỵ Cô, nữ kỵ Quả cư Mệnh.", "when": "(male() & in(Cô Thần)) | (female() & in(Quả Tú))", "tone": "hung" },
+    { "id": "co_than.292.2", "para": 292, "palaces": ["Mệnh"], "text": "Quả Cô cư Tứ Mộ vô chính diệu, riêng người Hoả, Thổ Mệnh, cùng với Tả Hữu Thai Toạ, nên phân luận tuỳ theo phú quý, hay văn tinh hội chiếu.", "when": "in(Cô Thần/Quả Tú) & at(Tứ Mộ) & empty() & menh(Hỏa, Thổ) & meet(Tả Hữu, Thai Tọa)", "tone": "trung", "review": "bà không nói kết quả, chỉ dặn xét thêm sao phú quý hay văn tinh hội chiếu; Cô Thần luôn ở Tứ Sinh nên chỉ Quả Tú cư Tứ Mộ được; «cùng với Tả Hữu Thai Toạ» hiểu là có gặp Tả Hữu Thai Toạ (cũng có thể là so sánh: Tả Hữu Thai Toạ cũng phải luận như vậy)" },
+    { "id": "co_than.293.1", "para": 293, "palaces": ["Mệnh", "Thân"], "text": "Hội với Tôn tinh hay Quý tinh là bậc học thức uyên bác, tính tình rất nghiêm cẩn.", "ctx": "Cô Thần", "when": "in(Cô Thần) & (meet(Tử Vi) | meet(Quý tinh))", "tone": "cat", "review": "Tôn tinh hiểu là Tử Vi (sao tôn quý); nếu bà muốn nói Lộc Tồn (Tồn tinh) thì Lộc Tồn đã có trong nhóm Quý tinh" },
+    { "id": "co_than.294.1", "para": 294, "palaces": ["Mệnh", "Thân"], "text": "Gia hội với phú tinh, quyền tinh, được cát diệu phù trì là bậc xưng cô nhân, quả nhân, quyền nhiếp thiên hạ.", "ctx": "Cô Thần", "when": "in(Cô Thần) & meet(Vũ Khúc/Thiên Phủ/Lộc, Hóa Quyền, Cát tinh)", "tone": "cat", "review": "phú tinh hiểu là Vũ Khúc, Thiên Phủ, Lộc Tồn, Hóa Lộc (các sao bà ghi là tài tinh); quyền tinh hiểu là Hóa Quyền" },
+    { "id": "co_than.295.1", "para": 295, "palaces": ["Quan Lộc"], "text": "Cư Quan lộc là hợp cách", "ctx": "Cô Thần", "when": "in(Cô Thần)", "tone": "cat" },
+    { "id": "co_than.296.1", "para": 296, "palaces": ["Mệnh", "Thân"], "text": "Quả Cô hội Vũ Khúc, nữ mệnh thì phu quân yểu triết, tử tức hình khắc, khôngkhỏi rơi lệ vì con bất hiếu.", "when": "female() & in(Cô Thần/Quả Tú) & meet(Cô Quả, Vũ Khúc)", "tone": "hung" },
+    { "id": "co_than.297.1", "para": 297, "palaces": ["Mệnh", "Thân"], "text": "Hội với Tử Phủ là vượng tướng nhưng phải có cát tinh phù", "ctx": "Cô Thần", "when": "in(Cô Thần) & meet(Tử Phủ, Cát tinh)", "tone": "cat" },
+    { "id": "co_than.297.2", "para": 297, "palaces": ["Mệnh", "Thân"], "text": "cũng như Phụ Bật, hội cát phù cát", "ctx": "Cô Thần", "when": "in(Cô Thần) & meet(Cát tinh)", "tone": "cat" },
+    { "id": "co_than.297.3", "para": 297, "palaces": ["Mệnh", "Thân"], "text": "hội hung sẽ theo hung mà tác hoạ.", "ctx": "Cô Thần", "when": "in(Cô Thần) & meet(Hung tinh)", "tone": "hung" },
+    { "id": "co_than.298.1", "para": 298, "palaces": ["Mệnh"], "text": "có Cô Thần: cô độc, lạnh lùng, ưa tĩnh, khoảnh", "when": "in(Cô Thần)", "tone": "hung" },
+    { "id": "co_than.299.1", "para": 299, "palaces": ["Tử Tức"], "text": "có Cô: hiếm con.", "when": "in(Cô Thần)", "tone": "hung" },
+    { "id": "co_than.299.2", "para": 299, "palaces": ["Tử Tức"], "text": "Cô Kỵ: khắc con.", "when": "in(Cô Thần) & meet(Hóa Kỵ)", "tone": "hung" },
+    { "id": "co_than.299.3", "para": 299, "palaces": ["Tử Tức"], "text": "Cô Đẩu: vô tự.", "when": "in(Cô Thần) & meet(Đẩu Quân)", "tone": "hung" },
+    { "id": "co_than.300.1", "para": 300, "palaces": ["Tử Tức"], "text": "Cô, Dưỡng, Khốc Hư: sinh nhiều nuôi ít, vất vả", "when": "in(Cô Thần) & meet(Dưỡng, Khốc Hư)", "tone": "hung" },
+    { "id": "co_than.301.1", "para": 301, "palaces": ["Tử Tức"], "text": "Cô ngộ Quý tinh: đông con.", "when": "in(Cô Thần) & meet(Quý tinh)", "tone": "cat" },
+    { "id": "co_than.302.1", "para": 302, "palaces": ["Tài Bạch"], "text": "có Cô: tiền của giữ vũng", "when": "in(Cô Thần)", "tone": "cat" },
+    { "id": "co_than.303.1", "para": 303, "palaces": ["Điền Trạch"], "text": "có Cô, Quả: ruộng đất vững bền.", "when": "in(Cô Thần/Quả Tú)", "tone": "cat", "review": "Cô Thần và Quả Tú không đồng cung được; hiểu là cung Điền có Cô hoặc Quả" },
+    { "id": "co_than.304.1", "para": 304, "palaces": ["Phúc Đức"], "text": "chủ sự cô qủa: Nhà độc đinh (con một) hiếm.", "ctx": "Cô Thần", "when": "in(Cô Thần)", "tone": "hung" },
+    { "id": "co_than.305.1", "para": 305, "palaces": ["Phúc Đức"], "text": "Cô Triệt Dưỡng: đời nào nhà cũng thất tự ( không có con trai và có con nuôi ).", "when": "in(Cô Thần) & meet(Triệt, Dưỡng)", "tone": "hung" },
+    { "id": "co_than.305.2", "para": 305, "palaces": ["Phúc Đức"], "text": "Cô đắc địa có phúc tinh- có linh thần phù hộ, được hưởng phúc, tránh được tai nạn", "when": "in(Cô Thần) & meet(Tử Vi/Thái Âm/Thiên Đồng/Thiên Đức/Nguyệt Đức/Long Đức/Phúc Đức/Thiên Phúc/Ân Quang/Thiên Quý/Thiên Tướng/Thiên Trù/Giải Thần/Thiên Giải/Địa Giải)", "tone": "cat", "review": "bảng của bà không ghi miếu hãm cho Cô Thần nên không xét được «đắc địa»; phúc tinh hiểu là các sao bà ghi là Phúc tinh / Phúc thiện tinh trong sổ (Tử Vi, Thái Âm, Thiên Đồng, Tứ Đức, Quang Quý, Thiên Tướng, Thiên Trù, các sao Giải) và Thiên Phúc" },
+    { "id": "co_than.305.3", "para": 305, "palaces": ["Phúc Đức"], "text": "gặp nhiều ác sát tinh tất giảm thọ, khó tránh tai hoạ, họ hàng sa sút, lụn bại, nhà hiếm người.", "ctx": "Cô", "when": "in(Cô Thần) & count(3, Kình Dương, Đà La, Hỏa Tinh, Linh Tinh, Địa Không, Địa Kiếp, Hóa Kỵ, Thiên Hình, Kiếp Sát, Thiên Không, Đại Hao, Tiểu Hao)", "tone": "hung", "review": "«nhiều ác sát tinh» hiểu là gặp từ 3 sao trở lên trong nhóm hung tinh (ác sát)" },
+    { "id": "co_than.306.1", "para": 306, "palaces": ["Huynh Đệ"], "text": "Cô Kiếp - con một", "when": "in(Cô Thần) & meet(Địa Kiếp)", "tone": "hung" },
+    { "id": "co_than.307.1", "para": 307, "palaces": ["Thiên Di"], "text": "Cô- không có bạn bè;", "when": "in(Cô Thần)", "tone": "hung" },
+    { "id": "co_than.308.1", "para": 308, "palaces": ["Thiên Di"], "text": "Cô ngộ quý tinh: được nhiều người giúp đỡ.", "when": "in(Cô Thần) & meet(Quý tinh)", "tone": "cat" },
+    { "id": "co_than.309.1", "para": 309, "palaces": ["Quan Lộc"], "text": "có Cô Quả thì tốt, khác nào công danh có thần trợ giúp.", "when": "in(Cô Thần/Quả Tú) & meet(Cô Quả)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 290, "kind": "meta" }
+  ]
+}

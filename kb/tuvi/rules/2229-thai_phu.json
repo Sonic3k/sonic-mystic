@@ -1,0 +1,18 @@
+{
+  "entry": 2229,
+  "star": "thai_phu",
+  "rules": [
+    { "id": "thai_phu.2231.1", "para": 2231, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: khoan hòa, ưa danh vọng. Chủ sự danh vọng, phù trợ, gia tăng sự phú quý, hiển đạt.", "when": "in(Thai Phụ)", "tone": "cat" },
+    { "id": "thai_phu.2232.1", "para": 2232, "palaces": ["Mệnh", "Quan Lộc"], "text": "có Thai Phụ =vinh hiển.", "when": "in(Thai Phụ)", "tone": "cat" },
+    { "id": "thai_phu.2232.2", "para": 2232, "palaces": ["Mệnh", "Quan Lộc"], "text": "Ngộ Sương Khúc Khoa Quyền = vinh hiển tột bậc", "ctx": "Thai Phụ", "when": "meet(Thai Phụ, Xương Khúc, Hóa Khoa, Hóa Quyền)", "tone": "cat", "review": "Thai Phụ luôn đứng cách Văn Khúc hai cung, nên khi Thai Phụ thủ cung thì không bao giờ hội được Văn Khúc; hiểu là cung Mệnh, Quan hội Thai Phụ (chiếu về) cùng Xương Khúc, Khoa, Quyền" },
+    { "id": "thai_phu.2232.3", "para": 2232, "palaces": ["Mệnh", "Quan Lộc"], "text": "Ngộ Tuần Không Kiếp = vô ngoại", "ctx": "Thai Phụ", "when": "in(Thai Phụ) & meet(Tuần/Địa Không/Địa Kiếp)", "tone": "trung", "review": "theo cách an sao Thai Phụ không bao giờ hội Địa Không hay Địa Kiếp, nên hiểu là gặp một trong Tuần, Không, Kiếp (thực chất là gặp Tuần); «vô ngoại» không rõ nghĩa (có thể là «vô ngại») nên để tone trung — cần xem lại" },
+    { "id": "thai_phu.2233.1", "para": 2233, "palaces": ["Tử Tức"], "text": "Thai Phụ ngộ Thai = sinh quý tử", "when": "in(Thai Phụ) & meet(Thai)", "tone": "cat" },
+    { "id": "thai_phu.2234.1", "para": 2234, "palaces": ["Phúc Đức"], "text": "Thai Phụ là hình cái nón.", "when": "in(Thai Phụ)", "tone": "trung" },
+    { "id": "thai_phu.2235.1", "para": 2235, "palaces": ["Phúc Đức"], "text": "Thai phụ là thổ đới kim, gặp Khôi Việt, Nhật Nguyệt, Tả Hữu đầu chầu về huyệt ắt được văn võ công hầu.", "when": "in(Thai Phụ) & meet(Khôi Việt, Nhật Nguyệt, Tả Hữu)", "tone": "cat", "review": "«đầu chầu» hiểu là «đều chầu»: hội đủ Khôi Việt, Nhật Nguyệt, Tả Hữu" },
+    { "id": "thai_phu.2235.2", "para": 2235, "palaces": ["Phúc Đức"], "text": "Nếu gặp Không Triệt Diêu Linh Phá Cự là sơn thuỷ thô sơ ắt bị tuyệt vọng.", "ctx": "Thai phụ", "when": "in(Thai Phụ) & meet(Tuần/Triệt/Thiên Diêu/Linh Tinh/Phá Quân/Cự Môn)", "tone": "hung", "review": "Phá Quân và Cự Môn không bao giờ cùng hội một cung nên hiểu là gặp một trong các sao Không, Triệt, Diêu, Linh, Phá, Cự; Không hiểu là Tuần (Tuần Không, đi cặp với Triệt) vì Địa Không không bao giờ hội Thai Phụ" },
+    { "id": "thai_phu.2236.1", "para": 2236, "palaces": ["Phúc Đức"], "text": "Thai Phụ Tử Vi = trong họ có người phản chồng.", "when": "in(Thai Phụ) & meet(Tử Vi)", "tone": "hung" }
+  ],
+  "skip": [
+    { "para": 2230, "kind": "meta" }
+  ]
+}

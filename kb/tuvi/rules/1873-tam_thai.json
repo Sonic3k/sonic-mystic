@@ -1,0 +1,36 @@
+{
+  "entry": 1873,
+  "star": "tam_thai",
+  "rules": [
+    { "id": "tam_thai.1876.1", "para": 1876, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: ung dung, dịu dàng, đàng hoàng, đứng đắn, thanh nhàn. Chủ sự hiển vinh lâu dài, chủ khoan hoà, bệ vệ", "when": "in(Tam Thai)", "tone": "cat" },
+    { "id": "tam_thai.1878.1", "para": 1878, "palaces": ["Mệnh", "Thân"], "text": "Cùng với Bát Toạ, Thai Toạ ví như các phủ sở, hợp với bộ Thai Cáo", "when": "in(Tam Thai/Bát Tọa) & meet(Thai Tọa, Thai Cáo)", "tone": "cat" },
+    { "id": "tam_thai.1878.2", "para": 1878, "palaces": ["Mệnh", "Thân"], "text": "hội Binh Tướng là thiên về võ nghiệp.", "ctx": "Thai Toạ", "when": "in(Tam Thai/Bát Tọa) & meet(Thai Tọa, Phục Binh, Tướng Quân)", "tone": "trung", "review": "Binh Tướng hiểu là Phục Binh, Tướng Quân (như mục Bát Toạ, cách Binh Hình Tướng Ấn)" },
+    { "id": "tam_thai.1881.1", "para": 1881, "palaces": ["Mệnh"], "text": "Cư Mệnh là người có trán vuông, bích lập như bức tường dựng", "ctx": "Tam Thai", "when": "in(Tam Thai)", "tone": "trung" },
+    { "id": "tam_thai.1881.2", "para": 1881, "palaces": ["Mệnh"], "text": "và cằm nở nang.", "ctx": "Bát Toạ cư Mệnh", "when": "in(Bát Tọa)", "tone": "trung", "review": "bà ghi cằm là Bát Toạ («ở thân thể Tam Thai là trán, Bát Toạ là cằm»), như mục Bát Toạ" },
+    { "id": "tam_thai.1882.1", "para": 1882, "palaces": ["Mệnh"], "text": "ở tướng học, người có cằm rộng, địa các nở nang là người có nhiều nhà đất.", "when": "in(Bát Tọa)", "tone": "cat", "review": "câu tướng học; cằm là Bát Toạ nên hiểu là Bát Toạ cư Mệnh thì có nhiều nhà đất (như mục Bát Toạ)" },
+    { "id": "tam_thai.1883.1", "para": 1883, "palaces": ["Mệnh", "Thân"], "text": "Thai Toạ mệnh danh là ' Tử Vi phụ tá tinh', chuyên chủ về văn chương sĩ tiến và cát khánh chi sự.", "when": "in(Tam Thai/Bát Tọa) & meet(Thai Tọa)", "tone": "cat" },
+    { "id": "tam_thai.1884.1", "para": 1884, "palaces": ["Mệnh", "Thân"], "text": "Toạ thủ Thân Mệnh cung là bậc tục nho thanh quý, tất gặp nhiều cát lợi, hoặc chủ hiển đạt thành bậc đại quý", "ctx": "Thai Toạ", "when": "in(Tam Thai/Bát Tọa)", "tone": "cat", "review": "chủ ngữ hiểu là Thai Toạ (câu trên); «Toạ thủ» là ngồi ở cung Thân Mệnh" },
+    { "id": "tam_thai.1884.2", "para": 1884, "palaces": ["Mệnh", "Thân"], "text": "Hãm địa - chủ cô đơn.", "ctx": "Thai Toạ toạ thủ Thân Mệnh", "when": "(in(Tam Thai) & !bright(Tam Thai)) | (in(Bát Tọa) & !bright(Bát Tọa))", "tone": "hung", "review": "bảng của bà không ghi cung hãm cho Tam Thai, Bát Toạ (chỉ ghi miếu vượng ở Thìn Tuất Sửu Mùi); hiểu hãm địa là ngoài các cung ấy" },
+    { "id": "tam_thai.1885.1", "para": 1885, "palaces": ["Mệnh"], "text": "Tam Thai - vinh hiển", "when": "in(Tam Thai)", "tone": "cat" },
+    { "id": "tam_thai.1885.2", "para": 1885, "palaces": ["Mệnh"], "text": "ngộ Thìn thì kém tốt.", "ctx": "Tam Thai", "when": "in(Tam Thai) & at(Thìn)", "tone": "hung" },
+    { "id": "tam_thai.1886.1", "para": 1886, "palaces": ["Mệnh"], "text": "Tam Thai Long Lộc - có địa vị lớn.", "when": "in(Tam Thai) & meet(Long Trì, Lộc)", "tone": "cat", "review": "Long hiểu là Long Trì; cũng có thể là Thanh Long" },
+    { "id": "tam_thai.1887.1", "para": 1887, "palaces": ["Mệnh"], "text": "Thai Toạ trùng lâm - tướng có tài ra trận như không.", "when": "in(Tam Thai, Bát Tọa)", "tone": "cat", "review": "trùng lâm hiểu là Tam Thai, Bát Toạ cùng ở Mệnh" },
+    { "id": "tam_thai.1888.1", "para": 1888, "palaces": ["Mệnh"], "text": "Mệnh giáp Thai giáp Toạ - tuổi trẻ đã có uy quyền cao.", "when": "flank(Tam Thai, Bát Tọa)", "tone": "cat" },
+    { "id": "tam_thai.1889.1", "para": 1889, "palaces": ["Mệnh", "Thân"], "text": "Mênh Thân có Thai Toạ gia Mộ - văn võ toàn tài", "when": "in(Tam Thai/Bát Tọa) & meet(Thai Tọa, Mộ)", "tone": "cat", "review": "Mộ hiểu là sao Mộ (vòng Tràng Sinh), như mục Bát Toạ; cũng có thể là Tứ Mộ (Thìn Tuất Sửu Mùi)" },
+    { "id": "tam_thai.1889.2", "para": 1889, "palaces": ["Mệnh", "Thân"], "text": "có Long Phượng chiếu - người đẹp.", "ctx": "Mệnh Thân có Thai Toạ", "when": "in(Tam Thai/Bát Tọa) & meet(Thai Tọa) & aim(Long Phượng)", "tone": "trung" },
+    { "id": "tam_thai.1890.1", "para": 1890, "palaces": ["Tài Bạch"], "text": "Có Thai Toạ - sung túc", "when": "in(Tam Thai/Bát Tọa) & meet(Thai Tọa)", "tone": "cat" },
+    { "id": "tam_thai.1891.1", "para": 1891, "palaces": ["Điền Trạch"], "text": "Thai Toạ Long Phượng - có nhà cửa lâu đài và hưởng lợi.", "when": "in(Tam Thai/Bát Tọa) & meet(Thai Tọa, Long Phượng)", "tone": "cat" },
+    { "id": "tam_thai.1892.1", "para": 1892, "palaces": ["Phúc Đức"], "text": "Thai Toạ - đất hình tam tinh.", "when": "in(Tam Thai/Bát Tọa) & meet(Thai Tọa)", "tone": "trung" },
+    { "id": "tam_thai.1893.1", "para": 1893, "palaces": ["Phúc Đức"], "text": "Thai Toạ = thọ và nhàn.", "when": "in(Tam Thai/Bát Tọa) & meet(Thai Tọa)", "tone": "cat" },
+    { "id": "tam_thai.1893.2", "para": 1893, "palaces": ["Phúc Đức"], "text": "Lộc ngộ Thai Toạ - phần mộ được hưởng tốt và phát.", "when": "in(Lộc) & meet(Thai Tọa)", "tone": "cat" },
+    { "id": "tam_thai.1893.3", "para": 1893, "palaces": ["Phúc Đức"], "text": "Có Tam Thai gia Cát diệu củng chiếu thì nuôi được thành người.", "when": "in(Tam Thai) & aim(Cát tinh)", "tone": "cat" },
+    { "id": "tam_thai.1893.4", "para": 1893, "palaces": ["Phúc Đức"], "text": "Thiên Mã Tam Thai = anh hùng vô địch.", "when": "in(Tam Thai) & meet(Thiên Mã)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 1874, "kind": "meta" },
+    { "para": 1875, "kind": "meta" },
+    { "para": 1877, "kind": "theory" },
+    { "para": 1879, "kind": "theory" },
+    { "para": 1880, "kind": "theory" }
+  ]
+}

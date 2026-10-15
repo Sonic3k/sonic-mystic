@@ -1,0 +1,26 @@
+{
+  "entry": 3088,
+  "star": "thien_khoc",
+  "rules": [
+    { "id": "thien_khoc.3091.1", "para": 3091, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: sầu thảm, bất chính.", "when": "in(Thiên Khốc)", "tone": "hung" },
+    { "id": "thien_khoc.3092.1", "para": 3092, "palaces": ["Mệnh", "Thân"], "text": "Chủ sự đau thương thảm khốc.", "when": "in(Thiên Khốc)", "tone": "hung" },
+    { "id": "thien_khoc.3093.1", "para": 3093, "palaces": ["Mệnh"], "text": "Có Khốc - người buồn lòng, gian hiểm.", "when": "in(Thiên Khốc)", "tone": "hung" },
+    { "id": "thien_khoc.3094.1", "para": 3094, "palaces": ["Mệnh"], "text": "Khốc Hổ - có nhiều sự đau thương.", "when": "in(Thiên Khốc) & meet(Bạch Hổ)", "tone": "hung" },
+    { "id": "thien_khoc.3095.1", "para": 3095, "palaces": ["Mệnh"], "text": "Nhược Đồng cư Tý Ngọ - bớt sự đau thương, tiền bần hậu phú.", "ctx": "Khốc Hổ", "when": "at(Tý, Ngọ) & meet(Thiên Khốc, Bạch Hổ)", "tone": "mixed", "review": "«Đồng cư» hiểu là (Khốc Hổ) cùng cư Tý Ngọ, như bà ghi ở sao Bạch Hổ «Hổ Khốc cùng an Tý Ngọ - Tiền bần hậu phú»; Khốc Hổ không bao giờ đồng cung ở Tý Ngọ, và khi Khốc thủ Mệnh ở Tý Ngọ thì không bao giờ hội Hổ, nên theo quy ước dùng gặp: Mệnh ở Tý Ngọ hội Khốc Hổ; cũng có thể bà muốn nói Thiên Đồng cư Tý Ngọ" },
+    { "id": "thien_khoc.3096.1", "para": 3096, "palaces": ["Mệnh"], "text": "Khốc Quyền đồng cung - danh giá rạng rỡ.", "when": "in(Thiên Khốc, Hóa Quyền)", "tone": "cat" },
+    { "id": "thien_khoc.3097.1", "para": 3097, "palaces": ["Mệnh"], "text": "Khốc ngộ Khôi Việt Khúc Sương - tài giỏi hiển danh", "when": "in(Thiên Khốc) & meet(Khôi Việt, Xương Khúc)", "tone": "cat" },
+    { "id": "thien_khoc.3098.1", "para": 3098, "palaces": ["Mệnh"], "text": "Khốc Đà Dần Thân - văn võ kiêm toàn.", "when": "in(Thiên Khốc) & meet(Đà La) & at(Dần, Thân)", "tone": "cat", "review": "Khốc và Đà không bao giờ đồng cung ở Dần Thân; hiểu là Khốc thủ Mệnh ở Dần Thân gặp Đà La" },
+    { "id": "thien_khoc.3099.1", "para": 3099, "palaces": ["Mệnh"], "text": "Khốc Hình Mã - võ nghiệp công danh.", "when": "in(Thiên Khốc) & meet(Thiên Hình, Thiên Mã)", "tone": "cat" },
+    { "id": "thien_khoc.3100.1", "para": 3100, "palaces": ["Mệnh"], "text": "Khốc Điếu Kiếp Phù ngộ Cự Dương -suốt đời nước mắt (đa hận ).", "when": "in(Thiên Khốc) & meet(Điếu Khách, Địa Kiếp, Quan Phù, Cự Môn, Thái Dương)", "tone": "hung", "review": "Điếu là Điếu Khách, Kiếp hiểu là Địa Kiếp, Phù hiểu là Quan Phù (vòng Thái Tuế), Cự Dương là Cự Môn Thái Dương" },
+    { "id": "thien_khoc.3101.1", "para": 3101, "palaces": ["Phu Thê"], "text": "Khốc Tang Hoả - số đàn bà chồng bị mù loà, không thì goá sớm.", "when": "female() & in(Thiên Khốc) & meet(Tang Môn, Hỏa Tinh)", "tone": "hung" },
+    { "id": "thien_khoc.3102.1", "para": 3102, "palaces": ["Phúc Đức"], "text": "Có Khốc - tổn thọ;", "when": "in(Thiên Khốc)", "tone": "hung" },
+    { "id": "thien_khoc.3103.1", "para": 3103, "palaces": ["Phúc Đức"], "text": "Khốc hãm - có âm hồn báo oán;", "when": "in(Thiên Khốc) & !bright(Thiên Khốc)", "tone": "hung", "review": "bảng của bà chỉ ghi Thiên Khốc vượng ở Tý Ngọ, đắc ở Sửu Thân, không ghi cung hãm; hiểu hãm là Khốc ở ngoài các cung ấy" },
+    { "id": "thien_khoc.3104.1", "para": 3104, "palaces": ["Phúc Đức"], "text": "Cư Đắc địa ngộ Phúc tinh - mả phát.", "ctx": "Khốc", "when": "in(Thiên Khốc) & bright(Thiên Khốc) & meet(Tử Vi/Thiên Phủ/Thái Âm/Thiên Đồng/Thiên Đức)", "tone": "cat", "review": "«Đắc địa» hiểu là Khốc ở nơi sáng (Tý Ngọ Sửu Thân); Phúc tinh hiểu là các sao bà ghi là Phúc tinh ở đầu mục: Tử Vi, Thiên Phủ, Thái Âm, Thiên Đồng, Thiên Đức" },
+    { "id": "thien_khoc.3105.1", "para": 3105, "palaces": ["Phúc Đức"], "text": "Ngộ Quý Cát tinh - hiển đạt.", "ctx": "Khốc", "when": "in(Thiên Khốc) & meet(Quý tinh, Cát tinh)", "tone": "cat", "review": "hiểu «Quý Cát tinh» là gặp cả quý tinh lẫn cát tinh" }
+  ],
+  "skip": [
+    { "para": 3089, "kind": "meta" },
+    { "para": 3090, "kind": "meta" },
+    { "para": 3106, "kind": "xref" }
+  ]
+}

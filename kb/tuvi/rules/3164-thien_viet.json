@@ -1,0 +1,22 @@
+{
+  "entry": 3164,
+  "star": "thien_viet",
+  "rules": [
+    { "id": "thien_viet.3167.1", "para": 3167, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: thanh bạch, khoan hoà, thông minh, tài giỏi.", "when": "in(Thiên Việt)", "tone": "cat" },
+    { "id": "thien_viet.3168.1", "para": 3168, "palaces": ["Mệnh", "Thân"], "text": "Chủ văn chương khoa giáp.", "when": "in(Thiên Việt)", "tone": "cat" },
+    { "id": "thien_viet.3169.1", "para": 3169, "palaces": ["Mệnh", "Thân"], "text": "Về cơ thể Việt là bả vai; ngộ Hình Hao - so vai.", "when": "in(Thiên Việt) & meet(Thiên Hình, Đại Hao/Tiểu Hao)", "tone": "hung", "review": "Hao hiểu là Đại Hao hay Tiểu Hao" },
+    { "id": "thien_viet.3170.1", "para": 3170, "palaces": ["Mệnh"], "text": "Khôi Việt Hoá Lộc = Khôi Việt Lộc Tồn Tràng ngộ Mã - học giỏi, đỗ cao, khoa danh lừng lẫy, sự nghiệp hiển hách.", "when": "in(Thiên Việt/Thiên Khôi) & meet(Khôi Việt) & (meet(Hóa Lộc) | meet(Lộc Tồn, Tràng Sinh, Thiên Mã))", "tone": "cat", "review": "Khôi Việt không bao giờ đồng cung: hiểu là một sao thủ Mệnh, sao kia chiếu; Tràng hiểu là Tràng Sinh" },
+    { "id": "thien_viet.3171.1", "para": 3171, "palaces": ["Mệnh"], "text": "Thiên Việt - da hơi đen và đanh.", "when": "in(Thiên Việt)", "tone": "trung" },
+    { "id": "thien_viet.3172.1", "para": 3172, "palaces": ["Mệnh"], "text": "Nữ Mệnh - trưởng nữ, đoan chính.", "ctx": "Thiên Việt", "when": "female() & in(Thiên Việt)", "tone": "cat" },
+    { "id": "thien_viet.3173.1", "para": 3173, "palaces": ["Tật Ách"], "text": "Có Việt Kỵ - bị câm.", "when": "in(Thiên Việt) & meet(Hóa Kỵ)", "tone": "hung" },
+    { "id": "thien_viet.3174.1", "para": 3174, "palaces": ["Tật Ách"], "text": "Việt Linh Hình - sét đáng, điện giật, súng bắn.", "when": "in(Thiên Việt) & meet(Linh Tinh, Thiên Hình)", "tone": "hung" },
+    { "id": "thien_viet.3175.1", "para": 3175, "palaces": ["Phúc Đức"], "text": "Thiên Việt như hình cái kiếm lớn.", "when": "in(Thiên Việt)", "tone": "trung" },
+    { "id": "thien_viet.3176.1", "para": 3176, "palaces": ["Phúc Đức"], "text": "Thiên Việt là Hoả đới Mộc gặp Khoa Quyền Nhật Nguyệt là đất cong cong ôm lấy mộ, được tú khí, con cháu văn hào, đỗ khôi nguyên.", "when": "in(Thiên Việt) & meet(Hóa Khoa, Hóa Quyền, Nhật Nguyệt)", "tone": "cat" },
+    { "id": "thien_viet.3176.2", "para": 3176, "palaces": ["Phúc Đức"], "text": "Nếu gặp Tuế Kình Đà Kỵ Không Kiếp Phá - là đất bị phạm hung sát, trai bị hình chu, gái bại gia dâm dật.", "ctx": "Thiên Việt", "when": "in(Thiên Việt) & meet(Thái Tuế/Kình Dương/Đà La/Hóa Kỵ/Địa Không/Địa Kiếp/Phá Quân)", "tone": "hung", "review": "hiểu là gặp một trong các sao Tuế (Thái Tuế), Kình, Đà, Kỵ, Không, Kiếp, Phá (Phá Quân); «trai … gái …» hiểu là con cháu trong họ (cung Phúc), không phải giới tính đương số" }
+  ],
+  "skip": [
+    { "para": 3165, "kind": "meta" },
+    { "para": 3166, "kind": "meta" },
+    { "para": 3177, "kind": "xref" }
+  ]
+}

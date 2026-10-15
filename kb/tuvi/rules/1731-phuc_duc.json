@@ -1,0 +1,16 @@
+{
+  "entry": 1731,
+  "star": "phuc_duc",
+  "rules": [
+    { "id": "phuc_duc.1733.1", "para": 1733, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: thật thà, chất phác, từ thiện.", "when": "in(Phúc Đức)", "tone": "cat" },
+    { "id": "phuc_duc.1734.1", "para": 1734, "palaces": ["Mệnh", "Thân"], "text": "Hội với Thiên Đức Nguyệt Đức Long Đức thành bộ Tứ Đức, chủ khoan hoà, nhân hậu, đoan chính, phúc thiện.", "ctx": "Phúc Đức", "when": "meet(Phúc Đức, Thiên Đức, Nguyệt Đức, Long Đức)", "tone": "cat", "review": "theo cách an sao Long Đức không bao giờ hội cung có Phúc Đức, bốn sao Đức chỉ hội đủ ở một cung không có sao Đức nào (đều chiếu về); nên hiểu là cung Thân Mệnh hội đủ bộ Tứ Đức, Phúc Đức chiếu" },
+    { "id": "phuc_duc.1735.1", "para": 1735, "palaces": ["Mệnh", "Thân"], "text": "Tứ Đức thủ chiếu Thân Mệnh thì phù trì đắc lực, hạn đến không bị sa vào tuyệt địa, còn được hưởng ân huệ, giữ được cốt cách của người phong lưu.", "when": "meet(Phúc Đức, Thiên Đức, Nguyệt Đức, Long Đức)", "tone": "cat", "review": "Tứ Đức hiểu là Phúc Đức, Thiên Đức, Nguyệt Đức, Long Đức; bốn sao chỉ hội đủ khi cùng chiếu về một cung (không sao nào thủ), nên điều kiện là Thân Mệnh hội đủ bốn sao" },
+    { "id": "phuc_duc.1736.1", "para": 1736, "palaces": ["*"], "text": "Phúc Đức không chế ngự được hung tinh ở các cung, hội với hung sát tinh thì Tứ Đức không nhập đảng tác hại.", "when": "in(Phúc Đức) & meet(Hung tinh)", "tone": "mixed", "review": "hiểu là Phúc Đức ở cung nào gặp hung sát tinh cũng vậy: không chế được hung tinh nhưng không theo hung tinh mà tác hại" },
+    { "id": "phuc_duc.1736.2", "para": 1736, "palaces": ["Mệnh", "Thân"], "text": "Tính hay giải cứu, cứu khốn phò nguy.", "ctx": "Phúc Đức", "when": "in(Phúc Đức)", "tone": "cat" },
+    { "id": "phuc_duc.1737.1", "para": 1737, "palaces": ["Mệnh", "Thân"], "text": "Hội với Cát Diệu thì tăng mỹ mãn.", "ctx": "Phúc Đức", "when": "in(Phúc Đức) & meet(Cát tinh)", "tone": "cat" },
+    { "id": "phuc_duc.1738.1", "para": 1738, "palaces": ["Mệnh"], "text": "Có Phúc Đức - người thật thà, từ thiện, gặp may.", "when": "in(Phúc Đức)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 1732, "kind": "meta" }
+  ]
+}

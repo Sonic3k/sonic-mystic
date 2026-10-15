@@ -1,0 +1,18 @@
+{
+  "entry": 1760,
+  "star": "quan_doi",
+  "rules": [
+    { "id": "quan_doi.1762.1", "para": 1762, "palaces": ["Mệnh", "Thân"], "text": "Chủ quyền bính, mũ mãng cân đai, y bố", "ctx": "Quan Đới", "when": "in(Quan Đới)", "tone": "cat" },
+    { "id": "quan_doi.1763.1", "para": 1763, "palaces": ["Mệnh"], "text": "Thủ Mệnh thì văn chương công danh hiển đạt, thường cẩn trọng về y phục", "ctx": "Quan Đới", "when": "in(Quan Đới)", "tone": "cat" },
+    { "id": "quan_doi.1763.2", "para": 1763, "palaces": ["Mệnh"], "text": "chỉ e gặp Hoả Linh thành dâm đãng, tửu sắc, tới bạc đầu còn vương vấn", "ctx": "Quan Đới thủ Mệnh", "when": "in(Quan Đới) & meet(Hỏa Linh)", "tone": "hung" },
+    { "id": "quan_doi.1763.3", "para": 1763, "palaces": ["Mệnh"], "text": "hay mắc chứng đờm nhiệt.", "ctx": "Quan Đới thủ Mệnh", "when": "in(Quan Đới)", "tone": "hung", "review": "không rõ «hay mắc chứng đờm nhiệt» nói chung cho Quan Đới thủ Mệnh hay chỉ khi gặp Hoả Linh (vế trước); để là nói chung" },
+    { "id": "quan_doi.1764.1", "para": 1764, "palaces": ["Mệnh", "Thân"], "text": "Hội với Văn Sương là đắc cách nhất.", "ctx": "Quan Đới", "when": "in(Quan Đới) & meet(Văn Xương)", "tone": "cat" },
+    { "id": "quan_doi.1765.1", "para": 1765, "palaces": ["Mệnh", "Thân"], "text": "Hội với Tử Phủ Sát Phá Thanh Long là hợp cách, là người văn chương thi phú tự thiếu thời.", "ctx": "Quan Đới", "when": "in(Quan Đới) & meet(Tử Phủ, Thất Sát, Phá Quân, Thanh Long)", "tone": "cat", "review": "hiểu là hội đủ Tử Phủ, Sát Phá và Thanh Long; cũng có thể bà liệt kê các sao hợp với Quan Đới, gặp sao nào cũng tốt" },
+    { "id": "quan_doi.1766.1", "para": 1766, "palaces": ["Mệnh"], "text": "Có Quan Đới - công danh hiển đạt", "when": "in(Quan Đới)", "tone": "cat" },
+    { "id": "quan_doi.1767.1", "para": 1767, "palaces": ["Tử Tức"], "text": "Có Quan Đới Thiên Tướng Thiên Lương - con quý tử.", "when": "in(Quan Đới) & meet(Thiên Tướng/Thiên Lương)", "tone": "cat", "review": "theo cách an sao Thiên Lương luôn ở cung liền sau Thiên Tướng nên hai sao không bao giờ cùng hội một cung; hiểu là Quan Đới gặp Thiên Tướng hoặc Thiên Lương" },
+    { "id": "quan_doi.1768.1", "para": 1768, "palaces": ["Phúc Đức"], "text": "Quan Đới là huyền vũ Thuỷ ( khí phách về võ) là cái đài, là hình bán nghuyệt.", "when": "in(Quan Đới)", "tone": "trung" }
+  ],
+  "skip": [
+    { "para": 1761, "kind": "meta" }
+  ]
+}

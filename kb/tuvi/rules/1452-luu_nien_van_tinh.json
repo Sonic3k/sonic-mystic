@@ -1,0 +1,15 @@
+{
+  "entry": 1452,
+  "star": "luu_nien_van_tinh",
+  "rules": [
+    { "id": "luu_nien_van_tinh.1454.1", "para": 1454, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: chăm học, thông thái. Chủ về văn học khoa giáp, học vấn.", "when": "in(Lưu Niên Văn Tinh)", "tone": "cat" },
+    { "id": "luu_nien_van_tinh.1455.1", "para": 1455, "palaces": ["Mệnh"], "text": "Lâm Mệnh là người có học vấn.", "ctx": "Lưu Niên Văn Tinh", "when": "in(Lưu Niên Văn Tinh)", "tone": "cat" },
+    { "id": "luu_nien_van_tinh.1457.1", "para": 1457, "palaces": ["Mệnh", "Thân", "Quan Lộc"], "text": "có LNVT - văn hay chữ tốt, thông minh, thành danh sĩ, người nho nhã có khiếu văn chương.", "when": "in(Lưu Niên Văn Tinh)", "tone": "cat" },
+    { "id": "luu_nien_van_tinh.1458.1", "para": 1458, "palaces": ["Mệnh", "Thân", "Quan Lộc"], "text": "LN ngộ Khoa Quyền - đỗ đạt lớn", "when": "in(Lưu Niên Văn Tinh) & meet(Hóa Khoa, Hóa Quyền)", "tone": "cat" },
+    { "id": "luu_nien_van_tinh.1458.2", "para": 1458, "palaces": ["Mệnh", "Thân", "Quan Lộc"], "text": "cùng Khôi Việt Sương Khúc thì văn nghiệp lỗi lạc.", "ctx": "LN (Lưu Niên Văn Tinh)", "when": "meet(Lưu Niên Văn Tinh, Khôi Việt, Xương Khúc)", "tone": "cat", "review": "cung có Lưu Niên Văn Tinh thủ thì không bao giờ hội đủ Khôi Việt, nên hiểu là cung hội đủ Lưu Niên Văn Tinh, Khôi Việt, Xương Khúc (Lưu Niên Văn Tinh có thể chiếu về); không buộc thêm Khoa Quyền của vế trước" }
+  ],
+  "skip": [
+    { "para": 1453, "kind": "meta" },
+    { "para": 1456, "kind": "heading" }
+  ]
+}

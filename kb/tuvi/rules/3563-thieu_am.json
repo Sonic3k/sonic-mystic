@@ -1,0 +1,176 @@
+{
+ "entry": 3563,
+ "star": "thieu_am",
+ "rules": [
+  {
+   "id": "thien_tuong.3565.1",
+   "para": 3565,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tính cách: lạnh lùng, hơi thông minh.",
+   "ctx": "Thiếu Âm",
+   "when": "in(Thiếu Âm)",
+   "tone": "trung",
+   "review": "các đoạn 3563–3575 là mục riêng của hai sao Thiếu Âm, Thiếu Dương chép liền trong mục Thiên Tướng, nên chủ thể là Thiếu Âm hoặc Thiếu Dương"
+  },
+  {
+   "id": "thien_tuong.3567.1",
+   "para": 3567,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tính cách: dịu dàng, ôn hoà, thông minh.",
+   "ctx": "Thiếu Dương",
+   "when": "in(Thiếu Dương)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3569.1",
+   "para": 3569,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Nhật cư Tý gặp Thiếu Âm, Nguyệt cư Ngọ gặp Thiếu Dương là tốt.",
+   "when": "(in(Thái Dương) & at(Tý) & meet(Thiếu Âm)) | (in(Thái Âm) & at(Ngọ) & meet(Thiếu Dương))",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3570.1",
+   "para": 3570,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Có Thiếu Âm, Thái Âm hoặc đồng cung hoặc tương chiếu - rất thông minh.",
+   "when": "in(Thiếu Âm, Thái Âm) | (in(Thiếu Âm) & opp(Thái Âm)) | (in(Thái Âm) & opp(Thiếu Âm))",
+   "tone": "cat",
+   "review": "tương chiếu hiểu là xung chiếu (hai sao ở hai cung đối nhau, một sao ở Mệnh)"
+  },
+  {
+   "id": "thien_tuong.3571.1",
+   "para": 3571,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Thiếu Âm gặp Thái Âm - thêm sáng, rất tốt",
+   "when": "in(Thiếu Âm) & meet(Thái Âm)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3571.2",
+   "para": 3571,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "nếu dứng một mình thì bình thường",
+   "ctx": "Thiếu Âm",
+   "when": "in(Thiếu Âm) & !meet(Thái Âm)",
+   "tone": "trung",
+   "review": "hiểu «đứng một mình» là không gặp Thái Âm"
+  },
+  {
+   "id": "thien_tuong.3571.3",
+   "para": 3571,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "hội sao tốt thì hơi lợi",
+   "ctx": "Thiếu Âm",
+   "when": "in(Thiếu Âm) & meet(Cát tinh)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3571.4",
+   "para": 3571,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "hội sao xấu thì không chế ngự được.",
+   "ctx": "Thiếu Âm",
+   "when": "in(Thiếu Âm) & meet(Hung tinh)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3572.1",
+   "para": 3572,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Mệnh có Thiếu Dương Thái Dương hoặc đồng cung hoặc tương chiếu - thông minh tột bậc.",
+   "when": "in(Thiếu Dương, Thái Dương) | (in(Thiếu Dương) & opp(Thái Dương)) | (in(Thái Dương) & opp(Thiếu Dương))",
+   "tone": "cat",
+   "review": "tương chiếu hiểu là xung chiếu (hai sao ở hai cung đối nhau, một sao ở Mệnh)"
+  },
+  {
+   "id": "thien_tuong.3573.1",
+   "para": 3573,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Thiếu Dương gặp Thái Dương - thêm sáng, rất tốt.",
+   "when": "in(Thiếu Dương) & meet(Thái Dương)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3574.1",
+   "para": 3574,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "Có Thiếu Dương hay Thiếu Âm vượng - dễ có tiền",
+   "when": "(in(Thiếu Dương) & at(Tý, Ngọ)) | (in(Thiếu Âm) & at(Mão, Dậu))",
+   "tone": "cat",
+   "review": "bảng sao chưa ghi miếu vượng cho Thiếu Dương, Thiếu Âm; dùng lời bà ở đầu mục: Thiếu Dương miếu ở Tý Ngọ, Thiếu Âm miếu ở Mão Dậu"
+  },
+  {
+   "id": "thien_tuong.3574.2",
+   "para": 3574,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "ngộ Lộc Mã - thêm tốt.",
+   "ctx": "Thiếu Dương hay Thiếu Âm vượng",
+   "when": null,
+   "tone": "cat",
+   "review": "theo cách an sao Thiếu Dương, Thiếu Âm không bao giờ hội Thiên Mã, nên không viết được điều kiện «ngộ Lộc Mã»"
+  },
+  {
+   "id": "thien_tuong.3575.1",
+   "para": 3575,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "Thiếu Dương gặp sao tốt thì tốt lên",
+   "when": "in(Thiếu Dương) & meet(Cát tinh)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3575.2",
+   "para": 3575,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "gặp sao xấu thì vô dụng.",
+   "ctx": "Thiếu Dương",
+   "when": "in(Thiếu Dương) & meet(Hung tinh)",
+   "tone": "hung"
+  }
+ ],
+ "skip": [
+  {
+   "para": 3564,
+   "kind": "meta"
+  },
+  {
+   "para": 3566,
+   "kind": "meta"
+  },
+  {
+   "para": 3568,
+   "kind": "theory"
+  }
+ ]
+}

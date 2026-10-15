@@ -1,0 +1,209 @@
+{
+ "entry": 158,
+ "star": "an_quang",
+ "rules": [
+  {
+   "id": "an_quang.161.1",
+   "para": 161,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tính cách: đẹp, hiền, quân tử, chủ ân huệ, giúp đỡ, may mắn, gặp thời",
+   "when": "in(Ân Quang)",
+   "tone": "cat"
+  },
+  {
+   "id": "an_quang.162.1",
+   "para": 162,
+   "palaces": [
+    "*"
+   ],
+   "text": "Được gọi là phúc thiện tinh, cùng với Th Quý là một bộ, đóng ở cung nào cũng được sự tốt lành.",
+   "when": "in(Ân Quang)",
+   "tone": "cat"
+  },
+  {
+   "id": "an_quang.162.2",
+   "para": 162,
+   "palaces": [
+    "Hạn"
+   ],
+   "text": "Gặp được Quý Ân trong cung hạn là được cứu khốn phò nguy.",
+   "when": "meet(Quang Quý)",
+   "tone": "cat"
+  },
+  {
+   "id": "an_quang.163.1",
+   "para": 163,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Quý Ân hội với Nhật Nguyệt là cách ví như tăng sức sáng rực rỡ cho Nhật Nguyệt.",
+   "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý, Nhật Nguyệt)",
+   "tone": "cat"
+  },
+  {
+   "id": "an_quang.164.1",
+   "para": 164,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Hội với Cơ Lương lại như văn diệu",
+   "ctx": "Ân Quang",
+   "when": "in(Ân Quang) & meet(Thiên Cơ, Thiên Lương)",
+   "tone": "cat"
+  },
+  {
+   "id": "an_quang.164.2",
+   "para": 164,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "người Mộc Mệnh, Cơ Lương gặp Quang Quý là đắc lực hợp cách.",
+   "when": "menh(Mộc) & meet(Thiên Cơ, Thiên Lương, Quang Quý)",
+   "tone": "cat"
+  },
+  {
+   "id": "an_quang.168.1",
+   "para": 168,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Có Ân Quang ở Sửu Mùi Mão Dậu là tốt, thành danh",
+   "when": "in(Ân Quang) & at(Sửu, Mùi, Mão, Dậu)",
+   "tone": "cat"
+  },
+  {
+   "id": "an_quang.169.1",
+   "para": 169,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Có Quang Quý - công danh rực rỡ.",
+   "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý)",
+   "tone": "cat"
+  },
+  {
+   "id": "an_quang.169.2",
+   "para": 169,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Thủ Mệnh là dáng người cao, thanh tú, thường có bộ quý mục ( mắt quý, trong sáng mà tâm hồn phúc thiện).",
+   "ctx": "Quang Quý",
+   "when": "in(Ân Quang/Thiên Quý)",
+   "tone": "trung"
+  },
+  {
+   "id": "an_quang.170.1",
+   "para": 170,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Có Quang Quý Khôi Việt - đỗ cao.",
+   "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý, Khôi Việt)",
+   "tone": "cat"
+  },
+  {
+   "id": "an_quang.171.1",
+   "para": 171,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "Có QQ là vợ chồng ân ái thuận hoà",
+   "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý)",
+   "tone": "cat"
+  },
+  {
+   "id": "an_quang.172.1",
+   "para": 172,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "Có Quang Mã Đồng Nhật hoặc Nguyệt Đức (Đàn ông không cần Nhật, nữ không cần Nguyệt Đức) - sánh duyên cùng người giàu sang tốt đẹp nhưng kiêu hãnh",
+   "when": "in(Ân Quang) & meet(Thiên Mã, Thiên Đồng, Thái Dương) & female()",
+   "tone": "mixed",
+   "review": "Phần trong ngoặc hiểu là: đàn ông cần Nguyệt Đức, đàn bà cần Nhật. Thiên Mã không bao giờ hội Nguyệt Đức nên vế đàn ông không xảy ra trên lá số nào; chỉ còn vế đàn bà."
+  },
+  {
+   "id": "an_quang.173.1",
+   "para": 173,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "có Quang Quý - con sang quý",
+   "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý)",
+   "tone": "cat"
+  },
+  {
+   "id": "an_quang.174.1",
+   "para": 174,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Quang Quý ngộ Nhật từ cung Dần đến Ngọ - sinh quý tử",
+   "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý, Thái Dương) & pos(Thái Dương, Dần, Mão, Thìn, Tỵ, Ngọ)",
+   "tone": "cat"
+  },
+  {
+   "id": "an_quang.174.2",
+   "para": 174,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "nếu Nhật hãm thì không con.",
+   "ctx": "Quang Quý ngộ Nhật",
+   "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý, Thái Dương) & dim(Thái Dương)",
+   "tone": "hung"
+  },
+  {
+   "id": "an_quang.175.1",
+   "para": 175,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Có Quang Tấu - có con thánh thần giáng sinh.",
+   "when": "in(Ân Quang) & meet(Tấu Thư)",
+   "tone": "cat"
+  },
+  {
+   "id": "an_quang.176.1",
+   "para": 176,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Có Quang Quý - có bạn kết nghĩa anh em; hoặc anh em trong nhà có anh chị em nuôi.",
+   "when": "in(Ân Quang/Thiên Quý) & meet(Quang Quý)",
+   "tone": "trung"
+  }
+ ],
+ "skip": [
+  {
+   "para": 159,
+   "kind": "meta"
+  },
+  {
+   "para": 160,
+   "kind": "meta"
+  },
+  {
+   "para": 165,
+   "kind": "verse"
+  },
+  {
+   "para": 166,
+   "kind": "verse"
+  },
+  {
+   "para": 167,
+   "kind": "heading"
+  }
+ ]
+}

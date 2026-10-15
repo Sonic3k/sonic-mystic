@@ -1,0 +1,25 @@
+{
+  "entry": 1799,
+  "star": "quoc_an",
+  "rules": [
+    { "id": "quoc_an.1801.1", "para": 1801, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: vui vẻ, có phong độ trượng phu. Chủ sự quyền quý.", "when": "in(Quốc Ấn)", "tone": "cat" },
+    { "id": "quoc_an.1802.1", "para": 1802, "palaces": ["Mệnh"], "text": "Có Quốc ấn - có địa vị cao sang.", "when": "in(Quốc Ấn)", "tone": "cat" },
+    { "id": "quoc_an.1803.1", "para": 1803, "palaces": ["Mệnh"], "text": "ấn ngộ Diêu - quý tốt.", "when": "in(Quốc Ấn) & meet(Thiên Diêu)", "tone": "cat" },
+    { "id": "quoc_an.1803.2", "para": 1803, "palaces": ["Mệnh"], "text": "ấn Tướng Khoa Quyền - đại vinh hiển.", "when": "in(Quốc Ấn) & meet(Thiên Tướng, Hóa Khoa, Hóa Quyền)", "tone": "cat", "review": "Tướng hiểu là Thiên Tướng (như «Tướng Phủ Quyền đới ấn» ở mục Thiên Tướng); nếu là Tướng Quân thì sao ấy luôn hội Quốc Ấn" },
+    { "id": "quoc_an.1803.3", "para": 1803, "palaces": ["Mệnh"], "text": "ấn Hình Tướng - hiển đạt uy danh.", "when": "in(Quốc Ấn) & meet(Thiên Hình, Tướng Quân)", "tone": "cat", "review": "Tướng hiểu là Tướng Quân (bộ Binh Hình Tướng Ấn; mục Thiên Hình ghi «Hình Tướng ấn ... võ nghiệp hiển đạt»); Tướng Quân luôn hội Quốc Ấn (đồng cung hay tam hợp) nên điều kiện chỉ còn là gặp Thiên Hình" },
+    { "id": "quoc_an.1804.1", "para": 1804, "palaces": ["Mệnh"], "text": "Lộc Cơ Hồng ấn Tấu - đắc thời hiển đạt.", "when": null, "tone": "cat", "review": "theo cách an sao Quốc Ấn luôn cách Tấu Thư 1 hoặc 3 cung nên hai sao không bao giờ cùng hội một cung, không viết được điều kiện; bộ gần giống ở mục Tấu Thư ghi «Tấu Ân Cơ Việt Quý Hồng» (Ân Quang), có thể «ấn» ở đây là Ân Quang; cần xem lại" },
+    { "id": "quoc_an.1805.1", "para": 1805, "palaces": ["Mệnh"], "text": "ấn ngộ Tấu Thư, Y, Bác Sĩ và Lộc Mã - làm thấy thuốc phát tài.", "when": null, "tone": "cat", "review": "theo cách an sao Quốc Ấn luôn cách Tấu Thư 1 hoặc 3 cung nên hai sao không bao giờ cùng hội một cung, không viết được điều kiện; cần xem lại" },
+    { "id": "quoc_an.1806.1", "para": 1806, "palaces": ["Mệnh"], "text": "Đàn bà số Phủ Tướng chiều viên phùng ấn - lấy chồng quý cách và giàu có.", "when": "female() & aim(Thiên Phủ, Thiên Tướng) & meet(Quốc Ấn)", "tone": "cat", "review": "Phủ Tướng triều viên (bà viết «chiều viên») hiểu là Thiên Phủ, Thiên Tướng cùng chiếu về Mệnh từ hai cung tam hợp" },
+    { "id": "quoc_an.1807.1", "para": 1807, "palaces": ["Tử Tức"], "text": "ấn Quý hay ấn Phong Quang Quý - con hiển đạt, vinh hiển.", "when": "in(Quốc Ấn) & (meet(Thiên Quý) | meet(Phong Cáo, Quang Quý))", "tone": "cat", "review": "Quý hiểu là Thiên Quý; Phong là Phong Cáo (mục Phong Cáo ghi «Có Phong ấn Quang Quý - con hiển đạt»)" },
+    { "id": "quoc_an.1808.1", "para": 1808, "palaces": ["Thiên Di"], "text": "ấn ngộ Mã -ra ngoài làm to", "when": "in(Quốc Ấn) & meet(Thiên Mã)", "tone": "cat" },
+    { "id": "quoc_an.1808.2", "para": 1808, "palaces": ["Thiên Di"], "text": "gia Tướng Quân - võ cách.", "ctx": "ấn ngộ Mã", "when": "in(Quốc Ấn) & meet(Thiên Mã, Tướng Quân)", "tone": "cat", "review": "hiểu là ấn ngộ Mã thêm Tướng Quân (mục Tướng Quân: «Tướng ấn ngộ Mã - làm quan võ to»); Tướng Quân luôn hội Quốc Ấn nên điều kiện như vế trước" },
+    { "id": "quoc_an.1809.1", "para": 1809, "palaces": ["Nô Bộc"], "text": "ấn Tướng - có người giúp đỡ làm nên.", "when": "in(Quốc Ấn) & meet(Thiên Tướng)", "tone": "cat", "review": "Tướng hiểu là Thiên Tướng; nếu là Tướng Quân thì điều kiện đúng mỗi khi có Quốc Ấn ở cung Nô" },
+    { "id": "quoc_an.1810.1", "para": 1810, "palaces": ["Quan Lộc"], "text": "ấn Hình Tướng - hiển đạt uy danh", "when": "in(Quốc Ấn) & meet(Thiên Hình, Tướng Quân)", "tone": "cat", "review": "Tướng hiểu là Tướng Quân (bộ Binh Hình Tướng Ấn), như ở cung Mệnh; Tướng Quân luôn hội Quốc Ấn" },
+    { "id": "quoc_an.1811.1", "para": 1811, "palaces": ["Quan Lộc"], "text": "Có ấn ngộ Hồng Hỷ chiếu - có danh giá", "when": "in(Quốc Ấn) & meet(Hồng Loan, Thiên Hỷ/Hỷ Thần)", "tone": "cat", "review": "Hồng Loan và Thiên Hỷ luôn xung chiếu nhau nên không thể cùng chiếu từ cung khác về; hiểu là hội Hồng Hỷ (một sao trong cung, sao kia xung chiếu); Hỷ Thần không bao giờ hội Quốc Ấn" },
+    { "id": "quoc_an.1811.2", "para": 1811, "palaces": ["Hạn"], "text": "hạn gặp = có quan hỷ.", "ctx": "ấn ngộ Hồng Hỷ", "when": "meet(Quốc Ấn, Hồng Loan, Thiên Hỷ/Hỷ Thần)", "tone": "cat" },
+    { "id": "quoc_an.1812.1", "para": 1812, "palaces": ["Phúc Đức"], "text": "Quốc ấn - phát quý, vinh hiển.", "when": "in(Quốc Ấn)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 1800, "kind": "meta" }
+  ]
+}

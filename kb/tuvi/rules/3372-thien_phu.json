@@ -1,0 +1,976 @@
+{
+ "entry": 3372,
+ "star": "thien_phu",
+ "rules": [
+  {
+   "id": "thien_phu.3376.1",
+   "para": 3376,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tính cách: trong trắng, phúc hậu, thông minh, tiết hạnh. Chủ tài bạch.",
+   "when": "in(Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3377.1",
+   "para": 3377,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Thủ Thân Mệnh là người mặt hơi vuông, sắc hồng da trắng, răng trắng, tâm tính ôn hoà, thuần nhã, ngay thẳng, học rộng tài cao, nhiều cơ mưu giải được nguy biến. ( nên có cách: Kim ô viên mãn, ngọc thố thanh kỳ )",
+   "ctx": "Thiên Phủ",
+   "when": "in(Thiên Phủ)",
+   "tone": "cat",
+   "review": "phần trong ngoặc là lời bàn thêm (Kim ô = Thái Dương, Ngọc thố = Thái Âm, nên sáng sủa), không đưa vào điều kiện"
+  },
+  {
+   "id": "thien_phu.3378.1",
+   "para": 3378,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Miếu địa ở Tuất, gặp được Tả Phụ đồng cung là thượng cách, là gấm thêm hoa",
+   "ctx": "Thiên Phủ",
+   "when": "in(Thiên Phủ, Tả Phù) & at(Tuất)",
+   "tone": "cat",
+   "review": "Tả Phụ hiểu là Tả Phù; bảng của bà ghi Phủ ở Tuất là đắc địa, nên dùng vị trí Tuất"
+  },
+  {
+   "id": "thien_phu.3378.2",
+   "para": 3378,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "là tài tinh, cùng với Lộc Tồn thì giàu có cự vạn, vàng chôn ngọc cất.",
+   "ctx": "Thiên Phủ",
+   "when": "in(Thiên Phủ, Lộc Tồn)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3379.1",
+   "para": 3379,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Nếu có Dương Đà Hoả Linh hội là người hay nói dối, gian trá, phải lao khổ",
+   "ctx": "Thiên Phủ",
+   "when": "in(Thiên Phủ) & meet(Tứ Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3379.2",
+   "para": 3379,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "gặp Không Kiếp đồng viên thì không tốt ( Tài tinh gặp Không thì nguy ), chỉ nên tu hành.",
+   "ctx": "Thiên Phủ",
+   "when": "in(Thiên Phủ) & meet(Không Kiếp)",
+   "tone": "hung",
+   "review": "«đồng viên» hiểu là cùng hội đủ cả Không lẫn Kiếp (nếu hiểu là cùng ở một cung với Phủ thì chỉ có ở Tỵ Hợi)"
+  },
+  {
+   "id": "thien_phu.3380.1",
+   "para": 3380,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Nữ gặp thì thanh bạch, khéo léo, thông minh, kiều diễm, vượng phu ích tử",
+   "ctx": "Thiên Phủ",
+   "when": "female() & in(Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3380.2",
+   "para": 3380,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "gặp Tử Vi Tả Hữu đồng viên thì cực mỹ, là mệnh phụ.",
+   "ctx": "Nữ Mệnh có Thiên Phủ",
+   "when": "female() & in(Thiên Phủ) & meet(Tử Vi, Tả Hữu)",
+   "tone": "cat",
+   "review": "Tử Phủ chỉ đồng cung ở Dần Thân còn Tả Hữu chỉ đồng cung ở Sửu Mùi, nên «đồng viên» hiểu là cùng hội về cung Mệnh"
+  },
+  {
+   "id": "thien_phu.3380.3",
+   "para": 3380,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Nếu gặp Dương Đà Hoả Linh là người bồng bột, nông nổi, phạm lỗi lầm, khắc lục thân, khó nuôi con, tu hành thì tốt.",
+   "ctx": "Nữ Mệnh có Thiên Phủ",
+   "when": "female() & in(Thiên Phủ) & meet(Tứ Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3381.1",
+   "para": 3381,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Phủ đắc địa - trung hậu, cẩn thận, đời sống êm đềm, không lo tai hoạ",
+   "when": "in(Thiên Phủ) & bright(Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3381.2",
+   "para": 3381,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "hãm địa - thường, nhu nhược.",
+   "ctx": "Phủ",
+   "when": "in(Thiên Phủ) & dim(Thiên Phủ)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3382.1",
+   "para": 3382,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Phủ cư Tỵ có Đà Tuế ( Thân Mệnh ) - điêu toa, ăn không nói có.",
+   "when": "in(Thiên Phủ) & at(Tỵ) & meet(Đà La, Thái Tuế)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3383.1",
+   "para": 3383,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Phủ gặp Vũ Đồng Đào Lộc - đại phú",
+   "when": null,
+   "tone": "cat",
+   "review": "theo cách an sao Thiên Đồng không bao giờ đồng cung hay hội chiếu Thiên Phủ, nên không viết được điều kiện; nếu «Đồng» chỉ là chữ «đồng» (cùng) thì điều kiện là Phủ gặp Vũ Khúc, Đào Hoa, Lộc — cần xem lại"
+  },
+  {
+   "id": "thien_phu.3383.2",
+   "para": 3383,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "gặp Không Kiếp - cơ nghiệp tan tành hết, tính thâm trầm.",
+   "ctx": "Phủ",
+   "when": "in(Thiên Phủ) & meet(Không Kiếp)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3384.1",
+   "para": 3384,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Tướng Phủ Thìn Tuất phùng Suy - rất khôn ngoan.",
+   "when": "in(Thiên Phủ/Thiên Tướng) & meet(Thiên Phủ, Thiên Tướng, Suy) & at(Thìn, Tuất)",
+   "tone": "cat",
+   "review": "không rõ sao nào ở Thìn Tuất: hiểu là Phủ hoặc Tướng thủ Mệnh ở Thìn Tuất (Phủ Tướng luôn tam hợp nhau), có sao Suy hội"
+  },
+  {
+   "id": "thien_phu.3385.1",
+   "para": 3385,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Phủ cư Mệnh Thân tại Tuất, vô sát ( Phủ Tướng triều viên ) - vô hung.",
+   "when": "in(Thiên Phủ) & at(Tuất) & !meet(Sát tinh)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3386.1",
+   "para": 3386,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Phủ Vũ thủ chiếu - tích ngọc đôi kim, quý hiển.",
+   "when": "meet(Thiên Phủ, Vũ Khúc)",
+   "tone": "cat",
+   "review": "«thủ chiếu» hiểu là Phủ Vũ ở Mệnh hoặc chiếu về Mệnh (đều ở tam phương tứ chính)"
+  },
+  {
+   "id": "thien_phu.3387.1",
+   "para": 3387,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Phủ Tướng - làm quan",
+   "when": "in(Thiên Phủ) & meet(Thiên Tướng)",
+   "tone": "cat",
+   "review": "Thiên Tướng luôn tam hợp Thiên Phủ nên điều kiện đúng mỗi khi Phủ thủ Mệnh"
+  },
+  {
+   "id": "thien_phu.3387.2",
+   "para": 3387,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "ngộ Tuần Triệt - đi tu làm nên.",
+   "ctx": "Phủ Tướng",
+   "when": "in(Thiên Phủ) & meet(Thiên Tướng, Tuần/Triệt)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_phu.3388.1",
+   "para": 3388,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Phủ Tướng lai triều Nữ Mệnh - phu hiền tử quý.",
+   "when": "female() & aim(Thiên Phủ, Thiên Tướng)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3389.1",
+   "para": 3389,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Phủ Tướng Lộc - làm quan, thăng quan tiến chức.",
+   "when": "in(Thiên Phủ) & meet(Thiên Tướng, Lộc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3390.1",
+   "para": 3390,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Phủ Mệnh Thân giáp Khúc Sương Tả Hữu hay Khúc Sương Lộc Quyền - có sự nghiệp lớn, đại phú.",
+   "when": null,
+   "tone": "cat",
+   "review": "Xương Khúc chỉ giáp được cung Sửu Mùi, và khi đó Mệnh Thân không bao giờ đồng thời được Tả Hữu giáp hay Lộc Quyền giáp (đã thử mọi lá số), nên không viết được điều kiện; nếu hiểu là giáp Xương Khúc, giáp Tả Hữu hoặc giáp Lộc Quyền riêng từng bộ thì đều có thể xảy ra — cần xem lại"
+  },
+  {
+   "id": "thien_phu.3391.1",
+   "para": 3391,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Có Phủ Tả Hữu Khúc Sương Lộc Tồn Long Tam Hoá - anh chị em đông, khá giả, nhiều người giúp đỡ mình.",
+   "when": null,
+   "tone": "cat",
+   "review": "theo bảng Tứ Hoá của bà, Thiên Phủ không bao giờ hội đủ cả Hoá Lộc, Hoá Quyền, Hoá Khoa (Tam Hoá), nên không viết được điều kiện; có thể bà liệt kê các sao tốt, có sao nào cũng tốt — cần xem lại"
+  },
+  {
+   "id": "thien_phu.3392.1",
+   "para": 3392,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Phủ - có 5 anh em",
+   "when": "in(Thiên Phủ)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_phu.3392.2",
+   "para": 3392,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "gia Dương Đà Hoả Linh Không Kiếp - còn 2.",
+   "ctx": "Phủ",
+   "when": "in(Thiên Phủ) & meet(Lục Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3393.1",
+   "para": 3393,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Tử Phủ - 3 người",
+   "when": "in(Tử Vi, Thiên Phủ)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_phu.3394.1",
+   "para": 3394,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Hội Khúc Sương Tả Hữu - 6,7 người.",
+   "ctx": "Phủ",
+   "when": "in(Thiên Phủ) & meet(Xương Khúc, Tả Hữu)",
+   "tone": "cat",
+   "review": "hiểu là Phủ nói chung hội Xương Khúc Tả Hữu (Tử Phủ hay Phủ Liêm ở cung Huynh không bao giờ hội đủ bốn sao này, nên không thể là nối tiếp dòng «Tử Phủ» ở trên)"
+  },
+  {
+   "id": "thien_phu.3395.1",
+   "para": 3395,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Phủ Vũ - 3 người, bất hoà.",
+   "when": "in(Thiên Phủ, Vũ Khúc)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3396.1",
+   "para": 3396,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Phủ Liêm - 3 người",
+   "when": "in(Thiên Phủ, Liêm Trinh)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_phu.3396.2",
+   "para": 3396,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "hội Khúc Sương Tả Hữu - chỉ 3 người.",
+   "ctx": "Phủ Liêm",
+   "when": null,
+   "tone": "trung",
+   "review": "Phủ Liêm ở cung Huynh không bao giờ hội đủ cả Xương Khúc lẫn Tả Hữu (đã thử mọi lá số), nên không viết được điều kiện; nếu hiểu là hội Xương Khúc hoặc hội Tả Hữu thì có thể xảy ra — cần xem lại"
+  },
+  {
+   "id": "thien_phu.3397.1",
+   "para": 3397,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "Phủ - vợ chồng hoà hợp",
+   "when": "in(Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3397.2",
+   "para": 3397,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "trai lấy vợ đẹp, hiền",
+   "ctx": "Phủ",
+   "when": "male() & in(Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3397.3",
+   "para": 3397,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "gái lấy chồng đứng tuổi nhưng quý hiển",
+   "ctx": "Phủ",
+   "when": "female() & in(Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3397.4",
+   "para": 3397,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "gia Dương Đà Hoả Linh Không Kiếp - nếu tảo hôn sẽ bị hình khắc, trì hôn sẽ bách niên giai lão.",
+   "ctx": "Phủ",
+   "when": "in(Thiên Phủ) & meet(Lục Sát)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_phu.3398.1",
+   "para": 3398,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "Tử Phủ - lấy người tốt đẹp, danh giá, hoà thuận \" Đáo lão vinh xương\"",
+   "when": "in(Tử Vi, Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3399.1",
+   "para": 3399,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "Phủ Tướng - cưới hỏi linh đình.",
+   "when": "in(Thiên Phủ) & meet(Thiên Tướng)",
+   "tone": "cat",
+   "review": "Thiên Tướng luôn tam hợp Thiên Phủ nên điều kiện đúng mỗi khi Phủ ở cung Thê"
+  },
+  {
+   "id": "thien_phu.3400.1",
+   "para": 3400,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "Phủ Vũ - có trắc trở, chậm trễ hôn sự thì sau vợ chồng mới bền.",
+   "when": "in(Thiên Phủ, Vũ Khúc)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_phu.3401.1",
+   "para": 3401,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Tử Phủ Vượng Đồng Tả Hữu - con đông mà khá.",
+   "when": null,
+   "tone": "cat",
+   "review": "theo cách an sao Thiên Đồng không bao giờ đồng cung hay hội chiếu Tử Phủ (Đế Vượng cũng không bao giờ ở Dần Thân nơi Tử Phủ đồng cung), nên không viết được điều kiện; nếu bỏ Đồng thì là Tử Phủ hội Đế Vượng và Tả Hữu — cần xem lại"
+  },
+  {
+   "id": "thien_phu.3402.1",
+   "para": 3402,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Tử Phủ Khôi Việt - có quý tử",
+   "when": "in(Tử Vi, Thiên Phủ) & meet(Khôi Việt)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3402.2",
+   "para": 3402,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "đơn thủ tại Tỵ Hợi - có 5 con, có 1 quý tử",
+   "ctx": "Phủ",
+   "when": "alone(Thiên Phủ) & at(Tỵ, Hợi)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3402.3",
+   "para": 3402,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "tại Sửu Mùi Mão Dậu - có 3 người.",
+   "ctx": "Phủ đơn thủ",
+   "when": "alone(Thiên Phủ) & at(Sửu, Mùi, Mão, Dậu)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_phu.3403.1",
+   "para": 3403,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Phủ cùng Tử Vi - có 4,5 con, khá giả.",
+   "when": "in(Thiên Phủ, Tử Vi)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3404.1",
+   "para": 3404,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Phủ Vũ - có 2 con, quý hiển.",
+   "when": "in(Thiên Phủ, Vũ Khúc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3404.2",
+   "para": 3404,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Phủ Liêm - 3 người",
+   "when": "in(Thiên Phủ, Liêm Trinh)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_phu.3405.1",
+   "para": 3405,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Phủ ngộ Dương Đà Hoả Linh Không Kiếp - chỉ có 2, 3 người.",
+   "when": "in(Thiên Phủ) & meet(Lục Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3406.1",
+   "para": 3406,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "Tử Phủ đồng cung = Tử Phủ Vũ Lộc - đại phú, giữ được bền chặt.",
+   "when": "in(Tử Vi, Thiên Phủ) | (in(Thiên Phủ) & meet(Tử Vi, Vũ Khúc, Lộc))",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3407.1",
+   "para": 3407,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "Phủ - tài bạch phong thịnh",
+   "when": "in(Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3407.2",
+   "para": 3407,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "gặp Dương Đà Hoả Linh Không Kiếp - khi thành khi bại.",
+   "ctx": "Phủ",
+   "when": "in(Thiên Phủ) & meet(Lục Sát)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_phu.3408.1",
+   "para": 3408,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "Phủ Vũ Kiếp = Phủ Kỵ Không - hao tán.",
+   "when": "(in(Thiên Phủ, Vũ Khúc) & meet(Địa Kiếp)) | (in(Thiên Phủ) & meet(Hóa Kỵ, Địa Không))",
+   "tone": "hung",
+   "review": "Không hiểu là Địa Không (đối với Kiếp ở vế trước)"
+  },
+  {
+   "id": "thien_phu.3409.1",
+   "para": 3409,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "Phủ ở cung có Tam Không - tiền tài suy kém, không giữ được tổ nghiệp.",
+   "when": "in(Thiên Phủ, Tam Không)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3410.1",
+   "para": 3410,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "Phủ Hình - hao tốn của cải.",
+   "when": "in(Thiên Phủ) & meet(Thiên Hình)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3411.1",
+   "para": 3411,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "Phủ Liêm gia Cát tinh - giàu có xa hoa",
+   "when": "in(Thiên Phủ, Liêm Trinh) & meet(Cát tinh)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3411.2",
+   "para": 3411,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "không gặp Cát tinh cũng khá, làm nên.",
+   "ctx": "Phủ Liêm",
+   "when": "in(Thiên Phủ, Liêm Trinh) & !meet(Cát tinh)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3412.1",
+   "para": 3412,
+   "palaces": [
+    "Tật Ách"
+   ],
+   "text": "Phủ - ít tai ách, nếu có sẽ gặp người cứu.",
+   "when": "in(Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3413.1",
+   "para": 3413,
+   "palaces": [
+    "Tật Ách"
+   ],
+   "text": "Tử Phủ Tả Hữu Lộc Tồn hay Hoá Lộc - ốm gặp thuốc, nạn có người cứu.",
+   "when": "in(Tử Vi, Thiên Phủ) & meet(Tả Hữu, Lộc Tồn/Hóa Lộc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3414.1",
+   "para": 3414,
+   "palaces": [
+    "Tật Ách"
+   ],
+   "text": "Tử Phủ - ít tai ách",
+   "when": "in(Tử Vi, Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3414.2",
+   "para": 3414,
+   "palaces": [
+    "Tật Ách"
+   ],
+   "text": "gia Dương Đà Hoả Linh Không Kiếp - hay mắc chứng phong tật.",
+   "ctx": "Tử Phủ",
+   "when": "in(Tử Vi, Thiên Phủ) & meet(Lục Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3414.3",
+   "para": 3414,
+   "palaces": [
+    "Tật Ách"
+   ],
+   "text": "Phủ Vũ - ít tai ách.",
+   "when": "in(Thiên Phủ, Vũ Khúc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3415.1",
+   "para": 3415,
+   "palaces": [
+    "Thiên Di"
+   ],
+   "text": "Phủ - xuất ngoại gặp quý nhân phù trợ",
+   "when": "in(Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3416.1",
+   "para": 3416,
+   "palaces": [
+    "Thiên Di"
+   ],
+   "text": "Phủ Không - tài suy, không bền.",
+   "when": "in(Thiên Phủ) & meet(Địa Không)",
+   "tone": "hung",
+   "review": "Không hiểu là Địa Không (như «Tài tinh gặp Không thì nguy» ở đầu mục); cũng có thể là Tuần Triệt hay Thiên Không"
+  },
+  {
+   "id": "thien_phu.3417.1",
+   "para": 3417,
+   "palaces": [
+    "Thiên Di"
+   ],
+   "text": "Phủ Tử - ra vào được hanh thông thịnh đạt, xuất ngoại phát phúc, có quý nhân giúp",
+   "when": "in(Thiên Phủ, Tử Vi)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3417.2",
+   "para": 3417,
+   "palaces": [
+    "Thiên Di"
+   ],
+   "text": "gia Khoa Quyền Tả Hữu - được trọng dụng.",
+   "ctx": "Phủ Tử",
+   "when": "in(Thiên Phủ, Tử Vi) & meet(Hóa Khoa, Hóa Quyền, Tả Hữu)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3418.1",
+   "para": 3418,
+   "palaces": [
+    "Thiên Di"
+   ],
+   "text": "Phủ Vũ - lập nghiệp nơi thị tứ mới tụ, là thương gia cự phú.",
+   "when": "in(Thiên Phủ, Vũ Khúc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3419.1",
+   "para": 3419,
+   "palaces": [
+    "Thiên Di"
+   ],
+   "text": "Phủ Liêm - thành đại thương gia nơi đô hội.",
+   "when": "in(Thiên Phủ, Liêm Trinh)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3420.1",
+   "para": 3420,
+   "palaces": [
+    "Thiên Di"
+   ],
+   "text": "Lạc Không Sứ - tài suy",
+   "ctx": "Phủ",
+   "when": null,
+   "tone": "hung",
+   "review": "theo cách an sao Thiên Sứ luôn ở cung Tật Ách (kề cung Di), không bao giờ ở hay hội chiếu cung Thiên Di, nên không viết được điều kiện; có thể bà muốn nói Phủ lạc vào Không vong (Tuần Triệt) hay Địa Không — cần xem lại"
+  },
+  {
+   "id": "thien_phu.3421.1",
+   "para": 3421,
+   "palaces": [
+    "Nô Bộc"
+   ],
+   "text": "Tử Phủ, Phủ Vũ, Phủ Liêm - nhiều gia nhân, bạn bè tốt",
+   "when": "in(Thiên Phủ, Tử Vi/Vũ Khúc/Liêm Trinh)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3421.2",
+   "para": 3421,
+   "palaces": [
+    "Nô Bộc"
+   ],
+   "text": "gia Dương Đà Hoả Linh Không Kiếp - hay phản, bỏ chủ.",
+   "ctx": "Tử Phủ, Phủ Vũ, Phủ Liêm",
+   "when": "in(Thiên Phủ, Tử Vi/Vũ Khúc/Liêm Trinh) & meet(Lục Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3422.1",
+   "para": 3422,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "Phủ miếu - văn võ quyền quý.",
+   "when": "in(Thiên Phủ) & bright(Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3423.1",
+   "para": 3423,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "Phủ Tử, Phủ Vũ, Phủ Liêm, Phủ Tướng gia Tam Hoá - làm quan văn phát, vinh hiển quyền quý; võ nghiệp cũng hiển đạt",
+   "when": null,
+   "tone": "cat",
+   "review": "theo bảng Tứ Hoá của bà, Thiên Phủ không bao giờ hội đủ cả Hoá Lộc, Hoá Quyền, Hoá Khoa (Tam Hoá), nên không viết được điều kiện — cần xem lại"
+  },
+  {
+   "id": "thien_phu.3423.2",
+   "para": 3423,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "gia Dương Đà Hoả Linh Không Kiếp - chỉ bình thường.",
+   "ctx": "Phủ Tử, Phủ Vũ, Phủ Liêm, Phủ Tướng",
+   "when": "in(Thiên Phủ) & meet(Lục Sát)",
+   "tone": "trung",
+   "review": "không buộc có Tam Hoá ở vế trước (Phủ không bao giờ hội đủ Tam Hoá); Phủ Tướng luôn tam hợp nên điều kiện là Phủ ở cung Quan gặp sát tinh"
+  },
+  {
+   "id": "thien_phu.3424.1",
+   "para": 3424,
+   "palaces": [
+    "Điền Trạch"
+   ],
+   "text": "Phủ, Tử Phủ, Phủ Vũ, Phủ Liêm - nhà cửa ruộng vườn nhiều, giữ được bền và mở mang thêm",
+   "when": "in(Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3424.2",
+   "para": 3424,
+   "palaces": [
+    "Điền Trạch"
+   ],
+   "text": "gia Dương Đà Hoả Linh Không Kiếp- rất ít hoặc lúc có lúc mất.",
+   "ctx": "Phủ",
+   "when": "in(Thiên Phủ) & meet(Lục Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3425.1",
+   "para": 3425,
+   "palaces": [
+    "Điền Trạch"
+   ],
+   "text": "Phủ Long Lộc Tồn - nhiều ruộng.",
+   "when": "in(Thiên Phủ) & meet(Long Trì, Lộc Tồn)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3425.2",
+   "para": 3425,
+   "palaces": [
+    "Điền Trạch"
+   ],
+   "text": "Phủ Vũ Kiếp - hao tán.",
+   "when": "in(Thiên Phủ, Vũ Khúc) & meet(Địa Kiếp)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3426.1",
+   "para": 3426,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Thiên Phủ là Thổ tinh, Tổ sơn đại địa, linh khí ở hữu đến. Được phát phúc trường cửu",
+   "when": "in(Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3426.2",
+   "para": 3426,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "nếu bị Tuần Triệt Không Kiếp là trưởng bại, thứ thành, tha hương bôn tẩu, tuy phát nhưng không lâu, địa khí đã kiệt.",
+   "ctx": "Thiên Phủ ở cung Phúc",
+   "when": "in(Thiên Phủ) & meet(Tuần/Triệt/Địa Không/Địa Kiếp)",
+   "tone": "hung",
+   "review": "hiểu là gặp một trong các sao Tuần, Triệt, Không, Kiếp"
+  },
+  {
+   "id": "thien_phu.3427.1",
+   "para": 3427,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Thiên Phủ - chỉ ngôi mộ ngũ đại ngoại, được yên tĩnh hưởng phúc.",
+   "when": "in(Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3427.2",
+   "para": 3427,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Phủ đơn thủ Tý Hợi cung - chủ phúc thọ, họ hàng cát vượng",
+   "when": "alone(Thiên Phủ) & at(Tý, Hợi)",
+   "tone": "cat",
+   "review": "Phủ ở Tý luôn đồng cung Vũ Khúc nên không đơn thủ được; điều kiện chỉ đúng ở Hợi (có thể bà muốn viết Tỵ Hợi như ở cung Tử)"
+  },
+  {
+   "id": "thien_phu.3427.3",
+   "para": 3427,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "tại Sửu Mùi Mão Dậu - chủ phúc lộc kém dồi dào, nếu tha hương lập nghiệp sẽ an thân.",
+   "ctx": "Phủ đơn thủ",
+   "when": "alone(Thiên Phủ) & at(Sửu, Mùi, Mão, Dậu)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_phu.3428.1",
+   "para": 3428,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Phủ cùng Tử Vi đồng cung - chủ hưởng phúc lộc thọ, vui sướng nhàn hạ, không lo hoạn nạn, họ hàng phú quý hiển đạt.",
+   "when": "in(Thiên Phủ, Tử Vi)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3428.2",
+   "para": 3428,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Phủ Vũ = chủ hưởng phúc đức, giàu có an hưởng hết đời, họ hàng cũng khá giả ( tuổi nhỏ cực khổ cay đắng, trung vận ra khá ).",
+   "when": "in(Thiên Phủ, Vũ Khúc)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_phu.3428.3",
+   "para": 3428,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Phủ Liêm - thân thì yên mà tâm thì hoang mang.",
+   "when": "in(Thiên Phủ, Liêm Trinh)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_phu.3428.4",
+   "para": 3428,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Gia Dương Đà Hoả Linh Không Kiếp Hao Kỵ thì lao khổ.",
+   "ctx": "Phủ",
+   "when": "in(Thiên Phủ) & meet(Lục Sát/Đại Hao/Tiểu Hao/Hóa Kỵ)",
+   "tone": "hung",
+   "review": "hiểu là nói chung cho Phủ ở cung Phúc (cũng có thể chỉ cho Phủ Liêm ở câu trước), gặp một trong các sao ấy"
+  },
+  {
+   "id": "thien_phu.3428.5",
+   "para": 3428,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Tử Phủ Đồng Lương - thọ > 80 tuổi.",
+   "when": null,
+   "tone": "cat",
+   "review": "theo cách an sao Thiên Đồng, Thiên Lương không bao giờ đồng cung hay hội chiếu Tử Phủ, nên không viết được điều kiện; có thể bà muốn nói Tử Phủ hoặc Đồng Lương (hai bộ đều chỉ đồng cung ở Dần Thân) — cần xem lại"
+  },
+  {
+   "id": "thien_phu.3429.1",
+   "para": 3429,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Về mồ mả, có Tử Phủ chỉ ngôi mả tổ.",
+   "when": "in(Tử Vi, Thiên Phủ)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_phu.3429.2",
+   "para": 3429,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Tử Phủ ngộ Triệt - mả chôn đất hoang.",
+   "when": "in(Tử Vi, Thiên Phủ) & meet(Triệt)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3430.1",
+   "para": 3430,
+   "palaces": [
+    "Phụ Mẫu"
+   ],
+   "text": "Phủ - cha mẹ giàu sang, hưởng phúc của tổ tiên.",
+   "when": "in(Thiên Phủ)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3430.2",
+   "para": 3430,
+   "palaces": [
+    "Phụ Mẫu"
+   ],
+   "text": "Tử Phủ, Phủ Vũ - cha mẹ con cái điền viên",
+   "when": "in(Thiên Phủ, Tử Vi/Vũ Khúc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3430.3",
+   "para": 3430,
+   "palaces": [
+    "Phụ Mẫu"
+   ],
+   "text": "gia Dương Đà Hoả Linh Không Kiếp - chu thương phụ mẫu (hại tới cha mẹ )",
+   "ctx": "Phủ",
+   "when": "in(Thiên Phủ) & meet(Lục Sát)",
+   "tone": "hung"
+  }
+ ],
+ "skip": [
+  {
+   "para": 3373,
+   "kind": "meta"
+  },
+  {
+   "para": 3374,
+   "kind": "meta"
+  },
+  {
+   "para": 3375,
+   "kind": "meta"
+  }
+ ]
+}

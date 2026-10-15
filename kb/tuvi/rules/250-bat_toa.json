@@ -1,0 +1,24 @@
+{
+  "entry": 250,
+  "star": "bat_toa",
+  "rules": [
+    { "id": "bat_toa.253.1", "para": 253, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: Đài các, lười biếng, không hoạt động, chủ sự vinh hiển, thanh nhàn.", "when": "in(Bát Tọa)", "tone": "mixed" },
+    { "id": "bat_toa.255.1", "para": 255, "palaces": ["Mệnh", "Thân"], "text": "nên cư Mộ địa là tài kiêm văn võ.", "ctx": "Bát toạ", "when": "in(Bát Tọa) & at(Tứ Mộ)", "tone": "cat", "review": "Mộ địa hiểu là Tứ Mộ (Thìn Tuất Sửu Mùi); cũng có thể bà muốn nói cung có sao Mộ (mục Tam Thai: «Thai Toạ gia Mộ - văn võ toàn tài»)" },
+    { "id": "bat_toa.256.1", "para": 256, "palaces": ["Mệnh", "Thân"], "text": "Đi đôi với Tam Thai là 1 bộ ví như các Phủ Sở, nên rất hợp với bộ Thai Cáo.", "when": "in(Tam Thai/Bát Tọa) & meet(Thai Tọa, Thai Cáo)", "tone": "cat" },
+    { "id": "bat_toa.257.1", "para": 257, "palaces": ["Mệnh", "Thân"], "text": "Hội với Binh Tướng là thiên về võ nghiệp", "ctx": "Bát toạ", "when": "in(Bát Tọa) & meet(Phục Binh, Tướng Quân)", "tone": "trung", "review": "Binh Tướng hiểu là Phục Binh, Tướng Quân (như cách Binh Hình Tướng Ấn)" },
+    { "id": "bat_toa.259.1", "para": 259, "palaces": ["Mệnh"], "text": "Cư Mệnh là người có trán vuông, bích lập như bức tường dựng (= Tam thai )", "when": "in(Tam Thai)", "tone": "trung", "review": "bà ghi rõ trán vuông là do Tam Thai (= Tam thai), cằm là do Bát Toạ" },
+    { "id": "bat_toa.259.2", "para": 259, "palaces": ["Mệnh"], "text": "và cầm nở nang", "ctx": "Bát Toạ cư Mệnh", "when": "in(Bát Tọa)", "tone": "trung" },
+    { "id": "bat_toa.259.3", "para": 259, "palaces": ["Mệnh"], "text": "ở Tướng học, người có cằm rộng và địa các nở nang là người có nhiều nhà đất (=Bát toạ).", "when": "in(Bát Tọa)", "tone": "cat", "review": "câu tướng học; hiểu là Bát Toạ cư Mệnh thì có nhiều nhà đất" },
+    { "id": "bat_toa.260.1", "para": 260, "palaces": ["Mệnh"], "text": "có Toạ: vinh hiển.", "when": "in(Bát Tọa)", "tone": "cat" },
+    { "id": "bat_toa.261.1", "para": 261, "palaces": ["Mệnh"], "text": "Mệnh giáp Thai, Toạ: sớm có uy quyền, đài các.", "when": "flank(Tam Thai, Bát Tọa)", "tone": "cat" },
+    { "id": "bat_toa.262.1", "para": 262, "palaces": ["Quan Lộc"], "text": "có Toạ, Thái Tuế, Đào Hoa: làm nên.", "when": null, "tone": "cat", "review": "theo cách an sao Thái Tuế và Đào Hoa không bao giờ cùng ở hay cùng hội một cung (Đào Hoa luôn lệch lẻ so với Thái Tuế), nên không viết được điều kiện; cần xem lại" },
+    { "id": "bat_toa.263.1", "para": 263, "palaces": ["Phúc Đức"], "text": "Có Toạ Thai Mộ: thọ ( Mộ trung Thai Toạ)", "when": "in(Bát Tọa) & meet(Tam Thai, Mộ)", "tone": "cat", "review": "Thai đi với Toạ nên hiểu là Tam Thai; Mộ hiểu là sao Mộ (vòng Tràng Sinh); «Mộ trung Thai Toạ» có thể là Thai Toạ đồng cung với Mộ" },
+    { "id": "bat_toa.264.1", "para": 264, "palaces": ["Điền Trạch"], "text": "có Thai Toạ Long Phượng; có nhà cửa lớn", "when": "in(Tam Thai/Bát Tọa) & meet(Thai Tọa, Long Phượng)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 251, "kind": "meta" },
+    { "para": 252, "kind": "meta" },
+    { "para": 254, "kind": "theory" },
+    { "para": 258, "kind": "theory" }
+  ]
+}

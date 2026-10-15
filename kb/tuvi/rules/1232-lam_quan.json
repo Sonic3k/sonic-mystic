@@ -1,0 +1,21 @@
+{
+  "entry": 1232,
+  "star": "lam_quan",
+  "rules": [
+    { "id": "lam_quan.1234.1", "para": 1234, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: cần mẫn, tinh anh, đàng hoàng, chủ sự làm ăn.", "when": "in(Lâm Quan)", "tone": "cat" },
+    { "id": "lam_quan.1235.1", "para": 1235, "palaces": ["Mệnh"], "text": "Về cơ thể, Lâm Quan là cái cổ; thủ Mệnh là người cổ cao và to.", "when": "in(Lâm Quan)", "tone": "trung" },
+    { "id": "lam_quan.1236.1", "para": 1236, "palaces": ["Mệnh", "Thân"], "text": "Lâm Quan hội Lộc là hợp cách", "when": "in(Lâm Quan) & meet(Lộc)", "tone": "cat" },
+    { "id": "lam_quan.1236.2", "para": 1236, "palaces": ["Mệnh", "Thân"], "text": "hội Vũ Khúc là đệ nhất cách vì cùng hành Kim - gặp nhiều cơ hội may mắn; chủ tảo tuế đắc lộ, được xuất nhập nơi quyền quý, là tham mưu phò tá chủ.", "ctx": "Lâm Quan", "when": "in(Lâm Quan) & meet(Vũ Khúc)", "tone": "cat" },
+    { "id": "lam_quan.1237.1", "para": 1237, "palaces": ["Mệnh", "Thân"], "text": "Tối kỵ đồng cung với Hoả Linh là hãm phá, thường bị chảy máu cam, xuất huyết, đứt mạch máu hay đàm nhiệt.", "ctx": "Lâm Quan", "when": "in(Lâm Quan) & in(Hỏa Tinh/Linh Tinh)", "tone": "hung", "review": "Hoả Tinh và Linh Tinh không bao giờ cùng ở một cung; hiểu là Lâm Quan đồng cung với Hoả hay Linh" },
+    { "id": "lam_quan.1238.1", "para": 1238, "palaces": ["Mệnh", "Thân"], "text": "Đồng cung với Địa Kiếp là bị tràng nhạc nặng, bệnh yết hầu hay thịt thừa ở họng.", "ctx": "Lâm Quan", "when": "in(Lâm Quan, Địa Kiếp)", "tone": "hung" },
+    { "id": "lam_quan.1239.1", "para": 1239, "palaces": ["Mệnh", "Thân"], "text": "Lạc Hoả Linh thì vợ chồng xung khắc, không được yêu mến.", "ctx": "Lâm Quan", "when": "in(Lâm Quan) & meet(Hỏa Linh)", "tone": "hung", "review": "«Lạc Hoả Linh» hiểu là Lâm Quan gặp cả Hoả Linh (hội chiếu); cũng có thể là đồng cung với Hoả hay Linh như câu trên" },
+    { "id": "lam_quan.1240.1", "para": 1240, "palaces": ["Mệnh", "Thân"], "text": "Cư Thân Mệnh có Lâm Quan - thanh nhàn", "when": "in(Lâm Quan)", "tone": "cat" },
+    { "id": "lam_quan.1240.2", "para": 1240, "palaces": ["Mệnh", "Thân"], "text": "Lâm Mã - giàu lớn", "when": "in(Lâm Quan) & meet(Thiên Mã)", "tone": "cat" },
+    { "id": "lam_quan.1240.3", "para": 1240, "palaces": ["Mệnh", "Thân"], "text": "tính hay khoe khoang.", "ctx": "Cư Thân Mệnh có Lâm Quan", "when": "in(Lâm Quan)", "tone": "hung" },
+    { "id": "lam_quan.1241.1", "para": 1241, "palaces": ["Tật Ách"], "text": "Hội Địa Kiếp - bị tràng nhạc, yết hầu.", "ctx": "Lâm Quan", "when": "in(Lâm Quan) & meet(Địa Kiếp)", "tone": "hung" },
+    { "id": "lam_quan.1242.1", "para": 1242, "palaces": ["Tật Ách"], "text": "Lâm Quan hội Hoả Linh - các bệnh về máu huyết, xung huyết, đứt mạch máu, chảy máu cam hay đờm nhiệt.", "when": "in(Lâm Quan) & meet(Hỏa Linh)", "tone": "hung" }
+  ],
+  "skip": [
+    { "para": 1233, "kind": "meta" }
+  ]
+}

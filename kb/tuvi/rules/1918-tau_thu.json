@@ -1,0 +1,36 @@
+{
+  "entry": 1918,
+  "star": "tau_thu",
+  "rules": [
+    { "id": "tau_thu.1920.1", "para": 1920, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: thanh bạch, lanh lợi, thông minh, tính tình thay đổi. Chủ về văn thư, bằng sắc, ấn tín và các thư tịch.", "when": "in(Tấu Thư)", "tone": "cat" },
+    { "id": "tau_thu.1921.1", "para": 1921, "palaces": ["Mệnh", "Thân"], "text": "Hội với Hoá Kỵ ở Miếu vượng - chủ thông minh học vấn, là người làm việc ở bàn giấy, được nhiều bổng lộc.", "ctx": "Tấu Thư", "when": "in(Tấu Thư) & meet(Hóa Kỵ) & bright(Hóa Kỵ)", "tone": "cat", "review": "Miếu vượng hiểu là Hoá Kỵ ở cung miếu vượng (bảng của bà không ghi miếu vượng cho Tấu Thư)" },
+    { "id": "tau_thu.1922.1", "para": 1922, "palaces": ["Hạn"], "text": "Hội với Bạch Hổ Đường Phù, lưu nhị hạn gặp được thì cầu tài lộc công danh thi cử, cưới hỏi sẽ được đắc ý.", "ctx": "Tấu Thư", "when": "dai(meet(Tấu Thư, Bạch Hổ, Đường Phù)) & tieu(meet(Tấu Thư, Bạch Hổ, Đường Phù))", "tone": "cat" },
+    { "id": "tau_thu.1923.1", "para": 1923, "palaces": ["Mệnh", "Thân"], "text": "Hội với Vũ Hỷ Đào - ưa thích nghệ thuật, ca kỹ nổi tiếng.", "ctx": "Tấu Thư", "when": "in(Tấu Thư) & meet(Vũ Khúc, Thiên Hỷ/Hỷ Thần, Đào Hoa)", "tone": "cat" },
+    { "id": "tau_thu.1924.1", "para": 1924, "palaces": ["Mệnh"], "text": "Có Tấu Thư - có tài năng nhưng hay sinh khẩu thiệt", "when": "in(Tấu Thư)", "tone": "mixed" },
+    { "id": "tau_thu.1924.2", "para": 1924, "palaces": ["Hạn"], "text": "hạn gặp Tuế Tấu Phi - có chuyện kiện cáo.", "when": null, "tone": "hung", "review": "theo cách an sao Phi Liêm luôn ở cung liền Tấu Thư nên hai sao không bao giờ cùng hội một cung; có thể bà nói các sao lưu niên (lưu Thái Tuế…) mà máy chưa tính; không viết được điều kiện, cần xem lại" },
+    { "id": "tau_thu.1925.1", "para": 1925, "palaces": ["Mệnh"], "text": "Tấu Nhật Nguyệt - người thanh cao", "when": "in(Tấu Thư) & meet(Nhật Nguyệt)", "tone": "cat" },
+    { "id": "tau_thu.1925.2", "para": 1925, "palaces": ["Mệnh"], "text": "Nữ Mệnh có Tấu Thư Hoa Cái - là người thanh cao.", "when": "female() & in(Tấu Thư) & meet(Hoa Cái)", "tone": "cat" },
+    { "id": "tau_thu.1926.1", "para": 1926, "palaces": ["Mệnh"], "text": "Tấu Thiên Tướng - tha hương nghĩ làm sự kỳ dị.", "when": "in(Tấu Thư) & meet(Thiên Tướng)", "tone": "trung" },
+    { "id": "tau_thu.1927.1", "para": 1927, "palaces": ["Mệnh"], "text": "Tấu Thiên Tướng Thiên Quan - đi tu, làm thầy cúng, thầy phù thuỷ.", "when": "in(Tấu Thư) & meet(Thiên Tướng, Thiên Quan)", "tone": "trung" },
+    { "id": "tau_thu.1928.1", "para": 1928, "palaces": ["Mệnh"], "text": "Tấu Vũ Hỷ Hồng Đào - ca hát giỏi nơi quyền quý.", "when": "in(Tấu Thư) & meet(Vũ Khúc, Thiên Hỷ/Hỷ Thần, Hồng Đào)", "tone": "cat" },
+    { "id": "tau_thu.1929.1", "para": 1929, "palaces": ["Mệnh"], "text": "Tấu Vũ Diêu Hình = Tấu Vũ Hình Cơ - thợ mộc giỏi.", "when": "in(Tấu Thư) & (meet(Vũ Khúc, Thiên Diêu, Thiên Hình) | meet(Vũ Khúc, Thiên Hình, Thiên Cơ))", "tone": "trung", "review": "Vũ Khúc và Thiên Cơ luôn cách nhau 3 cung nên vế «Tấu Vũ Hình Cơ» không bao giờ có; chỉ vế đầu xảy ra được" },
+    { "id": "tau_thu.1930.1", "para": 1930, "palaces": ["Mệnh"], "text": "Tấu Vũ Hồng Đào - thợ may giỏi.", "when": "in(Tấu Thư) & meet(Vũ Khúc, Hồng Đào)", "tone": "trung" },
+    { "id": "tau_thu.1931.1", "para": 1931, "palaces": ["Tử Tức"], "text": "Có Tấu Quang - con thần giáng sinh.", "when": "in(Tấu Thư) & meet(Ân Quang)", "tone": "cat" },
+    { "id": "tau_thu.1932.1", "para": 1932, "palaces": ["Tử Tức"], "text": "Tấu Xương Khúc - con hay chữ.", "when": "in(Tấu Thư) & meet(Xương Khúc)", "tone": "cat" },
+    { "id": "tau_thu.1933.1", "para": 1933, "palaces": ["Quan Lộc"], "text": "Tướng Tấu nhị Phù, Mệnh có Tả Hữu - tăng ni.", "when": "in(Tấu Thư) & meet(Thiên Tướng, Quan Phù, Quan Phủ) & pal(Mệnh, in(Tả Phù/Hữu Bật) & meet(Tả Hữu))", "tone": "trung", "review": "Tướng hiểu là Thiên Tướng (Tướng Quân luôn ở cung liền Tấu Thư); nhị Phù hiểu là Quan Phù và Quan Phủ (Quan Phủ luôn xung chiếu Tấu Thư), như mục Quan Phù «Phù Tướng Tấu, Mệnh có Tả Hữu»; «Mệnh có Tả Hữu» hiểu là Tả hoặc Hữu ở Mệnh và hội đủ cả hai" },
+    { "id": "tau_thu.1934.1", "para": 1934, "palaces": ["Quan Lộc"], "text": "Tấu Diêu Cơ Vũ Hồng Đào - khôi hài, ca xướng.", "when": null, "tone": "trung", "review": "theo cách an sao Thiên Cơ và Vũ Khúc luôn cách nhau 3 cung nên không bao giờ cùng hội một cung, không viết được điều kiện; cần xem lại" },
+    { "id": "tau_thu.1935.1", "para": 1935, "palaces": ["Quan Lộc"], "text": "Tấu Ân Cơ Việt Quý Hồng - trai cận thần", "when": "male() & in(Tấu Thư) & meet(Ân Quang, Thiên Cơ, Thiên Việt, Thiên Quý, Hồng Loan)", "tone": "cat" },
+    { "id": "tau_thu.1935.2", "para": 1935, "palaces": ["Quan Lộc"], "text": "gái cung phi.", "ctx": "Tấu Ân Cơ Việt Quý Hồng", "when": "female() & in(Tấu Thư) & meet(Ân Quang, Thiên Cơ, Thiên Việt, Thiên Quý, Hồng Loan)", "tone": "cat" },
+    { "id": "tau_thu.1936.1", "para": 1936, "palaces": ["Quan Lộc"], "text": "Tấu Vũ Hình Cơ - thợ mộc giỏi.", "when": null, "tone": "trung", "review": "theo cách an sao Thiên Cơ và Vũ Khúc luôn cách nhau 3 cung nên không bao giờ cùng hội một cung, không viết được điều kiện (ở cung Mệnh bà ghi «Tấu Vũ Diêu Hình = Tấu Vũ Hình Cơ»); cần xem lại" },
+    { "id": "tau_thu.1937.1", "para": 1937, "palaces": ["Quan Lộc"], "text": "Tấu gặp Thiên Phủ Lộc Tồn Quan Phủ - làm về việc đơn từ phát tài.", "when": null, "tone": "cat", "review": "theo cách an sao Tấu Thư luôn cách Lộc Tồn 5 cung nên không bao giờ hội Lộc Tồn, không viết được điều kiện; cần xem lại" },
+    { "id": "tau_thu.1938.1", "para": 1938, "palaces": ["Điền Trạch"], "text": "Tấu Sương Khúc - tự tậu được nhà đất.", "when": "in(Tấu Thư) & meet(Xương Khúc)", "tone": "cat" },
+    { "id": "tau_thu.1939.1", "para": 1939, "palaces": ["Phúc Đức"], "text": "Tấu Thư là hình thần long đứng 1 mình.", "when": "in(Tấu Thư)", "tone": "trung" },
+    { "id": "tau_thu.1939.2", "para": 1939, "palaces": ["Phúc Đức"], "text": "Tấu Thư là Kim đới Thổ, gặp Khôi Việt Nhật Nguyệt là văn học thành tài", "when": "in(Tấu Thư) & meet(Khôi Việt, Nhật Nguyệt)", "tone": "cat" },
+    { "id": "tau_thu.1939.3", "para": 1939, "palaces": ["Phúc Đức"], "text": "nếu gặp Diêu Kỵ Thái Tuế là bại địa, người gặp phải những sao này hay sinh ra điên.", "ctx": "Tấu Thư", "when": "in(Tấu Thư) & meet(Thiên Diêu, Hóa Kỵ, Thái Tuế)", "tone": "hung", "review": "hiểu là gặp đủ Diêu, Kỵ, Thái Tuế; cũng có thể là gặp một trong các sao ấy" },
+    { "id": "tau_thu.1940.1", "para": 1940, "palaces": ["Phúc Đức"], "text": "Tấu Thư Miếu địa - có ngôi mả phát hình bút, phát văn.", "when": null, "tone": "cat", "review": "bảng của bà không ghi miếu vượng cho Tấu Thư nên không xét được «Miếu địa», không viết được điều kiện; cần xem lại" },
+    { "id": "tau_thu.1941.1", "para": 1941, "palaces": ["Phúc Đức"], "text": "Tấu Diêu - có ngôi mả bên ruộng úng thuỷ.", "when": "in(Tấu Thư) & meet(Thiên Diêu)", "tone": "hung" }
+  ],
+  "skip": [
+    { "para": 1919, "kind": "meta" }
+  ]
+}

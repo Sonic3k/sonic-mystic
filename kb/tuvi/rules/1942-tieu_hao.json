@@ -1,0 +1,15 @@
+{
+  "entry": 1942,
+  "star": "tieu_hao",
+  "rules": [
+    { "id": "tieu_hao.1945.1", "para": 1945, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: hoang phí. Chủ sự hao tán.", "when": "in(Tiểu Hao)", "tone": "hung" },
+    { "id": "tieu_hao.1946.1", "para": 1946, "palaces": ["Mệnh"], "text": "Đại Tiểu Hao lâm Mệnh là người bé nhỏ, mặt hóp.", "when": "in(Đại Hao/Tiểu Hao) & meet(Song Hao)", "tone": "trung", "review": "Đại Hao và Tiểu Hao luôn xung chiếu nhau nên hiểu là một trong hai sao ở Mệnh (sao kia xung chiếu)" },
+    { "id": "tieu_hao.1947.1", "para": 1947, "palaces": ["Mệnh", "Thân"], "text": "Mão Dậu nhị Hao - bất hao", "when": "in(Đại Hao/Tiểu Hao) & meet(Song Hao) & at(Mão, Dậu)", "tone": "cat" },
+    { "id": "tieu_hao.1947.2", "para": 1947, "palaces": ["Mệnh", "Thân"], "text": "tuổi Thân lông bông, làm nên phú quý.", "ctx": "Mão Dậu nhị Hao", "when": null, "tone": "mixed", "review": "theo cách an sao nhị Hao chỉ ở Mão Dậu với tuổi Đinh, Kỷ, Quý (năm âm), không bao giờ với tuổi Thân (năm dương, nhị Hao luôn ở Dần Thân Tỵ Hợi); không viết được điều kiện, cần xem lại" },
+    { "id": "tieu_hao.1948.1", "para": 1948, "palaces": ["Hạn"], "text": "Hạn có Hao đắc địa - hoạch tài.", "when": "(in(Tiểu Hao) & bright(Tiểu Hao)) | (in(Đại Hao) & bright(Đại Hao))", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 1943, "kind": "meta" },
+    { "para": 1944, "kind": "meta" }
+  ]
+}

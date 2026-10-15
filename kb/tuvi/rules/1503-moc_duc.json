@@ -1,0 +1,28 @@
+{
+  "entry": 1503,
+  "star": "moc_duc",
+  "rules": [
+    { "id": "moc_duc.1506.1", "para": 1506, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: sạch sẽ, ưa hào nhoáng, dâm dục. Chủ sự trang điểm, ưa làm đỏm, tắm gội, phong tình.", "when": "in(Mộc Dục)", "tone": "mixed" },
+    { "id": "moc_duc.1507.1", "para": 1507, "palaces": ["Mệnh", "Thân"], "text": "Hội với Đào tinh - con gái trong nhà dâm loạn.", "ctx": "Mộc Dục", "when": "in(Mộc Dục) & meet(Đào Hoa/Tham Lang)", "tone": "hung", "review": "Đào tinh hiểu là Đào Hoa hoặc Tham Lang (ở mục Nguyệt Đức bà ghi Tham Lang là Đào tinh)" },
+    { "id": "moc_duc.1508.1", "para": 1508, "palaces": ["Mệnh", "Thân"], "text": "Mộc Dục đồng cung với Văn Khúc là hợp cách - chức quyền tài lộc hanh thông.", "when": "in(Mộc Dục, Văn Khúc)", "tone": "cat" },
+    { "id": "moc_duc.1509.1", "para": 1509, "palaces": ["Mệnh", "Thân", "Điền Trạch", "Tài Bạch"], "text": "Cư Mệnh Thân Điền Tài là hợp cách.", "ctx": "Mộc Dục", "when": "in(Mộc Dục)", "tone": "cat" },
+    { "id": "moc_duc.1510.1", "para": 1510, "palaces": ["Phúc Đức", "Tử Tức"], "text": "Cư cung Phúc hay Tử, hội với Hỷ Thần ví như cái chậu tắm cho quý tử, sinh con thông minh, thần đồng cách.", "ctx": "Mộc Dục", "when": "in(Mộc Dục) & meet(Hỷ Thần)", "tone": "cat" },
+    { "id": "moc_duc.1511.1", "para": 1511, "palaces": ["Phu Thê"], "text": "Cư cung Phu Thê Mộc Dục rất kỵ Không Vong - trong gia đình đề phòng thuỷ tai, tự tử, đau mắt, đới tật.", "when": "in(Mộc Dục) & in(Tuần/Triệt)", "tone": "hung", "review": "Không Vong hiểu là Tuần hay Triệt đóng ngay cung Phu Thê có Mộc Dục" },
+    { "id": "moc_duc.1512.1", "para": 1512, "palaces": ["Mệnh"], "text": "có Mộc Dục đơn thủ - hao, thích nghề thợ rèn.", "when": "alone(Mộc Dục)", "tone": "mixed", "review": "«đơn thủ» hiểu là Mộc Dục ở Mệnh không có chính tinh nào" },
+    { "id": "moc_duc.1513.1", "para": 1513, "palaces": ["Mệnh"], "text": "Mộc Quyền Thiên Tài, Thiên Phúc - vinh hiển hơn người.", "when": "in(Mộc Dục) & meet(Hóa Quyền, Thiên Tài, Thiên Phúc)", "tone": "cat", "review": "Mộc hiểu là Mộc Dục, Quyền là Hoá Quyền; hiểu là gặp đủ các sao kể ra" },
+    { "id": "moc_duc.1514.1", "para": 1514, "palaces": ["Mệnh"], "text": "Mộc Cái - loạn dâm, làm đĩ.", "when": "in(Mộc Dục) & meet(Hoa Cái)", "tone": "hung" },
+    { "id": "moc_duc.1514.2", "para": 1514, "palaces": ["Mệnh"], "text": "Mộc Đào - dâm dục.", "when": "in(Mộc Dục) & meet(Đào Hoa)", "tone": "hung" },
+    { "id": "moc_duc.1514.3", "para": 1514, "palaces": ["Mệnh"], "text": "Mộc gặp Long Trì không được quý cách thì làm nghề sông biển.", "when": "in(Mộc Dục) & meet(Long Trì) & !meet(Quý tinh)", "tone": "trung", "review": "«không được quý cách» hiểu là Mệnh không hội quý tinh nào — chỉ là cách đo gần đúng" },
+    { "id": "moc_duc.1515.1", "para": 1515, "palaces": ["Phu Thê"], "text": "có Mộc Cái - loạn dâm.", "when": "in(Mộc Dục) & meet(Hoa Cái)", "tone": "hung" },
+    { "id": "moc_duc.1516.1", "para": 1516, "palaces": ["Tử Tức"], "text": "Mộc Dục - hao con ( mười phần còn 2 )", "when": "in(Mộc Dục)", "tone": "hung" },
+    { "id": "moc_duc.1517.1", "para": 1517, "palaces": ["Tật Ách"], "text": "Mộc Linh Hoả - bỏng nước, bỏng lửa.", "when": "in(Mộc Dục) & meet(Hỏa Linh)", "tone": "hung" },
+    { "id": "moc_duc.1518.1", "para": 1518, "palaces": ["Tật Ách"], "text": "Mộc Kình Hình Triệt - sét đánh.", "when": "in(Mộc Dục) & meet(Kình Dương, Thiên Hình) & in(Triệt)", "tone": "hung", "review": "Triệt hiểu là đóng ngay cung có Mộc Dục" },
+    { "id": "moc_duc.1519.1", "para": 1519, "palaces": ["Tật Ách"], "text": "Mộc hãm - tê thấp, không nên gần sông nước, ao giếng phòng chết đuối.", "when": "in(Mộc Dục) & !bright(Mộc Dục)", "tone": "hung", "review": "bảng của bà chỉ ghi Mộc Dục miếu ở Tý Ngọ, không ghi cung hãm; hiểu hãm là Mộc Dục ở ngoài Tý Ngọ" },
+    { "id": "moc_duc.1520.1", "para": 1520, "palaces": ["Phúc Đức"], "text": "Mộc Dục là đất tích tụ các thứ nước.", "when": "in(Mộc Dục)", "tone": "trung" },
+    { "id": "moc_duc.1521.1", "para": 1521, "palaces": ["Phúc Đức"], "text": "Mộc Long Trì - có ngôi mộ bên giếng.", "when": "in(Mộc Dục) & meet(Long Trì)", "tone": "trung" }
+  ],
+  "skip": [
+    { "para": 1504, "kind": "meta" },
+    { "para": 1505, "kind": "meta" }
+  ]
+}

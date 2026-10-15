@@ -1,0 +1,13 @@
+{
+  "entry": 3479,
+  "star": "thien_tru",
+  "rules": [
+    { "id": "thien_tru.3481.1", "para": 3481, "palaces": ["Tài Bạch"], "text": "Thiên Trù gặp Lộc ở cung Tài - tốt.", "when": "in(Thiên Trù) & meet(Lộc)", "tone": "cat" },
+    { "id": "thien_tru.3482.1", "para": 3482, "palaces": ["Điền Trạch", "Tài Bạch"], "text": "Cư Điền Tài - giữ của", "ctx": "Thiên Trù", "when": "in(Thiên Trù)", "tone": "cat" },
+    { "id": "thien_tru.3483.1", "para": 3483, "palaces": ["Hạn"], "text": "Hạn gặp Lực Sĩ Thiên Trù - được ăn uống no say", "when": "meet(Lực Sĩ, Thiên Trù)", "tone": "cat" },
+    { "id": "thien_tru.3483.2", "para": 3483, "palaces": ["Hạn"], "text": "gặp Tham Lang - ăn uống linh đình.", "ctx": "Hạn gặp Thiên Trù", "when": "meet(Thiên Trù, Tham Lang)", "tone": "cat", "review": "hiểu là hạn gặp Thiên Trù và Tham Lang (không buộc có Lực Sĩ như vế trước)" }
+  ],
+  "skip": [
+    { "para": 3480, "kind": "meta" }
+  ]
+}

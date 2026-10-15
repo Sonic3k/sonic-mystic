@@ -1,0 +1,1217 @@
+{
+ "entry": 3484,
+ "star": "thien_tuong",
+ "rules": [
+  {
+   "id": "thien_tuong.3488.1",
+   "para": 3488,
+   "palaces": [
+    "*"
+   ],
+   "text": "Tối kỵ Tuần Triệt",
+   "ctx": "Thiên Tướng",
+   "when": "in(Thiên Tướng) & meet(Tuần/Triệt)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3489.1",
+   "para": 3489,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tính cách: ngay thẳng, hiền lành, quả quyết, chu đáo, thiên tư, tài năng, uy nghi, nhàn hạ.",
+   "when": "in(Thiên Tướng)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3491.1",
+   "para": 3491,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Thủ Mệnh là người đứng đắn, trung thực, hay có lòng nhân từ, tướng mạo đôn hậu, ôn hoà, nói năng hoạt bát, không làm sự trái, không ưa hư ảo giả trá, có lòng trắc ẩn, không thích biến cải, ưa tửu sắc, y lộc đầy đủ.",
+   "ctx": "Thiên Tướng",
+   "when": "in(Thiên Tướng)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3492.1",
+   "para": 3492,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Miếu địa, cư Nữ Mệnh thì hình dung tuấn tú, vượng phu ích tử, nói năng ôn hoà hoạt bát linh lợi khéo léo, hay đoạt quyền chồng.",
+   "ctx": "Thiên Tướng",
+   "when": "female() & in(Thiên Tướng) & bright(Thiên Tướng)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_tuong.3493.1",
+   "para": 3493,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tướng Hồng là người mặt hoa da phấn",
+   "when": "in(Thiên Tướng) & meet(Hồng Loan)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3493.2",
+   "para": 3493,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "lấy được chồng quyền quý.",
+   "ctx": "Tướng Hồng",
+   "when": "female() & in(Thiên Tướng) & meet(Hồng Loan)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3494.1",
+   "para": 3494,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Gặp Sát Phá lại có Dương Đà Hoả Linh thì tối kỵ, ắt cô hình khắc hại, không có người thân thích, hạng nô tỳ, khắc phu hại tử.",
+   "ctx": "Thiên Tướng",
+   "when": null,
+   "tone": "hung",
+   "review": "theo cách an sao Thất Sát luôn cách Thiên Tướng hai cung nên không bao giờ hội Thiên Tướng (còn Phá Quân thì luôn xung chiếu Tướng), nên không viết được điều kiện; nếu hiểu Sát là sát tinh thì điều kiện thành Tướng gặp Tứ Sát, rất thường gặp — cần xem lại"
+  },
+  {
+   "id": "thien_tuong.3494.2",
+   "para": 3494,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tướng Hao - mặt hóp lại.",
+   "when": "in(Thiên Tướng) & meet(Đại Hao/Tiểu Hao)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3495.1",
+   "para": 3495,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Lạc Không vong Hoả Linh thì bị hình khắc, cô quả, càng về hậu vận càng xấu.",
+   "ctx": "Thiên Tướng",
+   "when": "in(Thiên Tướng, Tuần/Triệt) & meet(Hỏa Linh)",
+   "tone": "hung",
+   "review": "hiểu là Tướng lạc vào Không vong (Tuần hay Triệt ở cung) lại gặp Hoả Linh"
+  },
+  {
+   "id": "thien_tuong.3496.1",
+   "para": 3496,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Hãm địa là tăng đạo- chuân chuyên vất vả thì tốt",
+   "ctx": "Thiên Tướng",
+   "when": "in(Thiên Tướng) & dim(Thiên Tướng)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_tuong.3497.1",
+   "para": 3497,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Có Tướng cư Hợi thì tốt",
+   "when": "in(Thiên Tướng) & at(Hợi)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3498.1",
+   "para": 3498,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tại Sửu Mùi tuổi Canh Nhâm Tý Tỵ Ngọ - danh giá, thọ 69 tuổi",
+   "ctx": "Thiên Tướng",
+   "when": "in(Thiên Tướng) & at(Sửu, Mùi) & (stem(Canh, Nhâm) | branch(Tý, Tỵ, Ngọ))",
+   "tone": "cat",
+   "review": "hiểu là tuổi Canh, Nhâm hoặc tuổi Tý, Tỵ, Ngọ (can Canh Nhâm không đi với chi Tỵ nên không thể buộc cả can lẫn chi)"
+  },
+  {
+   "id": "thien_tuong.3498.2",
+   "para": 3498,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "tuổi Thuỷ Mộc - trung bình",
+   "ctx": "Tướng tại Sửu Mùi",
+   "when": "in(Thiên Tướng) & at(Sửu, Mùi) & menh(Thủy, Mộc)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3498.3",
+   "para": 3498,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "tuổi Kim - văn võ toàn tài.",
+   "ctx": "Tướng tại Sửu Mùi",
+   "when": "in(Thiên Tướng) & at(Sửu, Mùi) & menh(Kim)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3499.1",
+   "para": 3499,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Thủ Nữ Mệnh - cao số, trắc trở hôn sự.",
+   "ctx": "Thiên Tướng",
+   "when": "female() & in(Thiên Tướng)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3500.1",
+   "para": 3500,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tướng Hồng - nữ quý nhân hảo phối.",
+   "when": "female() & in(Thiên Tướng) & meet(Hồng Loan)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3501.1",
+   "para": 3501,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Vũ Tướng Dần Thân - đại phú.",
+   "when": "in(Thiên Tướng, Vũ Khúc) & at(Dần, Thân)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3502.1",
+   "para": 3502,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tướng Mã - phú quý.",
+   "when": "in(Thiên Tướng) & meet(Thiên Mã)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3503.1",
+   "para": 3503,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tướng Mã Cáo - có tướng lộc, bằng khen.",
+   "when": "in(Thiên Tướng) & meet(Thiên Mã, Phong Cáo)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3504.1",
+   "para": 3504,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tướng Phủ - làm quan.",
+   "when": "in(Thiên Tướng) & meet(Thiên Phủ)",
+   "tone": "cat",
+   "review": "Thiên Phủ luôn tam hợp Thiên Tướng nên điều kiện đúng mỗi khi Tướng thủ Mệnh Thân"
+  },
+  {
+   "id": "thien_tuong.3504.2",
+   "para": 3504,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tướng Cáo - làm to.",
+   "when": "in(Thiên Tướng) & meet(Phong Cáo)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3505.1",
+   "para": 3505,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tướng thủ Mệnh, Vũ Tướng giáp = Tướng ấn Linh Cáo - quý hiển, công hầu.",
+   "when": "in(Thiên Tướng) & meet(Quốc Ấn, Linh Tinh, Phong Cáo)",
+   "tone": "cat",
+   "review": "vế đầu «Tướng thủ Mệnh, Vũ Tướng giáp» không viết được (hai cung kề Thiên Tướng luôn là Cự Môn và Thiên Lương, Vũ Khúc không bao giờ ở cung kề Tướng); chỉ viết vế sau «Tướng ấn Linh Cáo»: ấn hiểu là Quốc Ấn, Linh là Linh Tinh, Cáo là Phong Cáo — cần xem lại"
+  },
+  {
+   "id": "thien_tuong.3506.1",
+   "para": 3506,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tử Phủ Vũ Tướng = Tướng Vi Âm Dương vượng = Tướng Vi Tả Hữu Văn Vũ Khoa Quyền = Tướng Phủ Quyền đới ấn - đại quý.",
+   "when": "in(Thiên Tướng) & (meet(Tử Vi, Thiên Phủ, Vũ Khúc) | (in(Tử Vi) & meet(Tả Hữu, Văn Xương/Văn Khúc, Vũ Khúc, Hóa Khoa, Hóa Quyền)) | meet(Thiên Phủ, Hóa Quyền, Quốc Ấn))",
+   "tone": "cat",
+   "review": "vế «Tướng Vi Âm Dương vượng» không viết được: Thái Dương, Thái Âm không bao giờ hội Thiên Tướng, và khi Tử Tướng đồng cung thì Nhật Nguyệt không bao giờ cùng sáng; các vế khác: Vi là Tử Vi, Văn là Văn Xương hay Văn Khúc, Vũ là Vũ Khúc, ấn là Quốc Ấn"
+  },
+  {
+   "id": "thien_tuong.3507.1",
+   "para": 3507,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Thiên Tướng miếu - 4, 5 người",
+   "when": "in(Thiên Tướng) & bright(Thiên Tướng)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3507.2",
+   "para": 3507,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "bình - 2, 3 người",
+   "ctx": "Thiên Tướng",
+   "when": "in(Thiên Tướng) & !bright(Thiên Tướng) & !dim(Thiên Tướng)",
+   "tone": "trung",
+   "review": "bảng của bà không ghi «bình» cho Thiên Tướng; hiểu bình là không miếu vượng đắc cũng không hãm (Tý Sửu Thìn Ngọ Tuất)"
+  },
+  {
+   "id": "thien_tuong.3507.3",
+   "para": 3507,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "hãm ngộ Lục Sát - toàn vô.",
+   "ctx": "Thiên Tướng",
+   "when": "in(Thiên Tướng) & dim(Thiên Tướng) & meet(Lục Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3508.1",
+   "para": 3508,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Tướng Tử - 3, 4 người.",
+   "when": "in(Thiên Tướng, Tử Vi)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3509.1",
+   "para": 3509,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Tướng Vũ - 2 người, có người làm nghề thủ công",
+   "when": "in(Thiên Tướng, Vũ Khúc)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3510.1",
+   "para": 3510,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Tướng Liêm - 2 người.",
+   "when": "in(Thiên Tướng, Liêm Trinh)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3510.2",
+   "para": 3510,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Tướng Mã Lộc - anh chị em giàu có.",
+   "when": "in(Thiên Tướng) & meet(Thiên Mã, Lộc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3511.1",
+   "para": 3511,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Tướng Thai - có anh em dị bào.",
+   "when": "in(Thiên Tướng) & meet(Thai)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3512.1",
+   "para": 3512,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Tướng Phá Sứ - có người chửa hoang, theo trai.",
+   "when": "in(Thiên Tướng) & meet(Phá Quân, Thiên Sứ)",
+   "tone": "hung",
+   "review": "Phá Quân luôn xung chiếu Thiên Tướng, Thiên Sứ (luôn ở Tật Ách) luôn tam hợp cung Huynh, nên điều kiện đúng mỗi khi Tướng ở cung Huynh"
+  },
+  {
+   "id": "thien_tuong.3513.1",
+   "para": 3513,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Tướng Phá Phục ngộ Hồng Đào Cái, có Trực Phù chiếu - có người dâm đãng.",
+   "when": null,
+   "tone": "hung",
+   "review": "theo cách an sao Đào Hoa và Hoa Cái luôn cách nhau 5 cung nên không bao giờ cùng hội một cung, nên không viết được điều kiện; nếu bỏ Hoa Cái (Tướng Phá Phục gặp Hồng Đào, có Trực Phù chiếu) thì có thể xảy ra — cần xem lại"
+  },
+  {
+   "id": "thien_tuong.3514.1",
+   "para": 3514,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "Thiên Tướng - trai lấy vợ hiền",
+   "when": "male() & in(Thiên Tướng)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3514.2",
+   "para": 3514,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "gái lấy chồng đứng tuổi",
+   "ctx": "Thiên Tướng",
+   "when": "female() & in(Thiên Tướng)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3514.3",
+   "para": 3514,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "là người quen thuộc.",
+   "ctx": "Thiên Tướng ở cung Thê",
+   "when": "in(Thiên Tướng)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3515.1",
+   "para": 3515,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "Tướng gặp Dương Đà Hoả Linh Không Kiếp - chủ hình khắc.",
+   "when": "in(Thiên Tướng) & meet(Lục Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3515.2",
+   "para": 3515,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "Tướng Tử - vợ nhiều tuôit hơn, gia đình hoà thuận, vượng phát.",
+   "when": "in(Thiên Tướng, Tử Vi)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3516.1",
+   "para": 3516,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "Tướng Liêm miếu - hoà hợp",
+   "when": null,
+   "tone": "cat",
+   "review": "Liêm Trinh và Thiên Tướng chỉ đồng cung ở Tý Ngọ, mà bảng của bà không ghi miếu hay hãm cho hai sao ở Tý Ngọ, nên không phân được miếu/hãm; cần xem lại"
+  },
+  {
+   "id": "thien_tuong.3516.2",
+   "para": 3516,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "hãm - phân ly.",
+   "ctx": "Tướng Liêm",
+   "when": null,
+   "tone": "hung",
+   "review": "Liêm Trinh và Thiên Tướng chỉ đồng cung ở Tý Ngọ, mà bảng của bà không ghi miếu hay hãm cho hai sao ở Tý Ngọ, nên không phân được miếu/hãm; cần xem lại"
+  },
+  {
+   "id": "thien_tuong.3516.3",
+   "para": 3516,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "Tướng Lương - sớm có gia đình.",
+   "when": null,
+   "tone": "trung",
+   "review": "theo cách an sao Thiên Lương luôn ở cung liền sau Thiên Tướng nên hai sao không bao giờ đồng cung hay hội chiếu; không viết được điều kiện"
+  },
+  {
+   "id": "thien_tuong.3516.4",
+   "para": 3516,
+   "palaces": [
+    "Phu Thê"
+   ],
+   "text": "Tướng Vũ- vợ chồng bất hoà.",
+   "when": "in(Thiên Tướng, Vũ Khúc)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3517.1",
+   "para": 3517,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Tướng Lương Quan Đới - sinh con thánh thần",
+   "when": null,
+   "tone": "cat",
+   "review": "theo cách an sao Thiên Lương luôn ở cung liền sau Thiên Tướng nên hai sao không bao giờ đồng cung hay hội chiếu; không viết được điều kiện"
+  },
+  {
+   "id": "thien_tuong.3518.1",
+   "para": 3518,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Tướng Phục Thai - có con riêng hoặc chửa trước, cưới sau.",
+   "when": "in(Thiên Tướng) & meet(Phục Binh, Thai)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3519.1",
+   "para": 3519,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Tướng đơn thủ Tỵ Hợi - có 3 con",
+   "when": "alone(Thiên Tướng) & at(Tỵ, Hợi)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3519.2",
+   "para": 3519,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Sửu Mùi - 2 con",
+   "ctx": "Tướng đơn thủ",
+   "when": "alone(Thiên Tướng) & at(Sửu, Mùi)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3519.3",
+   "para": 3519,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Mão Dậu - sinh muộn, nuôi 2",
+   "ctx": "Tướng đơn thủ",
+   "when": "alone(Thiên Tướng) & at(Mão, Dậu)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_tuong.3519.4",
+   "para": 3519,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "ngộ Dương Đà Hoả Linh - phải chiêu tự con trưởng, sau mới sinh 3 con.",
+   "ctx": "Tướng đơn thủ",
+   "when": "alone(Thiên Tướng) & meet(Tứ Sát)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_tuong.3520.1",
+   "para": 3520,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Tướng Tử Vi, hội Khúc Sương Tả Hữu - 4, 5 con",
+   "when": "in(Thiên Tướng) & meet(Tử Vi, Xương Khúc, Tả Hữu)",
+   "tone": "cat",
+   "review": "Tử Tướng đồng cung ở cung Tử không bao giờ hội đủ Xương Khúc Tả Hữu (đã thử mọi lá số), nên hiểu là Tướng ở cung Tử có Tử Vi chiếu về, hội Xương Khúc Tả Hữu"
+  },
+  {
+   "id": "thien_tuong.3521.1",
+   "para": 3521,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Tướng Vũ - 3 con",
+   "when": "in(Thiên Tướng, Vũ Khúc)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3521.2",
+   "para": 3521,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "ngộ Dương Đà Hoả Linh Không Kiếp - hình khắc, hiếm hoi, lấy vợ thứ mới khỏi vô tự.",
+   "ctx": "Tướng Vũ",
+   "when": "in(Thiên Tướng, Vũ Khúc) & meet(Lục Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3522.1",
+   "para": 3522,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "Thiên Tướng - giàu có, từ thiện",
+   "when": "in(Thiên Tướng)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3522.2",
+   "para": 3522,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "gia Dương Đà Hoả Linh Không Kiếp Hao Kỵ - khi thành khi bại, không tụ.",
+   "ctx": "Thiên Tướng",
+   "when": "in(Thiên Tướng) & meet(Lục Sát/Đại Hao/Tiểu Hao/Hóa Kỵ)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3523.1",
+   "para": 3523,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "Tướng Tử - giàu có, phát.",
+   "when": "in(Thiên Tướng, Tử Vi)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3524.1",
+   "para": 3524,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "Tướng Vũ ngộ Quý tinh - làm nên sự nghiệp",
+   "when": "in(Thiên Tướng, Vũ Khúc) & meet(Quý tinh)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3524.2",
+   "para": 3524,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "gia Dương Đà Hoả Linh phải khó nhọc về nghề.",
+   "ctx": "Tướng Vũ",
+   "when": "in(Thiên Tướng, Vũ Khúc) & meet(Tứ Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3525.1",
+   "para": 3525,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "Tướng Liêm - buôn bán phát tài, làm nên.",
+   "when": "in(Thiên Tướng, Liêm Trinh)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3526.1",
+   "para": 3526,
+   "palaces": [
+    "Tật Ách"
+   ],
+   "text": "Tướng Vượng - ít tai ách nhưng mặt da vàng thũng, hay mắc chứng về huyết khí và bì phu.",
+   "when": "in(Thiên Tướng) & bright(Thiên Tướng)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_tuong.3526.2",
+   "para": 3526,
+   "palaces": [
+    "Tật Ách"
+   ],
+   "text": "Tướng Vũ Đà Tuế - nhiều nốt ruồi",
+   "when": "in(Thiên Tướng, Vũ Khúc) & meet(Đà La, Thái Tuế)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3526.3",
+   "para": 3526,
+   "palaces": [
+    "Tật Ách"
+   ],
+   "text": "hãm - bị tàn tật.",
+   "ctx": "Tướng",
+   "when": "in(Thiên Tướng) & dim(Thiên Tướng)",
+   "tone": "hung",
+   "review": "Vũ Tướng chỉ ở Dần Thân (đều sáng) nên «hãm» hiểu là Thiên Tướng hãm (ở Dậu), đối với «Tướng Vượng» ở đầu đoạn"
+  },
+  {
+   "id": "thien_tuong.3527.1",
+   "para": 3527,
+   "palaces": [
+    "Tật Ách"
+   ],
+   "text": "Tướng Tử - ít tai nạn nhưng da nhăn, vàng.",
+   "when": "in(Thiên Tướng, Tử Vi)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_tuong.3528.1",
+   "para": 3528,
+   "palaces": [
+    "Tật Ách"
+   ],
+   "text": "Tướng Vũ gia Dương Đà Hoả Linh laf phá tướng, bị ám tật.",
+   "when": "in(Thiên Tướng, Vũ Khúc) & meet(Tứ Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3529.1",
+   "para": 3529,
+   "palaces": [
+    "Tật Ách"
+   ],
+   "text": "Tướng Liêm - ít tai ách",
+   "when": "in(Thiên Tướng, Liêm Trinh)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3529.2",
+   "para": 3529,
+   "palaces": [
+    "Tật Ách"
+   ],
+   "text": "gia Lục Sát - chân tay có tật.",
+   "ctx": "Tướng Liêm",
+   "when": "in(Thiên Tướng, Liêm Trinh) & meet(Lục Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3530.1",
+   "para": 3530,
+   "palaces": [
+    "Thiên Di"
+   ],
+   "text": "Tướng - ra ngoài được quý nhân phù trì",
+   "when": "in(Thiên Tướng)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3531.1",
+   "para": 3531,
+   "palaces": [
+    "Thiên Di"
+   ],
+   "text": "Tử Tướng, Vũ Tướng - xuất ngoại phát tài, nhiều may mắn, lắm lợi",
+   "when": "in(Thiên Tướng, Tử Vi/Vũ Khúc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3532.1",
+   "para": 3532,
+   "palaces": [
+    "Thiên Di"
+   ],
+   "text": "Tướng Liêm - có gặp gay cấn mới thành đạt",
+   "when": "in(Thiên Tướng, Liêm Trinh)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_tuong.3532.2",
+   "para": 3532,
+   "palaces": [
+    "Thiên Di"
+   ],
+   "text": "gia Dương Đà Hoả Linh - mắc chuyện thị phi, bị tiểu nhân đố kỵ.",
+   "ctx": "Tướng Liêm",
+   "when": "in(Thiên Tướng, Liêm Trinh) & meet(Tứ Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3533.1",
+   "para": 3533,
+   "palaces": [
+    "Thiên Di"
+   ],
+   "text": "Tướng Dưỡng Suy - đi ra làm tôi tớ nhà quyền quý.",
+   "when": "in(Thiên Tướng) & meet(Dưỡng, Suy)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3534.1",
+   "para": 3534,
+   "palaces": [
+    "Nô Bộc"
+   ],
+   "text": "Thiên Tướng - được việc và làm vượng chủ",
+   "when": "in(Thiên Tướng)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3535.1",
+   "para": 3535,
+   "palaces": [
+    "Nô Bộc"
+   ],
+   "text": "Gia Dương Đà Hoả Linh Không Kiếp - bất lực, bỏ chủ.",
+   "ctx": "Thiên Tướng",
+   "when": "in(Thiên Tướng) & meet(Lục Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3536.1",
+   "para": 3536,
+   "palaces": [
+    "Nô Bộc"
+   ],
+   "text": "Tử Tướng Vũ Tướng - làm vượng cho chủ.",
+   "when": "in(Thiên Tướng, Tử Vi/Vũ Khúc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3537.1",
+   "para": 3537,
+   "palaces": [
+    "Nô Bộc"
+   ],
+   "text": "Tướng Liêm - về già có đầy tớ.",
+   "when": "in(Thiên Tướng, Liêm Trinh)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3538.1",
+   "para": 3538,
+   "palaces": [
+    "Nô Bộc"
+   ],
+   "text": "Tướng Phục - tôi tớ tư thông có hoang thai.",
+   "when": "in(Thiên Tướng) & meet(Phục Binh)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3539.1",
+   "para": 3539,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "Thiên Tướng miếu - văn võ song toàn, có bổng lộc",
+   "when": "in(Thiên Tướng) & bright(Thiên Tướng)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3539.2",
+   "para": 3539,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "cùng Khúc Sương Tả Hữu đồng cung - quyền quý vinh hiển",
+   "ctx": "Thiên Tướng",
+   "when": "in(Thiên Tướng) & meet(Xương Khúc, Tả Hữu)",
+   "tone": "cat",
+   "review": "Xương Khúc Tả Hữu không bao giờ cùng ở cung Quan với Thiên Tướng (đã thử mọi lá số), nên hiểu «đồng cung» là cùng hội về cung Quan"
+  },
+  {
+   "id": "thien_tuong.3539.3",
+   "para": 3539,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "hãm - khi thành khi bại",
+   "ctx": "Thiên Tướng",
+   "when": "in(Thiên Tướng) & dim(Thiên Tướng)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_tuong.3539.4",
+   "para": 3539,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "gia Dương Đà Hoả Linh Không Kiếp - bị biếm trách.",
+   "ctx": "Thiên Tướng",
+   "when": "in(Thiên Tướng) & meet(Lục Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3540.1",
+   "para": 3540,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "Tử Tướng Liêm Tướng - quyền quý, hiển đạt, liêm chính.",
+   "when": "in(Thiên Tướng, Tử Vi/Liêm Trinh)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3541.1",
+   "para": 3541,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "Tướng Vũ - chức vụ nơi biên di, quân ngũ.",
+   "when": "in(Thiên Tướng, Vũ Khúc)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3542.1",
+   "para": 3542,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "Tướng Phủ - quan cao bậc nhất.",
+   "when": "in(Thiên Tướng) & meet(Thiên Phủ)",
+   "tone": "cat",
+   "review": "Thiên Phủ luôn tam hợp Thiên Tướng nên điều kiện đúng mỗi khi Tướng ở cung Quan"
+  },
+  {
+   "id": "thien_tuong.3543.1",
+   "para": 3543,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "Tướng Mã - bậc nhì.",
+   "when": "in(Thiên Tướng) & meet(Thiên Mã)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3544.1",
+   "para": 3544,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "Tướng cư Thìn Tuất - công danh bền vững.",
+   "when": "in(Thiên Tướng) & at(Thìn, Tuất)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3545.1",
+   "para": 3545,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "Tướng Tấu Phù, Mệnh có Tả Hữu - làm tăng ni.",
+   "when": "in(Thiên Tướng) & meet(Tấu Thư, Đường Phù) & pal(Mệnh, meet(Tả Hữu))",
+   "tone": "trung",
+   "review": "Phù hiểu là Đường Phù (bà hay đi đôi Tấu Thư với Đường Phù); cũng có thể là Quan Phù"
+  },
+  {
+   "id": "thien_tuong.3546.1",
+   "para": 3546,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "Tướng Quang Quý - làm quan to.",
+   "when": "in(Thiên Tướng) & meet(Quang Quý)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3547.1",
+   "para": 3547,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "Tướng Đồng Lộc Mã Tràng - vinh hiển lâu dài.",
+   "when": null,
+   "tone": "cat",
+   "review": "theo cách an sao Thiên Đồng không bao giờ đồng cung hay hội chiếu Thiên Tướng, nên không viết được điều kiện; nếu bỏ Đồng thì là Tướng gặp Lộc, Mã, Tràng Sinh (mục Thiên Đồng có câu «Đồng Tướng Mã Lộc», có thể Tướng ở đó là Tướng Quân) — cần xem lại"
+  },
+  {
+   "id": "thien_tuong.3548.1",
+   "para": 3548,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "Tướng hãm ngộ Không Kiếp - không có công danh lại nhiều cay đắng; làm quan phải đề phòng tai hoạ",
+   "when": "in(Thiên Tướng) & dim(Thiên Tướng) & meet(Không Kiếp)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3548.2",
+   "para": 3548,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "nếu Tướng vượng thì bị cách bãi rồi lại phục chức.",
+   "ctx": "Tướng ngộ Không Kiếp",
+   "when": "in(Thiên Tướng) & bright(Thiên Tướng) & meet(Không Kiếp)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_tuong.3549.1",
+   "para": 3549,
+   "palaces": [
+    "Quan Lộc"
+   ],
+   "text": "Tướng ngộ Tuần Triệt - làm gì cũng không bền, bị sa thải, cách chức.",
+   "when": "in(Thiên Tướng) & meet(Tuần/Triệt)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3550.1",
+   "para": 3550,
+   "palaces": [
+    "Điền Trạch"
+   ],
+   "text": "Thiên Tướng miếu - hưởng tổ nghiệp.",
+   "when": "in(Thiên Tướng) & bright(Thiên Tướng)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3551.1",
+   "para": 3551,
+   "palaces": [
+    "Điền Trạch"
+   ],
+   "text": "Tướng Tử - tạo dựng sản nghiệp",
+   "when": "in(Thiên Tướng, Tử Vi)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3551.2",
+   "para": 3551,
+   "palaces": [
+    "Điền Trạch"
+   ],
+   "text": "gia Tả Hữu Khúc Sương - tuy có tổ nghiệp nhưng phải tu tạo.",
+   "ctx": "Tướng Tử",
+   "when": "in(Thiên Tướng) & meet(Tử Vi, Tả Hữu, Xương Khúc)",
+   "tone": "mixed",
+   "review": "Tử Tướng đồng cung ở cung Điền không bao giờ hội đủ Tả Hữu Xương Khúc (đã thử mọi lá số), nên hiểu là Tướng ở cung Điền có Tử Vi chiếu về, hội Tả Hữu Xương Khúc"
+  },
+  {
+   "id": "thien_tuong.3552.1",
+   "para": 3552,
+   "palaces": [
+    "Điền Trạch"
+   ],
+   "text": "Tướng Vũ - trước phá, sau mới tạo thành.",
+   "when": "in(Thiên Tướng, Vũ Khúc)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_tuong.3553.1",
+   "para": 3553,
+   "palaces": [
+    "Điền Trạch"
+   ],
+   "text": "Tướng Liêm - trước không sau có, sau gây dựng",
+   "when": "in(Thiên Tướng, Liêm Trinh)",
+   "tone": "mixed"
+  },
+  {
+   "id": "thien_tuong.3553.2",
+   "para": 3553,
+   "palaces": [
+    "Điền Trạch"
+   ],
+   "text": "gia Dương Đà Hoả Linh Không Kiếp - làm bay mất tổ nghiệp.",
+   "ctx": "Tướng Liêm",
+   "when": "in(Thiên Tướng, Liêm Trinh) & meet(Lục Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3554.1",
+   "para": 3554,
+   "palaces": [
+    "Điền Trạch"
+   ],
+   "text": "Tướng Lộc - nhiều ruộng đất.",
+   "when": "in(Thiên Tướng) & meet(Lộc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3555.1",
+   "para": 3555,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Thiên Tướng - là đất vuông vắn, đầy đặn, hình như cái ấn vuông.",
+   "when": "in(Thiên Tướng)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3556.1",
+   "para": 3556,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Là Thuỷ đới Mộc, gặp Khoa Quyền Khôi Việt - là đất long mạch đang lên nhiều, cao vòi vọi, đời đời công hầu bá tước",
+   "ctx": "Thiên Tướng",
+   "when": null,
+   "tone": "cat",
+   "review": "theo bảng Tứ Hoá của bà, Thiên Tướng không bao giờ hội đủ cả Hoá Khoa, Hoá Quyền lẫn Khôi Việt (đã thử mọi lá số), nên không viết được điều kiện; nếu hiểu là gặp Khoa Quyền hoặc gặp Khôi Việt thì có thể xảy ra — cần xem lại"
+  },
+  {
+   "id": "thien_tuong.3556.2",
+   "para": 3556,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "nếu gặp Tuần Triệt Không Kiếp thì long mạch bị kim châm chích thương tàn, trong hoạn lộ thì bị hoán cải, cách chức, thứ sĩ bị thị phi.",
+   "ctx": "Thiên Tướng",
+   "when": "in(Thiên Tướng) & meet(Tuần/Triệt/Địa Không/Địa Kiếp)",
+   "tone": "hung",
+   "review": "hiểu là gặp một trong các sao Tuần, Triệt, Không, Kiếp"
+  },
+  {
+   "id": "thien_tuong.3557.1",
+   "para": 3557,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Thiên Tướng chỉ mộ Cậu",
+   "when": "in(Thiên Tướng)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_tuong.3557.2",
+   "para": 3557,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "đắc địa thì được hưởng phúc, an nhàn sống lâu.",
+   "ctx": "Thiên Tướng",
+   "when": "in(Thiên Tướng) & bright(Thiên Tướng)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3558.1",
+   "para": 3558,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Tướng gặp Tử Vi là khoái lạc",
+   "when": "in(Thiên Tướng) & meet(Tử Vi)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3558.2",
+   "para": 3558,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "với Thiên Cơ thì hoang mang mà trong được tốt",
+   "ctx": "Tướng",
+   "when": null,
+   "tone": "mixed",
+   "review": "theo cách an sao Thiên Cơ không bao giờ đồng cung hay hội chiếu Thiên Tướng; không viết được điều kiện"
+  },
+  {
+   "id": "thien_tuong.3558.3",
+   "para": 3558,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "cùng Thái Dương thì phúc thọ",
+   "ctx": "Tướng",
+   "when": null,
+   "tone": "cat",
+   "review": "theo cách an sao Thái Dương không bao giờ đồng cung hay hội chiếu Thiên Tướng; không viết được điều kiện"
+  },
+  {
+   "id": "thien_tuong.3558.4",
+   "para": 3558,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "gia Dương Đà Hoả Linh Không Kiếp thì tâm không yên.",
+   "ctx": "Tướng",
+   "when": "in(Thiên Tướng) & meet(Lục Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3559.1",
+   "para": 3559,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Tướng Đồng Khôi Việt Cơ - nhà có thần đồng.",
+   "when": null,
+   "tone": "cat",
+   "review": "theo cách an sao Thiên Đồng và Thiên Cơ không bao giờ đồng cung hay hội chiếu Thiên Tướng; không viết được điều kiện"
+  },
+  {
+   "id": "thien_tuong.3560.1",
+   "para": 3560,
+   "palaces": [
+    "Phụ Mẫu"
+   ],
+   "text": "Thiên Tướng miếu vượng - cha mẹ song toàn, giàu và thọ.",
+   "when": "in(Thiên Tướng) & bright(Thiên Tướng)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3561.1",
+   "para": 3561,
+   "palaces": [
+    "Phụ Mẫu"
+   ],
+   "text": "Tướng gia Dương Đà Hoả Linh Không Kiếp - sớm bi khắc.",
+   "when": "in(Thiên Tướng) & meet(Lục Sát)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3562.1",
+   "para": 3562,
+   "palaces": [
+    "Phụ Mẫu"
+   ],
+   "text": "Tướng Tử, Tướng Liêm - chủ sự hoà hợp, thuận đồng trong gia đình.",
+   "when": "in(Thiên Tướng, Tử Vi/Liêm Trinh)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_tuong.3562.2",
+   "para": 3562,
+   "palaces": [
+    "Phụ Mẫu"
+   ],
+   "text": "Tướng Vũ - cha mẹ con cái bất đồng quan điểm",
+   "when": "in(Thiên Tướng, Vũ Khúc)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_tuong.3562.3",
+   "para": 3562,
+   "palaces": [
+    "Phụ Mẫu"
+   ],
+   "text": "gia Dương Đà Hoả Linh Không Kiếp - có sự hình thương ( thương tổn đến gia đạo hoặc tình nghĩa trong gia đình).",
+   "ctx": "Tướng Vũ",
+   "when": "in(Thiên Tướng, Vũ Khúc) & meet(Lục Sát)",
+   "tone": "hung"
+  }
+ ],
+ "skip": [
+  {
+   "para": 3485,
+   "kind": "meta"
+  },
+  {
+   "para": 3486,
+   "kind": "meta"
+  },
+  {
+   "para": 3487,
+   "kind": "meta"
+  },
+  {
+   "para": 3490,
+   "kind": "meta"
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+{
+  "entry": 1420,
+  "star": "long_duc",
+  "rules": [
+    { "id": "long_duc.1422.1", "para": 1422, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: người đẹp, có cốt cách, tính vui, ôn hoà.", "when": "in(Long Đức)", "tone": "cat" },
+    { "id": "long_duc.1423.1", "para": 1423, "palaces": ["Mệnh", "Thân"], "text": "Long đức hội với Phúc Đức, Thiên Đức, Nguyệt Đức là bộ Tứ Đức. Cư chiếu Thân Mệnh thì phù trì đắc lực, dù có lâm hạn đổ vỡ cũng không bị tuyệt địa, lại có thể nhờ vận khác để khởi vận được.", "when": "meet(Long Đức, Phúc Đức, Thiên Đức, Nguyệt Đức)", "tone": "cat", "review": "hiểu là bộ Tứ Đức (câu trước) cư hay chiếu Thân Mệnh, tức là hội đủ bốn sao; theo cách an sao Thiên Đức luôn cùng cung với Phúc Đức, và bốn sao chỉ hội đủ ở cung có Thiếu Dương, kế sau cung Thái Tuế; cũng có thể bà muốn nói riêng Long Đức cư chiếu Thân Mệnh" },
+    { "id": "long_duc.1424.1", "para": 1424, "palaces": ["Mệnh", "Thân"], "text": "Người có Tứ Đức Thân Mệnh còn hưởng ân huệ, giữ được cốt cách người phong lưu, không quá khốn quẫn, làm sằng mà tù tội.", "when": "meet(Long Đức, Phúc Đức, Thiên Đức, Nguyệt Đức)", "tone": "cat", "review": "bốn sao Tứ Đức không bao giờ cùng ở một cung nên hiểu «có Tứ Đức Thân Mệnh» là Thân Mệnh hội đủ bốn sao (chỉ xảy ra ở cung có Thiếu Dương, kế sau cung Thái Tuế)" }
+  ],
+  "skip": [
+    { "para": 1421, "kind": "meta" }
+  ]
+}

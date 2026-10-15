@@ -1,0 +1,13 @@
+{
+  "entry": 1793,
+  "star": "quan_phu_loc",
+  "rules": [
+    { "id": "quan_phu_loc.1795.1", "para": 1795, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: hèn hạ, gian nịnh. Chủ thị phi khẩu thiệt.", "when": "in(Quan Phủ)", "tone": "hung" },
+    { "id": "quan_phu_loc.1796.1", "para": 1796, "palaces": ["Mệnh", "Thân"], "text": "Quan Phủ hội với Thái Tuế Thiên Hình Cự Môn miếu địa là người rất giỏi về pháp luật, có tài biện thuyết.", "when": "in(Quan Phủ) & meet(Thái Tuế, Thiên Hình, Cự Môn) & bright(Cự Môn)", "tone": "cat", "review": "miếu địa hiểu là Cự Môn miếu vượng (bảng của bà không ghi miếu hãm cho Quan Phủ)" },
+    { "id": "quan_phu_loc.1797.1", "para": 1797, "palaces": ["Mệnh", "Thân"], "text": "Hội Liêm Trinh Thiên Hình Thái Tuế hãm địa thì hay mắc bệnh thị phi, quan tụng và dễ bị ngục tù.", "ctx": "Quan Phủ", "when": "in(Quan Phủ) & meet(Liêm Trinh, Thiên Hình, Thái Tuế) & (dim(Liêm Trinh) | dim(Thái Tuế))", "tone": "hung", "review": "hãm địa hiểu là Liêm Trinh hay Thái Tuế ở cung hãm (bảng của bà: Liêm hãm Tỵ Hợi, Thái Tuế hãm Thân Dậu; Thiên Hình và Quan Phủ không ghi cung hãm)" },
+    { "id": "quan_phu_loc.1798.1", "para": 1798, "palaces": ["Mệnh"], "text": "Có Quan Phủ ngộ Dương Đà - hư ngôn loạn ngữ, hay nói lung tung, vạ miệng (nhất là cư cung Tỵ ).", "when": "in(Quan Phủ) & meet(Kình Dương/Đà La)", "tone": "hung", "review": "Quan Phủ luôn đồng cung với Kình Dương hoặc Đà La, sao kia cách 2 cung nên không bao giờ hội đủ cả Dương lẫn Đà; hiểu là gặp Dương hoặc Đà, nên điều kiện đúng mỗi khi có Quan Phủ ở Mệnh; «nhất là cư cung Tỵ» là lời nhấn mạnh, không thành điều kiện" }
+  ],
+  "skip": [
+    { "para": 1794, "kind": "meta" }
+  ]
+}

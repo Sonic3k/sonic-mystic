@@ -1,0 +1,102 @@
+{
+ "entry": 3469,
+ "star": "thien_thuong",
+ "rules": [
+  {
+   "id": "thien_phu.3471.1",
+   "para": 3471,
+   "palaces": [
+    "Hạn"
+   ],
+   "text": "Tính cách: buồn ác. Chủ sự đau thương nguy khốn ( vật chất và tinh thần ). Thương đi đôi với Sứ, chú trọng cung ách và vận hạn.",
+   "ctx": "Thiên Thương",
+   "when": "in(Thiên Thương)",
+   "tone": "hung",
+   "review": "các đoạn 3469–3478 là mục riêng của Thiên Thương, Thiên Sứ chép liền trong mục Thiên Phủ; theo cách an sao Thiên Thương luôn ở cung Nô Bộc nên không bao giờ ở hay hội Mệnh Thân, theo lời bà «chú trọng … vận hạn» để luật này cho hạn gặp Thiên Thương"
+  },
+  {
+   "id": "thien_phu.3472.1",
+   "para": 3472,
+   "palaces": [
+    "Hạn"
+   ],
+   "text": "Là thần hư hao, lâm nhị hạn hội Thái Tuế, 3 phương chiếu lại tốt xấu tuỳ sao mà luận.",
+   "ctx": "Thiên Thương",
+   "when": "dai(in(Thiên Thương) & meet(Thái Tuế)) & tieu(in(Thiên Thương) & meet(Thái Tuế))",
+   "tone": "mixed",
+   "review": "nhị hạn hiểu là cả đại hạn lẫn tiểu hạn; Thái Tuế dùng sao Thái Tuế gốc của lá số (máy chưa tính lưu Thái Tuế)"
+  },
+  {
+   "id": "thien_phu.3474.1",
+   "para": 3474,
+   "palaces": [
+    "Hạn"
+   ],
+   "text": "Tính cách: ác. Chủ sự không may; là sao nhỏ, phụ, chủ yếu về vận hạn",
+   "ctx": "Thiên Sứ",
+   "when": "in(Thiên Sứ)",
+   "tone": "hung",
+   "review": "theo cách an sao Thiên Sứ luôn ở cung Tật Ách nên không bao giờ ở hay hội Mệnh Thân; theo lời bà «chủ yếu về vận hạn» để luật này cho hạn gặp Thiên Sứ"
+  },
+  {
+   "id": "thien_phu.3475.1",
+   "para": 3475,
+   "palaces": [
+    "Huynh Đệ"
+   ],
+   "text": "Cung Bào có Phá Tướng Sứ - chị em có người chửa hoang, theo trai",
+   "when": "in(Phá Quân/Thiên Tướng) & meet(Phá Quân, Thiên Tướng, Thiên Sứ)",
+   "tone": "hung",
+   "review": "Phá Quân và Thiên Tướng luôn xung chiếu nhau, Thiên Sứ (luôn ở Tật Ách) luôn tam hợp cung Bào, nên điều kiện đúng mỗi khi Phá Quân hoặc Thiên Tướng ở cung Bào"
+  },
+  {
+   "id": "thien_phu.3476.1",
+   "para": 3476,
+   "palaces": [
+    "Tử Tức"
+   ],
+   "text": "Cung Tử có Sứ Cự Đồng phùng Tang Đà Hổ - sát con.",
+   "when": null,
+   "tone": "hung",
+   "review": "theo cách an sao Thiên Sứ luôn ở cung Tật Ách, không bao giờ ở hay hội chiếu cung Tử, nên không viết được điều kiện; cần xem lại"
+  },
+  {
+   "id": "thien_phu.3478.1",
+   "para": 3478,
+   "palaces": [
+    "Hạn"
+   ],
+   "text": "Nhị hạn có Thái Tuế lâm vào, có cát tinh nhiều thì hoạ ít",
+   "ctx": "Thiên Sứ",
+   "when": "dai(in(Thiên Sứ, Thái Tuế) & count(3, Tả Phù, Hữu Bật, Văn Xương, Văn Khúc, Thiên Khôi, Thiên Việt, Lộc Tồn, Hóa Lộc, Hóa Quyền, Hóa Khoa)) & tieu(in(Thiên Sứ, Thái Tuế))",
+   "tone": "mixed",
+   "review": "câu không nhắc lại Thiên Sứ; hiểu là hai hạn có Thiên Sứ mà Thái Tuế lâm vào (như câu về Thiên Thương); Thái Tuế dùng sao gốc (máy chưa tính lưu Thái Tuế); «cát tinh nhiều» hiểu là hội từ 3 cát tinh trở lên"
+  },
+  {
+   "id": "thien_phu.3478.2",
+   "para": 3478,
+   "palaces": [
+    "Hạn"
+   ],
+   "text": "nếu không có chính tinh mà có Kỵ Dương Cự Hoả ắt bị quan tai, vong tán, có việc bất ngờ mà khuynh gia bại sản.",
+   "ctx": "Nhị hạn có Thiên Sứ, Thái Tuế",
+   "when": "dai(in(Thiên Sứ, Thái Tuế) & empty() & meet(Hóa Kỵ, Kình Dương, Cự Môn, Hỏa Tinh)) & tieu(in(Thiên Sứ, Thái Tuế))",
+   "tone": "hung",
+   "review": "Dương hiểu là Kình Dương (đi cùng các hung tinh Kỵ, Cự, Hoả); cung hạn vô chính diệu nên Cự Môn phải từ cung khác chiếu về; Thái Tuế dùng sao gốc"
+  }
+ ],
+ "skip": [
+  {
+   "para": 3470,
+   "kind": "meta"
+  },
+  {
+   "para": 3473,
+   "kind": "meta"
+  },
+  {
+   "para": 3477,
+   "kind": "theory"
+  }
+ ]
+}

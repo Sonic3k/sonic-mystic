@@ -1,0 +1,69 @@
+{
+  "source": "TT. so bo.doc — Tử vi đẩu số, Phần I: Lập lá số tử vi (bản 11/2011). Chép đúng lời bà; chỉ sửa chữ bị lỗi chuyển phông (TươI → Tươi, hảI → hải). Chữ viết tắt sau tên sao là hành: T Thủy, H Hỏa, M Mộc, T^ Thổ, K Kim.",
+  "hoaGiap": {
+    "cols": ["STT", "Tuổi", "Hành của Mệnh", "Ý nghĩa", "Bát quái", "Thuộc tính"],
+    "rows": [
+      [1, "Giáp Tý ất Sửu", "Hải Trung Kim", "Vàng biển", "Chấn Tốn", "Quặng vàng, hỗn hợp"],
+      [2, "Bính Dần Đinh mão", "Lô Trung Hỏa", "Lửa lò", "Khảm Càn", "Tinh anh, hoạt bát"],
+      [3, "Mậu Thìn Kỷ Tỵ", "Đại Lâm Mộc", "Gỗ rừng già", "Đoài Cấn", "Chắc bền, khí phách"],
+      [4, "Canh Ngọ Tân Mùi", "Lộ Bàng Thổ", "Đất bên đường", "Ly Khảm", "Bồi đắp, thứ vị"],
+      [5, "Nhâm Thân Quý Dậu", "Kiếm Phong Kim", "Vàng bọc kiếm", "Khôn Chấn", "Dứt khoát, quyết liệt"],
+      [6, "Giáp Tuất ất Hợi", "Sơn Đầu Hỏa", "Lửa đầu núi", "Càn Đoài", "Dữ dội, cường quyền"],
+      [7, "Bính Tý Đinh Sửu", "Giản Hạ Thủy", "Nước khe, nước sông cạn", "Cấn Ly", "Hạn chế, phụ trợ"],
+      [8, "Mậu Dần Kỷ Mão", "Thành Đầu Thổ", "Đất đầu thành", "Khảm Khôn", "Tiềm ẩn, hiên ngang"],
+      [9, "Canh Thìn Tân Tỵ", "Bạch Lạp Kim", "Vàng Đài nến", "Chấn Tốn", "Phát sáng, hợm hĩnh"],
+      [10, "Nhâm Ngọ Quý Mùi", "Dương Liễu Mộc", "Gỗ dương liễu", "Ly Càn", "Mềm mại, tinh tế"],
+      [11, "Giáp Thân ất Dậu", "Tuyền Trung Thủy", "Nước suối", "Khôn Chấn", "Thuận lẽ, trung hiếu"],
+      [12, "Bính Tuất Đinh Hợi", "ốc Thượng Thổ", "Đất trên mái nhà", "Tốn Chấn", "Chịu đựng, hữu ích"],
+      [13, "Mậu Tý Kỷ Sửu", "Tích Lịch Hỏa", "Lửa sấm sét", "Càn Đoài", "Mãnh liệt, tiềm ngầm"],
+      [14, "Canh Dần Tân Mão", "Tùng Bách Mộc", "Gỗ Tùng Bách", "Cấn Ly", "Vững vàng, bản lĩnh"],
+      [15, "Nhâm Thìn Quý Tỵ", "Trường Lưu Thủy", "Nước lớn chảy mạnh", "Khảm Khôn", "Thuận lẽ, trung thành"],
+      [16, "Giáp Ngọ ất Mùi", "Sa Trung Kim", "Vàng trong cát", "Ly Khảm", "Vàng trong cát, ẩn dấu"],
+      [17, "Bính Thân Đinh Dậu", "Sơn Hạ Hỏa", "Lửa chân núi", "Khôn Chấn", "Theo thời, xu phụ"],
+      [18, "Mậu Tuất Kỷ Hợi", "Bình Địa Mộc", "Gỗ lớn đồng bằng", "Tốn Cấn", "Tươi tốt, bền vững"],
+      [19, "Canh Tý Tân Sửu", "Bích Thượng Thổ", "đất bên đường", "Càn Đoài", "Chịu khó, cần mẫn"],
+      [20, "Nhâm Dần Quý Mão", "Kim Bạch Kim", "Vàng trắng", "Cấn Ly", "Cứng rắn, quý giá"],
+      [21, "Giáp Thìn ất Tỵ", "Phú Đăng Hỏa", "Lửa đèn to", "Tốn Đoài", "Sáng, rộng, năng lực"],
+      [22, "Bính Ngọ Đinh Mùi", "Thiên Hà Thủy", "Nước trời mưa", "Càn Đoài", "Tự nhiên, may mắn"],
+      [23, "Mậu Thân Kỷ Dậu", "Đại Trạch Thổ", "Đất bằng rộng lớn", "Cấn Ly", "Nền rộng, quý báu"],
+      [24, "Canh Tuất Tân Hợi", "Thoa Xuyến Kim", "Vàng Xuyến", "Khảm Khôn", "Trang sức, kiêu kỳ"],
+      [25, "Nhâm Tý Quý Sửu", "Tang Đố Mộc", "Gỗ cây Dâu", "Chấn Tốn", "Hữu ích, thiểu lực"],
+      [26, "Giáp Dần ất Mão", "Đại Khê Thủy", "Nước suối to", "Cấn Ly", "Thời vụ, dồi dào"],
+      [27, "Bính Thìn Đinh Tỵ", "Sa Trung Thổ", "Đất bãi cát", "Khảm Khôn", "Phức tạp, lựa lượn"],
+      [28, "Mậu Ngọ Kỷ Mùi", "Thiên Thượng Hỏa", "Lửa mặt trời", "Chấn Tốn", "Mãnh liệt, ác, cấp"],
+      [29, "Canh Thân Tân Dậu", "Thạch Lựu Mộc", "Gỗ cây lựu đá", "Khôn Càn", "Vui vầy, phè phỡn"],
+      [30, "Nhâm Tuất Quý Hợi", "Đại Hải Thủy", "Nước biển cả", "Tốn Cấn", "Rộng lớn , hiên ngang"]
+    ]
+  },
+  "steps": [
+    { "title": "1/ Tìm Mệnh — theo Lục thập Hoa Giáp", "lines": ["Có 3 câu thơ tìm mệnh:", "Tuổi Tý Ngọ = Ngân đăng gia bích câu", "Tuổi Thìn Tuất = Yên mãn tự chung lâu", "Dần Thân = Hán địa thiêu sài thấp"] },
+    { "title": "2/ Tìm Cục", "table": {
+      "cols": ["Mệnh án cung", "Giáp- Kỷ", "ất - Canh", "Bính – Tân", "Đinh- Nhâm", "Mậu- Quý"],
+      "rows": [
+        ["Tý – Sửu", "Thủy Nhị Cục", "Hỏa Lục cục", "Thổ Ngũ Cục", "Mộc Tam Cục", "Kim Tứ cục"],
+        ["Dần - Mão, Tuất - Hợi", "Hỏa Lục cục", "Thổ Ngũ Cục", "Mộc Tam Cục", "Kim Tứ cục", "Thủy Nhị Cục"],
+        ["Thìn Tỵ", "Mộc Tam Cục", "Kim Tứ cục", "Thủy Nhị Cục", "Hỏa Lục cục", "Thổ Ngũ Cục"],
+        ["Ngọ Mùi", "Thổ Ngũ Cục", "Mộc Tam Cục", "Kim Tứ cục", "Thủy Nhị Cục", "Hỏa Lục cục"],
+        ["Thân Dậu", "Kim Tứ cục", "Thủy Nhị Cục", "Hỏa Lục cục", "Thổ Ngũ Cục", "Mộc Tam Cục"]
+      ] },
+      "lines": ["5 câu thơ tìm Cục:", "- Giáp Kỷ: Giang Đăng giá bích ngân THMT^K", "- ất Canh: Yên cảnh tích mai tân HT^KMT", "- Bính Tân : Đề Liễu Ba ngân chước T^MTKH", "- Đinh Nhâm: Mai tiễn chước hải trần MKHTT^", "- Mậu Quý: Ngân ba đôi chước liễu KTT^HM"] },
+    { "title": "3/ Phân định âm dương", "lines": ["Thiên can — Dương: Giáp, Bính, Mậu, Canh, Nhâm · Âm: ất, Đinh, Kỷ, Tân, Quý", "Địa chi — Dương: Tý, Dần, Thìn, Ngọ, Thân, Tuất · Âm: Sửu, Mão, Tỵ, Mùi, Dậu, Hợi"] },
+    { "title": "4/ Tính giờ", "table": {
+      "cols": ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"],
+      "rows": [["23-1", "1-3", "3-5", "5-7", "7-9", "9-11", "11-13", "13-15", "15-17", "17-19", "19-21", "21-23"]] } },
+    { "title": "5/ An Mệnh", "lines": ["Khởi tự cung Dần là tháng Giêng, tính thuận đến tháng sinh, (trái sang phải), coi đó là giờ Tý, tính nghịch đến giờ sinh (phải sang trái), ngưng ở cung nào thì an Mệnh tại cung đó."] },
+    { "title": "6/ An Thân", "lines": ["Khởi tự cung Dần là tháng Giêng, tính thuận đến tháng sinh, coi đó là giờ Tý, tính thuận đến giờ sinh để an Thân.", "* Theo chiều thuận là cung: Mệnh, Phụ mẫu, Phúc đức, Điền trạch, Quan Lộc, Nô bộc, Thiên di, Giải ách, Tài bạch, tử tức, Phu thê, Huynh đệ."] },
+    { "title": "7/ An Tử Vi và các chính tinh", "lines": [
+      "Vị trí của Tử Vi theo ngày sinh — năm bảng cho năm cục (xem các bảng bên dưới).",
+      "Vòng Tử Vi: An nghịch theo thứ tự (gồm 6 sao): Tủ Vi (T^) , Thiên Cơ (M), bỏ 1 cung, Thiếu Dương (H), Vũ Khúc (K), Thiên Đồng (T), bỏ 2 cung, Liêm Trinh (H).",
+      "Vòng Thiên Phủ: Thiên Phủ (T), Thái Âm (T), Tham Lang (M), Cự Môn (T), Thiên Tướng (T), Thiên Lương (M), Thất sát (K), bỏ 3 cung, Phá Quân (T).",
+      "Chú ý: Sao Thiên Phủ luôn đối chiếu với sao Tủ Vi theo trục Dần Thân. tại 2 cung Dần và Thân 2 sao này đồng cung."
+    ], "note": "Ở vòng Tử Vi, chữ «Thiếu Dương» bà viết là Thái Dương — lá số an Thái Dương." }
+  ],
+  "triet": [["Giáp Kỷ", "Thân Dậu"], ["Ất Canh", "Ngọ Mùi"], ["Bính Tân", "Thìn Tỵ"], ["Đinh Nhâm", "Dần Mão"], ["Mậu Quý", "Tý Sửu"]],
+  "differences": [
+    { "what": "Hỏa Tinh – Linh Tinh", "ba": "Cung khởi theo tuổi; Nam khởi Hỏa trước, Nữ khởi Linh trước; cả hai đều tính thuận đến giờ sinh.", "sach": "Dương Nam, Âm Nữ: Hỏa thuận, Linh nghịch; Âm Nam, Dương Nữ: Hỏa nghịch, Linh thuận." },
+    { "what": "Tứ Hóa tuổi Canh", "ba": "Lộc Thái Dương, Quyền Vũ Khúc, Khoa Thiên Đồng, Kỵ Thái Âm.", "sach": "Lộc Thái Dương, Quyền Vũ Khúc, Khoa Thái Âm, Kỵ Thiên Đồng." },
+    { "what": "Thiên Phúc tuổi Quý", "ba": "Cung Tý.", "sach": "Cung Tỵ." }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "entry": 3576,
+  "star": "trang_sinh",
+  "rules": [
+    { "id": "trang_sinh.3578.1", "para": 3578, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: từ thiện, độ lượng. Chủ thọ.", "when": "in(Tràng Sinh)", "tone": "cat" },
+    { "id": "trang_sinh.3580.1", "para": 3580, "palaces": ["Mệnh", "Thân"], "text": "Hợp cách hội với Cát diệu, gia đình tăng tiến tài lộc, con trưởng phát văn học phú quý, tính tình trung lương, phúc thọ", "ctx": "Tràng Sinh", "when": "in(Tràng Sinh) & meet(Cát tinh)", "tone": "cat" },
+    { "id": "trang_sinh.3580.2", "para": 3580, "palaces": ["Mệnh", "Thân"], "text": "hội với Tham Lang là hợp cách nhất, chủ ích thọ, phúc lộc.", "ctx": "Tràng Sinh", "when": "in(Tràng Sinh) & meet(Tham Lang)", "tone": "cat" },
+    { "id": "trang_sinh.3581.1", "para": 3581, "palaces": ["Mệnh", "Thân"], "text": "Hội với Không vong, ác Sát thì gia đình tổn hại, phải quan phòng tai biến; chính thê vô hậu, phải có thứ thất thì mới có con được.", "ctx": "Tràng Sinh", "when": "in(Tràng Sinh) & meet(Tuần/Triệt) & meet(Hung tinh)", "tone": "hung", "review": "Không vong hiểu là Tuần Triệt, ác Sát hiểu là hung tinh; hiểu là gặp cả Không vong lẫn ác sát" },
+    { "id": "trang_sinh.3582.1", "para": 3582, "palaces": ["Mệnh", "Thân"], "text": "Có Tràng Sinh - thọ", "when": "in(Tràng Sinh)", "tone": "cat" },
+    { "id": "trang_sinh.3583.1", "para": 3583, "palaces": ["Mệnh", "Thân"], "text": "Tràng Đế Tử Phủ - người quảng đại.", "when": "in(Tràng Sinh) & meet(Đế Vượng, Tử Phủ)", "tone": "cat" },
+    { "id": "trang_sinh.3584.1", "para": 3584, "palaces": ["Mệnh", "Thân"], "text": "Tràng Mã tại Dần - tốt, làm nên dễ dàng, nhiều may mắn.", "when": "in(Tràng Sinh, Thiên Mã) & at(Dần)", "tone": "cat" },
+    { "id": "trang_sinh.3585.1", "para": 3585, "palaces": ["Mệnh", "Thân"], "text": "Tràng Mã Tuyệt Sứ hay Tràng Mã tại Hợi - vất vả mới làm nên", "when": "in(Tràng Sinh, Thiên Mã) & at(Hợi)", "tone": "mixed", "review": "vế «Tràng Mã Tuyệt Sứ» không viết được: Tràng Sinh luôn cách Tuyệt 3 cung nên không bao giờ hội Tuyệt, Thiên Sứ (luôn ở Tật Ách) không bao giờ ở hay hội Mệnh Thân; chỉ viết vế «Tràng Mã tại Hợi»" },
+    { "id": "trang_sinh.3586.1", "para": 3586, "palaces": ["Huynh Đệ"], "text": "Có Sinh Vượng - anh em đông, sung túc.", "when": "in(Tràng Sinh/Đế Vượng) & meet(Tràng Sinh, Đế Vượng)", "tone": "cat", "review": "Vượng hiểu là Đế Vượng; Tràng Sinh và Đế Vượng luôn tam hợp nên điều kiện đúng khi một trong hai sao ở cung Huynh" },
+    { "id": "trang_sinh.3587.1", "para": 3587, "palaces": ["Tử Tức"], "text": "Tràng Sinh Nhật Nguyệt - con cái làm quan to.", "when": "in(Tràng Sinh) & meet(Nhật Nguyệt)", "tone": "cat" },
+    { "id": "trang_sinh.3588.1", "para": 3588, "palaces": ["Tử Tức"], "text": "Sinh Vượng - đông con", "when": "in(Tràng Sinh/Đế Vượng) & meet(Tràng Sinh, Đế Vượng)", "tone": "cat", "review": "Tràng Sinh và Đế Vượng luôn tam hợp nên điều kiện đúng khi một trong hai sao ở cung Tử" },
+    { "id": "trang_sinh.3588.2", "para": 3588, "palaces": ["Tử Tức"], "text": "giáp Thai Nhật Nguyệt - đẻ sinh đôi.", "when": "in(Thai) & flank(Thái Dương, Thái Âm)", "tone": "trung", "review": "hiểu là cung Tử có Thai, hai bên giáp Nhật Nguyệt (như mục sao Thai: «Thai giáp Nhật Nguyệt - có con sinh đôi»); không buộc có Tràng Sinh" },
+    { "id": "trang_sinh.3589.1", "para": 3589, "palaces": ["Tài Bạch"], "text": "Lộc gặp Sinh Vượng - tiến phát.", "when": "in(Lộc) & meet(Tràng Sinh, Đế Vượng)", "tone": "cat" },
+    { "id": "trang_sinh.3590.1", "para": 3590, "palaces": ["Quan Lộc"], "text": "Mã ngộ Tràng Sinh đắc địa - thanh vân đắc lộ", "when": "in(Thiên Mã) & meet(Tràng Sinh) & bright(Thiên Mã)", "tone": "cat", "review": "đắc địa hiểu là Thiên Mã đắc địa (theo bảng của bà Mã ở đâu cũng đắc hoặc vượng)" },
+    { "id": "trang_sinh.3591.1", "para": 3591, "palaces": ["Quan Lộc"], "text": "Tràng Mã Lộc = Tràng Tử Phủ Vũ Tướng - vinh hiển.", "when": "in(Tràng Sinh) & (meet(Thiên Mã, Lộc) | meet(Tử Phủ Vũ Tướng))", "tone": "cat" },
+    { "id": "trang_sinh.3592.1", "para": 3592, "palaces": ["Điền Trạch"], "text": "Mã Tràng Tả Hữu Khôi Việt - ruộng đất có nhiều.", "when": "in(Tràng Sinh) & meet(Thiên Mã, Tả Hữu, Khôi Việt)", "tone": "cat" },
+    { "id": "trang_sinh.3593.1", "para": 3593, "palaces": ["Phúc Đức"], "text": "Tràng Sinh là đất tụ nhiều nước, là giải nước dài.", "when": "in(Tràng Sinh)", "tone": "trung" },
+    { "id": "trang_sinh.3593.2", "para": 3593, "palaces": ["Phúc Đức"], "text": "Ngộ Lộc đắc địa - trong họ có ngôi mộ được hưởng lâu dài.", "ctx": "Tràng Sinh", "when": "in(Tràng Sinh) & ((meet(Lộc Tồn) & bright(Lộc Tồn)) | (meet(Hóa Lộc) & bright(Hóa Lộc)))", "tone": "cat" },
+    { "id": "trang_sinh.3593.3", "para": 3593, "palaces": ["Phúc Đức"], "text": "Tràng Sinh = thọ, mả tổ phát.", "when": "in(Tràng Sinh)", "tone": "cat" },
+    { "id": "trang_sinh.3594.1", "para": 3594, "palaces": ["Phúc Đức"], "text": "Tràng Sinh hội Thiên Lương - người có kỳ tài.", "when": "in(Tràng Sinh) & meet(Thiên Lương)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 3577, "kind": "meta" },
+    { "para": 3579, "kind": "theory" }
+  ]
+}

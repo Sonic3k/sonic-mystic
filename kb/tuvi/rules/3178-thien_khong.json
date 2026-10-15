@@ -1,0 +1,37 @@
+{
+  "entry": 3178,
+  "star": "thien_khong",
+  "rules": [
+    { "id": "thien_khong.3181.1", "para": 3181, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: gian hùng, chẳng nên việc gì. Chủ sự thất bại, phá tán.", "when": "in(Thiên Không)", "tone": "hung" },
+    { "id": "thien_khong.3182.1", "para": 3182, "palaces": ["Mệnh"], "text": "Mệnh cung có Thiên Không toạ thủ - là cuộc đời thành bại đa đoan, với một kết quả: \" vạn sự giai không \", không nên gặp.", "when": "in(Thiên Không)", "tone": "hung" },
+    { "id": "thien_khong.3182.2", "para": 3182, "palaces": ["Mệnh"], "text": "Nếu gặp thì khoa trường lận đận, công danh trắc trở.", "ctx": "Mệnh gặp Thiên Không", "when": "meet(Thiên Không)", "tone": "hung", "review": "hiểu «nếu gặp» là Mệnh gặp Thiên Không (thủ hay chiếu)" },
+    { "id": "thien_khong.3183.1", "para": 3183, "palaces": ["Mệnh", "Thân"], "text": "Là thần Không Vong ( Thiên Địa Tuần Triệt Không ), gặp nhiều Không thì không tốt, là đoạn Kiều, gãy cầu, là bỏ đời chồng vợ mới hợp số, là hoạ nhẹ, là người hạ tiện", "ctx": "Thiên Không", "when": "in(Thiên Không) & meet(Tam Không)", "tone": "hung", "review": "«gặp nhiều Không» hiểu là hội từ ba sao Không trở lên (Tam Không: Thiên Không, Địa Không, Tuần, Triệt)" },
+    { "id": "thien_khong.3183.2", "para": 3183, "palaces": ["Mệnh", "Thân"], "text": "có Cát tinh thì đỡ.", "ctx": "Thiên Không gặp nhiều Không", "when": "in(Thiên Không) & meet(Tam Không, Cát tinh)", "tone": "cat" },
+    { "id": "thien_khong.3183.3", "para": 3183, "palaces": ["Hạn"], "text": "Xem Thái Tuế trong hai hạn có chính diệu gia Cát tinh thì bình an.", "when": "in(Thái Tuế) & !empty() & meet(Cát tinh)", "tone": "cat", "review": "hiểu là đại hạn hay tiểu hạn đến cung có Thái Tuế mà cung ấy có chính diệu, gặp cát tinh thì bình an; Thái Tuế ở đây có thể là lưu Thái Tuế của năm xem, chương trình chỉ có Thái Tuế gốc; câu nằm trong mục Thiên Không (Thiên Không luôn ở ngay sau Thái Tuế) nhưng không ghi phải gặp Thiên Không; cần xem lại" },
+    { "id": "thien_khong.3183.4", "para": 3183, "palaces": ["Hạn"], "text": "Trong Kinh nói: Nam liệt anh hùng vận đáo Thiên Không nhi táng quốc", "when": "in(Thiên Không)", "tone": "hung", "review": "câu dẫn sách: hiểu là hạn đến cung có Thiên Không" },
+    { "id": "thien_khong.3184.1", "para": 3184, "palaces": ["Mệnh"], "text": "Mệnh có Thiên Không là người xuất gia", "when": "in(Thiên Không)", "tone": "trung" },
+    { "id": "thien_khong.3184.2", "para": 3184, "palaces": ["Mệnh"], "text": "gặp Văn Xương Thiên Tướng có thể chế hoá được", "ctx": "Mệnh có Thiên Không", "when": "in(Thiên Không) & meet(Văn Xương, Thiên Tướng)", "tone": "cat" },
+    { "id": "thien_khong.3184.3", "para": 3184, "palaces": ["Mệnh", "Thân"], "text": "nếu gặp Tứ Sát cùng ở Thân Mệnh là người phải có nhiều ân đức mới có phúc được.", "ctx": "Thiên Không", "when": "in(Thiên Không) & in(Tứ Sát)", "tone": "mixed", "review": "«cùng ở Thân Mệnh» hiểu là có một trong Tứ Sát cùng ở cung Thân hay Mệnh có Thiên Không" },
+    { "id": "thien_khong.3185.1", "para": 3185, "palaces": ["Mệnh", "Thân"], "text": "Hội với đào Hoa là người có mưu trí nhưng cơ nghiệp đổ vỡ. Đào Không là cách: \" bán thiên triết sĩ “ như cánh chim lưng trời gãy cánh.", "ctx": "Thiên Không", "when": "in(Thiên Không) & meet(Đào Hoa)", "tone": "mixed", "review": "theo cách an sao, Đào Hoa luôn đồng cung hay hợp chiếu Thiên Không, nên điều kiện đúng mỗi khi Thiên Không ở Thân Mệnh; nếu cách «Đào Không» của bà là Đào Không đồng cung thì cần tách riêng" },
+    { "id": "thien_khong.3186.1", "para": 3186, "palaces": ["Mệnh"], "text": "Có Thiên Không - hoàn toàn thất bại, lúc trẻ vất vả gian nan, không được nhờ người thân thích", "when": "in(Thiên Không)", "tone": "hung" },
+    { "id": "thien_khong.3186.2", "para": 3186, "palaces": ["Mệnh"], "text": "nếu vượng địa thì ngoài 30-40 tuổi mới khá.", "ctx": "Có Thiên Không", "when": "in(Thiên Không) & bright(Thiên Không)", "tone": "mixed" },
+    { "id": "thien_khong.3186.3", "para": 3186, "palaces": ["Mệnh"], "text": "Mệnh vô chính diệu đắc tam Không thì bột phát phú quý nhưng không bền.", "when": "empty() & meet(Tam Không)", "tone": "mixed" },
+    { "id": "thien_khong.3187.1", "para": 3187, "palaces": ["Mệnh"], "text": "Thiên Không Địa Kiếp - gian phi", "when": "in(Thiên Không) & meet(Địa Kiếp)", "tone": "hung" },
+    { "id": "thien_khong.3187.2", "para": 3187, "palaces": ["Mệnh"], "text": "cư Tỵ Hợi - hoạnh phát công danh", "ctx": "Thiên Không Địa Kiếp", "when": "in(Thiên Không) & meet(Địa Kiếp) & at(Tỵ, Hợi)", "tone": "cat" },
+    { "id": "thien_khong.3187.3", "para": 3187, "palaces": ["Mệnh"], "text": "nếu ngộ Thiên Giải - được giải hết cái xấu.", "ctx": "Thiên Không Địa Kiếp", "when": "in(Thiên Không) & meet(Địa Kiếp, Thiên Giải)", "tone": "cat" },
+    { "id": "thien_khong.3188.1", "para": 3188, "palaces": ["Mệnh"], "text": "Không Kiếp Cái Quyền - người trên không dùng, dìm hại.", "when": "in(Địa Không/Địa Kiếp) & meet(Không Kiếp, Hoa Cái, Hóa Quyền)", "tone": "hung", "review": "Không Kiếp hiểu là Địa Không Địa Kiếp theo quy ước; nếu Không là Thiên Không thì Thiên Không không bao giờ hội Hoa Cái (khác âm dương)" },
+    { "id": "thien_khong.3189.1", "para": 3189, "palaces": ["Mệnh"], "text": "Không có Khốc chiếu - hay thương người.", "when": null, "tone": "trung", "review": "Thiên Không luôn ở cung khác âm dương với Thiên Khốc nên Khốc không bao giờ chiếu được cung có Thiên Không; không viết được điều kiện, cần xem lại (có thể «Không» là Địa Không); «thương người» có thể là thương xót hay làm hại người" },
+    { "id": "thien_khong.3190.1", "para": 3190, "palaces": ["Mệnh"], "text": "Không ngộ Hồng Đào - xảo trá.", "when": "in(Thiên Không) & meet(Hồng Đào)", "tone": "hung" },
+    { "id": "thien_khong.3191.1", "para": 3191, "palaces": ["Huynh Đệ"], "text": "Có Thiên Không - anh em có người gian xảo.", "when": "in(Thiên Không)", "tone": "hung" },
+    { "id": "thien_khong.3192.1", "para": 3192, "palaces": ["Điền Trạch", "Tài Bạch"], "text": "Thiên Không - nghèo, không làm ra tiền.", "when": "in(Thiên Không)", "tone": "hung" },
+    { "id": "thien_khong.3193.1", "para": 3193, "palaces": ["Điền Trạch", "Tài Bạch"], "text": "Thiên Không ngộ Lộc Tồn hay Hoá Lộc - tiền của tán tụ bất thường.", "when": "in(Thiên Không) & meet(Lộc Tồn/Hóa Lộc)", "tone": "mixed" },
+    { "id": "thien_khong.3194.1", "para": 3194, "palaces": ["Tật Ách"], "text": "Có Thiên Không - ít bệnh tật.", "when": "in(Thiên Không)", "tone": "cat" },
+    { "id": "thien_khong.3195.1", "para": 3195, "palaces": ["Thiên Di", "Quan Lộc"], "text": "Không ngộ Hồng Đào (Vượng) - tài hoa lỗi lạc, giảo quyệt phi thường.", "when": "in(Thiên Không) & meet(Hồng Đào) & bright(Thiên Không)", "tone": "mixed", "review": "«(Vượng)» hiểu là Thiên Không ở nơi miếu vượng (Tỵ Ngọ Dần Mão); Đào Hoa không bao giờ ở nơi sáng khi hội cùng Thiên Không" },
+    { "id": "thien_khong.3196.1", "para": 3196, "palaces": ["Quan Lộc"], "text": "Thiên Không cư Quan - không làm nên", "when": "in(Thiên Không)", "tone": "hung" },
+    { "id": "thien_khong.3196.2", "para": 3196, "palaces": ["Quan Lộc"], "text": "ngộ Âm Dương - về già mới thành đạt.", "ctx": "Thiên Không cư Quan", "when": "in(Thiên Không) & meet(Nhật Nguyệt)", "tone": "mixed" }
+  ],
+  "skip": [
+    { "para": 3179, "kind": "meta" },
+    { "para": 3180, "kind": "meta" }
+  ]
+}

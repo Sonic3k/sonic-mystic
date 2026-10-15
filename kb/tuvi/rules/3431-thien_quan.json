@@ -1,0 +1,293 @@
+{
+ "entry": 3431,
+ "star": "thien_quan",
+ "rules": [
+  {
+   "id": "thien_phu.3435.1",
+   "para": 3435,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Tính cách: hảo tâm, Phật tính, phò nguy cứu khổ.",
+   "ctx": "Thiên Quan, Thiên Phúc",
+   "when": "in(Thiên Quan/Thiên Phúc)",
+   "tone": "cat",
+   "review": "các đoạn 3431–3454 là mục riêng của hai sao Thiên Quan, Thiên Phúc chép liền trong mục Thiên Phủ, nên chủ thể là Thiên Quan hoặc Thiên Phúc, không phải Thiên Phủ"
+  },
+  {
+   "id": "thien_phu.3438.1",
+   "para": 3438,
+   "palaces": [
+    "*"
+   ],
+   "text": "là thần chuyên ban phúc cho gia đình. Đóng ở đâu cứu khổ cứu nạn ở đó.",
+   "ctx": "Thiên Quan, Thiên Phúc",
+   "when": "in(Thiên Quan/Thiên Phúc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3439.1",
+   "para": 3439,
+   "palaces": [
+    "*"
+   ],
+   "text": "Sao Quan Phúc đi với ác Sát tinh không có hại",
+   "when": "in(Thiên Quan/Thiên Phúc) & meet(Hung tinh)",
+   "tone": "cat",
+   "review": "Quan Phúc ở đây hiểu là sao Thiên Quan hay Thiên Phúc (bà nói tính chất chung của hai sao); ác Sát tinh hiểu là hung tinh"
+  },
+  {
+   "id": "thien_phu.3439.2",
+   "para": 3439,
+   "palaces": [
+    "*"
+   ],
+   "text": "hội sao nào cũng tốt; là Phúc Thiện tinh, chế khắc giải trừ bớt tai nạn.",
+   "ctx": "Sao Quan Phúc",
+   "when": "in(Thiên Quan/Thiên Phúc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3440.1",
+   "para": 3440,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Thủ Mệnh là người có lòng từ thiện",
+   "ctx": "Thiên Quan, Thiên Phúc",
+   "when": "in(Thiên Quan/Thiên Phúc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3440.2",
+   "para": 3440,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "chỉ e nữ Mệnh ngộ Hình Kỵ là người hay thay đổi tính tình",
+   "ctx": "Thiên Quan, Thiên Phúc thủ Mệnh",
+   "when": "female() & in(Thiên Quan/Thiên Phúc) & meet(Thiên Hình, Hóa Kỵ)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3440.3",
+   "para": 3440,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "hội Thiên Đồng hãm - ưa thích đồng bóng.",
+   "ctx": "nữ Mệnh có Thiên Quan, Thiên Phúc",
+   "when": "female() & in(Thiên Quan/Thiên Phúc) & meet(Thiên Đồng) & dim(Thiên Đồng)",
+   "tone": "hung",
+   "review": "hiểu vế này vẫn nói về nữ Mệnh như vế trước"
+  },
+  {
+   "id": "thien_phu.3441.1",
+   "para": 3441,
+   "palaces": [
+    "Mệnh",
+    "Thiên Di",
+    "Tật Ách"
+   ],
+   "text": "Có Quan Phúc - gặp hạn xấu có thánh thần hay ân nhân giúp đỡ; là người có đạo đức lớn, có danh vị.",
+   "when": "in(Thiên Quan/Thiên Phúc) & meet(Quan Phúc)",
+   "tone": "cat",
+   "review": "Quan Phúc hiểu là đủ cả Thiên Quan và Thiên Phúc (một sao ở cung, sao kia hội), như cách đọc Quang Quý; cũng có thể bà muốn nói có Thiên Quan hay Thiên Phúc"
+  },
+  {
+   "id": "thien_phu.3442.1",
+   "para": 3442,
+   "palaces": [
+    "Mệnh",
+    "Thân"
+   ],
+   "text": "Chiếu Thân Mệnh= đi thi đỗ cao.",
+   "ctx": "Quan Phúc",
+   "when": "aim(Quan Phúc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3442.2",
+   "para": 3442,
+   "palaces": [
+    "Mệnh"
+   ],
+   "text": "Mệnh có Phúc - sùng đạo.",
+   "ctx": "Thiên Phúc",
+   "when": "in(Thiên Phúc)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_phu.3443.1",
+   "para": 3443,
+   "palaces": [
+    "Tài Bạch"
+   ],
+   "text": "Có Thiên Phúc ngộ Lộc - làm thủ từ mà giàu có.",
+   "when": "in(Thiên Phúc) & meet(Lộc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3444.1",
+   "para": 3444,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Thiên Quan - là miếu Dương Thần linh, là Đình",
+   "when": "in(Thiên Quan)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_phu.3445.1",
+   "para": 3445,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Thiên Phúc - là Âm Thần linh tự ( Chùa ), là Quán.",
+   "when": "in(Thiên Phúc)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_phu.3446.1",
+   "para": 3446,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Thiên Quan - là dương Hoả, là đất đại quý",
+   "when": "in(Thiên Quan)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3447.1",
+   "para": 3447,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Gặp Khúc Sương Tam Hoá Khôi Việt là văn khôi cao sĩ;",
+   "ctx": "Thiên Quan",
+   "when": "in(Thiên Quan) & meet(Xương Khúc, Tam Hóa, Khôi Việt)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3448.1",
+   "para": 3448,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Gặp Tham Phá Vũ là vũ cách đến bậc Công hầu;",
+   "ctx": "Thiên Quan",
+   "when": "in(Thiên Quan) & meet(Tham Lang, Phá Quân, Vũ Khúc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3449.1",
+   "para": 3449,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Nếu gặp Tuần Triệt Cái Tấu là nhà xướng ca có tiếng tăm;",
+   "ctx": "Thiên Quan",
+   "when": "in(Thiên Quan) & meet(Tuần/Triệt, Hoa Cái, Tấu Thư)",
+   "tone": "trung"
+  },
+  {
+   "id": "thien_phu.3450.1",
+   "para": 3450,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Gặp Đà Kỵ Diêu Kiếp là bị tàn tật, hôn mê ngu xuẩn.",
+   "ctx": "Thiên Quan",
+   "when": "in(Thiên Quan) & meet(Đà La, Hóa Kỵ, Thiên Diêu, Địa Kiếp)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3451.1",
+   "para": 3451,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Thiên Phúc - là Âm Thổ, là cuộc đất rất đẹp.",
+   "when": "in(Thiên Phúc)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3452.1",
+   "para": 3452,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Gặp Tử Phủ Hồng Đào - trai là phò mã",
+   "ctx": "Thiên Phúc",
+   "when": "male() & in(Thiên Phúc) & meet(Tử Phủ, Hồng Đào)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3452.2",
+   "para": 3452,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "gái cung phi.",
+   "ctx": "Thiên Phúc gặp Tử Phủ Hồng Đào",
+   "when": "female() & in(Thiên Phúc) & meet(Tử Phủ, Hồng Đào)",
+   "tone": "cat"
+  },
+  {
+   "id": "thien_phu.3453.1",
+   "para": 3453,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Gặp Phá Đà Diêu Kỵ Tuần Triệt - là hung địa",
+   "ctx": "Thiên Phúc",
+   "when": "in(Thiên Phúc) & meet(Phá Quân, Đà La, Thiên Diêu, Hóa Kỵ, Tuần/Triệt)",
+   "tone": "hung",
+   "review": "Phá hiểu là Phá Quân (cũng có thể là Phá Toái)"
+  },
+  {
+   "id": "thien_phu.3453.2",
+   "para": 3453,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "trai làm đạo sĩ, ly tổ phiêu lưu.",
+   "ctx": "Thiên Phúc gặp Phá Đà Diêu Kỵ Tuần Triệt",
+   "when": "male() & in(Thiên Phúc) & meet(Phá Quân, Đà La, Thiên Diêu, Hóa Kỵ, Tuần/Triệt)",
+   "tone": "hung"
+  },
+  {
+   "id": "thien_phu.3454.1",
+   "para": 3454,
+   "palaces": [
+    "Phúc Đức"
+   ],
+   "text": "Quan Phúc cư Phúc cung là nhà có phúc lớn, mồ mả tiền nhân chôn gần chùa.",
+   "when": "in(Thiên Quan/Thiên Phúc) & meet(Quan Phúc)",
+   "tone": "cat"
+  }
+ ],
+ "skip": [
+  {
+   "para": 3432,
+   "kind": "meta"
+  },
+  {
+   "para": 3433,
+   "kind": "meta"
+  },
+  {
+   "para": 3434,
+   "kind": "meta"
+  },
+  {
+   "para": 3436,
+   "kind": "meta"
+  },
+  {
+   "para": 3437,
+   "kind": "meta"
+  }
+ ]
+}

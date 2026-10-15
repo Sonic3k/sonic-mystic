@@ -1,0 +1,18 @@
+{
+  "entry": 678,
+  "star": "dieu_khach",
+  "rules": [
+    { "id": "dieu_khach.680.1", "para": 680, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: Khoe khoang, khoác lác, liến láu, sảo quyệt. Chủ ngôn luận, văn chương thi phú.", "when": "in(Điếu Khách)", "tone": "mixed" },
+    { "id": "dieu_khach.681.1", "para": 681, "palaces": ["Mệnh", "Thân"], "text": "Hội với Song Hao, Tang Hổ là bại tinh, chủ phá bại tàn sản, gia trang, gây tật bệnh hình thương.", "ctx": "Điếu Khách", "when": "meet(Điếu Khách, Song Hao, Tang Hổ)", "tone": "hung", "review": "Bạch Hổ luôn cách Điếu Khách hai cung nên Điếu Khách thủ cung thì không bao giờ hội đủ Tang Hổ; hiểu là cung hội đủ Điếu Khách, Song Hao, Tang Hổ (chỉ xảy ra ở cung có Tang Môn)" },
+    { "id": "dieu_khach.682.1", "para": 682, "palaces": ["Mệnh", "Thân"], "text": "Cư hãm địa, nói năng không cẩn trọng, ham mê chơi bời, bài bạc, ly khắc tổ tông.", "ctx": "Điếu Khách", "when": null, "tone": "hung", "review": "bảng của bà không ghi miếu hãm cho Điếu Khách nên không biết cung nào là hãm địa; không viết được điều kiện, cần xem lại" },
+    { "id": "dieu_khach.683.1", "para": 683, "palaces": ["Mệnh", "Thân"], "text": "Hội với Mã Khốc Khách ví như ngựa có đủ bộ yên cương, nhạc.", "ctx": "Điếu Khách", "when": "in(Điếu Khách) & meet(Thiên Mã, Thiên Khốc)", "tone": "cat", "review": "Thiên Mã luôn ở tam hợp hay đồng cung với Điếu Khách nên điều kiện chủ yếu là có Thiên Khốc hội" },
+    { "id": "dieu_khach.683.2", "para": 683, "palaces": ["Mệnh"], "text": "lâm Mệnh là người có học vấn, có tài hùng biện, khéo ngoại giao.", "ctx": "Mã Khốc Khách", "when": "in(Điếu Khách) & meet(Thiên Mã, Thiên Khốc)", "tone": "cat" },
+    { "id": "dieu_khach.684.1", "para": 684, "palaces": ["Mệnh"], "text": "Điếu Khách ngộ Quan Phù - cờ bạc.", "when": "in(Điếu Khách) & meet(Quan Phù)", "tone": "hung", "review": "Quan Phù (vòng Thái Tuế) luôn xung chiếu Điếu Khách nên điều kiện đúng mỗi khi Điếu Khách ở Mệnh" },
+    { "id": "dieu_khach.685.1", "para": 685, "palaces": ["Tật Ách"], "text": "Điếu Tang Kỵ - Tự sát.", "when": "in(Điếu Khách) & meet(Tang Môn, Hóa Kỵ)", "tone": "hung" },
+    { "id": "dieu_khach.686.1", "para": 686, "palaces": ["Tật Ách"], "text": "Điếu Khách - tai nạn ngã cây. Phòng có hình phạt nhỏ.", "when": "in(Điếu Khách)", "tone": "hung" },
+    { "id": "dieu_khach.687.1", "para": 687, "palaces": ["Quan Lộc"], "text": "Điếu phùng Mã Khốc - Làm nên", "when": "in(Điếu Khách) & meet(Thiên Mã, Thiên Khốc)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 679, "kind": "meta" }
+  ]
+}

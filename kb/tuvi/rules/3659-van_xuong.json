@@ -1,0 +1,32 @@
+{
+  "entry": 3659,
+  "star": "van_xuong",
+  "rules": [
+    { "id": "van_xuong.3663.1", "para": 3663, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: khôi ngô thanh tú, thông minh, có tài văn chương. Chủ khoa giáp.", "when": "in(Văn Xương)", "tone": "cat" },
+    { "id": "van_xuong.3664.1", "para": 3664, "palaces": ["Mệnh", "Thân"], "text": "Toạ thủ Thân Mệnh là người có cặp mắt sáng, mi thanh mục tú, bản chất thông minh cơ sảo, học rộng tài cao, hiểu biết nhiều nên cơ biến khác thường, vì tính tình nho nhã nên ưa sự u nhàn, ghét chuyện náo tạp, về già bụng phệ.", "ctx": "Văn Sương", "when": "in(Văn Xương)", "tone": "cat" },
+    { "id": "van_xuong.3665.1", "para": 3665, "palaces": ["Mệnh"], "text": "Hội với Thái Dương Thiên Lương Lộc Tồn ở Tài Quan hợp chiếu thì phú quý, trước khó sau dễ.", "ctx": "Văn Sương", "when": "(in(Văn Xương) | tri(Văn Xương)) & tri(Thái Dương, Thiên Lương, Lộc Tồn)", "tone": "mixed", "review": "hiểu là Thái Dương, Thiên Lương, Lộc Tồn ở hai cung Tài Quan hợp chiếu Mệnh, Văn Xương ở Mệnh hoặc cũng ở Tài Quan" },
+    { "id": "van_xuong.3666.1", "para": 3666, "palaces": ["Mệnh", "Thân"], "text": "Hãm địa gia Dương Hoả - là người làm công nghệ khéo", "ctx": "Văn Sương", "when": "in(Văn Xương) & dim(Văn Xương) & meet(Kình Dương, Hỏa Tinh)", "tone": "trung" },
+    { "id": "van_xuong.3666.2", "para": 3666, "palaces": ["Mệnh", "Thân"], "text": "ngộ Kình Đà Linh là đới tật, mặt rỗ, cũng được sống lâu.", "ctx": "Văn Sương hãm địa", "when": "in(Văn Xương) & dim(Văn Xương) & meet(Kình Đà, Linh Tinh)", "tone": "mixed", "review": "hiểu là vẫn nói về Văn Xương hãm địa (cùng một câu với vế trước)" },
+    { "id": "van_xuong.3667.1", "para": 3667, "palaces": ["Mệnh"], "text": "Có Văn Sương - Tính thanh tao trong sạch; văn chương tài giỏi", "when": "in(Văn Xương)", "tone": "cat" },
+    { "id": "van_xuong.3667.2", "para": 3667, "palaces": ["Mệnh"], "text": "Nữ thì vượng phu ích tử", "ctx": "Có Văn Sương", "when": "in(Văn Xương) & female()", "tone": "cat" },
+    { "id": "van_xuong.3667.3", "para": 3667, "palaces": ["Mệnh"], "text": "ngộ Tham tại Dần Thân - gặp thời làm nên tướng quốc.", "ctx": "Có Văn Sương", "when": "in(Văn Xương) & meet(Tham Lang) & at(Dần, Thân)", "tone": "cat", "review": "hiểu là Văn Xương ở Mệnh tại Dần Thân gặp Tham Lang; cũng có thể bà muốn nói Tham Lang ở Dần Thân" },
+    { "id": "van_xuong.3668.1", "para": 3668, "palaces": ["Mệnh"], "text": "Sương hãm ngộ Thiên Thương - chết yểu", "when": null, "tone": "hung", "review": "Thiên Thương luôn ở cung Nô Bộc, không bao giờ ở hay hội chiếu cung Mệnh (có lẽ bà nói về hạn gặp Thiên Thương); không viết được điều kiện, cần xem lại" },
+    { "id": "van_xuong.3669.1", "para": 3669, "palaces": ["Mệnh"], "text": "Sương Diêu hãm cư Dần Thân - rất xấu, bị tù thì gia án", "when": null, "tone": "hung", "review": "theo cách an sao (Văn Xương theo giờ, Thiên Diêu theo tháng, Mệnh theo cả tháng và giờ), Văn Xương và Thiên Diêu chỉ cùng ở hay cùng hội về cung Mệnh khi Mệnh ở Sửu Mão Tỵ Mùi Dậu Hợi, không bao giờ ở Dần Thân; không viết được điều kiện, cần xem lại" },
+    { "id": "van_xuong.3670.1", "para": 3670, "palaces": ["Mệnh"], "text": "Sương Diêu Cơ Nguyệt - văn chương phong tình.", "when": "in(Văn Xương) & meet(Thiên Diêu, Thiên Cơ, Thái Âm)", "tone": "trung" },
+    { "id": "van_xuong.3671.1", "para": 3671, "palaces": ["Mệnh"], "text": "Sương Diêu Nhật nữ Mệnh - dâm dục, xấu", "when": "female() & in(Văn Xương) & meet(Thiên Diêu, Thái Dương)", "tone": "hung" },
+    { "id": "van_xuong.3672.1", "para": 3672, "palaces": ["Mệnh"], "text": "Sương Liêm Tham Dần Thân - lao tù", "when": "in(Văn Xương) & at(Dần, Thân) & meet(Liêm Trinh, Tham Lang)", "tone": "hung" },
+    { "id": "van_xuong.3673.1", "para": 3673, "palaces": ["Mệnh", "Thân"], "text": "Sương hay Khúc Sương Mệnh Thân - làm lý trưởng, trưởng ấp", "when": "in(Văn Xương) | (in(Văn Khúc) & meet(Văn Xương))", "tone": "cat" },
+    { "id": "van_xuong.3674.1", "para": 3674, "palaces": ["Mệnh"], "text": "Nhật cư Ngọ có Văn Sương - là người lịch duyệt, trên đời khó có người bì kịp.", "when": "in(Thái Dương) & at(Ngọ) & meet(Văn Xương)", "tone": "cat" },
+    { "id": "van_xuong.3675.1", "para": 3675, "palaces": ["Mệnh"], "text": "Văn Sương là dương Kim cư Ngọ là Dương Hoả - bị khắc chế nên nguy khốn", "when": "in(Văn Xương) & at(Ngọ)", "tone": "hung" },
+    { "id": "van_xuong.3675.2", "para": 3675, "palaces": ["Mệnh"], "text": "nếu được sao hành Thuỷ lâm vào thì sau thành đại khí, danh tiếng lớn lao.", "ctx": "Văn Sương cư Ngọ", "when": "in(Văn Xương) & at(Ngọ) & in(Thái Âm/Thiên Đồng/Cự Môn/Thiên Tướng/Tham Lang/Phá Quân/Văn Khúc/Hóa Khoa/Hóa Kỵ/Thiên Diêu/Thiên Y/Thiên Khốc/Thiên Hư/Thanh Long/Long Trì/Long Đức/Bác Sĩ/Đại Hao/Lưu Hà/Tràng Sinh/Mộc Dục/Suy/Mộ/Triệt)", "tone": "cat", "review": "sao hành Thuỷ lấy theo phần «Thuộc …» bà ghi ở đầu mục mỗi sao (các sao bà ghi Thuộc Thuỷ; Mộ, Suy là sao vòng Tràng Sinh); «lâm vào» hiểu là ở ngay cung Mệnh" },
+    { "id": "van_xuong.3676.1", "para": 3676, "palaces": ["Mệnh"], "text": "Văn Sương gặp Quả Tú như Trương Đế Sư đi tìm tiên.", "when": "in(Văn Xương) & meet(Quả Tú)", "tone": "trung" },
+    { "id": "van_xuong.3677.1", "para": 3677, "palaces": ["Mệnh"], "text": "Nữ Mệnh có Sương Diêu - nhỏ tuổi đã dâm đãng.", "when": "female() & in(Văn Xương) & meet(Thiên Diêu)", "tone": "hung" },
+    { "id": "van_xuong.3678.1", "para": 3678, "palaces": ["Phu Thê"], "text": "Có Văn Sương gặp Tam Không - vợ con nhà danh giá", "when": "in(Văn Xương) & meet(Tam Không)", "tone": "cat" },
+    { "id": "van_xuong.3679.1", "para": 3679, "palaces": ["Thiên Di"], "text": "Có Văn Sương Diêu Mã - ngoại dâm", "when": "in(Văn Xương) & meet(Thiên Diêu, Thiên Mã)", "tone": "hung" }
+  ],
+  "skip": [
+    { "para": 3660, "kind": "meta" },
+    { "para": 3661, "kind": "meta" },
+    { "para": 3662, "kind": "meta" }
+  ]
+}

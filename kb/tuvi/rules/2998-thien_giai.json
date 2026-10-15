@@ -1,0 +1,14 @@
+{
+  "entry": 2998,
+  "star": "thien_giai",
+  "rules": [
+    { "id": "thien_giai.3000.1", "para": 3000, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: lòng tốt hay giúp đỡ. Chủ việc giải trừ tai ách.", "when": "in(Thiên Giải)", "tone": "cat" },
+    { "id": "thien_giai.3001.1", "para": 3001, "palaces": ["Mệnh", "Thân"], "text": "Cư Thân Mệnh - chủ phúc hậu, cứu khốn phò nguy, giải trừ 1 phần hung nguy, tăng phúc thọ. Cùng với Thiên Trù Địa Giải Giải Thần là 4 sao phúc thiện tinh.", "ctx": "Thiên Giải", "when": "in(Thiên Giải)", "tone": "cat" },
+    { "id": "thien_giai.3002.1", "para": 3002, "palaces": ["Tật Ách", "Thiên Di", "Phúc Đức"], "text": "Thiên Giải cư ách Di Phúc - rất tốt, giải trừ tai ách.", "when": "in(Thiên Giải)", "tone": "cat" },
+    { "id": "thien_giai.3003.1", "para": 3003, "palaces": ["Điền Trạch", "Tài Bạch"], "text": "Cư Điền Tài - giữ của cải ruộng vườn bền chặt.", "ctx": "Thiên Giải", "when": "in(Thiên Giải)", "tone": "cat" },
+    { "id": "thien_giai.3004.1", "para": 3004, "palaces": ["Mệnh"], "text": "Mệnh có Giải Kình Đồng Âm - uy danh nhất thế.", "when": "in(Thiên Giải, Thiên Đồng, Thái Âm) & meet(Kình Dương)", "tone": "cat", "review": "Đồng Âm hiểu là Thiên Đồng Thái Âm đồng cung ở Mệnh (chỉ ở Tý Ngọ), như bà ghi ở sao Thái Âm «Âm Đồng cư Ngọ ngộ Kình = nhất thế uy danh»; Kình hiểu là gặp Kình Dương" }
+  ],
+  "skip": [
+    { "para": 2999, "kind": "meta" }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "entry": 3107,
+  "star": "thien_hy",
+  "rules": [
+    { "id": "thien_hy.3109.1", "para": 3109, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: vui vẻ, ôn hoà.", "when": "in(Thiên Hỷ)", "tone": "cat" },
+    { "id": "thien_hy.3110.1", "para": 3110, "palaces": ["Mệnh", "Thân"], "text": "Chủ sự mừng vui", "when": "in(Thiên Hỷ)", "tone": "cat" },
+    { "id": "thien_hy.3110.2", "para": 3110, "palaces": ["Quan Lộc"], "text": "hội với Đào Hồng cư Quan lộc là hợp cách.", "ctx": "Thiên Hỷ", "when": "in(Thiên Hỷ) & meet(Hồng Đào)", "tone": "cat" },
+    { "id": "thien_hy.3111.1", "para": 3111, "palaces": ["Mệnh"], "text": "Cư Mệnh là người có dung mạo tuấn mỹ, cười nói có duyên", "ctx": "Thiên Hỷ", "when": "in(Thiên Hỷ)", "tone": "trung" },
+    { "id": "thien_hy.3111.2", "para": 3111, "palaces": ["Mệnh"], "text": "ngộ Thiên Hỷ - sớm thành gia thất.", "when": "meet(Thiên Hỷ)", "tone": "cat", "review": "câu ở ngay mục Thiên Hỷ nên hiểu là Mệnh gặp Thiên Hỷ (thủ hay chiếu)" },
+    { "id": "thien_hy.3112.1", "para": 3112, "palaces": ["Mệnh", "Thân"], "text": "Thiên Hỷ Hỷ Thần Hồng Loan là 3 sao đem lại hân hoan trong đời.", "when": "in(Thiên Hỷ)", "tone": "cat" },
+    { "id": "thien_hy.3113.1", "para": 3113, "palaces": ["Mệnh"], "text": "Có Thiên Hỷ - người ôn hoà nhã nhặn.", "when": "in(Thiên Hỷ)", "tone": "cat" },
+    { "id": "thien_hy.3114.1", "para": 3114, "palaces": ["Mệnh"], "text": "Hỷ Hồng - vinh hiển, sớm nhân duyên, già hết lộc.", "when": "in(Thiên Hỷ) & meet(Hồng Loan)", "tone": "mixed", "review": "Hồng Loan luôn xung chiếu Thiên Hỷ nên điều kiện đúng mỗi khi Thiên Hỷ thủ Mệnh" },
+    { "id": "thien_hy.3115.1", "para": 3115, "palaces": ["Mệnh"], "text": "Hỷ Diêu - hay tự gây ra những tai hoạ quái dị.", "when": "in(Thiên Hỷ) & meet(Thiên Diêu)", "tone": "hung" },
+    { "id": "thien_hy.3116.1", "para": 3116, "palaces": ["Mệnh"], "text": "Hỷ Đào Nữ Mệnh - loạn luân.", "when": "female() & in(Thiên Hỷ) & meet(Đào Hoa)", "tone": "hung" },
+    { "id": "thien_hy.3117.1", "para": 3117, "palaces": ["Huynh Đệ"], "text": "Hỷ Thai Hồng Đào - có người ngoại dâm.", "when": "in(Thiên Hỷ) & meet(Thai, Hồng Đào)", "tone": "hung", "review": "Thai hiểu là sao Thai (vòng Tràng Sinh)" },
+    { "id": "thien_hy.3118.1", "para": 3118, "palaces": ["Huynh Đệ"], "text": "Hỷ Diêu Đào gặp Phá hay Tướng Sứ chiếu - có người chửa hoang.", "when": "in(Thiên Hỷ) & meet(Thiên Diêu, Đào Hoa) & meet(Phá Quân/Tướng Quân) & aim(Thiên Sứ)", "tone": "hung", "review": "Phá là Phá Quân, Tướng là Tướng Quân, Sứ là Thiên Sứ, như bà ghi ở sao Hỷ Thần «có Phá Quân hay Tướng Quân, Thiên Sứ chiếu»; Thiên Sứ luôn hợp chiếu cung Huynh" },
+    { "id": "thien_hy.3119.1", "para": 3119, "palaces": ["Phu Thê"], "text": "Hỷ Hồng Đào - sánh duyên cùng người đẹp dễ dàng.", "when": "in(Thiên Hỷ) & meet(Hồng Đào)", "tone": "cat" },
+    { "id": "thien_hy.3120.1", "para": 3120, "palaces": ["Thiên Di"], "text": "Hỷ Cái Tả Hữu - ra vào cửa quyền quý, làm nên.", "when": "in(Thiên Hỷ/Hỷ Thần) & meet(Hoa Cái, Tả Hữu)", "tone": "cat", "review": "Thiên Hỷ luôn ở cung khác âm dương với Hoa Cái nên không bao giờ hội Hoa Cái; hiểu Hỷ theo quy ước là Thiên Hỷ hay Hỷ Thần, thực tế chỉ Hỷ Thần hội được (bà cũng ghi câu này ở sao Hỷ Thần); cần xem lại" },
+    { "id": "thien_hy.3121.1", "para": 3121, "palaces": ["Quan Lộc"], "text": "Đào Hồng Hỷ hội - làm nên lớn dễ dàng.", "when": "in(Thiên Hỷ) & meet(Hồng Đào)", "tone": "cat" },
+    { "id": "thien_hy.3122.1", "para": 3122, "palaces": ["Quan Lộc"], "text": "Hỷ Đào Hồng Tấu Vũ - làm nghề ca xướng.", "when": "in(Thiên Hỷ) & meet(Hồng Đào, Tấu Thư, Vũ Khúc)", "tone": "trung" },
+    { "id": "thien_hy.3123.1", "para": 3123, "palaces": ["Phúc Đức"], "text": "Phúc có Thiên Hỷ Hỷ Thần - mả phát.", "when": "in(Thiên Hỷ) & meet(Hỷ Thần)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 3108, "kind": "meta" }
+  ]
+}

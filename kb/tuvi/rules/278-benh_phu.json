@@ -1,0 +1,22 @@
+{
+  "entry": 278,
+  "star": "benh_phu",
+  "rules": [
+    { "id": "benh_phu.280.1", "para": 280, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: ốm yếu, xanh, còm, chủ về bệnh tật, hình thương.", "when": "in(Bệnh Phù)", "tone": "hung" },
+    { "id": "benh_phu.281.1", "para": 281, "palaces": ["Mệnh"], "text": "Thủ Mệnh là người gầy - Da có nốt hơi đen xám.", "ctx": "Bệnh Phù", "when": "in(Bệnh Phù)", "tone": "trung" },
+    { "id": "benh_phu.282.1", "para": 282, "palaces": ["Mệnh", "Thân"], "text": "Hội với Địa Kiếp chủ hà tiện, cơ hàn", "ctx": "Bệnh Phù", "when": "in(Bệnh Phù) & meet(Địa Kiếp)", "tone": "hung" },
+    { "id": "benh_phu.283.1", "para": 283, "palaces": ["Mệnh", "Thân"], "text": "Hội Thái Tuế: có sự đau khổ ốm đau", "ctx": "Bệnh Phù", "when": "in(Bệnh Phù) & meet(Thái Tuế)", "tone": "hung" },
+    { "id": "benh_phu.283.2", "para": 283, "palaces": ["Mệnh", "Thân"], "text": "nếu có Th Lương thì giải được.", "ctx": "Bệnh Phù hội Thái Tuế", "when": "in(Bệnh Phù) & meet(Thái Tuế, Thiên Lương)", "tone": "cat" },
+    { "id": "benh_phu.284.1", "para": 284, "palaces": ["Mệnh", "Thân"], "text": "có Bệnh Phù: có đới tật, có bệnh hay ốm đau", "when": "in(Bệnh Phù)", "tone": "hung" },
+    { "id": "benh_phu.284.2", "para": 284, "palaces": ["Mệnh", "Thân"], "text": "Nếu có Thiên Lương thì không hại gì.", "ctx": "có Bệnh Phù", "when": "in(Bệnh Phù) & meet(Thiên Lương)", "tone": "cat" },
+    { "id": "benh_phu.285.1", "para": 285, "palaces": ["Mệnh", "Thân"], "text": "Nếu Mệnh Thân cư Tứ Mộ, có Bệnh phù Thái Tuế ( và Thiên Thương ) là người dở dang không lành.", "when": "in(Bệnh Phù) & meet(Thái Tuế) & at(Tứ Mộ)", "tone": "hung", "review": "«( và Thiên Thương )» không đưa vào điều kiện vì Thiên Thương luôn ở cung Nô, không bao giờ hội với Mệnh hay Thân" },
+    { "id": "benh_phu.286.1", "para": 286, "palaces": ["Phúc Đức"], "text": "có Bệnh Phù Hoá Kỵ Thiên Hình: nhà có người điên, hay mắc bênh phù thủng ( + bệnh phong sang.)", "when": "in(Bệnh Phù) & meet(Hóa Kỵ, Thiên Hình)", "tone": "hung" },
+    { "id": "benh_phu.287.1", "para": 287, "palaces": ["Tật Ách"], "text": "có Bệnh Phù, Hao Sát ngộ Hình Kỵ là bị ác bệnh.", "when": null, "tone": "hung", "review": "theo cách an sao Bệnh Phù luôn kề Đại Hao và lệch lẻ với Tiểu Hao, nên Bệnh Phù không bao giờ hội được sao Hao nào; không viết được điều kiện; cần xem lại (Sát có thể là Thất Sát hay sát tinh)" },
+    { "id": "benh_phu.287.2", "para": 287, "palaces": ["Tật Ách"], "text": "Có Bệnh Phù thường hay đau dạ dầy, đầy hơi chướng khí, kiết lỵ.", "when": "in(Bệnh Phù)", "tone": "hung" },
+    { "id": "benh_phu.288.1", "para": 288, "palaces": ["Tật Ách"], "text": "Bệnh và Bệnh phù gặp Thái Âm, Thiên Cơ thì mắc bệnh tê liệt khi trở về già", "when": "in(Bệnh Phù/Bệnh) & meet(Thái Âm, Thiên Cơ)", "tone": "hung", "review": "«Bệnh và Bệnh phù» hiểu là sao Bệnh hay Bệnh Phù đều vậy (mục Bệnh có đúng câu này cho riêng sao Bệnh)" },
+    { "id": "benh_phu.288.2", "para": 288, "palaces": ["Tật Ách"], "text": "gặp Hình: mắc bệnh phong.", "ctx": "Bệnh và Bệnh phù", "when": "in(Bệnh Phù/Bệnh) & meet(Thiên Hình)", "tone": "hung", "review": "hiểu là vế song song: Bệnh hay Bệnh Phù gặp Hình (mục Bệnh có đúng câu này); cũng có thể là gặp Âm Cơ lại gặp Hình" }
+  ],
+  "skip": [
+    { "para": 279, "kind": "meta" }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "entry": 1475,
+  "star": "luu_ha",
+  "rules": [
+    { "id": "luu_ha.1477.1", "para": 1477, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: lưu loát, thâm hiểm. Chủ thuỷ tai.", "when": "in(Lưu Hà)", "tone": "hung" },
+    { "id": "luu_ha.1478.1", "para": 1478, "palaces": ["Mệnh"], "text": "có Lưu Hà - đàn ông tha hương thì chết", "when": "in(Lưu Hà) & male()", "tone": "hung" },
+    { "id": "luu_ha.1478.2", "para": 1478, "palaces": ["Mệnh"], "text": "đàn bà thai sản thì vong.", "ctx": "có Lưu Hà", "when": "in(Lưu Hà) & female()", "tone": "hung" },
+    { "id": "luu_ha.1479.1", "para": 1479, "palaces": ["Mệnh"], "text": "Hà Sát Hao Kiếp Kình - bị giết.", "when": "in(Lưu Hà) & meet(Thất Sát, Đại Hao/Tiểu Hao, Địa Kiếp, Kình Dương)", "tone": "hung", "review": "Sát hiểu là Thất Sát, Hao là Đại Hao hay Tiểu Hao, Kiếp là Địa Kiếp (cũng có thể «Kiếp» là Kiếp Sát hoặc Sát là sát tinh)" },
+    { "id": "luu_ha.1480.1", "para": 1480, "palaces": ["Mệnh"], "text": "Hà Hình Kiếp - chết bởi đao thương.", "when": "in(Lưu Hà) & meet(Thiên Hình, Địa Kiếp)", "tone": "hung" },
+    { "id": "luu_ha.1481.1", "para": 1481, "palaces": ["Mệnh"], "text": "Hà Cự Kỵ - chết trôi.", "when": "in(Lưu Hà) & meet(Cự Môn, Hóa Kỵ)", "tone": "hung" },
+    { "id": "luu_ha.1482.1", "para": 1482, "palaces": ["Mệnh"], "text": "Hà Long - đắc thời.", "when": "in(Lưu Hà) & meet(Thanh Long)", "tone": "cat", "review": "Long hiểu là Thanh Long (mục Thanh Long ghi «Hội với Lưu Hà là Thanh Vân đắc lộ, rồng gặp nước»); cũng có thể là Long Trì" },
+    { "id": "luu_ha.1483.1", "para": 1483, "palaces": ["Mệnh"], "text": "Lưu Tang, Lưu Mã - súc vật trong nhà bị toi chết.", "when": "in(Lưu Hà) & (meet(Tang Môn) | meet(Thiên Mã))", "tone": "hung", "review": "hiểu «Lưu» là Lưu Hà (Lưu Hà gặp Tang Môn, hoặc gặp Thiên Mã); cũng có thể bà muốn nói Tang Môn, Thiên Mã lưu niên trong hạn — sao lưu niên không được tính" }
+  ],
+  "skip": [
+    { "para": 1476, "kind": "meta" }
+  ]
+}

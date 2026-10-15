@@ -1,0 +1,37 @@
+{
+  "entry": 589,
+  "star": "de_vuong",
+  "rules": [
+    { "id": "de_vuong.591.1", "para": 591, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: từ thiện, chủ sự thịnh vượng.", "when": "in(Đế Vượng)", "tone": "cat" },
+    { "id": "de_vuong.593.1", "para": 593, "palaces": ["Mệnh"], "text": "Thủ Mệnh là người có lưng dài và cường tráng.", "ctx": "Đế Vượng", "when": "in(Đế Vượng)", "tone": "trung" },
+    { "id": "de_vuong.593.2", "para": 593, "palaces": ["Mệnh"], "text": "Hội với Hình là lưng gù.", "ctx": "Đế Vượng thủ Mệnh", "when": "in(Đế Vượng) & meet(Thiên Hình)", "tone": "hung" },
+    { "id": "de_vuong.593.3", "para": 593, "palaces": ["Mệnh"], "text": "Hội với Kiếp là lưng bị ung thư, nhọt hậu bối.", "ctx": "Đế Vượng thủ Mệnh", "when": "in(Đế Vượng) & meet(Địa Kiếp)", "tone": "hung" },
+    { "id": "de_vuong.594.1", "para": 594, "palaces": ["Mệnh", "Thân"], "text": "Đế Vượng hợp sao Vũ Khúc nhất, 2 sao đồng cung là đồng ruộng nhà cửa cao sang, danh vọng quý hiển.", "when": "in(Đế Vượng, Vũ Khúc)", "tone": "cat" },
+    { "id": "de_vuong.595.1", "para": 595, "palaces": ["Phu Thê"], "text": "Thủ cung Phu Thê thì thuận hoà, êm ấm, tử tôn đề đa.", "ctx": "Đế Vượng", "when": "in(Đế Vượng)", "tone": "cat" },
+    { "id": "de_vuong.596.1", "para": 596, "palaces": ["Mệnh", "Thân"], "text": "Đế Vượng lạc Không Kiếp- ruộng vườn tiêu tán, tổ nghiệp không giữ được, mà tiểu phòng, con út bị hạn hoạ.", "when": "in(Đế Vượng) & meet(Không Kiếp)", "tone": "hung" },
+    { "id": "de_vuong.597.1", "para": 597, "palaces": ["Mệnh", "Thân"], "text": "Đế Vượng hội Tử Vi Thiên Phủ Vũ Khúc Phục Bật là người có cơ mưu, có tài lãnh đạo, tổ chức.", "when": "in(Đế Vượng) & meet(Tử Vi, Thiên Phủ, Vũ Khúc, Tả Hữu)", "tone": "cat", "review": "Phục Bật hiểu là Phụ Bật (Tả Phù, Hữu Bật)" },
+    { "id": "de_vuong.598.1", "para": 598, "palaces": ["Hạn"], "text": "Lưu hạn Vượng hội Cát tinh là tậu nhà cửa ruộng vườn, sinh đẻ và nhiều may mắn.", "when": "in(Đế Vượng) & meet(Cát tinh)", "tone": "cat" },
+    { "id": "de_vuong.599.1", "para": 599, "palaces": ["Hạn"], "text": "Lâm Không Kiếp là triệu chứng tiểu phòng, con út lâm hạn, tài lộc hao tán.", "ctx": "Lưu hạn Vượng", "when": "in(Đế Vượng) & meet(Không Kiếp)", "tone": "hung" },
+    { "id": "de_vuong.600.1", "para": 600, "palaces": ["Mệnh"], "text": "Có Đế Vượng - thịnh đạt.", "when": "in(Đế Vượng)", "tone": "cat" },
+    { "id": "de_vuong.601.1", "para": 601, "palaces": ["Mệnh"], "text": "Đế Vượng Tử Vi - Thủ lĩnh", "when": "in(Đế Vượng) & meet(Tử Vi)", "tone": "cat" },
+    { "id": "de_vuong.601.2", "para": 601, "palaces": ["Mệnh"], "text": "gặp thêm nhiều quý tinh là làm to.", "ctx": "Đế Vượng Tử Vi", "when": "in(Đế Vượng) & meet(Tử Vi) & count(3, Ân Quang, Thiên Quý, Thiên Khôi, Thiên Việt, Thiên Quan, Thiên Phúc, Hóa Quyền, Quốc Ấn, Lộc Tồn, Thiên Mã, Thanh Long, Tràng Sinh)", "tone": "cat", "review": "«nhiều quý tinh» hiểu là hội từ 3 quý tinh trở lên; Tràng Sinh luôn tam hợp Đế Vượng nên luôn được tính là một" },
+    { "id": "de_vuong.602.1", "para": 602, "palaces": ["Mệnh"], "text": "Vượng Tràng Tử Phủ - người quảng đại.", "when": "in(Đế Vượng) & meet(Tràng Sinh, Tử Vi, Thiên Phủ)", "tone": "cat", "review": "Tràng hiểu là Tràng Sinh (luôn tam hợp Đế Vượng); Tử Phủ hiểu là hội cả Tử Vi và Thiên Phủ" },
+    { "id": "de_vuong.604.1", "para": 604, "palaces": ["Huynh Đệ"], "text": "Vượng Thai đắc địa - có 8,9 anh chị em.", "when": "in(Đế Vượng/Thai) & meet(Đế Vượng, Thai) & bright(Thai)", "tone": "cat", "review": "Đế Vượng và Thai luôn xung chiếu nhau; Đế Vượng không có bảng miếu hãm nên hiểu «đắc địa» theo bảng của sao Thai (vượng ở Sửu Tuất Thìn)" },
+    { "id": "de_vuong.604.2", "para": 604, "palaces": ["Huynh Đệ"], "text": "Hãm địa có 1.", "ctx": "Vượng Thai", "when": "in(Đế Vượng/Thai) & meet(Đế Vượng, Thai) & !bright(Thai)", "tone": "hung", "review": "bảng của bà không ghi cung hãm cho Thai (chỉ ghi vượng ở Sửu Tuất Thìn), Đế Vượng không có bảng; hiểu hãm là Thai ở ngoài các cung ấy" },
+    { "id": "de_vuong.605.1", "para": 605, "palaces": ["Huynh Đệ"], "text": "Vượng Thai Tuyệt Tướng - Có anh em dị bào.", "when": null, "tone": "hung", "review": "theo cách an vòng Tràng Sinh, Tuyệt luôn ở sát cạnh Thai và cách Đế Vượng năm cung, nên Vượng, Thai, Tuyệt không bao giờ cùng hội một cung; không viết được điều kiện, cần xem lại" },
+    { "id": "de_vuong.606.1", "para": 606, "palaces": ["Huynh Đệ"], "text": "Tràng Sinh Đế Vượng - anh em đông mà sang túc.", "when": "in(Tràng Sinh/Đế Vượng) & meet(Tràng Sinh, Đế Vượng)", "tone": "cat", "review": "Tràng Sinh và Đế Vượng luôn tam hợp nhau nên hiểu là một sao ở cung Bào, sao kia hợp chiếu" },
+    { "id": "de_vuong.608.1", "para": 608, "palaces": ["Tử Tức"], "text": "Đế Vượng - đông con 9 5 con ).", "when": "in(Đế Vượng)", "tone": "cat" },
+    { "id": "de_vuong.608.2", "para": 608, "palaces": ["Tử Tức"], "text": "Hội Khôi Việt - con quý.", "ctx": "Đế Vượng", "when": "in(Đế Vượng) & meet(Khôi Việt)", "tone": "cat" },
+    { "id": "de_vuong.609.1", "para": 609, "palaces": ["Tử Tức"], "text": "Vượng Đồng Khúc Sương Tử Phủ Tả Hữu - con đông mà tài giỏi làm nên giàu có.", "when": null, "tone": "cat", "review": "theo cách an sao, Thiên Đồng luôn cách Tử Vi năm cung nên không bao giờ hội Tử Vi hay Thiên Phủ; bộ sao này không thể hội đủ, không viết được điều kiện, cần xem lại" },
+    { "id": "de_vuong.610.1", "para": 610, "palaces": ["Tài Bạch"], "text": "Vượng Tả Hữu Âm Dương Thìn Tuất - triệu phú.", "when": "in(Đế Vượng) & at(Thìn, Tuất) & meet(Tả Hữu, Nhật Nguyệt)", "tone": "cat", "review": "Âm Dương hiểu là Nhật Nguyệt; cung Tài ở Thìn Tuất mà hội Nhật Nguyệt thì Nhật Nguyệt ở đúng Thìn Tuất" },
+    { "id": "de_vuong.611.1", "para": 611, "palaces": ["Thiên Di"], "text": "có Phá Quân hãm gặp Đế vượng cũng giảm xấu đi.", "when": "in(Phá Quân) & dim(Phá Quân) & meet(Đế Vượng)", "tone": "cat" },
+    { "id": "de_vuong.612.1", "para": 612, "palaces": ["Điền Trạch"], "text": "Vượng Lộc - phát tài, có của.", "when": "in(Đế Vượng) & meet(Lộc)", "tone": "cat" },
+    { "id": "de_vuong.613.1", "para": 613, "palaces": ["Phúc Đức"], "text": "Vượng - Đông con trai và thọ.", "when": "in(Đế Vượng)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 590, "kind": "meta" },
+    { "para": 592, "kind": "theory" },
+    { "para": 603, "kind": "heading" },
+    { "para": 607, "kind": "heading" }
+  ]
+}

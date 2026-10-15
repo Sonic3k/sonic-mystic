@@ -1,0 +1,28 @@
+{
+  "entry": 1484,
+  "star": "mo",
+  "rules": [
+    { "id": "mo.1487.1", "para": 1487, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: đần độn, chậm, tối. Chủ sự nghiệp quả.", "when": "in(Mộ)", "tone": "hung" },
+    { "id": "mo.1488.1", "para": 1488, "palaces": ["Mệnh", "Thân"], "text": "Sao Mộ có sự ứng hợp với sao Phá Quân ở 4 cung Thìn Tuất Sửu Mùi nếu Phá Quân đồng cung với Mộ là như khắc chế được tính hung ác, ưa giết chóc sát phạt mà hoàn lương lại cho Phá Quân", "when": "in(Mộ, Phá Quân) & at(Tứ Mộ)", "tone": "cat" },
+    { "id": "mo.1489.1", "para": 1489, "palaces": ["Mệnh", "Thân"], "text": "Mộ hội Sương Khúc Thìn Tuất Sửu Mùi cùng với Phá Quân lại là cơ mưu, đa học đa năng, phú quý ví như hoa quả gặp mùa xuân tươi tốt.", "when": "in(Mộ) & at(Tứ Mộ) & meet(Xương Khúc, Phá Quân)", "tone": "cat", "review": "hiểu là Mộ ở Tứ Mộ hội Xương Khúc và Phá Quân (Phá Quân đồng cung hay hội chiếu); cũng có thể bà muốn nói Phá Quân đồng cung với Mộ như câu trước" },
+    { "id": "mo.1490.1", "para": 1490, "palaces": ["Mệnh", "Thân"], "text": "Chỉ sợ tam hợp xung phá, lạc Hoả Linh Không Kiếp thì nghèo túng mà nợ nần quanh năm.", "ctx": "Mộ hội Sương Khúc Thìn Tuất Sửu Mùi cùng với Phá Quân", "when": "in(Mộ) & at(Tứ Mộ) & meet(Xương Khúc, Phá Quân) & meet(Hỏa Tinh/Linh Tinh/Địa Không/Địa Kiếp)", "tone": "hung", "review": "nối ý câu trước (cách Mộ hội Sương Khúc cùng Phá Quân ở Tứ Mộ); hiểu là gặp một trong Hoả Linh Không Kiếp ở tam phương" },
+    { "id": "mo.1491.1", "para": 1491, "palaces": ["Mệnh", "Thân"], "text": "Con trai thứ ba, con gái thứ hai tất sẽ cô khổ, mà đệ tam phòng thời không tránh được hạn hoạ.", "ctx": "Mộ hội Sương Khúc cùng Phá Quân mà lạc Hoả Linh Không Kiếp", "when": "in(Mộ) & at(Tứ Mộ) & meet(Xương Khúc, Phá Quân) & meet(Hỏa Tinh/Linh Tinh/Địa Không/Địa Kiếp)", "tone": "hung", "review": "câu không nêu điều kiện riêng; hiểu là nối ý câu trước (bị xung phá, lạc Hoả Linh Không Kiếp); cũng có thể bà nói chung cho sao Mộ" },
+    { "id": "mo.1492.1", "para": 1492, "palaces": ["Mệnh"], "text": "có Mộ - đần độn", "when": "in(Mộ)", "tone": "hung" },
+    { "id": "mo.1492.2", "para": 1492, "palaces": ["Mệnh"], "text": "nếu có hao thì hết.", "ctx": "có Mộ - đần độn", "when": "in(Mộ) & meet(Đại Hao/Tiểu Hao)", "tone": "cat", "review": "hiểu là gặp Đại Hao hay Tiểu Hao thì hết đần độn" },
+    { "id": "mo.1493.1", "para": 1493, "palaces": ["Mệnh"], "text": "Mộ cư Sửu Mùi phùng Thai Toạ - văn mô vũ lược kiêm toàn.", "when": "in(Mộ) & at(Sửu, Mùi) & meet(Thai Tọa)", "tone": "cat" },
+    { "id": "mo.1494.1", "para": 1494, "palaces": ["Mệnh"], "text": "Mộ Không giáp Mệnh ( Mộ lạc hoang sơn) - rất xấu.", "when": "flank(Mộ, Địa Không/Thiên Không)", "tone": "hung", "review": "hiểu là Mộ và Không ở hai cung giáp Mệnh; Không hiểu là Địa Không hay Thiên Không" },
+    { "id": "mo.1495.1", "para": 1495, "palaces": ["Mệnh"], "text": "Mộ Đào Cái - hoang dâm, dâm dục.", "when": "in(Mộ) & (meet(Đào Hoa) | meet(Hoa Cái))", "tone": "hung", "review": "Đào Hoa và Hoa Cái không bao giờ cùng hội một cung, nên hiểu là Mộ gặp Đào Hoa hoặc gặp Hoa Cái (như «Mộ Cái, Mộ Diêu» ở cung Ách)" },
+    { "id": "mo.1496.1", "para": 1496, "palaces": ["Tử Tức"], "text": "có Mộ - khắc con", "when": "in(Mộ)", "tone": "hung" },
+    { "id": "mo.1497.1", "para": 1497, "palaces": ["Tài Bạch"], "text": "có Mộ Long Phượng - dòng dõi nhà giàu sang.", "when": "in(Mộ) & meet(Long Phượng)", "tone": "cat" },
+    { "id": "mo.1498.1", "para": 1498, "palaces": ["Tài Bạch"], "text": "Mộ Hoá Lộc - tiền của đến tận tay.", "when": "in(Mộ) & meet(Hóa Lộc)", "tone": "cat" },
+    { "id": "mo.1499.1", "para": 1499, "palaces": ["Tật Ách"], "text": "Mộ Kình Hình Triệt - sét đánh = Hoả Linh Hình Việt.", "when": "(in(Mộ) & meet(Kình Dương, Thiên Hình) & in(Triệt)) | meet(Hỏa Linh, Thiên Hình, Thiên Việt)", "tone": "hung", "review": "Triệt hiểu là đóng ngay cung có Mộ; vế «Hoả Linh Hình Việt» không nhắc Mộ nên không buộc có Mộ" },
+    { "id": "mo.1500.1", "para": 1500, "palaces": ["Tật Ách"], "text": "Mộ Cái, Mộ Diêu - thủ dâm.", "when": "in(Mộ) & (meet(Hoa Cái) | meet(Thiên Diêu))", "tone": "hung" },
+    { "id": "mo.1501.1", "para": 1501, "palaces": ["Phúc Đức"], "text": "có Mộ là thoái thần chi thuỷ.", "when": "in(Mộ)", "tone": "trung" },
+    { "id": "mo.1502.1", "para": 1502, "palaces": ["Phúc Đức"], "text": "Có Mộ là thọ", "when": "in(Mộ)", "tone": "cat" },
+    { "id": "mo.1502.2", "para": 1502, "palaces": ["Phúc Đức"], "text": "có nhiều sao tốt hội thì được đất lâu bền.", "ctx": "Có Mộ", "when": "in(Mộ) & count(3, Tả Phù, Hữu Bật, Văn Xương, Văn Khúc, Thiên Khôi, Thiên Việt, Lộc Tồn, Hóa Lộc, Hóa Quyền, Hóa Khoa)", "tone": "cat", "review": "«nhiều sao tốt» hiểu là hội từ 3 cát tinh trở lên" }
+  ],
+  "skip": [
+    { "para": 1485, "kind": "meta" },
+    { "para": 1486, "kind": "meta" }
+  ]
+}

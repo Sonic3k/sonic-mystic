@@ -1,0 +1,17 @@
+{
+  "entry": 177,
+  "star": "bac_si",
+  "rules": [
+    { "id": "bac_si.179.1", "para": 179, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: Cẩn thận, hay suy sét, kín, ngôn ngữ hoạt bát - chủ sự thông đạt, thâm thuý - chủ văn chương, bác học, công danh.", "when": "in(Bác Sĩ)", "tone": "cat" },
+    { "id": "bac_si.180.1", "para": 180, "palaces": ["Mệnh", "Thân"], "text": "Hội với Lộc Tồn và Dương Đà giáp biên là chứng nhận cho sự đổi thay, văn chương, phú quý của tính chất Lộc Tồn khi hội chiếu với các sao khác.", "when": "in(Bác Sĩ) & meet(Lộc Tồn) & flank(Kình Đà)", "tone": "cat", "review": "Bác Sĩ luôn đồng cung Lộc Tồn và Kình Đà luôn giáp Lộc Tồn, nên điều kiện đúng ở mọi lá số; câu mang tính giải thích ý nghĩa sao" },
+    { "id": "bac_si.181.1", "para": 181, "palaces": ["Mệnh", "Thân"], "text": "Hội với Diêu Y là cách thầy thuốc giỏi.", "ctx": "Bác Sĩ", "when": "in(Bác Sĩ) & meet(Diêu Y)", "tone": "cat" },
+    { "id": "bac_si.183.1", "para": 183, "palaces": ["Mệnh"], "text": "Có Bác Sĩ - người có học có hạnh.", "when": "in(Bác Sĩ)", "tone": "cat" },
+    { "id": "bac_si.184.1", "para": 184, "palaces": ["Mệnh"], "text": "Bác Sĩ gặp Khoa Quyền Sương Khúc - thông minh, có khoa danh.", "when": "in(Bác Sĩ) & meet(Hóa Khoa, Hóa Quyền, Xương Khúc)", "tone": "cat" },
+    { "id": "bac_si.185.1", "para": 185, "palaces": ["Quan Lộc"], "text": "Gặp Long Mã - làm nên", "ctx": "Bác Sĩ", "when": "in(Bác Sĩ) & meet(Long Trì, Thiên Mã)", "tone": "cat" },
+    { "id": "bac_si.186.1", "para": 186, "palaces": ["Tử Tức"], "text": "Có Bác Sĩ - nhiều con mà dễ nuôi.", "when": "in(Bác Sĩ)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 178, "kind": "meta" },
+    { "para": 182, "kind": "heading" }
+  ]
+}

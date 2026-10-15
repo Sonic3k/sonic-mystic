@@ -1,0 +1,20 @@
+{
+  "entry": 2990,
+  "star": "thien_duc",
+  "rules": [
+    { "id": "thien_duc.2992.1", "para": 2992, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: khoan hồng độ lượng. Chủ sự Từ bi, hoá hung vi cát, chủ khoan hoà nhân hậu, đoan chính, phúc thiện.", "when": "in(Thiên Đức)", "tone": "cat" },
+    { "id": "thien_duc.2993.1", "para": 2993, "palaces": ["Mệnh", "Thân"], "text": "Thiên Nguyệt Đức là bộ sao Lưỡng Đức, lâm Thân Mệnh thì giảm trừ tai nạn, tật bệnh, hung nguy; người đoan chính từ tâm; giảm 1 phần các sao hung ác, chế giảm tính hoa nguyệt của Hồng Đào.", "when": "in(Thiên Đức/Nguyệt Đức) & meet(Thiên Đức, Nguyệt Đức)", "tone": "cat", "review": "Thiên Đức và Nguyệt Đức luôn tam hợp, không bao giờ đồng cung; hiểu «Thiên Nguyệt Đức lâm Thân Mệnh» là một trong hai sao ở Thân hay Mệnh, sao kia hợp chiếu" },
+    { "id": "thien_duc.2993.2", "para": 2993, "palaces": ["Mệnh", "Thân"], "text": "Hội với Hồng Đào tuy có tính dâm nhưng là chính dâm, không phải ngoại tình.", "ctx": "Thiên Nguyệt Đức", "when": "in(Thiên Đức/Nguyệt Đức) & meet(Thiên Đức, Nguyệt Đức, Hồng Đào)", "tone": "mixed" },
+    { "id": "thien_duc.2993.3", "para": 2993, "palaces": ["Mệnh", "Thân"], "text": "Nữ Mệnh là người xinh tươi, duyên dáng, lịch thiệp", "ctx": "Thiên Nguyệt Đức", "when": "female() & in(Thiên Đức/Nguyệt Đức) & meet(Thiên Đức, Nguyệt Đức)", "tone": "trung" },
+    { "id": "thien_duc.2993.4", "para": 2993, "palaces": ["Mệnh", "Thân"], "text": "Trai lấy được vợ đẹp", "ctx": "Thiên Nguyệt Đức", "when": "male() & in(Thiên Đức/Nguyệt Đức) & meet(Thiên Đức, Nguyệt Đức)", "tone": "cat" },
+    { "id": "thien_duc.2993.5", "para": 2993, "palaces": ["Mệnh", "Thân"], "text": "gái lấy chồng giàu sang.", "ctx": "Thiên Nguyệt Đức", "when": "female() & in(Thiên Đức/Nguyệt Đức) & meet(Thiên Đức, Nguyệt Đức)", "tone": "cat" },
+    { "id": "thien_duc.2994.1", "para": 2994, "palaces": ["*"], "text": "Thiên Đức đóng cung nào gieo phúc cho cung đó, không sợ vận hạn.", "when": "in(Thiên Đức)", "tone": "cat" },
+    { "id": "thien_duc.2994.2", "para": 2994, "palaces": ["Phúc Đức"], "text": "Tốt nhất là cư cung Phúc, hội Nguyệt Đức Thiên Giải hay Giải Thần.", "ctx": "Thiên Đức", "when": "in(Thiên Đức) & meet(Nguyệt Đức) & meet(Thiên Giải/Giải Thần)", "tone": "cat", "review": "hiểu là Thiên Đức cư cung Phúc, hội Nguyệt Đức (sao này luôn hợp chiếu Thiên Đức) và Thiên Giải hay Giải Thần" },
+    { "id": "thien_duc.2995.1", "para": 2995, "palaces": ["Phu Thê"], "text": "Thiên Nguyệt Đức Đào Hoa - vợ chồng tốt đẹp, giàu sang.", "when": "in(Thiên Đức/Nguyệt Đức) & meet(Thiên Đức, Nguyệt Đức, Đào Hoa)", "tone": "cat", "review": "theo cách an sao, Thiên Đức, Nguyệt Đức và Đào Hoa luôn cùng một tam hợp, nên điều kiện đúng mỗi khi Thiên Đức hay Nguyệt Đức ở cung Thê" },
+    { "id": "thien_duc.2996.1", "para": 2996, "palaces": ["Phu Thê"], "text": "Đức Âm Đồng Quang Mã - vợ giàu.", "when": null, "tone": "cat", "review": "Đức là Thiên Đức hay Nguyệt Đức (câu giống ở sao Thiên Đồng ghi «Nguyệt Đức»); hai sao này luôn ở cung khác âm dương với chi năm sinh, còn Thiên Mã luôn ở cung cùng âm dương, mà tam phương tứ chính một cung đều cùng âm dương, nên Đức và Mã không bao giờ cùng hội; không viết được điều kiện, cần xem lại" },
+    { "id": "thien_duc.2997.1", "para": 2997, "palaces": ["Phúc Đức"], "text": "Có Thiên Nguyệt Đức - nhà có mả thiên táng.", "when": "in(Thiên Đức/Nguyệt Đức) & meet(Thiên Đức, Nguyệt Đức)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 2991, "kind": "meta" }
+  ]
+}

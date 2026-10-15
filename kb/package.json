@@ -1,0 +1,17 @@
+{
+  "name": "@mystic/kb",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Knowledge sources and the pipeline that turns them into the import bundle the API loads into the database.",
+  "scripts": {
+    "book": "node scripts/clean-source.mjs && node scripts/build-book.mjs && node scripts/make-worksheets.mjs",
+    "bundle": "node scripts/validate-rules.mjs && node scripts/validate-supplement.mjs && node scripts/build-bundle.mjs",
+    "reach": "node scripts/check-reach.mjs",
+    "read": "node scripts/test-reading.mjs",
+    "test": "node --test --test-concurrency=1 test/"
+  },
+  "dependencies": {
+    "@mystic/engine": "*"
+  }
+}

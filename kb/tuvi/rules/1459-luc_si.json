@@ -1,0 +1,24 @@
+{
+  "entry": 1459,
+  "star": "luc_si",
+  "rules": [
+    { "id": "luc_si.1461.1", "para": 1461, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: sức khoẻ, hay ăn, can đảm. Chủ về sức mạnh, uy quyền.", "when": "in(Lực Sĩ)", "tone": "cat" },
+    { "id": "luc_si.1462.1", "para": 1462, "palaces": ["Mệnh", "Thân"], "text": "Hợp với hung tinh, tăng sự hung ác.", "ctx": "Lực Sĩ", "when": "in(Lực Sĩ) & meet(Hung tinh)", "tone": "hung", "review": "theo cách an sao Lực Sĩ luôn đồng cung với Kình Dương hay Đà La (và luôn tam hợp với Đại Hao) nên điều kiện đúng mỗi khi có Lực Sĩ" },
+    { "id": "luc_si.1463.1", "para": 1463, "palaces": ["Mệnh", "Thân"], "text": "Hội Cát tinh thì gia tăng mỹ mãn.", "ctx": "Lực Sĩ", "when": "in(Lực Sĩ) & meet(Cát tinh)", "tone": "cat" },
+    { "id": "luc_si.1464.1", "para": 1464, "palaces": ["Mệnh"], "text": "có Lực Sĩ - sức lực tài năng hơn người, có uy quyền; người rắn rỏi", "when": "in(Lực Sĩ)", "tone": "cat" },
+    { "id": "luc_si.1464.2", "para": 1464, "palaces": ["Mệnh"], "text": "ngộ Tướng Quân thì võ cách.", "ctx": "có Lực Sĩ", "when": null, "tone": "cat", "review": "Lực Sĩ và Tướng Quân cùng vòng Lộc Tồn, luôn cách nhau 3 cung nên không bao giờ đồng cung hay hội chiếu; không viết được điều kiện, cần xem lại" },
+    { "id": "luc_si.1465.1", "para": 1465, "palaces": ["Mệnh"], "text": "Lực ngộ Mã - công danh hiển hách.", "when": "in(Lực Sĩ) & meet(Thiên Mã)", "tone": "cat" },
+    { "id": "luc_si.1466.1", "para": 1466, "palaces": ["Mệnh"], "text": "Lực ngộ Tuần Triệt - phá tán hết tiền của phải soay ngang.", "when": "in(Lực Sĩ) & in(Tuần/Triệt)", "tone": "hung", "review": "hiểu là Tuần hay Triệt đóng ngay cung có Lực Sĩ; nếu tính cả hội chiếu thì hơn 9/10 người có Lực Sĩ thủ Mệnh đều gặp" },
+    { "id": "luc_si.1467.1", "para": 1467, "palaces": ["Mệnh"], "text": "Lực ngộ Quyền - tài lực uy quyền nhưng không tước vị.", "when": "in(Lực Sĩ) & meet(Hóa Quyền)", "tone": "mixed" },
+    { "id": "luc_si.1468.1", "para": 1468, "palaces": ["Mệnh"], "text": "Lực ngộ Kình - có công mà không được phong tặng.", "when": "in(Lực Sĩ) & meet(Kình Dương)", "tone": "mixed" },
+    { "id": "luc_si.1469.1", "para": 1469, "palaces": ["Tài Bạch"], "text": "Lực Sĩ Thiên Hình - trộm của", "when": "in(Lực Sĩ) & meet(Thiên Hình)", "tone": "hung" },
+    { "id": "luc_si.1470.1", "para": 1470, "palaces": ["Nô Bộc", "Quan Lộc"], "text": "có Lực Sĩ - nhờ bạn làm nên.", "when": "in(Lực Sĩ)", "tone": "cat" },
+    { "id": "luc_si.1471.1", "para": 1471, "palaces": ["Nô Bộc", "Quan Lộc"], "text": "Lực Toạ - nhàn.", "when": "in(Lực Sĩ) & meet(Bát Tọa)", "tone": "cat", "review": "Toạ hiểu là Bát Tọa" },
+    { "id": "luc_si.1472.1", "para": 1472, "palaces": ["Nô Bộc", "Quan Lộc"], "text": "Lực Kình - sức khoẻ hơn người.", "when": "in(Lực Sĩ) & meet(Kình Dương)", "tone": "cat" },
+    { "id": "luc_si.1473.1", "para": 1473, "palaces": ["Nô Bộc", "Quan Lộc"], "text": "Lực Hình Lực Hổ - người sắt đá.", "when": "in(Lực Sĩ) & (meet(Thiên Hình) | meet(Bạch Hổ))", "tone": "trung", "review": "hiểu là Lực Sĩ gặp Thiên Hình hoặc gặp Bạch Hổ" },
+    { "id": "luc_si.1474.1", "para": 1474, "palaces": ["Phúc Đức"], "text": "có Quốc ấn, hợp cung có Lực Sĩ và Quyền Lộc thì trong họ có người làm quan võ to.", "when": null, "tone": "cat", "review": "theo cách an sao Quốc Ấn luôn cách Lực Sĩ 3 hay 5 cung nên hai sao không bao giờ đồng cung hay hội chiếu; không viết được điều kiện (Bác Sĩ thì luôn tam hợp với Quốc Ấn), cần xem lại" }
+  ],
+  "skip": [
+    { "para": 1460, "kind": "meta" }
+  ]
+}

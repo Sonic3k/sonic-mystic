@@ -1,0 +1,207 @@
+{
+  "about": "Lớp bổ sung tóm lược kiến thức tử vi phổ thông từ các sách thông dụng và hiểu biết chung, viết lại bằng lời mới; đây không phải ghi chép của bà. Nội dung chỉ mô tả xu hướng để tham khảo, chỗ nào khác với lời bà thì ghi chép của bà vẫn là gốc.",
+  "palaces": [
+    { "palace": "Mệnh", "about": "Cung gốc của lá số, nói về tính tình, tư chất, dáng vẻ và cái khung chung của cả đời người. Không đọc Mệnh bằng một sao riêng lẻ: phải xem chính tinh sáng hay tối, các cát tinh, sát tinh đóng tại cung và hội về từ Thiên Di, Tài Bạch, Quan Lộc. Nên đối chiếu thêm cung Thân và cung Phúc Đức trước khi kết luận." },
+    { "palace": "Phụ Mẫu", "about": "Nói về cha mẹ, người bề trên và sự dìu dắt mình nhận được từ họ; nhiều sách mở rộng sang quan hệ với cấp trên. Cung này chỉ cho thấy xu hướng của mối quan hệ và sự hòa hợp trong nhà, không phải lời đoán về số phận của cha mẹ. Đọc cùng Tật Ách ở cung đối diện và Nô Bộc, Tử Tức ở tam hợp." },
+    { "palace": "Phúc Đức", "about": "Nói về phúc phần của dòng họ, mồ mả tổ tiên theo cách nhìn xưa, và cũng là đời sống tinh thần, sự an vui trong lòng. Nhiều sách coi Phúc Đức quan trọng gần ngang Mệnh, vì cung này nâng đỡ hoặc làm giảm cái tốt xấu của các cung khác. Đọc cùng Tài Bạch ở cung đối diện và Thiên Di, Phu Thê ở tam hợp." },
+    { "palace": "Điền Trạch", "about": "Nói về nhà cửa, đất đai, nơi ở và không khí trong gia đình, cũng như khả năng giữ và gây dựng tài sản lâu bền. Cung này cho biết chuyện an cư thuận lợi hay vất vả, không định trước số của cải. Đọc cùng Tử Tức ở cung đối diện và Tật Ách, Huynh Đệ ở tam hợp." },
+    { "palace": "Quan Lộc", "about": "Nói về công việc, nghề nghiệp, học hành thi cử và cách mình làm việc. Cung này cho thấy thiên hướng nghề và thế mạnh, không định sẵn chức vị hay thành bại. Vì là tam hợp của Mệnh nên luôn đọc cùng Mệnh, Tài Bạch và cung đối diện Phu Thê." },
+    { "palace": "Nô Bộc", "about": "Nói về bạn bè, đồng nghiệp, người cộng tác, cấp dưới và những người giúp việc cho mình. Cung này cho biết mình được người xung quanh hỗ trợ hay phải lo toan vì họ nhiều hơn. Đọc cùng Huynh Đệ ở cung đối diện và Phụ Mẫu, Tử Tức ở tam hợp; theo cách an của ứng dụng, Thiên Thương luôn đóng ở đây." },
+    { "palace": "Thiên Di", "about": "Nói về con người mình khi ra ngoài xã hội: cách người khác nhìn mình, chuyện đi xa, đổi chỗ, những cơ hội và va chạm bên ngoài. Thiên Di xung chiếu thẳng vào Mệnh nên ảnh hưởng tới Mệnh rất mạnh, nhất là khi Mệnh vô chính diệu. Đọc cùng Mệnh và hai cung tam hợp Phúc Đức, Phu Thê." },
+    { "palace": "Tật Ách", "about": "Nói về thể chất, sức khỏe nói chung và những trắc trở bất ngờ trong đời. Đây chỉ là xu hướng tham khảo; chuyện sức khỏe cần hỏi người có chuyên môn, không dựa vào lá số. Đọc cùng Phụ Mẫu ở cung đối diện và Điền Trạch, Huynh Đệ ở tam hợp; theo cách an của ứng dụng, Thiên Sứ luôn đóng ở đây." },
+    { "palace": "Tài Bạch", "about": "Nói về tiền bạc: cách kiếm, cách tiêu, khả năng giữ của và thái độ với đồng tiền. Cung này cho biết nguồn và nhịp của tài lộc, không phải con số giàu nghèo cố định. Đọc cùng Mệnh, Quan Lộc ở tam hợp và Phúc Đức ở cung đối diện." },
+    { "palace": "Tử Tức", "about": "Nói về con cái, tình cảm và sự gắn bó giữa cha mẹ với con; một số sách mở rộng sang học trò, người mình dìu dắt. Cung này chỉ cho thấy xu hướng về duyên con cái và cách nuôi dạy, không phải lời phán về việc có con hay không. Đọc cùng Điền Trạch ở cung đối diện và Phụ Mẫu, Nô Bộc ở tam hợp." },
+    { "palace": "Phu Thê", "about": "Nói về hôn nhân, người phối ngẫu và cách mình sống trong quan hệ lứa đôi. Sao xấu ở đây thường chỉ những điểm cần vun đắp, nhường nhịn, không phải bản án cho cuộc hôn nhân. Đọc cùng Quan Lộc ở cung đối diện và Phúc Đức, Thiên Di ở tam hợp." },
+    { "palace": "Huynh Đệ", "about": "Nói về anh chị em ruột và, rộng hơn, những người ngang hàng thân thiết như bạn cùng học, người cộng sự gần. Cung này cho biết sự hòa thuận, giúp đỡ hay xa cách giữa anh em. Đọc cùng Nô Bộc ở cung đối diện và Điền Trạch, Tật Ách ở tam hợp." },
+    { "palace": "Thân", "about": "Thân không phải một cung riêng mà đóng chung với một trong sáu cung Mệnh, Phúc Đức, Quan Lộc, Thiên Di, Tài Bạch, Phu Thê, tùy giờ sinh. Mệnh cho biết cái gốc bẩm sinh, còn Thân cho biết điều mình hướng tới và sống cùng, thường rõ dần từ khoảng trung niên. Đọc Thân cần xem cả các sao tại đó lẫn ý nghĩa của cung mà Thân đóng." }
+  ],
+  "principles": [
+    { "id": "than_cu.Mệnh", "title": "Thân cư Mệnh", "text": "Thân đóng cùng cung với Mệnh, gặp ở người sinh giờ Tý hoặc giờ Ngọ. Các sách thường đọc là người sống theo bản tính, tự mình định hướng, ít để hoàn cảnh kéo đi; tính cách từ trẻ đến già khá nhất quán. Vì cả hai cùng một chỗ, cái mạnh và cái yếu của cung Mệnh đều hiện rõ hơn, nên càng cần xem kỹ các sao tại Mệnh và tam phương." },
+    { "id": "than_cu.Phúc Đức", "title": "Thân cư Phúc Đức", "text": "Thân đóng ở cung Phúc Đức, gặp ở người sinh giờ Sửu hoặc giờ Mùi. Thường được hiểu là cuộc sống gắn với phúc phần dòng họ và đời sống tinh thần: người hay nghĩ đến gốc gác, coi trọng sự an ổn trong lòng hơn danh lợi. Cung Phúc sáng sủa thì càng về sau càng nhẹ nhàng; Phúc kém thì sự tu dưỡng, sống tử tế là chỗ dựa tốt nhất." },
+    { "id": "than_cu.Quan Lộc", "title": "Thân cư Quan Lộc", "text": "Thân đóng ở cung Quan Lộc, gặp ở người sinh giờ Dần hoặc giờ Thân. Sách thường đọc là người lấy công việc, sự nghiệp làm trung tâm cuộc sống, coi trọng danh phận và trách nhiệm, càng làm càng hăng. Tốt xấu của cung Quan vì thế chi phối nhiều nửa sau cuộc đời; điều đáng để ý là giữ cân bằng giữa việc và nhà." },
+    { "id": "than_cu.Thiên Di", "title": "Thân cư Thiên Di", "text": "Thân đóng ở cung Thiên Di, gặp ở người sinh giờ Mão hoặc giờ Dậu. Thường được hiểu là người sống nhiều ở bên ngoài: hay đi lại, đổi chỗ, giao thiệp rộng, dễ thành công ở nơi xa quê hoặc nhờ môi trường xã hội. Hoàn cảnh xung quanh tác động tới họ nhiều, nên cung Di tốt thì ra ngoài gặp thời, cung Di kém thì nên dè dặt với những thay đổi lớn." },
+    { "id": "than_cu.Tài Bạch", "title": "Thân cư Tài Bạch", "text": "Thân đóng ở cung Tài Bạch, gặp ở người sinh giờ Thìn hoặc giờ Tuất. Sách thường đọc là người thực tế, coi trọng nền tảng vật chất, có óc xoay xở và lấy sự đầy đủ làm thước đo yên ổn. Cuộc sống xoay quanh việc làm ra và giữ gìn của cải, nên tốt xấu của cung Tài ảnh hưởng nhiều tới tâm trạng cả đời." },
+    { "id": "than_cu.Phu Thê", "title": "Thân cư Phu Thê", "text": "Thân đóng ở cung Phu Thê, gặp ở người sinh giờ Tỵ hoặc giờ Hợi. Thường được hiểu là cuộc sống gắn chặt với hôn nhân: người phối ngẫu có ảnh hưởng lớn tới hướng đi, có thể là chỗ dựa hoặc là nơi phải lo toan. Cung Phu Thê sáng sủa thì dễ được nhờ vợ hay chồng; có sao xấu thì đó là điều cần vun đắp, không phải lời phán định." },
+
+    { "id": "menh_cuc.cuc_sinh_menh", "title": "Cục sinh Mệnh", "text": "Hành của Cục sinh cho hành bản Mệnh (nạp âm năm sinh), ví dụ Thổ Ngũ Cục với người mệnh Kim. Cục được hiểu như môi trường nuôi dưỡng Mệnh, nên đây là thế được hoàn cảnh nâng đỡ: dễ gặp người giúp, công sức bỏ ra ít bị phí. Phần lớn các sách xếp trường hợp này tốt nhất trong quan hệ Mệnh – Cục." },
+    { "id": "menh_cuc.menh_sinh_cuc", "title": "Mệnh sinh Cục", "text": "Hành bản Mệnh sinh cho hành của Cục, ví dụ người mệnh Mộc gặp Hỏa Lục Cục. Đây là thế mình phải bỏ công vun đắp cho hoàn cảnh: hay lo cho người khác, làm nhiều hơn hưởng, dễ hao tâm sức. Tuy vậy vẫn là quan hệ tương sinh nên không bị xem là xấu, chỉ là vất vả hơn." },
+    { "id": "menh_cuc.menh_khac_cuc", "title": "Mệnh khắc Cục", "text": "Hành bản Mệnh khắc hành của Cục, ví dụ người mệnh Thủy gặp Hỏa Lục Cục. Thường được đọc là người chế ngự được hoàn cảnh nhưng phải tranh đấu, tốn sức; có ý chí, thích tự quyết. Các sách xếp thứ bậc giữa trường hợp này và Mệnh sinh Cục không giống nhau." },
+    { "id": "menh_cuc.cuc_khac_menh", "title": "Cục khắc Mệnh", "text": "Hành của Cục khắc hành bản Mệnh, ví dụ Kim Tứ Cục với người mệnh Mộc. Hoàn cảnh được hiểu là gây sức ép lên bản thân: dễ gặp trở ngại, phải bền bỉ hơn người mới đạt điều mong muốn. Sách coi đây là thế kém nhất trong quan hệ Mệnh – Cục, nhưng nó chỉ là một yếu tố, các sao tốt trong lá số vẫn bù lại được." },
+    { "id": "menh_cuc.binh_hoa", "title": "Mệnh Cục bình hòa", "text": "Hành bản Mệnh và hành của Cục giống nhau, ví dụ người mệnh Thủy gặp Thủy Nhị Cục. Bản thân và hoàn cảnh cùng một nhịp, nên cuộc sống thường ổn định, ít xung khắc với môi trường. Phần lớn sách xếp trường hợp này vào loại tốt, chỉ sau Cục sinh Mệnh." },
+
+    { "id": "am_duong.thuan", "title": "Âm dương thuận lý", "text": "Tuổi dương có cung Mệnh đóng ở chi dương (Tý, Dần, Thìn, Ngọ, Thân, Tuất), hoặc tuổi âm có Mệnh ở chi âm (Sửu, Mão, Tỵ, Mùi, Dậu, Hợi). Sách đọc là bản thân và vị trí Mệnh cùng chiều: việc làm dễ xuôi, công sức được đền đáp tương xứng, ít gặp cảnh trái ý. Đây là điểm cộng nhỏ, không thay cho việc đọc các sao." },
+    { "id": "am_duong.nghich", "title": "Âm dương nghịch lý", "text": "Tuổi dương mà cung Mệnh đóng ở chi âm, hoặc tuổi âm mà Mệnh ở chi dương. Sách đọc là bản thân và vị trí Mệnh ngược chiều: hay gặp cảnh trái ý, việc phải làm đi làm lại, thành quả đến chậm hơn công sức. Nhiều người coi đây chỉ là yếu tố phụ; lá số có sao tốt, cung Mệnh vững thì ảnh hưởng này không đáng kể." },
+
+    { "id": "cung_menh.cung_sinh_menh", "title": "Cung sinh Mệnh", "text": "Hành của chi cung Mệnh (Dần Mão Mộc, Tỵ Ngọ Hỏa, Thân Dậu Kim, Hợi Tý Thủy, Thìn Tuất Sửu Mùi Thổ) sinh cho hành bản Mệnh, ví dụ người mệnh Kim có Mệnh ở Sửu. Như cây gặp đất tốt, chỗ mình đứng nuôi dưỡng mình: dễ thuận lợi, dễ được nâng đỡ. Các sách không coi trọng quan hệ này như nhau, nên chỉ dùng để bổ sung." },
+    { "id": "cung_menh.menh_sinh_cung", "title": "Mệnh sinh cung", "text": "Hành bản Mệnh sinh cho hành của chi cung Mệnh, ví dụ người mệnh Mộc có Mệnh ở Ngọ. Mình phải dồn sức cho chỗ đứng của mình: hay lo toan, dễ hao tâm, cho đi nhiều hơn nhận. Tuy vậy vẫn là quan hệ thuận, không bị xem là xấu." },
+    { "id": "cung_menh.cung_khac_menh", "title": "Cung khắc Mệnh", "text": "Hành của chi cung Mệnh khắc hành bản Mệnh, ví dụ người mệnh Mộc có Mệnh ở Thân hay Dậu. Chỗ đứng gây sức ép lên bản thân: dễ cảm thấy gò bó, phải gắng nhiều hơn mới yên. Sách xem đây là thế kém, nhưng các sao sáng sủa ở Mệnh vẫn có thể bù lại." },
+    { "id": "cung_menh.menh_khac_cung", "title": "Mệnh khắc cung", "text": "Hành bản Mệnh khắc hành của chi cung Mệnh, ví dụ người mệnh Hỏa có Mệnh ở Thân hay Dậu. Mình chế ngự được hoàn cảnh nhưng phải vất vả, tranh đấu; thường là người có ý chí, thích tự làm chủ. Kết quả đến bằng sức mình hơn là nhờ hoàn cảnh." },
+    { "id": "cung_menh.dong_hanh", "title": "Cung và Mệnh đồng hành", "text": "Hành của chi cung Mệnh trùng với hành bản Mệnh, ví dụ người mệnh Thủy có Mệnh ở Hợi hay Tý. Bản thân hợp với chỗ đứng, tính cách vững và sống đúng với mình. Phần lớn sách xếp trường hợp này vào loại tốt, gần với cung sinh Mệnh." },
+
+    { "id": "menh_vcd", "title": "Mệnh vô chính diệu", "text": "Cung Mệnh không có sao nào trong mười bốn chính tinh. Cách đọc phổ biến là mượn chính tinh của cung đối diện (Thiên Di) để luận, đồng thời coi trọng hơn các phụ tinh tại Mệnh và các sao hội về từ tam phương; mượn trọn hay chỉ mượn một phần thì mỗi trường phái nói một khác. Người Mệnh vô chính diệu thường được tả là dễ thích nghi, chịu ảnh hưởng nhiều của hoàn cảnh và người xung quanh, cuộc đời hay có thay đổi. Nhiều sách cho rằng cách này cần gặp Tuần, Triệt hoặc các sao Không, hay được Nhật Nguyệt sáng sủa chiếu về, thì mới đẹp." },
+    { "id": "menh_chu", "title": "Mệnh chủ", "text": "Mệnh chủ là một sao được chọn làm sao chủ của bản mệnh, tra theo chi: ứng dụng này tra theo chi năm sinh như nhiều sách Việt, có sách khác tra theo chi của cung Mệnh. Khi đọc, xem sao ấy đóng ở cung nào, sáng hay hãm, gặp cát tinh hay sát tinh để biết thêm sức vững của bản mệnh, nghiêng về phần bẩm sinh. Đây là yếu tố phụ, không thay cho việc đọc chính tinh và tam phương của Mệnh." },
+    { "id": "than_chu", "title": "Thân chủ", "text": "Thân chủ là sao chủ của cung Thân, tra theo chi năm sinh. Sách dùng nó để xem sức bền và hướng đi về sau: Thân chủ đóng ở cung sáng sủa, gặp cát tinh thì nửa sau cuộc đời thêm vững; lạc hãm hoặc gặp nhiều sát tinh thì kém đi phần nào. Cũng như Mệnh chủ, đây chỉ là điểm tham khảo thêm." },
+    { "id": "dai_han", "title": "Đại hạn", "text": "Mỗi đại hạn là một quãng mười năm, khởi từ cung Mệnh theo số Cục và đi thuận hay nghịch tùy âm dương nam nữ. Khi đọc, coi cung đại hạn như cung Mệnh tạm thời của mười năm ấy: xem chính tinh, phụ tinh tại đó và tam phương tứ chính của nó, rồi đối chiếu với lá số gốc. Gốc tốt gặp hạn xấu thường chỉ là trắc trở, gốc yếu gặp hạn tốt là dịp vươn lên; chính tinh của hạn hợp hay không hợp với Mệnh quan trọng hơn từng sao nhỏ lẻ." },
+    { "id": "tieu_han", "title": "Tiểu hạn", "text": "Tiểu hạn là cung ứng với từng năm, cho biết việc gì nổi lên trong năm đó; với trẻ từ 1 đến 12 tuổi, sách xem theo đồng hạn. Đại hạn là nền của mười năm, tiểu hạn chỉ tô thêm: đại hạn tốt mà tiểu hạn xấu thường chỉ trục trặc tạm thời, đại hạn xấu mà tiểu hạn tốt thì có lúc dễ thở. Khi cả hai hạn cùng gặp nhiều sát tinh, hay cùng gặp nhiều cát tinh, xu hướng của năm ấy rõ hơn. Nhiều người còn xét thêm các sao lưu niên như Lưu Thái Tuế, Lưu Lộc Tồn; phần này ứng dụng chưa tính." },
+    { "id": "tam_phuong", "title": "Tam phương tứ chính", "text": "Tam phương tứ chính của một cung gồm chính cung ấy, cung đối diện (xung chiếu) và hai cung tam hợp, mỗi cung cách bốn cung về hai phía. Sao ở ba cung kia đều chiếu về và góp vào ý nghĩa của cung đang xem, nên không thể luận một cung chỉ bằng các sao đóng tại chỗ. Thường sao tại cung có sức nặng nhất, rồi đến cung xung chiếu và hai cung tam hợp; một bộ sao chỉ thành cách khi hội đủ trong tam phương. Hai cung kề bên (giáp) cũng được xét, nhưng nhẹ hơn." },
+    { "id": "mieu_ham", "title": "Miếu, vượng, đắc, bình, hãm", "text": "Mỗi sao có độ sáng khác nhau tùy cung nó đóng: miếu mạnh nhất, rồi đến vượng, đắc địa, bình hòa và thấp nhất là hãm. Sao tốt mà sáng thì phát huy trọn vẹn, sao tốt mà hãm thì cái tốt giảm đi hoặc đến muộn; sao xấu đắc địa có khi hóa thành sức mạnh, sao xấu hãm thì mặt xấu lộ rõ. Bảng miếu hãm của các trường phái không hoàn toàn giống nhau; ứng dụng này dùng bảng trong ghi chép của bà, sao nào bà không ghi độ sáng thì không xét yếu tố này." }
+  ],
+  "stars": [
+    {
+      "star": "thien_quan",
+      "about": "Thiên Quan hành Hỏa, là quý tinh an theo can năm sinh, thường được nhắc thành đôi với Thiên Phúc (bộ Quan Phúc). Sao chủ về danh dự, chức phận và sự che chở của người trên, đồng thời làm nhẹ bớt một phần tai ách nhỏ. Là sao phụ nên sức vừa phải: làm đẹp thêm khi cung có nền tốt, giảm nhẹ chứ không xóa được cái xấu.",
+      "rules": [
+        { "id": "bs.thien_quan.1", "palaces": ["Mệnh", "Thân"], "text": "Thiên Quan ở Mệnh hay Thân: người trọng danh dự, cư xử có chừng mực, dễ được người trên tin cậy và giao việc.", "when": "in(Thiên Quan)", "tone": "cat" },
+        { "id": "bs.thien_quan.2", "palaces": ["Quan Lộc"], "text": "Thiên Quan ở Quan Lộc: đường công việc dễ được cấp trên nâng đỡ, có cơ hội giữ vị trí có danh phận.", "when": "in(Thiên Quan)", "tone": "cat" },
+        { "id": "bs.thien_quan.3", "palaces": ["Quan Lộc"], "text": "Thiên Quan ở Quan Lộc gặp Hóa Quyền: uy tín trong công việc tăng thêm, dễ được trao những việc có trách nhiệm lớn.", "when": "in(Thiên Quan) & meet(Hóa Quyền)", "tone": "cat" },
+        { "id": "bs.thien_quan.4", "palaces": ["Tài Bạch"], "text": "Thiên Quan ở Tài Bạch: tiền bạc hay đến nhờ uy tín, chức phận hoặc sự tin cậy của người khác hơn là nhờ may rủi.", "when": "in(Thiên Quan)", "tone": "cat" },
+        { "id": "bs.thien_quan.5", "palaces": ["Thiên Di"], "text": "Thiên Quan ở Thiên Di: ra ngoài được nể trọng, dễ quen biết người có địa vị và có tiếng ở nơi xa.", "when": "in(Thiên Quan)", "tone": "cat" },
+        { "id": "bs.thien_quan.6", "palaces": ["Phụ Mẫu"], "text": "Thiên Quan ở Phụ Mẫu: cha mẹ là người có nề nếp, được xóm giềng hay nơi làm việc nể trọng.", "when": "in(Thiên Quan)", "tone": "cat" },
+        { "id": "bs.thien_quan.7", "palaces": ["Phu Thê"], "text": "Thiên Quan ở Phu Thê: người phối ngẫu đứng đắn, trọng thể diện, có thể có chức phận hoặc được xã hội coi trọng.", "when": "in(Thiên Quan)", "tone": "cat" },
+        { "id": "bs.thien_quan.8", "palaces": ["Tử Tức"], "text": "Thiên Quan ở Tử Tức: con cái biết giữ nề nếp, lớn lên dễ có danh phận.", "when": "in(Thiên Quan)", "tone": "cat" },
+        { "id": "bs.thien_quan.9", "palaces": ["Hạn"], "text": "Hạn đến cung có Thiên Quan: năm dễ có tin vui về công việc, danh phận, hoặc được người trên giúp một việc khó.", "when": "in(Thiên Quan)", "tone": "cat" }
+      ]
+    },
+    {
+      "star": "thien_phuc",
+      "about": "Thiên Phúc hành Thổ, là phúc tinh an theo can năm sinh, hay đi đôi với Thiên Quan. Sao chủ về phúc phần, sự bình yên, lòng nhân hậu và khả năng làm nhẹ rủi ro, thường được hiểu là được che chở lúc khó khăn. Với người tuổi Quý, các nguồn an sao này không giống nhau (ở Tý hoặc ở Tỵ), nên lá số tuổi Quý cần lưu ý điểm này.",
+      "rules": [
+        { "id": "bs.thien_phuc.1", "palaces": ["Mệnh", "Thân"], "text": "Thiên Phúc ở Mệnh hay Thân: tính hiền hòa, biết đủ, sống có trước có sau, gặp lúc bế tắc thường vẫn tìm được lối ra.", "when": "in(Thiên Phúc)", "tone": "cat" },
+        { "id": "bs.thien_phuc.2", "palaces": ["Tài Bạch"], "text": "Thiên Phúc ở Tài Bạch: tiền bạc thường đủ dùng, ít khi túng thiếu kéo dài, chi tiêu có phần rộng rãi với người khác.", "when": "in(Thiên Phúc)", "tone": "cat" },
+        { "id": "bs.thien_phuc.3", "palaces": ["Tật Ách"], "text": "Thiên Phúc ở Tật Ách: những lúc mệt mỏi, ốm yếu thường mau qua và hay được người thân chăm sóc chu đáo.", "when": "in(Thiên Phúc)", "tone": "cat" },
+        { "id": "bs.thien_phuc.4", "palaces": ["Điền Trạch"], "text": "Thiên Phúc ở Điền Trạch: nhà cửa êm ấm, nơi ở yên ổn, dễ giữ được nếp nhà.", "when": "in(Thiên Phúc)", "tone": "cat" },
+        { "id": "bs.thien_phuc.5", "palaces": ["Phu Thê"], "text": "Thiên Phúc ở Phu Thê: vợ chồng biết nhường nhịn, hôn nhân có nhiều lúc êm đềm.", "when": "in(Thiên Phúc)", "tone": "cat" },
+        { "id": "bs.thien_phuc.6", "palaces": ["Tử Tức"], "text": "Thiên Phúc ở Tử Tức: con cái hiền, có hiếu, tuổi già dễ có chỗ dựa nơi con.", "when": "in(Thiên Phúc)", "tone": "cat" },
+        { "id": "bs.thien_phuc.7", "palaces": ["Huynh Đệ"], "text": "Thiên Phúc ở Huynh Đệ: anh chị em hòa thuận, hay đỡ đần nhau lúc khó.", "when": "in(Thiên Phúc)", "tone": "cat" },
+        { "id": "bs.thien_phuc.8", "palaces": ["Hạn"], "text": "Hạn đến cung có Thiên Phúc: năm nhẹ nhõm hơn, việc khó dễ có người giúp, thường có niềm vui trong gia đình.", "when": "in(Thiên Phúc)", "tone": "cat" }
+      ]
+    },
+    {
+      "star": "thien_tai",
+      "about": "Thiên Tài hành Thổ, an từ cung Mệnh tính theo chi năm sinh; như tên gọi, sao chủ về tài năng, sự khéo léo và óc ứng biến. Sao hợp nhất với những cung nói về học hành, công việc và đồng tiền kiếm bằng tay nghề. Là sao nhỏ, nó tô thêm cho cung chứ không quyết định cát hung của cả cung.",
+      "rules": [
+        { "id": "bs.thien_tai.1", "palaces": ["Mệnh", "Thân"], "text": "Thiên Tài ở Mệnh hay Thân: người sáng dạ, khéo tay, có năng khiếu riêng và xoay xở nhanh trước việc mới.", "when": "in(Thiên Tài)", "tone": "cat" },
+        { "id": "bs.thien_tai.2", "palaces": ["Quan Lộc"], "text": "Thiên Tài ở Quan Lộc: mạnh về chuyên môn, hợp với nghề cần kỹ năng, sáng tạo hoặc tay nghề cao.", "when": "in(Thiên Tài)", "tone": "cat" },
+        { "id": "bs.thien_tai.3", "palaces": ["Tài Bạch"], "text": "Thiên Tài ở Tài Bạch: tiền bạc chủ yếu kiếm bằng tài năng, tay nghề của chính mình.", "when": "in(Thiên Tài)", "tone": "cat" },
+        { "id": "bs.thien_tai.4", "palaces": ["Thiên Di"], "text": "Thiên Tài ở Thiên Di: ra ngoài dễ được biết đến nhờ tài, có cơ hội thể hiện ở môi trường mới.", "when": "in(Thiên Tài)", "tone": "cat" },
+        { "id": "bs.thien_tai.5", "palaces": ["Tử Tức"], "text": "Thiên Tài ở Tử Tức: con cái lanh lợi, có năng khiếu riêng, đáng để cha mẹ chú ý vun đắp sở trường.", "when": "in(Thiên Tài)", "tone": "cat" },
+        { "id": "bs.thien_tai.6", "palaces": ["Phu Thê"], "text": "Thiên Tài ở Phu Thê: người phối ngẫu giỏi giang, khéo léo, có tài riêng.", "when": "in(Thiên Tài)", "tone": "cat" },
+        { "id": "bs.thien_tai.7", "palaces": ["Nô Bộc"], "text": "Thiên Tài ở Nô Bộc: bạn bè, cộng sự có nhiều người giỏi, mình học được nhiều từ họ.", "when": "in(Thiên Tài)", "tone": "cat" },
+        { "id": "bs.thien_tai.8", "palaces": ["Hạn"], "text": "Hạn đến cung có Thiên Tài: năm có dịp thể hiện khả năng, dễ được ghi nhận nhờ một việc làm khéo.", "when": "in(Thiên Tài)", "tone": "cat" }
+      ]
+    },
+    {
+      "star": "thien_tho",
+      "about": "Thiên Thọ hành Thổ, an từ cung Thân tính theo chi năm sinh; là thọ tinh, chủ sự điềm tĩnh, nhẫn nại và sức bền lâu dài. Sao thường được đọc là làm dịu tính khí và thêm phần vững vàng cho cung nó đóng. Ý nghĩa thọ chỉ là xu hướng tham khảo, không phải lời đoán tuổi.",
+      "rules": [
+        { "id": "bs.thien_tho.1", "palaces": ["Mệnh", "Thân"], "text": "Thiên Thọ ở Mệnh hay Thân: người nhẫn nại, chín chắn, làm việc bền bỉ, dáng vẻ thường chững chạc hơn tuổi.", "when": "in(Thiên Thọ)", "tone": "cat" },
+        { "id": "bs.thien_tho.2", "palaces": ["Quan Lộc"], "text": "Thiên Thọ ở Quan Lộc: hợp với công việc lâu năm, càng làm càng có thâm niên và được tin cậy.", "when": "in(Thiên Thọ)", "tone": "cat" },
+        { "id": "bs.thien_tho.3", "palaces": ["Phu Thê"], "text": "Thiên Thọ ở Phu Thê: người phối ngẫu chín chắn, có khi hơn tuổi hoặc già dặn, hôn nhân có xu hướng bền lâu.", "when": "in(Thiên Thọ)", "tone": "cat" },
+        { "id": "bs.thien_tho.4", "palaces": ["Huynh Đệ"], "text": "Thiên Thọ ở Huynh Đệ: anh chị em hiền hậu, tình anh em gắn bó lâu dài.", "when": "in(Thiên Thọ)", "tone": "cat" },
+        { "id": "bs.thien_tho.5", "palaces": ["Tử Tức"], "text": "Thiên Thọ ở Tử Tức: con cái hiền lành, chậm mà chắc, tình cảm với cha mẹ bền chặt.", "when": "in(Thiên Thọ)", "tone": "cat" },
+        { "id": "bs.thien_tho.6", "palaces": ["Điền Trạch"], "text": "Thiên Thọ ở Điền Trạch: dễ ở lâu một nơi, giữ được nhà cũ hay đất hương hỏa.", "when": "in(Thiên Thọ)", "tone": "cat" },
+        { "id": "bs.thien_tho.7", "palaces": ["Thiên Di"], "text": "Thiên Thọ ở Thiên Di: ra ngoài điềm đạm, được người lớn tuổi quý mến và giúp đỡ.", "when": "in(Thiên Thọ)", "tone": "cat" },
+        { "id": "bs.thien_tho.8", "palaces": ["Hạn"], "text": "Hạn đến cung có Thiên Thọ: nhịp sống chậm và vững hơn, việc gì làm từ từ thì dễ thành.", "when": "in(Thiên Thọ)", "tone": "cat" }
+      ]
+    },
+    {
+      "star": "thien_thuong",
+      "about": "Thiên Thương là hung tinh nhỏ, nhiều sách xếp hành Thổ (có nơi ghi Thủy), chủ sự hao tổn, buồn phiền và những việc dở dang. Theo cách an của ứng dụng, sao luôn đóng ở cung Nô Bộc, nên ý nghĩa chủ yếu được xét khi đại hạn hay tiểu hạn đi qua cung ấy. Mức độ xấu tùy các sao cùng hội: gặp cát tinh và sao giải thì nhẹ, gặp nhiều sát tinh thì nặng hơn.",
+      "rules": [
+        { "id": "bs.thien_thuong.1", "palaces": ["Hạn"], "text": "Hạn đến cung có Thiên Thương: năm dễ có hao hụt, việc dở dang hoặc nỗi buồn nhỏ, mức độ còn tùy các sao khác trong cung.", "when": "in(Thiên Thương)", "tone": "hung" },
+        { "id": "bs.thien_thuong.2", "palaces": ["Hạn"], "text": "Hạn có Thiên Thương lại hội từ ba sát tinh trở lên: trở ngại và hao tổn rõ hơn, năm ấy nên làm chậm mà chắc, tránh mạo hiểm.", "when": "in(Thiên Thương) & count(3, Kình Dương, Đà La, Hỏa Tinh, Linh Tinh, Địa Không, Địa Kiếp)", "tone": "hung" },
+        { "id": "bs.thien_thuong.3", "palaces": ["Hạn"], "text": "Hạn có Thiên Thương gặp Song Hao: chi tiêu dễ vượt dự tính, tiền bạc hao hụt vì những việc không định trước.", "when": "in(Thiên Thương) & meet(Song Hao)", "tone": "hung" },
+        { "id": "bs.thien_thuong.4", "palaces": ["Hạn"], "text": "Hạn có Thiên Thương gặp Hóa Kỵ: dễ có hiểu lầm, lời qua tiếng lại, nhất là với bạn bè và người cộng tác.", "when": "in(Thiên Thương) & meet(Hóa Kỵ)", "tone": "hung" },
+        { "id": "bs.thien_thuong.5", "palaces": ["Hạn"], "text": "Hạn có Thiên Thương gặp Tang Môn, Bạch Hổ: trong nhà dễ có chuyện buồn phải lo toan, lòng nặng nề hơn thường lệ.", "when": "in(Thiên Thương) & meet(Tang Hổ)", "tone": "hung" },
+        { "id": "bs.thien_thuong.6", "palaces": ["Hạn"], "text": "Hạn có Thiên Thương gặp Thiên Khốc, Thiên Hư: tâm trạng dễ buồn bã, hay lo xa, cần giữ tinh thần thư thái.", "when": "in(Thiên Thương) & meet(Khốc Hư)", "tone": "hung" },
+        { "id": "bs.thien_thuong.7", "palaces": ["Hạn"], "text": "Hạn có Thiên Thương mà cùng cung có Thiên Giải, Địa Giải hay Giải Thần: phiền muộn thường được tháo gỡ, chỉ còn những lo lắng thoáng qua.", "when": "in(Thiên Thương, Thiên Giải/Địa Giải/Giải Thần)", "tone": "mixed" }
+      ]
+    },
+    {
+      "star": "thien_su",
+      "about": "Thiên Sứ hành Thủy, là hung tinh nhỏ, chủ những việc không may đến bất ngờ và sự phiền nhiễu; tên sao gợi hình ảnh người sứ giả mang tin họa phúc tới. Theo cách an của ứng dụng, sao luôn đóng ở cung Tật Ách, nên chủ yếu được xét khi đại hạn hay tiểu hạn đi qua cung ấy. Cũng như Thiên Thương, sức xấu của sao tùy bạn đồng hành: cát tinh và sao giải làm nhẹ, sát tinh làm nặng thêm.",
+      "rules": [
+        { "id": "bs.thien_su.1", "palaces": ["Hạn"], "text": "Hạn đến cung có Thiên Sứ: năm dễ có việc bất ngờ ngoài dự tính, thường là phiền nhiễu nhỏ, nên giữ nhịp sống điều độ và chậm rãi hơn.", "when": "in(Thiên Sứ)", "tone": "hung" },
+        { "id": "bs.thien_su.2", "palaces": ["Hạn"], "text": "Hạn có Thiên Sứ lại hội từ ba sát tinh trở lên: trắc trở dễ dồn dập, cần thận trọng hơn trong đi lại và những quyết định lớn.", "when": "in(Thiên Sứ) & count(3, Kình Dương, Đà La, Hỏa Tinh, Linh Tinh, Địa Không, Địa Kiếp)", "tone": "hung" },
+        { "id": "bs.thien_su.3", "palaces": ["Hạn"], "text": "Hạn có Thiên Sứ gặp Thiên Hình: dễ có va vấp, xô xát nhỏ, nên tránh tranh cãi và cẩn thận khi đi lại.", "when": "in(Thiên Sứ) & meet(Thiên Hình)", "tone": "hung" },
+        { "id": "bs.thien_su.4", "palaces": ["Hạn"], "text": "Hạn có Thiên Sứ đồng cung với Quan Phù hay Quan Phủ: dễ vướng thị phi hoặc giấy tờ, thủ tục kéo dài.", "when": "in(Thiên Sứ, Quan Phù/Quan Phủ)", "tone": "hung" },
+        { "id": "bs.thien_su.5", "palaces": ["Hạn"], "text": "Hạn có Thiên Sứ gặp Tang Môn, Bạch Hổ: dễ có chuyện buồn phiền trong gia đình khiến mình phải lo nghĩ.", "when": "in(Thiên Sứ) & meet(Tang Hổ)", "tone": "hung" },
+        { "id": "bs.thien_su.6", "palaces": ["Hạn"], "text": "Hạn có Thiên Sứ mà cùng cung có Thiên Giải, Địa Giải hay Giải Thần: việc rắc rối thường có người gỡ giúp, cái xấu được giảm nhẹ nhiều.", "when": "in(Thiên Sứ, Thiên Giải/Địa Giải/Giải Thần)", "tone": "mixed" }
+      ]
+    },
+    {
+      "star": "thieu_duong",
+      "about": "Thiếu Dương hành Hỏa, là cát tinh nhỏ trong vòng Thái Tuế, đóng ở cung kế tiếp Thái Tuế theo chiều thuận và theo cách an này luôn đồng cung với Thiên Không. Sao chủ về sự thông minh, vui vẻ, cởi mở và những may mắn nhỏ trong giao tiếp. Vì luôn đi cùng Thiên Không, khi đọc nên cân nhắc cả hai: cái sáng của Thiếu Dương thường kèm sự bốc đồng hoặc kỳ vọng quá cao.",
+      "rules": [
+        { "id": "bs.thieu_duong.1", "palaces": ["Mệnh", "Thân"], "text": "Thiếu Dương ở Mệnh hay Thân: vui tính, cởi mở, nhanh nhạy; vì đi cùng Thiên Không nên nhiều ý tưởng nhưng dễ đặt kỳ vọng cao rồi hụt hẫng.", "when": "in(Thiếu Dương)", "tone": "mixed" },
+        { "id": "bs.thieu_duong.2", "palaces": ["Quan Lộc"], "text": "Thiếu Dương ở Quan Lộc: hợp với công việc cần giao tiếp, nhanh nhạy, nơi làm việc thường có không khí dễ chịu.", "when": "in(Thiếu Dương)", "tone": "cat" },
+        { "id": "bs.thieu_duong.3", "palaces": ["Thiên Di"], "text": "Thiếu Dương ở Thiên Di: ra ngoài cởi mở, dễ kết bạn, hay gặp những may mắn nhỏ trên đường đi.", "when": "in(Thiếu Dương)", "tone": "cat" },
+        { "id": "bs.thieu_duong.4", "palaces": ["Phu Thê"], "text": "Thiếu Dương ở Phu Thê: vợ chồng vui vẻ, nói chuyện cởi mở với nhau, người phối ngẫu thường hoạt bát.", "when": "in(Thiếu Dương)", "tone": "cat" },
+        { "id": "bs.thieu_duong.5", "palaces": ["Huynh Đệ"], "text": "Thiếu Dương ở Huynh Đệ: anh chị em thân thiện, dễ chuyện trò, ít để bụng.", "when": "in(Thiếu Dương)", "tone": "cat" },
+        { "id": "bs.thieu_duong.6", "palaces": ["Tử Tức"], "text": "Thiếu Dương ở Tử Tức: con cái hoạt bát, hiếu động, mang lại tiếng cười trong nhà.", "when": "in(Thiếu Dương)", "tone": "cat" },
+        { "id": "bs.thieu_duong.7", "palaces": ["Nô Bộc"], "text": "Thiếu Dương ở Nô Bộc: bạn bè vui vẻ, rộng rãi, dễ cùng nhau làm việc chung.", "when": "in(Thiếu Dương)", "tone": "cat" },
+        { "id": "bs.thieu_duong.8", "palaces": ["Hạn"], "text": "Hạn đến cung có Thiếu Dương: tinh thần phấn chấn, có tin vui nhỏ; vì đi cùng Thiên Không nên việc lớn cần tính kỹ, tránh hứa nhiều làm ít.", "when": "in(Thiếu Dương)", "tone": "mixed" }
+      ]
+    },
+    {
+      "star": "thieu_am",
+      "about": "Thiếu Âm hành Thủy, là cát tinh nhỏ trong vòng Thái Tuế, đóng ở cung thứ tư tính từ Thái Tuế theo chiều thuận. Sao chủ về sự ôn hòa, kín đáo, nhạy cảm và tình cảm êm đềm, thường làm dịu những sao nóng nảy cùng cung. Là sao nhỏ nên chủ yếu tô thêm sắc thái hiền hòa, không quyết định cát hung của cả cung.",
+      "rules": [
+        { "id": "bs.thieu_am.1", "palaces": ["Mệnh", "Thân"], "text": "Thiếu Âm ở Mệnh hay Thân: tính ôn hòa, kín đáo, giàu tình cảm nhưng ít bộc lộ, hay nghĩ cho người khác.", "when": "in(Thiếu Âm)", "tone": "trung" },
+        { "id": "bs.thieu_am.2", "palaces": ["Quan Lộc"], "text": "Thiếu Âm ở Quan Lộc: hợp với công việc cần sự tỉ mỉ, kiên nhẫn, làm lặng lẽ mà chắc.", "when": "in(Thiếu Âm)", "tone": "cat" },
+        { "id": "bs.thieu_am.3", "palaces": ["Phu Thê"], "text": "Thiếu Âm ở Phu Thê: tình cảm vợ chồng êm đềm, nhẹ nhàng, ít sóng gió bề ngoài.", "when": "in(Thiếu Âm)", "tone": "cat" },
+        { "id": "bs.thieu_am.4", "palaces": ["Điền Trạch"], "text": "Thiếu Âm ở Điền Trạch: nhà cửa yên tĩnh, ấm cúng, hợp với nơi ở thanh vắng.", "when": "in(Thiếu Âm)", "tone": "cat" },
+        { "id": "bs.thieu_am.5", "palaces": ["Phúc Đức"], "text": "Thiếu Âm ở Phúc Đức: đời sống nội tâm sâu lắng, dễ tìm được sự bình yên trong lòng.", "when": "in(Thiếu Âm)", "tone": "cat" },
+        { "id": "bs.thieu_am.6", "palaces": ["Tử Tức"], "text": "Thiếu Âm ở Tử Tức: con cái hiền, sống tình cảm, gần gũi cha mẹ.", "when": "in(Thiếu Âm)", "tone": "cat" },
+        { "id": "bs.thieu_am.7", "palaces": ["Nô Bộc"], "text": "Thiếu Âm ở Nô Bộc: bạn bè, người cộng tác phần nhiều hiền lành, ít khi gây phiền.", "when": "in(Thiếu Âm)", "tone": "cat" },
+        { "id": "bs.thieu_am.8", "palaces": ["Hạn"], "text": "Hạn đến cung có Thiếu Âm: nhịp sống êm hơn, có niềm vui nhỏ về tình cảm hoặc gia đình.", "when": "in(Thiếu Âm)", "tone": "cat" }
+      ]
+    },
+    {
+      "star": "dia_giai",
+      "about": "Địa Giải hành Thổ, là sao giải an theo tháng sinh, cùng Thiên Giải và Giải Thần hợp thành nhóm sao chuyên hóa giải. Sao chủ về việc tháo gỡ khó khăn, làm nhẹ tai ách, tranh chấp và buồn phiền. Sức giải là có thật nhưng vừa phải: làm nhẹ đi chứ không xóa hẳn được cái xấu của sát tinh.",
+      "rules": [
+        { "id": "bs.dia_giai.1", "palaces": ["Mệnh", "Thân"], "text": "Địa Giải ở Mệnh hay Thân: người có tài hòa giải, gặp việc rối thường bình tĩnh tìm cách gỡ, ít để mâu thuẫn kéo dài.", "when": "in(Địa Giải)", "tone": "cat" },
+        { "id": "bs.dia_giai.2", "palaces": ["Tật Ách"], "text": "Địa Giải ở Tật Ách: những trắc trở về sức khỏe thường mau qua, dễ gặp người chữa đúng cách.", "when": "in(Địa Giải)", "tone": "cat" },
+        { "id": "bs.dia_giai.3", "palaces": ["Quan Lộc"], "text": "Địa Giải ở Quan Lộc: trong công việc hay là người đứng ra dàn xếp, rắc rối nghề nghiệp thường được tháo gỡ.", "when": "in(Địa Giải)", "tone": "cat" },
+        { "id": "bs.dia_giai.4", "palaces": ["Phu Thê"], "text": "Địa Giải ở Phu Thê: vợ chồng có lúc giận hờn nhưng dễ làm lành, biết nhường nhau.", "when": "in(Địa Giải)", "tone": "cat" },
+        { "id": "bs.dia_giai.5", "palaces": ["Huynh Đệ"], "text": "Địa Giải ở Huynh Đệ: anh chị em có va chạm cũng dễ hòa giải, lúc khó vẫn tìm đến nhau.", "when": "in(Địa Giải)", "tone": "cat" },
+        { "id": "bs.dia_giai.6", "palaces": ["Điền Trạch"], "text": "Địa Giải ở Điền Trạch: chuyện nhà đất nếu có vướng mắc thường dàn xếp được êm thấm.", "when": "in(Địa Giải)", "tone": "cat" },
+        { "id": "bs.dia_giai.7", "palaces": ["Hạn"], "text": "Hạn có Địa Giải lại gặp Giải Thần: các việc vướng mắc trong năm dễ được tháo gỡ, có người đứng ra giúp.", "when": "in(Địa Giải) & meet(Giải Thần)", "tone": "cat" },
+        { "id": "bs.dia_giai.8", "palaces": ["Hạn"], "text": "Hạn có Địa Giải đồng cung với Quan Phù hay Quan Phủ: chuyện giấy tờ, tranh chấp có thể phát sinh nhưng dễ đi đến hòa giải.", "when": "in(Địa Giải, Quan Phù/Quan Phủ)", "tone": "mixed" }
+      ]
+    },
+    {
+      "star": "quan_sach",
+      "about": "Quán Sách là hung tinh nhỏ của vòng Thái Tuế; theo cách an này sao đóng ở cung kề bên Thái Tuế, cùng chỗ với Trực Phù, còn có sách xếp nó ở vị trí khác trong vòng. Tên sao gợi hình sợi dây xâu buộc, nên sao chủ về sự ràng buộc, vướng víu, chậm trễ, và khi gặp thêm sao xấu thì là những rắc rối giấy tờ, thị phi. Sách nói về sao này không nhiều, nên chỉ nên coi là một sắc thái phụ.",
+      "rules": [
+        { "id": "bs.quan_sach.1", "palaces": ["Mệnh", "Thân"], "text": "Quán Sách ở Mệnh hay Thân: hay tự đặt mình vào nhiều trách nhiệm, ràng buộc, cẩn thận đến mức câu nệ, khó dứt bỏ việc cũ.", "when": "in(Quán Sách)", "tone": "mixed" },
+        { "id": "bs.quan_sach.2", "palaces": ["Quan Lộc"], "text": "Quán Sách ở Quan Lộc: công việc nhiều thủ tục, cam kết, dễ bị giữ chân ở một chỗ lâu hơn ý muốn.", "when": "in(Quán Sách)", "tone": "hung" },
+        { "id": "bs.quan_sach.3", "palaces": ["Quan Lộc"], "text": "Quán Sách ở Quan Lộc gặp Thiên Hình: dễ vướng chuyện kỷ luật, giấy tờ hay tranh chấp trong công việc, mọi việc nên minh bạch.", "when": "in(Quán Sách) & meet(Thiên Hình)", "tone": "hung" },
+        { "id": "bs.quan_sach.4", "palaces": ["Tài Bạch"], "text": "Quán Sách ở Tài Bạch: tiền bạc dễ bị đọng hoặc bị ràng buộc vào những khoản khó rút ra đúng lúc cần.", "when": "in(Quán Sách)", "tone": "hung" },
+        { "id": "bs.quan_sach.5", "palaces": ["Thiên Di"], "text": "Quán Sách ở Thiên Di: ra ngoài hay gặp việc giữ chân, thủ tục chậm trễ, đi lại dễ lỡ hẹn.", "when": "in(Quán Sách)", "tone": "hung" },
+        { "id": "bs.quan_sach.6", "palaces": ["Hạn"], "text": "Hạn đến cung có Quán Sách: dễ cảm thấy bị bó buộc, việc tiến chậm, giấy tờ và cam kết trong năm nên rõ ràng.", "when": "in(Quán Sách)", "tone": "hung" },
+        { "id": "bs.quan_sach.7", "palaces": ["Hạn"], "text": "Hạn có Quán Sách đồng cung với Thiên Hình: dễ vướng thị phi hoặc tranh chấp giấy tờ kéo dài, nên giữ hòa khí và tránh va chạm.", "when": "in(Quán Sách, Thiên Hình)", "tone": "hung" },
+        { "id": "bs.quan_sach.8", "palaces": ["Hạn"], "text": "Hạn có Quán Sách mà cùng cung có Thiên Giải hay Địa Giải: những ràng buộc trong năm dễ được tháo gỡ dần.", "when": "in(Quán Sách, Thiên Giải/Địa Giải)", "tone": "mixed" }
+      ]
+    },
+    {
+      "star": "van_xuong",
+      "about": "Văn Xương hành Kim, là văn tinh đi cặp với Văn Khúc, chủ học vấn, thi cử, chữ nghĩa và mọi việc giấy tờ, văn bản. Sao sáng thì lời lẽ, giấy tờ mạch lạc, đường học thuận; hãm hoặc đồng cung Hóa Kỵ thì dễ sai sót văn thư, việc học gián đoạn. Văn Xương hóa Khoa với tuổi Bính và hóa Kỵ với tuổi Tân; phần bổ sung này chỉ viết cho những cung mà ghi chép của bà chưa nói tới.",
+      "rules": [
+        { "id": "bs.van_xuong.1", "palaces": ["Quan Lộc"], "text": "Văn Xương sáng ở Quan Lộc: hợp với công việc dùng chữ nghĩa, văn bản, giảng dạy hay nghiên cứu, dễ có tiếng nhờ học vấn.", "when": "in(Văn Xương) & bright(Văn Xương)", "tone": "cat" },
+        { "id": "bs.van_xuong.2", "palaces": ["Quan Lộc"], "text": "Văn Xương ở Quan Lộc gặp Hóa Khoa: thuận cho thi cử, bằng cấp và những chứng nhận về chuyên môn.", "when": "in(Văn Xương) & meet(Hóa Khoa)", "tone": "cat" },
+        { "id": "bs.van_xuong.3", "palaces": ["Quan Lộc"], "text": "Văn Xương hãm ở Quan Lộc: học vấn vẫn là chỗ dựa nhưng bằng cấp, thăng tiến thường đến chậm, cần bền bỉ mới thành.", "when": "in(Văn Xương) & dim(Văn Xương)", "tone": "mixed" },
+        { "id": "bs.van_xuong.4", "palaces": ["Quan Lộc", "Tài Bạch", "Điền Trạch"], "text": "Văn Xương đồng cung với Hóa Kỵ ở cung này: giấy tờ, hợp đồng, sổ sách liên quan dễ có sai sót hay nhầm lẫn, cần cẩn trọng khi ký kết.", "when": "in(Văn Xương, Hóa Kỵ)", "tone": "hung" },
+        { "id": "bs.van_xuong.5", "palaces": ["Tài Bạch"], "text": "Văn Xương ở Tài Bạch: tiền bạc thường đến từ việc dùng trí óc, chữ nghĩa, giấy tờ, tính toán sổ sách rành mạch.", "when": "in(Văn Xương) & !in(Hóa Kỵ)", "tone": "cat" },
+        { "id": "bs.van_xuong.6", "palaces": ["Tử Tức"], "text": "Văn Xương ở Tử Tức: con cái thường sáng dạ, ham sách vở, chuyện học của con là niềm vui lớn của cha mẹ.", "when": "in(Văn Xương)", "tone": "cat" },
+        { "id": "bs.van_xuong.7", "palaces": ["Phụ Mẫu"], "text": "Văn Xương ở Phụ Mẫu: cha mẹ là người có học, trọng lễ nghĩa, mình được hưởng nền nếp học hành từ gia đình.", "when": "in(Văn Xương)", "tone": "cat" },
+        { "id": "bs.van_xuong.8", "palaces": ["Huynh Đệ"], "text": "Văn Xương ở Huynh Đệ: trong anh chị em có người học giỏi, sống nho nhã, hay giúp nhau chuyện học.", "when": "in(Văn Xương)", "tone": "cat" },
+        { "id": "bs.van_xuong.9", "palaces": ["Nô Bộc"], "text": "Văn Xương ở Nô Bộc: bạn bè, đồng nghiệp phần nhiều là người có học, giúp được mình những việc cần chữ nghĩa, giấy tờ.", "when": "in(Văn Xương)", "tone": "cat" },
+        { "id": "bs.van_xuong.10", "palaces": ["Tật Ách"], "text": "Văn Xương ở Tật Ách: người hay lo nghĩ bằng đầu óc nên dễ căng thẳng khi việc dồn dập, nhưng sao này không làm nặng thêm tai ách.", "when": "in(Văn Xương)", "tone": "mixed" },
+        { "id": "bs.van_xuong.11", "palaces": ["Điền Trạch"], "text": "Văn Xương ở Điền Trạch: nhà cửa có chỗ cho sách vở, học hành, giấy tờ nhà đất thường rõ ràng.", "when": "in(Văn Xương) & !in(Hóa Kỵ)", "tone": "cat" },
+        { "id": "bs.van_xuong.12", "palaces": ["Phúc Đức"], "text": "Văn Xương ở Phúc Đức: dòng họ chuộng chữ nghĩa, có nếp học hành, đời sống tinh thần gắn với sách vở.", "when": "in(Văn Xương)", "tone": "cat" }
+      ]
+    }
+  ]
+}

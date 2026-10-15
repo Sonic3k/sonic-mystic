@@ -1,0 +1,37 @@
+{
+  "entry": 1949,
+  "star": "tuan",
+  "rules": [
+    { "id": "tuan.1952.1", "para": 1952, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: bạo ngược, ác tâm.", "when": "in(Tuần)", "tone": "hung" },
+    { "id": "tuan.1954.1", "para": 1954, "palaces": ["Mệnh", "Thân"], "text": "Thất Sát Dần Thân là nhất sinh tước lộc vinh sương, tứ phương củng phục anh hùng, nhưng gặp phải Tuần Triệt là kiếm gẫy.", "when": "in(Thất Sát) & at(Dần, Thân) & meet(Tuần/Triệt)", "tone": "hung", "review": "câu ví dụ (VD) của bà; hiểu là Thất Sát thủ cung ở Dần Thân mà gặp Tuần hoặc Triệt" },
+    { "id": "tuan.1955.1", "para": 1955, "palaces": ["Mệnh"], "text": "Mệnh vô chính diệu ngộ Không vong (Tuần) - thọ, làm nên vững bền", "when": "empty() & meet(Tuần)", "tone": "cat" },
+    { "id": "tuan.1955.2", "para": 1955, "palaces": ["Mệnh"], "text": "gia Cát tinh, Tam Không thủ chiếu - phú quý song toàn.", "ctx": "Mệnh vô chính diệu ngộ Không vong (Tuần)", "when": "empty() & meet(Tuần, Cát tinh, Tam Không)", "tone": "cat", "review": "hiểu là cần cả Cát tinh và Tam Không thủ chiếu; cũng có thể là có một trong hai" },
+    { "id": "tuan.1956.1", "para": 1956, "palaces": ["Mệnh"], "text": "Tuần Triệt giao đầu- thiếu niên tân khổ", "when": "in(Tuần, Triệt)", "tone": "hung", "review": "giao đầu hiểu là Tuần và Triệt cùng ở Mệnh" },
+    { "id": "tuan.1956.2", "para": 1956, "palaces": ["Mệnh", "Thân"], "text": "có Tam Không thủ chiếu Thân Mệnh mà không có Tam Hoá - phú quý không toàn.", "when": "meet(Tam Không) & !meet(Tam Hóa)", "tone": "mixed" },
+    { "id": "tuan.1957.1", "para": 1957, "palaces": ["Mệnh"], "text": "Tuần Triệt tương ngộ – vô kế sinh nhai, lông bông vô định, bất hưởng phúc, mồ côi.", "when": "in(Tuần/Triệt) & meet(Tuần, Triệt)", "tone": "hung", "review": "tương ngộ hiểu là Tuần hoặc Triệt ở Mệnh và Mệnh hội cả hai" },
+    { "id": "tuan.1957.2", "para": 1957, "palaces": ["Mệnh"], "text": "Đàn bà thêm chồng con trắc trở.", "ctx": "Tuần Triệt tương ngộ", "when": "female() & in(Tuần/Triệt) & meet(Tuần, Triệt)", "tone": "hung" },
+    { "id": "tuan.1958.1", "para": 1958, "palaces": ["Mệnh"], "text": "Tuần phùng Khoa Lộc - một bước khanh tướng.", "when": "in(Tuần) & meet(Hóa Khoa, Lộc)", "tone": "cat" },
+    { "id": "tuan.1959.1", "para": 1959, "palaces": ["Mệnh", "Điền Trạch"], "text": "Tuần Triệt cư Mệnh Điền - không được hưởng tổ nghiệp.", "when": "in(Tuần/Triệt)", "tone": "hung" },
+    { "id": "tuan.1960.1", "para": 1960, "palaces": ["Mệnh", "Thân"], "text": "Mệnh Thân có Không Kiếp nhưng ngộ Tuần Triệt - không sợ tai nguy.", "when": "in(Địa Không/Địa Kiếp) & meet(Không Kiếp, Tuần/Triệt)", "tone": "cat" },
+    { "id": "tuan.1961.1", "para": 1961, "palaces": ["Huynh Đệ"], "text": "Có Tuần - anh chị em xung khắc.", "when": "in(Tuần)", "tone": "hung" },
+    { "id": "tuan.1962.1", "para": 1962, "palaces": ["Huynh Đệ"], "text": "Tuần Triệt - anh chị trưởng phải chết.", "when": "in(Tuần/Triệt)", "tone": "hung", "review": "hiểu là cung Huynh có Tuần hoặc Triệt; cũng có thể là có cả Tuần lẫn Triệt (nặng hơn câu «Có Tuần» ở trên)" },
+    { "id": "tuan.1963.1", "para": 1963, "palaces": ["Phu Thê"], "text": "Có Tuần Triệt là xung khắc", "when": "in(Tuần/Triệt)", "tone": "hung" },
+    { "id": "tuan.1963.2", "para": 1963, "palaces": ["Phu Thê"], "text": "gặp Thiên Hư thì cả hai đều bất chính.", "ctx": "Có Tuần Triệt", "when": "in(Tuần/Triệt) & meet(Thiên Hư)", "tone": "hung" },
+    { "id": "tuan.1964.1", "para": 1964, "palaces": ["Phu Thê"], "text": "Có Tứ Không ngộ Mã - bỏ chồng theo trai, bỏ nhau (Tuần ngộ Mã).", "when": "(meet(Tứ Không) | in(Tuần)) & meet(Thiên Mã)", "tone": "hung", "review": "hiểu là cung Phu hội đủ Tứ Không (Tuần, Triệt, Địa Không, Thiên Không) gặp Mã, hoặc như bà ghi trong ngoặc là Tuần ngộ Mã" },
+    { "id": "tuan.1965.1", "para": 1965, "palaces": ["Phu Thê"], "text": "Có Tuần - viễn phối thì tốt, lấy người đồng hương thì xấu, phải trắc trở nhiều lần mới thành.", "when": "in(Tuần)", "tone": "mixed" },
+    { "id": "tuan.1966.1", "para": 1966, "palaces": ["Tử Tức"], "text": "Có Tuần Triệt - trước khó, sau dễ sinh.", "when": "in(Tuần/Triệt)", "tone": "mixed" },
+    { "id": "tuan.1967.1", "para": 1967, "palaces": ["Tài Bạch"], "text": "Thiên Phủ gặp Tuần - kho rỗng, hết sạch của cải.", "when": "in(Thiên Phủ) & meet(Tuần)", "tone": "hung" },
+    { "id": "tuan.1968.1", "para": 1968, "palaces": ["Tật Ách"], "text": "Có Tuần - khỏi hết tai ách.", "when": "in(Tuần)", "tone": "cat" },
+    { "id": "tuan.1969.1", "para": 1969, "palaces": ["Nô Bộc"], "text": "Có Tuần - tôi tớ không ở được lâu, đổi mới luôn.", "when": "in(Tuần)", "tone": "hung" },
+    { "id": "tuan.1970.1", "para": 1970, "palaces": ["Quan Lộc"], "text": "Có Tuần Thiên Tướng - giàu.", "when": "in(Tuần) & meet(Thiên Tướng)", "tone": "cat" },
+    { "id": "tuan.1971.1", "para": 1971, "palaces": ["Điền Trạch"], "text": "Có Tuần Triệt - vô điền sản, không hưởng tổ nghiệp.", "when": "in(Tuần/Triệt)", "tone": "hung" },
+    { "id": "tuan.1972.1", "para": 1972, "palaces": ["Phúc Đức"], "text": "Tuần Không là đất khoáng đạt không có gì, trong cuộc tán loạn.", "when": "in(Tuần)", "tone": "hung" },
+    { "id": "tuan.1973.1", "para": 1973, "palaces": ["Phúc Đức"], "text": "Tuần Không Kiếp - bần cùng; có ngôi mả tiền nhân mất ở hoang sơn.", "when": "in(Tuần) & meet(Không Kiếp)", "tone": "hung", "review": "hiểu là Tuần gặp Không Kiếp (Địa Không, Địa Kiếp); cũng có thể là Tuần Không gặp Địa Kiếp" },
+    { "id": "tuan.1974.1", "para": 1974, "palaces": ["Phụ Mẫu"], "text": "Tuần Triệt Hình hay Âm Dương Tuần Triệt - cha mẹ mất sớm.", "when": "in(Tuần/Triệt) & (meet(Thiên Hình) | meet(Nhật Nguyệt))", "tone": "hung", "review": "hiểu là cung Phụ Mẫu có Tuần hoặc Triệt, gặp Thiên Hình hay gặp Nhật Nguyệt; cũng có thể «Âm Dương Tuần Triệt» là Nhật Nguyệt bị Tuần Triệt ở bất cứ cung nào" }
+  ],
+  "skip": [
+    { "para": 1950, "kind": "meta" },
+    { "para": 1951, "kind": "meta" },
+    { "para": 1953, "kind": "theory" }
+  ]
+}

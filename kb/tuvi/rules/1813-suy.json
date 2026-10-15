@@ -1,0 +1,25 @@
+{
+  "entry": 1813,
+  "star": "suy",
+  "rules": [
+    { "id": "suy.1815.1", "para": 1815, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: yếu kém, bạc nhược.", "when": "in(Suy)", "tone": "hung" },
+    { "id": "suy.1816.1", "para": 1816, "palaces": ["Mệnh", "Thân"], "text": "Chủ sự suy bại, suy yếu, sa sút không thịnh đạt.", "ctx": "Suy", "when": "in(Suy)", "tone": "hung" },
+    { "id": "suy.1818.1", "para": 1818, "palaces": ["Mệnh", "Thân"], "text": "Sao Suy cư Thìn Tuất, hội Cự Môn là đắc cách nhất.", "when": "in(Suy) & at(Thìn, Tuất) & meet(Cự Môn)", "tone": "cat" },
+    { "id": "suy.1819.1", "para": 1819, "palaces": ["Mệnh", "Thân"], "text": "Đồng cung với Tử Vi Thiên Phủ như áo có thêu hoa, thiếu niên cặp đệ nhất văn chương phú túc.", "ctx": "Suy", "when": "in(Suy, Tử Vi/Thiên Phủ)", "tone": "cat", "review": "Tử Vi Thiên Phủ chỉ đồng cung ở Dần Thân, nơi sao Suy không bao giờ đóng; hiểu là Suy đồng cung với Tử Vi hoặc Thiên Phủ" },
+    { "id": "suy.1820.1", "para": 1820, "palaces": ["Mệnh", "Thân"], "text": "Hội Lộc Tồn là những vũ công danh tài", "ctx": "Suy", "when": "in(Suy) & meet(Lộc Tồn)", "tone": "cat" },
+    { "id": "suy.1820.2", "para": 1820, "palaces": ["Mệnh", "Thân"], "text": "hội Song Lộc là cách phú túc, tài lộc cự vạn.", "ctx": "Suy", "when": "in(Suy) & meet(Lộc Tồn, Hóa Lộc)", "tone": "cat" },
+    { "id": "suy.1821.1", "para": 1821, "palaces": ["Mệnh", "Thân"], "text": "Suy hội Cơ Lương hãm lạc Hoả Linh Không Kiếp thì có ngón nhà nghề diệu thủ ( trộm cắp móc túi ).", "when": "in(Suy) & meet(Thiên Cơ, Thiên Lương) & (dim(Thiên Cơ) | dim(Thiên Lương)) & meet(Hỏa Tinh/Linh Tinh/Địa Không/Địa Kiếp)", "tone": "hung", "review": "Cơ Lương hãm hiểu là Thiên Cơ hay Thiên Lương hãm (theo bảng của bà hai sao không bao giờ cùng hãm); hiểu là gặp một trong Hoả Linh Không Kiếp (cũng có thể phải đủ cả bốn)" },
+    { "id": "suy.1822.1", "para": 1822, "palaces": ["Hạn"], "text": "Lưu hạn gặp cách trên phòng gia đạo xảy ra đạo trích tổn hại.", "ctx": "Suy hội Cơ Lương hãm lạc Hoả Linh Không Kiếp", "when": "in(Suy) & meet(Thiên Cơ, Thiên Lương) & (dim(Thiên Cơ) | dim(Thiên Lương)) & meet(Hỏa Tinh/Linh Tinh/Địa Không/Địa Kiếp)", "tone": "hung" },
+    { "id": "suy.1823.1", "para": 1823, "palaces": ["Mệnh"], "text": "Có Suy - không ưa ai.", "when": "in(Suy)", "tone": "hung" },
+    { "id": "suy.1824.1", "para": 1824, "palaces": ["Tử Tức"], "text": "Suy - hiếm con.", "when": "in(Suy)", "tone": "hung" },
+    { "id": "suy.1825.1", "para": 1825, "palaces": ["Thiên Di"], "text": "Suy - làm tôi tớ", "when": "in(Suy)", "tone": "hung" },
+    { "id": "suy.1826.1", "para": 1826, "palaces": ["Thiên Di"], "text": "Suy ngộ Dưỡng Tướng - tôi tớ nhà quyền môn.", "when": "in(Suy) & meet(Dưỡng, Thiên Tướng)", "tone": "mixed", "review": "Tướng hiểu là Thiên Tướng; Dưỡng luôn xung chiếu sao Suy nên chỉ còn là gặp Thiên Tướng" },
+    { "id": "suy.1827.1", "para": 1827, "palaces": ["Quan Lộc"], "text": "Suy - công danh hèn kém.", "when": "in(Suy)", "tone": "hung" },
+    { "id": "suy.1828.1", "para": 1828, "palaces": ["Phúc Đức"], "text": "Suy là hình như cái xương sống gầy, sắc nhọn.", "when": "in(Suy)", "tone": "trung" },
+    { "id": "suy.1828.2", "para": 1828, "palaces": ["*"], "text": "Sao Suy cư cung nào cũng chỉ sự suy bại, kém.", "when": "in(Suy)", "tone": "hung" }
+  ],
+  "skip": [
+    { "para": 1814, "kind": "meta" },
+    { "para": 1817, "kind": "theory" }
+  ]
+}

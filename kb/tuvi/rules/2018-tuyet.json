@@ -1,0 +1,28 @@
+{
+  "entry": 2018,
+  "star": "tuyet",
+  "rules": [
+    { "id": "tuyet.2020.1", "para": 2020, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: bất lương. Chủ sự hết.", "when": "in(Tuyệt)", "tone": "hung" },
+    { "id": "tuyet.2021.1", "para": 2021, "palaces": ["Mệnh", "Thân"], "text": "Sao Tuyệt tương hợp với Hoá Lộc là đắc cách", "when": "in(Tuyệt) & meet(Hóa Lộc)", "tone": "cat" },
+    { "id": "tuyet.2021.2", "para": 2021, "palaces": ["Mệnh", "Thân"], "text": "cư Tý Ngọ cung hội Song Lộc - thông minh phát phúc, có văn học mà quý hiển.", "ctx": "Sao Tuyệt", "when": "at(Tý, Ngọ) & meet(Tuyệt, Lộc Tồn, Hóa Lộc)", "tone": "cat", "review": "Tuyệt luôn ở Dần Thân Tỵ Hợi, không bao giờ cư Tý Ngọ; hiểu là cung Mệnh (Thân) ở Tý Ngọ hội Tuyệt và Song Lộc (Lộc Tồn, Hoá Lộc); cần xem lại" },
+    { "id": "tuyet.2022.1", "para": 2022, "palaces": ["Mệnh", "Thân"], "text": "Hội Vũ Phá thì cha con bất hoà, vợ chồng ly biệt", "ctx": "Sao Tuyệt", "when": "in(Tuyệt) & meet(Vũ Khúc, Phá Quân)", "tone": "hung" },
+    { "id": "tuyet.2022.2", "para": 2022, "palaces": ["Mệnh", "Thân"], "text": "trai lãng đãng rong chơi", "ctx": "Tuyệt hội Vũ Phá", "when": "in(Tuyệt) & meet(Vũ Khúc, Phá Quân) & male()", "tone": "hung" },
+    { "id": "tuyet.2022.3", "para": 2022, "palaces": ["Mệnh", "Thân"], "text": "gái đa dâm", "ctx": "Tuyệt hội Vũ Phá", "when": "in(Tuyệt) & meet(Vũ Khúc, Phá Quân) & female()", "tone": "hung" },
+    { "id": "tuyet.2022.4", "para": 2022, "palaces": ["Mệnh", "Thân"], "text": "vợ cả vợ hai hay tư tình thông dâm", "ctx": "Tuyệt hội Vũ Phá", "when": "in(Tuyệt) & meet(Vũ Khúc, Phá Quân)", "tone": "hung", "review": "không rõ vế này nói về người nữ (làm vợ cả hay vợ hai đều tư tình) hay về các bà vợ của người nam; để chung cho cả nam lẫn nữ" },
+    { "id": "tuyet.2023.1", "para": 2023, "palaces": ["Tử Tức"], "text": "Sao Tuyệt kỵ cư cung Tử", "when": "in(Tuyệt)", "tone": "hung" },
+    { "id": "tuyet.2023.2", "para": 2023, "palaces": ["Tử Tức"], "text": "hội với Quả Cô Lộc Tồn là cách đáo lão vô nhi khốc (đến già cũng không có tiếng trẻ con khóc), hay hữu sinh vô dưỡng.", "ctx": "Sao Tuyệt cư cung Tử", "when": "in(Tuyệt) & meet(Cô Quả, Lộc Tồn)", "tone": "hung" },
+    { "id": "tuyet.2024.1", "para": 2024, "palaces": ["Mệnh"], "text": "Có Tuyệt độc thủ - rất xấu.", "when": "in(Tuyệt) & empty()", "tone": "hung", "review": "«độc thủ» hiểu là Tuyệt ở cung Mệnh vô chính diệu" },
+    { "id": "tuyet.2025.1", "para": 2025, "palaces": ["Mệnh"], "text": "Tuyệt phùng Hoả tại Hợi - chí khí hiên ngang, gặp thời thì ung dung.", "when": "in(Tuyệt) & at(Hợi) & meet(Hỏa Tinh)", "tone": "cat" },
+    { "id": "tuyet.2026.1", "para": 2026, "palaces": ["Mệnh"], "text": "Tuyệt Hoả Tham Hình thủ chiếu - hiển hách lừng lẫy.", "when": "meet(Tuyệt, Hỏa Tinh, Tham Lang, Thiên Hình)", "tone": "cat", "review": "«thủ chiếu» hiểu là bốn sao Tuyệt, Hoả Tinh, Tham Lang, Thiên Hình ở Mệnh hay chiếu về Mệnh (tam phương tứ chính), không buộc Tuyệt thủ Mệnh" },
+    { "id": "tuyet.2027.1", "para": 2027, "palaces": ["Mệnh"], "text": "Kình Dương gặp Tuyệt ở hãm cung - chết non.", "when": "in(Kình Dương/Tuyệt) & meet(Kình Dương, Tuyệt) & dim(Kình Dương)", "tone": "hung", "review": "«hãm cung» hiểu là Kình Dương hãm địa (Tý Ngọ Mão Dậu theo bảng của bà); hiểu là Kình Dương và Tuyệt hội ở Mệnh, một trong hai sao thủ Mệnh" },
+    { "id": "tuyet.2028.1", "para": 2028, "palaces": ["Huynh Đệ"], "text": "Lương Tuyệt đắc địa - có 5,6 anh chi em", "when": "in(Thiên Lương, Tuyệt) & bright(Thiên Lương)", "tone": "cat", "review": "«đắc địa» hiểu là Thiên Lương sáng (bảng của bà không ghi miếu hãm cho Tuyệt); Lương Tuyệt đồng cung chỉ ở Dần Thân Tỵ Hợi: Dần Thân Lương vượng, Tỵ Hợi Lương hãm" },
+    { "id": "tuyet.2028.2", "para": 2028, "palaces": ["Huynh Đệ"], "text": "Hãm - chỉ 1 người.", "ctx": "Lương Tuyệt", "when": "in(Thiên Lương, Tuyệt) & dim(Thiên Lương)", "tone": "hung" },
+    { "id": "tuyet.2029.1", "para": 2029, "palaces": ["Huynh Đệ"], "text": "Tuyệt Kiếp - có người gian giảo.", "when": "in(Tuyệt) & meet(Địa Kiếp)", "tone": "hung" },
+    { "id": "tuyet.2030.1", "para": 2030, "palaces": ["Huynh Đệ"], "text": "Tuyệt Tướng Vượng Thai - có anh chị em dị bào.", "when": "(in(Tuyệt) & meet(Tướng Quân)) | (in(Đế Vượng/Thai) & meet(Đế Vượng, Thai))", "tone": "trung", "review": "Tuyệt không bao giờ hội Đế Vượng hay Thai (cùng vòng Tràng Sinh), nên hiểu là hai bộ «Tuyệt Tướng» và «Vượng Thai» (mục Thai ghi «Thai Vượng, Thai Tướng - có anh em dị bào»); Tướng hiểu là Tướng Quân như mục Tướng Quân ghi «Vượng Thai Tướng Quân»; Đế Vượng và Thai luôn xung chiếu nhau; cần xem lại" },
+    { "id": "tuyet.2031.1", "para": 2031, "palaces": ["Phúc Đức"], "text": "Có Tuyệt ngộ Tướng Quân - có người chết vì binh đao.", "when": "in(Tuyệt) & meet(Tướng Quân)", "tone": "hung" },
+    { "id": "tuyet.2032.1", "para": 2032, "palaces": ["Phúc Đức"], "text": "Tuyệt cư Phúc cung là đất ấy hết vận, đến đời mình là thôi không được hưởng.", "when": "in(Tuyệt)", "tone": "hung" }
+  ],
+  "skip": [
+    { "para": 2019, "kind": "meta" }
+  ]
+}

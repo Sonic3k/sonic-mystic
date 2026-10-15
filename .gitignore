@@ -1,0 +1,11 @@
+node_modules/
+dist/
+dist-test/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.DS_Store
+# knowledge pipeline scratch output
+kb/work/
+kb/sources/**/*-report.txt

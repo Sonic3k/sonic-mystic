@@ -1,0 +1,22 @@
+{
+  "entry": 662,
+  "star": "dia_khong",
+  "rules": [
+    { "id": "dia_khong.665.1", "para": 665, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: nghèo cùng, cô độc, hiểm ác, gian sảo.", "when": "in(Địa Không)", "tone": "hung" },
+    { "id": "dia_khong.666.1", "para": 666, "palaces": ["Mệnh"], "text": "Địa Không - bần cùng gian nan ( làm việc gì cũng hỏng, mưu cầu gì cũng hoàn toàn thất bại ).", "when": "in(Địa Không)", "tone": "hung" },
+    { "id": "dia_khong.667.1", "para": 667, "palaces": ["Mệnh"], "text": "Mệnh Vô chính diệu đắc Tam Không - phú quý khả kỳ, nhưng không lâu bền.", "when": "empty() & meet(Tam Không)", "tone": "mixed" },
+    { "id": "dia_khong.667.2", "para": 667, "palaces": ["Mệnh"], "text": "Nhật Nguyệt đắc địa chiếu cung Mệnh vô chính diệu đắc Tam Không - đời đời vinh hiển phú quý - Nhật Nguyệt chiếu không địa cách.", "when": "empty() & meet(Tam Không) & aim(Nhật Nguyệt) & bright(Thái Dương, Thái Âm)", "tone": "cat" },
+    { "id": "dia_khong.668.1", "para": 668, "palaces": ["Mệnh"], "text": "Mệnh Không Thân Kiếp, tuổi Thìn Tuất Sửu Mùi - giàu có một thời.", "when": "in(Địa Không) & pal(Thân, in(Địa Kiếp)) & branch(Thìn, Tuất, Sửu, Mùi)", "tone": "mixed" },
+    { "id": "dia_khong.668.2", "para": 668, "palaces": ["Mệnh"], "text": "Mệnh Kim Thổ thì tốt hơn.", "ctx": "Mệnh Không Thân Kiếp", "when": "in(Địa Không) & pal(Thân, in(Địa Kiếp)) & menh(Kim, Thổ)", "tone": "cat", "review": "Mệnh Kim Thổ hiểu là người có bản Mệnh Kim hay Thổ" },
+    { "id": "dia_khong.669.1", "para": 669, "palaces": ["Mệnh"], "text": "Không Kiếp ngộ Mã - Có tài bôn tầu mà không nên công cán gì.", "when": "in(Địa Không/Địa Kiếp) & meet(Không Kiếp, Thiên Mã)", "tone": "mixed" },
+    { "id": "dia_khong.670.1", "para": 670, "palaces": ["Mệnh"], "text": "Không cư Tị Hợi ngộ Lộc Quyền - tài đảm, dũng lược, mà danh lợi chỉ hoạnh phát một thời.", "when": "in(Địa Không) & at(Tỵ, Hợi) & meet(Lộc, Hóa Quyền)", "tone": "mixed" },
+    { "id": "dia_khong.671.1", "para": 671, "palaces": ["Tật Ách"], "text": "Địa Không - có bệnh huyết hư.", "when": "in(Địa Không)", "tone": "hung" },
+    { "id": "dia_khong.672.1", "para": 672, "palaces": ["Phúc Đức"], "text": "Có Không Kiếp tất thị phúc bạc, phận mỏng.", "when": "in(Địa Không/Địa Kiếp) & meet(Không Kiếp)", "tone": "hung" },
+    { "id": "dia_khong.672.2", "para": 672, "palaces": ["Phúc Đức"], "text": "Hội Cát tinh, công việc ban đầu gian nan trắc trở, phải kiên trì vững chí, tất sẽ trôi chảy. Họ hàng mỗi người một phương nhưng khá giả.", "ctx": "Có Không Kiếp", "when": "in(Địa Không/Địa Kiếp) & meet(Không Kiếp, Cát tinh)", "tone": "mixed" },
+    { "id": "dia_khong.672.3", "para": 672, "palaces": ["Phúc Đức"], "text": "Nếu gặp Sát tinh khó tránh tai ương, phải sớm ly tổ, đi thật xa mới mong yên đủ.", "ctx": "Có Không Kiếp", "when": "in(Địa Không/Địa Kiếp) & meet(Không Kiếp, Tứ Sát)", "tone": "hung", "review": "Không Kiếp đã là sát tinh nên hiểu «gặp Sát tinh» là gặp thêm sát tinh khác (Kình Đà Hoả Linh)" }
+  ],
+  "skip": [
+    { "para": 663, "kind": "meta" },
+    { "para": 664, "kind": "meta" }
+  ]
+}

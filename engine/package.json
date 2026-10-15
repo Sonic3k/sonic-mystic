@@ -1,0 +1,35 @@
+{
+  "name": "@mystic/engine",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "description": "Pure computation for Huyền học — runs the same in Node (API) and in the browser (web). No I/O.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./tuvi": {
+      "types": "./dist/tuvi/index.d.ts",
+      "default": "./dist/tuvi/index.js"
+    },
+    "./tuvi/stars.json": "./dist/tuvi/stars.json",
+    "./api": {
+      "types": "./dist/api.d.ts",
+      "default": "./dist/api.js"
+    },
+    "./birth": {
+      "types": "./dist/birth.d.ts",
+      "default": "./dist/birth.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node --test --test-concurrency=1 test/"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^7.0.2"
+  }
+}

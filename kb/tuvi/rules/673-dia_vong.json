@@ -1,0 +1,16 @@
+{
+  "entry": 673,
+  "star": "dia_vong",
+  "rules": [
+    { "id": "dia_vong.675.1", "para": 675, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: Người thô, mặt lành mà đại hiểm ác, chủ sự giam bắt, cản trở.", "when": "in(Địa Võng)", "tone": "hung" },
+    { "id": "dia_vong.675.2", "para": 675, "palaces": ["Mệnh", "Thân"], "text": "Võng ngộ hung thành cát", "when": "in(Địa Võng) & meet(Hung tinh)", "tone": "cat" },
+    { "id": "dia_vong.675.3", "para": 675, "palaces": ["Mệnh", "Thân"], "text": "ngộ cát thành hung.", "ctx": "Võng", "when": "in(Địa Võng) & meet(Cát tinh)", "tone": "hung" },
+    { "id": "dia_vong.676.1", "para": 676, "palaces": ["Mệnh", "Thân"], "text": "La Võng là cái lưới trên trời, hàng rào dưới đất, nên Tử Vi Thiên Tướng cư Thìn Tuất phải có Kình Dương hay Thiên Hình, hoặc sao hung nhập miếu để phá tan lưới và rào, để Tử Tướng hay chính tinh nào cư Thìn Tuất có đất mà tung hoành.", "when": "at(Thìn, Tuất) & !empty() & (meet(Kình Dương/Thiên Hình) | (meet(Đà La) & bright(Đà La)) | (meet(Hỏa Tinh) & bright(Hỏa Tinh)) | (meet(Linh Tinh) & bright(Linh Tinh)) | (meet(Địa Không) & bright(Địa Không)) | (meet(Địa Kiếp) & bright(Địa Kiếp)) | (meet(Hóa Kỵ) & bright(Hóa Kỵ)) | (meet(Kiếp Sát) & bright(Kiếp Sát)) | (meet(Thiên Không) & bright(Thiên Không)) | (meet(Đại Hao) & bright(Đại Hao)) | (meet(Tiểu Hao) & bright(Tiểu Hao)))", "tone": "cat", "review": "hiểu là cung có chính tinh ở Thìn Tuất (bà nói Tử Tướng hay chính tinh nào) gặp Kình Dương hay Thiên Hình, hoặc gặp một hung tinh đang miếu vượng đắc địa" },
+    { "id": "dia_vong.676.2", "para": 676, "palaces": ["Mệnh", "Thân"], "text": "Nếu không thì ví như bị vướng rào mắc lưới, anh hùng vô dụng võ chi địa vậy.", "ctx": "chính tinh cư Thìn Tuất mà không có Kình, Hình hay sao hung nhập miếu", "when": "at(Thìn, Tuất) & !empty() & !(meet(Kình Dương/Thiên Hình) | (meet(Đà La) & bright(Đà La)) | (meet(Hỏa Tinh) & bright(Hỏa Tinh)) | (meet(Linh Tinh) & bright(Linh Tinh)) | (meet(Địa Không) & bright(Địa Không)) | (meet(Địa Kiếp) & bright(Địa Kiếp)) | (meet(Hóa Kỵ) & bright(Hóa Kỵ)) | (meet(Kiếp Sát) & bright(Kiếp Sát)) | (meet(Thiên Không) & bright(Thiên Không)) | (meet(Đại Hao) & bright(Đại Hao)) | (meet(Tiểu Hao) & bright(Tiểu Hao)))", "tone": "hung" },
+    { "id": "dia_vong.677.1", "para": 677, "palaces": ["Mệnh", "Thân"], "text": "Có Võng - Mọi sự đều lôi thôi trắc trở", "when": "in(Địa Võng)", "tone": "hung" },
+    { "id": "dia_vong.677.2", "para": 677, "palaces": ["Mệnh", "Thân"], "text": "gặp Thiên La cũng vậy", "ctx": "Mọi sự đều lôi thôi trắc trở", "when": "in(Thiên La)", "tone": "hung", "review": "hiểu là Thiên La ở cung Thân Mệnh (tức cung Thìn), như Võng ở Tuất; Thiên La luôn xung chiếu Địa Võng" }
+  ],
+  "skip": [
+    { "para": 674, "kind": "meta" }
+  ]
+}

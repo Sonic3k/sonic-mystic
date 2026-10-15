@@ -1,0 +1,27 @@
+{
+  "entry": 1349,
+  "star": "linh_tinh",
+  "rules": [
+    { "id": "linh_tinh.1352.1", "para": 1352, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: mặt buồn, người gầy, nóng nẩy mà đa sầu.", "when": "in(Linh Tinh)", "tone": "hung" },
+    { "id": "linh_tinh.1353.1", "para": 1353, "palaces": ["Mệnh"], "text": "Thủ Mệnh thì tướng mạo có nhiều sự khác lạ, cốt cách phá tướng, mắt lớn, tâm địa độc hại, tính tình trầm lặng nhiều khi thành lãnh đạm nhưng gan to mật lớn khác thường.", "ctx": "Linh Tinh", "when": "in(Linh Tinh)", "tone": "hung" },
+    { "id": "linh_tinh.1354.1", "para": 1354, "palaces": ["Mệnh", "Thân"], "text": "Hoả Linh là hung sát tinh, chủ sát phạt, tai nạn, cô bần", "when": "in(Linh Tinh)", "tone": "hung", "review": "câu nói chung cho cả Hoả lẫn Linh; mục Hoả Tinh có câu y hệt nên ở mục này lấy Linh Tinh thủ cung" },
+    { "id": "linh_tinh.1354.2", "para": 1354, "palaces": ["Mệnh", "Thân"], "text": "nhưng nhập miếu lại giúp ích lớn lao.", "ctx": "Hoả Linh", "when": "in(Linh Tinh) & bright(Linh Tinh)", "tone": "cat" },
+    { "id": "linh_tinh.1355.1", "para": 1355, "palaces": ["Mệnh", "Thân"], "text": "Tử Phủ gặp thì chế hoá bớt tính hung ác của Hoả Linh.", "when": "in(Linh Tinh) & meet(Tử Phủ)", "tone": "cat" },
+    { "id": "linh_tinh.1356.1", "para": 1356, "palaces": ["Mệnh", "Thân"], "text": "Cơ Lương ngộ Hoả Linh thì tối hung.", "when": "in(Thiên Cơ, Thiên Lương) & meet(Hỏa Linh)", "tone": "hung" },
+    { "id": "linh_tinh.1357.1", "para": 1357, "palaces": ["Mệnh", "Thân"], "text": "Tham ngộ Hoả là phú ông cách.", "when": "in(Tham Lang) & meet(Hỏa Tinh)", "tone": "cat", "review": "câu không nhắc Linh nên không buộc có Linh" },
+    { "id": "linh_tinh.1357.2", "para": 1357, "palaces": ["Mệnh", "Thân"], "text": "Tham ngộ Linh là cách tướng tướng chi danh, phát võ nghiệp.", "when": "in(Tham Lang) & meet(Linh Tinh)", "tone": "cat" },
+    { "id": "linh_tinh.1358.1", "para": 1358, "palaces": ["Mệnh", "Thân"], "text": "Hãm địa là người luôn u buồn.", "ctx": "Linh Tinh", "when": "in(Linh Tinh) & dim(Linh Tinh)", "tone": "hung" },
+    { "id": "linh_tinh.1359.1", "para": 1359, "palaces": ["Mệnh", "Thân"], "text": "Hội Diêu Hình - khi ngủ hay mơ màng hình ảnh ma quái", "ctx": "Linh Tinh", "when": "in(Linh Tinh) & meet(Thiên Diêu, Thiên Hình)", "tone": "hung", "review": "dòng «+» này viết ngay dưới ý «Hãm địa»; hiểu là Linh hội Diêu Hình nói chung, không buộc Linh hãm (cũng có thể bà chỉ nói khi Linh hãm)" },
+    { "id": "linh_tinh.1360.1", "para": 1360, "palaces": ["Mệnh", "Thân"], "text": "Hội Hình Kình thường mắc chứng kinh phong, gân cốt bị yếu, hay mắc bệnh thần kinh.", "ctx": "Linh Tinh", "when": "in(Linh Tinh) & meet(Thiên Hình, Kình Dương)", "tone": "hung", "review": "dòng «+» này viết ngay dưới ý «Hãm địa»; hiểu là Linh hội Hình Kình nói chung, không buộc Linh hãm (cũng có thể bà chỉ nói khi Linh hãm)" },
+    { "id": "linh_tinh.1361.1", "para": 1361, "palaces": ["Mệnh", "Thân"], "text": "Hoả Linh hãm tại Tý Hợi - dễ bị bệnh đau tim.", "when": "in(Hỏa Tinh/Linh Tinh) & at(Tý, Hợi)", "tone": "hung", "review": "hiểu là Hoả hay Linh ở Tý Hợi (theo cách an của bà hai sao không bao giờ đồng cung); bảng của bà chỉ ghi Linh hãm ở Tý Hợi, Hoả không ghi cung hãm, và mục Hoả Tinh không có câu này nên để cả Hoả" },
+    { "id": "linh_tinh.1362.1", "para": 1362, "palaces": ["Mệnh", "Thân"], "text": "có Linh đắc địa - can đảm, mọi việc thường trắc trở.", "when": "in(Linh Tinh) & bright(Linh Tinh)", "tone": "mixed" },
+    { "id": "linh_tinh.1363.1", "para": 1363, "palaces": ["Mệnh", "Thân"], "text": "Linh cư Mão Dậu ngộ Tham - công danh hoạch phát.", "when": "in(Linh Tinh) & at(Mão, Dậu) & meet(Tham Lang)", "tone": "cat" },
+    { "id": "linh_tinh.1364.1", "para": 1364, "palaces": ["Mệnh", "Thân"], "text": "Linh cư Sửu Mùi ngộ Tham - tuổi Mậu Kỷ làm nên danh tiếng.", "when": "in(Linh Tinh) & at(Sửu, Mùi) & meet(Tham Lang) & stem(Mậu, Kỷ)", "tone": "cat" },
+    { "id": "linh_tinh.1364.2", "para": 1364, "palaces": ["Mệnh", "Thân"], "text": "Tứ Sát cập Cự Môn - dâm dật.", "when": "in(Cự Môn) & meet(Tứ Sát)", "tone": "hung", "review": "hiểu là Cự Môn thủ cung gặp một trong Tứ Sát (Kình Đà Hoả Linh), như mục Cự Môn ghi «Cự Môn gia tứ Sát - bệnh về sắc dục»; cũng có thể là sát tinh thủ cung gặp Cự Môn" },
+    { "id": "linh_tinh.1365.1", "para": 1365, "palaces": ["Mệnh"], "text": "Hoả Linh Kình Đà (Tứ Sát ) thủ Mệnh, Mệnh cát phúc hãm- gian tà biển lận.", "when": null, "tone": "hung", "review": "hiểu là Tứ Sát thủ Mệnh, cung Mệnh tốt mà cung Phúc Đức hãm (xấu) — không có cách đo một cung tốt hay xấu nói chung nên không viết được điều kiện (phần Tứ Sát thủ Mệnh là in(Tứ Sát)); câu trong ngoặc «Hoả Linh phải đi đôi mới có hiệu lực lớn» là lời giảng, không thành luật riêng" }
+  ],
+  "skip": [
+    { "para": 1350, "kind": "meta" },
+    { "para": 1351, "kind": "meta" }
+  ]
+}

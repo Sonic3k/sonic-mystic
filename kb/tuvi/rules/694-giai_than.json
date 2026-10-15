@@ -1,0 +1,16 @@
+{
+  "entry": 694,
+  "star": "giai_than",
+  "rules": [
+    { "id": "giai_than.696.1", "para": 696, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: Thuận hoà, độ lượng, hay giúp đỡ, cứu vớt người.", "when": "in(Giải Thần)", "tone": "cat" },
+    { "id": "giai_than.697.1", "para": 697, "palaces": ["Mệnh", "Thân"], "text": "Thiên Trù, Địa Giải, Giải Thần, Thiên Giải là các sao Phúc Thiện tinh - Cư Thân Mệnh chủ phúc hậu, cứu khốn phò nguy, giải trừ phần nào hung nguy, tăng phúc thọ.", "when": "in(Thiên Trù/Địa Giải/Giải Thần/Thiên Giải)", "tone": "cat" },
+    { "id": "giai_than.698.1", "para": 698, "palaces": ["Điền Trạch", "Tài Bạch"], "text": "Cư Điền Tài thì giữ được của cải ruộng vườn bền chặt", "ctx": "Thiên Trù, Địa Giải, Giải Thần, Thiên Giải", "when": "in(Thiên Trù/Địa Giải/Giải Thần/Thiên Giải)", "tone": "cat", "review": "hiểu là nói tiếp về bốn sao phúc thiện ở đoạn trên" },
+    { "id": "giai_than.698.2", "para": 698, "palaces": ["Hạn"], "text": "Tuy là sao nhỏ, nhưng lưu nhị hạn mời gặp cũng đỡ lo ngại.", "ctx": "Thiên Trù, Địa Giải, Giải Thần, Thiên Giải", "when": "dai(meet(Thiên Trù/Địa Giải/Giải Thần/Thiên Giải)) & tieu(meet(Thiên Trù/Địa Giải/Giải Thần/Thiên Giải))", "tone": "cat", "review": "«mời gặp» hiểu là «mới gặp»; nhị hạn hiểu là cả đại hạn và tiểu hạn đều gặp một trong bốn sao phúc thiện" },
+    { "id": "giai_than.700.1", "para": 700, "palaces": ["Mệnh"], "text": "Có Giải Thần - giải ách, trừ hung, không lo vận hạn.", "when": "in(Giải Thần)", "tone": "cat" },
+    { "id": "giai_than.701.1", "para": 701, "palaces": ["Tật Ách"], "text": "Có Giải Thần - giải trừ vận hạn.", "when": "in(Giải Thần)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 695, "kind": "meta" },
+    { "para": 699, "kind": "heading" }
+  ]
+}

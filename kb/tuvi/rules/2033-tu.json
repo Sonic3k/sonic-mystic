@@ -1,0 +1,26 @@
+{
+  "entry": 2033,
+  "star": "tu",
+  "rules": [
+    { "id": "tu.2035.1", "para": 2035, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: ác, ai cũng ghét. Chủ sự chết.", "when": "in(Tử)", "tone": "hung" },
+    { "id": "tu.2036.1", "para": 2036, "palaces": ["Mệnh", "Thân"], "text": "Hội với Liêm Trinh Miếu - thường thiên về võ nghiệp, có quyền bính.", "ctx": "Tử", "when": "in(Tử) & meet(Liêm Trinh) & bright(Liêm Trinh)", "tone": "cat" },
+    { "id": "tu.2037.1", "para": 2037, "palaces": ["Mệnh", "Thân"], "text": "Hội với Vũ Khúc Thiên Tướng hãm - trai hay mắc nạn binh đao, hình thương tàn tật", "ctx": "Tử", "when": "in(Tử) & meet(Vũ Khúc, Thiên Tướng) & (!bright(Vũ Khúc) | !bright(Thiên Tướng)) & male()", "tone": "hung", "review": "bảng của bà không ghi Vũ Khúc hãm ở đâu, Thiên Tướng chỉ hãm ở Dậu (khi đó không hội Vũ Khúc); hiểu «hãm» là Vũ Khúc hay Thiên Tướng không ở nơi miếu vượng đắc (như mục Bệnh)" },
+    { "id": "tu.2037.2", "para": 2037, "palaces": ["Mệnh", "Thân"], "text": "nữ hay xảy ra việc hoại thai, sinh đẻ thiếu tháng.", "ctx": "Tử hội với Vũ Khúc Thiên Tướng hãm", "when": "in(Tử) & meet(Vũ Khúc, Thiên Tướng) & (!bright(Vũ Khúc) | !bright(Thiên Tướng)) & female()", "tone": "hung", "review": "bảng của bà không ghi Vũ Khúc hãm ở đâu, Thiên Tướng chỉ hãm ở Dậu (khi đó không hội Vũ Khúc); hiểu «hãm» là Vũ Khúc hay Thiên Tướng không ở nơi miếu vượng đắc (như mục Bệnh)" },
+    { "id": "tu.2038.1", "para": 2038, "palaces": ["Mệnh"], "text": "Cư Mệnh hãm là người dáng hơi ốm, da xám, vòng quanh con mắt bị đen", "ctx": "Tử", "when": "in(Tử)", "tone": "trung", "review": "bảng của bà không ghi miếu hãm cho sao Tử nên không xét được chữ «hãm»; luật đang áp cho mọi trường hợp Tử cư Mệnh" },
+    { "id": "tu.2038.2", "para": 2038, "palaces": ["Mệnh"], "text": "gia Hình hãm thường bị lao, kinh phong và có khi bị cùi.", "ctx": "Tử cư Mệnh hãm", "when": "in(Tử) & meet(Thiên Hình) & !bright(Thiên Hình)", "tone": "hung", "review": "bảng của bà không ghi miếu hãm cho sao Tử, và Thiên Hình chỉ có cung vượng (Dần Mão Dậu Tuất); hiểu «Hình hãm» là Thiên Hình ở ngoài các cung ấy" },
+    { "id": "tu.2039.1", "para": 2039, "palaces": ["Hạn"], "text": "Lưu hạn mà Bệnh Tử gặp Song Hao Bệnh Phù Tang Hổ thì không thoát được bệnh tật hình thương.", "when": "in(Bệnh/Tử) & (meet(Song Hao, Tang Hổ) | meet(Song Hao, Bệnh Phù) | meet(Tang Hổ, Bệnh Phù))", "tone": "hung", "review": "Bệnh và Tử không bao giờ hội nhau nên hiểu «Bệnh Tử» là sao Bệnh hay sao Tử (vòng Tràng Sinh); theo cách an sao Song Hao và Bệnh Phù không bao giờ cùng hội nên không thể đủ cả ba bộ, hiểu là gặp ít nhất hai trong ba bộ Song Hao, Bệnh Phù, Tang Hổ (như mục Bệnh); Tang Hổ trong hạn có thể là lưu Tang Hổ, engine dùng sao gốc" },
+    { "id": "tu.2040.1", "para": 2040, "palaces": ["Tật Ách"], "text": "Bệnh Tử lâm Tật ách gặp Song Hao Tang Hổ Bệnh Phù, không được Tuần Triệt án ngữ tất sẽ mắc bệnh nan y.", "when": "in(Bệnh/Tử) & (meet(Song Hao, Tang Hổ) | meet(Song Hao, Bệnh Phù) | meet(Tang Hổ, Bệnh Phù)) & !in(Tuần) & !in(Triệt)", "tone": "hung", "review": "«Bệnh Tử» hiểu là sao Bệnh hay sao Tử (vòng Tràng Sinh); Song Hao và Bệnh Phù không bao giờ cùng hội nên hiểu là gặp ít nhất hai trong ba bộ Song Hao, Tang Hổ, Bệnh Phù; «án ngữ» hiểu là Tuần, Triệt không đóng ở cung này (như mục Bệnh)" },
+    { "id": "tu.2041.1", "para": 2041, "palaces": ["Mệnh"], "text": "Có Tử - rất xấu.", "when": "in(Tử)", "tone": "hung" },
+    { "id": "tu.2042.1", "para": 2042, "palaces": ["Tử Tức"], "text": "Có Tử - con xung khắc", "when": "in(Tử)", "tone": "hung" },
+    { "id": "tu.2044.1", "para": 2044, "palaces": ["Điền Trạch", "Tài Bạch"], "text": "Có Tử - tài vững không hao.", "when": "in(Tử)", "tone": "cat" },
+    { "id": "tu.2045.1", "para": 2045, "palaces": ["Điền Trạch", "Tài Bạch"], "text": "Tử Vũ Tham Kỵ - có của chôn, của cất giữ.", "when": "in(Tử) & meet(Vũ Khúc, Tham Lang, Hóa Kỵ)", "tone": "cat", "review": "Tử hiểu là sao Tử vòng Tràng Sinh vì câu nằm trong mục sao Tử (cũng có thể bà muốn nói Tử Vi)" },
+    { "id": "tu.2046.1", "para": 2046, "palaces": ["Điền Trạch", "Tài Bạch"], "text": "Tử Tang - vô điền sản.", "when": "in(Tử) & meet(Tang Môn)", "tone": "hung" },
+    { "id": "tu.2048.1", "para": 2048, "palaces": ["Phúc Đức"], "text": "Tử - là chỗ nước chảy mau, từ thuỷ.", "when": "in(Tử)", "tone": "trung" },
+    { "id": "tu.2049.1", "para": 2049, "palaces": ["Phúc Đức"], "text": "Tử Phục - có người chết trận hay bị ám sát.", "when": "in(Tử) & meet(Phục Binh)", "tone": "hung" }
+  ],
+  "skip": [
+    { "para": 2034, "kind": "meta" },
+    { "para": 2043, "kind": "heading" },
+    { "para": 2047, "kind": "heading" }
+  ]
+}

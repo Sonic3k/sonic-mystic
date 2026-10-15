@@ -1,0 +1,37 @@
+{
+  "entry": 1110,
+  "star": "hy_than",
+  "rules": [
+    { "id": "hy_than.1112.1", "para": 1112, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: tính vui, lòng tốt; chủ sự vui mừng, thọ, may mắn, tăng tài tiến lộc", "when": "in(Hỷ Thần)", "tone": "cat" },
+    { "id": "hy_than.1113.1", "para": 1113, "palaces": ["Mệnh", "Thân"], "text": "Về cơ thể: Hỷ Thần là hậu môn- cái trĩ. Ngộ Hình là bị bệnh trĩ", "when": "in(Hỷ Thần) & meet(Thiên Hình)", "tone": "hung" },
+    { "id": "hy_than.1113.2", "para": 1113, "palaces": ["Mệnh", "Thân"], "text": "gia Kiếp là bị trĩ nặng.", "ctx": "Hỷ Thần ngộ Hình", "when": "in(Hỷ Thần) & meet(Thiên Hình, Địa Kiếp)", "tone": "hung" },
+    { "id": "hy_than.1114.1", "para": 1114, "palaces": ["Mệnh", "Thân"], "text": "Thủ Thân Mệnh là người cao, đầu dài.", "ctx": "Hỷ Thần", "when": "in(Hỷ Thần)", "tone": "trung" },
+    { "id": "hy_than.1115.1", "para": 1115, "palaces": ["Hạn"], "text": "Cư Mệnh Tài Quan, lưu nhị hạn gặp Thiên Hỷ là bộ song Hỷ, chắc chắn mưu cầu tài lộc, hôn nhân, sinh nở được toại ý.", "ctx": "Hỷ Thần", "when": "(pal(Mệnh, in(Hỷ Thần)) | pal(Tài Bạch, in(Hỷ Thần)) | pal(Quan Lộc, in(Hỷ Thần))) & dai(meet(Thiên Hỷ)) & tieu(meet(Thiên Hỷ))", "tone": "cat", "review": "Thiên Hỷ dùng sao gốc trong lá số (máy chưa tính lưu Thiên Hỷ); hiểu là Hỷ Thần cư Mệnh, Tài hay Quan, và cả đại hạn lẫn tiểu hạn gặp Thiên Hỷ" },
+    { "id": "hy_than.1116.1", "para": 1116, "palaces": ["Quan Lộc"], "text": "Song Hỷ cư Quan lộc là hợp cách, tài lộc đến dồn dập.", "when": "in(Hỷ Thần/Thiên Hỷ) & meet(Hỷ Thần, Thiên Hỷ)", "tone": "cat" },
+    { "id": "hy_than.1117.1", "para": 1117, "palaces": ["Mệnh"], "text": "có Hỷ Thần - gặp nhiều may và thọ.", "when": "in(Hỷ Thần)", "tone": "cat" },
+    { "id": "hy_than.1118.1", "para": 1118, "palaces": ["Mệnh"], "text": "Hỷ ngộ Điếu Khách lại hoá như không", "when": "in(Hỷ Thần) & meet(Điếu Khách)", "tone": "hung" },
+    { "id": "hy_than.1119.1", "para": 1119, "palaces": ["Mệnh"], "text": "Hỷ Phượng ( phượng múa)- Hỷ Mã Tràng: thanh vân đắc lộ.", "when": "in(Hỷ Thần) & (meet(Phượng Các) | meet(Thiên Mã, Tràng Sinh))", "tone": "cat", "review": "hiểu là Hỷ Phượng (cách phượng múa) hay Hỷ Mã Tràng đều thanh vân đắc lộ; Tràng hiểu là Tràng Sinh" },
+    { "id": "hy_than.1120.1", "para": 1120, "palaces": ["Mệnh"], "text": "Hỷ Đào nữ Mệnh- loạn luân", "when": "female() & in(Hỷ Thần) & meet(Đào Hoa)", "tone": "hung" },
+    { "id": "hy_than.1121.1", "para": 1121, "palaces": ["Mệnh"], "text": "Hồng Hỷ- dáng người vui tươi.", "when": "in(Hỷ Thần) & meet(Hồng Loan)", "tone": "cat" },
+    { "id": "hy_than.1123.1", "para": 1123, "palaces": ["Huynh Đệ"], "text": "Hỷ Hồng Đào Thai có Phục Tướng chiếu- có người ngoại dâm.", "when": "meet(Hồng Đào, Thai, Thiên Hỷ/Hỷ Thần, Phục Binh, Tướng Quân)", "tone": "hung", "review": "Hỷ Thần không bao giờ hội với Phục Binh, Tướng Quân (cách nhau số lẻ cung trong vòng Bác Sĩ), nên không buộc Hỷ Thần thủ cung và hiểu Hỷ là Thiên Hỷ (như mục Hồng Loan, Đào Hoa); Phục Tướng hiểu là Phục Binh, Tướng Quân (luôn xung chiếu nhau)" },
+    { "id": "hy_than.1124.1", "para": 1124, "palaces": ["Huynh Đệ"], "text": "Hỷ Diêu Đào có Phá Quân hay Tướng Quân, Thiên Sứ chiếu- có người theo trai, chửa hoang.", "when": "in(Hỷ Thần) & meet(Thiên Diêu, Đào Hoa) & meet(Phá Quân/Tướng Quân) & aim(Thiên Sứ)", "tone": "hung", "review": "Tướng Quân không bao giờ hội với Hỷ Thần nên chỉ vế Phá Quân xảy ra được; Thiên Sứ luôn tam hợp chiếu cung Huynh" },
+    { "id": "hy_than.1125.1", "para": 1125, "palaces": ["Phu Thê"], "text": "Đào Hồng Hỷ- giai nhân tài tử lấy nhau dễ dàng.", "when": "in(Hỷ Thần) & meet(Hồng Đào)", "tone": "cat" },
+    { "id": "hy_than.1126.1", "para": 1126, "palaces": ["Tử Tức"], "text": "Hỷ ngộ Dưỡng- sinh con quý tử.", "when": "in(Hỷ Thần) & meet(Dưỡng)", "tone": "cat" },
+    { "id": "hy_than.1127.1", "para": 1127, "palaces": ["Tài Bạch"], "text": "Hỷ Thần ở Tây cung- trộm của đền chùa.", "when": "in(Hỷ Thần) & at(Thân, Dậu)", "tone": "hung", "review": "«Tây cung» hiểu là cung Thân Dậu (phương Tây, hành Kim; ở mục Hoả Tinh bà giải phương Đông là Dần Mão, phương Nam là Tỵ Ngọ); cũng có thể gồm cả Tuất" },
+    { "id": "hy_than.1128.1", "para": 1128, "palaces": ["Tật Ách"], "text": "Hỷ Đào Diêu- bệnh mộng tinh.", "when": "in(Hỷ Thần) & meet(Đào Hoa, Thiên Diêu)", "tone": "hung" },
+    { "id": "hy_than.1129.1", "para": 1129, "palaces": ["Thiên Di"], "text": "Hỷ Cái Tả Hữu - ra vào cửa nhà quyền quý", "when": "in(Hỷ Thần) & meet(Hoa Cái, Tả Hữu)", "tone": "cat" },
+    { "id": "hy_than.1130.1", "para": 1130, "palaces": ["Quan Lộc"], "text": "Hỷ Hồng Đào- làm nên lớn dễ dàng", "when": "in(Hỷ Thần) & meet(Hồng Đào)", "tone": "cat" },
+    { "id": "hy_than.1131.1", "para": 1131, "palaces": ["Phúc Đức"], "text": "Hỷ Thần là vùng đất bằng có cát", "when": "in(Hỷ Thần)", "tone": "trung" },
+    { "id": "hy_than.1132.1", "para": 1132, "palaces": ["Phúc Đức"], "text": "Gặp Hồng Hỷ Phủ Cơ là quý địa, ắt phát công hầu", "ctx": "Hỷ Thần", "when": null, "tone": "cat", "review": "theo cách an sao Thiên Phủ và Thiên Cơ luôn cách nhau số lẻ cung nên không bao giờ cùng hội một cung; không viết được điều kiện, cần xem lại" },
+    { "id": "hy_than.1132.2", "para": 1132, "palaces": ["Phúc Đức"], "text": "nếu gặp Đà Kỵ Tuần Triệt Diêu Mã, Mộc Dục ắt là thuỷ phá nguyên đầu ( suối nước bị phá từ đầu) là loại trai gái dâm đãng.", "ctx": "Hỷ Thần", "when": "in(Hỷ Thần) & meet(Đà La, Hóa Kỵ, Tuần/Triệt, Thiên Diêu, Thiên Mã, Mộc Dục)", "tone": "hung", "review": "hiểu là gặp đủ các sao ấy (Tuần hay Triệt); không hiểu là gặp một trong các sao, vì cung có Hỷ Thần luôn hội Đà La nên câu sẽ đúng với mọi cung Phúc có Hỷ Thần" },
+    { "id": "hy_than.1133.1", "para": 1133, "palaces": ["Phúc Đức"], "text": "Hỷ Thần - có ngôi mả bên bãi đất cát.", "when": "in(Hỷ Thần)", "tone": "trung" },
+    { "id": "hy_than.1134.1", "para": 1134, "palaces": ["Phúc Đức"], "text": "Hỷ Thần Thiên Hỷ- mả phát", "when": "in(Hỷ Thần) & meet(Thiên Hỷ)", "tone": "cat" },
+    { "id": "hy_than.1134.2", "para": 1134, "palaces": ["Phúc Đức"], "text": "Hỷ Thần + Quang Quý- mả phát.", "when": "in(Hỷ Thần) & meet(Quang Quý)", "tone": "cat" },
+    { "id": "hy_than.1135.1", "para": 1135, "palaces": ["Phúc Đức"], "text": "Hoa Cái+ Hỷ Thần - mộ mới.", "when": "in(Hỷ Thần) & meet(Hoa Cái)", "tone": "trung" },
+    { "id": "hy_than.1136.1", "para": 1136, "palaces": ["Phúc Đức"], "text": "Coi về mồ mả, bất cứ phát gì có Hỷ Thần nhập vào mới phát.", "when": "in(Hỷ Thần)", "tone": "cat" }
+  ],
+  "skip": [
+    { "para": 1111, "kind": "meta" },
+    { "para": 1122, "kind": "heading" }
+  ]
+}

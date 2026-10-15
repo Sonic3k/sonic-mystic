@@ -1,0 +1,34 @@
+{
+  "entry": 1769,
+  "star": "quan_phu_tue",
+  "rules": [
+    { "id": "quan_phu_tue.1771.1", "para": 1771, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: hèn hạ, gian nịnh, khoe khoang.", "when": "in(Quan Phù)", "tone": "hung" },
+    { "id": "quan_phu_tue.1772.1", "para": 1772, "palaces": ["Mệnh", "Thân"], "text": "Chủ sự hèn hạ", "ctx": "Quan Phù", "when": "in(Quan Phù)", "tone": "hung" },
+    { "id": "quan_phu_tue.1772.2", "para": 1772, "palaces": ["Mệnh", "Thân"], "text": "chủ thông minh, cơ mưu, quyền bính.", "ctx": "Quan Phù", "when": "in(Quan Phù)", "tone": "cat" },
+    { "id": "quan_phu_tue.1773.1", "para": 1773, "palaces": ["Mệnh", "Thân"], "text": "Quan Phù rất hợp với Thái Tuế, Tuế Phá", "when": "in(Quan Phù) & meet(Thái Tuế/Tuế Phá)", "tone": "cat", "review": "Quan Phù luôn tam hợp với Thái Tuế, còn Tuế Phá luôn cách Quan Phù 2 cung nên không bao giờ hội; hiểu là hợp với từng sao, nên điều kiện đúng mỗi khi có Quan Phù" },
+    { "id": "quan_phu_tue.1773.2", "para": 1773, "palaces": ["Mệnh", "Thân"], "text": "hay hội với Cơ Lương Tang Hổ Hình Miếu địa, tăng phần rực rỡ tốt đẹp về văn chương binh nghiệp và tính chất của các sao này.", "ctx": "Quan Phù", "when": "in(Quan Phù) & ((meet(Thiên Cơ, Thiên Lương) & bright(Thiên Cơ, Thiên Lương)) | (meet(Bạch Hổ, Thiên Hình) & bright(Bạch Hổ, Thiên Hình)))", "tone": "cat", "review": "hiểu là hai bộ: Cơ Lương (văn chương) hoặc Tang Hổ Hình (binh nghiệp), các sao ở miếu vượng; Tang Môn luôn cách Quan Phù 2 cung nên không bao giờ hội, bộ sau chỉ xét Bạch Hổ và Thiên Hình (Bạch Hổ luôn tam hợp với Quan Phù); cần xem lại" },
+    { "id": "quan_phu_tue.1774.1", "para": 1774, "palaces": ["Mệnh", "Thân"], "text": "Hội với Tuế Đà Hình Kỵ cư hãm địa thì khó tránh ngục hình, thị phi nơi công môn.", "ctx": "Quan Phù", "when": "in(Quan Phù) & dim(Quan Phù) & meet(Thái Tuế, Đà La, Thiên Hình, Hóa Kỵ)", "tone": "hung", "review": "cư hãm địa hiểu là Quan Phù ở cung hãm (Tý Hợi theo bảng của bà)" },
+    { "id": "quan_phu_tue.1775.1", "para": 1775, "palaces": ["Mệnh"], "text": "Quan Phù - gian hèn, lắm bệnh tật.", "when": "in(Quan Phù)", "tone": "hung" },
+    { "id": "quan_phu_tue.1776.1", "para": 1776, "palaces": ["Mệnh"], "text": "Quan Phù Thái Tuế - đại sự đấu tranh kiện tụng", "when": "in(Quan Phù) & meet(Thái Tuế)", "tone": "hung", "review": "Quan Phù luôn tam hợp với Thái Tuế nên điều kiện đúng mỗi khi Quan Phù ở Mệnh" },
+    { "id": "quan_phu_tue.1776.2", "para": 1776, "palaces": ["Mệnh"], "text": "ở Vượng cung thì thắng.", "ctx": "Quan Phù Thái Tuế", "when": "in(Quan Phù) & meet(Thái Tuế) & !dim(Quan Phù)", "tone": "cat", "review": "bảng của bà chỉ ghi Quan Phù hãm ở Tý Hợi, không ghi cung vượng; hiểu «ở Vượng cung» là Quan Phù không ở cung hãm" },
+    { "id": "quan_phu_tue.1777.1", "para": 1777, "palaces": ["Mệnh"], "text": "Quan Phù hội Kình Đà hãm - chết trôi.", "when": "in(Quan Phù) & meet(Kình Đà) & (dim(Kình Dương) | dim(Đà La))", "tone": "hung", "review": "hãm hiểu là Kình hay Đà hãm (theo bảng của bà hai sao không bao giờ cùng hãm)" },
+    { "id": "quan_phu_tue.1778.1", "para": 1778, "palaces": ["Mệnh"], "text": "Phù Tướng Tấu - tăng ni.", "when": "in(Quan Phù) & meet(Thiên Tướng, Tấu Thư)", "tone": "trung", "review": "Tướng hiểu là Thiên Tướng (Tướng Quân luôn ở cung liền Tấu Thư, không bao giờ cùng hội)" },
+    { "id": "quan_phu_tue.1779.1", "para": 1779, "palaces": ["Mệnh"], "text": "Phù Hình Không Kiếp - bị nhiều người thù ghét, hãm hại.", "when": "in(Quan Phù) & meet(Thiên Hình, Không Kiếp)", "tone": "hung" },
+    { "id": "quan_phu_tue.1780.1", "para": 1780, "palaces": ["Thân", "Tử Tức"], "text": "Quan Phù lâm Thân Tử - thường bị người ta phản.", "when": "in(Quan Phù)", "tone": "hung", "review": "«Thân Tử» hiểu là cung Thân và cung Tử (Tử Tức); cũng có thể bà muốn nói Quan Phù ở Mệnh tại chi Thân, Tý" },
+    { "id": "quan_phu_tue.1781.1", "para": 1781, "palaces": ["Mệnh"], "text": "Quan Phù cư Tuất - phải quan phòng hạn phải gông cùm.", "when": "in(Quan Phù) & at(Tuất)", "tone": "hung" },
+    { "id": "quan_phu_tue.1782.1", "para": 1782, "palaces": ["Tài Bạch"], "text": "Quan Phù Thái Tuế - có kiện tụng mới có của.", "when": "in(Quan Phù) & meet(Thái Tuế)", "tone": "mixed" },
+    { "id": "quan_phu_tue.1783.1", "para": 1783, "palaces": ["Tật Ách"], "text": "Phù Hổ Sát - hình tù.", "when": "in(Quan Phù) & meet(Bạch Hổ, Thất Sát)", "tone": "hung", "review": "Sát hiểu là Thất Sát (như «Hổ Quan Phù gặp Thất Sát» ở mục Bạch Hổ); cũng có thể là sát tinh" },
+    { "id": "quan_phu_tue.1784.1", "para": 1784, "palaces": ["Tật Ách"], "text": "Phù Kình (hãm) - sét đánh", "when": "in(Quan Phù) & meet(Kình Dương) & dim(Kình Dương)", "tone": "hung" },
+    { "id": "quan_phu_tue.1785.1", "para": 1785, "palaces": ["Tật Ách"], "text": "Phù Hổ - bị đi đày", "when": "in(Quan Phù) & meet(Bạch Hổ)", "tone": "hung", "review": "Quan Phù luôn tam hợp với Bạch Hổ nên điều kiện đúng mỗi khi Quan Phù ở cung Ách" },
+    { "id": "quan_phu_tue.1786.1", "para": 1786, "palaces": ["Thiên Di"], "text": "Phù Phá Tú - đi đường thường bị nguy hiểm.", "when": "in(Quan Phù) & meet(Phá Quân, Quả Tú)", "tone": "hung", "review": "Phá hiểu là Phá Quân, Tú là Quả Tú (mục Quả Tú: «Quả Phá - đi đường hay bị nguy hiểm»); cũng có thể Phá là Phá Toái" },
+    { "id": "quan_phu_tue.1787.1", "para": 1787, "palaces": ["Thiên Di"], "text": "Phù Liêm - chết đường", "when": "in(Quan Phù) & meet(Liêm Trinh)", "tone": "hung" },
+    { "id": "quan_phu_tue.1788.1", "para": 1788, "palaces": ["Thiên Di"], "text": "Phù Sát Kình - Ký ngụ phong tử.", "when": "in(Quan Phù) & meet(Thất Sát, Kình Dương)", "tone": "hung", "review": "Sát hiểu là Thất Sát (Kình đã là sát tinh)" },
+    { "id": "quan_phu_tue.1789.1", "para": 1789, "palaces": ["Nô Bộc"], "text": "Có Quan Phù - tôi tớ trộm cắp.", "when": "in(Quan Phù)", "tone": "hung" },
+    { "id": "quan_phu_tue.1790.1", "para": 1790, "palaces": ["Quan Lộc"], "text": "Phù Tướng Tấu, Mệnh có Tả Hữu - tăng ni, hoà thượng.", "when": "in(Quan Phù) & meet(Thiên Tướng, Tấu Thư) & pal(Mệnh, in(Tả Phù/Hữu Bật) & meet(Tả Hữu))", "tone": "trung", "review": "Tướng hiểu là Thiên Tướng (Tướng Quân không bao giờ hội Tấu Thư); «Mệnh có Tả Hữu» hiểu là Tả hoặc Hữu ở Mệnh và hội đủ cả hai" },
+    { "id": "quan_phu_tue.1791.1", "para": 1791, "palaces": ["Quan Lộc"], "text": "Quan Phù Tả Hữu Lộc Tồn hay Tam Hoá hoặc Khoa Quyền - được người giúp đỡ.", "when": "in(Quan Phù) & meet(Tả Hữu) & (meet(Lộc Tồn) | meet(Tam Hóa) | meet(Hóa Khoa, Hóa Quyền))", "tone": "cat", "review": "hiểu là Quan Phù hội Tả Hữu cùng với Lộc Tồn, hoặc Tam Hoá, hoặc Khoa Quyền; cũng có thể bà muốn nói (Tả Hữu Lộc Tồn) hay Tam Hoá hay Khoa Quyền, không buộc Tả Hữu" },
+    { "id": "quan_phu_tue.1792.1", "para": 1792, "palaces": ["Phúc Đức"], "text": "Quan Phù - tổn thọ.", "when": "in(Quan Phù)", "tone": "hung" }
+  ],
+  "skip": [
+    { "para": 1770, "kind": "meta" }
+  ]
+}

@@ -1,0 +1,1908 @@
+{
+  "about": "Star catalogue. 'bright' is grandma's own miếu/vượng/đắc/bình/hãm table copied from the header of each star in 'Luận TV 11.2011' (M miếu · V vượng · D đắc · B bình · H hãm); a branch she did not list has no mark. 'tone' is how the chart colours a minor star, taken from the kind of star she names in the same header (Cát tinh, Quý tinh … / Hung tinh, Sát tinh, Hại tinh …). Stars she gave no entry are marked source 'bo-sung'.",
+  "stars": [
+    {
+      "id": "tu_vi",
+      "name": "Tử Vi",
+      "kind": "chinh",
+      "bright": {
+        "V": [
+          "Sửu",
+          "Dần",
+          "Ngọ",
+          "Mùi"
+        ],
+        "D": [
+          "Mão",
+          "Tỵ",
+          "Thân",
+          "Dậu"
+        ],
+        "H": [
+          "Tuất",
+          "Hợi",
+          "Tý",
+          "Thìn"
+        ]
+      }
+    },
+    {
+      "id": "thien_co",
+      "name": "Thiên Cơ",
+      "kind": "chinh",
+      "bright": {
+        "V": [
+          "Thìn",
+          "Tuất",
+          "Mão",
+          "Dậu"
+        ],
+        "H": [
+          "Sửu",
+          "Mùi"
+        ]
+      }
+    },
+    {
+      "id": "thai_duong",
+      "name": "Thái Dương",
+      "aliases": [
+        "Nhật"
+      ],
+      "kind": "chinh",
+      "bright": {
+        "M": [
+          "Dần",
+          "Mão",
+          "Thìn",
+          "Tỵ",
+          "Ngọ",
+          "Mùi",
+          "Thân"
+        ],
+        "H": [
+          "Dậu",
+          "Tuất",
+          "Hợi",
+          "Tý",
+          "Sửu"
+        ]
+      }
+    },
+    {
+      "id": "vu_khuc",
+      "name": "Vũ Khúc",
+      "kind": "chinh",
+      "bright": {
+        "V": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ],
+        "D": [
+          "Dần",
+          "Thân"
+        ]
+      }
+    },
+    {
+      "id": "thien_dong",
+      "name": "Thiên Đồng",
+      "kind": "chinh",
+      "bright": {
+        "V": [
+          "Tý",
+          "Ngọ",
+          "Thìn",
+          "Tuất"
+        ],
+        "D": [
+          "Mão",
+          "Dậu"
+        ],
+        "H": [
+          "Tỵ",
+          "Hợi",
+          "Sửu",
+          "Mùi"
+        ]
+      }
+    },
+    {
+      "id": "liem_trinh",
+      "name": "Liêm Trinh",
+      "kind": "chinh",
+      "bright": {
+        "M": [
+          "Dần",
+          "Thân"
+        ],
+        "H": [
+          "Tỵ",
+          "Hợi"
+        ]
+      }
+    },
+    {
+      "id": "thien_phu",
+      "name": "Thiên Phủ",
+      "kind": "chinh",
+      "bright": {
+        "V": [
+          "Tý",
+          "Dần"
+        ],
+        "D": [
+          "Thìn",
+          "Ngọ",
+          "Dậu",
+          "Tuất"
+        ],
+        "H": [
+          "Sửu",
+          "Mão",
+          "Tỵ",
+          "Mùi"
+        ]
+      }
+    },
+    {
+      "id": "thai_am",
+      "name": "Thái Âm",
+      "aliases": [
+        "Nguyệt"
+      ],
+      "kind": "chinh",
+      "bright": {
+        "V": [
+          "Hợi",
+          "Tý",
+          "Sửu"
+        ],
+        "D": [
+          "Dậu",
+          "Tuất"
+        ],
+        "H": [
+          "Dần",
+          "Mão",
+          "Thìn",
+          "Tỵ",
+          "Ngọ",
+          "Mùi",
+          "Thân"
+        ]
+      }
+    },
+    {
+      "id": "tham_lang",
+      "name": "Tham Lang",
+      "kind": "chinh",
+      "bright": {
+        "M": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ],
+        "D": [
+          "Tý",
+          "Ngọ",
+          "Mão",
+          "Dậu"
+        ],
+        "H": [
+          "Dần",
+          "Thân",
+          "Tỵ",
+          "Hợi"
+        ]
+      }
+    },
+    {
+      "id": "cu_mon",
+      "name": "Cự Môn",
+      "kind": "chinh",
+      "bright": {
+        "V": [
+          "Tý",
+          "Ngọ",
+          "Mão",
+          "Dậu"
+        ],
+        "D": [
+          "Dần",
+          "Thân",
+          "Tỵ",
+          "Hợi"
+        ],
+        "H": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ]
+      }
+    },
+    {
+      "id": "thien_tuong",
+      "name": "Thiên Tướng",
+      "kind": "chinh",
+      "bright": {
+        "V": [
+          "Dần",
+          "Thân"
+        ],
+        "D": [
+          "Tỵ",
+          "Hợi",
+          "Mão",
+          "Mùi"
+        ],
+        "H": [
+          "Dậu"
+        ]
+      }
+    },
+    {
+      "id": "thien_luong",
+      "name": "Thiên Lương",
+      "kind": "chinh",
+      "bright": {
+        "M": [
+          "Thìn",
+          "Tuất"
+        ],
+        "V": [
+          "Tý",
+          "Ngọ",
+          "Dần",
+          "Thân"
+        ],
+        "H": [
+          "Tỵ",
+          "Hợi"
+        ]
+      }
+    },
+    {
+      "id": "that_sat",
+      "name": "Thất Sát",
+      "kind": "chinh",
+      "bright": {
+        "V": [
+          "Dần",
+          "Thân",
+          "Tý",
+          "Ngọ"
+        ],
+        "D": [
+          "Tỵ",
+          "Hợi",
+          "Mão",
+          "Dậu"
+        ],
+        "H": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ]
+      }
+    },
+    {
+      "id": "pha_quan",
+      "name": "Phá Quân",
+      "kind": "chinh",
+      "bright": {
+        "M": [
+          "Tý",
+          "Ngọ"
+        ],
+        "D": [
+          "Thìn",
+          "Tuất"
+        ],
+        "H": [
+          "Mão",
+          "Dậu",
+          "Dần",
+          "Thân"
+        ]
+      }
+    },
+    {
+      "id": "van_xuong",
+      "name": "Văn Xương",
+      "aliases": [
+        "Văn Sương"
+      ],
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "V": [
+          "Tý",
+          "Sửu",
+          "Dần",
+          "Tỵ",
+          "Hợi"
+        ],
+        "D": [
+          "Mão",
+          "Thìn",
+          "Mùi",
+          "Thân",
+          "Dậu"
+        ],
+        "H": [
+          "Ngọ",
+          "Tuất"
+        ]
+      }
+    },
+    {
+      "id": "van_khuc",
+      "name": "Văn Khúc",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "V": [
+          "Tý",
+          "Sửu",
+          "Tỵ",
+          "Hợi"
+        ],
+        "D": [
+          "Mão",
+          "Thìn",
+          "Mùi",
+          "Thân",
+          "Dậu"
+        ],
+        "H": [
+          "Ngọ"
+        ]
+      }
+    },
+    {
+      "id": "ta_phu",
+      "name": "Tả Phù",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "M": [
+          "Thìn",
+          "Tuất"
+        ],
+        "V": [
+          "Sửu",
+          "Mùi"
+        ],
+        "D": [
+          "Dần",
+          "Thân",
+          "Tỵ",
+          "Hợi",
+          "Mão",
+          "Dậu"
+        ]
+      }
+    },
+    {
+      "id": "huu_bat",
+      "name": "Hữu Bật",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "V": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ],
+        "D": [
+          "Dần",
+          "Thân",
+          "Tỵ",
+          "Hợi",
+          "Mão",
+          "Dậu"
+        ]
+      }
+    },
+    {
+      "id": "thien_khoi",
+      "name": "Thiên Khôi",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "M": [
+          "Dần",
+          "Ngọ"
+        ],
+        "V": [
+          "Mão",
+          "Tỵ"
+        ],
+        "H": [
+          "Hợi",
+          "Tý",
+          "Sửu"
+        ]
+      }
+    },
+    {
+      "id": "thien_viet",
+      "name": "Thiên Việt",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "M": [
+          "Dần",
+          "Ngọ"
+        ],
+        "V": [
+          "Mão",
+          "Tỵ"
+        ],
+        "H": [
+          "Hợi",
+          "Tý",
+          "Sửu"
+        ]
+      }
+    },
+    {
+      "id": "loc_ton",
+      "name": "Lộc Tồn",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "V": [
+          "Dần",
+          "Thân",
+          "Tý",
+          "Ngọ",
+          "Mão",
+          "Dậu"
+        ],
+        "H": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ]
+      }
+    },
+    {
+      "id": "kinh_duong",
+      "name": "Kình Dương",
+      "kind": "phu",
+      "tone": "hung",
+      "bright": {
+        "M": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ],
+        "D": [
+          "Dần",
+          "Thân",
+          "Tỵ",
+          "Hợi"
+        ],
+        "H": [
+          "Tý",
+          "Ngọ",
+          "Mão",
+          "Dậu"
+        ]
+      }
+    },
+    {
+      "id": "da_la",
+      "name": "Đà La",
+      "kind": "phu",
+      "tone": "hung",
+      "bright": {
+        "V": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ],
+        "D": [
+          "Tý",
+          "Hợi"
+        ],
+        "H": [
+          "Dần",
+          "Mão",
+          "Tỵ",
+          "Ngọ",
+          "Thân",
+          "Dậu"
+        ]
+      }
+    },
+    {
+      "id": "hoa_tinh",
+      "name": "Hỏa Tinh",
+      "kind": "phu",
+      "tone": "hung",
+      "bright": {
+        "M": [
+          "Dần",
+          "Mão",
+          "Tỵ",
+          "Ngọ"
+        ],
+        "B": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ]
+      }
+    },
+    {
+      "id": "linh_tinh",
+      "name": "Linh Tinh",
+      "kind": "phu",
+      "tone": "hung",
+      "bright": {
+        "V": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi",
+          "Tỵ",
+          "Ngọ"
+        ],
+        "H": [
+          "Tý",
+          "Hợi"
+        ]
+      }
+    },
+    {
+      "id": "dia_khong",
+      "name": "Địa Không",
+      "kind": "phu",
+      "tone": "hung",
+      "bright": {
+        "V": [
+          "Tỵ",
+          "Hợi"
+        ],
+        "B": [
+          "Dần",
+          "Thân"
+        ],
+        "H": [
+          "Thìn",
+          "Tuất"
+        ]
+      }
+    },
+    {
+      "id": "dia_kiep",
+      "name": "Địa Kiếp",
+      "kind": "phu",
+      "tone": "hung",
+      "bright": {
+        "V": [
+          "Tỵ",
+          "Hợi"
+        ],
+        "B": [
+          "Dần",
+          "Thân"
+        ],
+        "H": [
+          "Thìn",
+          "Tuất"
+        ]
+      }
+    },
+    {
+      "id": "hoa_loc",
+      "name": "Hóa Lộc",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "V": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ],
+        "H": [
+          "Thân",
+          "Dậu"
+        ]
+      }
+    },
+    {
+      "id": "hoa_quyen",
+      "name": "Hóa Quyền",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "V": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ],
+        "H": [
+          "Ngọ",
+          "Thân",
+          "Dậu"
+        ]
+      }
+    },
+    {
+      "id": "hoa_khoa",
+      "name": "Hóa Khoa",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "V": [
+          "Thìn",
+          "Tuất",
+          "Dần",
+          "Thân"
+        ],
+        "D": [
+          "Hợi"
+        ],
+        "H": [
+          "Tý",
+          "Dậu"
+        ]
+      }
+    },
+    {
+      "id": "hoa_ky",
+      "name": "Hóa Kỵ",
+      "kind": "phu",
+      "tone": "hung",
+      "bright": {
+        "V": [
+          "Hợi",
+          "Tý",
+          "Dần",
+          "Mão",
+          "Dậu",
+          "Thân"
+        ]
+      }
+    },
+    {
+      "id": "thien_ma",
+      "name": "Thiên Mã",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "V": [
+          "Dần"
+        ],
+        "D": [
+          "Thân",
+          "Tỵ",
+          "Hợi"
+        ]
+      }
+    },
+    {
+      "id": "dao_hoa",
+      "name": "Đào Hoa",
+      "kind": "phu",
+      "tone": "trung",
+      "bright": {
+        "M": [
+          "Tỵ",
+          "Hợi"
+        ]
+      }
+    },
+    {
+      "id": "hong_loan",
+      "name": "Hồng Loan",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "V": [
+          "Dần",
+          "Mão",
+          "Tý",
+          "Hợi"
+        ]
+      }
+    },
+    {
+      "id": "thien_hy",
+      "name": "Thiên Hỷ",
+      "kind": "phu",
+      "tone": "cat"
+    },
+    {
+      "id": "thien_dieu",
+      "name": "Thiên Diêu",
+      "aliases": [
+        "Thiên Riêu"
+      ],
+      "kind": "phu",
+      "tone": "hung",
+      "bright": {
+        "V": [
+          "Mão",
+          "Dậu",
+          "Tuất",
+          "Hợi"
+        ]
+      }
+    },
+    {
+      "id": "thien_y",
+      "name": "Thiên Y",
+      "kind": "phu",
+      "tone": "trung"
+    },
+    {
+      "id": "thien_hinh",
+      "name": "Thiên Hình",
+      "kind": "phu",
+      "tone": "hung",
+      "bright": {
+        "V": [
+          "Dần",
+          "Mão",
+          "Dậu",
+          "Tuất"
+        ]
+      }
+    },
+    {
+      "id": "tam_thai",
+      "name": "Tam Thai",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "M": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ]
+      }
+    },
+    {
+      "id": "bat_toa",
+      "name": "Bát Tọa",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "M": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ]
+      }
+    },
+    {
+      "id": "an_quang",
+      "name": "Ân Quang",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "M": [
+          "Sửu",
+          "Mùi"
+        ],
+        "D": [
+          "Mão",
+          "Dậu"
+        ]
+      }
+    },
+    {
+      "id": "thien_quy",
+      "name": "Thiên Quý",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "V": [
+          "Sửu",
+          "Mùi"
+        ]
+      }
+    },
+    {
+      "id": "thai_phu",
+      "name": "Thai Phụ",
+      "kind": "phu",
+      "tone": "cat"
+    },
+    {
+      "id": "phong_cao",
+      "name": "Phong Cáo",
+      "kind": "phu",
+      "tone": "cat"
+    },
+    {
+      "id": "long_tri",
+      "name": "Long Trì",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "M": [
+          "Sửu",
+          "Mùi"
+        ]
+      }
+    },
+    {
+      "id": "phuong_cac",
+      "name": "Phượng Các",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "M": [
+          "Sửu",
+          "Mùi"
+        ],
+        "V": [
+          "Mão",
+          "Dậu"
+        ]
+      }
+    },
+    {
+      "id": "giai_than",
+      "name": "Giải Thần",
+      "kind": "phu",
+      "tone": "cat"
+    },
+    {
+      "id": "thien_giai",
+      "name": "Thiên Giải",
+      "kind": "phu",
+      "tone": "cat"
+    },
+    {
+      "id": "dia_giai",
+      "name": "Địa Giải",
+      "kind": "phu",
+      "tone": "cat",
+      "source": "bo-sung"
+    },
+    {
+      "id": "thien_quan",
+      "name": "Thiên Quan",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "H": [
+          "Tuất"
+        ]
+      }
+    },
+    {
+      "id": "thien_phuc",
+      "name": "Thiên Phúc",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "H": [
+          "Tuất"
+        ]
+      }
+    },
+    {
+      "id": "thien_tai",
+      "name": "Thiên Tài",
+      "kind": "phu",
+      "tone": "cat"
+    },
+    {
+      "id": "thien_tho",
+      "name": "Thiên Thọ",
+      "kind": "phu",
+      "tone": "cat"
+    },
+    {
+      "id": "thien_tru",
+      "name": "Thiên Trù",
+      "kind": "phu",
+      "tone": "cat"
+    },
+    {
+      "id": "luu_ha",
+      "name": "Lưu Hà",
+      "kind": "phu",
+      "tone": "hung"
+    },
+    {
+      "id": "thien_khoc",
+      "name": "Thiên Khốc",
+      "kind": "phu",
+      "tone": "hung",
+      "bright": {
+        "V": [
+          "Tý",
+          "Ngọ"
+        ],
+        "D": [
+          "Sửu",
+          "Thân"
+        ]
+      }
+    },
+    {
+      "id": "thien_hu",
+      "name": "Thiên Hư",
+      "kind": "phu",
+      "tone": "hung",
+      "bright": {
+        "M": [
+          "Tý",
+          "Ngọ"
+        ]
+      }
+    },
+    {
+      "id": "thien_la",
+      "name": "Thiên La",
+      "kind": "phu",
+      "tone": "hung"
+    },
+    {
+      "id": "dia_vong",
+      "name": "Địa Võng",
+      "kind": "phu",
+      "tone": "hung"
+    },
+    {
+      "id": "thien_thuong",
+      "name": "Thiên Thương",
+      "kind": "phu",
+      "tone": "hung"
+    },
+    {
+      "id": "thien_su",
+      "name": "Thiên Sứ",
+      "kind": "phu",
+      "tone": "hung"
+    },
+    {
+      "id": "co_than",
+      "name": "Cô Thần",
+      "kind": "phu",
+      "tone": "hung"
+    },
+    {
+      "id": "qua_tu",
+      "name": "Quả Tú",
+      "kind": "phu",
+      "tone": "hung",
+      "bright": {
+        "V": [
+          "Hợi"
+        ]
+      }
+    },
+    {
+      "id": "hoa_cai",
+      "name": "Hoa Cái",
+      "kind": "phu",
+      "tone": "cat",
+      "bright": {
+        "V": [
+          "Tý",
+          "Thìn",
+          "Mùi"
+        ]
+      }
+    },
+    {
+      "id": "kiep_sat",
+      "name": "Kiếp Sát",
+      "kind": "phu",
+      "tone": "hung",
+      "bright": {
+        "V": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ],
+        "D": [
+          "Tý",
+          "Hợi",
+          "Dần",
+          "Thân"
+        ],
+        "H": [
+          "Mão",
+          "Tỵ",
+          "Ngọ"
+        ]
+      }
+    },
+    {
+      "id": "pha_toai",
+      "name": "Phá Toái",
+      "kind": "phu",
+      "tone": "hung"
+    },
+    {
+      "id": "dau_quan",
+      "name": "Đẩu Quân",
+      "kind": "phu",
+      "tone": "hung"
+    },
+    {
+      "id": "quoc_an",
+      "name": "Quốc Ấn",
+      "kind": "phu",
+      "tone": "cat"
+    },
+    {
+      "id": "duong_phu",
+      "name": "Đường Phù",
+      "kind": "phu",
+      "tone": "cat"
+    },
+    {
+      "id": "thien_khong",
+      "name": "Thiên Không",
+      "kind": "phu",
+      "tone": "hung",
+      "bright": {
+        "M": [
+          "Tỵ",
+          "Ngọ",
+          "Dần",
+          "Mão"
+        ],
+        "H": [
+          "Thìn",
+          "Tuất"
+        ]
+      }
+    },
+    {
+      "id": "nguyet_duc",
+      "name": "Nguyệt Đức",
+      "kind": "phu",
+      "tone": "cat"
+    },
+    {
+      "id": "thien_duc",
+      "name": "Thiên Đức",
+      "kind": "phu",
+      "tone": "cat"
+    },
+    {
+      "id": "luu_nien_van_tinh",
+      "name": "Lưu Niên Văn Tinh",
+      "kind": "phu",
+      "tone": "cat"
+    },
+    {
+      "id": "bac_si",
+      "name": "Bác Sĩ",
+      "aliases": [
+        "Bác Sỹ"
+      ],
+      "kind": "phu",
+      "ring": "loc",
+      "tone": "cat"
+    },
+    {
+      "id": "luc_si",
+      "name": "Lực Sĩ",
+      "aliases": [
+        "Lực Sỹ"
+      ],
+      "kind": "phu",
+      "ring": "loc",
+      "tone": "trung"
+    },
+    {
+      "id": "thanh_long",
+      "name": "Thanh Long",
+      "kind": "phu",
+      "ring": "loc",
+      "tone": "cat",
+      "bright": {
+        "M": [
+          "Tý",
+          "Hợi",
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ]
+      }
+    },
+    {
+      "id": "tieu_hao",
+      "name": "Tiểu Hao",
+      "kind": "phu",
+      "ring": "loc",
+      "tone": "hung",
+      "bright": {
+        "M": [
+          "Mão",
+          "Dậu",
+          "Tý",
+          "Ngọ"
+        ],
+        "H": [
+          "Tỵ",
+          "Hợi"
+        ]
+      }
+    },
+    {
+      "id": "tuong_quan",
+      "name": "Tướng Quân",
+      "kind": "phu",
+      "ring": "loc",
+      "tone": "trung"
+    },
+    {
+      "id": "tau_thu",
+      "name": "Tấu Thư",
+      "kind": "phu",
+      "ring": "loc",
+      "tone": "cat"
+    },
+    {
+      "id": "phi_liem",
+      "name": "Phi Liêm",
+      "kind": "phu",
+      "ring": "loc",
+      "tone": "cat"
+    },
+    {
+      "id": "hy_than",
+      "name": "Hỷ Thần",
+      "kind": "phu",
+      "ring": "loc",
+      "tone": "cat"
+    },
+    {
+      "id": "benh_phu",
+      "name": "Bệnh Phù",
+      "kind": "phu",
+      "ring": "loc",
+      "tone": "hung"
+    },
+    {
+      "id": "dai_hao",
+      "name": "Đại Hao",
+      "kind": "phu",
+      "ring": "loc",
+      "tone": "hung",
+      "bright": {
+        "M": [
+          "Mão",
+          "Dậu"
+        ],
+        "V": [
+          "Tý",
+          "Ngọ"
+        ]
+      }
+    },
+    {
+      "id": "phuc_binh",
+      "name": "Phục Binh",
+      "kind": "phu",
+      "ring": "loc",
+      "tone": "hung"
+    },
+    {
+      "id": "quan_phu_loc",
+      "name": "Quan Phủ",
+      "kind": "phu",
+      "ring": "loc",
+      "tone": "hung"
+    },
+    {
+      "id": "thai_tue",
+      "name": "Thái Tuế",
+      "kind": "phu",
+      "ring": "tue",
+      "tone": "hung",
+      "bright": {
+        "H": [
+          "Thân",
+          "Dậu"
+        ]
+      }
+    },
+    {
+      "id": "thieu_duong",
+      "name": "Thiếu Dương",
+      "kind": "phu",
+      "ring": "tue",
+      "tone": "cat",
+      "bright": {
+        "M": [
+          "Tý",
+          "Ngọ"
+        ]
+      }
+    },
+    {
+      "id": "tang_mon",
+      "name": "Tang Môn",
+      "kind": "phu",
+      "ring": "tue",
+      "tone": "hung",
+      "bright": {
+        "M": [
+          "Mão",
+          "Dậu"
+        ],
+        "V": [
+          "Dần",
+          "Thân"
+        ]
+      }
+    },
+    {
+      "id": "thieu_am",
+      "name": "Thiếu Âm",
+      "kind": "phu",
+      "ring": "tue",
+      "tone": "cat",
+      "bright": {
+        "M": [
+          "Mão",
+          "Dậu"
+        ]
+      }
+    },
+    {
+      "id": "quan_phu_tue",
+      "name": "Quan Phù",
+      "kind": "phu",
+      "ring": "tue",
+      "tone": "hung",
+      "bright": {
+        "H": [
+          "Tý",
+          "Hợi"
+        ]
+      }
+    },
+    {
+      "id": "tu_phu",
+      "name": "Tử Phù",
+      "kind": "phu",
+      "ring": "tue",
+      "tone": "hung"
+    },
+    {
+      "id": "tue_pha",
+      "name": "Tuế Phá",
+      "kind": "phu",
+      "ring": "tue",
+      "tone": "hung"
+    },
+    {
+      "id": "long_duc",
+      "name": "Long Đức",
+      "kind": "phu",
+      "ring": "tue",
+      "tone": "cat"
+    },
+    {
+      "id": "bach_ho",
+      "name": "Bạch Hổ",
+      "kind": "phu",
+      "ring": "tue",
+      "tone": "hung",
+      "bright": {
+        "M": [
+          "Mão",
+          "Dậu"
+        ],
+        "V": [
+          "Dần",
+          "Thân"
+        ],
+        "D": [
+          "Tý",
+          "Ngọ"
+        ],
+        "H": [
+          "Tuất"
+        ]
+      }
+    },
+    {
+      "id": "phuc_duc",
+      "name": "Phúc Đức",
+      "kind": "phu",
+      "ring": "tue",
+      "tone": "cat"
+    },
+    {
+      "id": "dieu_khach",
+      "name": "Điếu Khách",
+      "kind": "phu",
+      "ring": "tue",
+      "tone": "hung"
+    },
+    {
+      "id": "truc_phu",
+      "name": "Trực Phù",
+      "kind": "phu",
+      "ring": "tue",
+      "tone": "hung"
+    },
+    {
+      "id": "quan_sach",
+      "name": "Quán Sách",
+      "kind": "phu",
+      "tone": "hung",
+      "source": "bo-sung"
+    },
+    {
+      "id": "trang_sinh",
+      "name": "Tràng Sinh",
+      "aliases": [
+        "Trường Sinh"
+      ],
+      "kind": "phu",
+      "ring": "sinh",
+      "tone": "cat"
+    },
+    {
+      "id": "moc_duc",
+      "name": "Mộc Dục",
+      "kind": "phu",
+      "ring": "sinh",
+      "tone": "hung",
+      "bright": {
+        "M": [
+          "Tý",
+          "Ngọ"
+        ]
+      }
+    },
+    {
+      "id": "quan_doi",
+      "name": "Quan Đới",
+      "kind": "phu",
+      "ring": "sinh",
+      "tone": "trung"
+    },
+    {
+      "id": "lam_quan",
+      "name": "Lâm Quan",
+      "kind": "phu",
+      "ring": "sinh",
+      "tone": "cat"
+    },
+    {
+      "id": "de_vuong",
+      "name": "Đế Vượng",
+      "kind": "phu",
+      "ring": "sinh",
+      "tone": "cat"
+    },
+    {
+      "id": "suy",
+      "name": "Suy",
+      "kind": "phu",
+      "ring": "sinh",
+      "tone": "hung"
+    },
+    {
+      "id": "benh",
+      "name": "Bệnh",
+      "kind": "phu",
+      "ring": "sinh",
+      "tone": "hung"
+    },
+    {
+      "id": "tu",
+      "name": "Tử",
+      "kind": "phu",
+      "ring": "sinh",
+      "tone": "hung"
+    },
+    {
+      "id": "mo",
+      "name": "Mộ",
+      "kind": "phu",
+      "ring": "sinh",
+      "tone": "hung",
+      "bright": {
+        "V": [
+          "Thìn",
+          "Tuất",
+          "Sửu",
+          "Mùi"
+        ]
+      }
+    },
+    {
+      "id": "tuyet",
+      "name": "Tuyệt",
+      "kind": "phu",
+      "ring": "sinh",
+      "tone": "hung"
+    },
+    {
+      "id": "thai",
+      "name": "Thai",
+      "kind": "phu",
+      "ring": "sinh",
+      "tone": "cat",
+      "bright": {
+        "V": [
+          "Sửu",
+          "Tuất",
+          "Thìn"
+        ]
+      }
+    },
+    {
+      "id": "duong",
+      "name": "Dưỡng",
+      "kind": "phu",
+      "ring": "sinh",
+      "tone": "cat"
+    },
+    {
+      "id": "tuan",
+      "name": "Tuần",
+      "aliases": [
+        "Tuần Không"
+      ],
+      "kind": "khong",
+      "tone": "hung",
+      "bright": {
+        "V": [
+          "Dần",
+          "Mão"
+        ]
+      }
+    },
+    {
+      "id": "triet",
+      "name": "Triệt",
+      "aliases": [
+        "Triệt Không",
+        "Triệt Lộ"
+      ],
+      "kind": "khong",
+      "tone": "hung",
+      "bright": {
+        "V": [
+          "Dần",
+          "Thân",
+          "Mão",
+          "Dậu"
+        ]
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "Tả Hữu",
+      "aliases": [
+        "Phụ Bật"
+      ],
+      "mode": "all",
+      "stars": [
+        "Tả Phù",
+        "Hữu Bật"
+      ]
+    },
+    {
+      "name": "Xương Khúc",
+      "aliases": [
+        "Sương Khúc",
+        "Khúc Xương",
+        "Khúc Sương"
+      ],
+      "mode": "all",
+      "stars": [
+        "Văn Xương",
+        "Văn Khúc"
+      ]
+    },
+    {
+      "name": "Khôi Việt",
+      "mode": "all",
+      "stars": [
+        "Thiên Khôi",
+        "Thiên Việt"
+      ]
+    },
+    {
+      "name": "Long Phượng",
+      "mode": "all",
+      "stars": [
+        "Long Trì",
+        "Phượng Các"
+      ]
+    },
+    {
+      "name": "Thai Tọa",
+      "mode": "all",
+      "stars": [
+        "Tam Thai",
+        "Bát Tọa"
+      ]
+    },
+    {
+      "name": "Quang Quý",
+      "aliases": [
+        "Quý Ân",
+        "Ân Quý"
+      ],
+      "mode": "all",
+      "stars": [
+        "Ân Quang",
+        "Thiên Quý"
+      ]
+    },
+    {
+      "name": "Hồng Đào",
+      "aliases": [
+        "Đào Hồng"
+      ],
+      "mode": "all",
+      "stars": [
+        "Hồng Loan",
+        "Đào Hoa"
+      ]
+    },
+    {
+      "name": "Không Kiếp",
+      "aliases": [
+        "Kiếp Không"
+      ],
+      "mode": "all",
+      "stars": [
+        "Địa Không",
+        "Địa Kiếp"
+      ]
+    },
+    {
+      "name": "Kình Đà",
+      "aliases": [
+        "Dương Đà"
+      ],
+      "mode": "all",
+      "stars": [
+        "Kình Dương",
+        "Đà La"
+      ]
+    },
+    {
+      "name": "Hỏa Linh",
+      "aliases": [
+        "Linh Hỏa"
+      ],
+      "mode": "all",
+      "stars": [
+        "Hỏa Tinh",
+        "Linh Tinh"
+      ]
+    },
+    {
+      "name": "Song Hao",
+      "mode": "all",
+      "stars": [
+        "Đại Hao",
+        "Tiểu Hao"
+      ]
+    },
+    {
+      "name": "Nhật Nguyệt",
+      "aliases": [
+        "Âm Dương"
+      ],
+      "mode": "all",
+      "stars": [
+        "Thái Dương",
+        "Thái Âm"
+      ]
+    },
+    {
+      "name": "Tử Phủ",
+      "mode": "all",
+      "stars": [
+        "Tử Vi",
+        "Thiên Phủ"
+      ]
+    },
+    {
+      "name": "Khốc Hư",
+      "mode": "all",
+      "stars": [
+        "Thiên Khốc",
+        "Thiên Hư"
+      ]
+    },
+    {
+      "name": "Thai Cáo",
+      "mode": "all",
+      "stars": [
+        "Thai Phụ",
+        "Phong Cáo"
+      ]
+    },
+    {
+      "name": "Diêu Y",
+      "aliases": [
+        "Riêu Y"
+      ],
+      "mode": "all",
+      "stars": [
+        "Thiên Diêu",
+        "Thiên Y"
+      ]
+    },
+    {
+      "name": "Cô Quả",
+      "mode": "all",
+      "stars": [
+        "Cô Thần",
+        "Quả Tú"
+      ]
+    },
+    {
+      "name": "La Võng",
+      "mode": "all",
+      "stars": [
+        "Thiên La",
+        "Địa Võng"
+      ]
+    },
+    {
+      "name": "Tang Hổ",
+      "aliases": [
+        "Hổ Tang"
+      ],
+      "mode": "all",
+      "stars": [
+        "Tang Môn",
+        "Bạch Hổ"
+      ]
+    },
+    {
+      "name": "Quan Phúc",
+      "mode": "all",
+      "stars": [
+        "Thiên Quan",
+        "Thiên Phúc"
+      ]
+    },
+    {
+      "name": "Tài Thọ",
+      "mode": "all",
+      "stars": [
+        "Thiên Tài",
+        "Thiên Thọ"
+      ]
+    },
+    {
+      "name": "Thương Sứ",
+      "mode": "all",
+      "stars": [
+        "Thiên Thương",
+        "Thiên Sứ"
+      ]
+    },
+    {
+      "name": "Tam Hóa",
+      "aliases": [
+        "Khoa Quyền Lộc",
+        "Lộc Quyền Khoa"
+      ],
+      "mode": "all",
+      "stars": [
+        "Hóa Lộc",
+        "Hóa Quyền",
+        "Hóa Khoa"
+      ]
+    },
+    {
+      "name": "Tứ Linh",
+      "mode": "all",
+      "stars": [
+        "Long Trì",
+        "Phượng Các",
+        "Bạch Hổ",
+        "Hoa Cái"
+      ],
+      "note": "bà ghi: Hổ hội Phượng Long Cái thành bộ Tứ Linh"
+    },
+    {
+      "name": "Tứ Hung",
+      "mode": "all",
+      "stars": [
+        "Bạch Hổ",
+        "Tang Môn",
+        "Điếu Khách",
+        "Phục Binh"
+      ],
+      "note": "bà ghi: Hổ Tang Điếu Binh (Tứ Hung)"
+    },
+    {
+      "name": "Sát Phá Tham",
+      "mode": "all",
+      "stars": [
+        "Thất Sát",
+        "Phá Quân",
+        "Tham Lang"
+      ]
+    },
+    {
+      "name": "Cơ Nguyệt Đồng Lương",
+      "mode": "all",
+      "stars": [
+        "Thiên Cơ",
+        "Thái Âm",
+        "Thiên Đồng",
+        "Thiên Lương"
+      ]
+    },
+    {
+      "name": "Tử Phủ Vũ Tướng",
+      "mode": "all",
+      "stars": [
+        "Tử Vi",
+        "Thiên Phủ",
+        "Vũ Khúc",
+        "Thiên Tướng"
+      ]
+    },
+    {
+      "name": "Tứ Không",
+      "mode": "all",
+      "stars": [
+        "Tuần",
+        "Triệt",
+        "Địa Không",
+        "Thiên Không"
+      ]
+    },
+    {
+      "name": "Tam Không",
+      "mode": "min",
+      "min": 3,
+      "stars": [
+        "Tuần",
+        "Triệt",
+        "Địa Không",
+        "Thiên Không"
+      ]
+    },
+    {
+      "name": "Tứ Sát",
+      "mode": "any",
+      "stars": [
+        "Kình Dương",
+        "Đà La",
+        "Hỏa Tinh",
+        "Linh Tinh"
+      ]
+    },
+    {
+      "name": "Lục Sát",
+      "mode": "any",
+      "stars": [
+        "Kình Dương",
+        "Đà La",
+        "Hỏa Tinh",
+        "Linh Tinh",
+        "Địa Không",
+        "Địa Kiếp"
+      ]
+    },
+    {
+      "name": "Sát tinh",
+      "mode": "any",
+      "stars": [
+        "Kình Dương",
+        "Đà La",
+        "Hỏa Tinh",
+        "Linh Tinh",
+        "Địa Không",
+        "Địa Kiếp"
+      ]
+    },
+    {
+      "name": "Hung tinh",
+      "aliases": [
+        "ác sát",
+        "ác tinh"
+      ],
+      "mode": "any",
+      "stars": [
+        "Kình Dương",
+        "Đà La",
+        "Hỏa Tinh",
+        "Linh Tinh",
+        "Địa Không",
+        "Địa Kiếp",
+        "Hóa Kỵ",
+        "Thiên Hình",
+        "Kiếp Sát",
+        "Thiên Không",
+        "Đại Hao",
+        "Tiểu Hao"
+      ]
+    },
+    {
+      "name": "Cát tinh",
+      "mode": "any",
+      "stars": [
+        "Tả Phù",
+        "Hữu Bật",
+        "Văn Xương",
+        "Văn Khúc",
+        "Thiên Khôi",
+        "Thiên Việt",
+        "Lộc Tồn",
+        "Hóa Lộc",
+        "Hóa Quyền",
+        "Hóa Khoa"
+      ]
+    },
+    {
+      "name": "Quý tinh",
+      "mode": "any",
+      "stars": [
+        "Ân Quang",
+        "Thiên Quý",
+        "Thiên Khôi",
+        "Thiên Việt",
+        "Thiên Quan",
+        "Thiên Phúc",
+        "Hóa Quyền",
+        "Quốc Ấn",
+        "Lộc Tồn",
+        "Thiên Mã",
+        "Thanh Long",
+        "Tràng Sinh"
+      ]
+    },
+    {
+      "name": "Văn tinh",
+      "mode": "any",
+      "stars": [
+        "Văn Xương",
+        "Văn Khúc",
+        "Thiên Khôi",
+        "Thiên Việt"
+      ],
+      "note": "bà ghi: Văn Tinh - Sương Khúc Khôi Việt"
+    },
+    {
+      "name": "Lộc",
+      "mode": "any",
+      "stars": [
+        "Lộc Tồn",
+        "Hóa Lộc"
+      ]
+    }
+  ]
+}

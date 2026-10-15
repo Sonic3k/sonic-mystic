@@ -1,0 +1,16 @@
+{
+  "entry": 2907,
+  "star": "thien_y",
+  "rules": [
+    { "id": "thien_y.2909.1", "para": 2909, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: sạch sẽ, cẩn thận. Chủ việc thuốc thang.", "when": "in(Thiên Y)", "tone": "trung" },
+    { "id": "thien_y.2910.1", "para": 2910, "palaces": ["Mệnh"], "text": "Có Thiên Y - hay ốm đau, thuốc thang.", "when": "in(Thiên Y)", "tone": "hung" },
+    { "id": "thien_y.2911.1", "para": 2911, "palaces": ["Mệnh"], "text": "Y cư Tuất ngộ Thiên Thọ - đại thọ", "when": "in(Thiên Y) & at(Tuất) & meet(Thiên Thọ)", "tone": "cat" },
+    { "id": "thien_y.2912.1", "para": 2912, "palaces": ["Mệnh"], "text": "Ngộ Tả Hữu Quan Phúc - danh y", "ctx": "Thiên Y", "when": null, "tone": "cat", "review": "theo cách an sao Thiên Y (luôn cùng cung với Thiên Diêu) không bao giờ hội Tả Phù hay Hữu Bật (luôn cách nhau một số lẻ cung), nên không viết được điều kiện; cần xem lại (mục Tả Phù của bà ghi «Tả Hữu Thiên Phúc - danh y»)" },
+    { "id": "thien_y.2912.2", "para": 2912, "palaces": ["Mệnh"], "text": "Gia Hình - giỏi khoa mổ sẻ.", "ctx": "Thiên Y ngộ Tả Hữu Quan Phúc", "when": null, "tone": "cat", "review": "nối tiếp vế trước (danh y) nên cũng không thể có; nếu hiểu riêng là Thiên Y gia Hình thì lúc nào cũng đúng, vì Thiên Hình luôn tam hợp với Thiên Y; cần xem lại" },
+    { "id": "thien_y.2913.1", "para": 2913, "palaces": ["Mệnh"], "text": "Cư Tài gặp Lương Hỷ an cung Tuất - làm nghề thuốc phát tài.", "ctx": "Thiên Y", "when": "pal(Tài Bạch, in(Thiên Y) & at(Tuất) & meet(Thiên Lương, Thiên Hỷ/Hỷ Thần))", "tone": "cat" },
+    { "id": "thien_y.2914.1", "para": 2914, "palaces": ["Mệnh"], "text": "Cư cung ách đắc địa - tốt.", "ctx": "Thiên Y", "when": null, "tone": "cat", "review": "bảng của bà không ghi miếu, đắc địa cho Thiên Y nên không xét được «đắc địa»; nếu bỏ chữ ấy thì là Thiên Y ở cung Ách, pal(Tật Ách, in(Thiên Y)); cần xem lại" }
+  ],
+  "skip": [
+    { "para": 2908, "kind": "meta" }
+  ]
+}

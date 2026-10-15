@@ -1,0 +1,32 @@
+{
+  "entry": 392,
+  "star": "duong",
+  "rules": [
+    { "id": "duong.394.1", "para": 394, "palaces": ["Mệnh", "Thân"], "text": "Tính cách: chăm lo, cẩn thận, chủ sự nuôi nấng.", "when": "in(Dưỡng)", "tone": "cat" },
+    { "id": "duong.396.1", "para": 396, "palaces": ["Mệnh", "Thân"], "text": "Hội với Cát tinh phù trì thêm tốt đẹp.", "ctx": "Dưỡng", "when": "in(Dưỡng) & meet(Cát tinh)", "tone": "cat" },
+    { "id": "duong.397.1", "para": 397, "palaces": ["Mệnh", "Thân"], "text": "Hội với Hoả Linh Không Kiếp là làm con nuôi hay đổi họ tên.", "ctx": "Dưỡng", "when": "in(Dưỡng) & meet(Hỏa Linh, Không Kiếp)", "tone": "hung" },
+    { "id": "duong.398.1", "para": 398, "palaces": ["Mệnh"], "text": "Thủ mệnh cùng Sát Phá Tham hãm, khi nhỏ thường bán cho cửa Chùa.", "ctx": "Dưỡng", "when": "in(Dưỡng) & ((in(Thất Sát) & dim(Thất Sát)) | (in(Phá Quân) & dim(Phá Quân)) | (in(Tham Lang) & dim(Tham Lang)))", "tone": "hung", "review": "Sát Phá Tham không cùng ở một cung; hiểu là Dưỡng thủ Mệnh cùng với một trong Sát, Phá, Tham và sao ấy hãm" },
+    { "id": "duong.399.1", "para": 399, "palaces": ["Thân"], "text": "có Dưỡng - Đông con.", "when": "in(Dưỡng)", "tone": "cat" },
+    { "id": "duong.400.1", "para": 400, "palaces": ["Huynh Đệ"], "text": "Dưỡng ngộ Tam Không - có nghĩa bào.", "when": "in(Dưỡng) & meet(Tam Không)", "tone": "trung" },
+    { "id": "duong.401.1", "para": 401, "palaces": ["Huynh Đệ"], "text": "Dưỡng Phượng Các = có nghĩa bào.", "when": "in(Dưỡng) & meet(Phượng Các)", "tone": "trung" },
+    { "id": "duong.401.2", "para": 401, "palaces": ["Huynh Đệ"], "text": "Dưỡng Hổ - hiếm anh em.", "when": "in(Dưỡng) & meet(Bạch Hổ)", "tone": "hung" },
+    { "id": "duong.402.1", "para": 402, "palaces": ["Tử Tức"], "text": "Dưỡng - Sát con.", "when": "in(Dưỡng)", "tone": "hung" },
+    { "id": "duong.403.1", "para": 403, "palaces": ["Tử Tức"], "text": "Dưỡng Khốc Hư - Sát con lắm", "when": "in(Dưỡng) & meet(Khốc Hư)", "tone": "hung" },
+    { "id": "duong.403.2", "para": 403, "palaces": ["Tử Tức"], "text": "Gia thêm Cơ - Sinh nhiều nuôi ít mà vất vả", "ctx": "Dưỡng Khốc Hư", "when": "in(Dưỡng) & meet(Khốc Hư, Thiên Cơ)", "tone": "hung" },
+    { "id": "duong.403.3", "para": 403, "palaces": ["Tử Tức"], "text": "Gặp Khốc Hư Tang Hổ - Hữu sinh vô dưỡng.", "ctx": "Dưỡng", "when": "in(Dưỡng) & meet(Khốc Hư, Tang Hổ)", "tone": "hung" },
+    { "id": "duong.404.1", "para": 404, "palaces": ["Tử Tức"], "text": "Cung Tử vô chính diệu đắc Tam Không, có Cát tinh, gặp Dưỡng - có con nuôi.", "when": "empty() & meet(Tam Không, Cát tinh, Dưỡng)", "tone": "trung" },
+    { "id": "duong.405.1", "para": 405, "palaces": ["Tử Tức"], "text": "Dưỡng Ngộ Hỷ thần - Tốt, sinh quý tử.", "when": "in(Dưỡng) & meet(Hỷ Thần)", "tone": "cat" },
+    { "id": "duong.406.1", "para": 406, "palaces": ["Tài Bạch"], "text": "Dưỡng Đào Tang - Làm nghề thủ công.", "when": null, "tone": "trung", "review": "theo cách an sao Đào Hoa và Tang Môn không bao giờ cùng ở hay cùng hội một cung, nên không viết được điều kiện; cần xem lại" },
+    { "id": "duong.407.1", "para": 407, "palaces": ["Tài Bạch"], "text": "Dưỡng Lộc - Giàu có.", "when": "in(Dưỡng) & meet(Lộc)", "tone": "cat" },
+    { "id": "duong.408.1", "para": 408, "palaces": ["Thiên Di"], "text": "Dưỡng Tướng Suy - Tôi tớ nhà quyền môn.", "when": "in(Dưỡng) & meet(Thiên Tướng, Suy)", "tone": "trung", "review": "Tướng hiểu là Thiên Tướng (cũng có thể là Tướng Quân); Suy (vòng Tràng Sinh) luôn xung chiếu Dưỡng nên điều kiện thực chất là Dưỡng gặp Tướng" },
+    { "id": "duong.409.1", "para": 409, "palaces": ["Thiên Di"], "text": "Dưỡng Lộc - giàu có phong lưu.", "when": "in(Dưỡng) & meet(Lộc)", "tone": "cat" },
+    { "id": "duong.410.1", "para": 410, "palaces": ["Phúc Đức"], "text": "Dưỡng Triệt Quả Cô - Thất tự.", "when": "in(Dưỡng) & meet(Triệt, Cô Quả)", "tone": "hung" },
+    { "id": "duong.411.1", "para": 411, "palaces": ["Phúc Đức"], "text": "Dưỡng ngộ Cát tinh - Được mộ và hưởng âm phù.", "when": "in(Dưỡng) & meet(Cát tinh)", "tone": "cat" },
+    { "id": "duong.412.1", "para": 412, "palaces": ["Phúc Đức"], "text": "Dưỡng ngộ Đà - có người để trộm mả lấn đất mộ nhà mình và có thể bị động.", "when": "in(Dưỡng) & meet(Đà La)", "tone": "hung" },
+    { "id": "duong.413.1", "para": 413, "palaces": ["Tật Ách"], "text": "có Dưỡng gặp Kình Đà - Có đới tật.", "when": "in(Dưỡng) & meet(Kình Đà)", "tone": "hung" }
+  ],
+  "skip": [
+    { "para": 393, "kind": "meta" },
+    { "para": 395, "kind": "theory" }
+  ]
+}
