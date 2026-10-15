@@ -9,7 +9,7 @@ import type { GroupDto, ProfileDto, TuViReadingDto, TuViSettings } from '@mystic
 import { api } from '../../api';
 import { Failed, errorText } from '../../components/Owner';
 import { Sheet } from '../../components/Sheet';
-import { birthDtoOf, fromProfile, fromSearch, settingsOf, thisYear, toSearch, type ChartParams } from '../../lib/params';
+import { birthDtoOf, fromProfile, fromSearch, settingsOf, thisYear, toSearch, tuviSettings, type ChartParams } from '../../lib/params';
 import { SONIC_HUB, genderOf } from '../../lib/people';
 import { useTitle } from '../../lib/text';
 import Grid from './Grid';
@@ -38,9 +38,9 @@ export default function ChartPage() {
   const an = sp.get('an');
   const variant = an === 'sach' ? 'sach' : an === 'ba' ? 'ba' : undefined;
   const year = Number(sp.get('nam')) || (id ? p?.viewYear ?? thisYear() : params?.options.viewYear ?? thisYear());
-  const settings: TuViSettings | null = !params ? null : p ? { ...p.settings, ...(variant ? { variant } : {}) } : settingsOf(params.options);
+  const settings: TuViSettings | null = !params ? null : p ? { ...tuviSettings(p), ...(variant ? { variant } : {}) } : settingsOf(params.options);
   /* a saved profile is read by the API from what it stored; a link, or a profile shown with another variant, is sent as it is */
-  const custom = !p || (variant !== undefined && variant !== p.settings.variant);
+  const custom = !p || (variant !== undefined && variant !== tuviSettings(p).variant);
   const chartKey = !params || !settings ? '' : custom ? toSearch({ ...params, name: '', options: { ...params.options, ...settings, viewYear: thisYear() } }) : `profile:${id}`;
   const reading = useQuery({
     queryKey: ['reading', chartKey, year],
@@ -76,7 +76,7 @@ function ChartView({ r, params, profile, year, loading, sp, setSp }: {
   const [hl, setHl] = useState<string | null>(null);
   const [sheet, setSheet] = useState<'save' | 'edit' | null>(null);
   const profileId = profile?.id ?? null;
-  const savedVariant = profile?.settings.variant;
+  const savedVariant = profile ? tuviSettings(profile).variant : undefined;
 
   const hanMarks = useMemo(() => {
     const m: Record<number, string[]> = {};
@@ -332,7 +332,7 @@ function EditSheet({ profile, onClose }: { profile: ProfileDto; onClose: () => v
   const [label, setLabel] = useState(profile.label ?? '');
   const [note, setNote] = useState(profile.note ?? '');
   const [viewYear, setViewYear] = useState(profile.viewYear ?? thisYear());
-  const [settings, setSettings] = useState<TuViSettings>(profile.settings);
+  const [settings, setSettings] = useState<TuViSettings>(tuviSettings(profile));
   const [ask, setAsk] = useState(false);
   const nav = useNavigate(), qc = useQueryClient();
   const refresh = () => ['profile', 'reading', 'subjects', 'subject', 'ai-readings', 'brief'].forEach(k => void qc.invalidateQueries({ queryKey: [k] }));

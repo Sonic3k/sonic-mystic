@@ -1,0 +1,3601 @@
+{
+ "entries": [
+  {
+   "at": 1,
+   "code": "front.title",
+   "title": "Bìa sách",
+   "kind": "general"
+  },
+  {
+   "at": 8,
+   "code": "front.toc",
+   "title": "Mục lục",
+   "kind": "general"
+  },
+  {
+   "at": 25,
+   "code": "front.original",
+   "title": "Bản quyền",
+   "kind": "general"
+  },
+  {
+   "at": 32,
+   "code": "front.title2",
+   "title": "Trang tên sách",
+   "kind": "general"
+  },
+  {
+   "at": 40,
+   "code": "front.publisher",
+   "title": "Nhà xuất bản",
+   "kind": "general"
+  },
+  {
+   "at": 54,
+   "code": "front.loi-ngo",
+   "title": "Lời ngỏ cùng bạn đọc",
+   "kind": "general"
+  },
+  {
+   "at": 61,
+   "code": "front.gioi-thieu",
+   "title": "Lời giới thiệu",
+   "kind": "general"
+  },
+  {
+   "at": 69,
+   "code": "p1",
+   "title": "Phần 1: Nhân số học - khoa học khám phá bản thân thông qua những con số",
+   "kind": "general"
+  },
+  {
+   "at": 70,
+   "code": "p1.khoa-hoc",
+   "title": "Nhân số học - khoa học khám phá bản thân thông qua những con số",
+   "parent": "p1",
+   "kind": "general"
+  },
+  {
+   "at": 77,
+   "code": "p1.pythagoras",
+   "title": "Nhà toán học Pythagoras và những tiết lộ tuyệt vời về con số",
+   "parent": "p1",
+   "kind": "general"
+  },
+  {
+   "at": 86,
+   "code": "p2",
+   "title": "Phần 2: Phần nội tâm được bộc lộ",
+   "kind": "general"
+  },
+  {
+   "at": 87,
+   "code": "p2.noi-tam",
+   "title": "Phần nội tâm được bộc lộ",
+   "parent": "p2",
+   "kind": "general"
+  },
+  {
+   "at": 93,
+   "code": "p3",
+   "title": "Phần 3: Ý nghĩa các số tự nhiên dưới lăng kính Nhân số học",
+   "kind": "general"
+  },
+  {
+   "at": 94,
+   "code": "p3.y-nghia",
+   "title": "Ý nghĩa các số tự nhiên dưới lăng kính Nhân số học",
+   "parent": "p3",
+   "kind": "general"
+  },
+  {
+   "at": 110,
+   "code": "p4",
+   "title": "Phần 4: Ba thể của con người",
+   "kind": "general"
+  },
+  {
+   "at": 111,
+   "code": "p4.ba-the",
+   "title": "Ba thể của con người",
+   "parent": "p4",
+   "kind": "general"
+  },
+  {
+   "at": 113,
+   "code": "p4.co-ban",
+   "title": "Thể Cơ bản (Basic Self)",
+   "parent": "p4",
+   "kind": "general"
+  },
+  {
+   "at": 120,
+   "code": "p4.y-thuc",
+   "title": "Thể Ý thức (Conscious Self)",
+   "parent": "p4",
+   "kind": "general"
+  },
+  {
+   "at": 127,
+   "code": "p4.sieu-thuc",
+   "title": "Thể Siêu thức (High Self)",
+   "parent": "p4",
+   "kind": "general"
+  },
+  {
+   "at": 132,
+   "code": "p5",
+   "title": "Phần 5: Con số chủ đạo",
+   "topic": "chu_dao",
+   "kind": "general"
+  },
+  {
+   "at": 133,
+   "code": "p5.gioi-thieu",
+   "title": "Con số chủ đạo",
+   "parent": "p5",
+   "kind": "general"
+  },
+  {
+   "at": 140,
+   "code": "p5.cach-tinh",
+   "title": "Cách xác định Con số chủ đạo",
+   "parent": "p5",
+   "kind": "method"
+  },
+  {
+   "at": 148,
+   "code": "p5.2",
+   "title": "Con số chủ đạo 2",
+   "parent": "p5",
+   "topic": "chu_dao",
+   "when": "ruling(2)",
+   "kind": "rule"
+  },
+  {
+   "at": 151,
+   "code": "p5.2.muc-dich",
+   "title": "Mục đích sống",
+   "parent": "p5.2",
+   "kind": "rule"
+  },
+  {
+   "at": 153,
+   "code": "p5.2.dieu-kien",
+   "title": "Điều kiện phát triển tối ưu",
+   "parent": "p5.2",
+   "kind": "advice"
+  },
+  {
+   "at": 156,
+   "code": "p5.2.dac-diem",
+   "title": "Đặc điểm nổi bật",
+   "parent": "p5.2",
+   "kind": "rule"
+  },
+  {
+   "at": 158,
+   "code": "p5.2.khac-phuc",
+   "title": "Khuynh hướng cần khắc phục",
+   "parent": "p5.2",
+   "kind": "rule"
+  },
+  {
+   "at": 160,
+   "code": "p5.2.phat-trien",
+   "title": "Hướng phát triển",
+   "parent": "p5.2",
+   "kind": "advice"
+  },
+  {
+   "at": 162,
+   "code": "p5.2.nghe-nghiep",
+   "title": "Nghề nghiệp phù hợp",
+   "parent": "p5.2",
+   "kind": "rule"
+  },
+  {
+   "at": 164,
+   "code": "p5.2.tom-lai",
+   "title": "Tóm lại",
+   "parent": "p5.2",
+   "kind": "rule"
+  },
+  {
+   "at": 167,
+   "code": "p5.3",
+   "title": "Con số chủ đạo 3",
+   "parent": "p5",
+   "topic": "chu_dao",
+   "when": "ruling(3)",
+   "kind": "rule"
+  },
+  {
+   "at": 169,
+   "code": "p5.3.muc-dich",
+   "title": "Mục đích sống",
+   "parent": "p5.3",
+   "kind": "rule"
+  },
+  {
+   "at": 171,
+   "code": "p5.3.dieu-kien",
+   "title": "Điều kiện phát triển tối ưu",
+   "parent": "p5.3",
+   "kind": "advice"
+  },
+  {
+   "at": 173,
+   "code": "p5.3.dac-diem",
+   "title": "Đặc điểm nổi bật",
+   "parent": "p5.3",
+   "kind": "rule"
+  },
+  {
+   "at": 175,
+   "code": "p5.3.khac-phuc",
+   "title": "Khuynh hướng cần khắc phục",
+   "parent": "p5.3",
+   "kind": "rule"
+  },
+  {
+   "at": 177,
+   "code": "p5.3.phat-trien",
+   "title": "Hướng phát triển",
+   "parent": "p5.3",
+   "kind": "advice"
+  },
+  {
+   "at": 180,
+   "code": "p5.3.nghe-nghiep",
+   "title": "Nghề nghiệp phù hợp",
+   "parent": "p5.3",
+   "kind": "rule"
+  },
+  {
+   "at": 182,
+   "code": "p5.3.tom-lai",
+   "title": "Tóm lại",
+   "parent": "p5.3",
+   "kind": "rule"
+  },
+  {
+   "at": 184,
+   "code": "p5.4",
+   "title": "Con số chủ đạo 4",
+   "parent": "p5",
+   "topic": "chu_dao",
+   "when": "ruling(4)",
+   "kind": "rule"
+  },
+  {
+   "at": 187,
+   "code": "p5.4.muc-dich",
+   "title": "Mục đích sống",
+   "parent": "p5.4",
+   "kind": "rule"
+  },
+  {
+   "at": 189,
+   "code": "p5.4.dieu-kien",
+   "title": "Điều kiện phát triển tối ưu",
+   "parent": "p5.4",
+   "kind": "advice"
+  },
+  {
+   "at": 191,
+   "code": "p5.4.dac-diem",
+   "title": "Đặc điểm nổi bật",
+   "parent": "p5.4",
+   "kind": "rule"
+  },
+  {
+   "at": 194,
+   "code": "p5.4.khac-phuc",
+   "title": "Khuynh hướng cần khắc phục",
+   "parent": "p5.4",
+   "kind": "rule"
+  },
+  {
+   "at": 196,
+   "code": "p5.4.phat-trien",
+   "title": "Hướng phát triển",
+   "parent": "p5.4",
+   "kind": "advice"
+  },
+  {
+   "at": 200,
+   "code": "p5.4.nghe-nghiep",
+   "title": "Nghề nghiệp phù hợp",
+   "parent": "p5.4",
+   "kind": "rule"
+  },
+  {
+   "at": 203,
+   "code": "p5.4.tom-lai",
+   "title": "Tóm lại",
+   "parent": "p5.4",
+   "kind": "rule"
+  },
+  {
+   "at": 205,
+   "code": "p5.5",
+   "title": "Con số chủ đạo 5",
+   "parent": "p5",
+   "topic": "chu_dao",
+   "when": "ruling(5)",
+   "kind": "rule"
+  },
+  {
+   "at": 207,
+   "code": "p5.5.muc-dich",
+   "title": "Mục đích sống",
+   "parent": "p5.5",
+   "kind": "rule"
+  },
+  {
+   "at": 209,
+   "code": "p5.5.dieu-kien",
+   "title": "Điều kiện phát triển tối ưu",
+   "parent": "p5.5",
+   "kind": "advice"
+  },
+  {
+   "at": 212,
+   "code": "p5.5.dac-diem",
+   "title": "Đặc điểm nổi bật",
+   "parent": "p5.5",
+   "kind": "rule"
+  },
+  {
+   "at": 214,
+   "code": "p5.5.khac-phuc",
+   "title": "Khuynh hướng cần khắc phục",
+   "parent": "p5.5",
+   "kind": "rule"
+  },
+  {
+   "at": 217,
+   "code": "p5.5.phat-trien",
+   "title": "Hướng phát triển",
+   "parent": "p5.5",
+   "kind": "advice"
+  },
+  {
+   "at": 220,
+   "code": "p5.5.nghe-nghiep",
+   "title": "Nghề nghiệp phù hợp",
+   "parent": "p5.5",
+   "kind": "rule"
+  },
+  {
+   "at": 222,
+   "code": "p5.5.tom-lai",
+   "title": "Tóm lại",
+   "parent": "p5.5",
+   "kind": "rule"
+  },
+  {
+   "at": 224,
+   "code": "p5.6",
+   "title": "Con số chủ đạo 6",
+   "parent": "p5",
+   "topic": "chu_dao",
+   "when": "ruling(6)",
+   "kind": "rule"
+  },
+  {
+   "at": 227,
+   "code": "p5.6.muc-dich",
+   "title": "Mục đích sống",
+   "parent": "p5.6",
+   "kind": "rule"
+  },
+  {
+   "at": 229,
+   "code": "p5.6.dieu-kien",
+   "title": "Điều kiện phát triển tối ưu",
+   "parent": "p5.6",
+   "kind": "advice"
+  },
+  {
+   "at": 231,
+   "code": "p5.6.dac-diem",
+   "title": "Đặc điểm nổi bật",
+   "parent": "p5.6",
+   "kind": "rule"
+  },
+  {
+   "at": 233,
+   "code": "p5.6.khac-phuc",
+   "title": "Khuynh hướng cần khắc phục",
+   "parent": "p5.6",
+   "kind": "rule"
+  },
+  {
+   "at": 235,
+   "code": "p5.6.phat-trien",
+   "title": "Hướng phát triển",
+   "parent": "p5.6",
+   "kind": "advice"
+  },
+  {
+   "at": 238,
+   "code": "p5.6.nghe-nghiep",
+   "title": "Nghề nghiệp phù hợp",
+   "parent": "p5.6",
+   "kind": "rule"
+  },
+  {
+   "at": 240,
+   "code": "p5.6.tom-lai",
+   "title": "Tóm lại",
+   "parent": "p5.6",
+   "kind": "rule"
+  },
+  {
+   "at": 242,
+   "code": "p5.7",
+   "title": "Con số chủ đạo 7",
+   "parent": "p5",
+   "topic": "chu_dao",
+   "when": "ruling(7)",
+   "kind": "rule"
+  },
+  {
+   "at": 245,
+   "code": "p5.7.muc-dich",
+   "title": "Mục đích sống",
+   "parent": "p5.7",
+   "kind": "rule"
+  },
+  {
+   "at": 247,
+   "code": "p5.7.dieu-kien",
+   "title": "Điều kiện phát triển tối ưu",
+   "parent": "p5.7",
+   "kind": "advice"
+  },
+  {
+   "at": 249,
+   "code": "p5.7.dac-diem",
+   "title": "Đặc điểm nổi bật",
+   "parent": "p5.7",
+   "kind": "rule"
+  },
+  {
+   "at": 253,
+   "code": "p5.7.khac-phuc",
+   "title": "Khuynh hướng cần khắc phục",
+   "parent": "p5.7",
+   "kind": "rule"
+  },
+  {
+   "at": 255,
+   "code": "p5.7.phat-trien",
+   "title": "Hướng phát triển",
+   "parent": "p5.7",
+   "kind": "advice"
+  },
+  {
+   "at": 258,
+   "code": "p5.7.nghe-nghiep",
+   "title": "Nghề nghiệp phù hợp",
+   "parent": "p5.7",
+   "kind": "rule"
+  },
+  {
+   "at": 260,
+   "code": "p5.7.tom-lai",
+   "title": "Tóm lại",
+   "parent": "p5.7",
+   "kind": "rule"
+  },
+  {
+   "at": 262,
+   "code": "p5.8",
+   "title": "Con số chủ đạo 8",
+   "parent": "p5",
+   "topic": "chu_dao",
+   "when": "ruling(8)",
+   "kind": "rule"
+  },
+  {
+   "at": 265,
+   "code": "p5.8.muc-dich",
+   "title": "Mục đích sống",
+   "parent": "p5.8",
+   "kind": "rule"
+  },
+  {
+   "at": 267,
+   "code": "p5.8.dieu-kien",
+   "title": "Điều kiện phát triển tối ưu",
+   "parent": "p5.8",
+   "kind": "advice"
+  },
+  {
+   "at": 271,
+   "code": "p5.8.dac-diem",
+   "title": "Đặc điểm nổi bật",
+   "parent": "p5.8",
+   "kind": "rule"
+  },
+  {
+   "at": 274,
+   "code": "p5.8.khac-phuc",
+   "title": "Khuynh hướng cần khắc phục",
+   "parent": "p5.8",
+   "kind": "rule"
+  },
+  {
+   "at": 276,
+   "code": "p5.8.phat-trien",
+   "title": "Hướng phát triển",
+   "parent": "p5.8",
+   "kind": "advice"
+  },
+  {
+   "at": 279,
+   "code": "p5.8.nghe-nghiep",
+   "title": "Nghề nghiệp phù hợp",
+   "parent": "p5.8",
+   "kind": "rule"
+  },
+  {
+   "at": 281,
+   "code": "p5.8.tom-lai",
+   "title": "Tóm lại",
+   "parent": "p5.8",
+   "kind": "rule"
+  },
+  {
+   "at": 283,
+   "code": "p5.9",
+   "title": "Con số chủ đạo 9",
+   "parent": "p5",
+   "topic": "chu_dao",
+   "when": "ruling(9)",
+   "kind": "rule"
+  },
+  {
+   "at": 285,
+   "code": "p5.9.muc-dich",
+   "title": "Mục đích sống",
+   "parent": "p5.9",
+   "kind": "rule"
+  },
+  {
+   "at": 287,
+   "code": "p5.9.dieu-kien",
+   "title": "Điều kiện phát triển tối ưu",
+   "parent": "p5.9",
+   "kind": "advice"
+  },
+  {
+   "at": 289,
+   "code": "p5.9.dac-diem",
+   "title": "Đặc điểm nổi bật",
+   "parent": "p5.9",
+   "kind": "rule"
+  },
+  {
+   "at": 292,
+   "code": "p5.9.khac-phuc",
+   "title": "Khuynh hướng cần khắc phục",
+   "parent": "p5.9",
+   "kind": "rule"
+  },
+  {
+   "at": 295,
+   "code": "p5.9.phat-trien",
+   "title": "Hướng phát triển",
+   "parent": "p5.9",
+   "kind": "advice"
+  },
+  {
+   "at": 298,
+   "code": "p5.9.nghe-nghiep",
+   "title": "Nghề nghiệp phù hợp",
+   "parent": "p5.9",
+   "kind": "rule"
+  },
+  {
+   "at": 300,
+   "code": "p5.9.tom-lai",
+   "title": "Tóm lại",
+   "parent": "p5.9",
+   "kind": "rule"
+  },
+  {
+   "at": 302,
+   "code": "p5.10",
+   "title": "Con số chủ đạo 10",
+   "parent": "p5",
+   "topic": "chu_dao",
+   "when": "ruling(10)",
+   "kind": "rule"
+  },
+  {
+   "at": 304,
+   "code": "p5.10.muc-dich",
+   "title": "Mục đích sống",
+   "parent": "p5.10",
+   "kind": "rule"
+  },
+  {
+   "at": 306,
+   "code": "p5.10.dieu-kien",
+   "title": "Điều kiện phát triển tối ưu",
+   "parent": "p5.10",
+   "kind": "advice"
+  },
+  {
+   "at": 308,
+   "code": "p5.10.dac-diem",
+   "title": "Đặc điểm nổi bật",
+   "parent": "p5.10",
+   "kind": "rule"
+  },
+  {
+   "at": 311,
+   "code": "p5.10.khac-phuc",
+   "title": "Khuynh hướng cần khắc phục",
+   "parent": "p5.10",
+   "kind": "rule"
+  },
+  {
+   "at": 313,
+   "code": "p5.10.phat-trien",
+   "title": "Hướng phát triển",
+   "parent": "p5.10",
+   "kind": "advice"
+  },
+  {
+   "at": 315,
+   "code": "p5.10.nghe-nghiep",
+   "title": "Nghề nghiệp phù hợp",
+   "parent": "p5.10",
+   "kind": "rule"
+  },
+  {
+   "at": 317,
+   "code": "p5.10.tom-lai",
+   "title": "Tóm lại",
+   "parent": "p5.10",
+   "kind": "rule"
+  },
+  {
+   "at": 319,
+   "code": "p5.11",
+   "title": "Con số chủ đạo 11",
+   "parent": "p5",
+   "topic": "chu_dao",
+   "when": "ruling(11)",
+   "kind": "rule"
+  },
+  {
+   "at": 322,
+   "code": "p5.11.muc-dich",
+   "title": "Mục đích sống",
+   "parent": "p5.11",
+   "kind": "rule"
+  },
+  {
+   "at": 324,
+   "code": "p5.11.dieu-kien",
+   "title": "Điều kiện phát triển tối ưu",
+   "parent": "p5.11",
+   "kind": "advice"
+  },
+  {
+   "at": 326,
+   "code": "p5.11.dac-diem",
+   "title": "Đặc điểm nổi bật",
+   "parent": "p5.11",
+   "kind": "rule"
+  },
+  {
+   "at": 328,
+   "code": "p5.11.khac-phuc",
+   "title": "Khuynh hướng cần khắc phục",
+   "parent": "p5.11",
+   "kind": "rule"
+  },
+  {
+   "at": 330,
+   "code": "p5.11.phat-trien",
+   "title": "Hướng phát triển",
+   "parent": "p5.11",
+   "kind": "advice"
+  },
+  {
+   "at": 332,
+   "code": "p5.11.nghe-nghiep",
+   "title": "Nghề nghiệp phù hợp",
+   "parent": "p5.11",
+   "kind": "rule"
+  },
+  {
+   "at": 334,
+   "code": "p5.11.tom-lai",
+   "title": "Tóm lại",
+   "parent": "p5.11",
+   "kind": "rule"
+  },
+  {
+   "at": 336,
+   "code": "p5.22",
+   "title": "Con số chủ đạo 22/4",
+   "parent": "p5",
+   "topic": "chu_dao",
+   "when": "ruling(22/4)",
+   "kind": "rule"
+  },
+  {
+   "at": 340,
+   "code": "p5.22.muc-dich",
+   "title": "Mục đích sống",
+   "parent": "p5.22",
+   "kind": "rule"
+  },
+  {
+   "at": 343,
+   "code": "p5.22.dieu-kien",
+   "title": "Điều kiện phát triển tối ưu",
+   "parent": "p5.22",
+   "kind": "advice"
+  },
+  {
+   "at": 345,
+   "code": "p5.22.dac-diem",
+   "title": "Đặc điểm nổi bật",
+   "parent": "p5.22",
+   "kind": "rule"
+  },
+  {
+   "at": 347,
+   "code": "p5.22.khac-phuc",
+   "title": "Khuynh hướng cần khắc phục",
+   "parent": "p5.22",
+   "kind": "rule"
+  },
+  {
+   "at": 350,
+   "code": "p5.22.phat-trien",
+   "title": "Hướng phát triển",
+   "parent": "p5.22",
+   "kind": "advice"
+  },
+  {
+   "at": 352,
+   "code": "p5.22.nghe-nghiep",
+   "title": "Nghề nghiệp phù hợp",
+   "parent": "p5.22",
+   "kind": "rule"
+  },
+  {
+   "at": 354,
+   "code": "p5.22.tom-lai",
+   "title": "Tóm lại",
+   "parent": "p5.22",
+   "kind": "rule"
+  },
+  {
+   "at": 356,
+   "code": "p6",
+   "title": "Phần 6: Biểu đồ ngày sinh",
+   "topic": "bieu_do",
+   "kind": "general"
+  },
+  {
+   "at": 357,
+   "code": "p6.bieu-do",
+   "title": "Biểu đồ ngày sinh",
+   "parent": "p6",
+   "kind": "general"
+  },
+  {
+   "at": 361,
+   "code": "p6.cach-lap",
+   "title": "Cách lập Biểu đồ ngày sinh",
+   "parent": "p6",
+   "kind": "method"
+  },
+  {
+   "at": 373,
+   "code": "p6.truc",
+   "title": "Ý nghĩa của mỗi trục",
+   "parent": "p6",
+   "kind": "general"
+  },
+  {
+   "at": 377,
+   "code": "p6.diem-danh",
+   "title": "Điểm danh các số “có mặt” và “vắng mặt” trong Biểu đồ ngày sinh",
+   "parent": "p6",
+   "kind": "method"
+  },
+  {
+   "at": 378,
+   "code": "p6.co-mat",
+   "title": "Điểm danh các số “có mặt”",
+   "parent": "p6.diem-danh",
+   "kind": "method"
+  },
+  {
+   "at": 384,
+   "code": "p6.vang-mat",
+   "title": "Điểm danh các số “vắng mặt”",
+   "parent": "p6.diem-danh",
+   "kind": "method"
+  },
+  {
+   "at": 387,
+   "code": "p6.thong-ke",
+   "title": "Thống kê tất cả các yếu tố nổi bật trên Biểu đồ ngày sinh",
+   "parent": "p6.diem-danh",
+   "kind": "method"
+  },
+  {
+   "at": 394,
+   "code": "p6.y-nghia",
+   "title": "Ý nghĩa các số trong Biểu đồ ngày sinh",
+   "parent": "p6",
+   "kind": "general"
+  },
+  {
+   "at": 395,
+   "code": "p6.so1",
+   "title": "Số 1 trong Biểu đồ ngày sinh",
+   "parent": "p6.y-nghia",
+   "when": "has(1)",
+   "kind": "rule"
+  },
+  {
+   "at": 398,
+   "code": "p6.so1.c1",
+   "title": "Một số 1",
+   "parent": "p6.so1",
+   "when": "count(1, 1)"
+  },
+  {
+   "at": 405,
+   "code": "p6.so1.c2",
+   "title": "Hai số 1 (11)",
+   "parent": "p6.so1",
+   "when": "count(1, 2)"
+  },
+  {
+   "at": 414,
+   "code": "p6.so1.c3",
+   "title": "Ba số 1 (111)",
+   "parent": "p6.so1",
+   "when": "count(1, 3)"
+  },
+  {
+   "at": 419,
+   "code": "p6.so1.c4",
+   "title": "Bốn số 1 (1111)",
+   "parent": "p6.so1",
+   "when": "count(1, 4)"
+  },
+  {
+   "at": 424,
+   "code": "p6.so1.c5",
+   "title": "Từ năm số 1 trở lên (11111...)",
+   "parent": "p6.so1",
+   "when": "count(1, 5+)"
+  },
+  {
+   "at": 428,
+   "code": "p6.so1.co-lap",
+   "title": "Những số 1 bị cô lập",
+   "parent": "p6.so1",
+   "when": "isolated(1)"
+  },
+  {
+   "at": 432,
+   "code": "p6.so1.luu-y",
+   "title": "Lưu ý",
+   "parent": "p6.so1",
+   "when": "count(1, 3+)"
+  },
+  {
+   "at": 434,
+   "code": "p6.so2",
+   "title": "Số 2 trong Biểu đồ ngày sinh",
+   "parent": "p6.y-nghia",
+   "when": "has(2)",
+   "kind": "rule"
+  },
+  {
+   "at": 439,
+   "code": "p6.so2.c1",
+   "title": "Một số 2",
+   "parent": "p6.so2",
+   "when": "count(2, 1)"
+  },
+  {
+   "at": 443,
+   "code": "p6.so2.c2",
+   "title": "Hai số 2 (22)",
+   "parent": "p6.so2",
+   "when": "count(2, 2)"
+  },
+  {
+   "at": 447,
+   "code": "p6.so2.c3",
+   "title": "Ba số 2 (222)",
+   "parent": "p6.so2",
+   "when": "count(2, 3)"
+  },
+  {
+   "at": 452,
+   "code": "p6.so2.c4",
+   "title": "Bốn số 2 (2222)",
+   "parent": "p6.so2",
+   "when": "count(2, 4)"
+  },
+  {
+   "at": 456,
+   "code": "p6.so2.c5",
+   "title": "Năm số 2 (22222)",
+   "parent": "p6.so2",
+   "when": "count(2, 5)"
+  },
+  {
+   "at": 459,
+   "code": "p6.so2.luu-y",
+   "title": "Lưu ý",
+   "parent": "p6.so2",
+   "when": "count(2, 5+)"
+  },
+  {
+   "at": 462,
+   "code": "p6.so3",
+   "title": "Số 3 trong Biểu đồ ngày sinh",
+   "parent": "p6.y-nghia",
+   "when": "has(3)",
+   "kind": "rule"
+  },
+  {
+   "at": 466,
+   "code": "p6.so3.c1",
+   "title": "Một số 3",
+   "parent": "p6.so3",
+   "when": "count(3, 1)"
+  },
+  {
+   "at": 470,
+   "code": "p6.so3.c2",
+   "title": "Hai số 3 (33)",
+   "parent": "p6.so3",
+   "when": "count(3, 2)"
+  },
+  {
+   "at": 474,
+   "code": "p6.so3.c3",
+   "title": "Ba số 3 (333)",
+   "parent": "p6.so3",
+   "when": "count(3, 3)"
+  },
+  {
+   "at": 478,
+   "code": "p6.so3.c4",
+   "title": "Bốn số 3 (3333)",
+   "parent": "p6.so3",
+   "when": "count(3, 4)"
+  },
+  {
+   "at": 480,
+   "code": "p6.so3.co-lap",
+   "title": "Những số 3 bị cô lập",
+   "parent": "p6.so3",
+   "when": "isolated(3)"
+  },
+  {
+   "at": 487,
+   "code": "p6.so4",
+   "title": "Số 4 trong Biểu đồ ngày sinh",
+   "parent": "p6.y-nghia",
+   "when": "has(4)",
+   "kind": "rule"
+  },
+  {
+   "at": 491,
+   "code": "p6.so4.c1",
+   "title": "Một số 4",
+   "parent": "p6.so4",
+   "when": "count(4, 1)"
+  },
+  {
+   "at": 496,
+   "code": "p6.so4.c2",
+   "title": "Hai số 4 (44)",
+   "parent": "p6.so4",
+   "when": "count(4, 2)"
+  },
+  {
+   "at": 500,
+   "code": "p6.so4.c3",
+   "title": "Ba số 4 (444)",
+   "parent": "p6.so4",
+   "when": "count(4, 3)"
+  },
+  {
+   "at": 504,
+   "code": "p6.so5",
+   "title": "Số 5 trong Biểu đồ ngày sinh",
+   "parent": "p6.y-nghia",
+   "when": "has(5)",
+   "kind": "rule"
+  },
+  {
+   "at": 510,
+   "code": "p6.so5.c1",
+   "title": "Một số 5",
+   "parent": "p6.so5",
+   "when": "count(5, 1)"
+  },
+  {
+   "at": 513,
+   "code": "p6.so5.c2",
+   "title": "Hai số 5 (55)",
+   "parent": "p6.so5",
+   "when": "count(5, 2)"
+  },
+  {
+   "at": 517,
+   "code": "p6.so5.c3",
+   "title": "Ba số 5 (555)",
+   "parent": "p6.so5",
+   "when": "count(5, 3)"
+  },
+  {
+   "at": 521,
+   "code": "p6.so5.c4",
+   "title": "Bốn số 5 (5555)",
+   "parent": "p6.so5",
+   "when": "count(5, 4)"
+  },
+  {
+   "at": 524,
+   "code": "p6.so6",
+   "title": "Số 6 trong Biểu đồ ngày sinh",
+   "parent": "p6.y-nghia",
+   "when": "has(6)",
+   "kind": "rule"
+  },
+  {
+   "at": 529,
+   "code": "p6.so6.c1",
+   "title": "Một số 6",
+   "parent": "p6.so6",
+   "when": "count(6, 1)"
+  },
+  {
+   "at": 532,
+   "code": "p6.so6.c2",
+   "title": "Hai số 6 (66)",
+   "parent": "p6.so6",
+   "when": "count(6, 2)"
+  },
+  {
+   "at": 537,
+   "code": "p6.so6.c3",
+   "title": "Ba số 6 (666)",
+   "parent": "p6.so6",
+   "when": "count(6, 3)"
+  },
+  {
+   "at": 541,
+   "code": "p6.so6.c4",
+   "title": "Bốn số 6 (6666)",
+   "parent": "p6.so6",
+   "when": "count(6, 4)"
+  },
+  {
+   "at": 545,
+   "code": "p6.so7",
+   "title": "Số 7 trong Biểu đồ ngày sinh",
+   "parent": "p6.y-nghia",
+   "when": "has(7)",
+   "kind": "rule"
+  },
+  {
+   "at": 551,
+   "code": "p6.so7.c1",
+   "title": "Một số 7",
+   "parent": "p6.so7",
+   "when": "count(7, 1)"
+  },
+  {
+   "at": 554,
+   "code": "p6.so7.c2",
+   "title": "Hai số 7 (77)",
+   "parent": "p6.so7",
+   "when": "count(7, 2)"
+  },
+  {
+   "at": 557,
+   "code": "p6.so7.c3",
+   "title": "Ba số 7 (777)",
+   "parent": "p6.so7",
+   "when": "count(7, 3)"
+  },
+  {
+   "at": 561,
+   "code": "p6.so7.c4",
+   "title": "Bốn số 7 (7777)",
+   "parent": "p6.so7",
+   "when": "count(7, 4)"
+  },
+  {
+   "at": 564,
+   "code": "p6.so7.co-lap",
+   "title": "Những số 7 bị cô lập",
+   "parent": "p6.so7",
+   "when": "isolated(7)"
+  },
+  {
+   "at": 569,
+   "code": "p6.so7.khong",
+   "title": "Không có số 7 trên Biểu đồ ngày sinh",
+   "parent": "p6.so7",
+   "when": "lacks(7)"
+  },
+  {
+   "at": 576,
+   "code": "p6.so8",
+   "title": "Số 8 trong Biểu đồ ngày sinh",
+   "parent": "p6.y-nghia",
+   "when": "has(8)",
+   "kind": "rule"
+  },
+  {
+   "at": 580,
+   "code": "p6.so8.c1",
+   "title": "Một số 8",
+   "parent": "p6.so8",
+   "when": "count(8, 1)"
+  },
+  {
+   "at": 583,
+   "code": "p6.so8.c2",
+   "title": "Hai số 8 (88)",
+   "parent": "p6.so8",
+   "when": "count(8, 2)"
+  },
+  {
+   "at": 586,
+   "code": "p6.so8.c3",
+   "title": "Ba số 8 (888)",
+   "parent": "p6.so8",
+   "when": "count(8, 3)"
+  },
+  {
+   "at": 589,
+   "code": "p6.so8.c4",
+   "title": "Bốn số 8 (8888)",
+   "parent": "p6.so8",
+   "when": "count(8, 4)"
+  },
+  {
+   "at": 591,
+   "code": "p6.so9",
+   "title": "Số 9 trong Biểu đồ ngày sinh",
+   "parent": "p6.y-nghia",
+   "when": "has(9)",
+   "kind": "rule"
+  },
+  {
+   "at": 595,
+   "code": "p6.so9.c1",
+   "title": "Một số 9",
+   "parent": "p6.so9",
+   "when": "count(9, 1)"
+  },
+  {
+   "at": 599,
+   "code": "p6.so9.c2",
+   "title": "Hai số 9 (99)",
+   "parent": "p6.so9",
+   "when": "count(9, 2)"
+  },
+  {
+   "at": 602,
+   "code": "p6.so9.c3",
+   "title": "Ba số 9 (999)",
+   "parent": "p6.so9",
+   "when": "count(9, 3)"
+  },
+  {
+   "at": 606,
+   "code": "p6.so9.c4",
+   "title": "Bốn số 9 (9999)",
+   "parent": "p6.so9",
+   "when": "count(9, 4)"
+  },
+  {
+   "at": 610,
+   "code": "p6.so9.c5",
+   "title": "Năm số 9 (99999)",
+   "parent": "p6.so9",
+   "when": "count(9, 5)"
+  },
+  {
+   "at": 613,
+   "code": "p6.so9.co-lap",
+   "title": "Những số 9 bị cô lập",
+   "parent": "p6.so9",
+   "when": "isolated(9)"
+  },
+  {
+   "at": 616,
+   "code": "p6.so9.khong",
+   "title": "Không có số 9 trong ngày sinh",
+   "parent": "p6.so9",
+   "when": "lacks(9)"
+  },
+  {
+   "at": 618,
+   "code": "p6.tom-lai",
+   "title": "Tóm lại",
+   "parent": "p6.y-nghia",
+   "when": "any()",
+   "kind": "general"
+  },
+  {
+   "at": 620,
+   "code": "p7",
+   "title": "Phần 7: Các mũi tên chỉ đặc điểm",
+   "topic": "mui_ten",
+   "kind": "general"
+  },
+  {
+   "at": 621,
+   "code": "p7.gioi-thieu",
+   "title": "Các mũi tên chỉ đặc điểm",
+   "parent": "p7",
+   "kind": "general"
+  },
+  {
+   "at": 629,
+   "code": "p7.nhan-dien",
+   "title": "Cách nhận diện Mũi tên chỉ đặc điểm",
+   "parent": "p7",
+   "kind": "method"
+  },
+  {
+   "at": 642,
+   "code": "p7.159",
+   "title": "Mũi tên 1-5-9: Mũi tên Quyết tâm",
+   "parent": "p7",
+   "when": "arrow(1-5-9)",
+   "kind": "rule"
+  },
+  {
+   "at": 658,
+   "code": "p7.159-trong",
+   "title": "Mũi tên trống 1-5-9: Mũi tên Trì hoãn",
+   "parent": "p7",
+   "when": "empty(1-5-9)",
+   "kind": "rule"
+  },
+  {
+   "at": 676,
+   "code": "p7.159-pha-the",
+   "title": "Cách phá thế Mũi tên trống 1-5-9",
+   "parent": "p7",
+   "when": "empty(1-5-9)",
+   "kind": "advice"
+  },
+  {
+   "at": 679,
+   "code": "p7.159-pha-the.ten",
+   "title": "Phá thế trống bằng tên riêng",
+   "parent": "p7.159-pha-the"
+  },
+  {
+   "at": 685,
+   "code": "p7.159-pha-the.ten.luu-y",
+   "title": "Lưu ý",
+   "parent": "p7.159-pha-the.ten"
+  },
+  {
+   "at": 689,
+   "code": "p7.159-pha-the.so5",
+   "title": "Điền \"số 5 ảo\"",
+   "parent": "p7.159-pha-the"
+  },
+  {
+   "at": 696,
+   "code": "p7.159-pha-the.so5.luu-y",
+   "title": "Lưu ý",
+   "parent": "p7.159-pha-the.so5"
+  },
+  {
+   "at": 698,
+   "code": "p7.159-pha-the.so9",
+   "title": "Điền \"số 9 ảo\"",
+   "parent": "p7.159-pha-the"
+  },
+  {
+   "at": 703,
+   "code": "p7.159-pha-the.so9.luu-y",
+   "title": "Lưu ý",
+   "parent": "p7.159-pha-the.so9"
+  },
+  {
+   "at": 706,
+   "code": "p7.357",
+   "title": "Mũi tên 3-5-7: Mũi tên Tâm linh",
+   "parent": "p7",
+   "when": "arrow(3-5-7)",
+   "kind": "rule"
+  },
+  {
+   "at": 721,
+   "code": "p7.357-trong",
+   "title": "Mũi tên trống 3-5-7: Mũi tên Hoài nghi",
+   "parent": "p7",
+   "when": "empty(3-5-7)",
+   "kind": "rule"
+  },
+  {
+   "at": 736,
+   "code": "p7.159-pha-the.so9.luu-y2",
+   "title": "Lưu ý",
+   "parent": "p7.159-pha-the.so9"
+  },
+  {
+   "at": 738,
+   "code": "p7.357-pha-the",
+   "title": "Cách phá thế Mũi tên trống 3-5-7",
+   "parent": "p7",
+   "when": "empty(3-5-7)",
+   "kind": "advice"
+  },
+  {
+   "at": 739,
+   "code": "p7.357-pha-the.ten",
+   "title": "Phá thế trống bằng tên riêng",
+   "parent": "p7.357-pha-the"
+  },
+  {
+   "at": 745,
+   "code": "p7.357-pha-the.ten.luu-y",
+   "title": "Lưu ý",
+   "parent": "p7.357-pha-the.ten"
+  },
+  {
+   "at": 748,
+   "code": "p7.357-pha-the.so-ao",
+   "title": "Phá thế trống bằng cách điền \"số ảo\"",
+   "parent": "p7.357-pha-the"
+  },
+  {
+   "at": 756,
+   "code": "p7.357-pha-the.so3",
+   "title": "Điền \"số 3 ảo\"",
+   "parent": "p7.357-pha-the.so-ao"
+  },
+  {
+   "at": 759,
+   "code": "p7.357-pha-the.so5",
+   "title": "Điền \"số 5 ảo\"",
+   "parent": "p7.357-pha-the.so-ao"
+  },
+  {
+   "at": 766,
+   "code": "p7.369",
+   "title": "Mũi tên 3-6-9: Mũi tên Trí tuệ",
+   "parent": "p7",
+   "when": "arrow(3-6-9)",
+   "kind": "rule"
+  },
+  {
+   "at": 799,
+   "code": "p7.369-trong",
+   "title": "Mũi tên trống 3-6-9: Mũi tên Trí nhớ ngắn hạn",
+   "parent": "p7",
+   "when": "empty(3-6-9)",
+   "kind": "rule"
+  },
+  {
+   "at": 809,
+   "code": "p7.369-pha-the",
+   "title": "Cách phá thế Mũi tên trống 3-6-9",
+   "parent": "p7",
+   "when": "empty(3-6-9)",
+   "kind": "advice"
+  },
+  {
+   "at": 824,
+   "code": "p7.258",
+   "title": "Mũi tên 2-5-8: Mũi tên Cân bằng cảm xúc",
+   "parent": "p7",
+   "when": "arrow(2-5-8)",
+   "kind": "rule"
+  },
+  {
+   "at": 845,
+   "code": "p7.258-trong",
+   "title": "Mũi tên trống 2-5-8: Mũi tên Nhạy cảm",
+   "parent": "p7",
+   "when": "empty(2-5-8)",
+   "kind": "rule"
+  },
+  {
+   "at": 854,
+   "code": "p7.258-pha-the",
+   "title": "Cách phá thế Mũi tên trống 2-5-8",
+   "parent": "p7",
+   "when": "empty(2-5-8)",
+   "kind": "advice"
+  },
+  {
+   "at": 865,
+   "code": "p7.147",
+   "title": "Mũi tên 1-4-7: Mũi tên Thực tế",
+   "parent": "p7",
+   "when": "arrow(1-4-7)",
+   "kind": "rule"
+  },
+  {
+   "at": 879,
+   "code": "p7.147-trong",
+   "title": "Mũi tên trống 1-4-7: Mũi tên Thiếu trật tự",
+   "parent": "p7",
+   "when": "empty(1-4-7)",
+   "kind": "rule"
+  },
+  {
+   "at": 902,
+   "code": "p7.123",
+   "title": "Mũi tên 1-2-3: Mũi tên Kế hoạch",
+   "parent": "p7",
+   "when": "arrow(1-2-3)",
+   "kind": "rule"
+  },
+  {
+   "at": 915,
+   "code": "p7.456",
+   "title": "Mũi tên 4-5-6: Mũi tên Ý chí",
+   "parent": "p7",
+   "when": "arrow(4-5-6)",
+   "kind": "rule"
+  },
+  {
+   "at": 929,
+   "code": "p7.456-trong",
+   "title": "Mũi tên trống 4-5-6: Mũi tên Uất giận",
+   "parent": "p7",
+   "when": "empty(4-5-6)",
+   "kind": "rule"
+  },
+  {
+   "at": 943,
+   "code": "p7.789",
+   "title": "Mũi tên 7-8-9: Mũi tên Hoạt động",
+   "parent": "p7",
+   "when": "arrow(7-8-9)",
+   "kind": "rule"
+  },
+  {
+   "at": 955,
+   "code": "p7.789-trong",
+   "title": "Mũi tên trống 7-8-9: Mũi tên Thụ động",
+   "parent": "p7",
+   "when": "empty(7-8-9)",
+   "kind": "rule"
+  },
+  {
+   "at": 974,
+   "code": "p8",
+   "title": "Phần 8: Con số ngày sinh - ảnh hưởng của ngày sinh",
+   "topic": "ngay_sinh",
+   "kind": "general"
+  },
+  {
+   "at": 975,
+   "code": "p8.gioi-thieu",
+   "title": "Con số ngày sinh - ảnh hưởng của ngày sinh",
+   "parent": "p8",
+   "kind": "general"
+  },
+  {
+   "at": 980,
+   "code": "p8.cach-tinh",
+   "title": "Cách xác định Con số ngày sinh",
+   "parent": "p8",
+   "kind": "method"
+  },
+  {
+   "at": 988,
+   "code": "p8.quan-he",
+   "title": "Mối quan hệ giữa Con số ngày sinh và Con số chủ đạo",
+   "parent": "p8",
+   "kind": "general"
+  },
+  {
+   "at": 989,
+   "code": "p8.quan-he.khac",
+   "title": "Con số ngày sinh khác với Con số chủ đạo",
+   "parent": "p8.quan-he",
+   "when": "!day_is_ruling()",
+   "kind": "rule"
+  },
+  {
+   "at": 992,
+   "code": "p8.quan-he.trung",
+   "title": "Con số ngày sinh trùng với Con số chủ đạo",
+   "parent": "p8.quan-he",
+   "when": "day_is_ruling()",
+   "kind": "rule"
+  },
+  {
+   "at": 994,
+   "code": "p8.y-nghia",
+   "title": "Ý nghĩa của Con số ngày sinh",
+   "parent": "p8",
+   "kind": "general"
+  },
+  {
+   "at": 1001,
+   "code": "p8.1",
+   "title": "Con số ngày sinh 1",
+   "parent": "p8.y-nghia",
+   "when": "day(1)",
+   "kind": "rule"
+  },
+  {
+   "at": 1010,
+   "code": "p8.2",
+   "title": "Con số ngày sinh 2",
+   "parent": "p8.y-nghia",
+   "when": "day(2)",
+   "kind": "rule"
+  },
+  {
+   "at": 1020,
+   "code": "p8.3",
+   "title": "Con số ngày sinh 3",
+   "parent": "p8.y-nghia",
+   "when": "day(3)",
+   "kind": "rule"
+  },
+  {
+   "at": 1028,
+   "code": "p8.4",
+   "title": "Con số ngày sinh 4",
+   "parent": "p8.y-nghia",
+   "when": "day(4)",
+   "kind": "rule"
+  },
+  {
+   "at": 1034,
+   "code": "p8.5",
+   "title": "Con số ngày sinh 5",
+   "parent": "p8.y-nghia",
+   "when": "day(5)",
+   "kind": "rule"
+  },
+  {
+   "at": 1041,
+   "code": "p8.6",
+   "title": "Con số ngày sinh 6",
+   "parent": "p8.y-nghia",
+   "when": "day(6)",
+   "kind": "rule"
+  },
+  {
+   "at": 1048,
+   "code": "p8.7",
+   "title": "Con số ngày sinh 7",
+   "parent": "p8.y-nghia",
+   "when": "day(7)",
+   "kind": "rule"
+  },
+  {
+   "at": 1057,
+   "code": "p8.8",
+   "title": "Con số ngày sinh 8",
+   "parent": "p8.y-nghia",
+   "when": "day(8)",
+   "kind": "rule"
+  },
+  {
+   "at": 1064,
+   "code": "p8.9",
+   "title": "Con số ngày sinh 9",
+   "parent": "p8.y-nghia",
+   "when": "day(9)",
+   "kind": "rule"
+  },
+  {
+   "at": 1073,
+   "code": "p8.10",
+   "title": "Con số ngày sinh 10",
+   "parent": "p8.y-nghia",
+   "when": "day(10)",
+   "kind": "rule"
+  },
+  {
+   "at": 1078,
+   "code": "p8.11",
+   "title": "Con số ngày sinh 11",
+   "parent": "p8.y-nghia",
+   "when": "day(11)",
+   "kind": "rule"
+  },
+  {
+   "at": 1088,
+   "code": "p8.22",
+   "title": "Con số ngày sinh 22/4",
+   "parent": "p8.y-nghia",
+   "when": "day(22/4)",
+   "kind": "rule"
+  },
+  {
+   "at": 1094,
+   "code": "p9",
+   "title": "Phần 9: Chu kỳ 9 năm thay đổi",
+   "topic": "nam",
+   "kind": "general"
+  },
+  {
+   "at": 1095,
+   "code": "p9.gioi-thieu",
+   "title": "Chu kỳ 9 năm thay đổi",
+   "parent": "p9",
+   "kind": "general"
+  },
+  {
+   "at": 1133,
+   "code": "p9.cach-tinh",
+   "title": "Cách tính Con số năm cá nhân",
+   "parent": "p9",
+   "kind": "method"
+  },
+  {
+   "at": 1150,
+   "code": "p9.bieu-do",
+   "title": "Cách lập biểu đồ chu kỳ thay đổi của cá nhân",
+   "parent": "p9",
+   "kind": "general"
+  },
+  {
+   "at": 1157,
+   "code": "p9.nam9",
+   "title": "Năm thứ chín (PYN 9) - Năm đỉnh điểm thay đổi",
+   "parent": "p9",
+   "when": "pyear(9)",
+   "kind": "rule"
+  },
+  {
+   "at": 1161,
+   "code": "p9.nam1",
+   "title": "Năm thứ nhất (PYN 1) - Năm của sự điều chỉnh quyết liệt",
+   "parent": "p9",
+   "when": "pyear(1)",
+   "kind": "rule"
+  },
+  {
+   "at": 1164,
+   "code": "p9.nam2",
+   "title": "Năm thứ hai (PYN 2) - Năm của sự phát triển tâm linh và chia sẻ",
+   "parent": "p9",
+   "when": "pyear(2)",
+   "kind": "rule"
+  },
+  {
+   "at": 1169,
+   "code": "p9.nam3",
+   "title": "Năm thứ ba (PYN 3) - Năm của sự mở mang tâm trí",
+   "parent": "p9",
+   "when": "pyear(3)",
+   "kind": "rule"
+  },
+  {
+   "at": 1175,
+   "code": "p9.nam4",
+   "title": "Năm thứ tư (PYN 4) - Năm của sự củng cố nội lực",
+   "parent": "p9",
+   "when": "pyear(4)",
+   "kind": "rule"
+  },
+  {
+   "at": 1180,
+   "code": "p9.nam5",
+   "title": "Năm thứ năm (PYN 5) - Năm của tự do",
+   "parent": "p9",
+   "when": "pyear(5)",
+   "kind": "rule"
+  },
+  {
+   "at": 1183,
+   "code": "p9.nam6",
+   "title": "Năm thứ sáu (PYN 6) - Năm của sự sáng tạo",
+   "parent": "p9",
+   "when": "pyear(6)",
+   "kind": "rule"
+  },
+  {
+   "at": 1188,
+   "code": "p9.nam7",
+   "title": "Năm thứ bảy (PYN 7) - Năm của sự tập trung vượt chướng ngại",
+   "parent": "p9",
+   "when": "pyear(7)",
+   "kind": "rule"
+  },
+  {
+   "at": 1192,
+   "code": "p9.nam8",
+   "title": "Năm thứ tám (PYN 8) - Năm của sự độc lập và trí tuệ",
+   "parent": "p9",
+   "when": "pyear(8)",
+   "kind": "rule"
+  },
+  {
+   "at": 1195,
+   "code": "p9.giao-thoi",
+   "title": "Các khúc giao thời",
+   "parent": "p9",
+   "kind": "method"
+  },
+  {
+   "at": 1208,
+   "code": "p10",
+   "title": "Phần 10: Ba giai đoạn của đời người",
+   "topic": "giai_doan",
+   "kind": "general"
+  },
+  {
+   "at": 1209,
+   "code": "p10.gioi-thieu",
+   "title": "Ba giai đoạn của đời người",
+   "parent": "p10",
+   "kind": "general"
+  },
+  {
+   "at": 1214,
+   "code": "p10.gd1",
+   "title": "Giai đoạn 1: Thời niên thiếu",
+   "parent": "p10",
+   "when": "stage(1)",
+   "kind": "rule"
+  },
+  {
+   "at": 1218,
+   "code": "p10.gd2",
+   "title": "Giai đoạn 2: 27 năm trưởng thành",
+   "parent": "p10",
+   "when": "stage(2)",
+   "kind": "rule"
+  },
+  {
+   "at": 1223,
+   "code": "p10.gd3",
+   "title": "Giai đoạn 3: Viên mãn",
+   "parent": "p10",
+   "when": "stage(3)",
+   "kind": "rule"
+  },
+  {
+   "at": 1228,
+   "code": "p11",
+   "title": "Phần 11: Tổ hợp Kim tự tháp - Bốn đỉnh cao của đời người",
+   "topic": "dinh",
+   "kind": "general"
+  },
+  {
+   "at": 1229,
+   "code": "p11.gioi-thieu",
+   "title": "Tổ hợp Kim tự tháp - Bốn đỉnh cao của đời người",
+   "parent": "p11",
+   "kind": "general"
+  },
+  {
+   "at": 1234,
+   "code": "p11.do-tuoi",
+   "title": "Độ tuổi khi đạt được bốn đỉnh cao của đời người",
+   "parent": "p11",
+   "kind": "method"
+  },
+  {
+   "at": 1241,
+   "code": "p11.cac-buoc",
+   "title": "Các bước hình thành bốn đỉnh cao Kim tự tháp của đời người",
+   "parent": "p11",
+   "kind": "method"
+  },
+  {
+   "at": 1243,
+   "code": "p11.buoc1",
+   "title": "Bước 1: Rút gọn các con số của ngày, tháng, năm sinh",
+   "parent": "p11.cac-buoc",
+   "kind": "method"
+  },
+  {
+   "at": 1245,
+   "code": "p11.buoc1.vd-1-5-1974",
+   "title": "Ngày sinh 1/5/1974",
+   "parent": "p11.buoc1",
+   "kind": "example"
+  },
+  {
+   "at": 1249,
+   "code": "p11.buoc1.vd-7-10-1984",
+   "title": "Ngày sinh 7/10/1984",
+   "parent": "p11.buoc1",
+   "kind": "example"
+  },
+  {
+   "at": 1254,
+   "code": "p11.buoc2",
+   "title": "Bước 2: Hình thành hai Kim tự tháp ở tầng thấp nhất",
+   "parent": "p11.cac-buoc",
+   "kind": "method"
+  },
+  {
+   "at": 1264,
+   "code": "p11.buoc3",
+   "title": "Bước 3: Hình thành đỉnh của hai Kim tự tháp đầu tiên",
+   "parent": "p11.cac-buoc",
+   "kind": "method"
+  },
+  {
+   "at": 1276,
+   "code": "p11.buoc4",
+   "title": "Bước 4: Hình thành đỉnh của hai Kim tự tháp cuối cùng",
+   "parent": "p11.cac-buoc",
+   "kind": "method"
+  },
+  {
+   "at": 1289,
+   "code": "p11.buoc5",
+   "title": "Bước 5: Ráp bốn đỉnh Kim tự tháp với số tuổi tương ứng",
+   "parent": "p11.cac-buoc",
+   "kind": "method"
+  },
+  {
+   "at": 1301,
+   "code": "p11.buoc6",
+   "title": "Bước 6: Tham chiếu tính chất của các con số tại các đỉnh Kim tự tháp",
+   "parent": "p11.cac-buoc",
+   "kind": "method"
+  },
+  {
+   "at": 1304,
+   "code": "p11.duong-doi",
+   "title": "Đường đời con người qua bốn đỉnh Kim tự tháp",
+   "parent": "p11",
+   "kind": "general"
+  },
+  {
+   "at": 1307,
+   "code": "p11.dinh1",
+   "title": "Đỉnh cao mang số 1",
+   "parent": "p11.duong-doi",
+   "when": "peak(1)",
+   "kind": "rule"
+  },
+  {
+   "at": 1310,
+   "code": "p11.dinh2",
+   "title": "Đỉnh cao mang số 2",
+   "parent": "p11.duong-doi",
+   "when": "peak(2)",
+   "kind": "rule"
+  },
+  {
+   "at": 1313,
+   "code": "p11.dinh3",
+   "title": "Đỉnh cao mang số 3",
+   "parent": "p11.duong-doi",
+   "when": "peak(3)",
+   "kind": "rule"
+  },
+  {
+   "at": 1315,
+   "code": "p11.dinh4",
+   "title": "Đỉnh cao mang số 4",
+   "parent": "p11.duong-doi",
+   "when": "peak(4)",
+   "kind": "rule"
+  },
+  {
+   "at": 1317,
+   "code": "p11.dinh5",
+   "title": "Đỉnh cao mang số 5",
+   "parent": "p11.duong-doi",
+   "when": "peak(5)",
+   "kind": "rule"
+  },
+  {
+   "at": 1319,
+   "code": "p11.dinh6",
+   "title": "Đỉnh cao mang số 6",
+   "parent": "p11.duong-doi",
+   "when": "peak(6)",
+   "kind": "rule"
+  },
+  {
+   "at": 1321,
+   "code": "p11.dinh7",
+   "title": "Đỉnh cao mang số 7",
+   "parent": "p11.duong-doi",
+   "when": "peak(7)",
+   "kind": "rule"
+  },
+  {
+   "at": 1324,
+   "code": "p11.dinh8",
+   "title": "Đỉnh cao mang số 8",
+   "parent": "p11.duong-doi",
+   "when": "peak(8)",
+   "kind": "rule"
+  },
+  {
+   "at": 1326,
+   "code": "p11.dinh9",
+   "title": "Đỉnh cao mang số 9",
+   "parent": "p11.duong-doi",
+   "when": "peak(9)",
+   "kind": "rule"
+  },
+  {
+   "at": 1329,
+   "code": "p11.dinh10",
+   "title": "Đỉnh cao mang số 10",
+   "parent": "p11.duong-doi",
+   "when": "peak(10)",
+   "kind": "rule"
+  },
+  {
+   "at": 1332,
+   "code": "p11.dinh11",
+   "title": "Đỉnh cao mang số 11",
+   "parent": "p11.duong-doi",
+   "when": "peak(11)",
+   "kind": "rule"
+  },
+  {
+   "at": 1363,
+   "code": "p12",
+   "title": "Phần 12: Sức mạnh của tên riêng",
+   "topic": "ten",
+   "kind": "general"
+  },
+  {
+   "at": 1364,
+   "code": "p12.gioi-thieu",
+   "title": "Sức mạnh của tên riêng",
+   "parent": "p12",
+   "kind": "general"
+  },
+  {
+   "at": 1373,
+   "code": "p12.chu-cai",
+   "title": "Mỗi chữ cái tương ứng một con số",
+   "parent": "p12",
+   "kind": "method"
+  },
+  {
+   "at": 1388,
+   "code": "p12.cach-rap",
+   "title": "Cách ráp các con số vào tên",
+   "parent": "p12",
+   "kind": "method"
+  },
+  {
+   "at": 1389,
+   "code": "p12.cach-rap.b1",
+   "title": "Bước 1",
+   "parent": "p12.cach-rap",
+   "kind": "method"
+  },
+  {
+   "at": 1394,
+   "code": "p12.cach-rap.b2",
+   "title": "Bước 2",
+   "parent": "p12.cach-rap",
+   "kind": "method"
+  },
+  {
+   "at": 1402,
+   "code": "p12.linh-hon",
+   "title": "Sức mạnh của những nguyên âm: sự thôi thúc từ linh hồn",
+   "parent": "p12",
+   "kind": "general"
+  },
+  {
+   "at": 1426,
+   "code": "p12.linh-hon.y-nghia",
+   "title": "Ý nghĩa của các Con số linh hồn",
+   "parent": "p12.linh-hon",
+   "kind": "general"
+  },
+  {
+   "at": 1428,
+   "code": "p12.linh-hon.1",
+   "title": "Con số linh hồn 1",
+   "parent": "p12.linh-hon.y-nghia",
+   "when": "soul(1)",
+   "kind": "rule"
+  },
+  {
+   "at": 1430,
+   "code": "p12.linh-hon.2",
+   "title": "Con số linh hồn 2",
+   "parent": "p12.linh-hon.y-nghia",
+   "when": "soul(2)",
+   "kind": "rule"
+  },
+  {
+   "at": 1432,
+   "code": "p12.linh-hon.3",
+   "title": "Con số linh hồn 3",
+   "parent": "p12.linh-hon.y-nghia",
+   "when": "soul(3)",
+   "kind": "rule"
+  },
+  {
+   "at": 1434,
+   "code": "p12.linh-hon.4",
+   "title": "Con số linh hồn 4",
+   "parent": "p12.linh-hon.y-nghia",
+   "when": "soul(4, 22/4)",
+   "kind": "rule"
+  },
+  {
+   "at": 1436,
+   "code": "p12.linh-hon.5",
+   "title": "Con số linh hồn 5",
+   "parent": "p12.linh-hon.y-nghia",
+   "when": "soul(5)",
+   "kind": "rule"
+  },
+  {
+   "at": 1438,
+   "code": "p12.linh-hon.6",
+   "title": "Con số linh hồn 6",
+   "parent": "p12.linh-hon.y-nghia",
+   "when": "soul(6)",
+   "kind": "rule"
+  },
+  {
+   "at": 1440,
+   "code": "p12.linh-hon.7",
+   "title": "Con số linh hồn 7",
+   "parent": "p12.linh-hon.y-nghia",
+   "when": "soul(7)",
+   "kind": "rule"
+  },
+  {
+   "at": 1442,
+   "code": "p12.linh-hon.8",
+   "title": "Con số linh hồn 8",
+   "parent": "p12.linh-hon.y-nghia",
+   "when": "soul(8)",
+   "kind": "rule"
+  },
+  {
+   "at": 1444,
+   "code": "p12.linh-hon.9",
+   "title": "Con số linh hồn 9",
+   "parent": "p12.linh-hon.y-nghia",
+   "when": "soul(9)",
+   "kind": "rule"
+  },
+  {
+   "at": 1446,
+   "code": "p12.linh-hon.10",
+   "title": "Con số linh hồn 10",
+   "parent": "p12.linh-hon.y-nghia",
+   "when": "soul(10)",
+   "kind": "rule"
+  },
+  {
+   "at": 1448,
+   "code": "p12.linh-hon.11",
+   "title": "Con số linh hồn 11",
+   "parent": "p12.linh-hon.y-nghia",
+   "when": "soul(11)",
+   "kind": "rule"
+  },
+  {
+   "at": 1450,
+   "code": "p12.bieu-dat",
+   "title": "Sức mạnh của những phụ âm: cách biểu đạt bên ngoài",
+   "parent": "p12",
+   "kind": "general"
+  },
+  {
+   "at": 1475,
+   "code": "p12.bieu-dat.y-nghia",
+   "title": "Ý nghĩa của các Con số biểu đạt",
+   "parent": "p12.bieu-dat",
+   "kind": "general"
+  },
+  {
+   "at": 1477,
+   "code": "p12.bieu-dat.1",
+   "title": "Con số biểu đạt 1",
+   "parent": "p12.bieu-dat.y-nghia",
+   "when": "expression(1)",
+   "kind": "rule"
+  },
+  {
+   "at": 1479,
+   "code": "p12.bieu-dat.2",
+   "title": "Con số biểu đạt 2",
+   "parent": "p12.bieu-dat.y-nghia",
+   "when": "expression(2)",
+   "kind": "rule"
+  },
+  {
+   "at": 1481,
+   "code": "p12.bieu-dat.3",
+   "title": "Con số biểu đạt 3",
+   "parent": "p12.bieu-dat.y-nghia",
+   "when": "expression(3)",
+   "kind": "rule"
+  },
+  {
+   "at": 1483,
+   "code": "p12.bieu-dat.4",
+   "title": "Con số biểu đạt 4",
+   "parent": "p12.bieu-dat.y-nghia",
+   "when": "expression(4)",
+   "kind": "rule"
+  },
+  {
+   "at": 1485,
+   "code": "p12.bieu-dat.5",
+   "title": "Con số biểu đạt 5",
+   "parent": "p12.bieu-dat.y-nghia",
+   "when": "expression(5)",
+   "kind": "rule"
+  },
+  {
+   "at": 1487,
+   "code": "p12.bieu-dat.6",
+   "title": "Con số biểu đạt 6",
+   "parent": "p12.bieu-dat.y-nghia",
+   "when": "expression(6)",
+   "kind": "rule"
+  },
+  {
+   "at": 1489,
+   "code": "p12.bieu-dat.7",
+   "title": "Con số biểu đạt 7",
+   "parent": "p12.bieu-dat.y-nghia",
+   "when": "expression(7)",
+   "kind": "rule"
+  },
+  {
+   "at": 1491,
+   "code": "p12.bieu-dat.8",
+   "title": "Con số biểu đạt 8",
+   "parent": "p12.bieu-dat.y-nghia",
+   "when": "expression(8)",
+   "kind": "rule"
+  },
+  {
+   "at": 1493,
+   "code": "p12.bieu-dat.9",
+   "title": "Con số biểu đạt 9",
+   "parent": "p12.bieu-dat.y-nghia",
+   "when": "expression(9)",
+   "kind": "rule"
+  },
+  {
+   "at": 1495,
+   "code": "p12.bieu-dat.10",
+   "title": "Con số biểu đạt 10",
+   "parent": "p12.bieu-dat.y-nghia",
+   "when": "expression(10)",
+   "kind": "rule"
+  },
+  {
+   "at": 1497,
+   "code": "p12.bieu-dat.11",
+   "title": "Con số biểu đạt 11",
+   "parent": "p12.bieu-dat.y-nghia",
+   "when": "expression(11)",
+   "kind": "rule"
+  },
+  {
+   "at": 1499,
+   "code": "p12.bieu-dat.22",
+   "title": "Con số biểu đạt 22/4",
+   "parent": "p12.bieu-dat.y-nghia",
+   "when": "expression(22/4)",
+   "kind": "rule"
+  },
+  {
+   "at": 1501,
+   "code": "p12.ten-rieng",
+   "title": "Con số tên riêng",
+   "parent": "p12",
+   "kind": "general"
+  },
+  {
+   "at": 1531,
+   "code": "p12.bieu-do-ten",
+   "title": "Biểu đồ tên",
+   "parent": "p12",
+   "kind": "general"
+  },
+  {
+   "at": 1534,
+   "code": "p12.bieu-do-ten.kh1",
+   "title": "Khuynh hướng thứ nhất",
+   "parent": "p12.bieu-do-ten",
+   "when": "name_compensates()",
+   "kind": "rule"
+  },
+  {
+   "at": 1548,
+   "code": "p12.bieu-do-ten.kh2",
+   "title": "Khuynh hướng thứ hai",
+   "parent": "p12.bieu-do-ten",
+   "when": "name_reinforces()",
+   "kind": "rule"
+  },
+  {
+   "at": 1557,
+   "code": "p12.bieu-do-ten.kh3",
+   "title": "Khuynh hướng thứ ba",
+   "parent": "p12.bieu-do-ten",
+   "when": "!name_compensates() & !name_reinforces()",
+   "kind": "rule"
+  },
+  {
+   "at": 1567,
+   "code": "p12.chon-ten",
+   "title": "Chọn tên sao cho phù hợp",
+   "parent": "p12",
+   "kind": "general"
+  },
+  {
+   "at": 1593,
+   "code": "p12.chon-ten.luu-y",
+   "title": "Lưu ý khi chọn tên",
+   "parent": "p12.chon-ten",
+   "kind": "general"
+  },
+  {
+   "at": 1608,
+   "code": "p12.chon-ten.doi-ten",
+   "title": "Đổi tên",
+   "parent": "p12.chon-ten",
+   "kind": "general"
+  },
+  {
+   "at": 1630,
+   "code": "p12.chon-ten.chon-ten",
+   "title": "Chọn tên",
+   "parent": "p12.chon-ten",
+   "kind": "general"
+  },
+  {
+   "at": 1652,
+   "code": "ket",
+   "title": "Lời kết",
+   "kind": "general"
+  },
+  {
+   "at": 1660,
+   "code": "cam-nhan",
+   "title": "Cảm nhận của độc giả về Nhân số học",
+   "kind": "general"
+  }
+ ],
+ "paras": {
+  "138": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "150": {
+   "kind": "general"
+  },
+  "166": {
+   "kind": "general"
+  },
+  "186": {
+   "kind": "general"
+  },
+  "226": {
+   "kind": "method"
+  },
+  "244": {
+   "kind": "method"
+  },
+  "257": {
+   "kind": "child"
+  },
+  "264": {
+   "kind": "method"
+  },
+  "349": {
+   "kind": "advice"
+  },
+  "372": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "374": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "375": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "376": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "392": {
+   "kind": "rule",
+   "when": "arrows(0)",
+   "topic": "mui_ten"
+  },
+  "396": {
+   "kind": "general"
+  },
+  "403": {
+   "kind": "advice"
+  },
+  "408": {
+   "kind": "general"
+  },
+  "409": {
+   "when": "count(1, 2) & empty(4-5-6) & has(7)"
+  },
+  "411": {
+   "when": "count(1, 2) & arrow(1-4-7)"
+  },
+  "416": {
+   "when": "count(1, 3) & !empty(2-5-8)"
+  },
+  "417": {
+   "when": "count(1, 3) & empty(2-5-8)"
+  },
+  "427": {
+   "kind": "child"
+  },
+  "431": {
+   "when": "isolated(1) & plane(tri_nao, 3+)"
+  },
+  "433": {
+   "when": "count(1, 3+)"
+  },
+  "437": {
+   "when": "lacks(2)"
+  },
+  "438": {
+   "kind": "general"
+  },
+  "451": {
+   "kind": "child"
+  },
+  "458": {
+   "kind": "child"
+  },
+  "460": {
+   "when": "count(2, 6+)",
+   "kind": "child"
+  },
+  "461": {
+   "when": "count(2, 3+)",
+   "kind": "advice"
+  },
+  "464": {
+   "when": "lacks(3)"
+  },
+  "465": {
+   "kind": "general"
+  },
+  "472": {
+   "kind": "advice"
+  },
+  "473": {
+   "when": "count(3, 2-3)"
+  },
+  "477": {
+   "kind": "advice"
+  },
+  "483": {
+   "kind": "advice"
+  },
+  "485": {
+   "kind": "advice"
+  },
+  "486": {
+   "kind": "advice"
+  },
+  "489": {
+   "when": "lacks(4)"
+  },
+  "490": {
+   "when": "lacks(4) & (arrow(3-6-9) | arrow(2-5-8))"
+  },
+  "493": {
+   "when": "count(4, 1) & ruling(9)"
+  },
+  "499": {
+   "when": "count(4, 2+)",
+   "kind": "advice"
+  },
+  "508": {
+   "when": "lacks(5)"
+  },
+  "509": {
+   "kind": "general"
+  },
+  "519": {
+   "kind": "child"
+  },
+  "520": {
+   "kind": "child"
+  },
+  "528": {
+   "when": "lacks(6)"
+  },
+  "536": {
+   "kind": "advice"
+  },
+  "544": {
+   "when": "has(6)"
+  },
+  "549": {
+   "kind": "example"
+  },
+  "550": {
+   "kind": "general"
+  },
+  "563": {
+   "kind": "child"
+  },
+  "575": {
+   "kind": "general"
+  },
+  "579": {
+   "when": "lacks(8)"
+  },
+  "594": {
+   "kind": "general"
+  },
+  "615": {
+   "kind": "advice"
+  },
+  "630": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "631": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "632": {
+   "kind": "general"
+  },
+  "645": {
+   "kind": "general"
+  },
+  "646": {
+   "kind": "general"
+  },
+  "649": {
+   "when": "arrow(1-5-9) & count(1, 2+)"
+  },
+  "651": {
+   "when": "double(1-5-9)"
+  },
+  "655": {
+   "kind": "child"
+  },
+  "656": {
+   "kind": "child"
+  },
+  "657": {
+   "kind": "child"
+  },
+  "660": {
+   "kind": "general"
+  },
+  "662": {
+   "kind": "example"
+  },
+  "664": {
+   "kind": "example"
+  },
+  "665": {
+   "kind": "example"
+  },
+  "667": {
+   "kind": "example"
+  },
+  "668": {
+   "kind": "example"
+  },
+  "670": {
+   "kind": "example"
+  },
+  "671": {
+   "kind": "example"
+  },
+  "673": {
+   "kind": "example"
+  },
+  "674": {
+   "kind": "example"
+  },
+  "675": {
+   "kind": "example"
+  },
+  "677": {
+   "kind": "general"
+  },
+  "678": {
+   "kind": "general"
+  },
+  "686": {
+   "kind": "child"
+  },
+  "687": {
+   "kind": "child"
+  },
+  "708": {
+   "kind": "general"
+  },
+  "714": {
+   "kind": "example"
+  },
+  "716": {
+   "kind": "example"
+  },
+  "718": {
+   "kind": "child"
+  },
+  "719": {
+   "kind": "child"
+  },
+  "720": {
+   "kind": "child"
+  },
+  "726": {
+   "kind": "example"
+  },
+  "731": {
+   "kind": "advice"
+  },
+  "732": {
+   "kind": "child"
+  },
+  "733": {
+   "kind": "child"
+  },
+  "734": {
+   "kind": "child"
+  },
+  "735": {
+   "kind": "child"
+  },
+  "737": {
+   "kind": "child"
+  },
+  "746": {
+   "kind": "child"
+  },
+  "747": {
+   "kind": "child"
+  },
+  "749": {
+   "kind": "advice"
+  },
+  "750": {
+   "kind": "example"
+  },
+  "751": {
+   "kind": "example"
+  },
+  "753": {
+   "kind": "example"
+  },
+  "755": {
+   "kind": "advice"
+  },
+  "771": {
+   "when": "arrow(3-6-9) & lacks(2)"
+  },
+  "772": {
+   "kind": "example"
+  },
+  "773": {
+   "kind": "example"
+  },
+  "774": {
+   "kind": "example"
+  },
+  "775": {
+   "kind": "example"
+  },
+  "778": {
+   "kind": "example"
+  },
+  "779": {
+   "kind": "example"
+  },
+  "780": {
+   "kind": "example"
+  },
+  "781": {
+   "kind": "example"
+  },
+  "783": {
+   "kind": "example"
+  },
+  "784": {
+   "kind": "example"
+  },
+  "785": {
+   "kind": "example"
+  },
+  "786": {
+   "kind": "example"
+  },
+  "787": {
+   "kind": "example"
+  },
+  "788": {
+   "kind": "example"
+  },
+  "789": {
+   "kind": "general"
+  },
+  "790": {
+   "kind": "example"
+  },
+  "792": {
+   "kind": "example"
+  },
+  "793": {
+   "kind": "example"
+  },
+  "794": {
+   "kind": "child"
+  },
+  "795": {
+   "kind": "child"
+  },
+  "796": {
+   "kind": "child"
+  },
+  "797": {
+   "kind": "child"
+  },
+  "798": {
+   "kind": "child"
+  },
+  "800": {
+   "kind": "general"
+  },
+  "801": {
+   "kind": "general"
+  },
+  "802": {
+   "kind": "example"
+  },
+  "805": {
+   "kind": "advice"
+  },
+  "806": {
+   "kind": "general"
+  },
+  "807": {
+   "kind": "child"
+  },
+  "808": {
+   "kind": "child"
+  },
+  "810": {
+   "kind": "example"
+  },
+  "811": {
+   "kind": "example"
+  },
+  "832": {
+   "kind": "child"
+  },
+  "833": {
+   "kind": "example"
+  },
+  "834": {
+   "kind": "example"
+  },
+  "835": {
+   "kind": "example"
+  },
+  "836": {
+   "kind": "example"
+  },
+  "837": {
+   "kind": "example"
+  },
+  "839": {
+   "kind": "example"
+  },
+  "840": {
+   "kind": "example"
+  },
+  "841": {
+   "kind": "example"
+  },
+  "842": {
+   "kind": "example"
+  },
+  "843": {
+   "kind": "example"
+  },
+  "851": {
+   "kind": "advice"
+  },
+  "852": {
+   "kind": "child"
+  },
+  "853": {
+   "kind": "child"
+  },
+  "855": {
+   "kind": "advice"
+  },
+  "856": {
+   "kind": "example"
+  },
+  "857": {
+   "kind": "example"
+  },
+  "859": {
+   "kind": "example"
+  },
+  "860": {
+   "kind": "example"
+  },
+  "861": {
+   "kind": "example"
+  },
+  "862": {
+   "kind": "example"
+  },
+  "864": {
+   "kind": "general"
+  },
+  "869": {
+   "kind": "advice"
+  },
+  "870": {
+   "kind": "child"
+  },
+  "871": {
+   "kind": "child"
+  },
+  "872": {
+   "kind": "child"
+  },
+  "873": {
+   "kind": "example"
+  },
+  "874": {
+   "kind": "example"
+  },
+  "876": {
+   "kind": "example"
+  },
+  "881": {
+   "kind": "general"
+  },
+  "885": {
+   "kind": "child"
+  },
+  "886": {
+   "kind": "example"
+  },
+  "887": {
+   "kind": "example"
+  },
+  "888": {
+   "kind": "example"
+  },
+  "889": {
+   "kind": "example"
+  },
+  "890": {
+   "kind": "example"
+  },
+  "894": {
+   "kind": "example"
+  },
+  "895": {
+   "kind": "example"
+  },
+  "896": {
+   "kind": "example"
+  },
+  "897": {
+   "kind": "example"
+  },
+  "898": {
+   "kind": "example"
+  },
+  "899": {
+   "kind": "example"
+  },
+  "906": {
+   "kind": "child"
+  },
+  "907": {
+   "kind": "child"
+  },
+  "908": {
+   "kind": "child"
+  },
+  "909": {
+   "kind": "child"
+  },
+  "910": {
+   "kind": "example"
+  },
+  "911": {
+   "kind": "example"
+  },
+  "913": {
+   "kind": "example"
+  },
+  "920": {
+   "kind": "example"
+  },
+  "921": {
+   "kind": "example"
+  },
+  "923": {
+   "kind": "example"
+  },
+  "925": {
+   "kind": "example"
+  },
+  "927": {
+   "kind": "child"
+  },
+  "928": {
+   "kind": "child"
+  },
+  "933": {
+   "kind": "advice"
+  },
+  "934": {
+   "kind": "advice"
+  },
+  "935": {
+   "kind": "advice"
+  },
+  "936": {
+   "kind": "child"
+  },
+  "937": {
+   "kind": "child"
+  },
+  "938": {
+   "kind": "example"
+  },
+  "939": {
+   "kind": "example"
+  },
+  "941": {
+   "kind": "example"
+  },
+  "947": {
+   "kind": "general"
+  },
+  "948": {
+   "kind": "example"
+  },
+  "949": {
+   "kind": "example"
+  },
+  "951": {
+   "kind": "example"
+  },
+  "953": {
+   "kind": "child"
+  },
+  "954": {
+   "kind": "child"
+  },
+  "956": {
+   "kind": "general"
+  },
+  "957": {
+   "kind": "general"
+  },
+  "958": {
+   "kind": "general"
+  },
+  "961": {
+   "kind": "general"
+  },
+  "962": {
+   "kind": "general"
+  },
+  "963": {
+   "kind": "general"
+  },
+  "965": {
+   "kind": "example"
+  },
+  "967": {
+   "kind": "example"
+  },
+  "968": {
+   "kind": "example"
+  },
+  "970": {
+   "kind": "child"
+  },
+  "971": {
+   "kind": "child"
+  },
+  "972": {
+   "kind": "general"
+  },
+  "973": {
+   "kind": "child"
+  },
+  "995": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "996": {
+   "kind": "example"
+  },
+  "997": {
+   "kind": "example"
+  },
+  "998": {
+   "kind": "example"
+  },
+  "999": {
+   "kind": "example"
+  },
+  "1000": {
+   "kind": "example"
+  },
+  "1002": {
+   "kind": "general"
+  },
+  "1007": {
+   "kind": "example"
+  },
+  "1008": {
+   "kind": "example"
+  },
+  "1011": {
+   "kind": "general"
+  },
+  "1017": {
+   "kind": "example"
+  },
+  "1018": {
+   "kind": "example"
+  },
+  "1026": {
+   "kind": "example"
+  },
+  "1027": {
+   "kind": "example"
+  },
+  "1031": {
+   "when": "day(4) & ruling(3, 5, 7, 9, 11)"
+  },
+  "1032": {
+   "when": "day(4) & ruling(2, 4, 6, 8, 10, 22/4)"
+  },
+  "1033": {
+   "kind": "example"
+  },
+  "1038": {
+   "kind": "advice"
+  },
+  "1039": {
+   "kind": "example"
+  },
+  "1040": {
+   "kind": "example"
+  },
+  "1046": {
+   "kind": "advice"
+  },
+  "1047": {
+   "kind": "example"
+  },
+  "1052": {
+   "kind": "example"
+  },
+  "1053": {
+   "kind": "example"
+  },
+  "1054": {
+   "kind": "example"
+  },
+  "1062": {
+   "kind": "example"
+  },
+  "1063": {
+   "kind": "example"
+  },
+  "1071": {
+   "kind": "example"
+  },
+  "1072": {
+   "kind": "example"
+  },
+  "1082": {
+   "kind": "general"
+  },
+  "1083": {
+   "kind": "example"
+  },
+  "1084": {
+   "kind": "example"
+  },
+  "1085": {
+   "kind": "example"
+  },
+  "1086": {
+   "kind": "example"
+  },
+  "1087": {
+   "kind": "example"
+  },
+  "1089": {
+   "kind": "general"
+  },
+  "1092": {
+   "kind": "example"
+  },
+  "1093": {
+   "kind": "example"
+  },
+  "1121": {
+   "kind": "method"
+  },
+  "1122": {
+   "kind": "method"
+  },
+  "1123": {
+   "kind": "method"
+  },
+  "1124": {
+   "kind": "method"
+  },
+  "1125": {
+   "kind": "method"
+  },
+  "1126": {
+   "kind": "method"
+  },
+  "1127": {
+   "kind": "method"
+  },
+  "1128": {
+   "kind": "method"
+  },
+  "1129": {
+   "kind": "method"
+  },
+  "1130": {
+   "kind": "example"
+  },
+  "1131": {
+   "kind": "example"
+  },
+  "1132": {
+   "kind": "method"
+  },
+  "1153": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "1160": {
+   "when": "pyear(9) & ruling(9)"
+  },
+  "1163": {
+   "when": "pyear(1) & ruling(10)"
+  },
+  "1168": {
+   "when": "pyear(2) & ruling(2, 11)"
+  },
+  "1174": {
+   "when": "pyear(3) & ruling(3)"
+  },
+  "1179": {
+   "when": "pyear(4) & ruling(4, 22/4)"
+  },
+  "1182": {
+   "when": "pyear(5) & ruling(5)"
+  },
+  "1187": {
+   "when": "pyear(6) & ruling(6)"
+  },
+  "1191": {
+   "when": "pyear(7) & ruling(7)"
+  },
+  "1194": {
+   "when": "pyear(8) & ruling(8)"
+  },
+  "1196": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "1197": {
+   "kind": "general"
+  },
+  "1200": {
+   "kind": "example"
+  },
+  "1201": {
+   "kind": "example"
+  },
+  "1202": {
+   "kind": "example"
+  },
+  "1203": {
+   "kind": "example"
+  },
+  "1204": {
+   "kind": "example"
+  },
+  "1205": {
+   "kind": "example"
+  },
+  "1206": {
+   "kind": "example"
+  },
+  "1207": {
+   "kind": "example"
+  },
+  "1305": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "1306": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "1336": {
+   "kind": "example"
+  },
+  "1337": {
+   "kind": "example"
+  },
+  "1340": {
+   "kind": "example"
+  },
+  "1341": {
+   "kind": "example"
+  },
+  "1342": {
+   "kind": "example"
+  },
+  "1343": {
+   "kind": "example"
+  },
+  "1344": {
+   "kind": "example"
+  },
+  "1345": {
+   "kind": "example"
+  },
+  "1346": {
+   "kind": "example"
+  },
+  "1347": {
+   "kind": "example"
+  },
+  "1348": {
+   "kind": "example"
+  },
+  "1349": {
+   "kind": "example"
+  },
+  "1350": {
+   "kind": "example"
+  },
+  "1351": {
+   "kind": "example"
+  },
+  "1352": {
+   "kind": "example"
+  },
+  "1354": {
+   "kind": "example"
+  },
+  "1355": {
+   "kind": "example"
+  },
+  "1356": {
+   "kind": "example"
+  },
+  "1357": {
+   "kind": "example"
+  },
+  "1358": {
+   "kind": "example"
+  },
+  "1359": {
+   "kind": "example"
+  },
+  "1360": {
+   "kind": "example"
+  },
+  "1361": {
+   "kind": "example"
+  },
+  "1362": {
+   "kind": "example"
+  },
+  "1403": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "1404": {
+   "kind": "method"
+  },
+  "1405": {
+   "kind": "example"
+  },
+  "1406": {
+   "kind": "example"
+  },
+  "1408": {
+   "kind": "example"
+  },
+  "1410": {
+   "kind": "example"
+  },
+  "1411": {
+   "kind": "example"
+  },
+  "1412": {
+   "kind": "example"
+  },
+  "1414": {
+   "kind": "example"
+  },
+  "1416": {
+   "kind": "example"
+  },
+  "1417": {
+   "kind": "example"
+  },
+  "1418": {
+   "kind": "example"
+  },
+  "1420": {
+   "kind": "example"
+  },
+  "1422": {
+   "kind": "example"
+  },
+  "1424": {
+   "kind": "example"
+  },
+  "1425": {
+   "kind": "example"
+  },
+  "1451": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "1452": {
+   "kind": "example"
+  },
+  "1453": {
+   "kind": "example"
+  },
+  "1455": {
+   "kind": "example"
+  },
+  "1457": {
+   "kind": "example"
+  },
+  "1458": {
+   "kind": "example"
+  },
+  "1459": {
+   "kind": "example"
+  },
+  "1461": {
+   "kind": "example"
+  },
+  "1463": {
+   "kind": "example"
+  },
+  "1464": {
+   "kind": "example"
+  },
+  "1465": {
+   "kind": "example"
+  },
+  "1467": {
+   "kind": "example"
+  },
+  "1468": {
+   "kind": "example"
+  },
+  "1471": {
+   "kind": "example"
+  },
+  "1473": {
+   "kind": "example"
+  },
+  "1474": {
+   "kind": "example"
+  },
+  "1502": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "1503": {
+   "kind": "method"
+  },
+  "1504": {
+   "kind": "general"
+  },
+  "1505": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "1506": {
+   "kind": "rule",
+   "when": "name_is_ruling()"
+  },
+  "1507": {
+   "kind": "rule",
+   "when": "name_same_plane()"
+  },
+  "1508": {
+   "kind": "rule",
+   "when": "name_other_plane()"
+  },
+  "1509": {
+   "kind": "example"
+  },
+  "1510": {
+   "kind": "example"
+  },
+  "1512": {
+   "kind": "example"
+  },
+  "1514": {
+   "kind": "example"
+  },
+  "1515": {
+   "kind": "example"
+  },
+  "1516": {
+   "kind": "example"
+  },
+  "1517": {
+   "kind": "example"
+  },
+  "1519": {
+   "kind": "example"
+  },
+  "1521": {
+   "kind": "example"
+  },
+  "1522": {
+   "kind": "example"
+  },
+  "1523": {
+   "kind": "example"
+  },
+  "1525": {
+   "kind": "example"
+  },
+  "1527": {
+   "kind": "example"
+  },
+  "1529": {
+   "kind": "example"
+  },
+  "1530": {
+   "kind": "example"
+  },
+  "1532": {
+   "kind": "general",
+   "when": "any()"
+  },
+  "1533": {
+   "kind": "general"
+  },
+  "1536": {
+   "kind": "example"
+  },
+  "1540": {
+   "kind": "example"
+  },
+  "1541": {
+   "kind": "example"
+  },
+  "1542": {
+   "kind": "example"
+  },
+  "1544": {
+   "kind": "example"
+  },
+  "1545": {
+   "kind": "example"
+  },
+  "1546": {
+   "kind": "example"
+  },
+  "1547": {
+   "kind": "example"
+  },
+  "1550": {
+   "kind": "example"
+  },
+  "1555": {
+   "kind": "example"
+  },
+  "1556": {
+   "kind": "example"
+  },
+  "1559": {
+   "kind": "example"
+  },
+  "1563": {
+   "kind": "example"
+  },
+  "1564": {
+   "kind": "example"
+  },
+  "1565": {
+   "kind": "example"
+  },
+  "1566": {
+   "kind": "example"
+  },
+  "1568": {
+   "kind": "example"
+  },
+  "1570": {
+   "kind": "example"
+  },
+  "1572": {
+   "kind": "example"
+  },
+  "1573": {
+   "kind": "example"
+  },
+  "1574": {
+   "kind": "example"
+  },
+  "1577": {
+   "kind": "example"
+  },
+  "1578": {
+   "kind": "example"
+  },
+  "1579": {
+   "kind": "example"
+  },
+  "1580": {
+   "kind": "example"
+  },
+  "1581": {
+   "kind": "example"
+  },
+  "1582": {
+   "kind": "example"
+  },
+  "1583": {
+   "kind": "example"
+  },
+  "1584": {
+   "kind": "example"
+  },
+  "1585": {
+   "kind": "example"
+  },
+  "1586": {
+   "kind": "example"
+  },
+  "1587": {
+   "kind": "example"
+  },
+  "1588": {
+   "kind": "example"
+  },
+  "1589": {
+   "kind": "example"
+  },
+  "1590": {
+   "kind": "example"
+  },
+  "1591": {
+   "kind": "general"
+  },
+  "1592": {
+   "kind": "general"
+  },
+  "1594": {
+   "kind": "general"
+  },
+  "1595": {
+   "kind": "advice",
+   "when": "name_reinforces() | !name_compensates()"
+  },
+  "1596": {
+   "kind": "advice",
+   "when": "name_reinforces() | !name_compensates()"
+  },
+  "1597": {
+   "kind": "advice",
+   "when": "name_reinforces() | !name_compensates()"
+  },
+  "1598": {
+   "kind": "general"
+  },
+  "1599": {
+   "kind": "advice",
+   "when": "name_reinforces() | !name_compensates()"
+  },
+  "1600": {
+   "kind": "advice",
+   "when": "name_reinforces() | !name_compensates()"
+  },
+  "1601": {
+   "kind": "advice",
+   "when": "name_reinforces() | !name_compensates()"
+  },
+  "1602": {
+   "kind": "advice",
+   "when": "name_reinforces() | !name_compensates()"
+  },
+  "1603": {
+   "kind": "advice",
+   "when": "name_reinforces() | !name_compensates()"
+  },
+  "1604": {
+   "kind": "example"
+  },
+  "1605": {
+   "kind": "advice",
+   "when": "name_reinforces() | !name_compensates()"
+  },
+  "1606": {
+   "kind": "advice",
+   "when": "name_reinforces() | !name_compensates()"
+  },
+  "1607": {
+   "kind": "general"
+  }
+ },
+ "source": {
+  "code": "numerology.ldqh",
+  "title": "Thay đổi cuộc sống với Nhân số học",
+  "author": "Lê Đỗ Quỳnh Hương",
+  "basedOn": "The Complete Book of Numerology — David A. Phillips, Ph.D.",
+  "publisher": "First News – Trí Việt, NXB Tổng hợp TP.HCM, 2020",
+  "file": "nhan-so-hoc.pdf",
+  "note": "Chữ đã soát từng trang với bản scan; trang dẫn là trang của file PDF. Sách ghi Con số chủ đạo của 28/9/1988 là 10 (Hình 101) — theo đúng cách tính của sách là 9."
+ }
+}

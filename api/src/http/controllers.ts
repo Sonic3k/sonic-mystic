@@ -1,14 +1,21 @@
-import { Body, Controller, Delete, Get, HttpCode, Inject, NotFoundException, Param, ParseIntPipe, Patch, Post, Put, Query } from '@nestjs/common';
-import { asc, sql } from 'drizzle-orm';
+import { gunzipSync } from 'node:zlib';
+import { BadRequestException, Body, Controller, Delete, Get, HttpCode, Inject, NotFoundException, Param, ParseIntPipe, Patch, PayloadTooLargeException, Post, Put, Query, Req } from '@nestjs/common';
+import { asc, desc, eq, sql } from 'drizzle-orm';
+import type { Request } from 'express';
 import { z } from 'zod';
 import type { DisciplineDto } from '@mystic/engine/api';
 import { AiService } from '../ai/ai.service.js';
 import { BooksService } from '../books/books.service.js';
-import { Access, ZodPipe } from '../common/access.js';
+import { Access, ZodPipe, isOwner } from '../common/access.js';
+import { APP_CONFIG } from '../common/tokens.js';
+import type { AppConfig } from '../config.js';
 import { DB, type Db } from '../db/db.js';
-import { disciplines } from '../db/schema.js';
+import { disciplines, imports } from '../db/schema.js';
 import { KnowledgeService } from '../kb/knowledge.service.js';
+import { BundleError, importNumerology } from '../kb/numerology-importer.js';
+import { NumerologyBody, NumerologyService, type NumerologyBodyT } from '../numerology/numerology.service.js';
 import { PeopleService, ProfileBody, ProfilePatch, SubjectBody, type ProfileInput, type SubjectInput } from '../people/people.service.js';
+import { ReadingsService, WrittenBody, type WrittenBodyT } from '../readings/readings.service.js';
 import { SyncService } from '../sync/sync.service.js';
 import type { SonicHubPerson } from '../sync/sonic-hub.client.js';
 import { TuViService } from '../tuvi/tuvi.service.js';
@@ -44,7 +51,8 @@ export class HealthController {
   async health() {
     await this.db.execute(sql`select 1`);
     const k = await this.knowledge.get();
-    return { ok: true, knowledgeVersion: k.version, rules: k.rules.size };
+    const n = await this.knowledge.numerology();
+    return { ok: true, knowledgeVersion: k.version, rules: k.rules.size, numerology: n ? { knowledgeVersion: n.version, rules: n.rules.size } : null };
   }
 }
 
@@ -71,19 +79,21 @@ export class MetaController {
 @Controller()
 @Access('public')
 export class BooksController {
-  constructor(@Inject(BooksService) private readonly books: BooksService) {}
+  constructor(@Inject(BooksService) private readonly books: BooksService, @Inject(APP_CONFIG) private readonly config: AppConfig) {}
 
   @Get('sources')
   sources(@Query('discipline') discipline = 'tuvi') { return this.books.sources(discipline); }
 
   @Get('sources/:code/entries')
-  entries(@Param('code') code: string) { return this.books.entries(code); }
+  entries(@Param('code') code: string, @Req() req: Request) { return this.books.entries(code, isOwner(this.config, req)); }
 
   @Get('sources/:code/entries/:key')
-  entry(@Param('code') code: string, @Param('key') key: string) { return this.books.entry(code, key); }
+  entry(@Param('code') code: string, @Param('key') key: string, @Req() req: Request) { return this.books.entry(code, key, isOwner(this.config, req)); }
 
   @Get('search')
-  search(@Query('q') q = '', @Query('discipline') discipline = 'tuvi', @Query('limit') limit?: string) { return this.books.search(q, discipline, optInt(limit)); }
+  search(@Query('q') q = '', @Query('discipline') discipline = 'tuvi', @Query('limit') limit?: string, @Req() req?: Request) {
+    return this.books.search(q, discipline, optInt(limit), req ? isOwner(this.config, req) : false);
+  }
 
   @Patch('passages/:id')
   @Access('owner')
@@ -123,10 +133,85 @@ export class TuViController {
   catalog() { return this.books.catalog(); }
 }
 
+const BUNDLE_MAX = 8 * 1024 * 1024;
+
+/** Nhân số học: computing the numbers is open to anyone; the book's text (readings, the book, lookups) is the owner's
+    while its source is marked so */
+@Controller('numerology')
+@Access('public')
+export class NumerologyController {
+  constructor(
+    @Inject(NumerologyService) private readonly numerology: NumerologyService,
+    @Inject(KnowledgeService) private readonly knowledge: KnowledgeService,
+    @Inject(APP_CONFIG) private readonly config: AppConfig,
+    @Inject(DB) private readonly db: Db,
+  ) {}
+
+  @Post('chart')
+  @HttpCode(200)
+  chart(@Body(new ZodPipe(NumerologyBody)) body: NumerologyBodyT) { const c = this.numerology.chart(body); return { solar: c.solar, chart: c.chart }; }
+
+  @Post('reading')
+  @HttpCode(200)
+  reading(@Body(new ZodPipe(NumerologyBody)) body: NumerologyBodyT, @Req() req: Request) { return this.numerology.reading(body, isOwner(this.config, req)); }
+
+  @Get('book')
+  toc(@Req() req: Request) { return this.numerology.toc(isOwner(this.config, req)); }
+
+  @Get('book/:code')
+  entry(@Param('code') code: string, @Req() req: Request) { return this.numerology.entry(code, isOwner(this.config, req)); }
+
+  /** ?symbols=chu-dao:7,so:1 — the passages whose condition speaks of all of them (optionally in one part: &topic=bieu_do) */
+  @Get('lookup')
+  lookup(@Query('symbols') symbols = '', @Query('topic') topic: string | undefined, @Req() req: Request) {
+    return this.numerology.lookup(symbols.split(',').map(x => x.trim()).filter(Boolean), isOwner(this.config, req), topic || undefined);
+  }
+
+  @Get('catalog')
+  catalog(@Req() req: Request) { return this.numerology.catalog(isOwner(this.config, req)); }
+
+  /** whether the book is loaded, and which bundle */
+  @Get('bundle')
+  async bundle() {
+    const n = await this.knowledge.numerology();
+    const [last] = await this.db.select().from(imports).where(eq(imports.disciplineCode, 'numerology')).orderBy(desc(imports.id)).limit(1);
+    return { loaded: !!n, knowledgeVersion: n?.version ?? null, rules: n?.rules.size ?? 0, entries: n?.order.length ?? 0, bundleVersion: last?.bundleVersion ?? null, importedAt: last?.importedAt.toISOString() ?? null };
+  }
+
+  /** the owner loads the book: the bundle built where the book is, gzipped (kb: npm run upload:numerology) */
+  @Put('bundle')
+  @Access('owner')
+  async upload(@Req() req: Request, @Query('force') force?: string) {
+    if (!/gzip/.test(req.headers['content-type'] ?? '')) throw new BadRequestException('Gửi gói sách dạng application/gzip (npm run upload:numerology)');
+    const parts: Buffer[] = [];
+    let size = 0;
+    for await (const chunk of req) {
+      size += (chunk as Buffer).length;
+      if (size > BUNDLE_MAX) throw new PayloadTooLargeException('Gói sách quá lớn');
+      parts.push(chunk as Buffer);
+    }
+    let bundle: unknown;
+    try { bundle = JSON.parse(gunzipSync(Buffer.concat(parts), { maxOutputLength: 64 * 1024 * 1024 }).toString('utf8')); } catch (e) { throw new BadRequestException(`Không đọc được gói sách: ${(e as Error).message}`); }
+    try {
+      const report = await importNumerology(this.db, bundle as Parameters<typeof importNumerology>[1], { force: force === '1' || force === 'true' });
+      this.knowledge.invalidate();
+      return report;
+    } catch (e) {
+      if (e instanceof BundleError) throw new BadRequestException(e.message);
+      throw e;
+    }
+  }
+}
+
 @Controller()
 @Access('owner')
 export class PeopleController {
-  constructor(@Inject(PeopleService) private readonly people: PeopleService, @Inject(SyncService) private readonly sync: SyncService, @Inject(AiService) private readonly ai: AiService) {}
+  constructor(
+    @Inject(PeopleService) private readonly people: PeopleService,
+    @Inject(SyncService) private readonly sync: SyncService,
+    @Inject(AiService) private readonly ai: AiService,
+    @Inject(ReadingsService) private readonly readings: ReadingsService,
+  ) {}
 
   @Get('subjects')
   subjects() { return this.people.subjects(); }
@@ -146,6 +231,7 @@ export class PeopleController {
 
   @Get('subjects/:id/brief')
   async brief(@Param('id') id: string, @Query('discipline') discipline = 'tuvi') {
+    if (!['tuvi', 'numerology'].includes(discipline)) throw new BadRequestException(`Chưa có môn ${discipline}`);
     await this.people.subject(id);
     const b = await this.sync.brief(id, discipline);
     if (!b) throw new NotFoundException('Người này chưa có profile');
@@ -198,13 +284,19 @@ export class PeopleController {
   @Get('profiles/:id/reading')
   profileReading(@Param('id') id: string, @Query('year') year?: string) { return this.people.profileReading(id, optInt(year)); }
 
+  /** every written reading of a profile (the app's AI ones and those written with Claude) */
   @Get('profiles/:id/ai-readings')
-  aiReadings(@Param('id') id: string) { return this.ai.list(id); }
+  aiReadings(@Param('id') id: string) { return this.readings.list(id); }
 
   @Post('profiles/:id/ai-readings')
   generate(@Param('id') id: string, @Body(new ZodPipe(AiBody)) body: z.infer<typeof AiBody>) { return this.ai.generate(id, body.scope, body.viewYear); }
 
+  /** saves a reading written with Claude for one scope ('tong-hop' for nhân số học; a tử vi scope); it replaces the
+      one of the same scope and year */
+  @Put('profiles/:id/readings/:scope')
+  putReading(@Param('id') id: string, @Param('scope') scope: string, @Body(new ZodPipe(WrittenBody)) body: WrittenBodyT) { return this.readings.put(id, scope, body); }
+
   @Delete('ai-readings/:id')
   @HttpCode(204)
-  async removeReading(@Param('id') id: string) { await this.ai.remove(id); }
+  async removeReading(@Param('id') id: string) { await this.readings.remove(id); }
 }

@@ -14,9 +14,10 @@ import {
 } from 'drizzle-orm/pg-core';
 
 /*
- * One database for every Huyền học discipline (tử vi now; chiêm tinh, nhân số học, Kinh Dịch, tarot later).
- * Nothing here is shaped for tử vi alone except tuvi_profile_settings: a new discipline brings its engine and,
- * when it needs one, its own settings table — knowledge, people, profiles and readings are shared.
+ * One database for every Huyền học discipline (tử vi and nhân số học now; chiêm tinh, Kinh Dịch, tarot later).
+ * Nothing here is shaped for one discipline alone except its own settings table (tuvi_profile_settings,
+ * numerology_profile_names): a new discipline brings its engine and, when it needs one, such a table — knowledge,
+ * people, profiles and readings are shared.
  *
  *  knowledge   disciplines → sources (a notebook, a book, the supplement layer) → entries → passages,
  *              plus symbols (stars, later planets, numbers, hexagrams, cards) and rules (what a passage says,
@@ -58,6 +59,8 @@ export const sources = pgTable('sources', {
   description: text('description'),
   sourceFile: text('source_file'),
   note: text('note'),
+  /** who may read its text: anyone, or the owner only (a published book, under its author's copyright) */
+  access: text('access', { enum: ['public', 'owner'] }).notNull().default('public'),
   sortOrder: smallint('sort_order').notNull().default(0),
   ...audit,
 });
@@ -83,8 +86,10 @@ export const passages = pgTable('passages', {
   /** stable within its entry ("p159" = grandma's paragraph at line 159, "about", "l2", "note") */
   key: text('key').notNull(),
   ordinal: integer('ordinal').notNull(),
-  /** meta | section | item | text | line | about | app_note — app_note is never grandma's */
+  /** meta | section | item | text | line | about | app_note — app_note is never grandma's; a book: para | item | figure | note */
   kind: text('kind').notNull(),
+  /** what the paragraph is to the person read (Nhân số học: rule, advice, child, general, method, example, figure, note) */
+  role: text('role'),
   /** the palaces a paragraph speaks of ("Mệnh · Thân") */
   section: text('section'),
   sourceRef: integer('source_ref'),
@@ -290,7 +295,8 @@ export const profiles = pgTable('profiles', {
   disciplineCode: text('discipline_code').notNull().references(() => disciplines.code),
   label: text('label'),
   viewYear: smallint('view_year'),
-  gender: text('gender', { enum: ['male', 'female'] }).notNull(),
+  /** tử vi needs it; nhân số học reads without it */
+  gender: text('gender', { enum: ['male', 'female'] }),
   ...birthColumns,
   engineVersion: text('engine_version').notNull(),
   knowledgeVersion: text('knowledge_version').notNull(),
@@ -309,7 +315,17 @@ export const tuviProfileSettings = pgTable('tuvi_profile_settings', {
   ...audit,
 });
 
-/** a written reading of a profile — by the AI for now */
+/** the names a nhân số học profile reads (the primary one is the name its reading speaks of) */
+export const numerologyProfileNames = pgTable('numerology_profile_names', {
+  profileId: uuid('profile_id').notNull().references(() => profiles.id, { onDelete: 'cascade' }),
+  ordinal: smallint('ordinal').notNull(),
+  /** "Tên gọi", "Họ tên đầy đủ", "Tên ở nhà"… */
+  label: text('label'),
+  text: text('text').notNull(),
+  primary: boolean('primary').notNull().default(false),
+}, t => [primaryKey({ columns: [t.profileId, t.ordinal] })]);
+
+/** a written reading of a profile — by the app's AI call, or written with Claude and saved here */
 export const readings = pgTable('readings', {
   id: uuid('id').primaryKey().defaultRandom(),
   profileId: uuid('profile_id').notNull().references(() => profiles.id, { onDelete: 'cascade' }),

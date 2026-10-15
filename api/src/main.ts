@@ -8,6 +8,7 @@ import { AppModule } from './app.module.js';
 import { loadConfig, type AppConfig } from './config.js';
 import { createDb, createPool, ensureDatabase, runMigrations } from './db/db.js';
 import { importTuvi } from './kb/importer.js';
+import { importNumerology, readNumerologyBundle } from './kb/numerology-importer.js';
 
 /** the database first (created on the shared server when missing), its schema, the knowledge, then the app */
 export async function createApp(config: AppConfig): Promise<NestExpressApplication> {
@@ -18,6 +19,12 @@ export async function createApp(config: AppConfig): Promise<NestExpressApplicati
   await runMigrations(db);
   const report = await importTuvi(db, config.kbBundleDir);
   log.log(report.skipped ? `knowledge ${report.version} already imported` : `imported knowledge ${report.version}: ${report.written} rows, ${report.keptEdited} edited kept, ${report.removed} removed (${report.ms} ms)`);
+  // the numerology book, when its bundle is on disk (else it is uploaded: PUT /api/numerology/bundle)
+  const nb = readNumerologyBundle(config.numerologyBundleDir);
+  if (nb) {
+    const r = await importNumerology(db, nb);
+    log.log(r.skipped ? `numerology ${r.version} already imported` : `imported numerology ${r.version}: ${r.written} rows, ${r.keptEdited} edited kept, ${r.removed} removed (${r.ms} ms)`);
+  } else log.log('numerology bundle not on disk: the book is loaded by upload');
   const app = await NestFactory.create<NestExpressApplication>(AppModule.forRoot(config, pool), {
     logger: process.env.NODE_ENV === 'test' ? ['error'] : ['log', 'warn', 'error'],
   });

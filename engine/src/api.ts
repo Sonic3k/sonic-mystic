@@ -1,6 +1,7 @@
 /* The contract between the Mystic API and the webs that use it: what each endpoint takes and returns.
    Types only — the API builds these objects, every web reads them. */
 import type { BirthInput, Chart, ChartOptions, Principle, Tone, View } from './tuvi/index.js';
+import type { NumerologyChart, ParaRole, RuleKind, Topic } from './numerology/index.js';
 
 /** grandma's voice (a family source) or anything added on top of it (supplement, other books, AI) */
 export type Layer = 'primary' | 'added';
@@ -12,6 +13,8 @@ export interface DisciplineDto { code: string; name: string; description: string
 export interface SourceDto {
   code: string; discipline: string; title: string; author: string | null; kind: SourceKind;
   description: string | null; note: string | null; sourceFile: string | null;
+  /** who may read its text: anyone, or the owner only (a published book) */
+  access: 'public' | 'owner';
   entries: number; passages: number; rules: number; reviewNotes: number;
 }
 
@@ -25,6 +28,8 @@ export interface RuleDto {
 // ── book ──
 export interface EntrySummaryDto {
   id: number; code: string; ref: number | null; kind: string; title: string; symbols: string[];
+  /** the entry it sits under (a book's sections), null at the top */
+  parent: string | null;
   passages: number; rules: number; reviewNotes: number; firstLine: string | null;
 }
 export interface PassageDto {
@@ -116,8 +121,11 @@ export interface ProfileDto {
   id: string; discipline: string; label: string | null; viewYear: number | null; note: string | null;
   subject: { id: string; displayName: string; links: LinkDto[] };
   /** the birth exactly as this profile read it — later edits of the person do not change an old profile */
-  gender: Gender; birth: BirthDto;
-  settings: TuViSettings;
+  gender: Gender | null; birth: BirthDto;
+  /** tử vi: how the stars are placed (null for other disciplines) */
+  settings: TuViSettings | null;
+  /** nhân số học: the names read, the primary one first in importance (null for other disciplines) */
+  names: NumerologyNameDto[] | null;
   engineVersion: string; knowledgeVersion: string;
   /** set when the knowledge has changed since the profile was made */
   knowledgeChanged: boolean;
@@ -129,12 +137,22 @@ export interface SonicHubPersonDto { id: string; name: string; displayName: stri
 export interface AiItemDto { layer: Layer; text: string; refs: { code: string; quoted: string }[] }
 export interface AiSectionDto { title: string; items: AiItemDto[] }
 export interface AiReadingDto {
-  id: string; profileId: string; scope: string; viewYear: number; model: string | null; inputHash: string | null;
+  id: string; profileId: string; scope: string; viewYear: number;
+  /** who wrote it: 'ai' (the app's AI call) or 'claude' (written with Claude and saved here) */
+  author: string;
+  model: string | null; inputHash: string | null;
   caution: string | null; sections: AiSectionDto[]; createdAt: string;
   /** the chart, the settings or the matched lines have changed since this reading was written */
   stale: boolean;
+  /** on saving a written reading: the refs it cited that its chart did not match (left out) */
+  dropped?: string[];
 }
 export interface AiStatusDto { ai: boolean; model: string }
+/** a reading written elsewhere (with Claude) and saved to a profile: each idea that retells the book cites its passages */
+export interface WrittenReadingInput {
+  viewYear?: number; author?: string; model?: string | null; caution?: string | null;
+  sections: { title: string; items: { layer: Layer; text: string; refs?: string[] }[] }[];
+}
 
 // ── the brief Sonic Hub keeps beside a person ──
 export interface BriefDto {
@@ -142,4 +160,87 @@ export interface BriefDto {
   facts: { label: string; value: string }[];
   lines: { layer: Layer; text: string; source: string }[];
   updatedAt: string;
+}
+
+// ── Nhân số học (Lê Đỗ Quỳnh Hương's book) ──
+export interface NumerologyNameDto {
+  /** what the name is to the person ("Tên gọi", "Họ tên đầy đủ", "Tên ở nhà"…) */
+  label: string | null;
+  text: string;
+  /** the name the reading speaks of */
+  primary: boolean;
+}
+export interface NumerologyBirthDto {
+  calendar: 'solar' | 'lunar'; year: number; month: number; day: number;
+  leapMonth?: boolean;
+  /** decides the lunar calendar of 1968–1975 (the South used UTC+8 until 13/6/1975) */
+  latitude?: number | null;
+}
+export interface NumerologyRequest {
+  birth: NumerologyBirthDto; gender?: Gender | null; names?: NumerologyNameDto[];
+  /** the personal year to read (default: the one lived today) */
+  viewYear?: number;
+}
+export interface NumerologyRuleDto {
+  code: string; text: string; page: number | null;
+  /** rule: the book describing the person · advice · child: words about a child · general: the book's explanation of
+      the part read, shown once at its top */
+  kind: RuleKind;
+  topic: Topic;
+  /** the section of the book it stands in */
+  entry: string;
+  when: string;
+  edited: boolean; active: boolean;
+}
+export interface NumerologySourceDto { code: string; title: string; author: string | null; description: string | null; note: string | null }
+export interface NumerologyMatchDto { rule: string; why: string[] }
+export interface NumerologyGroupDto { entry: string; title: string; path: string[]; matches: NumerologyMatchDto[] }
+export interface NumerologySectionDto { topic: Topic; title: string; focus: string | null; groups: NumerologyGroupDto[] }
+export interface NumerologyReadingDto {
+  engineVersion: string; knowledgeVersion: string;
+  /** the date read, and how it was found when the birth was written in the lunar calendar */
+  solar: { year: number; month: number; day: number; fromLunar: boolean; note: string | null };
+  chart: NumerologyChart;
+  /** the personal year read, and the calendar year it is asked for (null: the one lived today) */
+  pyear: number; viewYear: number | null;
+  sections: NumerologySectionDto[];
+  /** every rule the sections cite, by code */
+  rules: Record<string, NumerologyRuleDto>;
+  source: NumerologySourceDto;
+}
+export interface NumerologyTocEntryDto {
+  code: string; title: string; parent: string | null; depth: number; kind: string; page: number | null;
+  topic: Topic | null; passages: number; rules: number;
+}
+export interface NumerologyBookDto {
+  source: NumerologySourceDto;
+  toc: NumerologyTocEntryDto[];
+  /** the parts of a reading, each with the part of the book it reads */
+  topics: { code: Topic; title: string; part: number; entry: string | null }[];
+}
+export interface NumerologyPassageDto {
+  id: number; key: string; kind: string; role: ParaRole; page: number | null; text: string;
+  /** set only when the text was reworded in the database: what was imported */
+  originalText: string | null;
+  /** the condition under which the book says this of a person (null: method, example, figure, note) */
+  rule: NumerologyRuleDto | null;
+}
+export interface NumerologyEntryTextDto { code: string; title: string; depth: number; page: number | null; passages: NumerologyPassageDto[]; tables: TableDto[] }
+export interface NumerologyEntryDto {
+  code: string; title: string; page: number | null; topic: Topic | null;
+  path: { code: string; title: string }[];
+  /** the entry and every section under it, in the book's order */
+  sections: NumerologyEntryTextDto[];
+  prev: { code: string; title: string } | null; next: { code: string; title: string } | null;
+  source: NumerologySourceDto;
+}
+export interface NumerologySymbolDto { code: string; name: string; kind: string; rules: number }
+export interface NumerologyLookupDto {
+  symbols: NumerologySymbolDto[]; total: number;
+  groups: { entry: string; title: string; path: string[]; rules: NumerologyRuleDto[] }[];
+}
+export interface NumerologyCatalogDto {
+  symbols: NumerologySymbolDto[];
+  topics: { code: Topic; title: string; part: number }[];
+  tables: (TableDto & { entry: string })[];
 }

@@ -2,8 +2,39 @@
    the same way. */
 import type { BirthDto, Gender } from './api.js';
 import type { BirthInput } from './tuvi/index.js';
+import { lunarMonthLength, lunarToSolar, lunarZoneFor } from './tuvi/lunar.js';
 
 export class BirthError extends Error {}
+
+export interface SolarDate {
+  year: number; month: number; day: number;
+  /** the birth was written in the lunar calendar, and converted with the calendar of its time (zone: UTC+7 or +8) */
+  fromLunar: boolean; zone: 7 | 8 | null;
+}
+
+/**
+ * The solar date of a birth (what Nhân số học reads): as written, or converted from the lunar date. A lunar date is
+ * converted with the calendar it was written in — UTC+8 before 1968, and in the South (latitude below 17°) until
+ * 13/6/1975 — as the Tử vi chart does.
+ */
+export function solarDateOf(b: Pick<BirthDto, 'calendar' | 'year' | 'month' | 'day' | 'leapMonth' | 'latitude'>): SolarDate {
+  if (b.year === null || b.month === null || b.day === null) throw new BirthError('Chưa có đủ ngày tháng năm sinh');
+  const { year, month, day } = b;
+  if (b.calendar === 'solar') {
+    const t = new Date(Date.UTC(year, month - 1, day));
+    if (month < 1 || month > 12 || day < 1 || t.getUTCMonth() !== month - 1) throw new BirthError(`Không có ngày ${day}/${month}/${year} dương lịch`);
+    return { year, month, day, fromLunar: false, zone: null };
+  }
+  if (month < 1 || month > 12 || day < 1 || day > 30) throw new BirthError(`Không có ngày ${day}/${month}/${year} âm lịch`);
+  const leap = !!b.leapMonth;
+  const at = (tz: 7 | 8) => lunarToSolar(day, month, year, leap, tz);
+  let s = at(7), zone: 7 | 8 = 7;
+  const s8 = at(8);
+  if (s8 && lunarZoneFor(s8[0], s8[1], s8[2], b.latitude) === 8) { s = s8; zone = 8; }
+  if (!s) throw new BirthError(leap ? `Năm âm lịch ${year} không có tháng ${month} nhuận` : `Không đổi được ngày ${day}/${month}/${year} âm lịch`);
+  if (day > lunarMonthLength(month, year, leap, zone)) throw new BirthError(`Tháng ${month}${leap ? ' nhuận' : ''} năm ${year} âm lịch chỉ có 29 ngày`);
+  return { day: s[0], month: s[1], year: s[2], fromLunar: true, zone };
+}
 
 /** the engine's input for a birth; a BirthError names what is missing when a chart cannot be set up */
 export function birthInputOf(gender: Gender | null, b: BirthDto): BirthInput {
