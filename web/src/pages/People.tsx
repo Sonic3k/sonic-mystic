@@ -89,7 +89,7 @@ export function SubjectPage() {
               </Link>))}
             {!s.profiles.length && <div className="tv-empty">Chưa có lá số nào.</div>}
           </div>
-          <div className="tv-row" style={{ marginTop: 14, flexWrap: 'wrap' }}>
+          <div className="tv-acts" style={{ marginTop: 14 }}>
             <button type="button" className="tv-btn son" disabled={!ready || make.isPending} onClick={() => make.mutate()} title={ready ? undefined : 'Cần giới tính, ngày tháng năm và giờ sinh'}>
               {make.isPending ? 'Đang lập…' : 'Lập lá số từ ngày giờ sinh này'}</button>
             <Link className="tv-btn ghost" to={`/tu-vi?nguoi=${s.id}`}>Lập với giờ hoặc ngày khác…</Link>

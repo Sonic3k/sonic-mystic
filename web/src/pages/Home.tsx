@@ -27,7 +27,7 @@ export default function Home() {
           <h1>Huyền học</h1>
           <p>Những gì bà ghi chép về tử vi — giữ nguyên lời bà, số hoá để so được với từng lá số. Phần nào không phải của bà (sách phổ thông, AI) luôn được ghi rõ và để riêng.</p>
           <p>Mỗi người có thể có nhiều lá số ở những thời điểm khác nhau; bản tóm tắt của lá số mới nhất hiện cả ở trang người trong Sonic Hub.</p>
-          <div className="tv-row" style={{ flexWrap: 'wrap', marginTop: 6 }}>
+          <div className="tv-acts" style={{ marginTop: 6 }}>
             <Link className="tv-btn son" to="/tu-vi">Lập lá số tử vi</Link>
             <Link className="tv-btn ghost" to="/tu-vi/sach">Đọc sách của bà</Link>
           </div>

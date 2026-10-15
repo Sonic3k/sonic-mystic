@@ -138,7 +138,7 @@ function BookCard() {
       {luan && <div className="tv-stats"><div><b>{stars.length || '…'}</b><span>mục sao</span></div><div><b>{luan.passages.toLocaleString('vi-VN')}</b><span>đoạn</span></div><div><b>{luan.rules.toLocaleString('vi-VN')}</b><span>câu luận</span></div></div>}
       {hit && <blockquote>{hit.text.replace(/^[-*•+]\s*/, '')}<small>— mục {hit.entryTitle}</small></blockquote>}
       <div className="tv-chips">{mains.map(s => { const ref = refOf(s.code); return <Link key={s.code} className="tv-chip" to={ref != null ? `/tu-vi/sach/${ref}` : '/tu-vi/sach'}>{s.name}</Link>; })}</div>
-      <div className="tv-row" style={{ marginTop: 16, flexWrap: 'wrap' }}>
+      <div className="tv-acts" style={{ marginTop: 16 }}>
         <Link className="tv-btn ghost" to="/tu-vi/sach">Đọc sách của bà</Link>
         <Link className="tv-btn ghost" to="/tu-vi/tra-cuu">Tra cứu</Link>
         <Link className="tv-btn ghost" to="/tu-vi/phan-1">Phần I · An sao</Link>

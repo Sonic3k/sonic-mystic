@@ -331,3 +331,8 @@ button.tv-edited { padding: 0; border: 0; background: none; cursor: pointer; tex
 button.hh-person { font: inherit; text-align: left; cursor: pointer; }
 button.hh-person:disabled { opacity: .6; cursor: default; }
 .tv-filter .tv-spin { border-color: rgba(0, 0, 0, .12); border-top-color: var(--ba); margin-right: 6px; vertical-align: -2px; }
+/* a row of buttons that wraps on a phone instead of squeezing its labels */
+.tv-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.tv-acts > * { flex: 0 1 auto; }
+.tv-acts .tv-btn { white-space: normal; text-align: center; justify-content: center; }
+

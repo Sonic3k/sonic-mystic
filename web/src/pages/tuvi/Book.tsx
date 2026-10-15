@@ -55,7 +55,7 @@ export function BookIndex() {
     <div className="wrap page tv">
       <div className="ptitle"><h1>Sách của bà<small>{luan?.title}</small></h1></div>
       <p className="tv-sub">{symbolEntries.length} mục sao, viết dở năm 2011. <b>Lời bà giữ nguyên</b> — chỉ sửa những chữ bị lỗi khi chuyển phông chữ cũ. {luan?.note}</p>
-      <div className="tv-row" style={{ flexWrap: 'wrap', marginBottom: 8 }}>
+      <div className="tv-acts" style={{ marginBottom: 8 }}>
         <Link className="tv-btn ghost" to="/tu-vi/phan-1">Phần I · Lập lá số</Link>
         <Link className="tv-btn ghost" to="/tu-vi/tra-cuu">Tìm trong sách</Link>
       </div>
