@@ -1,7 +1,7 @@
 /* Readings Claude writes for a profile. The server matches grandma's sentences itself and hands them over, so the
    first layer can only retell her lines (each idea cites them, and an idea that cites none is shown as added). */
 import Anthropic from '@anthropic-ai/sdk';
-import { BadRequestException, Inject, Injectable, NotFoundException, ServiceUnavailableException } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, Logger, NotFoundException, ServiceUnavailableException } from '@nestjs/common';
 import { and, asc, desc, eq, inArray } from 'drizzle-orm';
 import { z } from 'zod';
 import {
@@ -46,7 +46,7 @@ Lớp "them" (luận giải thêm):
 - Viết như ý kiến bổ sung, không bao giờ gán cho bà (không viết "bà dặn", "theo bà", "theo ghi chép"…).
 - Không lặp lại những gì đã có ở lớp "ba".
 
-Mỗi section ứng với một nhóm ý: theo cung; hoặc theo tính cách, công danh, tài lộc, gia đạo… khi phạm vi là tổng quan; hoặc theo đại hạn, tiểu hạn khi phạm vi là vận hạn. "title" là tên ngắn của nhóm ý; mỗi ý trong "ba" và "them" là một đoạn ngắn.
+Mỗi section ứng với một nhóm ý: theo cung; hoặc theo tính cách, công danh, tài lộc, gia đạo… khi phạm vi là tổng quan; hoặc theo đại hạn, tiểu hạn khi phạm vi là vận hạn. "title" là tên ngắn của nhóm ý; mỗi ý trong "ba" và "them" là một đoạn ngắn. Viết gọn: tối đa 8 nhóm ý, mỗi lớp trong một nhóm tối đa 5 ý.
 
 Văn phong: tiếng Việt tự nhiên, ấm áp, mạch lạc. Nói xu hướng chứ không phán định mệnh. Những ý về bệnh tật, tai nạn, chết chóc, con cái, hôn nhân đổ vỡ phải nói nhẹ nhàng, như điều nên lưu tâm. Không đưa lời khuyên y tế, pháp lý, tài chính cụ thể.
 
@@ -58,6 +58,30 @@ Chỉ trả về một đối tượng JSON đúng cấu trúc sau, không kèm 
 {"sections":[{"title":"…","ba":[{"text":"…","refs":["<mã>"]}],"them":[{"text":"…"}]}],"caution":"…"}`;
 
 const RETRY = 'Trả lời lại, chỉ một đối tượng JSON hợp lệ đúng cấu trúc đã yêu cầu.';
+const SHORTER = 'Lần trước bài viết dài quá giới hạn. Lần này viết gọn: tối đa 7 nhóm ý, mỗi lớp trong một nhóm tối đa 4 ý, mỗi ý 1–3 câu.';
+
+/** the answer's shape, for structured output (the same as Answer below) */
+const ANSWER_SCHEMA = {
+  type: 'object',
+  properties: {
+    sections: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          title: { type: 'string' },
+          ba: { type: 'array', items: { type: 'object', properties: { text: { type: 'string' }, refs: { type: 'array', items: { type: 'string' } } }, required: ['text', 'refs'], additionalProperties: false } },
+          them: { type: 'array', items: { type: 'object', properties: { text: { type: 'string' } }, required: ['text'], additionalProperties: false } },
+        },
+        required: ['title', 'ba', 'them'],
+        additionalProperties: false,
+      },
+    },
+    caution: { type: 'string' },
+  },
+  required: ['sections', 'caution'],
+  additionalProperties: false,
+} as const;
 
 const Answer = z.object({
   sections: z.array(z.object({
@@ -116,6 +140,7 @@ export function jsonIn(answer: string | null | undefined): unknown {
 
 @Injectable()
 export class AiService {
+  private readonly log = new Logger('AiService');
   private readonly client: Anthropic | null;
 
   constructor(
@@ -196,24 +221,42 @@ export class AiService {
     return this.dto(saved, false);
   }
 
+  /**
+   * One answer as the JSON the reading is stored from. The model is held to ANSWER_SCHEMA (structured output); an
+   * answer cut off by the token limit is asked again, shorter. Models without structured output get the plain prompt.
+   */
   private async ask(user: string): Promise<AnswerT> {
+    let structured = true;
     const call = async (messages: Anthropic.MessageParam[]) => {
       try {
-        const msg = await this.client!.messages.create({ model: this.config.ai.model, max_tokens: this.config.ai.maxTokens, system: SYSTEM, messages });
-        return msg.content.map(b => (b.type === 'text' ? b.text : '')).join('');
+        const msg = await this.client!.messages.create({
+          model: this.config.ai.model, max_tokens: this.config.ai.maxTokens, system: SYSTEM, messages,
+          ...(structured ? { output_config: { format: { type: 'json_schema' as const, schema: ANSWER_SCHEMA } } } : {}),
+        });
+        return { text: msg.content.map(b => (b.type === 'text' ? b.text : '')).join(''), stop: msg.stop_reason, tokens: msg.usage.output_tokens };
       } catch (e) {
-        throw new ServiceUnavailableException(`Không gọi được AI: ${(e as Error).message}`);
+        const m = (e as Error).message;
+        if (structured && e instanceof Anthropic.BadRequestError && /output_config|format|schema/i.test(m)) {
+          this.log.warn(`structured output refused, asking without it: ${m}`);
+          structured = false;
+          return call(messages);
+        }
+        throw new ServiceUnavailableException(`Không gọi được AI: ${m}`);
       }
     };
+    const parsed = (r: { text: string }) => Answer.safeParse(jsonIn(r.text));
     const first = await call([{ role: 'user', content: user }]);
-    const a = Answer.safeParse(jsonIn(first));
+    const a = parsed(first);
     if (a.success) return a.data;
-    const again = first.trim()
-      ? await call([{ role: 'user', content: user }, { role: 'assistant', content: first }, { role: 'user', content: RETRY }])
-      : await call([{ role: 'user', content: user }]);
-    const b = Answer.safeParse(jsonIn(again));
-    if (!b.success) throw new ServiceUnavailableException('AI trả lời không đúng định dạng');
-    return b.data;
+    this.log.warn(`answer not usable (stop ${first.stop}, ${first.tokens} tokens, ${first.text.length} chars), asking again`);
+    if (first.stop === 'refusal') throw new ServiceUnavailableException('AI từ chối viết bài này');
+    const again = first.stop === 'max_tokens' || !first.text.trim()
+      ? await call([{ role: 'user', content: `${user}\n\n${SHORTER}` }])
+      : await call([{ role: 'user', content: user }, { role: 'assistant', content: first.text }, { role: 'user', content: RETRY }]);
+    const b = parsed(again);
+    if (b.success) return b.data;
+    this.log.warn(`answer still not usable (stop ${again.stop}, ${again.tokens} tokens, ${again.text.length} chars)`);
+    throw new ServiceUnavailableException(again.stop === 'max_tokens' ? 'Bài luận dài quá giới hạn, thử lại sau' : 'AI trả lời không đúng định dạng');
   }
 
   private async dto(r: typeof readings.$inferSelect, stale: boolean): Promise<AiReadingDto> {

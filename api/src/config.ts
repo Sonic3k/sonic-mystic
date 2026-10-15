@@ -69,7 +69,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
     syncToken: opt(env, 'SYNC_TOKEN'),
     sonicHub: { apiUrl: opt(env, 'SONIC_HUB_API_URL')?.replace(/\/$/, '') ?? null },
     publicWebUrl: opt(env, 'PUBLIC_WEB_URL')?.replace(/\/$/, '') ?? null,
-    ai: { apiKey: opt(env, 'ANTHROPIC_API_KEY'), model: opt(env, 'ANTHROPIC_MODEL') ?? 'claude-sonnet-5-5', maxTokens: Number(env.AI_MAX_TOKENS ?? 8000) },
+    ai: { apiKey: opt(env, 'ANTHROPIC_API_KEY'), model: opt(env, 'ANTHROPIC_MODEL') ?? 'claude-sonnet-5-5', maxTokens: Number(env.AI_MAX_TOKENS ?? 16000) },
     kbBundleDir: opt(env, 'KB_BUNDLE_DIR') ?? resolve(repoRoot, 'kb/bundle'),
     ownerName: opt(env, 'OWNER_NAME') ?? 'Chủ nhà',
     syncWorker: (env.SYNC_WORKER ?? 'true') !== 'false',
