@@ -117,7 +117,7 @@ export class SyncService implements OnModuleInit, OnModuleDestroy {
 
     // lines: the overview the AI wrote for this profile, else grandma's first sentences about the stars in Mệnh
     const lines: BriefDto['lines'] = [];
-    const [ai] = await this.db.select({ id: readings.id }).from(readings).where(and(eq(readings.profileId, p.id), eq(readings.scope, 'tong-quan'))).orderBy(desc(readings.updatedAt)).limit(1);
+    const [ai] = await this.db.select({ id: readings.id, updatedAt: readings.updatedAt }).from(readings).where(and(eq(readings.profileId, p.id), eq(readings.scope, 'tong-quan'))).orderBy(desc(readings.updatedAt)).limit(1);
     if (ai) {
       const items = await this.db.select({ layer: readingItems.layer, text: readingItems.text, s: readingSections.ordinal, o: readingItems.ordinal }).from(readingItems)
         .innerJoin(readingSections, eq(readingSections.id, readingItems.sectionId)).where(eq(readingSections.readingId, ai.id)).orderBy(asc(readingSections.ordinal), asc(readingItems.ordinal));
@@ -136,7 +136,7 @@ export class SyncService implements OnModuleInit, OnModuleDestroy {
     const base = this.config.publicWebUrl;
     return {
       discipline, title: 'Tử vi', subjectId, profileId: p.id, profileLabel: p.label,
-      url: base ? `${base}/tu-vi/profile/${p.id}` : null, facts, lines, updatedAt: p.updatedAt.toISOString(),
+      url: base ? `${base}/tu-vi/profile/${p.id}` : null, facts, lines, updatedAt: (ai && ai.updatedAt > p.updatedAt ? ai.updatedAt : p.updatedAt).toISOString(),
     };
   }
 }
