@@ -111,10 +111,14 @@ export class PeopleService {
     const ps = await this.db.select().from(profiles).where(inArray(profiles.subjectId, ids)).orderBy(desc(profiles.createdAt));
     const ai = ps.length ? await this.db.select({ profileId: readings.profileId, n: count() }).from(readings).where(inArray(readings.profileId, ps.map(p => p.id))).groupBy(readings.profileId) : [];
     const aiOf = new Map(ai.map(a => [a.profileId, a.n]));
+    const ns = ps.filter(p => p.disciplineCode === 'numerology').map(p => p.id);
+    const named = ns.length ? await this.db.select({ profileId: numerologyProfileNames.profileId, text: numerologyProfileNames.text }).from(numerologyProfileNames)
+      .where(and(inArray(numerologyProfileNames.profileId, ns), eq(numerologyProfileNames.primary, true))) : [];
+    const nameOf = new Map(named.map(n => [n.profileId, n.text]));
     return rows.map(s => ({
       id: s.id, displayName: s.displayName, gender: s.gender, birth: birthDto(s), note: s.note,
       links: links.filter(l => l.subjectId === s.id).map(linkDto),
-      profiles: ps.filter(p => p.subjectId === s.id).map(p => profileSummary(p, aiOf.get(p.id) ?? 0)),
+      profiles: ps.filter(p => p.subjectId === s.id).map(p => profileSummary(p, aiOf.get(p.id) ?? 0, nameOf.get(p.id) ?? null)),
       createdAt: s.createdAt.toISOString(), updatedAt: s.updatedAt.toISOString(),
     }));
   }
@@ -289,12 +293,12 @@ export class PeopleService {
     return { profile: p, subject: s, names, computed: numerologyOf(birthDto(p), p.gender, names) };
   }
 
-  async profileReading(id: string, year?: number): Promise<TuViReadingDto | NumerologyReadingDto> {
+  async profileReading(id: string, year?: number, name?: number): Promise<TuViReadingDto | NumerologyReadingDto> {
     const { p } = await this.profileRows(id);
     if (p.disciplineCode === 'numerology') {
       const { computed, profile } = await this.numerologyInput(id);
       const k = await this.numerology.book(true);
-      return this.numerology.readingOf(computed, k, year ?? profile.viewYear ?? null);
+      return this.numerology.readingOf(computed, k, year ?? profile.viewYear ?? null, name);
     }
     const { profile, birth, settings } = await this.profileInput(id);
     return this.tuvi.reading(birth, settings, year ?? profile.viewYear ?? thisYear());
@@ -332,8 +336,9 @@ export class PeopleService {
 }
 
 const linkDto = (l: typeof subjectLinks.$inferSelect): LinkDto => ({ system: l.system, externalId: l.externalId, ownsIdentity: l.ownsIdentity, syncedAt: iso(l.syncedAt) });
-const profileSummary = (p: ProfileRow, aiReadings: number): ProfileSummaryDto => ({
+const profileSummary = (p: ProfileRow, aiReadings: number, name: string | null): ProfileSummaryDto => ({
   id: p.id, discipline: p.disciplineCode, label: p.label, viewYear: p.viewYear, createdAt: p.createdAt.toISOString(), updatedAt: p.updatedAt.toISOString(), aiReadings,
+  gender: p.gender, birth: birthDto(p), name,
 });
 
 function stripNulls<T extends object>(o: T): Partial<T> {

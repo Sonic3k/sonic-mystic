@@ -233,6 +233,9 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       assert.equal(p.status, 201);
       assert.deepEqual(p.data.names?.map(n => [n.text, n.primary]), [['Quỳnh', true], ['Thị Quỳnh', false], ['Lê Thị Quỳnh', false]]);
       assert.equal(p.data.settings, null);
+      // a person's list of profiles names the one each reads, and keeps its birth
+      const sum = (await api<SubjectDto>(`/subjects/${s.data.id}`)).data.profiles[0];
+      assert.deepEqual([sum.name, sum.gender, sum.birth.day, sum.birth.month, sum.birth.year], ['Quỳnh', 'female', 1, 5, 1974]);
       const r = await api<NumerologyReadingDto>(`/profiles/${p.data.id}/reading`);
       assert.equal(r.data.chart.ruling, 9);
       const codes = r.data.sections[0].groups.flatMap(g => g.matches.map(m => m.rule));
@@ -251,6 +254,7 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       assert.deepEqual(b.data.lines.map(l => l.layer), ['primary', 'added']);
       const renamed = await api<ProfileDto>(`/profiles/${p.data.id}`, { names: [{ label: 'Tên ở nhà', text: 'Bông', primary: true }] }, 'PATCH');
       assert.deepEqual(renamed.data.names, [{ label: 'Tên ở nhà', text: 'Bông', primary: true }]);
+      assert.equal((await api<SubjectDto>(`/subjects/${s.data.id}`)).data.profiles[0].name, 'Bông');
       const after = await api<AiReadingDto[]>(`/profiles/${p.data.id}/ai-readings`);
       assert.equal(after.data[0].stale, true);
       assert.equal((await api(`/profiles/${p.data.id}/readings/han-2026`, { sections: [{ title: 'x', items: [{ layer: 'added', text: 'y' }] }] }, 'PUT')).status, 400);

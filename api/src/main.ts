@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 import { AppModule } from './app.module.js';
 import { loadConfig, type AppConfig } from './config.js';
 import { createDb, createPool, ensureDatabase, runMigrations } from './db/db.js';
-import { importTuvi } from './kb/importer.js';
+import { importTuvi, upsertDisciplines } from './kb/importer.js';
 import { importNumerology, readNumerologyBundle } from './kb/numerology-importer.js';
 
 /** the database first (created on the shared server when missing), its schema, the knowledge, then the app */
@@ -17,6 +17,8 @@ export async function createApp(config: AppConfig): Promise<NestExpressApplicati
   const pool = createPool(url, config.db.ssl);
   const db = createDb(pool);
   await runMigrations(db);
+  // the disciplines the engine knows, and which of them are ready (an import may be skipped, this is not)
+  await upsertDisciplines(db);
   const report = await importTuvi(db, config.kbBundleDir);
   log.log(report.skipped ? `knowledge ${report.version} already imported` : `imported knowledge ${report.version}: ${report.written} rows, ${report.keptEdited} edited kept, ${report.removed} removed (${report.ms} ms)`);
   // the numerology book, when its bundle is on disk (else it is uploaded: PUT /api/numerology/bundle)

@@ -281,8 +281,9 @@ export class PeopleController {
   @HttpCode(204)
   async deleteProfile(@Param('id') id: string) { await this.people.deleteProfile(id); }
 
+  /** ?year= the calendar year whose personal year is read (tử vi: the year viewed); nhân số học: ?name= another of its names */
   @Get('profiles/:id/reading')
-  profileReading(@Param('id') id: string, @Query('year') year?: string) { return this.people.profileReading(id, optInt(year)); }
+  profileReadingOf(@Param('id') id: string, @Query('year') year?: string, @Query('name') name?: string) { return this.people.profileReading(id, optInt(year), optInt(name)); }
 
   /** every written reading of a profile (the app's AI ones and those written with Claude) */
   @Get('profiles/:id/ai-readings')

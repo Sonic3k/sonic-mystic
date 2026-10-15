@@ -1,5 +1,5 @@
 /* How a person and a birth read in a line. */
-import type { BirthDto, Gender } from '@mystic/engine/api';
+import type { BirthDto, Gender, SubjectDto } from '@mystic/engine/api';
 import type { Gender as ChartGender } from '@mystic/engine/tuvi';
 import { GIO } from './params';
 
@@ -19,5 +19,14 @@ export function birthLine(b: BirthDto): string {
 
 /** a birth complete enough to set up a chart */
 export const birthComplete = (g: Gender | null, b: BirthDto) => !!g && !!b.year && !!b.month && !!b.day && (!!b.time || b.hourBranch !== null);
+
+/** a date complete enough for the numbers (no hour needed) */
+export const dateComplete = (b: BirthDto) => !!b.year && !!b.month && !!b.day;
+
+/** "2 lá số · 1 hồ sơ nhân số học" */
+export function profilesLine(s: SubjectDto): string {
+  const tuvi = s.profiles.filter(p => p.discipline === 'tuvi').length, ns = s.profiles.filter(p => p.discipline === 'numerology').length;
+  return [tuvi ? `${tuvi} lá số` : '', ns ? `${ns} hồ sơ nhân số học` : ''].filter(Boolean).join(' · ') || 'chưa có lá số';
+}
 
 export const SONIC_HUB = 'sonic-hub';

@@ -2,6 +2,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import Shell from './components/Shell';
 import Home from './pages/Home';
+import { NsBookEntry, NsBookIndex } from './pages/ns/Book';
+import NsHome from './pages/ns/Home';
+import NsLookup from './pages/ns/Lookup';
+import { NsProfilePage, NsXemPage } from './pages/ns/Reading';
 import { PeoplePage, SubjectPage } from './pages/People';
 import { BookEntryPage, BookIndex } from './pages/tuvi/Book';
 import ChartPage from './pages/tuvi/ChartPage';
@@ -27,6 +31,12 @@ export default function App() {
             <Route path="tu-vi/sach/:ref" element={<BookEntryPage />} />
             <Route path="tu-vi/tra-cuu" element={<Lookup />} />
             <Route path="tu-vi/phan-1" element={<Phan1 />} />
+            <Route path="nhan-so-hoc" element={<NsHome />} />
+            <Route path="nhan-so-hoc/xem" element={<NsXemPage />} />
+            <Route path="nhan-so-hoc/profile/:id" element={<NsProfilePage />} />
+            <Route path="nhan-so-hoc/sach" element={<NsBookIndex />} />
+            <Route path="nhan-so-hoc/sach/:code" element={<NsBookEntry />} />
+            <Route path="nhan-so-hoc/tra-cuu" element={<NsLookup />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>

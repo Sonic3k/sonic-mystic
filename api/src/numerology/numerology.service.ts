@@ -95,8 +95,9 @@ export class NumerologyService {
   }
 
   /** the reading of a chart: the book's passages for every part, and every rule they cite */
-  readingOf(c: Computed, k: NumerologyKnowledge, viewYear: number | null): NumerologyReadingDto {
-    const r = readNumerology(c.chart, k.kb, viewYear ? { year: viewYear } : {});
+  readingOf(c: Computed, k: NumerologyKnowledge, viewYear: number | null, name?: number): NumerologyReadingDto {
+    const nameRead = name !== undefined && c.chart.names[name] ? name : c.chart.primary;
+    const r = readNumerology(c.chart, k.kb, { ...(viewYear ? { year: viewYear } : {}), ...(nameRead !== null ? { name: nameRead } : {}) });
     const used = new Set<string>();
     const sections = r.sections.map(s => ({
       topic: s.topic, title: s.title, focus: s.focus,
@@ -108,7 +109,7 @@ export class NumerologyService {
     return {
       engineVersion: ENGINE_VERSION, knowledgeVersion: k.version,
       solar: { year: c.solar.year, month: c.solar.month, day: c.solar.day, fromLunar: c.solar.fromLunar, note: c.solar.note },
-      chart: c.chart, pyear: r.pyear, viewYear, sections, rules, source,
+      chart: c.chart, pyear: r.pyear, viewYear, name: nameRead, sections, rules, source,
     };
   }
 

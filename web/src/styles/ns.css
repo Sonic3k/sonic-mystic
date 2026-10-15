@@ -1,0 +1,183 @@
+/* ═══ Nhân số học ═══
+   The Tử vi pages' paper and components, with the book's own voice in mực tím (purple ink) instead of grandma's
+   cinnabar; everything added to the book (Claude's synthesis) keeps the slate blue of the added layer. */
+.ns { --ba: #5B3F8F; --ba-soft: #F1ECF7; --ba-line: #DDD2EC; --gold-ink: #8A6512; --grid: #CFC3AE; --ok: #2F7A4D; }
+.ns .seg { margin-left: 0; }
+.ns .tv-f .seg { align-self: stretch; }
+.seg button { padding: 6px 12px; border-radius: 7px; font-size: 13px; font-weight: 500; color: var(--ink2); user-select: none; min-height: 32px; }
+.seg button.on { background: var(--card); color: var(--ink); box-shadow: 0 1px 2px rgba(0, 0, 0, .06); }
+.tv-chip small { font-size: 11.5px; color: var(--ink3); } .tv-chip.on small { color: rgba(255, 255, 255, .7); }
+
+/* the board: the birth chart, the numbers, the pyramid */
+.ns-board { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(260px, 330px); gap: 28px 32px; padding: 22px 24px; align-items: start; }
+.ns-chart { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.ns-gridwrap { display: flex; gap: 10px; align-items: stretch; }
+.ns-grid { --cell: 74px; position: relative; display: grid; grid-template-columns: repeat(3, var(--cell)); grid-auto-rows: var(--cell); gap: 1px; background: var(--grid); border: 1px solid var(--grid); border-radius: 12px; overflow: hidden; flex: 0 0 auto; }
+.ns-cell { display: flex; align-items: center; justify-content: center; background: var(--card); font-family: var(--serif); font-size: 23px; font-weight: 600; letter-spacing: .03em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.ns-cell.none { color: #D2C7B4; font-weight: 400; font-size: 17px; }
+.ns-cell.long { font-size: 18px; letter-spacing: 0; }
+.ns-cell .nm { color: var(--ba); }
+.ns-cell.iso > span { box-shadow: 0 0 0 2px var(--hung); border-radius: 999px; padding: 0 8px; }
+.ns-arrows { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.ns-planes { display: grid; grid-auto-rows: var(--cell); gap: 1px; padding: 1px 0; }
+.ns-planes div { display: flex; flex-direction: column; justify-content: center; font-size: 11.5px; color: var(--ink3); line-height: 1.3; }
+.ns-planes b { font-size: 12.5px; font-weight: 600; color: var(--ink2); }
+.ns-legend { display: flex; flex-wrap: wrap; gap: 6px; }
+.ns-pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12.5px; font-weight: 600; background: var(--ba-soft); color: var(--ba); }
+.ns-pill.empty { background: transparent; box-shadow: inset 0 0 0 1px #BDB3A2; color: var(--ink2); font-weight: 500; }
+.ns-pill.iso { background: #F7E8E4; color: var(--hung); }
+.ns-pill.name { background: transparent; box-shadow: inset 0 0 0 1px var(--ba-line); }
+.ns-nums { display: grid; gap: 18px; min-width: 0; }
+.ns-big { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 16px; align-items: end; }
+.ns-big b { grid-row: span 2; font-family: var(--serif); font-size: 66px; line-height: .86; font-weight: 600; color: var(--ba); font-variant-numeric: tabular-nums; }
+.ns-big .tv-k { align-self: end; }
+.ns-big span { font-size: 13px; color: var(--ink2); }
+.ns-big span code { font-family: var(--sans); font-size: 12.5px; color: var(--ink3); }
+.ns-kv { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 20px; margin: 0; }
+.ns-kv div { display: grid; gap: 1px; min-width: 0; }
+.ns-kv dt { font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); }
+.ns-kv dd { margin: 0; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.ns-kv dd b { font-family: var(--serif); font-size: 28px; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.ns-kv dd span { font-size: 12.5px; color: var(--ink2); }
+.ns-names { display: flex; flex-wrap: wrap; gap: 6px; }
+.ns-names button { min-height: 30px; padding: 3px 10px; border-radius: 999px; font-size: 12.5px; color: var(--ink2); background: var(--soft); }
+.ns-names button.on { background: var(--ba); color: #fff; }
+.ns-names button small { opacity: .75; }
+.ns-pyr { min-width: 0; }
+.ns-pyr svg { display: block; width: 100%; height: auto; max-width: 340px; }
+.ns-pyr p { margin: 4px 0 0; font-size: 12.5px; color: var(--ink2); }
+
+/* the book's words, as read for the person */
+.ns-line { position: relative; padding: 7px 10px 9px 14px; border-radius: 6px; scroll-margin-top: 96px; }
+.ns-line::before { content: ""; position: absolute; left: 0; top: 9px; bottom: 9px; width: 3px; border-radius: 2px; background: var(--ba); opacity: .55; }
+.ns-line.advice::before { background: var(--gold-ink); opacity: .8; }
+.ns-line.child::before { background: #8E8A80; }
+.ns-line.hl { background: #FFF1D9; }
+.ns-line p { margin: 0; font-family: var(--serif); font-size: 16.5px; line-height: 1.6; color: var(--ink); white-space: pre-line; }
+.ns-why { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 4px; font-size: 12px; color: var(--ink3); }
+.ns-why .w::before { content: "← "; }
+.ns-why a { color: var(--ink3); text-decoration: underline; text-decoration-color: #D6CCBA; text-underline-offset: 2px; }
+.ns-tag { display: inline-block; padding: 0 6px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.ns-tag.adv { background: #F5EDD9; color: var(--gold-ink); }
+.ns-tag.kid { background: var(--soft); color: var(--ink2); }
+.ns-tag.ex { background: var(--soft); color: var(--ink3); }
+.ns-expl { padding: 14px 16px; border-radius: 10px; background: var(--card); border: 1px solid var(--line); }
+.ns-expl h4 { margin: 0 0 8px; font-size: 13px; font-weight: 700; color: var(--ba); display: flex; gap: 8px; align-items: center; }
+.ns-expl p { margin: 0 0 8px; font-family: var(--serif); font-size: 14.5px; line-height: 1.55; color: var(--ink2); }
+.ns-expl small { display: block; font-size: 11.5px; color: var(--ink3); margin-top: -4px; margin-bottom: 8px; }
+.ns-expl .row { display: flex; justify-content: space-between; gap: 10px; margin: 0 0 4px; font-family: var(--sans); font-size: 13px; color: var(--ink2); }
+
+/* the synthesis: the book retold, and what Claude adds — never mixed */
+.ns-sum { margin: 0 0 28px; }
+.ns-sum h3 { margin: 0 0 10px; font-size: 18px; font-weight: 700; letter-spacing: -.01em; text-wrap: balance; scroll-margin-top: 90px; }
+.ns-item { margin: 0 0 10px; border-radius: 0 8px 8px 0; }
+.ns-item.src { padding: 10px 12px 10px 14px; border-left: 3px solid var(--ba); background: #F8F5FB; }
+.ns-item.src p { margin: 0; font-family: var(--serif); font-size: 16px; line-height: 1.62; }
+.ns-item.add { padding: 10px 12px 10px 14px; border-left: 3px solid var(--bs); background: var(--bs-soft); color: #23384A; }
+.ns-item.add p { margin: 0; font-size: 14.5px; line-height: 1.6; }
+.ns-item.add .tv-voice { margin-bottom: 4px; }
+.ns-refs { display: inline-flex; gap: 3px; margin-left: 4px; vertical-align: 2px; }
+.ns-refs button { min-width: 20px; height: 20px; padding: 0 5px; border-radius: 5px; font-family: var(--sans); font-size: 11px; font-weight: 700; color: var(--ba); background: var(--ba-soft); line-height: 20px; }
+.ns-item.add .ns-refs button { color: var(--bs); background: #DCE8EE; }
+.ns-refs button[aria-expanded="true"] { background: var(--ba); color: #fff; }
+.ns-quotes { display: grid; gap: 8px; margin: 10px 0 2px; padding-top: 10px; border-top: 1px dashed var(--ba-line); }
+.ns-quote { margin: 0; font-family: var(--serif); font-size: 14.5px; line-height: 1.55; color: var(--ink2); }
+.ns-quote small { display: block; margin-top: 2px; font-family: var(--sans); font-size: 11.5px; color: var(--ink3); }
+.ns-quote small button { font-size: 11.5px; font-weight: 600; color: var(--ba); }
+.ns-sum-head { display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; margin: 0 0 18px; font-size: 13px; color: var(--ink2); }
+.ns-ok { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: 999px; background: #E6F1EA; color: var(--ok); font-size: 12px; font-weight: 600; }
+.ns-ok::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.ns-ok.old { background: #FFF4E0; color: #8A5A10; }
+.ns-toc { display: grid; gap: 2px; }
+.ns-toc a, .ns-toc button { display: block; padding: 6px 8px; border-radius: 6px; font-size: 13.5px; color: var(--ink2); text-align: left; }
+.ns-toc a:hover, .ns-toc button:hover { background: var(--soft); color: var(--ink); }
+
+/* thời vận: a life on one line, the nine-year cycle, the peaks */
+.ns-life { padding: 16px 20px 10px; margin: 0 0 18px; }
+.ns-life svg { display: block; width: 100%; height: auto; max-width: 860px; margin: 0 auto; }
+.ns-life svg.sm { display: none; }
+.ns-years { display: grid; grid-template-columns: repeat(11, minmax(98px, 1fr)); gap: 6px; overflow-x: auto; padding-bottom: 4px; margin: 0 0 22px; scrollbar-width: thin; }
+.ns-years button { display: flex; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 9px; border-radius: 9px; background: var(--card); border: 1px solid var(--line); text-align: left; min-width: 0; }
+.ns-years button b { font-family: var(--serif); font-size: 24px; font-weight: 600; line-height: 1.1; color: var(--ink); }
+.ns-years button span { font-size: 12.5px; font-weight: 600; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.ns-years button small { font-size: 10.5px; color: var(--ink3); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ns-years button i { font-style: normal; font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ba); }
+.ns-years button.now { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.ns-years button.sel { background: var(--ink); border-color: var(--ink); } .ns-years button.sel b, .ns-years button.sel span { color: #fff; } .ns-years button.sel small { color: rgba(255, 255, 255, .7); } .ns-years button.sel i { color: #CDBDF0; }
+.ns-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.ns-peaks { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 0 0 16px; }
+.ns-peaks button { display: grid; gap: 0; padding: 8px 10px; border-radius: 9px; background: var(--card); border: 1px solid var(--line); text-align: left; min-width: 0; }
+.ns-peaks button b { font-family: var(--serif); font-size: 22px; font-weight: 600; line-height: 1.1; }
+.ns-peaks button span { font-size: 12px; color: var(--ink2); white-space: nowrap; }
+.ns-peaks button small { font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ink3); }
+.ns-peaks button.next small { color: var(--ba); }
+.ns-peaks button.sel { background: var(--ink); border-color: var(--ink); color: #fff; } .ns-peaks button.sel span, .ns-peaks button.sel small { color: rgba(255, 255, 255, .78); }
+.ns-note { margin: 0 0 14px; padding: 9px 12px; border-radius: 8px; background: var(--ba-soft); color: #43306B; font-size: 13px; line-height: 1.5; }
+
+/* the book */
+.ns-part { margin-top: 36px; }
+.ns-part-h { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin: 0 0 12px; }
+.ns-part-h h2 { margin: 0; font-family: var(--serif); font-size: 22px; font-weight: 600; text-wrap: balance; }
+.ns-part-h span { font-size: 12.5px; color: var(--ink3); }
+.ns-topic { display: inline-flex; align-items: center; gap: 6px; padding: 1px 9px; border-radius: 999px; background: var(--ba-soft); color: var(--ba); font-size: 12px; font-weight: 600; }
+.ns-crumb { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; color: var(--ink3); margin: 0 0 8px; }
+.ns-crumb a { color: var(--ba); font-weight: 600; }
+.ns-h2 { margin: 30px 0 8px; font-family: var(--serif); font-size: 21px; font-weight: 600; scroll-margin-top: 90px; }
+.ns-h3 { margin: 22px 0 6px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ba); scroll-margin-top: 90px; }
+.ns-text { padding-left: 46px; }
+.ns-text .tv-para p { white-space: pre-line; }
+.ns-pg { position: absolute; left: -46px; top: 9px; width: 38px; text-align: right; font-size: 11px; color: var(--ink3); font-variant-numeric: tabular-nums; }
+.ns-when { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 4px; font-size: 12px; color: var(--ba); }
+.ns-when::before { content: "khi"; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink3); }
+.tv-para.role-example p, .tv-para.role-method p { color: var(--ink2); font-size: 16px; }
+.ns-fig { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin: 8px 0 12px; padding: 12px 14px; border-radius: 10px; background: var(--card); border: 1px solid var(--line); }
+.ns-fig .ns-grid { --cell: 40px; border-radius: 8px; }
+.ns-fig .ns-cell { font-size: 15px; }
+.ns-fig .ns-cell.long { font-size: 11.5px; }
+.ns-fig figcaption { flex: 1; min-width: 200px; font-size: 13px; color: var(--ink2); }
+.ns-fig figcaption b { display: block; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.ns-fig.hl { box-shadow: 0 0 0 2px #F0DDB5; }
+
+/* lookup */
+.ns-pickers { display: grid; gap: 14px; }
+.ns-picker { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 6px 14px; align-items: start; }
+.ns-picker > span { padding-top: 6px; font-size: 12.5px; font-weight: 600; color: var(--ink2); }
+
+/* the names a profile reads */
+.ns-namerows { display: grid; gap: 8px; }
+.ns-namerow { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.4fr) auto; gap: 8px; align-items: center; }
+.ns-namerow input[type="radio"] { width: 18px; height: 18px; accent-color: var(--ba); }
+.ns-namerow .tv-input { height: 38px; font-size: 14px; }
+.ns-namerow button { width: 34px; height: 34px; border-radius: 8px; color: var(--ink3); font-size: 18px; }
+
+@media (max-width: 1100px) {
+  .ns-board { grid-template-columns: auto minmax(0, 1fr); }
+  .ns-pyr { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 8px 24px; align-items: center; }
+  .ns-two { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 860px) {
+  .ns-pg { position: static; display: inline; margin-right: 6px; }
+  .ns-text { padding-left: 0; }
+  .ns-picker { grid-template-columns: minmax(0, 1fr); }
+  .ns-picker > span { padding-top: 0; }
+}
+@media (max-width: 640px) {
+  .ns-board { grid-template-columns: minmax(0, 1fr); padding: 16px; gap: 22px; }
+  .ns-chart { align-items: flex-start; }
+  .ns-grid { --cell: 62px; }
+  .ns-cell { font-size: 20px; }
+  .ns-pyr { grid-template-columns: minmax(0, 1fr); }
+  .ns-big b { font-size: 56px; }
+  .ns-kv dd b { font-size: 24px; }
+  .ns-peaks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ns-line p { font-size: 16px; }
+  /* a name per two lines: what it is above, the name below, the radio and × beside both */
+  .ns-namerows { gap: 14px; }
+  .ns-namerow { grid-template-columns: auto minmax(0, 1fr) auto; row-gap: 6px; }
+  .ns-namerow input[type="radio"] { grid-row: 1 / 3; }
+  .ns-namerow .lbl { grid-column: 2; grid-row: 1; }
+  .ns-namerow .tv-input:not(.lbl) { grid-column: 2; grid-row: 2; }
+  .ns-namerow button { grid-column: 3; grid-row: 1 / 3; }
+  .ns-cell.long { font-size: 15px; }
+  .ns-life svg.lg { display: none; } .ns-life svg.sm { display: block; }
+}

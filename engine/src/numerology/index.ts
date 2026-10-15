@@ -3,3 +3,4 @@ export * from './chart.js';
 export * from './dsl.js';
 export * from './reading.js';
 export * from './book.js';
+export * from './describe.js';
