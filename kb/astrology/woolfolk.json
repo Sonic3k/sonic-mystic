@@ -65,7 +65,8 @@
    "at": 61,
    "code": "w1.aries.march-21-april-19",
    "title": "(21/3 – 19/4)",
-   "parent": "w1.aries"
+   "parent": "w1.aries",
+   "join": true
   },
   {
    "at": 79,
@@ -105,7 +106,8 @@
    "at": 102,
    "code": "w1.taurus.april-20-may-20",
    "title": "(20/4 – 20/5)",
-   "parent": "w1.taurus"
+   "parent": "w1.taurus",
+   "join": true
   },
   {
    "at": 120,
@@ -145,7 +147,8 @@
    "at": 140,
    "code": "w1.gemini.may-21-june-20",
    "title": "(21/5 – 20/6)",
-   "parent": "w1.gemini"
+   "parent": "w1.gemini",
+   "join": true
   },
   {
    "at": 158,
@@ -185,7 +188,8 @@
    "at": 181,
    "code": "w1.cancer.june-21-july-22",
    "title": "(21/6 – 22/7)",
-   "parent": "w1.cancer"
+   "parent": "w1.cancer",
+   "join": true
   },
   {
    "at": 199,
@@ -231,7 +235,8 @@
    "at": 221,
    "code": "w1.leo.july-23-august-22",
    "title": "(23/7 – 22/8)",
-   "parent": "w1.leo"
+   "parent": "w1.leo",
+   "join": true
   },
   {
    "at": 240,
@@ -271,7 +276,8 @@
    "at": 259,
    "code": "w1.virgo.august-23-september-22",
    "title": "(23/8 – 22/9)",
-   "parent": "w1.virgo"
+   "parent": "w1.virgo",
+   "join": true
   },
   {
    "at": 277,
@@ -311,7 +317,8 @@
    "at": 300,
    "code": "w1.libra.september-23-october-22",
    "title": "(23/9 – 22/10)",
-   "parent": "w1.libra"
+   "parent": "w1.libra",
+   "join": true
   },
   {
    "at": 318,
@@ -357,7 +364,8 @@
    "at": 338,
    "code": "w1.scorpio.october-23-november-21",
    "title": "(23/10 – 21/11)",
-   "parent": "w1.scorpio"
+   "parent": "w1.scorpio",
+   "join": true
   },
   {
    "at": 356,
@@ -397,7 +405,8 @@
    "at": 379,
    "code": "w1.sagittarius.november-22-december-21",
    "title": "(22/11 – 21/12)",
-   "parent": "w1.sagittarius"
+   "parent": "w1.sagittarius",
+   "join": true
   },
   {
    "at": 397,
@@ -437,7 +446,8 @@
    "at": 419,
    "code": "w1.capricorn.december-22-january-19",
    "title": "(22/12 – 19/1)",
-   "parent": "w1.capricorn"
+   "parent": "w1.capricorn",
+   "join": true
   },
   {
    "at": 437,
@@ -477,7 +487,8 @@
    "at": 459,
    "code": "w1.aquarius.january-20-february-18",
    "title": "(20/1 – 18/2)",
-   "parent": "w1.aquarius"
+   "parent": "w1.aquarius",
+   "join": true
   },
   {
    "at": 477,
@@ -517,7 +528,8 @@
    "at": 502,
    "code": "w1.pisces.february-19-march-20",
    "title": "(19/2 – 20/3)",
-   "parent": "w1.pisces"
+   "parent": "w1.pisces",
+   "join": true
   },
   {
    "at": 520,

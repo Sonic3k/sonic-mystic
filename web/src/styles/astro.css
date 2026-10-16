@@ -1,0 +1,121 @@
+/* ═══ Chiêm tinh ═══
+   The Tử vi pages' paper and components. Each voice keeps its own colour, never shared: cô Hương Kiều's own words in
+   a deep teal (as grandma's are cinnabar and the numerology book's purple), the class's translation of Bil Tierney in
+   sepia, Woolfolk in Claude's translation in a muted plum, and what Claude adds in the slate blue of the added layer. */
+.as { --ba: #1E6B66; --ba-soft: #E4F0EE; --ba-line: #C6DFDA; --tie: #7A4E2D; --tie-soft: #F4ECE4; --wf: #6B567F; --wf-soft: #EFEBF4;
+  --fire: #B0412E; --earth: #6E7A2B; --air: #A77418; --water: #2D6C8C; --hard: #B0412E; --easy: #2F7A4D; --minor: #9A958A; }
+.as .seg { margin-left: 0; }
+.tv-voice.hk { color: var(--ba); } .tv-voice.tie { color: var(--tie); } .tv-voice.wf { color: var(--wf); }
+
+/* the board: the wheel, the positions, the chart at a glance */
+.as-board { display: grid; grid-template-columns: minmax(280px, 500px) minmax(0, 1fr); gap: 24px 32px; padding: 20px 22px; align-items: start; }
+.as-wheel { min-width: 0; }
+.as-wheel svg { display: block; width: 100%; height: auto; }
+.as-wheel .gl { font-family: "Noto Sans Symbols 2", "Segoe UI Symbol", "DejaVu Sans", sans-serif; }
+.as-wheel p { margin: 6px 0 0; font-size: 12px; color: var(--ink3); text-align: center; }
+.as-right { display: grid; gap: 18px; min-width: 0; }
+.as-pos { width: 100%; border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+.as-pos th { padding: 0 8px 6px 0; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); text-align: left; white-space: nowrap; }
+.as-pos td { padding: 5px 8px 5px 0; border-top: 1px solid var(--line); white-space: nowrap; }
+.as-pos td:first-child { font-weight: 600; }
+.as-pos .g { display: inline-block; width: 18px; font-family: "Noto Sans Symbols 2", "Segoe UI Symbol", "DejaVu Sans", sans-serif; font-weight: 400; color: var(--ink2); }
+.as-pos .r { color: var(--hard); font-weight: 600; }
+.as-pos tr.pt td { color: var(--ink2); } .as-pos tr.pt td:first-child { font-weight: 500; }
+.as-pos tr.sep td { border-top: 1px solid #D6CAB4; }
+.as-dig { display: inline-block; padding: 0 6px; border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: .03em; }
+.as-dig.ruler, .as-dig.exaltation { background: #E6F1EA; color: var(--easy); }
+.as-dig.detriment, .as-dig.fall { background: #F7E8E4; color: var(--hard); }
+.as-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 20px; margin: 0; }
+.as-facts div { display: grid; gap: 1px; min-width: 0; }
+.as-facts dt { font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); }
+.as-facts dd { margin: 0; font-size: 14px; color: var(--ink); }
+.as-facts dd small { display: block; font-size: 12px; color: var(--ink2); }
+.as-elem { display: flex; flex-wrap: wrap; gap: 6px; }
+.as-elem span { display: inline-flex; align-items: baseline; gap: 5px; padding: 2px 9px; border-radius: 999px; background: var(--soft); font-size: 12.5px; color: var(--ink2); }
+.as-elem span b { font-size: 13px; color: var(--ink); }
+.as-elem span.zero { background: transparent; box-shadow: inset 0 0 0 1px #CFC3AE; color: var(--ink3); }
+.as-window { margin: -6px 0 16px; padding: 9px 12px; border-radius: 8px; background: var(--ba-soft); color: #18504C; font-size: 13px; line-height: 1.5; }
+.as-window b { font-variant-numeric: tabular-nums; }
+.as-note { margin: 0 0 14px; padding: 9px 12px; border-radius: 8px; background: #FFF4E0; color: #6E4A0E; font-size: 13px; line-height: 1.5; }
+
+/* a part's focus: one planet, house, sign, structure… of several */
+.as-sub { display: flex; flex-wrap: wrap; gap: 6px; margin: -6px 0 16px; }
+.as-sub button { display: inline-flex; align-items: baseline; gap: 6px; min-height: 30px; padding: 3px 11px; border-radius: 999px; font-size: 12.5px; color: var(--ink2); background: var(--soft); }
+.as-sub button .g { font-family: "Noto Sans Symbols 2", "Segoe UI Symbol", "DejaVu Sans", sans-serif; }
+.as-sub button small { font-size: 11px; opacity: .75; }
+.as-sub button.on { background: var(--ink); color: #fff; }
+
+/* the sources' words, as read for the person: a bar of the voice's colour */
+.as-line { position: relative; padding: 7px 10px 9px 14px; border-radius: 6px; scroll-margin-top: 96px; }
+.as-line::before { content: ""; position: absolute; left: 0; top: 9px; bottom: 9px; width: 3px; border-radius: 2px; background: var(--ba); opacity: .6; }
+.as-line.tierney::before { background: var(--tie); } .as-line.woolfolk::before { background: var(--wf); }
+.as-line.hl { background: #FFF1D9; }
+.as-line p { margin: 0; font-family: var(--serif); font-size: 16.5px; line-height: 1.6; color: var(--ink); white-space: pre-line; }
+.as-line p b.lb { font-family: var(--sans); font-size: 13px; font-weight: 700; color: var(--ink2); margin-right: 6px; }
+.as-line ul { margin: 2px 0 0; padding-left: 18px; font-family: var(--serif); font-size: 16px; line-height: 1.55; }
+.as-line ul li { margin: 1px 0; }
+.as-why { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 4px; font-size: 12px; color: var(--ink3); }
+.as-why .w::before { content: "← "; }
+.as-why a, .as-why button { font-size: 12px; color: var(--ink3); text-decoration: underline; text-decoration-color: #D6CCBA; text-underline-offset: 2px; }
+.as-why button.en[aria-pressed="true"] { color: var(--wf); text-decoration-color: currentColor; }
+.as-en { margin: 6px 0 2px; padding: 8px 10px; border-radius: 6px; background: var(--wf-soft); font-family: var(--serif); font-size: 14.5px; line-height: 1.55; color: #4B3E5C; font-style: italic; }
+.as .tv-strip { flex-wrap: wrap; overflow: visible; }
+.as-group .tv-gh { flex-wrap: wrap; row-gap: 2px; }
+.as-group .tv-gh b.caps { font-family: var(--sans); font-size: 13.5px; font-weight: 700; letter-spacing: .05em; }
+.as-group .tv-gh .v { font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.as-group .tv-gh .v.hk { color: var(--ba); } .as-group .tv-gh .v.tierney { color: var(--tie); } .as-group .tv-gh .v.woolfolk { color: var(--wf); }
+.as-more { margin: 4px 0 0 14px; font-size: 12.5px; font-weight: 600; color: var(--ba); }
+.as-side { padding: 14px 16px; border-radius: 10px; background: var(--card); border: 1px solid var(--line); }
+.as-side h4 { margin: 0 0 8px; font-size: 13px; font-weight: 700; color: var(--ba); display: flex; gap: 8px; align-items: center; }
+.as-side p { margin: 0 0 8px; font-family: var(--serif); font-size: 14.5px; line-height: 1.55; color: var(--ink2); }
+.as-side small { display: block; font-size: 11.5px; color: var(--ink3); margin-bottom: 8px; }
+.as-side .row { display: flex; justify-content: space-between; gap: 10px; margin: 0 0 4px; font-family: var(--sans); font-size: 13px; color: var(--ink2); }
+.as-side .row b { font-variant-numeric: tabular-nums; }
+
+/* lá số chi tiết: the aspects, the structures, her test of the dominant planets, the balance */
+.as-detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.as-asp { border-collapse: collapse; font-size: 12px; }
+.as-asp th, .as-asp td { width: 34px; height: 30px; padding: 0; text-align: center; border: 1px solid var(--line); background: var(--card); }
+.as-asp th { font-family: "Noto Sans Symbols 2", "Segoe UI Symbol", "DejaVu Sans", sans-serif; font-size: 15px; font-weight: 400; color: var(--ink2); background: var(--soft); }
+.as-asp td.x { background: transparent; border-color: transparent; }
+.as-asp td b { display: block; font-family: "Noto Sans Symbols 2", "Segoe UI Symbol", "DejaVu Sans", sans-serif; font-size: 15px; font-weight: 400; line-height: 1; }
+.as-asp td small { display: block; font-size: 9.5px; color: var(--ink3); font-variant-numeric: tabular-nums; }
+.as-asp td.hard b { color: var(--hard); } .as-asp td.easy b { color: var(--easy); } .as-asp td.conj b { color: var(--ink); } .as-asp td.minor b { color: var(--minor); }
+.as-asp-wrap { overflow-x: auto; padding-bottom: 4px; }
+.as-pat { display: grid; gap: 8px; }
+.as-pat div { padding: 10px 12px; border-radius: 9px; background: var(--card); border: 1px solid var(--line); }
+.as-pat b { display: block; font-size: 14px; }
+.as-pat span { font-size: 12.5px; color: var(--ink2); }
+.as-dom { display: grid; gap: 4px; }
+.as-dom-row { display: grid; grid-template-columns: 112px minmax(0, 1fr) 36px 92px; gap: 10px; align-items: center; padding: 6px 8px; border-radius: 7px; text-align: left; width: 100%; }
+.as-dom-row:hover { background: var(--soft); }
+.as-dom-row > span:first-child { font-size: 13.5px; font-weight: 600; }
+.as-dom-row i { display: block; height: 8px; border-radius: 4px; background: var(--ba); opacity: .75; }
+.as-dom-row i.low { background: #CFC3AE; } .as-dom-row i.medium { background: #9FC2BD; } .as-dom-row i.very-strong { background: var(--ba); opacity: 1; }
+.as-dom-row b { font-size: 14px; font-variant-numeric: tabular-nums; text-align: right; }
+.as-dom-row small { font-size: 12px; color: var(--ink2); }
+.as-dom-items { margin: 2px 0 10px 8px; padding: 8px 12px; border-left: 2px solid var(--ba-line); display: grid; gap: 3px; font-size: 13px; color: var(--ink2); }
+.as-dom-items p { margin: 0; display: grid; grid-template-columns: 46px minmax(0, 1fr) 30px; gap: 6px; }
+.as-dom-items p b { color: var(--ink); font-variant-numeric: tabular-nums; text-align: right; }
+.as-dom-items p span:first-child { color: var(--ink3); font-size: 11.5px; padding-top: 1px; }
+
+/* the sources */
+.as-books { display: grid; gap: 14px; }
+.as-book { padding: 16px 18px; }
+.as-book h3 { margin: 0 0 2px; font-family: var(--serif); font-size: 19px; font-weight: 600; }
+.as-book > p { margin: 0 0 10px; font-size: 13px; color: var(--ink2); max-width: 80ch; }
+
+@media (max-width: 1100px) {
+  .as-board { grid-template-columns: minmax(0, 1fr); }
+  .as-wheel { max-width: 520px; }
+  .as-detail { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .as-board { padding: 14px; }
+  .as .tv-strip { flex-wrap: nowrap; overflow-x: auto; }
+  .as-group .tv-gh > span:not(.v) { flex-basis: 100%; order: 3; }
+  .as-facts { grid-template-columns: minmax(0, 1fr); }
+  .as-pos td, .as-pos th { padding-right: 5px; }
+  .as-line p { font-size: 16px; }
+  .as-dom-row { grid-template-columns: 96px minmax(0, 1fr) 30px; } .as-dom-row small { display: none; }
+}

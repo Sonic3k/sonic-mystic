@@ -44,6 +44,7 @@ for (const name of MAPS) {
     if (blocks[e.at - 1]?.kind !== 'heading') errors.push(`${short}/${e.code}: khối ${e.at} không phải đề mục`);
     if (e.parent && !byCode.has(e.parent)) errors.push(`${short}/${e.code}: không có mục cha ${e.parent}`);
     if (e.kind && !ROLES.has(e.kind)) errors.push(`${short}/${e.code}: kind "${e.kind}"`);
+    if (e.join && map.entries.some(x => x.parent === e.code)) errors.push(`${short}/${e.code}: đề mục nối vào đề mục trước thì không có mục con`);
     for (const t of [e.topic ?? []].flat()) if (!TOPIC_CODES.has(t)) errors.push(`${short}/${e.code}: topic "${t}"`);
   }
   for (const b of blocks) if (b.kind === 'heading' && !byAt.has(b.id)) errors.push(`${short}: đề mục ở khối ${b.id} chưa có mục: "${b.text}"`);
@@ -55,6 +56,12 @@ for (const name of MAPS) {
     if (b.kind === 'heading') {
       const e = byAt.get(b.id);
       if (!e) continue;
+      // a heading that only completes the one before it (Woolfolk's "(January 20 – February 18)" under "Aquarius")
+      if (e.join) {
+        if (cur?.at !== b.id - 1) errors.push(`${short}/${e.code}: "join" chỉ dùng cho đề mục ngay sau một đề mục khác`);
+        else { cur.title = `${cur.title} ${e.title}`; if (b.en) cur.en = cur.en ? `${cur.en} ${b.en}` : b.en; }
+        continue;
+      }
       const when = inherit(e, 'when') ?? null;
       const parsed = when ? parse(when) : null;
       if (parsed?.errors.length) errors.push(`${short}/${e.code}: điều kiện lỗi — ${parsed.errors.join('; ')} — ${when}`);

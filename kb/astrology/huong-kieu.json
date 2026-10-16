@@ -486,6 +486,7 @@
    "at": 240,
    "code": "sign-aries",
    "title": "BẠCH DƯƠNG",
+   "parent": "12-dau-hieu-hoang-dao",
    "kind": "rule",
    "topic": "sign",
    "when": "focus_sign(aries)"
@@ -554,6 +555,7 @@
    "at": 280,
    "code": "sign-taurus",
    "title": "KIM NGƯU",
+   "parent": "12-dau-hieu-hoang-dao",
    "kind": "rule",
    "topic": "sign",
    "when": "focus_sign(taurus)"
@@ -622,6 +624,7 @@
    "at": 327,
    "code": "sign-gemini",
    "title": "SONG TỬ",
+   "parent": "12-dau-hieu-hoang-dao",
    "kind": "rule",
    "topic": "sign",
    "when": "focus_sign(gemini)"
@@ -690,6 +693,7 @@
    "at": 370,
    "code": "sign-cancer",
    "title": "CỰ GIẢI",
+   "parent": "12-dau-hieu-hoang-dao",
    "kind": "rule",
    "topic": "sign",
    "when": "focus_sign(cancer)"
@@ -758,6 +762,7 @@
    "at": 416,
    "code": "sign-leo",
    "title": "SƯ TỬ",
+   "parent": "12-dau-hieu-hoang-dao",
    "kind": "rule",
    "topic": "sign",
    "when": "focus_sign(leo)"
@@ -826,6 +831,7 @@
    "at": 462,
    "code": "sign-virgo",
    "title": "XỬ NỮ",
+   "parent": "12-dau-hieu-hoang-dao",
    "kind": "rule",
    "topic": "sign",
    "when": "focus_sign(virgo)"
@@ -900,6 +906,7 @@
    "at": 513,
    "code": "sign-libra",
    "title": "THIÊN BÌNH",
+   "parent": "12-dau-hieu-hoang-dao",
    "kind": "rule",
    "topic": "sign",
    "when": "focus_sign(libra)"
@@ -968,6 +975,7 @@
    "at": 559,
    "code": "sign-scorpio",
    "title": "BỌ CẠP",
+   "parent": "12-dau-hieu-hoang-dao",
    "kind": "rule",
    "topic": "sign",
    "when": "focus_sign(scorpio)"
@@ -1036,6 +1044,7 @@
    "at": 608,
    "code": "sign-sagittarius",
    "title": "NHÂN MÃ",
+   "parent": "12-dau-hieu-hoang-dao",
    "kind": "rule",
    "topic": "sign",
    "when": "focus_sign(sagittarius)"
@@ -1104,6 +1113,7 @@
    "at": 653,
    "code": "sign-capricorn",
    "title": "MA KẾT",
+   "parent": "12-dau-hieu-hoang-dao",
    "kind": "rule",
    "topic": "sign",
    "when": "focus_sign(capricorn)"
@@ -1166,6 +1176,7 @@
    "at": 695,
    "code": "sign-aquarius",
    "title": "BẢO BÌNH",
+   "parent": "12-dau-hieu-hoang-dao",
    "kind": "rule",
    "topic": "sign",
    "when": "focus_sign(aquarius)"
@@ -1228,6 +1239,7 @@
    "at": 738,
    "code": "sign-pisces",
    "title": "SONG NGƯ",
+   "parent": "12-dau-hieu-hoang-dao",
    "kind": "rule",
    "topic": "sign",
    "when": "focus_sign(pisces)"
