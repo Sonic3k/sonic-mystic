@@ -23,10 +23,11 @@ export const birthComplete = (g: Gender | null, b: BirthDto) => !!g && !!b.year 
 /** a date complete enough for the numbers (no hour needed) */
 export const dateComplete = (b: BirthDto) => !!b.year && !!b.month && !!b.day;
 
-/** "2 lá số · 1 hồ sơ nhân số học" */
+/** "2 lá số tử vi · 1 lá số chiêm tinh · 1 hồ sơ nhân số học" */
 export function profilesLine(s: SubjectDto): string {
-  const tuvi = s.profiles.filter(p => p.discipline === 'tuvi').length, ns = s.profiles.filter(p => p.discipline === 'numerology').length;
-  return [tuvi ? `${tuvi} lá số` : '', ns ? `${ns} hồ sơ nhân số học` : ''].filter(Boolean).join(' · ') || 'chưa có lá số';
+  const n = (d: string) => s.profiles.filter(p => p.discipline === d).length;
+  const tuvi = n('tuvi'), ns = n('numerology'), astro = n('astrology');
+  return [tuvi ? `${tuvi} lá số tử vi` : '', astro ? `${astro} lá số chiêm tinh` : '', ns ? `${ns} hồ sơ nhân số học` : ''].filter(Boolean).join(' · ') || 'chưa có lá số';
 }
 
 export const SONIC_HUB = 'sonic-hub';

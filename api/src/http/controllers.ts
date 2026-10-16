@@ -231,8 +231,9 @@ export class AstrologyController {
   @Get('book')
   toc() { return this.astrology.toc(); }
 
+  /** ?shallow=1: only the entry's own passages and the titles under it */
   @Get('book/:source/:code')
-  entry(@Param('source') source: string, @Param('code') code: string) { return this.astrology.entry(source, code); }
+  entry(@Param('source') source: string, @Param('code') code: string, @Query('shallow') shallow?: string) { return this.astrology.entry(source, code, shallow === '1' || shallow === 'true'); }
 
   /** ?symbols=sun@aries,house:7 — the passages whose condition speaks of all of them (optionally in one part: &topic=sun) */
   @Get('lookup')

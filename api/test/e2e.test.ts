@@ -331,6 +331,11 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       assert.ok(l.data.total >= 1);
       assert.ok(l.data.groups.every(g => g.rules.every(x => x.when.includes('sagittarius'))));
       assert.equal((await api('/astrology/book/hk/khong-co')).status, 404);
+      // a whole chapter, shallowly: its own passages, then only the titles of its sections
+      const ch = await api<AstrologyEntryDto>('/astrology/book/woolfolk/w1?shallow=1');
+      assert.ok(ch.data.sections[0].passages.length > 0);
+      assert.ok(ch.data.sections.length > 12 && ch.data.sections.slice(1).every(x => x.passages.length === 0 && x.depth === 1));
+      assert.ok(ch.data.sections.some(x => x.title === 'Bảo Bình (20/1 – 18/2)'));
     });
 
     test('profiles: a chart of a person, a reading written with Claude, the brief', async () => {

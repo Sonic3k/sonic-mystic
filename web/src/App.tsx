@@ -2,6 +2,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import Shell from './components/Shell';
 import Home from './pages/Home';
+import { AstroBookEntry, AstroBookIndex } from './pages/astro/Book';
+import AstroHome from './pages/astro/Home';
+import AstroLookup from './pages/astro/Lookup';
+import { AstroProfilePage, AstroXemPage } from './pages/astro/Reading';
 import { NsBookEntry, NsBookIndex } from './pages/ns/Book';
 import NsHome from './pages/ns/Home';
 import NsLookup from './pages/ns/Lookup';
@@ -37,6 +41,12 @@ export default function App() {
             <Route path="nhan-so-hoc/sach" element={<NsBookIndex />} />
             <Route path="nhan-so-hoc/sach/:code" element={<NsBookEntry />} />
             <Route path="nhan-so-hoc/tra-cuu" element={<NsLookup />} />
+            <Route path="chiem-tinh" element={<AstroHome />} />
+            <Route path="chiem-tinh/xem" element={<AstroXemPage />} />
+            <Route path="chiem-tinh/profile/:id" element={<AstroProfilePage />} />
+            <Route path="chiem-tinh/sach" element={<AstroBookIndex />} />
+            <Route path="chiem-tinh/sach/:source/:code" element={<AstroBookEntry />} />
+            <Route path="chiem-tinh/tra-cuu" element={<AstroLookup />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>

@@ -1,6 +1,7 @@
 /* The Mystic API, typed by the contract in @mystic/engine/api. */
 import type {
-  AiReadingDto, AiStatusDto, BirthDto, BriefDto, CatalogDto, DisciplineDto, EntryDto, EntrySummaryDto, Gender, LookupResultDto,
+  AiReadingDto, AiStatusDto, AstrologyBookDto, AstrologyCatalogDto, AstrologyChartDto, AstrologyEntryDto, AstrologyLookupDto, AstrologyReadingDto, AstrologyRequest,
+  BirthDto, BriefDto, CatalogDto, DisciplineDto, EntryDto, EntrySummaryDto, Gender, LookupResultDto,
   NumerologyBookDto, NumerologyCatalogDto, NumerologyEntryDto, NumerologyLookupDto, NumerologyNameDto, NumerologyReadingDto, NumerologyRequest,
   PassageDto, ProfileDto, RuleDto, SearchResultDto, SetupDto, SonicHubPersonDto, SourceDto, SubjectDto, TuViReadingDto, TuViRequest, TuViSettings,
 } from '@mystic/engine/api';
@@ -40,7 +41,7 @@ const q = (o: Record<string, string | number | undefined | null>) => {
 export interface SubjectInput { displayName: string; gender: Gender | null; birth: Partial<BirthDto>; note?: string | null }
 export interface RulePatch { text?: string; context?: string | null; condition?: string | null; tone?: RuleDto['tone']; active?: boolean; reviewNote?: string | null }
 export interface ProfileInput {
-  subjectId: string; discipline?: 'tuvi' | 'numerology'; label?: string | null; viewYear?: number | null; note?: string | null;
+  subjectId: string; discipline?: 'tuvi' | 'numerology' | 'astrology'; label?: string | null; viewYear?: number | null; note?: string | null;
   gender?: Gender | null; birth?: Partial<BirthDto> | null; settings?: Partial<TuViSettings>;
   /** nhân số học: the names read */
   names?: NumerologyNameDto[] | null;
@@ -83,6 +84,15 @@ export const api = {
   nsEntry: (code: string) => get<NumerologyEntryDto>(`/numerology/book/${encodeURIComponent(code)}`),
   nsLookup: (symbols: string[], topic?: string) => get<NumerologyLookupDto>(`/numerology/lookup${q({ symbols: symbols.join(','), topic })}`),
   nsCatalog: () => get<NumerologyCatalogDto>('/numerology/catalog'),
+
+  // chiêm tinh
+  astroChart: (r: AstrologyRequest) => call<AstrologyChartDto>('POST', '/astrology/chart', r),
+  astroReading: (r: AstrologyRequest) => call<AstrologyReadingDto>('POST', '/astrology/reading', r),
+  astroProfileReading: (id: string) => get<AstrologyReadingDto>(`/profiles/${id}/reading`),
+  astroBook: () => get<AstrologyBookDto>('/astrology/book'),
+  astroEntry: (source: string, code: string, shallow = false) => get<AstrologyEntryDto>(`/astrology/book/${encodeURIComponent(source)}/${encodeURIComponent(code)}${shallow ? '?shallow=1' : ''}`),
+  astroLookup: (symbols: string[], topic?: string) => get<AstrologyLookupDto>(`/astrology/lookup${q({ symbols: symbols.join(','), topic })}`),
+  astroCatalog: () => get<AstrologyCatalogDto>('/astrology/catalog'),
 
   aiStatus: () => get<AiStatusDto>('/ai/status'),
   aiReadings: (profileId: string) => get<AiReadingDto[]>(`/profiles/${profileId}/ai-readings`),

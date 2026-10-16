@@ -302,14 +302,25 @@ export function evaluate(node: Node, x: Ctx): Result {
   }
 }
 
+/** the body a condition's "self" is, when it is read in one body's section: focus(sun) & dominant(self) */
+function selfOf(n: Node | undefined): string | null {
+  if (!n) return null;
+  if (n.t === 'call') return n.fn === 'focus' && n.args.length === 1 ? n.args[0].trim() : null;
+  if (n.t !== 'and') return null;
+  const fs = n.a.map(selfOf).filter((x): x is string => !!x);
+  return fs.length === 1 ? fs[0] : null;
+}
+
 /** what a condition speaks of, for looking passages up: "sign:aries", "body:sun", "house:5", "sun@aries",
-    "sun@h5", "aspect:square", "sun~moon", "pattern:t-square", "dominant:mars"… (self speaks of nothing in particular) */
+    "sun@h5", "aspect:square", "sun~moon", "pattern:t-square", "dominant:mars"… (self is the body of its section, when
+    the condition names one; otherwise it speaks of nothing in particular) */
 export function symbolsOf(node: Node | undefined): Set<string> {
   const out = new Set<string>();
+  const self = selfOf(node);
   const walk = (n: Node | undefined): void => {
     if (!n || n.t === 'not') return;
     if (n.t !== 'call') { n.a.forEach(walk); return; }
-    const a = n.args.map(s => s.trim());
+    const a = n.args.map(s => s.trim()).map((s, k) => (s === 'self' && self && !(n.fn === 'cusp' && k === 0) ? self : s));
     const b0 = a[0] && a[0] !== 'self' ? a[0] : null;
     switch (n.fn) {
       case 'in': if (b0) out.add(`body:${b0}`); for (const s of a.slice(1)) { out.add(`sign:${s}`); if (b0) out.add(`${b0}@${s}`); } break;
@@ -340,6 +351,69 @@ export function symbolsOf(node: Node | undefined): Set<string> {
   };
   walk(node);
   return out;
+}
+
+const ASPECT_GROUP_NAME: Record<string, string> = { strong: 'góc mạnh', hard: 'góc căng', soft: 'góc thuận', weak: 'góc yếu' };
+const QUALIFIER_NAME = (q: string) => (q in ELEMENT_NAME ? `nguyên tố ${ELEMENT_NAME[q as Element]}` : q in MODALITY_NAME ? `thể thức ${MODALITY_NAME[q as Modality]}`
+  : q === 'fire-air' ? 'Lửa – Khí' : q === 'earth-water' ? 'Đất – Nước' : q === 'out-of-sign' ? 'phân tách' : q === 'angular' ? 'trên các góc' : q);
+/** "2" · "5+" · "2-3" in words, for a count of planets */
+const specWords = (s: string) => { const r = specOf(s); return !r ? s : r[0] === 0 && r[1] === 0 ? 'không có' : r[1] === Infinity ? `từ ${r[0]}` : r[0] === r[1] ? String(r[0]) : `${r[0]}–${r[1]}`; };
+const houseWords = (s: string) => { const h = housesOf(s); return !h ? s : h.length > 1 ? `${h[0]}–${h[h.length - 1]}` : String(h[0]); };
+
+/**
+ * A condition in words, as a reader of the book sees it: "Mặt Trăng ở Nhân Mã", "Mặt Trời vuông góc hay xung Sao Thổ",
+ * "có Chữ T, nguyên tố Lửa", "Sao Thủy trội (cháy máy đo)". What only says which part of a reading a passage belongs
+ * to (focus…) is left out when the rest says it.
+ */
+export function describeWhen(src: string): string {
+  const p = parse(src);
+  if (!p.node) return src;
+  const self = selfOf(p.node);
+  const who = (a: string) => { const v = a.trim(); return v === 'self' ? (self ? NAME(self as BodyCode) : 'sao đang đọc') : BODY[v as BodyCode] ? NAME(v as BodyCode) : v; };
+  const signs = (list: string[]) => list.map(s => SIGN[s.trim() as SignCode]?.name ?? s).join(' hay ');
+  const kinds = (list: string[]) => list.map(k => ASPECT_GROUP_NAME[k.trim()] ?? (ASPECT[k.trim() as AspectCode] ? lowerFirst(ASPECT[k.trim() as AspectCode].name) : k)).join(' hay ');
+  const one = (n: Node, top: boolean): string | null => {
+    if (n.t === 'not') { const s = one(n.a, false); return s ? `không phải: ${s}` : null; }
+    if (n.t !== 'call') {
+      const parts = n.a.map(x => one(x, n.t === 'and' && top)).filter((x): x is string => !!x);
+      return parts.length ? parts.join(n.t === 'and' ? ', ' : ' hoặc ') : null;
+    }
+    const a = n.args;
+    switch (n.fn) {
+      case 'in': return `${who(a[0])} ở ${signs(a.slice(1))}`;
+      case 'house': return `${who(a[0])} ở cung ${a.slice(1).map(houseWords).join(' hay ')}`;
+      case 'cusp': return `${signs(a.slice(1))} ở nóc ${a[0].trim() === 'self' ? 'cung đang đọc' : `cung ${houseWords(a[0])}`}`;
+      case 'aspect': return a.length > 2 ? `${who(a[0])} ${kinds(a.slice(2))} ${who(a[1])}` : `${who(a[0])} có góc chiếu với ${who(a[1])}`;
+      case 'has_aspect': return `lá số có ${kinds(a)}`;
+      case 'out_of_sign': return a.length ? `có ${kinds(a)} phân tách` : 'có góc chiếu phân tách';
+      case 'pattern': return `có ${PATTERN_NAME[a[0].trim() as PatternKind] ?? a[0]}${a.length > 1 ? `, ${a.slice(1).map(q => QUALIFIER_NAME(q.trim())).join(', ')}` : ''}`;
+      case 'apex': return `${who(a[1])} là đỉnh của ${PATTERN_NAME[a[0].trim() as PatternKind] ?? a[0]}`;
+      case 'dominant': return `${who(a[0])} trội${a[1] ? ` (${LEVEL_NAME[a[1].trim() as DominantLevel] ?? a[1]})` : ''}`;
+      case 'retro': return `${who(a[0])} nghịch hành`;
+      case 'dignity': return `${who(a[0])} ${a.slice(1).map(d => DIGNITY_NAME[d.trim() as Dignity] ?? d).join(' hay ')}`;
+      case 'decan': return `${who(a[0])} ở decan ${a[2]} của ${signs([a[1]])}`;
+      case 'sun_cusp': return `Mặt Trời ở chỗ giáp ranh ${signs([a[0]])} – ${signs([a[1]])}`;
+      case 'element': { const w = specWords(a[1]); return w === 'không có' ? `không có hành tinh nào thuộc ${ELEMENT_NAME[a[0].trim() as Element]}` : `${w} hành tinh thuộc ${ELEMENT_NAME[a[0].trim() as Element]}`; }
+      case 'modality': { const w = specWords(a[1]); return w === 'không có' ? `không có hành tinh nào thuộc thể thức ${MODALITY_NAME[a[0].trim() as Modality]}` : `${w} hành tinh thuộc thể thức ${MODALITY_NAME[a[0].trim() as Modality]}`; }
+      case 'hemisphere': { const w = specWords(a[1]); return `${w === 'không có' ? 'không có hành tinh nào' : `${w} hành tinh`} ở ${HEMIS[a[0].trim()] ?? a[0]}`; }
+      case 'ruler': return `chủ tinh lá số là ${a.map(who).join(' hay ')}`;
+      case 'sun_ruler': return `chủ tinh cung Mặt Trời là ${a.map(who).join(' hay ')}`;
+      case 'moon_ruler': return `chủ tinh cung Mặt Trăng là ${a.map(who).join(' hay ')}`;
+      case 'in_own': return `${who(a[0])} ở cung nó làm chủ`;
+      case 'reception': return `${who(a[0])} và ${who(a[1])} tiếp nhận tương hỗ`;
+      // which part of a reading: said only when nothing else is
+      case 'focus': return top && self ? null : `phần đọc ${a.map(who).join(' hay ')}`;
+      case 'focus_house': return `phần đọc cung ${a.map(houseWords).join(' hay ')}`;
+      case 'focus_sign': return `phần đọc ${signs(a)}`;
+      case 'male': return 'nam';
+      case 'female': return 'nữ';
+      case 'time': return 'có giờ sinh';
+      case 'any': return 'mọi lá số';
+    }
+    return n.fn;
+  };
+  const words = one(p.node, true) ?? (self ? `phần đọc ${NAME(self as BodyCode)}` : src);
+  return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
 /** every symbol a passage can be about, with its name */

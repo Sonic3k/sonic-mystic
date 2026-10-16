@@ -116,16 +116,23 @@ export class AstrologyService {
     };
   }
 
-  /** an entry with every section under it, passage by passage, each passage with the rule it is */
-  async entry(source: string, code: string): Promise<AstrologyEntryDto> {
+  /** an entry with every section under it, passage by passage, each passage with the rule it is; shallow: only its own
+      passages and the titles of the sections under it (a whole chapter) */
+  async entry(source: string, code: string, shallow = false): Promise<AstrologyEntryDto> {
     const k = await this.book();
     const src = k.sources.find(s => s.code === source || s.code === `astrology.${source}`);
     const e = src ? k.entries.get(entryKey(src.code, code)) : undefined;
     if (!src || !e) throw new NotFoundException('Không có mục này trong tài liệu');
     const under = new Set([code]);
-    const unit = k.order.filter(x => { if (x.source !== src.code) return false; if (x.code === code) return true; if (x.parent && under.has(x.parent)) { under.add(x.code); return true; } return false; });
-    const ps = await this.db.select().from(passages).where(inArray(passages.entryId, unit.map(x => x.id))).orderBy(asc(passages.entryId), asc(passages.ordinal));
-    const tables = await this.tablesOf(unit.map(x => x.id));
+    const unit = k.order.filter(x => {
+      if (x.source !== src.code) return false;
+      if (x.code === code) return true;
+      if (x.parent && under.has(x.parent)) { if (!shallow) under.add(x.code); return true; }
+      return false;
+    });
+    const read = shallow ? [e.id] : unit.map(x => x.id);
+    const ps = await this.db.select().from(passages).where(inArray(passages.entryId, read)).orderBy(asc(passages.entryId), asc(passages.ordinal));
+    const tables = await this.tablesOf(read);
     const topics = this.topicOfEntries(k);
     const sections = unit.map(x => ({
       code: x.code, title: x.title, depth: x.depth - e.depth, page: x.page,

@@ -177,6 +177,18 @@ test('Tử Khí by her spreadsheet: 310.58° on 1/6/2009, 0.0352° a day', () =>
   assert.equal(A.signOf(A.ziqiAt(A.ZIQI_EPOCH_JD + 2000)), 'aries');
 });
 
+test('a condition in words, and what it speaks of', () => {
+  assert.equal(A.describeWhen('in(moon, sagittarius)'), 'Mặt Trăng ở Nhân Mã');
+  assert.equal(A.describeWhen('focus(mercury) & in(mercury, aquarius)'), 'Sao Thủy ở Bảo Bình');
+  assert.equal(A.describeWhen('aspect(sun, saturn, square, opposition)'), 'Mặt Trời vuông góc hay xung Sao Thổ');
+  assert.equal(A.describeWhen('pattern(t-square, fixed) & apex(t-square, mars)'), 'Có Chữ T, thể thức Kiên định, Sao Hỏa là đỉnh của Chữ T');
+  assert.equal(A.describeWhen('focus(sun) & dominant(self, low)'), 'Mặt Trời trội (thấp)');
+  assert.equal(A.describeWhen('focus(mars)'), 'Phần đọc Sao Hỏa');
+  assert.equal(A.describeWhen('in(sun, aries) & female()'), 'Mặt Trời ở Bạch Dương, nữ');
+  // a "self" read in one body's section speaks of that body
+  assert.ok(A.symbolsOf(A.parse('focus(sun) & dominant(self)').node).has('dominant:sun'));
+});
+
 test('the condition language', () => {
   const ev = (src, x = {}) => { const r = A.parse(src); assert.deepEqual(r.errors, [], src); return A.evaluate(r.node, { chart, ...x }); };
   assert.ok(ev('in(sun, aquarius)').ok);

@@ -7,6 +7,19 @@
 .as .seg { margin-left: 0; }
 .tv-voice.hk { color: var(--ba); } .tv-voice.tie { color: var(--tie); } .tv-voice.wf { color: var(--wf); }
 
+/* lập lá số: the birth, the example of the book */
+.as-home { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.as-form { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 14px 12px; }
+.as-form .tv-f.as-c4 { grid-column: span 4; } .as-form .tv-f.as-c5 { grid-column: span 5; } .as-form .tv-f.as-c7 { grid-column: span 7; } .as-form .tv-f.as-c8 { grid-column: span 8; }
+.as-check { display: flex; gap: 8px; align-items: center; height: 40px; font-size: 14px; font-weight: 500; color: var(--ink2); }
+.tv-f .as-check input { width: 18px; height: 18px; padding: 0; flex: 0 0 auto; }
+.as-form-foot { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; align-items: center; }
+.as-form-foot > span { font-size: 12.5px; }
+.tv-card > p.as-src { margin: 0 0 6px; font-size: 13px; color: var(--ink2); } .as-src b { color: var(--ink); }
+.as .ns-note { color: #18504C; }
+.as .ns-item.src, .as .tv-brief-ba { background: #F1F7F5; }
+.as .tv-voice.ba { color: var(--ba); }
+
 /* the board: the wheel, the positions, the chart at a glance */
 .as-board { display: grid; grid-template-columns: minmax(280px, 500px) minmax(0, 1fr); gap: 24px 32px; padding: 20px 22px; align-items: start; }
 .as-wheel { min-width: 0; }
@@ -26,7 +39,7 @@
 .as-dig.ruler, .as-dig.exaltation { background: #E6F1EA; color: var(--easy); }
 .as-dig.detriment, .as-dig.fall { background: #F7E8E4; color: var(--hard); }
 .as-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 20px; margin: 0; }
-.as-facts div { display: grid; gap: 1px; min-width: 0; }
+.as-facts > div { display: grid; gap: 1px; min-width: 0; }
 .as-facts dt { font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); }
 .as-facts dd { margin: 0; font-size: 14px; color: var(--ink); }
 .as-facts dd small { display: block; font-size: 12px; color: var(--ink2); }
@@ -104,18 +117,34 @@
 .as-book { padding: 16px 18px; }
 .as-book h3 { margin: 0 0 2px; font-family: var(--serif); font-size: 19px; font-weight: 600; }
 .as-book > p { margin: 0 0 10px; font-size: 13px; color: var(--ink2); max-width: 80ch; }
+.as-toc { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.as-toc a { display: flex; gap: 8px; align-items: baseline; }
+.as-toc a small { margin-left: auto; font-size: 11.5px; color: var(--ink3); font-variant-numeric: tabular-nums; }
+.as-items { margin: 0; padding-left: 20px; font-family: var(--serif); font-size: 16.5px; line-height: 1.6; }
+.as .ptitle h1.caps { font-size: 24px; letter-spacing: .02em; }
+.as .ns-h2.caps, .as .ns-h3.caps { font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: .04em; }
+.as .tv-para .as-en { margin-top: 6px; }
 
 @media (max-width: 1100px) {
+  .as-home { grid-template-columns: minmax(0, 1fr); }
   .as-board { grid-template-columns: minmax(0, 1fr); }
   .as-wheel { max-width: 520px; }
   .as-detail { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 640px) {
   .as-board { padding: 14px; }
+  .as-form .tv-f.as-c4, .as-form .tv-f.as-c5, .as-form .tv-f.as-c7, .as-form .tv-f.as-c8 { grid-column: span 12; }
+  .as-form .tv-f.as-c4:nth-child(-n+3) { grid-column: span 4; }
+  .as-form .tv-f.as-c8 > span:first-child { display: none; }
   .as .tv-strip { flex-wrap: nowrap; overflow-x: auto; }
   .as-group .tv-gh > span:not(.v) { flex-basis: 100%; order: 3; }
   .as-facts { grid-template-columns: minmax(0, 1fr); }
+  .as-pos { font-size: 12.5px; }
   .as-pos td, .as-pos th { padding-right: 5px; }
+  .as-pos th { font-size: 10px; letter-spacing: .04em; }
+  .as-pos .g { width: 15px; }
+  .as-dig { padding: 0 4px; font-size: 10px; }
+  .as-dig-h { display: none; }
   .as-line p { font-size: 16px; }
   .as-dom-row { grid-template-columns: 96px minmax(0, 1fr) 30px; } .as-dom-row small { display: none; }
 }
