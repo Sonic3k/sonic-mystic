@@ -36,7 +36,7 @@ export const SOURCE_CODES = { luan: 'tuvi.ba.luan', phan1: 'tuvi.ba.phan1', supp
 
 const DESCRIPTIONS: Record<string, string> = {
   tuvi: 'Tử vi đẩu số theo ghi chép của bà: lập lá số, luận từng cung, vận hạn.',
-  astrology: 'Lá số chiêm tinh phương Tây: hành tinh, cung hoàng đạo, nhà.',
+  astrology: 'Lá số chiêm tinh phương Tây theo giáo trình của cô Hương Kiều: hành tinh, dấu hiệu hoàng đạo, cung địa bàn, góc chiếu.',
   numerology: 'Những con số rút từ ngày sinh và họ tên.',
   iching: 'Sáu mươi tư quẻ Kinh Dịch.',
   tarot: 'Bảy mươi tám lá bài tarot.',

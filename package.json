@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "description": "Huyền học — Tử vi from grandma's notes, and later chiêm tinh, nhân số học, Kinh Dịch, tarot: one engine package, one API, one web.",
+  "license": "AGPL-3.0-or-later",
   "workspaces": [
     "engine",
     "kb",

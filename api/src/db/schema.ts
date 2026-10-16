@@ -4,6 +4,7 @@ import {
   doublePrecision,
   index,
   integer,
+  jsonb,
   pgTable,
   primaryKey,
   smallint,
@@ -90,6 +91,14 @@ export const passages = pgTable('passages', {
   kind: text('kind').notNull(),
   /** what the paragraph is to the person read (Nhân số học: rule, advice, child, general, method, example, figure, note) */
   role: text('role'),
+  /** whose words it is, when a source carries more than one voice (chiêm tinh: hk = cô Hương Kiều, tierney, woolfolk) */
+  voice: text('voice'),
+  /** the run-in label of an item ("Biểu tượng", "Sao Thủy ở Bạch Dương") */
+  label: text('label'),
+  /** a translated source keeps its original beside the translation (Woolfolk's English) */
+  sourceText: text('source_text'),
+  /** a list kept as a list (her keywords), one entry per line */
+  items: jsonb('items').$type<string[]>(),
   /** the palaces a paragraph speaks of ("Mệnh · Thân") */
   section: text('section'),
   sourceRef: integer('source_ref'),

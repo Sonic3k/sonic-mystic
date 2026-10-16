@@ -11,6 +11,8 @@ import { DB, type Db } from '../db/db.js';
 import { readingItemRefs, readingItems, readingSections, readings, rules } from '../db/schema.js';
 import { KnowledgeService } from '../kb/knowledge.service.js';
 import { NumerologyService, todayVn, type Computed } from '../numerology/numerology.service.js';
+import { AstrologyService } from '../astrology/astrology.service.js';
+import type { AstrologyChartDto } from '@mystic/engine/api';
 import { PeopleService } from '../people/people.service.js';
 import { SyncService } from '../sync/sync.service.js';
 import { scopeOk, tuviInput } from '../ai/lines.js';
@@ -29,6 +31,8 @@ export type WrittenBodyT = z.infer<typeof WrittenBody>;
 
 /** nhân số học: the synthesis of the whole chart, or of one year */
 export const numerologyScopeOk = (scope: string) => scope === 'tong-hop' || /^nam-\d{4}$/.test(scope);
+/** chiêm tinh: the reading of the whole chart */
+export const astrologyScopeOk = (scope: string) => scope === 'tong-hop';
 /** the scopes whose reading is the one a brief quotes */
 const OVERVIEW = new Set(['tong-quan', 'tong-hop']);
 
@@ -38,6 +42,12 @@ export interface StoredReading {
 }
 
 const hash16 = (s: string) => createHash('sha256').update(s).digest('hex').slice(0, 16);
+
+/** what a chiêm tinh reading is written from: the moment and place read, the gender, and the passages matched */
+export function astrologyHash(c: AstrologyChartDto, scope: string, codes: string[]): string {
+  const i = c.chart.input;
+  return hash16(`${i.jd.toFixed(6)}|${i.place ? `${i.place.latitude},${i.place.longitude}` : ''}|${i.timeKnown ? 1 : 0}|${i.gender ?? ''}|${scope}|${codes.join(',')}`);
+}
 
 /** what a nhân số học reading is written from: the date read, the names, the gender, and the passages matched */
 export function numerologyHash(c: Computed, scope: string, year: number, codes: string[]): string {
@@ -53,6 +63,7 @@ export class ReadingsService {
     @Inject(PeopleService) private readonly people: PeopleService,
     @Inject(SyncService) private readonly sync: SyncService,
     @Inject(NumerologyService) private readonly numerology: NumerologyService,
+    @Inject(AstrologyService) private readonly astrology: AstrologyService,
   ) {}
 
   async list(profileId: string): Promise<AiReadingDto[]> {
@@ -66,6 +77,11 @@ export class ReadingsService {
   /** the hash a reading of (scope, year) would have now — null when it cannot be told (the book is not loaded…) */
   private async currentHash(profileId: string, discipline: string): Promise<((scope: string, year: number) => string | null) | null> {
     try {
+      if (discipline === 'astrology') {
+        const { computed } = await this.people.astrologyInput(profileId);
+        const k = await this.astrology.book(true);
+        return scope => astrologyHash(computed, scope, this.astrology.matched(computed, k));
+      }
       if (discipline === 'numerology') {
         const { computed } = await this.people.numerologyInput(profileId);
         const k = await this.numerology.book(true);
@@ -87,7 +103,16 @@ export class ReadingsService {
   async put(profileId: string, scope: string, body: WrittenBodyT): Promise<AiReadingDto> {
     const { profile } = await this.people.profileHead(profileId);
     let year: number, inputHash: string, allowed: Set<string>, quote: Map<string, string>;
-    if (profile.disciplineCode === 'numerology') {
+    if (profile.disciplineCode === 'astrology') {
+      if (!astrologyScopeOk(scope)) throw new BadRequestException(`Phạm vi không hợp lệ: ${scope} (tong-hop)`);
+      year = body.viewYear ?? profile.viewYear ?? todayVn().year;
+      const { computed } = await this.people.astrologyInput(profileId);
+      const k = await this.astrology.book(true);
+      const codes = this.astrology.matched(computed, k);
+      inputHash = astrologyHash(computed, scope, codes);
+      allowed = new Set(codes);
+      quote = new Map(codes.map(c => [c, k.rules.get(c)?.text ?? '']));
+    } else if (profile.disciplineCode === 'numerology') {
       if (!numerologyScopeOk(scope)) throw new BadRequestException(`Phạm vi không hợp lệ: ${scope} (tong-hop, hoặc nam-YYYY)`);
       year = body.viewYear ?? (scope.startsWith('nam-') ? Number(scope.slice(4)) : profile.viewYear ?? todayVn().year);
       const { computed } = await this.people.numerologyInput(profileId);

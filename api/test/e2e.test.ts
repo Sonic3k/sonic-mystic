@@ -6,14 +6,15 @@ import { after, before, describe, test } from 'node:test';
 import { gzipSync } from 'node:zlib';
 import pg from 'pg';
 import type {
-  AiReadingDto, BriefDto, EntryDto, NumerologyBookDto, NumerologyEntryDto, NumerologyLookupDto, NumerologyReadingDto, ProfileDto, SearchResultDto, SourceDto,
-  SubjectDto, TuViReadingDto,
+  AiReadingDto, AstrologyBookDto, AstrologyChartDto, AstrologyEntryDto, AstrologyLookupDto, AstrologyReadingDto, BriefDto, EntryDto, NumerologyBookDto,
+  NumerologyEntryDto, NumerologyLookupDto, NumerologyReadingDto, ProfileDto, SearchResultDto, SourceDto, SubjectDto, TuViReadingDto,
 } from '@mystic/engine/api';
 import { jsonIn, scopeOk } from '../src/ai/ai.service.js';
 import { loadConfig } from '../src/config.js';
 import { createDb, createPool, ensureDatabase } from '../src/db/db.js';
 import { importTuvi } from '../src/kb/importer.js';
 import { importNumerology, readNumerologyBundle } from '../src/kb/numerology-importer.js';
+import { importAstrology, readAstrologyBundle } from '../src/kb/astrology-importer.js';
 import { createApp } from '../src/main.js';
 
 /*
@@ -23,6 +24,8 @@ import { createApp } from '../src/main.js';
 const adminUrl = process.env.TEST_DATABASE_URL;
 const numerologyDir = join(loadConfig({ DATABASE_URL: 'x' }).kbBundleDir, 'numerology');
 const hasBook = existsSync(join(numerologyDir, 'manifest.json'));
+const astrologyDir = join(loadConfig({ DATABASE_URL: 'x' }).kbBundleDir, 'astrology');
+const hasAstrology = existsSync(join(astrologyDir, 'manifest.json'));
 const dbName = `mystic_e2e_${process.pid}`;
 const role = `mystic_e2e_${process.pid}`;
 const ADMIN = 'e2e-admin-token';
@@ -259,6 +262,98 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       assert.equal(after.data[0].stale, true);
       assert.equal((await api(`/profiles/${p.data.id}/readings/han-2026`, { sections: [{ title: 'x', items: [{ layer: 'added', text: 'y' }] }] }, 'PUT')).status, 400);
       assert.equal((await api(`/profiles/${p.data.id}/ai-readings`, { scope: 'tong-hop' })).status, 503);
+      assert.equal((await api(`/subjects/${s.data.id}`, undefined, 'DELETE')).status, 204);
+    });
+  });
+  /* Chiêm tinh: anyone may compute a chart (Swiss Ephemeris); the sources' text is the owner's. Woolfolk prints Oprah
+     Winfrey's chart (ch. 9): born 29/1/1954, 4:30 CST, Kosciusko, Mississippi. */
+  const oprah = { birth: { year: 1954, month: 1, day: 29, time: '04:30', utcOffsetMinutes: -360, timeZone: null, place: 'Kosciusko, Mississippi', latitude: 33.05, longitude: -89.583333 }, gender: 'female' };
+  test('chiêm tinh: a chart as Woolfolk prints it, from the ephemeris', async () => {
+    const c = await anon<AstrologyChartDto>('/astrology/chart', oprah);
+    assert.equal(c.status, 200);
+    const pl = c.data.chart.placements;
+    assert.deepEqual([pl.sun!.sign, pl.sun!.house, pl.moon!.sign, pl.moon!.house, pl.asc!.sign, pl.jupiter!.retro], ['aquarius', 2, 'sagittarius', 11, 'sagittarius', true]);
+    assert.equal(pl.saturn!.text, "9°02' Bò Cạp");
+    // the span of times that read the same chart: AC at 29°41' Nhân Mã turns to Ma Kết within minutes
+    assert.ok(c.data.window && c.data.window.after < 10, JSON.stringify(c.data.window));
+    // by its time zone (the database knows Chicago's offset in 1954)
+    const z = await anon<AstrologyChartDto>('/astrology/chart', { ...oprah, birth: { ...oprah.birth, utcOffsetMinutes: null, timeZone: 'America/Chicago' } });
+    assert.equal(z.data.offsetMinutes, -360);
+    // no time: no houses, and the chart says so
+    const n = await anon<AstrologyChartDto>('/astrology/chart', { birth: { year: 1954, month: 1, day: 29, time: null, utcOffsetMinutes: -360 } });
+    assert.equal(n.data.chart.houses, null);
+    assert.ok(n.data.chart.notes.length >= 1);
+    assert.equal((await anon('/astrology/chart', { birth: { year: 1990, month: 2, day: 30, time: null } })).status, 400);
+    assert.equal((await anon('/astrology/chart', { birth: { year: 1990, month: 2, day: 3, time: '25:00' } })).status, 400);
+  });
+
+  describe('chiêm tinh: the sources', { skip: !hasAstrology && 'the astrology bundle is not built here' }, () => {
+    test('the sources are imported once, and their text is the owner\'s', async () => {
+      const h = await api<{ astrology: { rules: number; sources: number } | null }>('/health');
+      assert.equal(h.data.astrology?.sources, 6);
+      assert.ok((h.data.astrology?.rules ?? 0) > 2000);
+      const src = await api<SourceDto[]>('/sources?discipline=astrology');
+      assert.deepEqual(src.data.map(s => s.access), ['owner', 'owner', 'owner', 'owner', 'owner', 'owner']);
+      const pool = createPool(appUrl, false);
+      const again = await importAstrology(createDb(pool), readAstrologyBundle(astrologyDir)!);
+      await pool.end();
+      assert.equal(again.skipped, true);
+      for (const path of ['/astrology/book', '/astrology/catalog', '/astrology/lookup?symbols=sun@aquarius']) assert.equal((await anon(path)).status, 401, path);
+      assert.equal((await anon('/astrology/reading', oprah)).status, 401);
+    });
+
+    test('a reading: every part, every passage cited, why it was chosen', async () => {
+      const r = await api<AstrologyReadingDto>('/astrology/reading', oprah);
+      assert.equal(r.status, 200);
+      const topics = [...new Set(r.data.sections.map(s => s.topic))];
+      for (const t of ['sun', 'moon', 'asc', 'planet', 'sign', 'house', 'aspect', 'pattern', 'dominant', 'point', 'love']) assert.ok(topics.includes(t as never), t);
+      for (const s of r.data.sections) for (const g of s.groups) for (const m of g.matches) assert.ok(r.data.rules[m.rule], m.rule);
+      const sun = r.data.sections.find(s => s.topic === 'sun')!;
+      assert.ok(sun.groups.some(g => g.source === 'astrology.woolfolk' && g.matches[0].why.some(w => /Bảo Bình/.test(w))));
+      const woolfolk = Object.values(r.data.rules).find(x => x.voice === 'woolfolk')!;
+      assert.ok(woolfolk.en && woolfolk.en.length > 0 && woolfolk.en !== woolfolk.text);
+      assert.equal(r.data.sources.find(s => s.code === 'astrology.woolfolk')?.translator, 'Claude');
+      // a woman reads Woolfolk's words on the Aquarius woman, not on the man
+      const love = r.data.sections.find(s => s.topic === 'love')!;
+      assert.ok(love.groups.some(g => /phụ nữ/.test(g.title)) && !love.groups.some(g => /đàn ông/.test(g.title)));
+      const dom = r.data.chart.dominant.tests.find(t => t.body === 'mercury')!;
+      assert.equal(dom.level, 'very-strong');
+    });
+
+    test('the sources, section by section, and lookups', async () => {
+      const toc = await api<AstrologyBookDto>('/astrology/book');
+      assert.equal(toc.data.sources.length, 6);
+      const kw = toc.data.sources.find(s => s.source.code === 'astrology.hk-keywords')!;
+      const venus = kw.toc.find(e => e.code === 'venus-taurus')!;
+      const e = await api<AstrologyEntryDto>(`/astrology/book/hk-keywords/${venus.code}`);
+      assert.equal(e.status, 200);
+      assert.equal(e.data.source.label, 'Lời cô');
+      const dig = await api<AstrologyEntryDto>('/astrology/book/hk/' + toc.data.sources.find(s => s.source.code === 'astrology.hk')!.toc.find(x => /^BẢNG VƯỢNG/.test(x.title))!.code);
+      assert.equal(dig.data.sections[0].tables[0].rows.length, 10);
+      const l = await api<AstrologyLookupDto>('/astrology/lookup?symbols=moon@sagittarius');
+      assert.ok(l.data.total >= 1);
+      assert.ok(l.data.groups.every(g => g.rules.every(x => x.when.includes('sagittarius'))));
+      assert.equal((await api('/astrology/book/hk/khong-co')).status, 404);
+    });
+
+    test('profiles: a chart of a person, a reading written with Claude, the brief', async () => {
+      const s = await api<SubjectDto>('/subjects', { displayName: 'Oprah Winfrey', gender: 'female', birth: { calendar: 'solar', ...oprah.birth, timeApprox: false, leapMonth: false, hourBranch: null } });
+      assert.equal(s.status, 201);
+      const p = await api<ProfileDto>('/profiles', { subjectId: s.data.id, discipline: 'astrology' });
+      assert.equal(p.status, 201);
+      const r = await api<AstrologyReadingDto>(`/profiles/${p.data.id}/reading`);
+      assert.equal(r.data.chart.placements.asc!.sign, 'sagittarius');
+      const codes = r.data.sections.find(x => x.topic === 'sun')!.groups.flatMap(g => g.matches.map(m => m.rule));
+      const w = await api<AiReadingDto>(`/profiles/${p.data.id}/readings/tong-hop`, {
+        caution: 'Chỉ để tham khảo.',
+        sections: [{ title: 'Mặt Trời ở Bảo Bình', items: [{ layer: 'primary', text: 'Tóm lược.', refs: [codes[0], 'woolfolk.b0'] }, { layer: 'added', text: 'Luận thêm.' }] }],
+      }, 'PUT');
+      assert.equal(w.status, 200);
+      assert.deepEqual(w.data.dropped, ['woolfolk.b0']);
+      const b = await api<BriefDto>(`/subjects/${s.data.id}/brief?discipline=astrology`);
+      assert.equal(b.data.title, 'Chiêm tinh');
+      assert.ok(b.data.facts.some(f => f.label === 'Cung Mọc' && /Nhân Mã/.test(f.value)));
+      assert.equal((await api(`/profiles/${p.data.id}/readings/han-2026`, { sections: [{ title: 'x', items: [{ layer: 'added', text: 'y' }] }] }, 'PUT')).status, 400);
       assert.equal((await api(`/subjects/${s.data.id}`, undefined, 'DELETE')).status, 204);
     });
   });

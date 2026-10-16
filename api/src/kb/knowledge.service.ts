@@ -10,7 +10,11 @@ import {
   BOOK_SOURCE, TOPICS, compile as compileNumerology, parse as parseNumerology, symbolsOf,
   type Kb as NumerologyKb, type RuleKind, type Topic,
 } from '@mystic/engine/numerology';
-import type { NumerologyRuleDto, NumerologySourceDto, RuleDto, SourceKind } from '@mystic/engine/api';
+import {
+  TOPICS as ASTROLOGY_TOPICS, compile as compileAstrology, parse as parseAstrology, symbolsOf as astrologySymbolsOf,
+  type Kb as AstrologyKb, type RuleKind as AstrologyRuleKind, type Topic as AstrologyTopic,
+} from '@mystic/engine/astrology';
+import type { AstrologyRuleDto, AstrologySourceDto, AstrologyVoice, NumerologyRuleDto, NumerologySourceDto, RuleDto, SourceKind } from '@mystic/engine/api';
 import { DB, type Db } from '../db/db.js';
 import { entries, passages, ruleTargets, rules, sources, symbols } from '../db/schema.js';
 
@@ -32,6 +36,25 @@ export interface NumerologyKnowledge {
 const TOPIC_CODES = new Set<string>(TOPICS.map(t => t.code));
 const RULE_KINDS = new Set(['rule', 'advice', 'child', 'general']);
 
+/** Chiêm tinh: an entry of one of its sources (entry codes are unique within their source) */
+export interface AstrologyEntry { id: number; key: string; source: string; code: string; title: string; parent: string | null; page: number | null; ordinal: number; depth: number }
+export interface AstrologyKnowledge {
+  kb: AstrologyKb;
+  version: string;
+  rules: Map<string, AstrologyRuleDto>;
+  symbols: Map<string, string[]>;
+  ruleOfPassage: Map<number, string>;
+  /** the sources in the order a reading quotes them, each with who may read it */
+  sources: (AstrologySourceDto & { id: number; access: 'public' | 'owner' })[];
+  /** entries by "source/code", in each source's order */
+  entries: Map<string, AstrologyEntry>;
+  order: AstrologyEntry[];
+}
+/** how a reading names whose words a passage is */
+export const VOICE_LABEL: Record<AstrologyVoice, string> = { hk: 'Lời cô', tierney: 'Bản dịch Tierney', woolfolk: 'Woolfolk' };
+const ASTROLOGY_TOPIC_CODES = new Set<string>(ASTROLOGY_TOPICS.map(t => t.code));
+export const entryKey = (source: string, code: string) => `${source}/${code}`;
+
 export interface Knowledge {
   kb: Kb;
   version: string;
@@ -44,10 +67,11 @@ export interface Knowledge {
 export class KnowledgeService {
   private cache: Promise<Knowledge> | null = null;
   private numerologyCache: Promise<NumerologyKnowledge | null> | null = null;
+  private astrologyCache: Promise<AstrologyKnowledge | null> | null = null;
 
   constructor(@Inject(DB) private readonly db: Db) {}
 
-  invalidate(): void { this.cache = null; this.numerologyCache = null; }
+  invalidate(): void { this.cache = null; this.numerologyCache = null; this.astrologyCache = null; }
 
   get(): Promise<Knowledge> {
     this.cache ??= this.load().catch(e => { this.cache = null; throw e; });
@@ -58,6 +82,67 @@ export class KnowledgeService {
   numerology(): Promise<NumerologyKnowledge | null> {
     this.numerologyCache ??= this.loadNumerology().catch(e => { this.numerologyCache = null; throw e; });
     return this.numerologyCache;
+  }
+
+  /** Chiêm tinh: every source as the engine reads it — null while none is loaded */
+  astrology(): Promise<AstrologyKnowledge | null> {
+    this.astrologyCache ??= this.loadAstrology().catch(e => { this.astrologyCache = null; throw e; });
+    return this.astrologyCache;
+  }
+
+  private async loadAstrology(): Promise<AstrologyKnowledge | null> {
+    const db = this.db;
+    const srcs = await db.select().from(sources).where(eq(sources.disciplineCode, 'astrology')).orderBy(asc(sources.sortOrder));
+    if (!srcs.length) return null;
+    const srcById = new Map(srcs.map(x => [x.id, x]));
+    const es = await db.select({ id: entries.id, sourceId: entries.sourceId, code: entries.code, title: entries.title, parentId: entries.parentId, page: entries.sourceRef, ordinal: entries.ordinal })
+      .from(entries).where(inArray(entries.sourceId, srcs.map(x => x.id))).orderBy(asc(entries.sourceId), asc(entries.ordinal));
+    const byId = new Map(es.map(e => [e.id, e]));
+    const order: AstrologyEntry[] = es.map(e => {
+      const src = srcById.get(e.sourceId)!.code, parent = e.parentId !== null ? byId.get(e.parentId)?.code ?? null : null;
+      return { id: e.id, key: entryKey(src, e.code), source: src, code: e.code, title: e.title, parent, page: e.page, ordinal: e.ordinal, depth: 0 };
+    });
+    order.sort((a, b) => srcs.findIndex(x => x.code === a.source) - srcs.findIndex(x => x.code === b.source) || a.ordinal - b.ordinal);
+    const byKey = new Map(order.map(e => [e.key, e]));
+    for (const e of order) { let d = 0; for (let p = e.parent; p; p = byKey.get(entryKey(e.source, p))?.parent ?? null) d++; e.depth = d; }
+
+    const rows = await db.select({
+      id: rules.id, code: rules.code, sourceId: rules.sourceId, entryId: rules.entryId, passageId: rules.passageId, ordinal: rules.ordinal, ruleText: rules.text, when: rules.condition,
+      active: rules.active, ruleEdited: rules.editedAt, text: passages.text, passageEdited: passages.editedAt, role: passages.role, page: passages.sourceRef,
+      voice: passages.voice, label: passages.label, en: passages.sourceText, items: passages.items,
+    }).from(rules).leftJoin(passages, eq(passages.id, rules.passageId)).where(eq(rules.disciplineCode, 'astrology')).orderBy(asc(rules.ordinal));
+    const topicOf = new Map<number, string>();
+    const ids = rows.map(r => r.id);
+    for (let i = 0; i < ids.length; i += 5000) {
+      const part = await db.select({ ruleId: ruleTargets.ruleId, target: ruleTargets.target }).from(ruleTargets).where(inArray(ruleTargets.ruleId, ids.slice(i, i + 5000)));
+      for (const t of part) if (ASTROLOGY_TOPIC_CODES.has(t.target)) topicOf.set(t.ruleId, t.target);
+    }
+    const dtos = new Map<string, AstrologyRuleDto>(), syms = new Map<string, string[]>(), ruleOfPassage = new Map<number, string>();
+    const raw: Parameters<typeof compileAstrology>[0] = [];
+    const hash = createHash('sha256');
+    for (const e of order) hash.update(`${e.key}|${e.title}|${e.parent ?? ''}\n`);
+    for (const r of rows) {
+      const topic = topicOf.get(r.id) as AstrologyTopic | undefined, e = byId.get(r.entryId), src = srcById.get(r.sourceId);
+      if (!topic || !e || !src) continue;
+      const kind = (r.role === 'general' ? 'general' : 'rule') as AstrologyRuleKind;
+      const text = r.text ?? r.ruleText, when = r.when ?? '';
+      const dto: AstrologyRuleDto = {
+        code: r.code, source: src.code, voice: (r.voice ?? 'hk') as AstrologyVoice, text, en: r.en ?? null, label: r.label ?? null, items: r.items ?? null,
+        page: r.page, kind, topic, entry: e.code, when, edited: !!(r.ruleEdited || r.passageEdited), active: r.active,
+      };
+      hash.update(`${r.code}|${text}|${when}|${r.active}|${topic}|${kind}|${e.code}\n`);
+      dtos.set(r.code, dto);
+      if (r.passageId !== null) ruleOfPassage.set(r.passageId, r.code);
+      syms.set(r.code, when ? [...astrologySymbolsOf(parseAstrology(when).node)] : []);
+      if (r.active && when) raw.push({ id: r.code, topic, entry: entryKey(src.code, e.code), ord: r.ordinal, page: r.page ?? undefined, source: src.code, kind, text, when });
+    }
+    const label = (code: string) => (code === 'astrology.tierney' ? VOICE_LABEL.tierney : code === 'astrology.woolfolk' ? VOICE_LABEL.woolfolk : VOICE_LABEL.hk);
+    return {
+      kb: { rules: compileAstrology(raw), entries: Object.fromEntries(order.map(e => [e.key, { code: e.key, title: e.title, parent: e.parent ? entryKey(e.source, e.parent) : undefined, ord: e.ordinal }])) },
+      version: hash.digest('hex').slice(0, 16),
+      rules: dtos, symbols: syms, ruleOfPassage, entries: byKey, order,
+      sources: srcs.map(x => ({ id: x.id, code: x.code, title: x.title, author: x.author, description: x.description, note: x.note, access: x.access, label: label(x.code), translator: x.code === 'astrology.woolfolk' ? 'Claude' : null })),
+    };
   }
 
   private async loadNumerology(): Promise<NumerologyKnowledge | null> {

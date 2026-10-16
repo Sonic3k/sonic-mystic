@@ -59,7 +59,7 @@ for (const name of MAPS) {
       const parsed = when ? parse(when) : null;
       if (parsed?.errors.length) errors.push(`${short}/${e.code}: điều kiện lỗi — ${parsed.errors.join('; ')} — ${when}`);
       const topic = inherit(e, 'topic') ?? null;
-      cur = { code: e.code, title: e.title, parent: e.parent ?? null, page: b.page, at: b.id, topic: Array.isArray(topic) ? topic[0] : topic, symbols: [...symbolsOf(parsed?.node)], ...(b.en ? { en: b.en } : {}), paras: [] };
+      cur = { code: e.code, title: e.title, parent: e.parent ?? null, page: b.page ?? null, at: b.id, topic: Array.isArray(topic) ? topic[0] : topic, symbols: [...symbolsOf(parsed?.node)], ...(b.en ? { en: b.en } : {}), paras: [] };
       entries.push(cur);
       continue;
     }
@@ -69,7 +69,7 @@ for (const name of MAPS) {
     const role = o.kind ?? inherit(e, 'kind') ?? 'general';
     if (!ROLES.has(role)) errors.push(`${short} đoạn ${b.id}: kind "${role}"`);
     const text = textOf(b);
-    const p = { id: b.id, kind: b.kind, role, page: b.page, text, voice: voiceOf(map.source.code, b) };
+    const p = { id: b.id, kind: b.kind, role, page: b.page ?? null, text, voice: voiceOf(map.source.code, b) };
     if (b.pages && b.pages.length > 1) p.pages = b.pages;
     if (b.label) p.label = b.label;
     if (b.en) p.en = b.en;
@@ -87,7 +87,7 @@ for (const name of MAPS) {
       const parsed = parse(when);
       for (const m of parsed.errors) errors.push(`${short} đoạn ${b.id}: điều kiện lỗi — ${m} — ${when}`);
       topics.forEach(tp => rules.push({
-        i: `${short}.b${b.id}${topics.length > 1 ? `.${tp}` : ''}`, s: map.source.code, e: cur.code, p: b.id, pg: b.page, t: text, w: when, k: role, tp, o: ord++,
+        i: `${short}.b${b.id}${topics.length > 1 ? `.${tp}` : ''}`, s: map.source.code, e: cur.code, p: b.id, pg: b.page ?? null, t: text, w: when, k: role, tp, o: ord++,
         sy: [...symbolsOf(parsed.node)], v: p.voice, ...(p.label ? { lb: p.label } : {}), ...(p.en ? { en: p.en } : {}), ...(p.items ? { it: p.items } : {}),
       }));
     }

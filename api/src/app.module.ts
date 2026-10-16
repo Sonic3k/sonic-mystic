@@ -7,7 +7,8 @@ import { AccessGuard } from './common/access.js';
 import { APP_CONFIG } from './common/tokens.js';
 import type { AppConfig } from './config.js';
 import { createDb, DB, PG_POOL } from './db/db.js';
-import { BooksController, HealthController, MetaController, NumerologyController, PeopleController, TuViController } from './http/controllers.js';
+import { AstrologyController, BooksController, HealthController, MetaController, NumerologyController, PeopleController, TuViController } from './http/controllers.js';
+import { AstrologyService } from './astrology/astrology.service.js';
 import { KnowledgeService } from './kb/knowledge.service.js';
 import { NumerologyService } from './numerology/numerology.service.js';
 import { PeopleService } from './people/people.service.js';
@@ -28,7 +29,7 @@ export class AppModule {
   static forRoot(config: AppConfig, pool: pg.Pool): DynamicModule {
     return {
       module: AppModule,
-      controllers: [HealthController, MetaController, BooksController, TuViController, NumerologyController, PeopleController],
+      controllers: [HealthController, MetaController, BooksController, TuViController, NumerologyController, AstrologyController, PeopleController],
       providers: [
         { provide: APP_CONFIG, useValue: config },
         { provide: PG_POOL, useValue: pool },
@@ -38,6 +39,7 @@ export class AppModule {
         KnowledgeService,
         TuViService,
         NumerologyService,
+        AstrologyService,
         BooksService,
         SonicHubClient,
         SyncService,

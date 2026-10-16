@@ -5,12 +5,13 @@ import { and, asc, count, desc, eq, inArray, isNull } from 'drizzle-orm';
 import { z } from 'zod';
 import { ENGINE_VERSION } from '@mystic/engine';
 import type {
-  BirthDto, Gender, LinkDto, NumerologyNameDto, NumerologyReadingDto, ProfileDto, ProfileSummaryDto, SonicHubPersonDto, SubjectDto, TuViReadingDto, TuViSettings,
+  AstrologyReadingDto, BirthDto, Gender, LinkDto, NumerologyNameDto, NumerologyReadingDto, ProfileDto, ProfileSummaryDto, SonicHubPersonDto, SubjectDto, TuViReadingDto, TuViSettings,
 } from '@mystic/engine/api';
 import { DB, type Db } from '../db/db.js';
 import { accounts, numerologyProfileNames, outbox, profiles, readings, subjectLinks, subjects, tuviProfileSettings } from '../db/schema.js';
 import { KnowledgeService } from '../kb/knowledge.service.js';
 import { NameBody, NumerologyService, defaultNames, normalizeNames, numerologyOf, type Computed } from '../numerology/numerology.service.js';
+import { AstrologyService, astroBirthOf, astrologyOf } from '../astrology/astrology.service.js';
 import { SyncService } from '../sync/sync.service.js';
 import { SonicHubClient, type SonicHubPerson } from '../sync/sonic-hub.client.js';
 import { TuViService, chartOf, optionsOf } from '../tuvi/tuvi.service.js';
@@ -37,7 +38,7 @@ export const SettingsBody = z.object({
 
 export const ProfileBody = z.object({
   subjectId: z.string().uuid(),
-  discipline: z.enum(['tuvi', 'numerology']).default('tuvi'),
+  discipline: z.enum(['tuvi', 'numerology', 'astrology']).default('tuvi'),
   label: z.string().trim().max(200).nullable().default(null),
   viewYear: z.number().int().min(1800).max(2200).nullable().default(null),
   note: z.string().max(2000).nullable().default(null),
@@ -76,6 +77,7 @@ export class PeopleService {
     @Inject(KnowledgeService) private readonly knowledge: KnowledgeService,
     @Inject(TuViService) private readonly tuvi: TuViService,
     @Inject(NumerologyService) private readonly numerology: NumerologyService,
+    @Inject(AstrologyService) private readonly astrology: AstrologyService,
     @Inject(SonicHubClient) private readonly hub: SonicHubClient,
     @Inject(SyncService) private readonly sync: SyncService,
   ) {}
@@ -204,6 +206,7 @@ export class PeopleService {
     const [s] = await this.db.select().from(subjects).where(eq(subjects.id, input.subjectId));
     if (!s) throw new NotFoundException('Không tìm thấy người này');
     if (input.discipline === 'numerology') return this.createNumerologyProfile(input, s);
+    if (input.discipline === 'astrology') return this.createAstrologyProfile(input, s);
     const gender = input.gender ?? s.gender;
     if (!gender) throw new BadRequestException('Chưa có giới tính của người này');
     const birth = withOffset({ ...birthDto(s), ...stripNulls(input.birth ?? {}) } as BirthDto);
@@ -244,6 +247,32 @@ export class PeopleService {
     return this.profile(id);
   }
 
+  /** a chiêm tinh profile: the birth as the chart reads it (date, clock time, place); gender is kept when known (some
+      of Woolfolk's passages speak of a woman or a man), not required */
+  private async createAstrologyProfile(input: ProfileInput, s: SubjectRow): Promise<ProfileDto> {
+    const gender = input.gender ?? s.gender ?? null;
+    const birth = withOffset({ ...birthDto(s), ...stripNulls(input.birth ?? {}) } as BirthDto);
+    astrologyOf(astroBirthOf(birth), gender);
+    const k = await this.knowledge.astrology();
+    const id = await this.db.transaction(async tx => {
+      const [p] = await tx.insert(profiles).values({
+        subjectId: s.id, disciplineCode: 'astrology', label: input.label, viewYear: input.viewYear, note: input.note, gender,
+        ...birthColumns(birth), engineVersion: ENGINE_VERSION, knowledgeVersion: k?.version ?? 'chua-nap',
+      }).returning({ id: profiles.id });
+      await tx.update(subjects).set({ updatedAt: new Date() }).where(eq(subjects.id, s.id));
+      return p.id;
+    });
+    await this.sync.briefChanged(s.id);
+    return this.profile(id);
+  }
+
+  /** a chiêm tinh profile computed: its chart */
+  async astrologyInput(id: string) {
+    const { p, s } = await this.profileRows(id);
+    if (p.disciplineCode !== 'astrology') throw new BadRequestException('Đây không phải profile chiêm tinh');
+    return { profile: p, subject: s, computed: astrologyOf(astroBirthOf(birthDto(p)), p.gender) };
+  }
+
   private async namesOf(profileId: string): Promise<NumerologyNameDto[]> {
     const rows = await this.db.select().from(numerologyProfileNames).where(eq(numerologyProfileNames.profileId, profileId)).orderBy(asc(numerologyProfileNames.ordinal));
     return rows.map(n => ({ label: n.label, text: n.text, primary: n.primary }));
@@ -260,7 +289,8 @@ export class PeopleService {
     const { p, s, settings } = await this.profileRows(id);
     const links = await this.db.select().from(subjectLinks).where(eq(subjectLinks.subjectId, s.id));
     const numerology = p.disciplineCode === 'numerology';
-    const version = numerology ? (await this.knowledge.numerology())?.version : (await this.knowledge.get()).version;
+    const version = numerology ? (await this.knowledge.numerology())?.version
+      : p.disciplineCode === 'astrology' ? (await this.knowledge.astrology())?.version : (await this.knowledge.get()).version;
     return {
       id: p.id, discipline: p.disciplineCode, label: p.label, viewYear: p.viewYear, note: p.note,
       subject: { id: s.id, displayName: s.displayName, links: links.map(linkDto) },
@@ -293,8 +323,12 @@ export class PeopleService {
     return { profile: p, subject: s, names, computed: numerologyOf(birthDto(p), p.gender, names) };
   }
 
-  async profileReading(id: string, year?: number, name?: number): Promise<TuViReadingDto | NumerologyReadingDto> {
+  async profileReading(id: string, year?: number, name?: number): Promise<TuViReadingDto | NumerologyReadingDto | AstrologyReadingDto> {
     const { p } = await this.profileRows(id);
+    if (p.disciplineCode === 'astrology') {
+      const { computed } = await this.astrologyInput(id);
+      return this.astrology.readingOf(computed, await this.astrology.book(true));
+    }
     if (p.disciplineCode === 'numerology') {
       const { computed, profile } = await this.numerologyInput(id);
       const k = await this.numerology.book(true);

@@ -2,6 +2,7 @@
    Types only — the API builds these objects, every web reads them. */
 import type { BirthInput, Chart, ChartOptions, Principle, Tone, View } from './tuvi/index.js';
 import type { NumerologyChart, ParaRole, RuleKind, Topic } from './numerology/index.js';
+import type { AstroChart, RuleKind as AstrologyRuleKind, Topic as AstrologyTopic } from './astrology/index.js';
 
 /** grandma's voice (a family source) or anything added on top of it (supplement, other books, AI) */
 export type Layer = 'primary' | 'added';
@@ -251,4 +252,87 @@ export interface NumerologyCatalogDto {
   symbols: NumerologySymbolDto[];
   topics: { code: Topic; title: string; part: number }[];
   tables: (TableDto & { entry: string })[];
+}
+
+// ── Chiêm tinh (cô Hương Kiều's materials, the class's Tierney, Woolfolk in Claude's translation) ──
+/** whose words a passage is: cô Hương Kiều's own, Bil Tierney's (the class's translation), Woolfolk's (Claude's translation) */
+export type AstrologyVoice = 'hk' | 'tierney' | 'woolfolk';
+export interface AstrologyBirthDto {
+  year: number; month: number; day: number;
+  /** clock time "HH:MM", null when not known (the chart then has no AC, MC or houses) */
+  time: string | null;
+  /** the time is only roughly known: the reading shows the span of times that give the same chart */
+  timeApprox?: boolean;
+  utcOffsetMinutes: number | null; timeZone: string | null;
+  place: string | null; latitude: number | null; longitude: number | null;
+}
+export interface AstrologyRequest { birth: AstrologyBirthDto; gender?: Gender | null }
+export interface AstrologyChartDto {
+  chart: AstroChart;
+  /** the UTC offset used, and what the reader should know about how the chart was set up */
+  offsetMinutes: number; notes: string[];
+  /** the span of birth times around the one given that read the same (same AC, same sign of the Moon, every planet
+      in the same house); null without a time or a place */
+  window: { from: string; to: string; before: number; after: number; capped: boolean } | null;
+}
+export interface AstrologySourceDto {
+  code: string; title: string; author: string | null; description: string | null; note: string | null;
+  /** how a reading names it: "Lời cô", "Bản dịch Tierney", "Woolfolk" */
+  label: string | null;
+  translator: string | null;
+}
+export interface AstrologyRuleDto {
+  code: string; source: string; voice: AstrologyVoice;
+  text: string;
+  /** the original of a translated passage (Woolfolk's English) */
+  en: string | null;
+  label: string | null; items: string[] | null; page: number | null;
+  /** rule: the source speaking of the person · general: its explanation of the part read, shown once at its top */
+  kind: AstrologyRuleKind;
+  topic: AstrologyTopic;
+  entry: string; when: string;
+  edited: boolean; active: boolean;
+}
+export interface AstrologyMatchDto { rule: string; why: string[] }
+export interface AstrologyGroupDto { entry: string; source: string; title: string; path: string[]; matches: AstrologyMatchDto[] }
+export interface AstrologySectionDto { topic: AstrologyTopic; title: string; focus: string | null; groups: AstrologyGroupDto[] }
+export interface AstrologyReadingDto extends AstrologyChartDto {
+  engineVersion: string; knowledgeVersion: string;
+  sections: AstrologySectionDto[];
+  /** every rule the sections cite, by code */
+  rules: Record<string, AstrologyRuleDto>;
+  sources: AstrologySourceDto[];
+}
+export interface AstrologyTocEntryDto {
+  code: string; title: string; parent: string | null; depth: number; page: number | null;
+  topic: AstrologyTopic | null; passages: number; rules: number;
+}
+export interface AstrologyBookDto {
+  sources: { source: AstrologySourceDto; toc: AstrologyTocEntryDto[] }[];
+  topics: { code: AstrologyTopic; title: string }[];
+}
+export interface AstrologyPassageDto {
+  id: number; key: string; kind: string; role: string; voice: AstrologyVoice | null; page: number | null;
+  text: string; en: string | null; label: string | null; items: string[] | null;
+  /** set only when the text was reworded in the database: what was imported */
+  originalText: string | null;
+  rule: AstrologyRuleDto | null;
+}
+export interface AstrologyEntryTextDto { code: string; title: string; depth: number; page: number | null; passages: AstrologyPassageDto[]; tables: TableDto[] }
+export interface AstrologyEntryDto {
+  code: string; title: string; page: number | null; topic: AstrologyTopic | null;
+  path: { code: string; title: string }[];
+  sections: AstrologyEntryTextDto[];
+  prev: { code: string; title: string } | null; next: { code: string; title: string } | null;
+  source: AstrologySourceDto;
+}
+export interface AstrologySymbolDto { code: string; name: string; kind: string; rules: number }
+export interface AstrologyLookupDto {
+  symbols: AstrologySymbolDto[]; total: number;
+  groups: { entry: string; source: string; title: string; path: string[]; rules: AstrologyRuleDto[] }[];
+}
+export interface AstrologyCatalogDto {
+  symbols: AstrologySymbolDto[];
+  topics: { code: AstrologyTopic; title: string }[];
+  sources: AstrologySourceDto[];
 }

@@ -353,5 +353,15 @@ export function symbolCatalogue(): { code: string; name: string; kind: string }[
   for (const p of [...PLANETS, 'chiron'] as BodyCode[]) out.push({ code: `dominant:${p}`, name: `${BODY[p].name} trội`, kind: 'dominant' });
   for (const e of Object.keys(ELEMENT_NAME) as Element[]) out.push({ code: `element:${e}`, name: `Nguyên tố ${ELEMENT_NAME[e]}`, kind: 'element' });
   for (const m of Object.keys(MODALITY_NAME) as Modality[]) out.push({ code: `modality:${m}`, name: `Thể thức ${MODALITY_NAME[m]}`, kind: 'modality' });
+  // a body in a sign, in a house; two bodies in aspect
+  const named = (b: BodyCode) => (b === 'asc' ? 'Cung Mọc' : b === 'mc' ? 'MC' : BODY[b].name);
+  const placed = Object.values(BODY).filter(b => b.code !== 'dsc' && b.code !== 'ic').map(b => b.code);
+  for (const b of placed) for (const s of SIGNS) out.push({ code: `${b}@${s.code}`, name: `${named(b)} ở ${s.name}`, kind: 'in-sign' });
+  for (const b of placed) if (BODY[b].kind !== 'angle') for (let h = 1; h <= 12; h++) out.push({ code: `${b}@h${h}`, name: `${named(b)} ở cung ${h}`, kind: 'in-house' });
+  const paired = [...PLANETS, 'chiron', 'north-node', 'south-node', 'lilith', 'asc', 'mc'] as BodyCode[];
+  for (let i = 0; i < paired.length; i++) for (let j = i + 1; j < paired.length; j++) {
+    const [a, b] = [paired[i], paired[j]].sort();
+    out.push({ code: `${a}~${b}`, name: `${named(paired[i])} – ${named(paired[j])}`, kind: 'pair' });
+  }
   return out;
 }

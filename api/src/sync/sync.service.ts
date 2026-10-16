@@ -12,6 +12,8 @@ import { DB, type Db } from '../db/db.js';
 import { numerologyProfileNames, outbox, profiles, readingItems, readingSections, readings, subjectLinks, tuviProfileSettings } from '../db/schema.js';
 import { KnowledgeService } from '../kb/knowledge.service.js';
 import { numerologyOf } from '../numerology/numerology.service.js';
+import { astroBirthOf, astrologyOf } from '../astrology/astrology.service.js';
+import { BODY, LEVEL_NAME, SIGN, patternText, placementText, readAstrology } from '@mystic/engine/astrology';
 import { birthDto, birthInputOf } from '../people/birth.js';
 import { chartOf, optionsOf } from '../tuvi/tuvi.service.js';
 import { SonicHubClient, SonicHubError } from './sonic-hub.client.js';
@@ -102,6 +104,7 @@ export class SyncService implements OnModuleInit, OnModuleDestroy {
   /** the brief of a subject's newest profile in a discipline (null when there is none) */
   async brief(subjectId: string, discipline: string): Promise<BriefDto | null> {
     if (discipline === 'numerology') return this.numerologyBrief(subjectId);
+    if (discipline === 'astrology') return this.astrologyBrief(subjectId);
     const [row] = await this.db.select({ p: profiles, settings: tuviProfileSettings }).from(profiles)
       .leftJoin(tuviProfileSettings, eq(tuviProfileSettings.profileId, profiles.id))
       .where(and(eq(profiles.subjectId, subjectId), eq(profiles.disciplineCode, discipline))).orderBy(desc(profiles.updatedAt)).limit(1);
@@ -143,6 +146,44 @@ export class SyncService implements OnModuleInit, OnModuleDestroy {
     return {
       discipline, title: 'Tử vi', subjectId, profileId: p.id, profileLabel: p.label,
       url: base ? `${base}/tu-vi/profile/${p.id}` : null, facts, lines, updatedAt: (ai && ai.updatedAt > p.updatedAt ? ai.updatedAt : p.updatedAt).toISOString(),
+    };
+  }
+
+  /** Chiêm tinh: the newest profile's Mặt Trời, Mặt Trăng, cung Mọc, ruler, dominant planets and structures, and the
+      synthesis written for it (else Woolfolk's first words on its Sun sign) */
+  private async astrologyBrief(subjectId: string): Promise<BriefDto | null> {
+    const [p] = await this.db.select().from(profiles).where(and(eq(profiles.subjectId, subjectId), eq(profiles.disciplineCode, 'astrology'))).orderBy(desc(profiles.updatedAt)).limit(1);
+    if (!p) return null;
+    const { chart: c } = astrologyOf(astroBirthOf(birthDto(p)), p.gender);
+    const i = c.input;
+    const strong = c.dominant.tests.filter(t => t.level === 'strong' || t.level === 'very-strong').sort((a, b) => b.total - a.total);
+    const facts = [
+      { label: 'Ngày giờ sinh', value: `${i.local.day}/${i.local.month}/${i.local.year}${i.local.hour !== null ? ` ${String(i.local.hour).padStart(2, '0')}:${String(i.local.minute).padStart(2, '0')}` : ' (chưa có giờ)'}${p.birthTimeApprox ? ', ước chừng' : ''}` },
+      { label: 'Mặt Trời', value: placementText(c, 'sun') },
+      { label: 'Mặt Trăng', value: placementText(c, 'moon') },
+      ...(c.timeKnown ? [{ label: 'Cung Mọc', value: `${SIGN[c.placements.asc!.sign].name} · chủ tinh ${c.rulers.chart!.map(r => BODY[r].name).join(', ')}` }] : []),
+      ...(strong.length ? [{ label: 'Nhân tố trội', value: strong.map(t => `${BODY[t.body].name} ${t.total} (${LEVEL_NAME[t.level]})`).join(', ') }] : []),
+      ...(c.patterns.length ? [{ label: 'Cấu trúc', value: c.patterns.map(patternText).join('; ') }] : []),
+    ];
+    const lines: BriefDto['lines'] = [];
+    const [w] = await this.db.select({ id: readings.id, author: readings.author, updatedAt: readings.updatedAt }).from(readings).where(and(eq(readings.profileId, p.id), eq(readings.scope, 'tong-hop'))).orderBy(desc(readings.updatedAt)).limit(1);
+    if (w) {
+      const items = await this.db.select({ layer: readingItems.layer, text: readingItems.text }).from(readingItems)
+        .innerJoin(readingSections, eq(readingSections.id, readingItems.sectionId)).where(eq(readingSections.readingId, w.id)).orderBy(asc(readingSections.ordinal), asc(readingItems.ordinal));
+      for (const it of items.filter(x => x.layer === 'primary').slice(0, 3)) lines.push({ layer: 'primary', text: it.text, source: 'Tóm lược tài liệu chiêm tinh (cô Hương Kiều, Tierney, Woolfolk)' });
+      const added = items.find(x => x.layer === 'added');
+      if (added) lines.push({ layer: 'added', text: added.text, source: `${w.author === 'ai' ? 'AI' : 'Claude'} luận thêm — không phải lời cô` });
+    }
+    if (!lines.length) {
+      const k = await this.knowledge.astrology();
+      const r = k ? readAstrology(c, k.kb) : null;
+      const g = r?.sections.find(x => x.topic === 'sun')?.groups.find(x => x.source === 'astrology.woolfolk');
+      for (const m of g?.matches.slice(0, 2) ?? []) lines.push({ layer: 'primary', text: m.rule.text, source: `Woolfolk · ${g!.title}` });
+    }
+    const base = this.config.publicWebUrl;
+    return {
+      discipline: 'astrology', title: 'Chiêm tinh', subjectId, profileId: p.id, profileLabel: p.label,
+      url: base ? `${base}/chiem-tinh/profile/${p.id}` : null, facts, lines, updatedAt: (w && w.updatedAt > p.updatedAt ? w.updatedAt : p.updatedAt).toISOString(),
     };
   }
 

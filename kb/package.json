@@ -13,7 +13,8 @@
     "numerology": "node scripts/build-numerology.mjs",
     "read:numerology": "node scripts/test-numerology.mjs",
     "upload:numerology": "node scripts/upload-numerology.mjs",
-    "astrology": "node scripts/build-astrology.mjs"
+    "astrology": "node scripts/build-astrology.mjs",
+    "upload:astrology": "node scripts/upload-astrology.mjs"
   },
   "dependencies": {
     "@mystic/engine": "*"
