@@ -64,8 +64,10 @@ export function SubjectPage() {
   const q = useQuery({ queryKey: ['subject', id], queryFn: () => api.subject(id), retry: false });
   const s = q.data;
   const tuvi = s?.profiles.filter(p => p.discipline === 'tuvi') ?? [], ns = s?.profiles.filter(p => p.discipline === 'numerology') ?? [];
+  const astro = s?.profiles.filter(p => p.discipline === 'astrology') ?? [];
   const brief = useQuery({ queryKey: ['brief', id], queryFn: () => api.brief(id), retry: false, enabled: tuvi.length > 0 });
   const nsBrief = useQuery({ queryKey: ['brief', id, 'numerology'], queryFn: () => api.brief(id, 'numerology'), retry: false, enabled: ns.length > 0 });
+  const astroBrief = useQuery({ queryKey: ['brief', id, 'astrology'], queryFn: () => api.brief(id, 'astrology'), retry: false, enabled: astro.length > 0 });
   const [editing, setEditing] = useState(false);
   const nav = useNavigate(), qc = useQueryClient();
   const refreshAll = () => ['subject', 'subjects', 'brief'].forEach(k => void qc.invalidateQueries({ queryKey: [k] }));
@@ -77,6 +79,11 @@ export function SubjectPage() {
   const makeNs = useMutation({
     mutationFn: () => api.createProfile({ subjectId: id, discipline: 'numerology' }),
     onSuccess: p => { refreshAll(); nav(`/nhan-so-hoc/profile/${p.id}`); },
+  });
+  /* chiêm tinh reads the person's own date, clock time and place (no time: the planets in the signs only) */
+  const makeAstro = useMutation({
+    mutationFn: () => api.createProfile({ subjectId: id, discipline: 'astrology' }),
+    onSuccess: p => { refreshAll(); nav(`/chiem-tinh/profile/${p.id}`); },
   });
   const pull = useMutation({ mutationFn: () => api.linkSonicHub(hubLink(s!)!.externalId), onSuccess: refreshAll });
   useTitle(s?.displayName ?? 'Người');
@@ -125,6 +132,26 @@ export function SubjectPage() {
             {!dated && <p className="tv-muted" style={{ fontSize: 13 }}>Còn thiếu ngày sinh{link ? ' — sửa ở Sonic Hub rồi bấm «Cập nhật từ Sonic Hub».' : '.'}</p>}
             {makeNs.isError && <p className="tv-err">{errorText(makeNs.error)}</p>}
             {nsBrief.data && <Brief b={nsBrief.data} linked={!!link} voice={l => (l.layer === 'added' ? 'Luận thêm' : l.source.startsWith('Tóm lược') ? 'Tóm lược sách' : 'Lời sách')} />}
+          </section>
+
+          <section className="as" style={{ marginTop: 36 }}>
+            <div className="hd"><h2>Chiêm tinh</h2><span>{astro.length}</span></div>
+            <div className="tv-profiles">
+              {astro.map(p => (
+                <Link key={p.id} className="tv-profile-item" to={`/chiem-tinh/profile/${p.id}`}>
+                  <b>{p.label || 'Lá số chiêm tinh'}</b><span>{p.aiReadings ? 'có bài tổng hợp' : ''}</span>
+                  <small>{[birthLine(p.birth), `lưu ${dateVi(p.createdAt)}`].filter(Boolean).join(' · ')}</small>
+                </Link>))}
+              {!astro.length && <div className="tv-empty">Chưa có lá số chiêm tinh.</div>}
+            </div>
+            <div className="tv-acts" style={{ marginTop: 14 }}>
+              <button type="button" className="tv-btn son" disabled={!dated || s.birth.calendar !== 'solar' || makeAstro.isPending} onClick={() => makeAstro.mutate()} title={dated ? undefined : 'Cần ngày tháng năm sinh'}>
+                {makeAstro.isPending ? 'Đang lập…' : 'Lập lá số chiêm tinh'}</button>
+              <Link className="tv-btn ghost" to={`/chiem-tinh?nguoi=${s.id}`}>Lập với giờ hoặc nơi khác…</Link>
+            </div>
+            {(!dated || !s.birth.time || s.birth.latitude === null) && <p className="tv-muted" style={{ fontSize: 13 }}>{!dated ? 'Còn thiếu ngày sinh.' : `Chưa có ${[!s.birth.time && 'giờ sinh (giờ đồng hồ)', s.birth.latitude === null && 'nơi sinh'].filter(Boolean).join(' và ')}: lá số chưa có cung Mọc và các cung địa bàn.`}</p>}
+            {makeAstro.isError && <p className="tv-err">{errorText(makeAstro.error)}</p>}
+            {astroBrief.data && <Brief b={astroBrief.data} linked={!!link} voice={l => (l.layer === 'added' ? 'Luận thêm' : l.source.startsWith('Tóm lược') ? 'Tóm lược tài liệu' : 'Lời tài liệu')} />}
           </section>
         </div>
         <aside className="tv-card" style={{ padding: '16px 18px' }}>

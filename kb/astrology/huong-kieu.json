@@ -1,0 +1,1351 @@
+{
+ "source": {
+  "code": "astrology.hk",
+  "file": "huong-kieu.jsonl",
+  "title": "Chiêm tinh học cơ bản",
+  "author": "Kiều Thị Thu Hương (cô Hương Kiều)",
+  "label": "Lời cô",
+  "description": "Giáo trình lớp cơ bản của cô Hương Kiều (quybaba.blogspot.com), 162 trang; phần 12 dấu hiệu hoàng đạo là bản dịch \"All Round the Zodiac\" của Bil Tierney, hiệu đính từ bản dịch của Hy Chan."
+ },
+ "entries": [
+  {
+   "at": 1,
+   "code": "vai-net-ve-chiem-tinh-tay-phuong-hien-da",
+   "title": "VÀI NÉT VỀ CHIÊM TINH TÂY PHƯƠNG HIỆN ĐẠI",
+   "kind": "general"
+  },
+  {
+   "at": 18,
+   "code": "noi-dung-hoc-lop-co-ban",
+   "title": "NỘI DUNG HỌC LỚP CƠ BẢN",
+   "kind": "general"
+  },
+  {
+   "at": 31,
+   "code": "kien-thuc-co-ban-chiem-tinh-hoc",
+   "title": "KIẾN THỨC CƠ BẢN CHIÊM TINH HỌC",
+   "kind": "general"
+  },
+  {
+   "at": 32,
+   "code": "cau-truc-la-so-chiem-tinh",
+   "title": "CẤU TRÚC LÁ SỐ CHIÊM TINH",
+   "kind": "general"
+  },
+  {
+   "at": 45,
+   "code": "cau-truc-la-so-chiem-tinh.cac-goc-chieu-chinh",
+   "title": "CÁC GÓC CHIẾU CHÍNH",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 47,
+   "code": "cau-truc-la-so-chiem-tinh.phan-nhom",
+   "title": "PHÂN NHÓM",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 65,
+   "code": "cau-truc-la-so-chiem-tinh.bang-tu-khoa-dau-hieu-hoang-dao-cung-dia",
+   "title": "BẢNG TỪ KHÓA (DẤU HIỆU HOÀNG ĐẠO, CUNG ĐỊA BÀN VÀ HÀNH TINH)",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 66,
+   "code": "cau-truc-la-so-chiem-tinh.bang-tu-khoa-dau-hieu-hoang-dao-cung-dia.bach-duong-aries",
+   "title": "BẠCH DƯƠNG – ARIES",
+   "parent": "cau-truc-la-so-chiem-tinh.bang-tu-khoa-dau-hieu-hoang-dao-cung-dia"
+  },
+  {
+   "at": 68,
+   "code": "cau-truc-la-so-chiem-tinh.bang-tu-khoa-dau-hieu-hoang-dao-cung-dia.cung-dia-ban-so-1",
+   "title": "CUNG ĐỊA BÀN SỐ 1",
+   "parent": "cau-truc-la-so-chiem-tinh.bang-tu-khoa-dau-hieu-hoang-dao-cung-dia"
+  },
+  {
+   "at": 70,
+   "code": "cau-truc-la-so-chiem-tinh.hoa-tinh-mars",
+   "title": "HỎA TINH – MARS",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 73,
+   "code": "cau-truc-la-so-chiem-tinh.hoa-tinh-mars.kim-nguu-taurus",
+   "title": "KIM NGƯU – TAURUS",
+   "parent": "cau-truc-la-so-chiem-tinh.hoa-tinh-mars"
+  },
+  {
+   "at": 75,
+   "code": "cau-truc-la-so-chiem-tinh.hoa-tinh-mars.cung-dia-ban-so-2",
+   "title": "CUNG ĐỊA BÀN SỐ 2",
+   "parent": "cau-truc-la-so-chiem-tinh.hoa-tinh-mars"
+  },
+  {
+   "at": 77,
+   "code": "cau-truc-la-so-chiem-tinh.kim-tinh-venus",
+   "title": "KIM TINH – VENUS",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 78,
+   "code": "cau-truc-la-so-chiem-tinh.kim-tinh-venus.song-tu-gemini",
+   "title": "SONG TỬ - GEMINI",
+   "parent": "cau-truc-la-so-chiem-tinh.kim-tinh-venus"
+  },
+  {
+   "at": 80,
+   "code": "cau-truc-la-so-chiem-tinh.kim-tinh-venus.cung-dia-ban-so-3",
+   "title": "CUNG ĐỊA BÀN SỐ 3",
+   "parent": "cau-truc-la-so-chiem-tinh.kim-tinh-venus"
+  },
+  {
+   "at": 82,
+   "code": "cau-truc-la-so-chiem-tinh.thuy-tinh-mercury",
+   "title": "THỦY TINH – MERCURY",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 88,
+   "code": "cau-truc-la-so-chiem-tinh.thuy-tinh-mercury.cu-giai-cancer",
+   "title": "CỰ GIẢI - CANCER",
+   "parent": "cau-truc-la-so-chiem-tinh.thuy-tinh-mercury"
+  },
+  {
+   "at": 90,
+   "code": "cau-truc-la-so-chiem-tinh.thuy-tinh-mercury.cung-dia-ban-so-4",
+   "title": "CUNG ĐỊA BÀN SỐ 4",
+   "parent": "cau-truc-la-so-chiem-tinh.thuy-tinh-mercury"
+  },
+  {
+   "at": 92,
+   "code": "cau-truc-la-so-chiem-tinh.mat-trang-moon",
+   "title": "MẶT TRĂNG – MOON",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 96,
+   "code": "cau-truc-la-so-chiem-tinh.mat-trang-moon.su-tu-leo",
+   "title": "SƯ TỬ - LEO",
+   "parent": "cau-truc-la-so-chiem-tinh.mat-trang-moon"
+  },
+  {
+   "at": 98,
+   "code": "cau-truc-la-so-chiem-tinh.mat-trang-moon.cung-dia-ban-so-5",
+   "title": "CUNG ĐỊA BÀN SỐ 5",
+   "parent": "cau-truc-la-so-chiem-tinh.mat-trang-moon"
+  },
+  {
+   "at": 100,
+   "code": "cau-truc-la-so-chiem-tinh.mat-troi-sun",
+   "title": "MẶT TRỜI – SUN",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 105,
+   "code": "cau-truc-la-so-chiem-tinh.mat-troi-sun.xu-nu-virgo",
+   "title": "XỬ NỮ – VIRGO",
+   "parent": "cau-truc-la-so-chiem-tinh.mat-troi-sun"
+  },
+  {
+   "at": 107,
+   "code": "cau-truc-la-so-chiem-tinh.mat-troi-sun.cung-dia-ban-so-6",
+   "title": "CUNG ĐỊA BÀN SỐ 6",
+   "parent": "cau-truc-la-so-chiem-tinh.mat-troi-sun"
+  },
+  {
+   "at": 109,
+   "code": "cau-truc-la-so-chiem-tinh.thuy-tinh-mercury-2",
+   "title": "THỦY TINH – MERCURY",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 110,
+   "code": "cau-truc-la-so-chiem-tinh.thuy-tinh-mercury-2.thien-binh-libra",
+   "title": "THIÊN BÌNH – LIBRA",
+   "parent": "cau-truc-la-so-chiem-tinh.thuy-tinh-mercury-2"
+  },
+  {
+   "at": 112,
+   "code": "cau-truc-la-so-chiem-tinh.thuy-tinh-mercury-2.cung-dia-ban-so-7",
+   "title": "CUNG ĐỊA BÀN SỐ 7",
+   "parent": "cau-truc-la-so-chiem-tinh.thuy-tinh-mercury-2"
+  },
+  {
+   "at": 114,
+   "code": "cau-truc-la-so-chiem-tinh.kim-tinh-venus-2",
+   "title": "KIM TINH - VENUS",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 117,
+   "code": "cau-truc-la-so-chiem-tinh.kim-tinh-venus-2.bo-cap-scorpio",
+   "title": "BỌ CẠP - SCORPIO",
+   "parent": "cau-truc-la-so-chiem-tinh.kim-tinh-venus-2"
+  },
+  {
+   "at": 119,
+   "code": "cau-truc-la-so-chiem-tinh.kim-tinh-venus-2.cung-dia-ban-so-8",
+   "title": "CUNG ĐỊA BÀN SỐ 8",
+   "parent": "cau-truc-la-so-chiem-tinh.kim-tinh-venus-2"
+  },
+  {
+   "at": 121,
+   "code": "cau-truc-la-so-chiem-tinh.diem-vuong-tinh-pluto",
+   "title": "DIÊM VƯƠNG TINH - PLUTO",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 125,
+   "code": "cau-truc-la-so-chiem-tinh.diem-vuong-tinh-pluto.nhan-ma-sagittarius",
+   "title": "NHÂN MÃ – SAGITTARIUS",
+   "parent": "cau-truc-la-so-chiem-tinh.diem-vuong-tinh-pluto"
+  },
+  {
+   "at": 127,
+   "code": "cau-truc-la-so-chiem-tinh.diem-vuong-tinh-pluto.cung-dia-ban-so-9",
+   "title": "CUNG ĐỊA BÀN SỐ 9",
+   "parent": "cau-truc-la-so-chiem-tinh.diem-vuong-tinh-pluto"
+  },
+  {
+   "at": 129,
+   "code": "cau-truc-la-so-chiem-tinh.moc-tinh-jupiter",
+   "title": "MỘC TINH - JUPITER",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 134,
+   "code": "cau-truc-la-so-chiem-tinh.moc-tinh-jupiter.ma-ket-capricorn",
+   "title": "MA KẾT - CAPRICORN",
+   "parent": "cau-truc-la-so-chiem-tinh.moc-tinh-jupiter"
+  },
+  {
+   "at": 136,
+   "code": "cau-truc-la-so-chiem-tinh.moc-tinh-jupiter.cung-dia-ban-so-10",
+   "title": "CUNG ĐỊA BÀN SỐ 10",
+   "parent": "cau-truc-la-so-chiem-tinh.moc-tinh-jupiter"
+  },
+  {
+   "at": 138,
+   "code": "cau-truc-la-so-chiem-tinh.tho-tinh-saturn",
+   "title": "THỔ TINH – SATURN",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 141,
+   "code": "cau-truc-la-so-chiem-tinh.tho-tinh-saturn.bao-binh-aquarius",
+   "title": "BẢO BÌNH - AQUARIUS",
+   "parent": "cau-truc-la-so-chiem-tinh.tho-tinh-saturn"
+  },
+  {
+   "at": 143,
+   "code": "cau-truc-la-so-chiem-tinh.tho-tinh-saturn.cung-dia-ban-so-11",
+   "title": "CUNG ĐỊA BÀN SỐ 11",
+   "parent": "cau-truc-la-so-chiem-tinh.tho-tinh-saturn"
+  },
+  {
+   "at": 145,
+   "code": "cau-truc-la-so-chiem-tinh.thien-vuong-tinh-uranus",
+   "title": "THIÊN VƯƠNG TINH - URANUS",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 150,
+   "code": "cau-truc-la-so-chiem-tinh.thien-vuong-tinh-uranus.song-ngu-pisces",
+   "title": "SONG NGƯ – PISCES",
+   "parent": "cau-truc-la-so-chiem-tinh.thien-vuong-tinh-uranus"
+  },
+  {
+   "at": 152,
+   "code": "cau-truc-la-so-chiem-tinh.thien-vuong-tinh-uranus.cung-dia-ban-so-12",
+   "title": "CUNG ĐỊA BÀN SỐ 12",
+   "parent": "cau-truc-la-so-chiem-tinh.thien-vuong-tinh-uranus"
+  },
+  {
+   "at": 154,
+   "code": "cau-truc-la-so-chiem-tinh.hai-vuong-tinh-neptune",
+   "title": "HẢI VƯƠNG TINH - NEPTUNE",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 159,
+   "code": "cau-truc-la-so-chiem-tinh.cac-hanh-tinh-va-cac-diem-toan-hoc-khac",
+   "title": "CÁC HÀNH TINH VÀ CÁC ĐIỂM TOÁN HỌC KHÁC TRÊN LÁ SỐ CHIÊM TINH",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 160,
+   "code": "cau-truc-la-so-chiem-tinh.1-vertex-va-anti-vertex",
+   "title": "1. VERTEX VÀ ANTI-VERTEX",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 161,
+   "code": "cau-truc-la-so-chiem-tinh.1-vertex-va-anti-vertex.vertex",
+   "title": "VERTEX",
+   "parent": "cau-truc-la-so-chiem-tinh.1-vertex-va-anti-vertex"
+  },
+  {
+   "at": 163,
+   "code": "cau-truc-la-so-chiem-tinh.1-vertex-va-anti-vertex.anti-vertex",
+   "title": "ANTI-VERTEX",
+   "parent": "cau-truc-la-so-chiem-tinh.1-vertex-va-anti-vertex"
+  },
+  {
+   "at": 165,
+   "code": "cau-truc-la-so-chiem-tinh.2-tu-du-la-hau-ke-do-tu-khi-nguyet-bot",
+   "title": "2. TỨ DƯ (LA HẦU, KẾ ĐÔ, TỬ KHÍ, NGUYỆT BỘT)",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 166,
+   "code": "cau-truc-la-so-chiem-tinh.2-tu-du-la-hau-ke-do-tu-khi-nguyet-bot.nguyet-bot-lilith",
+   "title": "NGUYỆT BỘT (LILITH)",
+   "parent": "cau-truc-la-so-chiem-tinh.2-tu-du-la-hau-ke-do-tu-khi-nguyet-bot"
+  },
+  {
+   "at": 171,
+   "code": "cau-truc-la-so-chiem-tinh.2-tu-du-la-hau-ke-do-tu-khi-nguyet-bot.tu-khi",
+   "title": "TỬ KHÍ",
+   "parent": "cau-truc-la-so-chiem-tinh.2-tu-du-la-hau-ke-do-tu-khi-nguyet-bot"
+  },
+  {
+   "at": 173,
+   "code": "cau-truc-la-so-chiem-tinh.2-tu-du-la-hau-ke-do-tu-khi-nguyet-bot.la-hau",
+   "title": "LA HẦU",
+   "parent": "cau-truc-la-so-chiem-tinh.2-tu-du-la-hau-ke-do-tu-khi-nguyet-bot"
+  },
+  {
+   "at": 175,
+   "code": "cau-truc-la-so-chiem-tinh.2-tu-du-la-hau-ke-do-tu-khi-nguyet-bot.ke-do",
+   "title": "KẾ ĐÔ",
+   "parent": "cau-truc-la-so-chiem-tinh.2-tu-du-la-hau-ke-do-tu-khi-nguyet-bot"
+  },
+  {
+   "at": 177,
+   "code": "cau-truc-la-so-chiem-tinh.3-chiron",
+   "title": "3. CHIRON",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 179,
+   "code": "cau-truc-la-so-chiem-tinh.4-part-of-fortune",
+   "title": "4. PART OF FORTUNE",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 181,
+   "code": "cau-truc-la-so-chiem-tinh.bang-vuong-tuong-tu-tu-cua-cac-hanh-tinh",
+   "title": "BẢNG VƯỢNG, TƯỚNG, TÙ, TỬ CỦA CÁC HÀNH TINH TRÊN LÁ SỐ CHIÊM TINH",
+   "parent": "cau-truc-la-so-chiem-tinh"
+  },
+  {
+   "at": 183,
+   "code": "cau-truc-la-so-chiem-tinh.bang-vuong-tuong-tu-tu-cua-cac-hanh-tinh.vuong-exaltation",
+   "title": "VƯỢNG (EXALTATION)",
+   "parent": "cau-truc-la-so-chiem-tinh.bang-vuong-tuong-tu-tu-cua-cac-hanh-tinh"
+  },
+  {
+   "at": 185,
+   "code": "cau-truc-la-so-chiem-tinh.bang-vuong-tuong-tu-tu-cua-cac-hanh-tinh.tuong-ruler",
+   "title": "TƯỚNG (RULER)",
+   "parent": "cau-truc-la-so-chiem-tinh.bang-vuong-tuong-tu-tu-cua-cac-hanh-tinh"
+  },
+  {
+   "at": 187,
+   "code": "cau-truc-la-so-chiem-tinh.bang-vuong-tuong-tu-tu-cua-cac-hanh-tinh.tu-detriment",
+   "title": "TÙ (DETRIMENT)",
+   "parent": "cau-truc-la-so-chiem-tinh.bang-vuong-tuong-tu-tu-cua-cac-hanh-tinh"
+  },
+  {
+   "at": 189,
+   "code": "cau-truc-la-so-chiem-tinh.bang-vuong-tuong-tu-tu-cua-cac-hanh-tinh.tu-fall",
+   "title": "TỬ (FALL)",
+   "parent": "cau-truc-la-so-chiem-tinh.bang-vuong-tuong-tu-tu-cua-cac-hanh-tinh"
+  },
+  {
+   "at": 192,
+   "code": "12-cung-dia-ban-house",
+   "title": "12 CUNG ĐỊA BÀN (HOUSE)",
+   "kind": "general"
+  },
+  {
+   "at": 194,
+   "code": "12-cung-dia-ban-house.cung-1",
+   "title": "CUNG 1",
+   "parent": "12-cung-dia-ban-house",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(1)"
+  },
+  {
+   "at": 198,
+   "code": "12-cung-dia-ban-house.cung-2",
+   "title": "CUNG 2",
+   "parent": "12-cung-dia-ban-house",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(2)"
+  },
+  {
+   "at": 201,
+   "code": "12-cung-dia-ban-house.cung-3",
+   "title": "CUNG 3",
+   "parent": "12-cung-dia-ban-house",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(3)"
+  },
+  {
+   "at": 204,
+   "code": "12-cung-dia-ban-house.cung-4",
+   "title": "CUNG 4",
+   "parent": "12-cung-dia-ban-house",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(4)"
+  },
+  {
+   "at": 209,
+   "code": "12-cung-dia-ban-house.cung-5",
+   "title": "CUNG 5",
+   "parent": "12-cung-dia-ban-house",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(5)"
+  },
+  {
+   "at": 213,
+   "code": "12-cung-dia-ban-house.cung-6",
+   "title": "CUNG 6",
+   "parent": "12-cung-dia-ban-house",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(6)"
+  },
+  {
+   "at": 216,
+   "code": "12-cung-dia-ban-house.cung-7",
+   "title": "CUNG 7",
+   "parent": "12-cung-dia-ban-house",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(7)"
+  },
+  {
+   "at": 220,
+   "code": "12-cung-dia-ban-house.cung-8",
+   "title": "CUNG 8",
+   "parent": "12-cung-dia-ban-house",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(8)"
+  },
+  {
+   "at": 225,
+   "code": "12-cung-dia-ban-house.cung-9",
+   "title": "CUNG 9",
+   "parent": "12-cung-dia-ban-house",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(9)"
+  },
+  {
+   "at": 227,
+   "code": "12-cung-dia-ban-house.cung-10",
+   "title": "CUNG 10",
+   "parent": "12-cung-dia-ban-house",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(10)"
+  },
+  {
+   "at": 231,
+   "code": "12-cung-dia-ban-house.cung-11",
+   "title": "CUNG 11",
+   "parent": "12-cung-dia-ban-house",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(11)"
+  },
+  {
+   "at": 234,
+   "code": "12-cung-dia-ban-house.cung-12",
+   "title": "CUNG 12",
+   "parent": "12-cung-dia-ban-house",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(12)"
+  },
+  {
+   "at": 238,
+   "code": "12-dau-hieu-hoang-dao",
+   "title": "12 DẤU HIỆU HOÀNG ĐẠO",
+   "kind": "general"
+  },
+  {
+   "at": 240,
+   "code": "sign-aries",
+   "title": "BẠCH DƯƠNG",
+   "parent": "12-dau-hieu-hoang-dao",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(aries)"
+  },
+  {
+   "at": 241,
+   "code": "sign-aries.bang-dang-mot-thanh-vien",
+   "title": "BĂNG ĐẢNG MỘT THÀNH VIÊN",
+   "parent": "sign-aries"
+  },
+  {
+   "at": 248,
+   "code": "sign-aries.phong-het-toc-luc-ve-phia-truoc-nao",
+   "title": "PHÓNG HẾT TỐC LỰC VỀ PHÍA TRƯỚC NÀO!",
+   "parent": "sign-aries"
+  },
+  {
+   "at": 252,
+   "code": "sign-aries.xe-tao-ra",
+   "title": "XÊ TAO RA!!!",
+   "parent": "sign-aries"
+  },
+  {
+   "at": 255,
+   "code": "sign-aries.thich-danh-nhau-khong",
+   "title": "THÍCH ĐÁNH NHAU KHÔNG?",
+   "parent": "sign-aries"
+  },
+  {
+   "at": 260,
+   "code": "sign-aries.hay-tu-khang-dinh-minh",
+   "title": "HÃY TỰ KHẲNG ĐỊNH MÌNH!!!",
+   "parent": "sign-aries"
+  },
+  {
+   "at": 263,
+   "code": "sign-aries.nhung-ke-lieu-mang",
+   "title": "NHỮNG KẺ LIỀU MẠNG",
+   "parent": "sign-aries"
+  },
+  {
+   "at": 267,
+   "code": "sign-aries.tinh-tinh-don-gian",
+   "title": "TÍNH TÌNH ĐƠN GIẢN",
+   "parent": "sign-aries"
+  },
+  {
+   "at": 270,
+   "code": "sign-aries.chi-co-mot-minh",
+   "title": "CHỈ CÓ MỘT MÌNH",
+   "parent": "sign-aries"
+  },
+  {
+   "at": 275,
+   "code": "sign-aries.va-giong-nhu-mot-vu-no-cua-sao-hoa",
+   "title": "VÀ GIỐNG NHƯ MỘT VỤ NỔ CỦA SAO HỎA",
+   "parent": "sign-aries"
+  },
+  {
+   "at": 278,
+   "code": "sign-aries.loi-chot-ha",
+   "title": "LỜI CHỐT HẠ",
+   "parent": "sign-aries"
+  },
+  {
+   "at": 280,
+   "code": "sign-taurus",
+   "title": "KIM NGƯU",
+   "parent": "12-dau-hieu-hoang-dao",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(taurus)"
+  },
+  {
+   "at": 281,
+   "code": "sign-taurus.dia-ban-rieng-tien-nghi",
+   "title": "ĐỊA BÀN RIÊNG TIỆN NGHI",
+   "parent": "sign-taurus"
+  },
+  {
+   "at": 288,
+   "code": "sign-taurus.chac-nhu-cua-gach",
+   "title": "CHẮC NHƯ CUA GẠCH",
+   "parent": "sign-taurus"
+  },
+  {
+   "at": 292,
+   "code": "sign-taurus.cu-tu-tu-roi-khoai-se-du",
+   "title": "CỨ TỪ TỪ RỒI KHOAI SẼ DỪ!!!",
+   "parent": "sign-taurus"
+  },
+  {
+   "at": 297,
+   "code": "sign-taurus.ua-ngot",
+   "title": "ƯA NGỌT",
+   "parent": "sign-taurus"
+  },
+  {
+   "at": 301,
+   "code": "sign-taurus.tung-buoc-tung-buoc-mot",
+   "title": "TỪNG BƯỚC, TỪNG BƯỚC MỘT",
+   "parent": "sign-taurus"
+  },
+  {
+   "at": 305,
+   "code": "sign-taurus.dang-gia",
+   "title": "ĐÁNG GIÁ",
+   "parent": "sign-taurus"
+  },
+  {
+   "at": 310,
+   "code": "sign-taurus.ban-nang-goc",
+   "title": "BẢN NĂNG GỐC",
+   "parent": "sign-taurus"
+  },
+  {
+   "at": 315,
+   "code": "sign-taurus.ke-chiem-huu",
+   "title": "KẺ CHIẾM HỮU",
+   "parent": "sign-taurus"
+  },
+  {
+   "at": 321,
+   "code": "sign-taurus.sao-kim-khong-dieu-da",
+   "title": "SAO KIM KHÔNG ĐIỆU ĐÀ",
+   "parent": "sign-taurus"
+  },
+  {
+   "at": 324,
+   "code": "sign-taurus.loi-chot-ha",
+   "title": "LỜI CHỐT HẠ",
+   "parent": "sign-taurus"
+  },
+  {
+   "at": 327,
+   "code": "sign-gemini",
+   "title": "SONG TỬ",
+   "parent": "12-dau-hieu-hoang-dao",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(gemini)"
+  },
+  {
+   "at": 328,
+   "code": "sign-gemini.song-hanh",
+   "title": "SONG HÀNH",
+   "parent": "sign-gemini"
+  },
+  {
+   "at": 335,
+   "code": "sign-gemini.gio-giat",
+   "title": "GIÓ GIẬT",
+   "parent": "sign-gemini"
+  },
+  {
+   "at": 339,
+   "code": "sign-gemini.lac-que",
+   "title": "LẠC QUẺ",
+   "parent": "sign-gemini"
+  },
+  {
+   "at": 343,
+   "code": "sign-gemini.chung-ta-co-the-noi-chuyen-khong",
+   "title": "CHÚNG TA CÓ THỂ NÓI CHUYỆN KHÔNG?",
+   "parent": "sign-gemini"
+  },
+  {
+   "at": 347,
+   "code": "sign-gemini.hoi-hot",
+   "title": "HỜI HỢT",
+   "parent": "sign-gemini"
+  },
+  {
+   "at": 352,
+   "code": "sign-gemini.minh-dang-cam-thay-gi-the-nhi",
+   "title": "MÌNH ĐANG CẢM THẤY GÌ THẾ NHỈ?",
+   "parent": "sign-gemini"
+  },
+  {
+   "at": 356,
+   "code": "sign-gemini.nhung-hanh-trinh-cua-tam-tri",
+   "title": "NHỮNG HÀNH TRÌNH CỦA TÂM TRÍ",
+   "parent": "sign-gemini"
+  },
+  {
+   "at": 361,
+   "code": "sign-gemini.chan-chay",
+   "title": "CHÂN CHẠY",
+   "parent": "sign-gemini"
+  },
+  {
+   "at": 364,
+   "code": "sign-gemini.sao-thuy-dang-sau-tay-lai",
+   "title": "SAO THỦY ĐẰNG SAU TAY LÁI",
+   "parent": "sign-gemini"
+  },
+  {
+   "at": 368,
+   "code": "sign-gemini.loi-chot-ha",
+   "title": "LỜI CHỐT HẠ",
+   "parent": "sign-gemini"
+  },
+  {
+   "at": 370,
+   "code": "sign-cancer",
+   "title": "CỰ GIẢI",
+   "parent": "12-dau-hieu-hoang-dao",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(cancer)"
+  },
+  {
+   "at": 371,
+   "code": "sign-cancer.goi-me-di-cung",
+   "title": "GỌI MẸ ĐI CƯNG !",
+   "parent": "sign-cancer"
+  },
+  {
+   "at": 378,
+   "code": "sign-cancer.to-duyen-troi-buoc",
+   "title": "TƠ DUYÊN TRÓI BUỘC",
+   "parent": "sign-cancer"
+  },
+  {
+   "at": 385,
+   "code": "sign-cancer.chim-dam-trong-tam-trang",
+   "title": "CHÌM ĐẮM TRONG TÂM TRẠNG",
+   "parent": "sign-cancer"
+  },
+  {
+   "at": 392,
+   "code": "sign-cancer.to-am-hoan-hao",
+   "title": "TỔ ẤM HOÀN HẢO",
+   "parent": "sign-cancer"
+  },
+  {
+   "at": 397,
+   "code": "sign-cancer.hanh-xu-mu-quang",
+   "title": "HÀNH XỬ MÙ QUÁNG",
+   "parent": "sign-cancer"
+  },
+  {
+   "at": 402,
+   "code": "sign-cancer.sau-con-mua-troi-lai-sang",
+   "title": "SAU CƠN MƯA TRỜI LẠI SÁNG",
+   "parent": "sign-cancer"
+  },
+  {
+   "at": 405,
+   "code": "sign-cancer.cua-ninh-ap-suat",
+   "title": "CUA NINH ÁP SUẤT?",
+   "parent": "sign-cancer"
+  },
+  {
+   "at": 409,
+   "code": "sign-cancer.nung-minh-di",
+   "title": "NỰNG MÌNH ĐI",
+   "parent": "sign-cancer"
+  },
+  {
+   "at": 411,
+   "code": "sign-cancer.anh-trang",
+   "title": "ÁNH TRĂNG",
+   "parent": "sign-cancer"
+  },
+  {
+   "at": 414,
+   "code": "sign-cancer.loi-chot-ha",
+   "title": "LỜI CHỐT HẠ",
+   "parent": "sign-cancer"
+  },
+  {
+   "at": 416,
+   "code": "sign-leo",
+   "title": "SƯ TỬ",
+   "parent": "12-dau-hieu-hoang-dao",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(leo)"
+  },
+  {
+   "at": 417,
+   "code": "sign-leo.nghe-ta-gam-day",
+   "title": "NGHE TA GẦM ĐÂY",
+   "parent": "sign-leo"
+  },
+  {
+   "at": 424,
+   "code": "sign-leo.tim-su-chu-y",
+   "title": "TÌM SỰ CHÚ Ý",
+   "parent": "sign-leo"
+  },
+  {
+   "at": 428,
+   "code": "sign-leo.tien-len-voi-tat-ca-niem-kieu-hanh",
+   "title": "TIẾN LÊN VỚI TẤT CẢ NIỀM KIÊU HÃNH",
+   "parent": "sign-leo"
+  },
+  {
+   "at": 432,
+   "code": "sign-leo.cau-chuyen-ve-ke-dua-doi",
+   "title": "CÂU CHUYỆN VỀ KẺ ĐUA ĐÒI",
+   "parent": "sign-leo"
+  },
+  {
+   "at": 437,
+   "code": "sign-leo.tre-mai",
+   "title": "TRẺ MÃI",
+   "parent": "sign-leo"
+  },
+  {
+   "at": 442,
+   "code": "sign-leo.tinh-yeu-chan-thanh",
+   "title": "TÌNH YÊU CHÂN THÀNH",
+   "parent": "sign-leo"
+  },
+  {
+   "at": 446,
+   "code": "sign-leo.cai-toi-no-ro",
+   "title": "CÁI TÔI NỞ RỘ",
+   "parent": "sign-leo"
+  },
+  {
+   "at": 449,
+   "code": "sign-leo.muon-thanh-ngoi-sao-rock-and-roll-sao",
+   "title": "MUỐN THÀNH NGÔI SAO ROCK-AND-ROLL SAO?",
+   "parent": "sign-leo"
+  },
+  {
+   "at": 455,
+   "code": "sign-leo.ong-mat-troi-kia-roi",
+   "title": "ÔNG MẶT TRỜI KIA RỒI",
+   "parent": "sign-leo"
+  },
+  {
+   "at": 459,
+   "code": "sign-leo.loi-chot-ha",
+   "title": "LỜI CHỐT HẠ",
+   "parent": "sign-leo"
+  },
+  {
+   "at": 462,
+   "code": "sign-virgo",
+   "title": "XỬ NỮ",
+   "parent": "12-dau-hieu-hoang-dao",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(virgo)"
+  },
+  {
+   "at": 463,
+   "code": "sign-virgo.don-dep-sach-dep",
+   "title": "DỌN DẸP SẠCH ĐẸP",
+   "parent": "sign-virgo"
+  },
+  {
+   "at": 470,
+   "code": "sign-virgo.cung-lam-viec-thoi",
+   "title": "CÙNG LÀM VIỆC THÔI",
+   "parent": "sign-virgo"
+  },
+  {
+   "at": 474,
+   "code": "sign-virgo.doi-dao-tieu-tiet",
+   "title": "DỒI DÀO TIỂU TIẾT",
+   "parent": "sign-virgo"
+  },
+  {
+   "at": 480,
+   "code": "sign-virgo.xu-nu-co-phai-la-trong-trang",
+   "title": "XỬ NỮ CÓ PHẢI LÀ TRONG TRẮNG",
+   "parent": "sign-virgo"
+  },
+  {
+   "at": 484,
+   "code": "sign-virgo.san-sang-phuc-vu",
+   "title": "SẴN SÀNG PHỤC VỤ",
+   "parent": "sign-virgo"
+  },
+  {
+   "at": 491,
+   "code": "sign-virgo.ke-lam-to-chuyen",
+   "title": "KẺ LÀM TO CHUYỆN",
+   "parent": "sign-virgo"
+  },
+  {
+   "at": 496,
+   "code": "sign-virgo.giu-gin-suc-khoe",
+   "title": "GIỮ GÌN SỨC KHỎE",
+   "parent": "sign-virgo"
+  },
+  {
+   "at": 501,
+   "code": "sign-virgo.ke-hieu-hoc",
+   "title": "KẺ HIẾU HỌC",
+   "parent": "sign-virgo"
+  },
+  {
+   "at": 504,
+   "code": "sign-virgo.sao-thuy-nha-to-chuc",
+   "title": "SAO THỦY – NHÀ TỔ CHỨC",
+   "parent": "sign-virgo"
+  },
+  {
+   "at": 508,
+   "code": "sign-virgo.loi-chot-ha",
+   "title": "LỜI CHỐT HẠ",
+   "parent": "sign-virgo"
+  },
+  {
+   "at": 511,
+   "code": "sign-virgo.chu-thich",
+   "title": "CHÚ THÍCH:",
+   "parent": "sign-virgo"
+  },
+  {
+   "at": 513,
+   "code": "sign-libra",
+   "title": "THIÊN BÌNH",
+   "parent": "12-dau-hieu-hoang-dao",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(libra)"
+  },
+  {
+   "at": 514,
+   "code": "sign-libra.dung-dua",
+   "title": "ĐUNG ĐƯA",
+   "parent": "sign-libra"
+  },
+  {
+   "at": 521,
+   "code": "sign-libra.duong-hai-chieu",
+   "title": "ĐƯỜNG HAI CHIỀU",
+   "parent": "sign-libra"
+  },
+  {
+   "at": 525,
+   "code": "sign-libra.dung-mai-co-don",
+   "title": "ĐỪNG MÃI CÔ ĐƠN",
+   "parent": "sign-libra"
+  },
+  {
+   "at": 529,
+   "code": "sign-libra.chuyen-ve-cai-can-ay",
+   "title": "CHUYỆN VỀ CÁI CÂN ẤY",
+   "parent": "sign-libra"
+  },
+  {
+   "at": 535,
+   "code": "sign-libra.khoe-khong-cau",
+   "title": "KHỎE KHÔNG CẬU?",
+   "parent": "sign-libra"
+  },
+  {
+   "at": 541,
+   "code": "sign-libra.phai-ua-nhin",
+   "title": "PHẢI ƯA NHÌN",
+   "parent": "sign-libra"
+  },
+  {
+   "at": 544,
+   "code": "sign-libra.co-doi-co-cap",
+   "title": "CÓ ĐÔI CÓ CẶP",
+   "parent": "sign-libra"
+  },
+  {
+   "at": 549,
+   "code": "sign-libra.song-chay-co-khuc-nguoi-luoi-co-luc",
+   "title": "SÔNG CHẢY CÓ KHÚC, NGƯỜI LƯỜI CÓ LÚC?",
+   "parent": "sign-libra"
+  },
+  {
+   "at": 553,
+   "code": "sign-libra.sao-kim-dung-dieu",
+   "title": "SAO KIM ĐÚNG ĐIỆU",
+   "parent": "sign-libra"
+  },
+  {
+   "at": 556,
+   "code": "sign-libra.loi-chot-ha",
+   "title": "LỜI CHỐT HẠ",
+   "parent": "sign-libra"
+  },
+  {
+   "at": 559,
+   "code": "sign-scorpio",
+   "title": "BỌ CẠP",
+   "parent": "12-dau-hieu-hoang-dao",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(scorpio)"
+  },
+  {
+   "at": 560,
+   "code": "sign-scorpio.duoc-an-ca-nga-ve-khong",
+   "title": "ĐƯỢC ĂN CẢ, NGÃ VỀ KHÔNG",
+   "parent": "sign-scorpio"
+  },
+  {
+   "at": 567,
+   "code": "sign-scorpio.tam-diem-cua-dieu-bi-an",
+   "title": "TÂM ĐIỂM CỦA ĐIỀU BÍ ẨN",
+   "parent": "sign-scorpio"
+  },
+  {
+   "at": 573,
+   "code": "sign-scorpio.kieu-hanh-va-dam-me",
+   "title": "KIÊU HÃNH VÀ ĐAM MÊ",
+   "parent": "sign-scorpio"
+  },
+  {
+   "at": 578,
+   "code": "sign-scorpio.toan-tam-gan-bo",
+   "title": "TOÀN TÂM GẮN BÓ?",
+   "parent": "sign-scorpio"
+  },
+  {
+   "at": 585,
+   "code": "sign-scorpio.lieu-phap-rot-rao",
+   "title": "LIỆU PHÁP RỐT RÁO",
+   "parent": "sign-scorpio"
+  },
+  {
+   "at": 589,
+   "code": "sign-scorpio.goi-cam-chu-ha",
+   "title": "GỢI CẢM CHỨ HẢ?",
+   "parent": "sign-scorpio"
+  },
+  {
+   "at": 594,
+   "code": "sign-scorpio.mong-moi-cai-chet",
+   "title": "MONG MỎI CÁI CHẾT",
+   "parent": "sign-scorpio"
+  },
+  {
+   "at": 598,
+   "code": "sign-scorpio.hoi-sinh",
+   "title": "HỒI SINH",
+   "parent": "sign-scorpio"
+  },
+  {
+   "at": 602,
+   "code": "sign-scorpio.nhiet-do-cua-sao-diem-vuong",
+   "title": "NHIỆT ĐỘ CỦA SAO DIÊM VƯƠNG",
+   "parent": "sign-scorpio"
+  },
+  {
+   "at": 605,
+   "code": "sign-scorpio.loi-chot-ha",
+   "title": "LỜI CHỐT HẠ",
+   "parent": "sign-scorpio"
+  },
+  {
+   "at": 608,
+   "code": "sign-sagittarius",
+   "title": "NHÂN MÃ",
+   "parent": "12-dau-hieu-hoang-dao",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(sagittarius)"
+  },
+  {
+   "at": 609,
+   "code": "sign-sagittarius.the-gioi-rong-lon-o-ngoai-kia",
+   "title": "THẾ GIỚI RỘNG LỚN Ở NGOÀI KIA",
+   "parent": "sign-sagittarius"
+  },
+  {
+   "at": 616,
+   "code": "sign-sagittarius.hanh-trinh-bat-tan",
+   "title": "HÀNH TRÌNH BẤT TẬN",
+   "parent": "sign-sagittarius"
+  },
+  {
+   "at": 620,
+   "code": "sign-sagittarius.tinh-than-cong-dong",
+   "title": "TINH THẦN CỘNG ĐỒNG",
+   "parent": "sign-sagittarius"
+  },
+  {
+   "at": 625,
+   "code": "sign-sagittarius.phai-co-chan-li",
+   "title": "PHẢI CÓ CHÂN LÍ",
+   "parent": "sign-sagittarius"
+  },
+  {
+   "at": 630,
+   "code": "sign-sagittarius.ong-gia-noel-vui-tinh",
+   "title": "ÔNG GIÀ NOEL VUI TÍNH?",
+   "parent": "sign-sagittarius"
+  },
+  {
+   "at": 633,
+   "code": "sign-sagittarius.loi-mon-tu-nhien",
+   "title": "LỐI MÒN TỰ NHIÊN",
+   "parent": "sign-sagittarius"
+  },
+  {
+   "at": 637,
+   "code": "sign-sagittarius.niem-tin-co-suc-manh-han-gan-tat-ca",
+   "title": "NIỀM TIN CÓ SỨC MẠNH HÀN GẮN TẤT CẢ",
+   "parent": "sign-sagittarius"
+  },
+  {
+   "at": 641,
+   "code": "sign-sagittarius.van-may-cua-nguoi-ai-len",
+   "title": "VẬN MAY CỦA NGƯỜI AI-LEN?",
+   "parent": "sign-sagittarius"
+  },
+  {
+   "at": 645,
+   "code": "sign-sagittarius.sao-moc-hang-hai",
+   "title": "SAO MỘC HĂNG HÁI",
+   "parent": "sign-sagittarius"
+  },
+  {
+   "at": 650,
+   "code": "sign-sagittarius.loi-chot-ha",
+   "title": "LỜI CHỐT HẠ",
+   "parent": "sign-sagittarius"
+  },
+  {
+   "at": 653,
+   "code": "sign-capricorn",
+   "title": "MA KẾT",
+   "parent": "12-dau-hieu-hoang-dao",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(capricorn)"
+  },
+  {
+   "at": 654,
+   "code": "sign-capricorn.tu-ton-leo-cao",
+   "title": "TỪ TỐN LEO CAO",
+   "parent": "sign-capricorn"
+  },
+  {
+   "at": 661,
+   "code": "sign-capricorn.chung-ta-nghiem-tuc-nhe",
+   "title": "CHÚNG TA NGHIÊM TÚC NHÉ!",
+   "parent": "sign-capricorn"
+  },
+  {
+   "at": 665,
+   "code": "sign-capricorn.ong-cu-non",
+   "title": "ÔNG CỤ NON",
+   "parent": "sign-capricorn"
+  },
+  {
+   "at": 669,
+   "code": "sign-capricorn.cong-dan-guong-mau",
+   "title": "CÔNG DÂN GƯƠNG MẪU",
+   "parent": "sign-capricorn"
+  },
+  {
+   "at": 673,
+   "code": "sign-capricorn.danh-vong",
+   "title": "DANH VỌNG",
+   "parent": "sign-capricorn"
+  },
+  {
+   "at": 677,
+   "code": "sign-capricorn.ret-roi-chu",
+   "title": "RÉT RỒI CHỨ?",
+   "parent": "sign-capricorn"
+  },
+  {
+   "at": 681,
+   "code": "sign-capricorn.cam-bay-phu-huynh",
+   "title": "CẠM BẪY PHỤ HUYNH",
+   "parent": "sign-capricorn"
+  },
+  {
+   "at": 687,
+   "code": "sign-capricorn.ban-tay-vung-chai-cua-sao-tho",
+   "title": "BÀN TAY VỮNG CHÃI CỦA SAO THỔ",
+   "parent": "sign-capricorn"
+  },
+  {
+   "at": 691,
+   "code": "sign-capricorn.loi-chot-ha",
+   "title": "LỜI CHỐT HẠ",
+   "parent": "sign-capricorn"
+  },
+  {
+   "at": 695,
+   "code": "sign-aquarius",
+   "title": "BẢO BÌNH",
+   "parent": "12-dau-hieu-hoang-dao",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(aquarius)"
+  },
+  {
+   "at": 696,
+   "code": "sign-aquarius.cac-phi-vu-pha-luat",
+   "title": "CÁC PHI VỤ PHÁ LUẬT",
+   "parent": "sign-aquarius"
+  },
+  {
+   "at": 703,
+   "code": "sign-aquarius.ke-chien-dau-cho-tu-do",
+   "title": "KẺ CHIẾN ĐẤU CHO TỰ DO",
+   "parent": "sign-aquarius"
+  },
+  {
+   "at": 707,
+   "code": "sign-aquarius.ke-lap-di",
+   "title": "KẺ LẬP DỊ",
+   "parent": "sign-aquarius"
+  },
+  {
+   "at": 713,
+   "code": "sign-aquarius.hoan-nan-biet-chan-tinh",
+   "title": "HOẠN NẠN BIẾT CHÂN TÌNH",
+   "parent": "sign-aquarius"
+  },
+  {
+   "at": 718,
+   "code": "sign-aquarius.nhung-phut-loe-sang-cua-tam-tri",
+   "title": "NHỮNG PHÚT LÓE SÁNG CỦA TÂM TRÍ",
+   "parent": "sign-aquarius"
+  },
+  {
+   "at": 722,
+   "code": "sign-aquarius.tu-tan-day-long",
+   "title": "TỪ TẬN ĐÁY LÒNG?",
+   "parent": "sign-aquarius"
+  },
+  {
+   "at": 727,
+   "code": "sign-aquarius.dong-doi",
+   "title": "ĐỒNG ĐỘI",
+   "parent": "sign-aquarius"
+  },
+  {
+   "at": 730,
+   "code": "sign-aquarius.nao-dong-cung-sao-thien-vuong",
+   "title": "NÁO ĐỘNG CÙNG SAO THIÊN VƯƠNG",
+   "parent": "sign-aquarius"
+  },
+  {
+   "at": 734,
+   "code": "sign-aquarius.loi-chot-ha",
+   "title": "LỜI CHỐT HẠ",
+   "parent": "sign-aquarius"
+  },
+  {
+   "at": 738,
+   "code": "sign-pisces",
+   "title": "SONG NGƯ",
+   "parent": "12-dau-hieu-hoang-dao",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(pisces)"
+  },
+  {
+   "at": 739,
+   "code": "sign-pisces.nghe-thuat-mo-mong",
+   "title": "NGHỆ THUẬT MƠ MỘNG",
+   "parent": "sign-pisces"
+  },
+  {
+   "at": 746,
+   "code": "sign-pisces.ma-thuat-cuoi-cung",
+   "title": "MA THUẬT CUỐI CÙNG",
+   "parent": "sign-pisces"
+  },
+  {
+   "at": 753,
+   "code": "sign-pisces.tam-hon-tru-phu",
+   "title": "TÂM HỒN TRÙ PHÚ",
+   "parent": "sign-pisces"
+  },
+  {
+   "at": 758,
+   "code": "sign-pisces.bien-mat-tai-day",
+   "title": "BIẾN MẤT TẠI ĐÂY",
+   "parent": "sign-pisces"
+  },
+  {
+   "at": 763,
+   "code": "sign-pisces.buoc-di-tren-mat-nuoc",
+   "title": "BƯỚC ĐI TRÊN MẶT NƯỚC?",
+   "parent": "sign-pisces"
+  },
+  {
+   "at": 771,
+   "code": "sign-pisces.hay-thu-tuong-tuong",
+   "title": "HÃY THỬ TƯỞNG TƯỢNG",
+   "parent": "sign-pisces"
+  },
+  {
+   "at": 776,
+   "code": "sign-pisces.thoi-diem-ket-thuc",
+   "title": "THỜI ĐIỂM KẾT THÚC",
+   "parent": "sign-pisces"
+  },
+  {
+   "at": 781,
+   "code": "sign-pisces.sao-hai-vuong-han-gan-tat-ca",
+   "title": "SAO HẢI VƯƠNG HÀN GẮN TẤT CẢ",
+   "parent": "sign-pisces"
+  },
+  {
+   "at": 786,
+   "code": "sign-pisces.loi-chot-ha",
+   "title": "LỜI CHỐT HẠ",
+   "parent": "sign-pisces"
+  },
+  {
+   "at": 789,
+   "code": "phu-luc",
+   "title": "PHỤ LỤC",
+   "kind": "general"
+  },
+  {
+   "at": 790,
+   "code": "phu-luc.cach-cat-la-so",
+   "title": "CÁCH CẮT LÁ SỐ",
+   "parent": "phu-luc"
+  },
+  {
+   "at": 797,
+   "code": "phu-luc.thuat-ngu-chiem-tinh-hoc",
+   "title": "THUẬT NGỮ CHIÊM TINH HỌC:",
+   "parent": "phu-luc"
+  },
+  {
+   "at": 798,
+   "code": "phu-luc.1-cung",
+   "title": "1. CUNG:",
+   "parent": "phu-luc"
+  },
+  {
+   "at": 808,
+   "code": "phu-luc.2-hanh-tinh-va-nguon-sang",
+   "title": "2. HÀNH TINH VÀ NGUỒN SÁNG:",
+   "parent": "phu-luc"
+  },
+  {
+   "at": 826,
+   "code": "phu-luc.3-cac-diem-toan-hoc-tren-la-so",
+   "title": "3. CÁC ĐIỂM TOÁN HỌC TRÊN LÁ SỐ",
+   "parent": "phu-luc"
+  },
+  {
+   "at": 834,
+   "code": "phu-luc.4-mot-so-cau-truc-chiem-tinh",
+   "title": "4. MỘT SỐ CẤU TRÚC CHIÊM TINH:",
+   "parent": "phu-luc"
+  },
+  {
+   "at": 846,
+   "code": "phu-luc.5-cac-to-hop-thuong-gap",
+   "title": "5. CÁC TỔ HỢP THƯỜNG GẶP:",
+   "parent": "phu-luc"
+  }
+ ],
+ "paras": {}
+}

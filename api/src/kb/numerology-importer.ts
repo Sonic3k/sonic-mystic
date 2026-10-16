@@ -1,6 +1,6 @@
 /* Loads the Nhân số học bundle — Lê Đỗ Quỳnh Hương's book mapped paragraph by paragraph — into the database. The
    book's text is not kept in the repository, so the bundle comes from disk (kb/bundle/numerology, built where the
-   book is) or is uploaded by the owner; with neither, nothing is imported and the pages say the book is not loaded.
+   book is) or is uploaded (PUT /api/numerology/bundle); with neither, nothing is imported and the pages say the book is not loaded.
    As with Tử vi, everything is written by its stable key and what was edited in the database is kept: an edited
    passage keeps its text, an edited rule its condition, and neither is removed when the book no longer has it. */
 import { existsSync, readFileSync } from 'node:fs';
@@ -82,9 +82,8 @@ export async function importNumerology(db: Db, raw: NumerologyBundle, opts: { fo
   const report = await db.transaction(async tx => {
     await upsertDisciplines(tx);
     const s = b.book.source;
-    // a published book: its text is the owner's to read (access is set once; the owner may open it later)
     const [src] = await tx.insert(sources).values({
-      disciplineCode: 'numerology', code: s.code, title: s.title, author: s.author, kind: 'book', sourceFile: s.file ?? null, note: s.note ?? null, access: 'owner', sortOrder: 0,
+      disciplineCode: 'numerology', code: s.code, title: s.title, author: s.author, kind: 'book', sourceFile: s.file ?? null, note: s.note ?? null, sortOrder: 0,
       description: [s.basedOn ? `Dựa trên ${s.basedOn}` : null, s.publisher ?? null].filter(Boolean).join(' · ') || null,
     }).onConflictDoUpdate({ target: sources.code, set: { title: sql`excluded.title`, author: sql`excluded.author`, kind: sql`excluded.kind`, sourceFile: sql`excluded.source_file`, note: sql`excluded.note`, description: sql`excluded.description`, updatedAt: now } })
       .returning({ id: sources.id });

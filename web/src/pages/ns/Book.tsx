@@ -48,7 +48,7 @@ export function NsBookIndex() {
   return page(<>
     <div className="ptitle"><h1>{b.source.title}<small>{b.source.author}</small></h1></div>
     <p style={{ margin: '-14px 0 8px', color: 'var(--ink2)', fontSize: 14 }}>{b.source.description ? `${b.source.description}. ` : ''}Trang dẫn là trang của file PDF.</p>
-    <p className="tv-muted" style={{ margin: '0 0 8px', fontSize: 12.5 }}>Sách in đã được soát với bản scan. Chỉ chủ nhà đọc được phần chữ của sách (bản quyền của tác giả).</p>
+    <p className="tv-muted" style={{ margin: '0 0 8px', fontSize: 12.5 }}>Sách in đã được soát với bản scan.</p>
     {front.length > 0 && <section className="ns-part"><div className="ns-part-h"><h2>Đầu sách</h2></div><div className="tv-bookgrid">{front.map(card)}</div></section>}
     {parts.map(p => {
       const t = topicOfPart.get(p.code);

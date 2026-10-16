@@ -9,6 +9,7 @@ import { loadConfig, type AppConfig } from './config.js';
 import { createDb, createPool, ensureDatabase, runMigrations } from './db/db.js';
 import { importTuvi, upsertDisciplines } from './kb/importer.js';
 import { importNumerology, readNumerologyBundle } from './kb/numerology-importer.js';
+import { importAstrology, readAstrologyBundle } from './kb/astrology-importer.js';
 
 /** the database first (created on the shared server when missing), its schema, the knowledge, then the app */
 export async function createApp(config: AppConfig): Promise<NestExpressApplication> {
@@ -27,6 +28,12 @@ export async function createApp(config: AppConfig): Promise<NestExpressApplicati
     const r = await importNumerology(db, nb);
     log.log(r.skipped ? `numerology ${r.version} already imported` : `imported numerology ${r.version}: ${r.written} rows, ${r.keptEdited} edited kept, ${r.removed} removed (${r.ms} ms)`);
   } else log.log('numerology bundle not on disk: the book is loaded by upload');
+  // the astrology sources, likewise (PUT /api/astrology/bundle)
+  const ab = readAstrologyBundle(config.astrologyBundleDir);
+  if (ab) {
+    const r = await importAstrology(db, ab);
+    log.log(r.skipped ? `astrology ${r.version} already imported` : `imported astrology ${r.version}: ${r.written} rows, ${r.keptEdited} edited kept, ${r.removed} removed (${r.ms} ms)`);
+  } else log.log('astrology bundle not on disk: the sources are loaded by upload');
   const app = await NestFactory.create<NestExpressApplication>(AppModule.forRoot(config, pool), {
     logger: process.env.NODE_ENV === 'test' ? ['error'] : ['log', 'warn', 'error'],
   });

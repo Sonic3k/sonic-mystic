@@ -1,0 +1,534 @@
+{
+ "source": {
+  "code": "astrology.tierney",
+  "file": "tierney-aspects.jsonl",
+  "title": "Dynamics of Aspect Analysis (bản dịch của lớp)",
+  "author": "Bil Tierney",
+  "label": "Bản dịch Tierney",
+  "description": "Bản dịch tiếng Việt các chương 1–8 trong thư mục \"Important\" của cô Hương Kiều (cô dẫn sách này trong phần Thuật ngữ)."
+ },
+ "entries": [
+  {
+   "at": 1,
+   "code": "c1",
+   "title": "CHƯƠNG 1: CÁC NGUYÊN TẮC ĐẰNG SAU GÓC CHIẾU",
+   "kind": "general"
+  },
+  {
+   "at": 9,
+   "code": "c1.conjunction",
+   "title": "GÓC TRÙNG (0°)",
+   "parent": "c1",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "has_aspect(conjunction)"
+  },
+  {
+   "at": 18,
+   "code": "c1.semisextile",
+   "title": "GÓC BÁN LỤC HỢP (30°)",
+   "parent": "c1",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "has_aspect(semisextile)"
+  },
+  {
+   "at": 28,
+   "code": "c1.semisquare",
+   "title": "GÓC BÁN VUÔNG (45°)",
+   "parent": "c1",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "has_aspect(semisquare)"
+  },
+  {
+   "at": 34,
+   "code": "c1.sextile",
+   "title": "GÓC LỤC HỢP (60°)",
+   "parent": "c1",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "has_aspect(sextile)"
+  },
+  {
+   "at": 41,
+   "code": "c1.square",
+   "title": "GÓC VUÔNG (90°)",
+   "parent": "c1",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "has_aspect(square)"
+  },
+  {
+   "at": 49,
+   "code": "c1.trine",
+   "title": "GÓC TAM HỢP (120°)",
+   "parent": "c1",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "has_aspect(trine)"
+  },
+  {
+   "at": 57,
+   "code": "c1.sesquiquadrate",
+   "title": "GÓC TAM BÁN PHƯƠNG (135°)",
+   "parent": "c1",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "has_aspect(sesquiquadrate)"
+  },
+  {
+   "at": 64,
+   "code": "c1.quincunx",
+   "title": "GÓC BẤT ĐỒNG VỊ (150°)",
+   "parent": "c1",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "has_aspect(quincunx)"
+  },
+  {
+   "at": 69,
+   "code": "c1.opposition",
+   "title": "GÓC XUNG (180°)",
+   "parent": "c1",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "has_aspect(opposition)"
+  },
+  {
+   "at": 78,
+   "code": "c2",
+   "title": "CHƯƠNG 2: CÁC GÓC CHIẾU KHÔNG PHỔ BIẾN",
+   "kind": "general"
+  },
+  {
+   "at": 82,
+   "code": "c2.quintile",
+   "title": "GÓC NGŨ CHIẾU (72°/Q)",
+   "parent": "c2",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "has_aspect(quintile, biquintile)"
+  },
+  {
+   "at": 90,
+   "code": "c2.goc-phan-bay",
+   "title": "GÓC PHẦN BẢY (360°/7 51° ½)",
+   "parent": "c2",
+   "kind": "general"
+  },
+  {
+   "at": 97,
+   "code": "c2.goc-phan-chin",
+   "title": "GÓC PHẦN CHÍN (360°/9 40°)",
+   "parent": "c2",
+   "kind": "general"
+  },
+  {
+   "at": 102,
+   "code": "c3",
+   "title": "CHƯƠNG 3: CÁC GÓC PHÂN TÁCH",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "out_of_sign()"
+  },
+  {
+   "at": 105,
+   "code": "c3.conjunction",
+   "title": "GÓC TRÙNG TỤ PHÂN TÁCH",
+   "parent": "c3",
+   "when": "out_of_sign(conjunction)"
+  },
+  {
+   "at": 107,
+   "code": "c3.semisextile",
+   "title": "GÓC BÁN LỤC HỢP PHÂN TÁCH",
+   "parent": "c3",
+   "when": "out_of_sign(semisextile)"
+  },
+  {
+   "at": 109,
+   "code": "c3.sextile",
+   "title": "GÓC LỤC HỢP PHÂN TÁCH",
+   "parent": "c3",
+   "when": "out_of_sign(sextile)"
+  },
+  {
+   "at": 111,
+   "code": "c3.square",
+   "title": "GÓC VUÔNG PHÂN TÁCH",
+   "parent": "c3",
+   "when": "out_of_sign(square)"
+  },
+  {
+   "at": 114,
+   "code": "c3.trine",
+   "title": "GÓC TAM HỢP PHÂN TÁCH",
+   "parent": "c3",
+   "when": "out_of_sign(trine)"
+  },
+  {
+   "at": 116,
+   "code": "c3.quincunx",
+   "title": "GÓC BẤT ĐỒNG VỊ PHÂN TÁCH",
+   "parent": "c3",
+   "when": "out_of_sign(quincunx)"
+  },
+  {
+   "at": 119,
+   "code": "c3.opposition",
+   "title": "GÓC ĐỐI ĐỈNH PHÂN TÁCH",
+   "parent": "c3",
+   "when": "out_of_sign(opposition)"
+  },
+  {
+   "at": 121,
+   "code": "c4",
+   "title": "CHƯƠNG 4: ĐẠI TAM HỢP",
+   "kind": "rule",
+   "topic": "pattern",
+   "when": "pattern(grand-trine)"
+  },
+  {
+   "at": 131,
+   "code": "c4.fire",
+   "title": "ĐẠI TAM HỢP LỬA",
+   "parent": "c4",
+   "when": "pattern(grand-trine, fire)"
+  },
+  {
+   "at": 134,
+   "code": "c4.earth",
+   "title": "ĐẠI TAM HỢP ĐẤT",
+   "parent": "c4",
+   "when": "pattern(grand-trine, earth)"
+  },
+  {
+   "at": 137,
+   "code": "c4.air",
+   "title": "ĐẠI TAM HỢP KHÍ",
+   "parent": "c4",
+   "when": "pattern(grand-trine, air)"
+  },
+  {
+   "at": 140,
+   "code": "c4.water",
+   "title": "ĐẠI TAM HỢP NƯỚC",
+   "parent": "c4",
+   "when": "pattern(grand-trine, water)"
+  },
+  {
+   "at": 143,
+   "code": "c4.out-of-sign",
+   "title": "ĐẠI TAM HỢP PHÂN TÁCH",
+   "parent": "c4",
+   "when": "pattern(grand-trine, out-of-sign)"
+  },
+  {
+   "at": 145,
+   "code": "c4.minor",
+   "title": "ĐẠI TAM HỢP PHỤ",
+   "parent": "c4",
+   "when": "pattern(minor-grand-trine)"
+  },
+  {
+   "at": 147,
+   "code": "c5",
+   "title": "CHƯƠNG 5: ĐẠI LỤC HỢP",
+   "kind": "rule",
+   "topic": "pattern",
+   "when": "pattern(grand-sextile)"
+  },
+  {
+   "at": 151,
+   "code": "c5.fire-air",
+   "title": "ĐẠI LỤC HỢP LỬA-KHÍ",
+   "parent": "c5",
+   "when": "pattern(grand-sextile, fire-air)"
+  },
+  {
+   "at": 154,
+   "code": "c5.earth-water",
+   "title": "ĐẠI LỤC HỢP ĐẤT-NƯỚC",
+   "parent": "c5",
+   "when": "pattern(grand-sextile, earth-water)"
+  },
+  {
+   "at": 157,
+   "code": "c5.out-of-sign",
+   "title": "ĐẠI LỤC HỢP PHÂN TÁCH",
+   "parent": "c5",
+   "when": "pattern(grand-sextile, out-of-sign)"
+  },
+  {
+   "at": 159,
+   "code": "c6",
+   "title": "CHƯƠNG 6: ĐẠI THẬP TỰ VÀ HÌNH CHỮ NHẬT THẦN BÍ",
+   "kind": "rule",
+   "topic": "pattern",
+   "when": "pattern(grand-cross)"
+  },
+  {
+   "at": 162,
+   "code": "c6.cardinal",
+   "title": "ĐẠI THẬP TỰ TẠO BỞI CÁC CUNG THỐNG LĨNH",
+   "parent": "c6",
+   "when": "pattern(grand-cross, cardinal)"
+  },
+  {
+   "at": 166,
+   "code": "c6.fixed",
+   "title": "ĐẠI THẬP TỰ TẠO BỞI CÁC CUNG KIÊN ĐỊNH",
+   "parent": "c6",
+   "when": "pattern(grand-cross, fixed)"
+  },
+  {
+   "at": 170,
+   "code": "c6.mutable",
+   "title": "ĐẠI THẬP TỰ TẠO BỞI CÁC CUNG LINH HOẠT",
+   "parent": "c6",
+   "when": "pattern(grand-cross, mutable)"
+  },
+  {
+   "at": 174,
+   "code": "c6.out-of-sign",
+   "title": "ĐẠI THẬP TỰ PHÂN TÁCH",
+   "parent": "c6",
+   "when": "pattern(grand-cross, out-of-sign)"
+  },
+  {
+   "at": 178,
+   "code": "c6.angular",
+   "title": "ĐẠI THẬP TỰ LIÊN QUAN ĐẾN CÁC NHÀ GÓC",
+   "parent": "c6",
+   "when": "pattern(grand-cross, angular)"
+  },
+  {
+   "at": 181,
+   "code": "c6.mystic-rectangle",
+   "title": "HÌNH CHỮ NHẬT THẦN BÍ",
+   "parent": "c6",
+   "when": "pattern(mystic-rectangle)"
+  },
+  {
+   "at": 183,
+   "code": "c6.hard-rectangle",
+   "title": "HÌNH CHỮ NHẬT KHÓ KHĂN",
+   "parent": "c6",
+   "when": "pattern(hard-rectangle)"
+  },
+  {
+   "at": 186,
+   "code": "c7",
+   "title": "CHƯƠNG 7: TỔ HỢP CHỮ T",
+   "kind": "rule",
+   "topic": "pattern",
+   "when": "pattern(t-square)"
+  },
+  {
+   "at": 190,
+   "code": "c7.cardinal",
+   "title": "TỔ HỢP CHỮ T TẠO BỞI CÁC CUNG THỐNG LĨNH",
+   "parent": "c7",
+   "when": "pattern(t-square, cardinal)"
+  },
+  {
+   "at": 192,
+   "code": "c7.fixed",
+   "title": "TỔ HỢP CHỮ T TẠO BỞI CÁC CUNG KIÊN ĐỊNH",
+   "parent": "c7",
+   "when": "pattern(t-square, fixed)"
+  },
+  {
+   "at": 194,
+   "code": "c7.mutable",
+   "title": "TỔ HỢP CHỮ T TẠO BỞI CÁC CUNG LINH HOẠT",
+   "parent": "c7",
+   "when": "pattern(t-square, mutable)"
+  },
+  {
+   "at": 196,
+   "code": "c7.out-of-sign",
+   "title": "TỔ HỢP CHỮ T PHÂN TÁCH",
+   "parent": "c7",
+   "when": "pattern(t-square, out-of-sign)"
+  },
+  {
+   "at": 198,
+   "code": "c7.angular",
+   "title": "TỔ HỢP CHỮ T LIÊN QUAN ĐẾN CÁC NHÀ GÓC (1,4,7,10)",
+   "parent": "c7",
+   "when": "pattern(t-square, angular)"
+  },
+  {
+   "at": 202,
+   "code": "c7.apex",
+   "title": "HÀNH TINH ĐỈNH CỦA TỔ HỢP CHỮ T",
+   "parent": "c7",
+   "when": "pattern(t-square)"
+  },
+  {
+   "at": 206,
+   "code": "c7.apex-sun",
+   "title": "TỔ HỢP CHỮ T CÓ ĐỈNH LÀ MẶT TRỜI",
+   "parent": "c7",
+   "when": "apex(t-square, sun)"
+  },
+  {
+   "at": 212,
+   "code": "c7.apex-moon",
+   "title": "TỔ HỢP CHỮ T CÓ ĐỈNH LÀ MẶT TRĂNG",
+   "parent": "c7",
+   "when": "apex(t-square, moon)"
+  },
+  {
+   "at": 218,
+   "code": "c7.apex-mercury",
+   "title": "TỔ HỢP CHỮ T CÓ ĐỈNH LÀ THỦY TINH",
+   "parent": "c7",
+   "when": "apex(t-square, mercury)"
+  },
+  {
+   "at": 227,
+   "code": "c7.apex-venus",
+   "title": "TỔ HỢP CHỮ T CÓ ĐỈNH LÀ KIM TINH",
+   "parent": "c7",
+   "when": "apex(t-square, venus)"
+  },
+  {
+   "at": 237,
+   "code": "c7.apex-mars",
+   "title": "TỔ HỢP CHỮ T CÓ ĐỈNH LÀ HỎA TINH",
+   "parent": "c7",
+   "when": "apex(t-square, mars)"
+  },
+  {
+   "at": 247,
+   "code": "c7.apex-jupiter",
+   "title": "TỔ HỢP CHỮ T CÓ ĐỈNH LÀ MỘC TINH",
+   "parent": "c7",
+   "when": "apex(t-square, jupiter)"
+  },
+  {
+   "at": 257,
+   "code": "c7.apex-saturn",
+   "title": "TỔ HỢP CHỮ T CÓ ĐỈNH LÀ THỔ TINH",
+   "parent": "c7",
+   "when": "apex(t-square, saturn)"
+  },
+  {
+   "at": 267,
+   "code": "c7.apex-uranus",
+   "title": "TỔ HỢP CHỮ T CÓ ĐỈNH LÀ THIÊN VƯƠNG TINH",
+   "parent": "c7",
+   "when": "apex(t-square, uranus)"
+  },
+  {
+   "at": 277,
+   "code": "c7.apex-neptune",
+   "title": "TỔ HỢP CHỮ T CÓ ĐỈNH LÀ HẢI VƯƠNG TINH",
+   "parent": "c7",
+   "when": "apex(t-square, neptune)"
+  },
+  {
+   "at": 287,
+   "code": "c7.apex-pluto",
+   "title": "TỔ HỢP CHỮ T CÓ ĐỈNH LÀ DIÊM VƯƠNG TINH",
+   "parent": "c7",
+   "when": "apex(t-square, pluto)"
+  },
+  {
+   "at": 297,
+   "code": "c7.more",
+   "title": "NHỮNG NGHIÊN CỨU BỔ SUNG",
+   "parent": "c7",
+   "kind": "general"
+  },
+  {
+   "at": 299,
+   "code": "c8",
+   "title": "CHƯƠNG 8: CẤU TRÚC YOD",
+   "kind": "rule",
+   "topic": "pattern",
+   "when": "pattern(yod)"
+  },
+  {
+   "at": 312,
+   "code": "c8.composite",
+   "title": "CẤU TRÚC YOD KẾT HỢP (COMPOSITE YODS)",
+   "parent": "c8",
+   "kind": "general"
+  },
+  {
+   "at": 320,
+   "code": "c8.apex-sun",
+   "title": "CẤU TRÚC YOD CÓ ĐỈNH LÀ MẶT TRỜI",
+   "parent": "c8",
+   "when": "apex(yod, sun)"
+  },
+  {
+   "at": 324,
+   "code": "c8.apex-moon",
+   "title": "CẤU TRÚC YOD CÓ ĐỈNH LÀ MẶT TRĂNG",
+   "parent": "c8",
+   "when": "apex(yod, moon)"
+  },
+  {
+   "at": 328,
+   "code": "c8.apex-mercury",
+   "title": "CẤU TRÚC YOD CÓ ĐỈNH LÀ THỦY TINH",
+   "parent": "c8",
+   "when": "apex(yod, mercury)"
+  },
+  {
+   "at": 331,
+   "code": "c8.apex-venus",
+   "title": "CẤU TRÚC YOD CÓ ĐỈNH LÀ KIM TINH",
+   "parent": "c8",
+   "when": "apex(yod, venus)"
+  },
+  {
+   "at": 334,
+   "code": "c8.apex-mars",
+   "title": "CẤU TRÚC YOD CÓ ĐỈNH LÀ HỎA TINH",
+   "parent": "c8",
+   "when": "apex(yod, mars)"
+  },
+  {
+   "at": 337,
+   "code": "c8.apex-jupiter",
+   "title": "CẤU TRÚC YOD CÓ ĐỈNH LÀ MỘC TINH",
+   "parent": "c8",
+   "when": "apex(yod, jupiter)"
+  },
+  {
+   "at": 340,
+   "code": "c8.apex-saturn",
+   "title": "CẤU TRÚC YOD CÓ ĐỈNH LÀ THỔ TINH",
+   "parent": "c8",
+   "when": "apex(yod, saturn)"
+  },
+  {
+   "at": 344,
+   "code": "c8.apex-uranus",
+   "title": "CẤU TRÚC YOD CÓ ĐỈNH LÀ THIÊN VƯƠNG TINH",
+   "parent": "c8",
+   "when": "apex(yod, uranus)"
+  },
+  {
+   "at": 347,
+   "code": "c8.apex-neptune",
+   "title": "CẤU TRÚC YOD CÓ ĐỈNH LÀ HẢI VƯƠNG TINH",
+   "parent": "c8",
+   "when": "apex(yod, neptune)"
+  },
+  {
+   "at": 350,
+   "code": "c8.apex-pluto",
+   "title": "CẤU TRÚC YOD CÓ ĐỈNH LÀ DIÊM VƯƠNG TINH",
+   "parent": "c8",
+   "when": "apex(yod, pluto)"
+  }
+ ],
+ "paras": {}
+}

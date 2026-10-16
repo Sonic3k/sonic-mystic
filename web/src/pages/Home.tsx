@@ -6,10 +6,10 @@ import { api } from '../api';
 import { SONIC_HUB, birthLine, genderName, profilesLine } from '../lib/people';
 import { useTitle } from '../lib/text';
 
-const PATH: Record<string, string> = { tuvi: '/tu-vi', numerology: '/nhan-so-hoc' };
+const PATH: Record<string, string> = { tuvi: '/tu-vi', numerology: '/nhan-so-hoc', astrology: '/chiem-tinh' };
 const ABOUT: Record<string, string> = {
   tuvi: 'Lập lá số và luận từng cung theo sổ tay «Luận Tử Vi» bà viết năm 2011.',
-  astrology: 'Lá số chiêm tinh theo ngày giờ và nơi sinh.',
+  astrology: 'Lá số chiêm tinh theo ngày giờ và nơi sinh, luận theo giáo trình của cô Hương Kiều, bản dịch Tierney và sách của Woolfolk.',
   numerology: 'Các con số từ ngày sinh và tên, theo sách «Thay đổi cuộc sống với Nhân số học» của Lê Đỗ Quỳnh Hương.',
   iching: 'Gieo quẻ và đọc 64 quẻ Kinh Dịch.',
   tarot: 'Trải bài và đọc các lá Tarot.',
@@ -27,11 +27,13 @@ export default function Home() {
           <h1>Huyền học</h1>
           <p>Những gì bà ghi chép về tử vi — giữ nguyên lời bà, số hoá để so được với từng lá số. Phần nào không phải của bà (sách phổ thông, AI) luôn được ghi rõ và để riêng.</p>
           <p>Nhân số học đọc theo sách «Thay đổi cuộc sống với Nhân số học» của Lê Đỗ Quỳnh Hương, cũng tách lời sách khỏi phần luận thêm.</p>
+          <p>Chiêm tinh luận theo giáo trình và các bài của cô Hương Kiều, bản dịch Tierney của lớp và sách của Woolfolk; mỗi đoạn ghi rõ là lời ai.</p>
           <p>Mỗi người có thể có nhiều lá số ở những thời điểm khác nhau; bản tóm tắt của lá số mới nhất hiện cả ở trang người trong Sonic Hub.</p>
           <div className="tv-acts" style={{ marginTop: 6 }}>
             <Link className="tv-btn son" to="/tu-vi">Lập lá số tử vi</Link>
             <Link className="tv-btn ghost" to="/tu-vi/sach">Đọc sách của bà</Link>
             <Link className="tv-btn ghost" to="/nhan-so-hoc">Xem các con số</Link>
+            <Link className="tv-btn ghost" to="/chiem-tinh">Lập lá số chiêm tinh</Link>
           </div>
         </div>
         <div className="hh-disc">

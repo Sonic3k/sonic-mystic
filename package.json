@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "description": "Huyền học — Tử vi from grandma's notes, and later chiêm tinh, nhân số học, Kinh Dịch, tarot: one engine package, one API, one web.",
+  "license": "AGPL-3.0-or-later",
   "workspaces": [
     "engine",
     "kb",
@@ -22,6 +23,7 @@
     "kb:book": "npm run build:engine && npm run book -w @mystic/kb",
     "kb:bundle": "npm run build:engine && npm run bundle -w @mystic/kb",
     "kb:numerology": "npm run build:engine && npm run numerology -w @mystic/kb",
+    "kb:astrology": "npm run build:engine && npm run astrology -w @mystic/kb",
     "db:generate": "npm run db:generate -w @mystic/api",
     "start": "npm run start -w @mystic/api",
     "dev:web": "npm run dev -w @mystic/web"

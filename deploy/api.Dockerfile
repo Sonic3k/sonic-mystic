@@ -24,6 +24,8 @@ RUN npm ci --omit=dev --workspace @mystic/engine --workspace @mystic/api --inclu
 COPY --from=build /app/engine/dist engine/dist
 COPY --from=build /app/api/dist api/dist
 COPY api/drizzle api/drizzle
+# the Swiss Ephemeris files (planets, Moon, Chiron; 1800–2400)
+COPY api/ephe api/ephe
 COPY kb/bundle kb/bundle
 WORKDIR /app/api
 USER node

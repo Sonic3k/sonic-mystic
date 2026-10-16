@@ -29,6 +29,8 @@ export interface AppConfig {
   kbBundleDir: string;
   /** where the Nhân số học bundle is, when it is on disk (its text is not in the repository: else it is uploaded) */
   numerologyBundleDir: string;
+  /** the same for the Chiêm tinh sources */
+  astrologyBundleDir: string;
   ownerName: string;
   /** sends briefs in the background; off in tests */
   syncWorker: boolean;
@@ -74,6 +76,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
     ai: { apiKey: opt(env, 'ANTHROPIC_API_KEY'), model: opt(env, 'ANTHROPIC_MODEL') ?? 'claude-sonnet-5-5', maxTokens: Number(env.AI_MAX_TOKENS ?? 16000) },
     kbBundleDir: opt(env, 'KB_BUNDLE_DIR') ?? resolve(repoRoot, 'kb/bundle'),
     numerologyBundleDir: opt(env, 'NUMEROLOGY_BUNDLE_DIR') ?? resolve(opt(env, 'KB_BUNDLE_DIR') ?? resolve(repoRoot, 'kb/bundle'), 'numerology'),
+    astrologyBundleDir: opt(env, 'ASTROLOGY_BUNDLE_DIR') ?? resolve(opt(env, 'KB_BUNDLE_DIR') ?? resolve(repoRoot, 'kb/bundle'), 'astrology'),
     ownerName: opt(env, 'OWNER_NAME') ?? 'Chủ nhà',
     syncWorker: (env.SYNC_WORKER ?? 'true') !== 'false',
   };

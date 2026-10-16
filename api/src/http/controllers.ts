@@ -6,13 +6,13 @@ import { z } from 'zod';
 import type { DisciplineDto } from '@mystic/engine/api';
 import { AiService } from '../ai/ai.service.js';
 import { BooksService } from '../books/books.service.js';
-import { Access, ZodPipe, isOwner } from '../common/access.js';
-import { APP_CONFIG } from '../common/tokens.js';
-import type { AppConfig } from '../config.js';
+import { Access, ZodPipe } from '../common/access.js';
 import { DB, type Db } from '../db/db.js';
 import { disciplines, imports } from '../db/schema.js';
 import { KnowledgeService } from '../kb/knowledge.service.js';
 import { BundleError, importNumerology } from '../kb/numerology-importer.js';
+import { importAstrology } from '../kb/astrology-importer.js';
+import { AstrologyBody, AstrologyService, type AstrologyBodyT } from '../astrology/astrology.service.js';
 import { NumerologyBody, NumerologyService, type NumerologyBodyT } from '../numerology/numerology.service.js';
 import { PeopleService, ProfileBody, ProfilePatch, SubjectBody, type ProfileInput, type SubjectInput } from '../people/people.service.js';
 import { ReadingsService, WrittenBody, type WrittenBodyT } from '../readings/readings.service.js';
@@ -52,7 +52,12 @@ export class HealthController {
     await this.db.execute(sql`select 1`);
     const k = await this.knowledge.get();
     const n = await this.knowledge.numerology();
-    return { ok: true, knowledgeVersion: k.version, rules: k.rules.size, numerology: n ? { knowledgeVersion: n.version, rules: n.rules.size } : null };
+    const a = await this.knowledge.astrology();
+    return {
+      ok: true, knowledgeVersion: k.version, rules: k.rules.size,
+      numerology: n ? { knowledgeVersion: n.version, rules: n.rules.size } : null,
+      astrology: a ? { knowledgeVersion: a.version, rules: a.rules.size, sources: a.sources.length } : null,
+    };
   }
 }
 
@@ -79,20 +84,20 @@ export class MetaController {
 @Controller()
 @Access('public')
 export class BooksController {
-  constructor(@Inject(BooksService) private readonly books: BooksService, @Inject(APP_CONFIG) private readonly config: AppConfig) {}
+  constructor(@Inject(BooksService) private readonly books: BooksService) {}
 
   @Get('sources')
   sources(@Query('discipline') discipline = 'tuvi') { return this.books.sources(discipline); }
 
   @Get('sources/:code/entries')
-  entries(@Param('code') code: string, @Req() req: Request) { return this.books.entries(code, isOwner(this.config, req)); }
+  entries(@Param('code') code: string) { return this.books.entries(code); }
 
   @Get('sources/:code/entries/:key')
-  entry(@Param('code') code: string, @Param('key') key: string, @Req() req: Request) { return this.books.entry(code, key, isOwner(this.config, req)); }
+  entry(@Param('code') code: string, @Param('key') key: string) { return this.books.entry(code, key); }
 
   @Get('search')
-  search(@Query('q') q = '', @Query('discipline') discipline = 'tuvi', @Query('limit') limit?: string, @Req() req?: Request) {
-    return this.books.search(q, discipline, optInt(limit), req ? isOwner(this.config, req) : false);
+  search(@Query('q') q = '', @Query('discipline') discipline = 'tuvi', @Query('limit') limit?: string) {
+    return this.books.search(q, discipline, optInt(limit));
   }
 
   @Patch('passages/:id')
@@ -135,15 +140,26 @@ export class TuViController {
 
 const BUNDLE_MAX = 8 * 1024 * 1024;
 
-/** Nhân số học: computing the numbers is open to anyone; the book's text (readings, the book, lookups) is the owner's
-    while its source is marked so */
+/** a gzipped JSON bundle from the request body */
+async function readGzipBody(req: Request, max: number, hint: string): Promise<unknown> {
+  if (!/gzip/.test(req.headers['content-type'] ?? '')) throw new BadRequestException(`Gửi gói dạng application/gzip (${hint})`);
+  const parts: Buffer[] = [];
+  let size = 0;
+  for await (const chunk of req) {
+    size += (chunk as Buffer).length;
+    if (size > max) throw new PayloadTooLargeException('Gói quá lớn');
+    parts.push(chunk as Buffer);
+  }
+  try { return JSON.parse(gunzipSync(Buffer.concat(parts), { maxOutputLength: 96 * 1024 * 1024 }).toString('utf8')); } catch (e) { throw new BadRequestException(`Không đọc được gói: ${(e as Error).message}`); }
+}
+
+/** Nhân số học: the numbers, the readings, the book and its lookups */
 @Controller('numerology')
 @Access('public')
 export class NumerologyController {
   constructor(
     @Inject(NumerologyService) private readonly numerology: NumerologyService,
     @Inject(KnowledgeService) private readonly knowledge: KnowledgeService,
-    @Inject(APP_CONFIG) private readonly config: AppConfig,
     @Inject(DB) private readonly db: Db,
   ) {}
 
@@ -153,22 +169,22 @@ export class NumerologyController {
 
   @Post('reading')
   @HttpCode(200)
-  reading(@Body(new ZodPipe(NumerologyBody)) body: NumerologyBodyT, @Req() req: Request) { return this.numerology.reading(body, isOwner(this.config, req)); }
+  reading(@Body(new ZodPipe(NumerologyBody)) body: NumerologyBodyT) { return this.numerology.reading(body); }
 
   @Get('book')
-  toc(@Req() req: Request) { return this.numerology.toc(isOwner(this.config, req)); }
+  toc() { return this.numerology.toc(); }
 
   @Get('book/:code')
-  entry(@Param('code') code: string, @Req() req: Request) { return this.numerology.entry(code, isOwner(this.config, req)); }
+  entry(@Param('code') code: string) { return this.numerology.entry(code); }
 
   /** ?symbols=chu-dao:7,so:1 — the passages whose condition speaks of all of them (optionally in one part: &topic=bieu_do) */
   @Get('lookup')
-  lookup(@Query('symbols') symbols = '', @Query('topic') topic: string | undefined, @Req() req: Request) {
-    return this.numerology.lookup(symbols.split(',').map(x => x.trim()).filter(Boolean), isOwner(this.config, req), topic || undefined);
+  lookup(@Query('symbols') symbols = '', @Query('topic') topic: string | undefined) {
+    return this.numerology.lookup(symbols.split(',').map(x => x.trim()).filter(Boolean), topic || undefined);
   }
 
   @Get('catalog')
-  catalog(@Req() req: Request) { return this.numerology.catalog(isOwner(this.config, req)); }
+  catalog() { return this.numerology.catalog(); }
 
   /** whether the book is loaded, and which bundle */
   @Get('bundle')
@@ -178,20 +194,11 @@ export class NumerologyController {
     return { loaded: !!n, knowledgeVersion: n?.version ?? null, rules: n?.rules.size ?? 0, entries: n?.order.length ?? 0, bundleVersion: last?.bundleVersion ?? null, importedAt: last?.importedAt.toISOString() ?? null };
   }
 
-  /** the owner loads the book: the bundle built where the book is, gzipped (kb: npm run upload:numerology) */
+  /** loads the book: the bundle built where the book is, gzipped (kb: npm run upload:numerology) */
   @Put('bundle')
   @Access('owner')
   async upload(@Req() req: Request, @Query('force') force?: string) {
-    if (!/gzip/.test(req.headers['content-type'] ?? '')) throw new BadRequestException('Gửi gói sách dạng application/gzip (npm run upload:numerology)');
-    const parts: Buffer[] = [];
-    let size = 0;
-    for await (const chunk of req) {
-      size += (chunk as Buffer).length;
-      if (size > BUNDLE_MAX) throw new PayloadTooLargeException('Gói sách quá lớn');
-      parts.push(chunk as Buffer);
-    }
-    let bundle: unknown;
-    try { bundle = JSON.parse(gunzipSync(Buffer.concat(parts), { maxOutputLength: 64 * 1024 * 1024 }).toString('utf8')); } catch (e) { throw new BadRequestException(`Không đọc được gói sách: ${(e as Error).message}`); }
+    const bundle = await readGzipBody(req, BUNDLE_MAX, 'npm run upload:numerology');
     try {
       const report = await importNumerology(this.db, bundle as Parameters<typeof importNumerology>[1], { force: force === '1' || force === 'true' });
       this.knowledge.invalidate();
@@ -201,6 +208,65 @@ export class NumerologyController {
       throw e;
     }
   }
+}
+
+/** Chiêm tinh: the chart, the readings, the sources and their lookups */
+@Controller('astrology')
+@Access('public')
+export class AstrologyController {
+  constructor(
+    @Inject(AstrologyService) private readonly astrology: AstrologyService,
+    @Inject(KnowledgeService) private readonly knowledge: KnowledgeService,
+    @Inject(DB) private readonly db: Db,
+  ) {}
+
+  @Post('chart')
+  @HttpCode(200)
+  chart(@Body(new ZodPipe(AstrologyBody)) body: AstrologyBodyT) { return this.astrology.chart(body); }
+
+  @Post('reading')
+  @HttpCode(200)
+  reading(@Body(new ZodPipe(AstrologyBody)) body: AstrologyBodyT) { return this.astrology.reading(body); }
+
+  @Get('book')
+  toc() { return this.astrology.toc(); }
+
+  /** ?shallow=1: only the entry's own passages and the titles under it */
+  @Get('book/:source/:code')
+  entry(@Param('source') source: string, @Param('code') code: string, @Query('shallow') shallow?: string) { return this.astrology.entry(source, code, shallow === '1' || shallow === 'true'); }
+
+  /** ?symbols=sun@aries,house:7 — the passages whose condition speaks of all of them (optionally in one part: &topic=sun) */
+  @Get('lookup')
+  lookup(@Query('symbols') symbols = '', @Query('topic') topic: string | undefined) {
+    return this.astrology.lookup(symbols.split(',').map(x => x.trim()).filter(Boolean), topic || undefined);
+  }
+
+  @Get('catalog')
+  catalog() { return this.astrology.catalog(); }
+
+  /** whether the sources are loaded, and which bundle */
+  @Get('bundle')
+  async bundle() {
+    const a = await this.knowledge.astrology();
+    const [last] = await this.db.select().from(imports).where(eq(imports.disciplineCode, 'astrology')).orderBy(desc(imports.id)).limit(1);
+    return { loaded: !!a, knowledgeVersion: a?.version ?? null, rules: a?.rules.size ?? 0, sources: a?.sources.length ?? 0, entries: a?.order.length ?? 0, bundleVersion: last?.bundleVersion ?? null, importedAt: last?.importedAt.toISOString() ?? null };
+  }
+
+  /** loads the sources: the bundle built where they are, gzipped (kb: npm run upload:astrology) */
+  @Put('bundle')
+  @Access('owner')
+  async upload(@Req() req: Request, @Query('force') force?: string) {
+    const bundle = await readGzipBody(req, 24 * 1024 * 1024, 'npm run upload:astrology');
+    try {
+      const report = await importAstrology(this.db, bundle as Parameters<typeof importAstrology>[1], { force: force === '1' || force === 'true' });
+      this.knowledge.invalidate();
+      return report;
+    } catch (e) {
+      if (e instanceof BundleError) throw new BadRequestException(e.message);
+      throw e;
+    }
+  }
+
 }
 
 @Controller()
@@ -231,7 +297,7 @@ export class PeopleController {
 
   @Get('subjects/:id/brief')
   async brief(@Param('id') id: string, @Query('discipline') discipline = 'tuvi') {
-    if (!['tuvi', 'numerology'].includes(discipline)) throw new BadRequestException(`Chưa có môn ${discipline}`);
+    if (!['tuvi', 'numerology', 'astrology'].includes(discipline)) throw new BadRequestException(`Chưa có môn ${discipline}`);
     await this.people.subject(id);
     const b = await this.sync.brief(id, discipline);
     if (!b) throw new NotFoundException('Người này chưa có profile');

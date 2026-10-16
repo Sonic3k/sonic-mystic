@@ -1,0 +1,582 @@
+{
+ "source": {
+  "code": "astrology.hk-dominant",
+  "file": "huong-kieu-dominant.jsonl",
+  "title": "Đi tìm nhân tố trội",
+  "author": "Kiều Thị Thu Hương (cô Hương Kiều)",
+  "label": "Lời cô",
+  "description": "Tài liệu giảng dạy của lớp Chiêm tinh (quybaba.blogspot.com): bài test tính điểm cho từng hành tinh và Chiron để tìm nhân tố trội trên lá số."
+ },
+ "entries": [
+  {
+   "at": 1,
+   "code": "intro",
+   "title": "Đi tìm nhân tố trội",
+   "kind": "general"
+  },
+  {
+   "at": 4,
+   "code": "sun",
+   "title": "Nhật kế—Tính điểm cho mặt trời",
+   "kind": "rule",
+   "topic": "dominant",
+   "when": "focus(sun) & (dominant(self) | dominant(self, low))"
+  },
+  {
+   "at": 23,
+   "code": "moon",
+   "title": "Nguyệt kế- Tính điểm cho mặt trăng",
+   "kind": "rule",
+   "topic": "dominant",
+   "when": "focus(moon) & (dominant(self) | dominant(self, low))"
+  },
+  {
+   "at": 42,
+   "code": "mercury",
+   "title": "Thủy tinh kế- Tính điểm cho sao Thủy",
+   "kind": "rule",
+   "topic": "dominant",
+   "when": "focus(mercury) & (dominant(self) | dominant(self, low))"
+  },
+  {
+   "at": 60,
+   "code": "venus",
+   "title": "Kim tinh kế - Tính điểm cho sao Kim",
+   "kind": "rule",
+   "topic": "dominant",
+   "when": "focus(venus) & (dominant(self) | dominant(self, low))"
+  },
+  {
+   "at": 61,
+   "code": "venus.phien-ban-1-kim-tinh",
+   "title": "PHIÊN BẢN 1: Kim Tinh Kế không tính đến Kim Ngưu",
+   "parent": "venus",
+   "kind": "general"
+  },
+  {
+   "at": 72,
+   "code": "venus.phien-ban-2-neu-ban-",
+   "title": "PHIÊN BẢN 2: Nếu bạn thuộc trường phái tin rằng Kim Tinh làm chủ cả cung số 2 và Kim Ngưu, hãy tính thêm các nhân tố sau:",
+   "parent": "venus",
+   "kind": "general"
+  },
+  {
+   "at": 83,
+   "code": "mars",
+   "title": "Hỏa tinh kế- Tính điểm cho sao Hỏa",
+   "kind": "rule",
+   "topic": "dominant",
+   "when": "focus(mars) & (dominant(self) | dominant(self, low))"
+  },
+  {
+   "at": 99,
+   "code": "jupiter",
+   "title": "Mộc tinh kế - Tính điểm cho sao Mộc",
+   "kind": "rule",
+   "topic": "dominant",
+   "when": "focus(jupiter) & (dominant(self) | dominant(self, low))"
+  },
+  {
+   "at": 115,
+   "code": "saturn",
+   "title": "Thổ tinh kế - Tính điểm cho sao Thổ",
+   "kind": "rule",
+   "topic": "dominant",
+   "when": "focus(saturn) & (dominant(self) | dominant(self, low))"
+  },
+  {
+   "at": 132,
+   "code": "uranus",
+   "title": "Uranus kế - Tính điểm cho Thiên Vương Tinh",
+   "kind": "rule",
+   "topic": "dominant",
+   "when": "focus(uranus) & (dominant(self) | dominant(self, low))"
+  },
+  {
+   "at": 149,
+   "code": "neptune",
+   "title": "Neptune kế —Tính điểm cho sao Hải Vương",
+   "kind": "rule",
+   "topic": "dominant",
+   "when": "focus(neptune) & (dominant(self) | dominant(self, low))"
+  },
+  {
+   "at": 167,
+   "code": "pluto",
+   "title": "Pluto kế —Tính điểm cho Diêm Vương tinh",
+   "kind": "rule",
+   "topic": "dominant",
+   "when": "focus(pluto) & (dominant(self) | dominant(self, low))"
+  },
+  {
+   "at": 187,
+   "code": "chiron",
+   "title": "Chiron kế —Tính điểm cho Chiron",
+   "kind": "rule",
+   "topic": "dominant",
+   "when": "focus(chiron) & (dominant(self) | dominant(self, low))"
+  }
+ ],
+ "paras": {
+  "2": {
+   "kind": "general",
+   "topic": "dominant",
+   "when": "any()"
+  },
+  "3": {
+   "kind": "general",
+   "topic": "dominant",
+   "when": "any()"
+  },
+  "5": {
+   "kind": "general"
+  },
+  "6": {
+   "kind": "general"
+  },
+  "7": {
+   "kind": "general"
+  },
+  "8": {
+   "kind": "general"
+  },
+  "9": {
+   "kind": "general"
+  },
+  "10": {
+   "kind": "general"
+  },
+  "11": {
+   "kind": "general"
+  },
+  "12": {
+   "kind": "general"
+  },
+  "13": {
+   "kind": "general"
+  },
+  "14": {
+   "kind": "general"
+  },
+  "15": {
+   "kind": "general"
+  },
+  "16": {
+   "when": "focus(sun) & dominant(self)"
+  },
+  "17": {
+   "when": "focus(sun) & dominant(self)"
+  },
+  "24": {
+   "kind": "general"
+  },
+  "25": {
+   "kind": "general"
+  },
+  "26": {
+   "kind": "general"
+  },
+  "27": {
+   "kind": "general"
+  },
+  "28": {
+   "kind": "general"
+  },
+  "29": {
+   "kind": "general"
+  },
+  "30": {
+   "kind": "general"
+  },
+  "31": {
+   "kind": "general"
+  },
+  "32": {
+   "kind": "general"
+  },
+  "33": {
+   "kind": "general"
+  },
+  "34": {
+   "kind": "general"
+  },
+  "35": {
+   "kind": "general"
+  },
+  "36": {
+   "kind": "general"
+  },
+  "37": {
+   "when": "focus(moon) & dominant(self)"
+  },
+  "43": {
+   "kind": "general"
+  },
+  "44": {
+   "kind": "general"
+  },
+  "45": {
+   "kind": "general"
+  },
+  "46": {
+   "kind": "general"
+  },
+  "47": {
+   "kind": "general"
+  },
+  "48": {
+   "kind": "general"
+  },
+  "49": {
+   "kind": "general"
+  },
+  "50": {
+   "kind": "general"
+  },
+  "51": {
+   "kind": "general"
+  },
+  "52": {
+   "kind": "general"
+  },
+  "53": {
+   "kind": "general"
+  },
+  "54": {
+   "when": "focus(mercury) & dominant(self)"
+  },
+  "58": {
+   "when": "focus(mercury) & dominant(self)"
+  },
+  "59": {
+   "when": "focus(mercury) & dominant(self, low)"
+  },
+  "62": {
+   "kind": "general"
+  },
+  "63": {
+   "kind": "general"
+  },
+  "64": {
+   "kind": "general"
+  },
+  "65": {
+   "kind": "general"
+  },
+  "66": {
+   "kind": "general"
+  },
+  "67": {
+   "kind": "general"
+  },
+  "68": {
+   "kind": "general"
+  },
+  "69": {
+   "kind": "general"
+  },
+  "70": {
+   "kind": "general"
+  },
+  "71": {
+   "kind": "general"
+  },
+  "73": {
+   "kind": "general"
+  },
+  "74": {
+   "kind": "general"
+  },
+  "75": {
+   "kind": "general"
+  },
+  "76": {
+   "kind": "general"
+  },
+  "77": {
+   "kind": "general"
+  },
+  "78": {
+   "kind": "general"
+  },
+  "79": {
+   "kind": "general"
+  },
+  "80": {
+   "when": "focus(venus) & dominant(self)"
+  },
+  "84": {
+   "kind": "general"
+  },
+  "85": {
+   "kind": "general"
+  },
+  "86": {
+   "kind": "general"
+  },
+  "87": {
+   "kind": "general"
+  },
+  "88": {
+   "kind": "general"
+  },
+  "89": {
+   "kind": "general"
+  },
+  "90": {
+   "kind": "general"
+  },
+  "91": {
+   "kind": "general"
+  },
+  "92": {
+   "kind": "general"
+  },
+  "93": {
+   "kind": "general"
+  },
+  "94": {
+   "kind": "general"
+  },
+  "95": {
+   "when": "focus(mars) & dominant(self)"
+  },
+  "97": {
+   "when": "focus(mars) & dominant(self)"
+  },
+  "100": {
+   "kind": "general"
+  },
+  "101": {
+   "kind": "general"
+  },
+  "102": {
+   "kind": "general"
+  },
+  "103": {
+   "kind": "general"
+  },
+  "104": {
+   "kind": "general"
+  },
+  "105": {
+   "kind": "general"
+  },
+  "106": {
+   "kind": "general"
+  },
+  "107": {
+   "kind": "general"
+  },
+  "108": {
+   "kind": "general"
+  },
+  "109": {
+   "kind": "general"
+  },
+  "110": {
+   "kind": "general"
+  },
+  "112": {
+   "when": "focus(jupiter) & dominant(self)"
+  },
+  "114": {
+   "when": "focus(jupiter) & dominant(self)"
+  },
+  "116": {
+   "kind": "general"
+  },
+  "117": {
+   "kind": "general"
+  },
+  "118": {
+   "kind": "general"
+  },
+  "119": {
+   "kind": "general"
+  },
+  "120": {
+   "kind": "general"
+  },
+  "121": {
+   "kind": "general"
+  },
+  "122": {
+   "kind": "general"
+  },
+  "123": {
+   "kind": "general"
+  },
+  "124": {
+   "kind": "general"
+  },
+  "125": {
+   "kind": "general"
+  },
+  "126": {
+   "kind": "general"
+  },
+  "127": {
+   "when": "focus(saturn) & dominant(self)"
+  },
+  "130": {
+   "when": "focus(saturn) & dominant(self)"
+  },
+  "131": {
+   "when": "focus(saturn) & dominant(self, low)"
+  },
+  "133": {
+   "kind": "general"
+  },
+  "134": {
+   "kind": "general"
+  },
+  "135": {
+   "kind": "general"
+  },
+  "136": {
+   "kind": "general"
+  },
+  "137": {
+   "kind": "general"
+  },
+  "138": {
+   "kind": "general"
+  },
+  "139": {
+   "kind": "general"
+  },
+  "140": {
+   "kind": "general"
+  },
+  "141": {
+   "kind": "general"
+  },
+  "142": {
+   "kind": "general"
+  },
+  "143": {
+   "kind": "general"
+  },
+  "144": {
+   "kind": "general"
+  },
+  "145": {
+   "when": "focus(uranus) & dominant(self)"
+  },
+  "148": {
+   "when": "focus(uranus) & dominant(self, low)"
+  },
+  "150": {
+   "kind": "general"
+  },
+  "151": {
+   "kind": "general"
+  },
+  "152": {
+   "kind": "general"
+  },
+  "153": {
+   "kind": "general"
+  },
+  "154": {
+   "kind": "general"
+  },
+  "155": {
+   "kind": "general"
+  },
+  "156": {
+   "kind": "general"
+  },
+  "157": {
+   "kind": "general"
+  },
+  "158": {
+   "kind": "general"
+  },
+  "159": {
+   "kind": "general"
+  },
+  "160": {
+   "kind": "general"
+  },
+  "161": {
+   "when": "focus(neptune) & dominant(self)"
+  },
+  "165": {
+   "when": "focus(neptune) & dominant(self)"
+  },
+  "166": {
+   "when": "focus(neptune) & dominant(self, low)"
+  },
+  "168": {
+   "kind": "general"
+  },
+  "169": {
+   "kind": "general"
+  },
+  "170": {
+   "kind": "general"
+  },
+  "171": {
+   "kind": "general"
+  },
+  "172": {
+   "kind": "general"
+  },
+  "173": {
+   "kind": "general"
+  },
+  "174": {
+   "kind": "general"
+  },
+  "175": {
+   "kind": "general"
+  },
+  "176": {
+   "kind": "general"
+  },
+  "177": {
+   "kind": "general"
+  },
+  "178": {
+   "kind": "general"
+  },
+  "179": {
+   "when": "focus(pluto) & dominant(self)"
+  },
+  "185": {
+   "when": "focus(pluto) & dominant(self, low)"
+  },
+  "186": {
+   "kind": "general"
+  },
+  "188": {
+   "kind": "general"
+  },
+  "189": {
+   "kind": "general"
+  },
+  "190": {
+   "kind": "general"
+  },
+  "191": {
+   "kind": "general"
+  },
+  "192": {
+   "kind": "general"
+  },
+  "193": {
+   "kind": "general"
+  },
+  "194": {
+   "kind": "general"
+  },
+  "195": {
+   "kind": "general"
+  },
+  "196": {
+   "kind": "general"
+  }
+ }
+}

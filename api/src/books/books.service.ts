@@ -1,6 +1,6 @@
 /* The knowledge as something to read and search: sources, their entries paragraph by paragraph, the rules each
    paragraph became, the setup tables, and a few edits (rewording a passage or a rule keeps the imported text). */
-import { BadRequestException, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { and, asc, count, eq, gt, inArray, isNotNull, lt, sql } from 'drizzle-orm';
 import { CUC, STARS, findStar, parse, starsOf, tuViPosition, type Tone } from '@mystic/engine/tuvi';
 import { parse as parseNumerology, symbolsOf as numerologySymbolsOf } from '@mystic/engine/numerology';
@@ -36,26 +36,19 @@ export class BooksService {
     return s;
   }
 
-  /** a source whose text the caller may read (a source marked for the owner answers a 401 to anyone else) */
-  private async readable(code: string, owner: boolean): Promise<SourceRow> {
-    const s = await this.sourceRow(code);
-    if (s.access === 'owner' && !owner) throw new UnauthorizedException('Nguồn này chỉ chủ nhà đọc được (cần mã chủ nhà)');
-    return s;
-  }
-
   private async sourceDto(s: SourceRow): Promise<SourceDto> {
     const [e] = await this.db.select({ n: count() }).from(entries).where(eq(entries.sourceId, s.id));
     const [p] = await this.db.select({ n: count() }).from(passages).innerJoin(entries, eq(entries.id, passages.entryId)).where(eq(entries.sourceId, s.id));
     const [r] = await this.db.select({ n: count(), review: sql<number>`count(${rules.reviewNote})::int` }).from(rules).where(and(eq(rules.sourceId, s.id), eq(rules.active, true)));
     return {
       code: s.code, discipline: s.disciplineCode, title: s.title, author: s.author, kind: s.kind, description: s.description, note: s.note, sourceFile: s.sourceFile,
-      access: s.access, entries: e.n, passages: p.n, rules: r.n, reviewNotes: r.review,
+      entries: e.n, passages: p.n, rules: r.n, reviewNotes: r.review,
     };
   }
 
   /** the entries of a source in order, each with its symbols and how much it holds */
-  async entries(code: string, owner = true): Promise<EntrySummaryDto[]> {
-    const s = await this.readable(code, owner);
+  async entries(code: string): Promise<EntrySummaryDto[]> {
+    const s = await this.sourceRow(code);
     const rows = await this.db.select().from(entries).where(eq(entries.sourceId, s.id)).orderBy(asc(entries.ordinal));
     if (!rows.length) return [];
     const ids = rows.map(e => e.id);
@@ -80,8 +73,8 @@ export class BooksService {
   }
 
   /** one entry, found by its line in the source (grandma's book) or by its code */
-  async entry(code: string, key: string, owner = true): Promise<EntryDto> {
-    const s = await this.readable(code, owner);
+  async entry(code: string, key: string): Promise<EntryDto> {
+    const s = await this.sourceRow(code);
     const where = /^\d+$/.test(key) ? and(eq(entries.sourceId, s.id), eq(entries.sourceRef, Number(key))) : and(eq(entries.sourceId, s.id), eq(entries.code, key));
     const [e] = await this.db.select().from(entries).where(where).orderBy(asc(entries.ordinal)).limit(1);
     if (!e) throw new NotFoundException('Không có mục này');
@@ -136,11 +129,11 @@ export class BooksService {
 
   // ── tra cứu ──
 
-  async search(q: string, discipline = 'tuvi', limit = 120, owner = true): Promise<SearchResultDto> {
+  async search(q: string, discipline = 'tuvi', limit = 120): Promise<SearchResultDto> {
     const needle = fold(q);
     if (needle.length < 2) return { query: q, total: 0, hits: [] };
     const pattern = `%${needle.replace(/[\\%_]/g, m => `\\${m}`)}%`;
-    const where = and(eq(sources.disciplineCode, discipline), sql`${passages.searchText} like ${pattern}`, owner ? undefined : eq(sources.access, 'public'));
+    const where = and(eq(sources.disciplineCode, discipline), sql`${passages.searchText} like ${pattern}`);
     const [{ n }] = await this.db.select({ n: count() }).from(passages).innerJoin(entries, eq(entries.id, passages.entryId)).innerJoin(sources, eq(sources.id, entries.sourceId)).where(where);
     const rows = await this.db.select({
       passageId: passages.id, passageRef: passages.sourceRef, sourceCode: sources.code, sourceKind: sources.kind, entryRef: entries.sourceRef, entryCode: entries.code, entryTitle: entries.title, section: passages.section, text: passages.text,

@@ -1,0 +1,40 @@
+{
+ "source": {
+  "code": "astrology.hk-aries",
+  "file": "huong-kieu-aries.jsonl",
+  "title": "Chuyên đề Bạch Dương",
+  "author": "Kiều Thị Thu Hương (cô Hương Kiều)",
+  "label": "Lời cô",
+  "description": "Bài giảng của cô về cách tổ hợp năng lượng một dấu hiệu với các cấu trúc trên lá số, lấy Bạch Dương làm ví dụ, kèm mẫu câu cho 12 cung địa bàn."
+ },
+ "entries": [
+  {
+   "at": 1,
+   "code": "aries",
+   "title": "Chuyên đề Bạch Dương",
+   "kind": "general"
+  }
+ ],
+ "paras": {
+  "7": {
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, aries)"
+  },
+  "8": {
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, aries)"
+  },
+  "9": {
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, aries)"
+  },
+  "10": {
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, aries)"
+  }
+ }
+}

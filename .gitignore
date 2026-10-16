@@ -13,3 +13,7 @@ kb/sources/**/*-report.txt
 # built bundle; the API can also take the bundle from NUMEROLOGY_BUNDLE_DIR or an owner upload
 kb/sources/numerology/*.jsonl
 kb/bundle/numerology/
+# the astrology sources' own text (cô Hương Kiều's materials, the Tierney translation, Woolfolk and its translation —
+# all under their authors' copyright) and the bundle built from them stay out of this public repo
+kb/sources/astrology/*.jsonl
+kb/bundle/astrology/
