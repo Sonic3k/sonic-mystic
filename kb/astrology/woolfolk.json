@@ -1,0 +1,5416 @@
+{
+ "source": {
+  "code": "astrology.woolfolk",
+  "file": "woolfolk.jsonl",
+  "title": "The Only Astrology Book You'll Ever Need",
+  "author": "Joanna Martine Woolfolk",
+  "translator": "Claude",
+  "label": "Woolfolk",
+  "description": "Sách chiêm tinh phổ thông của Joanna Martine Woolfolk (bản 2008), Claude dịch sang tiếng Việt theo thuật ngữ của cô Hương Kiều; bản gốc tiếng Anh giữ kèm từng đoạn.",
+  "note": "Dịch các chương 1, 2, 3, 5–10; không dịch chương 4 (sức khỏe), 11–13 và các bảng tra."
+ },
+ "entries": [
+  {
+   "at": 1,
+   "code": "w1",
+   "title": "1 · Các cung Mặt Trời",
+   "kind": "general"
+  },
+  {
+   "at": 16,
+   "code": "w1.some-astrological-background-on-the-twel",
+   "title": "Đôi nét về nền tảng chiêm tinh của mười hai cung hoàng đạo",
+   "parent": "w1"
+  },
+  {
+   "at": 25,
+   "code": "w1.some-astrological-background-on-the-twel.dualities",
+   "title": "Âm dương",
+   "parent": "w1.some-astrological-background-on-the-twel"
+  },
+  {
+   "at": 30,
+   "code": "w1.some-astrological-background-on-the-twel.triplicities",
+   "title": "Nhóm ba",
+   "parent": "w1.some-astrological-background-on-the-twel"
+  },
+  {
+   "at": 36,
+   "code": "w1.some-astrological-background-on-the-twel.quadruplicities",
+   "title": "Nhóm bốn",
+   "parent": "w1.some-astrological-background-on-the-twel"
+  },
+  {
+   "at": 45,
+   "code": "w1.some-astrological-background-on-the-twel.polarities",
+   "title": "Cặp đối cực",
+   "parent": "w1.some-astrological-background-on-the-twel"
+  },
+  {
+   "at": 58,
+   "code": "w1.some-astrological-background-on-the-twel.what-is-your-sun-sign",
+   "title": "Cung Mặt Trời của bạn là gì?",
+   "parent": "w1.some-astrological-background-on-the-twel"
+  },
+  {
+   "at": 60,
+   "code": "w1.aries",
+   "title": "Bạch Dương",
+   "parent": "w1",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, aries)"
+  },
+  {
+   "at": 61,
+   "code": "w1.aries.march-21-april-19",
+   "title": "(21/3 – 19/4)",
+   "parent": "w1.aries"
+  },
+  {
+   "at": 79,
+   "code": "w1.aries.your-most-likeable-trait-courage",
+   "title": "Nét đáng mến nhất của bạn: lòng can đảm",
+   "parent": "w1.aries"
+  },
+  {
+   "at": 95,
+   "code": "w1.aries.your-most-likeable-trait-courage.the-inner-you",
+   "title": "Con người bên trong bạn",
+   "parent": "w1.aries.your-most-likeable-trait-courage"
+  },
+  {
+   "at": 97,
+   "code": "w1.aries.your-most-likeable-trait-courage.how-others-see-you",
+   "title": "Bạn trong mắt người khác",
+   "parent": "w1.aries.your-most-likeable-trait-courage"
+  },
+  {
+   "at": 99,
+   "code": "w1.aries.famous",
+   "title": "Người nổi tiếng có Mặt Trời ở Bạch Dương",
+   "parent": "w1.aries",
+   "kind": "general"
+  },
+  {
+   "at": 101,
+   "code": "w1.taurus",
+   "title": "Kim Ngưu",
+   "parent": "w1",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, taurus)"
+  },
+  {
+   "at": 102,
+   "code": "w1.taurus.april-20-may-20",
+   "title": "(20/4 – 20/5)",
+   "parent": "w1.taurus"
+  },
+  {
+   "at": 120,
+   "code": "w1.taurus.your-most-likeable-trait-dependability",
+   "title": "Nét đáng mến nhất của bạn: sự đáng tin cậy",
+   "parent": "w1.taurus"
+  },
+  {
+   "at": 133,
+   "code": "w1.taurus.your-most-likeable-trait-dependability.the-inner-you",
+   "title": "Con người bên trong bạn",
+   "parent": "w1.taurus.your-most-likeable-trait-dependability"
+  },
+  {
+   "at": 135,
+   "code": "w1.taurus.your-most-likeable-trait-dependability.how-others-see-you",
+   "title": "Bạn trong mắt người khác",
+   "parent": "w1.taurus.your-most-likeable-trait-dependability"
+  },
+  {
+   "at": 137,
+   "code": "w1.taurus.famous",
+   "title": "Người nổi tiếng có Mặt Trời ở Kim Ngưu",
+   "parent": "w1.taurus",
+   "kind": "general"
+  },
+  {
+   "at": 139,
+   "code": "w1.gemini",
+   "title": "Song Tử",
+   "parent": "w1",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, gemini)"
+  },
+  {
+   "at": 140,
+   "code": "w1.gemini.may-21-june-20",
+   "title": "(21/5 – 20/6)",
+   "parent": "w1.gemini"
+  },
+  {
+   "at": 158,
+   "code": "w1.gemini.your-most-likeable-trait-responsiveness",
+   "title": "Nét đáng mến nhất của bạn: sự nhanh nhạy",
+   "parent": "w1.gemini"
+  },
+  {
+   "at": 174,
+   "code": "w1.gemini.your-most-likeable-trait-responsiveness.the-inner-you",
+   "title": "Con người bên trong bạn",
+   "parent": "w1.gemini.your-most-likeable-trait-responsiveness"
+  },
+  {
+   "at": 176,
+   "code": "w1.gemini.your-most-likeable-trait-responsiveness.how-others-see-you",
+   "title": "Bạn trong mắt người khác",
+   "parent": "w1.gemini.your-most-likeable-trait-responsiveness"
+  },
+  {
+   "at": 178,
+   "code": "w1.gemini.famous",
+   "title": "Người nổi tiếng có Mặt Trời ở Song Tử",
+   "parent": "w1.gemini",
+   "kind": "general"
+  },
+  {
+   "at": 180,
+   "code": "w1.cancer",
+   "title": "Cự Giải",
+   "parent": "w1",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, cancer)"
+  },
+  {
+   "at": 181,
+   "code": "w1.cancer.june-21-july-22",
+   "title": "(21/6 – 22/7)",
+   "parent": "w1.cancer"
+  },
+  {
+   "at": 199,
+   "code": "w1.cancer.your-most-likeable-trait",
+   "title": "Nét đáng mến nhất của bạn",
+   "parent": "w1.cancer"
+  },
+  {
+   "at": 200,
+   "code": "w1.cancer.loyalty",
+   "title": "Lòng trung thành",
+   "parent": "w1.cancer"
+  },
+  {
+   "at": 214,
+   "code": "w1.cancer.loyalty.the-inner-you",
+   "title": "Con người bên trong bạn",
+   "parent": "w1.cancer.loyalty"
+  },
+  {
+   "at": 216,
+   "code": "w1.cancer.loyalty.how-others-see-you",
+   "title": "Bạn trong mắt người khác",
+   "parent": "w1.cancer.loyalty"
+  },
+  {
+   "at": 218,
+   "code": "w1.cancer.famous",
+   "title": "Người nổi tiếng có Mặt Trời ở Cự Giải",
+   "parent": "w1.cancer",
+   "kind": "general"
+  },
+  {
+   "at": 220,
+   "code": "w1.leo",
+   "title": "Sư Tử",
+   "parent": "w1",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, leo)"
+  },
+  {
+   "at": 221,
+   "code": "w1.leo.july-23-august-22",
+   "title": "(23/7 – 22/8)",
+   "parent": "w1.leo"
+  },
+  {
+   "at": 240,
+   "code": "w1.leo.your-most-likeable-trait-exuberance",
+   "title": "Nét đáng mến nhất của bạn: sự sôi nổi",
+   "parent": "w1.leo"
+  },
+  {
+   "at": 252,
+   "code": "w1.leo.your-most-likeable-trait-exuberance.the-inner-you",
+   "title": "Con người bên trong bạn",
+   "parent": "w1.leo.your-most-likeable-trait-exuberance"
+  },
+  {
+   "at": 254,
+   "code": "w1.leo.your-most-likeable-trait-exuberance.how-others-see-you",
+   "title": "Bạn trong mắt người khác",
+   "parent": "w1.leo.your-most-likeable-trait-exuberance"
+  },
+  {
+   "at": 256,
+   "code": "w1.leo.famous",
+   "title": "Người nổi tiếng có Mặt Trời ở Sư Tử",
+   "parent": "w1.leo",
+   "kind": "general"
+  },
+  {
+   "at": 258,
+   "code": "w1.virgo",
+   "title": "Xử Nữ",
+   "parent": "w1",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, virgo)"
+  },
+  {
+   "at": 259,
+   "code": "w1.virgo.august-23-september-22",
+   "title": "(23/8 – 22/9)",
+   "parent": "w1.virgo"
+  },
+  {
+   "at": 277,
+   "code": "w1.virgo.your-most-likeable-trait-conscientiousne",
+   "title": "Nét đáng mến nhất của bạn: sự tận tâm",
+   "parent": "w1.virgo"
+  },
+  {
+   "at": 293,
+   "code": "w1.virgo.your-most-likeable-trait-conscientiousne.the-inner-you",
+   "title": "Con người bên trong bạn",
+   "parent": "w1.virgo.your-most-likeable-trait-conscientiousne"
+  },
+  {
+   "at": 295,
+   "code": "w1.virgo.your-most-likeable-trait-conscientiousne.how-others-see-you",
+   "title": "Bạn trong mắt người khác",
+   "parent": "w1.virgo.your-most-likeable-trait-conscientiousne"
+  },
+  {
+   "at": 297,
+   "code": "w1.virgo.famous",
+   "title": "Người nổi tiếng có Mặt Trời ở Xử Nữ",
+   "parent": "w1.virgo",
+   "kind": "general"
+  },
+  {
+   "at": 299,
+   "code": "w1.libra",
+   "title": "Thiên Bình",
+   "parent": "w1",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, libra)"
+  },
+  {
+   "at": 300,
+   "code": "w1.libra.september-23-october-22",
+   "title": "(23/9 – 22/10)",
+   "parent": "w1.libra"
+  },
+  {
+   "at": 318,
+   "code": "w1.libra.your-most-likeable-trait",
+   "title": "Nét đáng mến nhất của bạn",
+   "parent": "w1.libra"
+  },
+  {
+   "at": 319,
+   "code": "w1.libra.charm",
+   "title": "Sức quyến rũ",
+   "parent": "w1.libra"
+  },
+  {
+   "at": 331,
+   "code": "w1.libra.charm.the-inner-you",
+   "title": "Con người bên trong bạn",
+   "parent": "w1.libra.charm"
+  },
+  {
+   "at": 333,
+   "code": "w1.libra.charm.how-others-see-you",
+   "title": "Bạn trong mắt người khác",
+   "parent": "w1.libra.charm"
+  },
+  {
+   "at": 335,
+   "code": "w1.libra.famous",
+   "title": "Người nổi tiếng có Mặt Trời ở Thiên Bình",
+   "parent": "w1.libra",
+   "kind": "general"
+  },
+  {
+   "at": 337,
+   "code": "w1.scorpio",
+   "title": "Bò Cạp",
+   "parent": "w1",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, scorpio)"
+  },
+  {
+   "at": 338,
+   "code": "w1.scorpio.october-23-november-21",
+   "title": "(23/10 – 21/11)",
+   "parent": "w1.scorpio"
+  },
+  {
+   "at": 356,
+   "code": "w1.scorpio.your-most-likeable-trait-idealism",
+   "title": "Nét đáng mến nhất của bạn: tinh thần lý tưởng",
+   "parent": "w1.scorpio"
+  },
+  {
+   "at": 372,
+   "code": "w1.scorpio.your-most-likeable-trait-idealism.the-inner-you",
+   "title": "Con người bên trong bạn",
+   "parent": "w1.scorpio.your-most-likeable-trait-idealism"
+  },
+  {
+   "at": 374,
+   "code": "w1.scorpio.your-most-likeable-trait-idealism.how-others-see-you",
+   "title": "Bạn trong mắt người khác",
+   "parent": "w1.scorpio.your-most-likeable-trait-idealism"
+  },
+  {
+   "at": 376,
+   "code": "w1.scorpio.famous",
+   "title": "Người nổi tiếng có Mặt Trời ở Bò Cạp",
+   "parent": "w1.scorpio",
+   "kind": "general"
+  },
+  {
+   "at": 378,
+   "code": "w1.sagittarius",
+   "title": "Nhân Mã",
+   "parent": "w1",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, sagittarius)"
+  },
+  {
+   "at": 379,
+   "code": "w1.sagittarius.november-22-december-21",
+   "title": "(22/11 – 21/12)",
+   "parent": "w1.sagittarius"
+  },
+  {
+   "at": 397,
+   "code": "w1.sagittarius.your-most-likeable-trait-optimism",
+   "title": "Nét đáng mến nhất của bạn: tính lạc quan",
+   "parent": "w1.sagittarius"
+  },
+  {
+   "at": 412,
+   "code": "w1.sagittarius.your-most-likeable-trait-optimism.the-inner-you",
+   "title": "Con người bên trong bạn",
+   "parent": "w1.sagittarius.your-most-likeable-trait-optimism"
+  },
+  {
+   "at": 414,
+   "code": "w1.sagittarius.your-most-likeable-trait-optimism.how-others-see-you",
+   "title": "Bạn trong mắt người khác",
+   "parent": "w1.sagittarius.your-most-likeable-trait-optimism"
+  },
+  {
+   "at": 416,
+   "code": "w1.sagittarius.famous",
+   "title": "Người nổi tiếng có Mặt Trời ở Nhân Mã",
+   "parent": "w1.sagittarius",
+   "kind": "general"
+  },
+  {
+   "at": 418,
+   "code": "w1.capricorn",
+   "title": "Ma Kết",
+   "parent": "w1",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, capricorn)"
+  },
+  {
+   "at": 419,
+   "code": "w1.capricorn.december-22-january-19",
+   "title": "(22/12 – 19/1)",
+   "parent": "w1.capricorn"
+  },
+  {
+   "at": 437,
+   "code": "w1.capricorn.your-most-likeable-trait-steadiness",
+   "title": "Nét đáng mến nhất của bạn: sự vững vàng",
+   "parent": "w1.capricorn"
+  },
+  {
+   "at": 452,
+   "code": "w1.capricorn.your-most-likeable-trait-steadiness.the-inner-you",
+   "title": "Con người bên trong bạn",
+   "parent": "w1.capricorn.your-most-likeable-trait-steadiness"
+  },
+  {
+   "at": 454,
+   "code": "w1.capricorn.your-most-likeable-trait-steadiness.how-others-see-you",
+   "title": "Bạn trong mắt người khác",
+   "parent": "w1.capricorn.your-most-likeable-trait-steadiness"
+  },
+  {
+   "at": 456,
+   "code": "w1.capricorn.famous",
+   "title": "Người nổi tiếng có Mặt Trời ở Ma Kết",
+   "parent": "w1.capricorn",
+   "kind": "general"
+  },
+  {
+   "at": 458,
+   "code": "w1.aquarius",
+   "title": "Bảo Bình",
+   "parent": "w1",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, aquarius)"
+  },
+  {
+   "at": 459,
+   "code": "w1.aquarius.january-20-february-18",
+   "title": "(20/1 – 18/2)",
+   "parent": "w1.aquarius"
+  },
+  {
+   "at": 477,
+   "code": "w1.aquarius.your-most-likeable-trait-friendliness",
+   "title": "Nét đáng mến nhất của bạn: sự thân thiện",
+   "parent": "w1.aquarius"
+  },
+  {
+   "at": 494,
+   "code": "w1.aquarius.your-most-likeable-trait-friendliness.the-inner-you",
+   "title": "Con người bên trong bạn",
+   "parent": "w1.aquarius.your-most-likeable-trait-friendliness"
+  },
+  {
+   "at": 496,
+   "code": "w1.aquarius.your-most-likeable-trait-friendliness.how-others-see-you",
+   "title": "Bạn trong mắt người khác",
+   "parent": "w1.aquarius.your-most-likeable-trait-friendliness"
+  },
+  {
+   "at": 499,
+   "code": "w1.aquarius.famous",
+   "title": "Người nổi tiếng có Mặt Trời ở Bảo Bình",
+   "parent": "w1.aquarius",
+   "kind": "general"
+  },
+  {
+   "at": 501,
+   "code": "w1.pisces",
+   "title": "Song Ngư",
+   "parent": "w1",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, pisces)"
+  },
+  {
+   "at": 502,
+   "code": "w1.pisces.february-19-march-20",
+   "title": "(19/2 – 20/3)",
+   "parent": "w1.pisces"
+  },
+  {
+   "at": 520,
+   "code": "w1.pisces.your-most-likeable-trait-compassion",
+   "title": "Nét đáng mến nhất của bạn: lòng trắc ẩn",
+   "parent": "w1.pisces"
+  },
+  {
+   "at": 531,
+   "code": "w1.pisces.your-most-likeable-trait-compassion.your-inner-self",
+   "title": "Con người bên trong bạn",
+   "parent": "w1.pisces.your-most-likeable-trait-compassion"
+  },
+  {
+   "at": 533,
+   "code": "w1.pisces.your-most-likeable-trait-compassion.how-others-see-you",
+   "title": "Bạn trong mắt người khác",
+   "parent": "w1.pisces.your-most-likeable-trait-compassion"
+  },
+  {
+   "at": 535,
+   "code": "w1.pisces.famous",
+   "title": "Người nổi tiếng có Mặt Trời ở Song Ngư",
+   "parent": "w1.pisces",
+   "kind": "general"
+  },
+  {
+   "at": 537,
+   "code": "w2",
+   "title": "2 · Các cung Mặt Trời trong tình yêu",
+   "kind": "general"
+  },
+  {
+   "at": 546,
+   "code": "w2.aries",
+   "title": "Bạch Dương",
+   "parent": "w2",
+   "kind": "rule",
+   "topic": "love",
+   "when": "in(sun, aries)"
+  },
+  {
+   "at": 547,
+   "code": "w2.aries.the-amorous-nature",
+   "title": "Bản tính trong tình yêu",
+   "parent": "w2.aries"
+  },
+  {
+   "at": 548,
+   "code": "w2.aries.the-amorous-nature.woman",
+   "title": "Bạn và người phụ nữ Bạch Dương",
+   "parent": "w2.aries.the-amorous-nature",
+   "when": "in(sun, aries) & female()"
+  },
+  {
+   "at": 558,
+   "code": "w2.aries.the-amorous-nature.man",
+   "title": "Bạn và người đàn ông Bạch Dương",
+   "parent": "w2.aries.the-amorous-nature",
+   "when": "in(sun, aries) & male()"
+  },
+  {
+   "at": 566,
+   "code": "w2.aries.how-to-attract-aries",
+   "title": "Cách thu hút người Bạch Dương",
+   "parent": "w2.aries"
+  },
+  {
+   "at": 573,
+   "code": "w2.aries.combinations",
+   "title": "Bạch Dương và các cung khác trong tình yêu",
+   "parent": "w2.aries",
+   "kind": "general"
+  },
+  {
+   "at": 586,
+   "code": "w2.taurus",
+   "title": "Kim Ngưu",
+   "parent": "w2",
+   "kind": "rule",
+   "topic": "love",
+   "when": "in(sun, taurus)"
+  },
+  {
+   "at": 587,
+   "code": "w2.taurus.the-amorous-nature",
+   "title": "Bản tính trong tình yêu",
+   "parent": "w2.taurus"
+  },
+  {
+   "at": 588,
+   "code": "w2.taurus.the-amorous-nature.woman",
+   "title": "Bạn và người phụ nữ Kim Ngưu",
+   "parent": "w2.taurus.the-amorous-nature",
+   "when": "in(sun, taurus) & female()"
+  },
+  {
+   "at": 595,
+   "code": "w2.taurus.the-amorous-nature.man",
+   "title": "Bạn và người đàn ông Kim Ngưu",
+   "parent": "w2.taurus.the-amorous-nature",
+   "when": "in(sun, taurus) & male()"
+  },
+  {
+   "at": 603,
+   "code": "w2.taurus.how-to-attract-taurus",
+   "title": "Cách thu hút người Kim Ngưu",
+   "parent": "w2.taurus"
+  },
+  {
+   "at": 611,
+   "code": "w2.taurus.combinations",
+   "title": "Kim Ngưu và các cung khác trong tình yêu",
+   "parent": "w2.taurus",
+   "kind": "general"
+  },
+  {
+   "at": 624,
+   "code": "w2.gemini",
+   "title": "Song Tử",
+   "parent": "w2",
+   "kind": "rule",
+   "topic": "love",
+   "when": "in(sun, gemini)"
+  },
+  {
+   "at": 625,
+   "code": "w2.gemini.the-amorous-nature",
+   "title": "Bản tính trong tình yêu",
+   "parent": "w2.gemini"
+  },
+  {
+   "at": 626,
+   "code": "w2.gemini.the-amorous-nature.woman",
+   "title": "Bạn và người phụ nữ Song Tử",
+   "parent": "w2.gemini.the-amorous-nature",
+   "when": "in(sun, gemini) & female()"
+  },
+  {
+   "at": 637,
+   "code": "w2.gemini.the-amorous-nature.man",
+   "title": "Bạn và người đàn ông Song Tử",
+   "parent": "w2.gemini.the-amorous-nature",
+   "when": "in(sun, gemini) & male()"
+  },
+  {
+   "at": 646,
+   "code": "w2.gemini.how-to-attract-gemini",
+   "title": "Cách thu hút người Song Tử",
+   "parent": "w2.gemini"
+  },
+  {
+   "at": 653,
+   "code": "w2.gemini.combinations",
+   "title": "Song Tử và các cung khác trong tình yêu",
+   "parent": "w2.gemini",
+   "kind": "general"
+  },
+  {
+   "at": 667,
+   "code": "w2.cancer",
+   "title": "Cự Giải",
+   "parent": "w2",
+   "kind": "rule",
+   "topic": "love",
+   "when": "in(sun, cancer)"
+  },
+  {
+   "at": 668,
+   "code": "w2.cancer.the-amorous-nature",
+   "title": "Bản tính trong tình yêu",
+   "parent": "w2.cancer"
+  },
+  {
+   "at": 669,
+   "code": "w2.cancer.the-amorous-nature.woman",
+   "title": "Bạn và người phụ nữ Cự Giải",
+   "parent": "w2.cancer.the-amorous-nature",
+   "when": "in(sun, cancer) & female()"
+  },
+  {
+   "at": 676,
+   "code": "w2.cancer.the-amorous-nature.man",
+   "title": "Bạn và người đàn ông Cự Giải",
+   "parent": "w2.cancer.the-amorous-nature",
+   "when": "in(sun, cancer) & male()"
+  },
+  {
+   "at": 682,
+   "code": "w2.cancer.how-to-attract-cancer",
+   "title": "Cách thu hút người Cự Giải",
+   "parent": "w2.cancer"
+  },
+  {
+   "at": 688,
+   "code": "w2.cancer.combinations",
+   "title": "Cự Giải và các cung khác trong tình yêu",
+   "parent": "w2.cancer",
+   "kind": "general"
+  },
+  {
+   "at": 701,
+   "code": "w2.leo",
+   "title": "Sư Tử",
+   "parent": "w2",
+   "kind": "rule",
+   "topic": "love",
+   "when": "in(sun, leo)"
+  },
+  {
+   "at": 702,
+   "code": "w2.leo.the-amorous-nature",
+   "title": "Bản tính trong tình yêu",
+   "parent": "w2.leo"
+  },
+  {
+   "at": 703,
+   "code": "w2.leo.the-amorous-nature.woman",
+   "title": "Bạn và người phụ nữ Sư Tử",
+   "parent": "w2.leo.the-amorous-nature",
+   "when": "in(sun, leo) & female()"
+  },
+  {
+   "at": 711,
+   "code": "w2.leo.the-amorous-nature.man",
+   "title": "Bạn và người đàn ông Sư Tử",
+   "parent": "w2.leo.the-amorous-nature",
+   "when": "in(sun, leo) & male()"
+  },
+  {
+   "at": 718,
+   "code": "w2.leo.how-to-attract-leo",
+   "title": "Cách thu hút người Sư Tử",
+   "parent": "w2.leo"
+  },
+  {
+   "at": 725,
+   "code": "w2.leo.combinations",
+   "title": "Sư Tử và các cung khác trong tình yêu",
+   "parent": "w2.leo",
+   "kind": "general"
+  },
+  {
+   "at": 738,
+   "code": "w2.virgo",
+   "title": "Xử Nữ",
+   "parent": "w2",
+   "kind": "rule",
+   "topic": "love",
+   "when": "in(sun, virgo)"
+  },
+  {
+   "at": 739,
+   "code": "w2.virgo.the-amorous-nature",
+   "title": "Bản tính trong tình yêu",
+   "parent": "w2.virgo"
+  },
+  {
+   "at": 740,
+   "code": "w2.virgo.the-amorous-nature.woman",
+   "title": "Bạn và người phụ nữ Xử Nữ",
+   "parent": "w2.virgo.the-amorous-nature",
+   "when": "in(sun, virgo) & female()"
+  },
+  {
+   "at": 746,
+   "code": "w2.virgo.the-amorous-nature.man",
+   "title": "Bạn và người đàn ông Xử Nữ",
+   "parent": "w2.virgo.the-amorous-nature",
+   "when": "in(sun, virgo) & male()"
+  },
+  {
+   "at": 754,
+   "code": "w2.virgo.how-to-attract-virgo",
+   "title": "Cách thu hút người Xử Nữ",
+   "parent": "w2.virgo"
+  },
+  {
+   "at": 763,
+   "code": "w2.virgo.combinations",
+   "title": "Xử Nữ và các cung khác trong tình yêu",
+   "parent": "w2.virgo",
+   "kind": "general"
+  },
+  {
+   "at": 778,
+   "code": "w2.libra",
+   "title": "Thiên Bình",
+   "parent": "w2",
+   "kind": "rule",
+   "topic": "love",
+   "when": "in(sun, libra)"
+  },
+  {
+   "at": 779,
+   "code": "w2.libra.the-amorous-nature",
+   "title": "Bản tính trong tình yêu",
+   "parent": "w2.libra"
+  },
+  {
+   "at": 780,
+   "code": "w2.libra.the-amorous-nature.woman",
+   "title": "Bạn và người phụ nữ Thiên Bình",
+   "parent": "w2.libra.the-amorous-nature",
+   "when": "in(sun, libra) & female()"
+  },
+  {
+   "at": 790,
+   "code": "w2.libra.the-amorous-nature.man",
+   "title": "Bạn và người đàn ông Thiên Bình",
+   "parent": "w2.libra.the-amorous-nature",
+   "when": "in(sun, libra) & male()"
+  },
+  {
+   "at": 796,
+   "code": "w2.libra.how-to-attract-libra",
+   "title": "Cách thu hút người Thiên Bình",
+   "parent": "w2.libra"
+  },
+  {
+   "at": 803,
+   "code": "w2.libra.combinations",
+   "title": "Thiên Bình và các cung khác trong tình yêu",
+   "parent": "w2.libra",
+   "kind": "general"
+  },
+  {
+   "at": 816,
+   "code": "w2.scorpio",
+   "title": "Bò Cạp",
+   "parent": "w2",
+   "kind": "rule",
+   "topic": "love",
+   "when": "in(sun, scorpio)"
+  },
+  {
+   "at": 817,
+   "code": "w2.scorpio.the-amorous-nature",
+   "title": "Bản tính trong tình yêu",
+   "parent": "w2.scorpio"
+  },
+  {
+   "at": 818,
+   "code": "w2.scorpio.the-amorous-nature.woman",
+   "title": "Bạn và người phụ nữ Bò Cạp",
+   "parent": "w2.scorpio.the-amorous-nature",
+   "when": "in(sun, scorpio) & female()"
+  },
+  {
+   "at": 826,
+   "code": "w2.scorpio.the-amorous-nature.man",
+   "title": "Bạn và người đàn ông Bò Cạp",
+   "parent": "w2.scorpio.the-amorous-nature",
+   "when": "in(sun, scorpio) & male()"
+  },
+  {
+   "at": 833,
+   "code": "w2.scorpio.how-to-attract-scorpio",
+   "title": "Cách thu hút người Bò Cạp",
+   "parent": "w2.scorpio"
+  },
+  {
+   "at": 839,
+   "code": "w2.scorpio.combinations",
+   "title": "Bò Cạp và các cung khác trong tình yêu",
+   "parent": "w2.scorpio",
+   "kind": "general"
+  },
+  {
+   "at": 852,
+   "code": "w2.sagittarius",
+   "title": "Nhân Mã",
+   "parent": "w2",
+   "kind": "rule",
+   "topic": "love",
+   "when": "in(sun, sagittarius)"
+  },
+  {
+   "at": 853,
+   "code": "w2.sagittarius.the-amorous-nature",
+   "title": "Bản tính trong tình yêu",
+   "parent": "w2.sagittarius"
+  },
+  {
+   "at": 854,
+   "code": "w2.sagittarius.the-amorous-nature.woman",
+   "title": "Bạn và người phụ nữ Nhân Mã",
+   "parent": "w2.sagittarius.the-amorous-nature",
+   "when": "in(sun, sagittarius) & female()"
+  },
+  {
+   "at": 863,
+   "code": "w2.sagittarius.the-amorous-nature.man",
+   "title": "Bạn và người đàn ông Nhân Mã",
+   "parent": "w2.sagittarius.the-amorous-nature",
+   "when": "in(sun, sagittarius) & male()"
+  },
+  {
+   "at": 871,
+   "code": "w2.sagittarius.how-to-attract-sagittarius",
+   "title": "Cách thu hút người Nhân Mã",
+   "parent": "w2.sagittarius"
+  },
+  {
+   "at": 877,
+   "code": "w2.sagittarius.combinations",
+   "title": "Nhân Mã và các cung khác trong tình yêu",
+   "parent": "w2.sagittarius",
+   "kind": "general"
+  },
+  {
+   "at": 890,
+   "code": "w2.capricorn",
+   "title": "Ma Kết",
+   "parent": "w2",
+   "kind": "rule",
+   "topic": "love",
+   "when": "in(sun, capricorn)"
+  },
+  {
+   "at": 891,
+   "code": "w2.capricorn.the-amorous-nature",
+   "title": "Bản tính trong tình yêu",
+   "parent": "w2.capricorn"
+  },
+  {
+   "at": 892,
+   "code": "w2.capricorn.the-amorous-nature.woman",
+   "title": "Bạn và người phụ nữ Ma Kết",
+   "parent": "w2.capricorn.the-amorous-nature",
+   "when": "in(sun, capricorn) & female()"
+  },
+  {
+   "at": 900,
+   "code": "w2.capricorn.the-amorous-nature.man",
+   "title": "Bạn và người đàn ông Ma Kết",
+   "parent": "w2.capricorn.the-amorous-nature",
+   "when": "in(sun, capricorn) & male()"
+  },
+  {
+   "at": 908,
+   "code": "w2.capricorn.how-to-attract-capricorn",
+   "title": "Cách thu hút người Ma Kết",
+   "parent": "w2.capricorn"
+  },
+  {
+   "at": 915,
+   "code": "w2.capricorn.combinations",
+   "title": "Ma Kết và các cung khác trong tình yêu",
+   "parent": "w2.capricorn",
+   "kind": "general"
+  },
+  {
+   "at": 929,
+   "code": "w2.aquarius",
+   "title": "Bảo Bình",
+   "parent": "w2",
+   "kind": "rule",
+   "topic": "love",
+   "when": "in(sun, aquarius)"
+  },
+  {
+   "at": 930,
+   "code": "w2.aquarius.the-amorous-nature",
+   "title": "Bản tính trong tình yêu",
+   "parent": "w2.aquarius"
+  },
+  {
+   "at": 931,
+   "code": "w2.aquarius.the-amorous-nature.woman",
+   "title": "Bạn và người phụ nữ Bảo Bình",
+   "parent": "w2.aquarius.the-amorous-nature",
+   "when": "in(sun, aquarius) & female()"
+  },
+  {
+   "at": 941,
+   "code": "w2.aquarius.the-amorous-nature.man",
+   "title": "Bạn và người đàn ông Bảo Bình",
+   "parent": "w2.aquarius.the-amorous-nature",
+   "when": "in(sun, aquarius) & male()"
+  },
+  {
+   "at": 949,
+   "code": "w2.aquarius.how-to-attract-aquarius",
+   "title": "Cách thu hút người Bảo Bình",
+   "parent": "w2.aquarius"
+  },
+  {
+   "at": 957,
+   "code": "w2.aquarius.combinations",
+   "title": "Bảo Bình và các cung khác trong tình yêu",
+   "parent": "w2.aquarius",
+   "kind": "general"
+  },
+  {
+   "at": 970,
+   "code": "w2.pisces",
+   "title": "Song Ngư",
+   "parent": "w2",
+   "kind": "rule",
+   "topic": "love",
+   "when": "in(sun, pisces)"
+  },
+  {
+   "at": 971,
+   "code": "w2.pisces.the-amorous-nature",
+   "title": "Bản tính trong tình yêu",
+   "parent": "w2.pisces"
+  },
+  {
+   "at": 972,
+   "code": "w2.pisces.the-amorous-nature.woman",
+   "title": "Bạn và người phụ nữ Song Ngư",
+   "parent": "w2.pisces.the-amorous-nature",
+   "when": "in(sun, pisces) & female()"
+  },
+  {
+   "at": 982,
+   "code": "w2.pisces.the-amorous-nature.man",
+   "title": "Bạn và người đàn ông Song Ngư",
+   "parent": "w2.pisces.the-amorous-nature",
+   "when": "in(sun, pisces) & male()"
+  },
+  {
+   "at": 989,
+   "code": "w2.pisces.how-to-attract-pisces",
+   "title": "Cách thu hút người Song Ngư",
+   "parent": "w2.pisces"
+  },
+  {
+   "at": 996,
+   "code": "w2.pisces.combinations",
+   "title": "Song Ngư và các cung khác trong tình yêu",
+   "parent": "w2.pisces",
+   "kind": "general"
+  },
+  {
+   "at": 1009,
+   "code": "w3",
+   "title": "3 · Các decan và các điểm giáp ranh của cung Mặt Trời",
+   "kind": "general"
+  },
+  {
+   "at": 1013,
+   "code": "w3.what-is-a-decanate",
+   "title": "Decan là gì?",
+   "parent": "w3"
+  },
+  {
+   "at": 1023,
+   "code": "w3.decanates-aries",
+   "title": "Các decan của Bạch Dương",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, aries)"
+  },
+  {
+   "at": 1024,
+   "code": "w3.decanates-aries.decan-1",
+   "title": "Decan thứ nhất: 21/3 – 31/3",
+   "parent": "w3.decanates-aries",
+   "when": "decan(sun, aries, 1)"
+  },
+  {
+   "at": 1029,
+   "code": "w3.decanates-aries.decan-2",
+   "title": "Decan thứ hai: 1/4 – 10/4",
+   "parent": "w3.decanates-aries",
+   "when": "decan(sun, aries, 2)"
+  },
+  {
+   "at": 1034,
+   "code": "w3.decanates-aries.decan-3",
+   "title": "Decan thứ ba: 11/4 – 19/4",
+   "parent": "w3.decanates-aries",
+   "when": "decan(sun, aries, 3)"
+  },
+  {
+   "at": 1039,
+   "code": "w3.decanates-taurus",
+   "title": "Các decan của Kim Ngưu",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, taurus)"
+  },
+  {
+   "at": 1040,
+   "code": "w3.decanates-taurus.decan-1",
+   "title": "Decan thứ nhất: 20/4 – 30/4",
+   "parent": "w3.decanates-taurus",
+   "when": "decan(sun, taurus, 1)"
+  },
+  {
+   "at": 1045,
+   "code": "w3.decanates-taurus.decan-2",
+   "title": "Decan thứ hai: 1/5 – 10/5",
+   "parent": "w3.decanates-taurus",
+   "when": "decan(sun, taurus, 2)"
+  },
+  {
+   "at": 1050,
+   "code": "w3.decanates-taurus.decan-3",
+   "title": "Decan thứ ba: 11/5 – 20/5",
+   "parent": "w3.decanates-taurus",
+   "when": "decan(sun, taurus, 3)"
+  },
+  {
+   "at": 1055,
+   "code": "w3.decanates-gemini",
+   "title": "Các decan của Song Tử",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, gemini)"
+  },
+  {
+   "at": 1056,
+   "code": "w3.decanates-gemini.decan-1",
+   "title": "Decan thứ nhất: 21/5 – 31/5",
+   "parent": "w3.decanates-gemini",
+   "when": "decan(sun, gemini, 1)"
+  },
+  {
+   "at": 1061,
+   "code": "w3.decanates-gemini.decan-2",
+   "title": "Decan thứ hai: 1/6 – 10/6",
+   "parent": "w3.decanates-gemini",
+   "when": "decan(sun, gemini, 2)"
+  },
+  {
+   "at": 1066,
+   "code": "w3.decanates-gemini.decan-3",
+   "title": "Decan thứ ba: 11/6 – 20/6",
+   "parent": "w3.decanates-gemini",
+   "when": "decan(sun, gemini, 3)"
+  },
+  {
+   "at": 1071,
+   "code": "w3.decanates-cancer",
+   "title": "Các decan của Cự Giải",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, cancer)"
+  },
+  {
+   "at": 1072,
+   "code": "w3.decanates-cancer.decan-1",
+   "title": "Decan thứ nhất: 21/6 – 30/6",
+   "parent": "w3.decanates-cancer",
+   "when": "decan(sun, cancer, 1)"
+  },
+  {
+   "at": 1077,
+   "code": "w3.decanates-cancer.decan-2",
+   "title": "Decan thứ hai: 1/7 – 11/7",
+   "parent": "w3.decanates-cancer",
+   "when": "decan(sun, cancer, 2)"
+  },
+  {
+   "at": 1082,
+   "code": "w3.decanates-cancer.decan-3",
+   "title": "Decan thứ ba: 12/7 – 22/7",
+   "parent": "w3.decanates-cancer",
+   "when": "decan(sun, cancer, 3)"
+  },
+  {
+   "at": 1087,
+   "code": "w3.decanates-leo",
+   "title": "Các decan của Sư Tử",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, leo)"
+  },
+  {
+   "at": 1088,
+   "code": "w3.decanates-leo.decan-1",
+   "title": "Decan thứ nhất: 23/7 – 1/8",
+   "parent": "w3.decanates-leo",
+   "when": "decan(sun, leo, 1)"
+  },
+  {
+   "at": 1093,
+   "code": "w3.decanates-leo.decan-2",
+   "title": "Decan thứ hai: 2/8 – 12/8",
+   "parent": "w3.decanates-leo",
+   "when": "decan(sun, leo, 2)"
+  },
+  {
+   "at": 1098,
+   "code": "w3.decanates-leo.decan-3",
+   "title": "Decan thứ ba: 13/8 – 22/8",
+   "parent": "w3.decanates-leo",
+   "when": "decan(sun, leo, 3)"
+  },
+  {
+   "at": 1103,
+   "code": "w3.decanates-virgo",
+   "title": "Các decan của Xử Nữ",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, virgo)"
+  },
+  {
+   "at": 1104,
+   "code": "w3.decanates-virgo.decan-1",
+   "title": "Decan thứ nhất: 23/8 – 1/9",
+   "parent": "w3.decanates-virgo",
+   "when": "decan(sun, virgo, 1)"
+  },
+  {
+   "at": 1109,
+   "code": "w3.decanates-virgo.decan-2",
+   "title": "Decan thứ hai: 2/9 – 12/9",
+   "parent": "w3.decanates-virgo",
+   "when": "decan(sun, virgo, 2)"
+  },
+  {
+   "at": 1114,
+   "code": "w3.decanates-virgo.decan-3",
+   "title": "Decan thứ ba: 13/9 – 22/9",
+   "parent": "w3.decanates-virgo",
+   "when": "decan(sun, virgo, 3)"
+  },
+  {
+   "at": 1119,
+   "code": "w3.decanates-libra",
+   "title": "Các decan của Thiên Bình",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, libra)"
+  },
+  {
+   "at": 1120,
+   "code": "w3.decanates-libra.decan-1",
+   "title": "Decan thứ nhất: 23/9 – 2/10",
+   "parent": "w3.decanates-libra",
+   "when": "decan(sun, libra, 1)"
+  },
+  {
+   "at": 1125,
+   "code": "w3.decanates-libra.decan-2",
+   "title": "Decan thứ hai: 3/10 – 13/10",
+   "parent": "w3.decanates-libra",
+   "when": "decan(sun, libra, 2)"
+  },
+  {
+   "at": 1130,
+   "code": "w3.decanates-libra.decan-3",
+   "title": "Decan thứ ba: 14/10 – 22/10",
+   "parent": "w3.decanates-libra",
+   "when": "decan(sun, libra, 3)"
+  },
+  {
+   "at": 1135,
+   "code": "w3.decanates-scorpio",
+   "title": "Các decan của Bò Cạp",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, scorpio)"
+  },
+  {
+   "at": 1136,
+   "code": "w3.decanates-scorpio.decan-1",
+   "title": "Decan thứ nhất: 23/10 – 1/11",
+   "parent": "w3.decanates-scorpio",
+   "when": "decan(sun, scorpio, 1)"
+  },
+  {
+   "at": 1141,
+   "code": "w3.decanates-scorpio.decan-2",
+   "title": "Decan thứ hai: 2/11 – 11/11",
+   "parent": "w3.decanates-scorpio",
+   "when": "decan(sun, scorpio, 2)"
+  },
+  {
+   "at": 1146,
+   "code": "w3.decanates-scorpio.decan-3",
+   "title": "Decan thứ ba: 12/11 – 21/11",
+   "parent": "w3.decanates-scorpio",
+   "when": "decan(sun, scorpio, 3)"
+  },
+  {
+   "at": 1151,
+   "code": "w3.decanates-sagittarius",
+   "title": "Các decan của Nhân Mã",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, sagittarius)"
+  },
+  {
+   "at": 1152,
+   "code": "w3.decanates-sagittarius.decan-1",
+   "title": "Decan thứ nhất: 22/11 – 1/12",
+   "parent": "w3.decanates-sagittarius",
+   "when": "decan(sun, sagittarius, 1)"
+  },
+  {
+   "at": 1157,
+   "code": "w3.decanates-sagittarius.decan-2",
+   "title": "Decan thứ hai: 2/12 – 11/12",
+   "parent": "w3.decanates-sagittarius",
+   "when": "decan(sun, sagittarius, 2)"
+  },
+  {
+   "at": 1162,
+   "code": "w3.decanates-sagittarius.decan-3",
+   "title": "Decan thứ ba: 12/12 – 21/12",
+   "parent": "w3.decanates-sagittarius",
+   "when": "decan(sun, sagittarius, 3)"
+  },
+  {
+   "at": 1167,
+   "code": "w3.decanates-capricorn",
+   "title": "Các decan của Ma Kết",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, capricorn)"
+  },
+  {
+   "at": 1168,
+   "code": "w3.decanates-capricorn.decan-1",
+   "title": "Decan thứ nhất: 22/12 – 31/12",
+   "parent": "w3.decanates-capricorn",
+   "when": "decan(sun, capricorn, 1)"
+  },
+  {
+   "at": 1173,
+   "code": "w3.decanates-capricorn.decan-2",
+   "title": "Decan thứ hai: 1/1 – 10/1",
+   "parent": "w3.decanates-capricorn",
+   "when": "decan(sun, capricorn, 2)"
+  },
+  {
+   "at": 1178,
+   "code": "w3.decanates-capricorn.decan-3",
+   "title": "Decan thứ ba: 11/1 – 19/1",
+   "parent": "w3.decanates-capricorn",
+   "when": "decan(sun, capricorn, 3)"
+  },
+  {
+   "at": 1183,
+   "code": "w3.decanates-aquarius",
+   "title": "Các decan của Bảo Bình",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, aquarius)"
+  },
+  {
+   "at": 1184,
+   "code": "w3.decanates-aquarius.decan-1",
+   "title": "Decan thứ nhất: 20/1 – 29/1",
+   "parent": "w3.decanates-aquarius",
+   "when": "decan(sun, aquarius, 1)"
+  },
+  {
+   "at": 1189,
+   "code": "w3.decanates-aquarius.decan-2",
+   "title": "Decan thứ hai: 30/1 – 8/2",
+   "parent": "w3.decanates-aquarius",
+   "when": "decan(sun, aquarius, 2)"
+  },
+  {
+   "at": 1195,
+   "code": "w3.decanates-aquarius.decan-3",
+   "title": "Decan thứ ba: 9/2 – 18/2",
+   "parent": "w3.decanates-aquarius",
+   "when": "decan(sun, aquarius, 3)"
+  },
+  {
+   "at": 1200,
+   "code": "w3.decanates-pisces",
+   "title": "Các decan của Song Ngư",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, pisces)"
+  },
+  {
+   "at": 1201,
+   "code": "w3.decanates-pisces.decan-1",
+   "title": "Decan thứ nhất: 19/2 – 29/2",
+   "parent": "w3.decanates-pisces",
+   "when": "decan(sun, pisces, 1)"
+  },
+  {
+   "at": 1206,
+   "code": "w3.decanates-pisces.decan-2",
+   "title": "Decan thứ hai: 1/3 – 10/3",
+   "parent": "w3.decanates-pisces",
+   "when": "decan(sun, pisces, 2)"
+  },
+  {
+   "at": 1211,
+   "code": "w3.decanates-pisces.decan-3",
+   "title": "Decan thứ ba: 11/3 – 20/3",
+   "parent": "w3.decanates-pisces",
+   "when": "decan(sun, pisces, 3)"
+  },
+  {
+   "at": 1216,
+   "code": "w3.decanates-pisces.what-is-a-cusp",
+   "title": "Điểm giáp ranh là gì?",
+   "parent": "w3.decanates-pisces"
+  },
+  {
+   "at": 1227,
+   "code": "w3.cusps-aries",
+   "title": "Các điểm giáp ranh của Bạch Dương",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, aries)"
+  },
+  {
+   "at": 1228,
+   "code": "w3.cusps-aries.cusp-pisces-aries",
+   "title": "Sinh từ 21/3 đến 25/3",
+   "parent": "w3.cusps-aries",
+   "when": "in(sun, aries) & sun_cusp(pisces, aries)"
+  },
+  {
+   "at": 1230,
+   "code": "w3.cusps-aries.cusp-aries-taurus",
+   "title": "Sinh từ 15/4 đến 19/4",
+   "parent": "w3.cusps-aries",
+   "when": "in(sun, aries) & sun_cusp(aries, taurus)"
+  },
+  {
+   "at": 1232,
+   "code": "w3.cusps-taurus",
+   "title": "Các điểm giáp ranh của Kim Ngưu",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, taurus)"
+  },
+  {
+   "at": 1233,
+   "code": "w3.cusps-taurus.cusp-aries-taurus",
+   "title": "Sinh từ 20/4 đến 24/4",
+   "parent": "w3.cusps-taurus",
+   "when": "in(sun, taurus) & sun_cusp(aries, taurus)"
+  },
+  {
+   "at": 1235,
+   "code": "w3.cusps-taurus.cusp-taurus-gemini",
+   "title": "Sinh từ 16/5 đến 20/5",
+   "parent": "w3.cusps-taurus",
+   "when": "in(sun, taurus) & sun_cusp(taurus, gemini)"
+  },
+  {
+   "at": 1237,
+   "code": "w3.cusps-gemini",
+   "title": "Các điểm giáp ranh của Song Tử",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, gemini)"
+  },
+  {
+   "at": 1238,
+   "code": "w3.cusps-gemini.cusp-taurus-gemini",
+   "title": "Sinh từ 21/5 đến 25/5",
+   "parent": "w3.cusps-gemini",
+   "when": "in(sun, gemini) & sun_cusp(taurus, gemini)"
+  },
+  {
+   "at": 1240,
+   "code": "w3.cusps-gemini.cusp-gemini-cancer",
+   "title": "Sinh từ 16/6 đến 20/6",
+   "parent": "w3.cusps-gemini",
+   "when": "in(sun, gemini) & sun_cusp(gemini, cancer)"
+  },
+  {
+   "at": 1242,
+   "code": "w3.cusps-cancer",
+   "title": "Các điểm giáp ranh của Cự Giải",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, cancer)"
+  },
+  {
+   "at": 1243,
+   "code": "w3.cusps-cancer.cusp-gemini-cancer",
+   "title": "Sinh từ 21/6 đến 25/6",
+   "parent": "w3.cusps-cancer",
+   "when": "in(sun, cancer) & sun_cusp(gemini, cancer)"
+  },
+  {
+   "at": 1245,
+   "code": "w3.cusps-cancer.cusp-cancer-leo",
+   "title": "Sinh từ 18/7 đến 22/7",
+   "parent": "w3.cusps-cancer",
+   "when": "in(sun, cancer) & sun_cusp(cancer, leo)"
+  },
+  {
+   "at": 1247,
+   "code": "w3.cusps-leo",
+   "title": "Các điểm giáp ranh của Sư Tử",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, leo)"
+  },
+  {
+   "at": 1248,
+   "code": "w3.cusps-leo.cusp-cancer-leo",
+   "title": "Sinh từ 23/7 đến 27/7",
+   "parent": "w3.cusps-leo",
+   "when": "in(sun, leo) & sun_cusp(cancer, leo)"
+  },
+  {
+   "at": 1250,
+   "code": "w3.cusps-leo.cusp-leo-virgo",
+   "title": "Sinh từ 18/8 đến 22/8",
+   "parent": "w3.cusps-leo",
+   "when": "in(sun, leo) & sun_cusp(leo, virgo)"
+  },
+  {
+   "at": 1252,
+   "code": "w3.cusps-virgo",
+   "title": "Các điểm giáp ranh của Xử Nữ",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, virgo)"
+  },
+  {
+   "at": 1253,
+   "code": "w3.cusps-virgo.cusp-leo-virgo",
+   "title": "Sinh từ 23/8 đến 27/8",
+   "parent": "w3.cusps-virgo",
+   "when": "in(sun, virgo) & sun_cusp(leo, virgo)"
+  },
+  {
+   "at": 1255,
+   "code": "w3.cusps-virgo.cusp-virgo-libra",
+   "title": "Sinh từ 18/9 đến 22/9",
+   "parent": "w3.cusps-virgo",
+   "when": "in(sun, virgo) & sun_cusp(virgo, libra)"
+  },
+  {
+   "at": 1257,
+   "code": "w3.cusps-libra",
+   "title": "Các điểm giáp ranh của Thiên Bình",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, libra)"
+  },
+  {
+   "at": 1258,
+   "code": "w3.cusps-libra.cusp-virgo-libra",
+   "title": "Sinh từ 23/9 đến 27/9",
+   "parent": "w3.cusps-libra",
+   "when": "in(sun, libra) & sun_cusp(virgo, libra)"
+  },
+  {
+   "at": 1260,
+   "code": "w3.cusps-libra.cusp-libra-scorpio",
+   "title": "Sinh từ 18/10 đến 22/10",
+   "parent": "w3.cusps-libra",
+   "when": "in(sun, libra) & sun_cusp(libra, scorpio)"
+  },
+  {
+   "at": 1262,
+   "code": "w3.cusps-scorpio",
+   "title": "Các điểm giáp ranh của Bò Cạp",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, scorpio)"
+  },
+  {
+   "at": 1263,
+   "code": "w3.cusps-scorpio.cusp-libra-scorpio",
+   "title": "Sinh từ 23/10 đến 27/10",
+   "parent": "w3.cusps-scorpio",
+   "when": "in(sun, scorpio) & sun_cusp(libra, scorpio)"
+  },
+  {
+   "at": 1265,
+   "code": "w3.cusps-scorpio.cusp-scorpio-sagittarius",
+   "title": "Sinh từ 17/11 đến 21/11",
+   "parent": "w3.cusps-scorpio",
+   "when": "in(sun, scorpio) & sun_cusp(scorpio, sagittarius)"
+  },
+  {
+   "at": 1267,
+   "code": "w3.cusps-sagittarius",
+   "title": "Các điểm giáp ranh của Nhân Mã",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, sagittarius)"
+  },
+  {
+   "at": 1268,
+   "code": "w3.cusps-sagittarius.cusp-scorpio-sagittarius",
+   "title": "Sinh từ 22/11 đến 26/11",
+   "parent": "w3.cusps-sagittarius",
+   "when": "in(sun, sagittarius) & sun_cusp(scorpio, sagittarius)"
+  },
+  {
+   "at": 1270,
+   "code": "w3.cusps-sagittarius.cusp-sagittarius-capricorn",
+   "title": "Sinh từ 17/12 đến 21/12",
+   "parent": "w3.cusps-sagittarius",
+   "when": "in(sun, sagittarius) & sun_cusp(sagittarius, capricorn)"
+  },
+  {
+   "at": 1272,
+   "code": "w3.cusps-capricorn",
+   "title": "Các điểm giáp ranh của Ma Kết",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, capricorn)"
+  },
+  {
+   "at": 1273,
+   "code": "w3.cusps-capricorn.cusp-sagittarius-capricorn",
+   "title": "Sinh từ 22/12 đến 26/12",
+   "parent": "w3.cusps-capricorn",
+   "when": "in(sun, capricorn) & sun_cusp(sagittarius, capricorn)"
+  },
+  {
+   "at": 1275,
+   "code": "w3.cusps-capricorn.cusp-capricorn-aquarius",
+   "title": "Sinh từ 15/1 đến 19/1",
+   "parent": "w3.cusps-capricorn",
+   "when": "in(sun, capricorn) & sun_cusp(capricorn, aquarius)"
+  },
+  {
+   "at": 1277,
+   "code": "w3.cusps-aquarius",
+   "title": "Các điểm giáp ranh của Bảo Bình",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, aquarius)"
+  },
+  {
+   "at": 1278,
+   "code": "w3.cusps-aquarius.cusp-capricorn-aquarius",
+   "title": "Sinh từ 20/1 đến 24/1",
+   "parent": "w3.cusps-aquarius",
+   "when": "in(sun, aquarius) & sun_cusp(capricorn, aquarius)"
+  },
+  {
+   "at": 1280,
+   "code": "w3.cusps-aquarius.cusp-aquarius-pisces",
+   "title": "Sinh từ 14/2 đến 18/2",
+   "parent": "w3.cusps-aquarius",
+   "when": "in(sun, aquarius) & sun_cusp(aquarius, pisces)"
+  },
+  {
+   "at": 1282,
+   "code": "w3.cusps-pisces",
+   "title": "Các điểm giáp ranh của Song Ngư",
+   "parent": "w3",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "in(sun, pisces)"
+  },
+  {
+   "at": 1283,
+   "code": "w3.cusps-pisces.cusp-aquarius-pisces",
+   "title": "Sinh từ 19/2 đến 23/2",
+   "parent": "w3.cusps-pisces",
+   "when": "in(sun, pisces) & sun_cusp(aquarius, pisces)"
+  },
+  {
+   "at": 1285,
+   "code": "w3.cusps-pisces.cusp-pisces-aries",
+   "title": "Sinh từ 16/3 đến 20/3",
+   "parent": "w3.cusps-pisces",
+   "when": "in(sun, pisces) & sun_cusp(pisces, aries)"
+  },
+  {
+   "at": 1287,
+   "code": "w5",
+   "title": "5 · Các cung Mặt Trăng",
+   "kind": "general"
+  },
+  {
+   "at": 1307,
+   "code": "w5.what-is-your-moon-sign",
+   "title": "Cung Mặt Trăng của bạn là gì?",
+   "parent": "w5"
+  },
+  {
+   "at": 1309,
+   "code": "w5.aries",
+   "title": "Mặt Trăng ở Bạch Dương",
+   "parent": "w5",
+   "kind": "rule",
+   "topic": "moon",
+   "when": "in(moon, aries)"
+  },
+  {
+   "at": 1322,
+   "code": "w5.aries.famous",
+   "title": "Người nổi tiếng có Mặt Trăng ở Bạch Dương",
+   "parent": "w5.aries",
+   "kind": "general"
+  },
+  {
+   "at": 1324,
+   "code": "w5.taurus",
+   "title": "Mặt Trăng ở Kim Ngưu",
+   "parent": "w5",
+   "kind": "rule",
+   "topic": "moon",
+   "when": "in(moon, taurus)"
+  },
+  {
+   "at": 1336,
+   "code": "w5.taurus.famous",
+   "title": "Người nổi tiếng có Mặt Trăng ở Kim Ngưu",
+   "parent": "w5.taurus",
+   "kind": "general"
+  },
+  {
+   "at": 1338,
+   "code": "w5.gemini",
+   "title": "Mặt Trăng ở Song Tử",
+   "parent": "w5",
+   "kind": "rule",
+   "topic": "moon",
+   "when": "in(moon, gemini)"
+  },
+  {
+   "at": 1351,
+   "code": "w5.gemini.famous",
+   "title": "Người nổi tiếng có Mặt Trăng ở Song Tử",
+   "parent": "w5.gemini",
+   "kind": "general"
+  },
+  {
+   "at": 1353,
+   "code": "w5.cancer",
+   "title": "Mặt Trăng ở Cự Giải",
+   "parent": "w5",
+   "kind": "rule",
+   "topic": "moon",
+   "when": "in(moon, cancer)"
+  },
+  {
+   "at": 1365,
+   "code": "w5.cancer.famous",
+   "title": "Người nổi tiếng có Mặt Trăng ở Cự Giải",
+   "parent": "w5.cancer",
+   "kind": "general"
+  },
+  {
+   "at": 1367,
+   "code": "w5.leo",
+   "title": "Mặt Trăng ở Sư Tử",
+   "parent": "w5",
+   "kind": "rule",
+   "topic": "moon",
+   "when": "in(moon, leo)"
+  },
+  {
+   "at": 1381,
+   "code": "w5.leo.famous",
+   "title": "Người nổi tiếng có Mặt Trăng ở Sư Tử",
+   "parent": "w5.leo",
+   "kind": "general"
+  },
+  {
+   "at": 1383,
+   "code": "w5.virgo",
+   "title": "Mặt Trăng ở Xử Nữ",
+   "parent": "w5",
+   "kind": "rule",
+   "topic": "moon",
+   "when": "in(moon, virgo)"
+  },
+  {
+   "at": 1395,
+   "code": "w5.virgo.famous",
+   "title": "Người nổi tiếng có Mặt Trăng ở Xử Nữ",
+   "parent": "w5.virgo",
+   "kind": "general"
+  },
+  {
+   "at": 1397,
+   "code": "w5.libra",
+   "title": "Mặt Trăng ở Thiên Bình",
+   "parent": "w5",
+   "kind": "rule",
+   "topic": "moon",
+   "when": "in(moon, libra)"
+  },
+  {
+   "at": 1407,
+   "code": "w5.libra.famous",
+   "title": "Người nổi tiếng có Mặt Trăng ở Thiên Bình",
+   "parent": "w5.libra",
+   "kind": "general"
+  },
+  {
+   "at": 1409,
+   "code": "w5.scorpio",
+   "title": "Mặt Trăng ở Bò Cạp",
+   "parent": "w5",
+   "kind": "rule",
+   "topic": "moon",
+   "when": "in(moon, scorpio)"
+  },
+  {
+   "at": 1422,
+   "code": "w5.scorpio.famous",
+   "title": "Người nổi tiếng có Mặt Trăng ở Bò Cạp",
+   "parent": "w5.scorpio",
+   "kind": "general"
+  },
+  {
+   "at": 1424,
+   "code": "w5.sagittarius",
+   "title": "Mặt Trăng ở Nhân Mã",
+   "parent": "w5",
+   "kind": "rule",
+   "topic": "moon",
+   "when": "in(moon, sagittarius)"
+  },
+  {
+   "at": 1436,
+   "code": "w5.sagittarius.famous",
+   "title": "Người nổi tiếng có Mặt Trăng ở Nhân Mã",
+   "parent": "w5.sagittarius",
+   "kind": "general"
+  },
+  {
+   "at": 1438,
+   "code": "w5.capricorn",
+   "title": "Mặt Trăng ở Ma Kết",
+   "parent": "w5",
+   "kind": "rule",
+   "topic": "moon",
+   "when": "in(moon, capricorn)"
+  },
+  {
+   "at": 1451,
+   "code": "w5.capricorn.famous",
+   "title": "Người nổi tiếng có Mặt Trăng ở Ma Kết",
+   "parent": "w5.capricorn",
+   "kind": "general"
+  },
+  {
+   "at": 1453,
+   "code": "w5.aquarius",
+   "title": "Mặt Trăng ở Bảo Bình",
+   "parent": "w5",
+   "kind": "rule",
+   "topic": "moon",
+   "when": "in(moon, aquarius)"
+  },
+  {
+   "at": 1465,
+   "code": "w5.aquarius.famous",
+   "title": "Người nổi tiếng có Mặt Trăng ở Bảo Bình",
+   "parent": "w5.aquarius",
+   "kind": "general"
+  },
+  {
+   "at": 1467,
+   "code": "w5.pisces",
+   "title": "Mặt Trăng ở Song Ngư",
+   "parent": "w5",
+   "kind": "rule",
+   "topic": "moon",
+   "when": "in(moon, pisces)"
+  },
+  {
+   "at": 1482,
+   "code": "w5.pisces.famous",
+   "title": "Người nổi tiếng có Mặt Trăng ở Song Ngư",
+   "parent": "w5.pisces",
+   "kind": "general"
+  },
+  {
+   "at": 1484,
+   "code": "w6",
+   "title": "6 · Cung Mọc của bạn và sức mạnh của nó",
+   "kind": "general"
+  },
+  {
+   "at": 1498,
+   "code": "w6.what-sign-is-your-ascendant",
+   "title": "Cung Mọc của bạn là cung nào?",
+   "parent": "w6"
+  },
+  {
+   "at": 1504,
+   "code": "w6.aries",
+   "title": "Cung Mọc Bạch Dương",
+   "parent": "w6",
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, aries)"
+  },
+  {
+   "at": 1513,
+   "code": "w6.taurus",
+   "title": "Cung Mọc Kim Ngưu",
+   "parent": "w6",
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, taurus)"
+  },
+  {
+   "at": 1521,
+   "code": "w6.gemini",
+   "title": "Cung Mọc Song Tử",
+   "parent": "w6",
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, gemini)"
+  },
+  {
+   "at": 1529,
+   "code": "w6.cancer",
+   "title": "Cung Mọc Cự Giải",
+   "parent": "w6",
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, cancer)"
+  },
+  {
+   "at": 1537,
+   "code": "w6.leo",
+   "title": "Cung Mọc Sư Tử",
+   "parent": "w6",
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, leo)"
+  },
+  {
+   "at": 1546,
+   "code": "w6.virgo",
+   "title": "Cung Mọc Xử Nữ",
+   "parent": "w6",
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, virgo)"
+  },
+  {
+   "at": 1555,
+   "code": "w6.libra",
+   "title": "Cung Mọc Thiên Bình",
+   "parent": "w6",
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, libra)"
+  },
+  {
+   "at": 1565,
+   "code": "w6.scorpio",
+   "title": "Cung Mọc Bò Cạp",
+   "parent": "w6",
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, scorpio)"
+  },
+  {
+   "at": 1574,
+   "code": "w6.sagittarius",
+   "title": "Cung Mọc Nhân Mã",
+   "parent": "w6",
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, sagittarius)"
+  },
+  {
+   "at": 1583,
+   "code": "w6.capricorn",
+   "title": "Cung Mọc Ma Kết",
+   "parent": "w6",
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, capricorn)"
+  },
+  {
+   "at": 1592,
+   "code": "w6.aquarius",
+   "title": "Cung Mọc Bảo Bình",
+   "parent": "w6",
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, aquarius)"
+  },
+  {
+   "at": 1602,
+   "code": "w6.pisces",
+   "title": "Cung Mọc Song Ngư",
+   "parent": "w6",
+   "kind": "rule",
+   "topic": "asc",
+   "when": "in(asc, pisces)"
+  },
+  {
+   "at": 1610,
+   "code": "w7",
+   "title": "7 · Bạn và các hành tinh: vai trò của chúng trong vận mệnh của bạn",
+   "kind": "general"
+  },
+  {
+   "at": 1611,
+   "code": "w7.their-role-in-your-destiny",
+   "title": "Vai trò của chúng trong vận mệnh của bạn",
+   "parent": "w7"
+  },
+  {
+   "at": 1625,
+   "code": "w7.mercury",
+   "title": "Sao Thủy",
+   "parent": "w7",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury)"
+  },
+  {
+   "at": 1631,
+   "code": "w7.mercury.astronomy",
+   "title": "Sao Thủy dưới góc nhìn thiên văn",
+   "parent": "w7.mercury",
+   "kind": "general"
+  },
+  {
+   "at": 1643,
+   "code": "w7.mercury.where",
+   "title": "Sao Thủy của bạn ở đâu?",
+   "parent": "w7.mercury",
+   "kind": "general"
+  },
+  {
+   "at": 1657,
+   "code": "w7.venus",
+   "title": "Sao Kim",
+   "parent": "w7",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus)"
+  },
+  {
+   "at": 1663,
+   "code": "w7.venus.astronomy",
+   "title": "Sao Kim dưới góc nhìn thiên văn",
+   "parent": "w7.venus",
+   "kind": "general"
+  },
+  {
+   "at": 1671,
+   "code": "w7.venus.where",
+   "title": "Sao Kim của bạn ở đâu?",
+   "parent": "w7.venus",
+   "kind": "general"
+  },
+  {
+   "at": 1686,
+   "code": "w7.mars",
+   "title": "Sao Hỏa",
+   "parent": "w7",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars)"
+  },
+  {
+   "at": 1692,
+   "code": "w7.mars.astronomy",
+   "title": "Sao Hỏa dưới góc nhìn thiên văn",
+   "parent": "w7.mars",
+   "kind": "general"
+  },
+  {
+   "at": 1705,
+   "code": "w7.mars.where",
+   "title": "Sao Hỏa của bạn ở đâu?",
+   "parent": "w7.mars",
+   "kind": "general"
+  },
+  {
+   "at": 1720,
+   "code": "w7.jupiter",
+   "title": "Sao Mộc",
+   "parent": "w7",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter)"
+  },
+  {
+   "at": 1726,
+   "code": "w7.jupiter.astronomy",
+   "title": "Sao Mộc dưới góc nhìn thiên văn",
+   "parent": "w7.jupiter",
+   "kind": "general"
+  },
+  {
+   "at": 1741,
+   "code": "w7.jupiter.where",
+   "title": "Sao Mộc của bạn ở đâu?",
+   "parent": "w7.jupiter",
+   "kind": "general"
+  },
+  {
+   "at": 1755,
+   "code": "w7.saturn",
+   "title": "Sao Thổ",
+   "parent": "w7",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn)"
+  },
+  {
+   "at": 1762,
+   "code": "w7.saturn.astronomy",
+   "title": "Sao Thổ dưới góc nhìn thiên văn",
+   "parent": "w7.saturn",
+   "kind": "general"
+  },
+  {
+   "at": 1779,
+   "code": "w7.saturn.where",
+   "title": "Sao Thổ của bạn ở đâu?",
+   "parent": "w7.saturn",
+   "kind": "general"
+  },
+  {
+   "at": 1793,
+   "code": "w7.uranus",
+   "title": "Thiên Vương",
+   "parent": "w7",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus)"
+  },
+  {
+   "at": 1806,
+   "code": "w7.uranus.astronomy",
+   "title": "Thiên Vương dưới góc nhìn thiên văn",
+   "parent": "w7.uranus",
+   "kind": "general"
+  },
+  {
+   "at": 1811,
+   "code": "w7.uranus.where",
+   "title": "Thiên Vương của bạn ở đâu?",
+   "parent": "w7.uranus",
+   "kind": "general"
+  },
+  {
+   "at": 1825,
+   "code": "w7.neptune",
+   "title": "Hải Vương",
+   "parent": "w7",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune)"
+  },
+  {
+   "at": 1838,
+   "code": "w7.neptune.astronomy",
+   "title": "Hải Vương dưới góc nhìn thiên văn",
+   "parent": "w7.neptune",
+   "kind": "general"
+  },
+  {
+   "at": 1843,
+   "code": "w7.neptune.where",
+   "title": "Hải Vương của bạn ở đâu?",
+   "parent": "w7.neptune",
+   "kind": "general"
+  },
+  {
+   "at": 1858,
+   "code": "w7.pluto",
+   "title": "Diêm Vương",
+   "parent": "w7",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto)"
+  },
+  {
+   "at": 1868,
+   "code": "w7.pluto.astronomy",
+   "title": "Diêm Vương dưới góc nhìn thiên văn",
+   "parent": "w7.pluto",
+   "kind": "general"
+  },
+  {
+   "at": 1876,
+   "code": "w7.pluto.where",
+   "title": "Diêm Vương của bạn ở đâu?",
+   "parent": "w7.pluto",
+   "kind": "general"
+  },
+  {
+   "at": 1893,
+   "code": "w8",
+   "title": "8 · Các cung địa bàn trong chiêm tinh học",
+   "kind": "general"
+  },
+  {
+   "at": 1897,
+   "code": "w8.about-1",
+   "title": "Cung 1",
+   "parent": "w8",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(1)"
+  },
+  {
+   "at": 1899,
+   "code": "w8.about-2",
+   "title": "Cung 2",
+   "parent": "w8",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(2)"
+  },
+  {
+   "at": 1901,
+   "code": "w8.about-3",
+   "title": "Cung 3",
+   "parent": "w8",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(3)"
+  },
+  {
+   "at": 1903,
+   "code": "w8.about-4",
+   "title": "Cung 4",
+   "parent": "w8",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(4)"
+  },
+  {
+   "at": 1905,
+   "code": "w8.about-5",
+   "title": "Cung 5",
+   "parent": "w8",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(5)"
+  },
+  {
+   "at": 1907,
+   "code": "w8.about-6",
+   "title": "Cung 6",
+   "parent": "w8",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(6)"
+  },
+  {
+   "at": 1909,
+   "code": "w8.about-7",
+   "title": "Cung 7",
+   "parent": "w8",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(7)"
+  },
+  {
+   "at": 1911,
+   "code": "w8.about-8",
+   "title": "Cung 8",
+   "parent": "w8",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(8)"
+  },
+  {
+   "at": 1913,
+   "code": "w8.about-9",
+   "title": "Cung 9",
+   "parent": "w8",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(9)"
+  },
+  {
+   "at": 1915,
+   "code": "w8.about-10",
+   "title": "Cung 10",
+   "parent": "w8",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(10)"
+  },
+  {
+   "at": 1917,
+   "code": "w8.about-11",
+   "title": "Cung 11",
+   "parent": "w8",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(11)"
+  },
+  {
+   "at": 1919,
+   "code": "w8.about-12",
+   "title": "Cung 12",
+   "parent": "w8",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(12)"
+  },
+  {
+   "at": 1922,
+   "code": "w8.rulers-of-the-houses",
+   "title": "Chủ quản của các cung địa bàn",
+   "parent": "w8"
+  },
+  {
+   "at": 1924,
+   "code": "w8.rulers-of-the-houses.house-natural-ruler",
+   "title": "Cung địa bàn · Chủ quản tự nhiên",
+   "parent": "w8.rulers-of-the-houses"
+  },
+  {
+   "at": 1926,
+   "code": "w8.kinds-of-houses",
+   "title": "Các loại cung địa bàn",
+   "parent": "w8"
+  },
+  {
+   "at": 1928,
+   "code": "w8.kinds-of-houses.houses-divided-into-three-groups",
+   "title": "Các cung địa bàn chia thành ba nhóm",
+   "parent": "w8.kinds-of-houses"
+  },
+  {
+   "at": 1936,
+   "code": "w8.kinds-of-houses.houses-divided-into-four-groups",
+   "title": "Các cung địa bàn chia thành bốn nhóm",
+   "parent": "w8.kinds-of-houses"
+  },
+  {
+   "at": 1941,
+   "code": "w8.kinds-of-houses.houses-divided-into-four-groups.3-houses-of-relationships",
+   "title": "3. Các cung Quan hệ",
+   "parent": "w8.kinds-of-houses.houses-divided-into-four-groups"
+  },
+  {
+   "at": 1945,
+   "code": "w8.planets-in-the-houses",
+   "title": "Các hành tinh trong các cung địa bàn",
+   "parent": "w8"
+  },
+  {
+   "at": 1948,
+   "code": "w8.planets-in-the-houses.house-1",
+   "title": "Cung 1 (cung của Bản thân)",
+   "parent": "w8.planets-in-the-houses",
+   "kind": "general"
+  },
+  {
+   "at": 1959,
+   "code": "w8.planets-in-the-houses.house-2",
+   "title": "Cung 2 (cung của Tài sản)",
+   "parent": "w8.planets-in-the-houses",
+   "kind": "general"
+  },
+  {
+   "at": 1971,
+   "code": "w8.planets-in-the-houses.house-3",
+   "title": "Cung 3 (cung của Giao tiếp)",
+   "parent": "w8.planets-in-the-houses",
+   "kind": "general"
+  },
+  {
+   "at": 1982,
+   "code": "w8.planets-in-the-houses.house-4",
+   "title": "Cung 4 (cung của Gia đình; cũng là cung của Giai đoạn đầu và Giai đoạn cuối cuộc đời)",
+   "parent": "w8.planets-in-the-houses",
+   "kind": "general"
+  },
+  {
+   "at": 1993,
+   "code": "w8.planets-in-the-houses.house-5",
+   "title": "Cung 5 (cung của Sáng tạo và Tình dục)",
+   "parent": "w8.planets-in-the-houses",
+   "kind": "general"
+  },
+  {
+   "at": 2004,
+   "code": "w8.planets-in-the-houses.house-6",
+   "title": "Cung 6 (cung của Phục vụ và Sức khỏe)",
+   "parent": "w8.planets-in-the-houses",
+   "kind": "general"
+  },
+  {
+   "at": 2016,
+   "code": "w8.planets-in-the-houses.house-7",
+   "title": "Cung 7 (cung của Hôn nhân và Hợp tác)",
+   "parent": "w8.planets-in-the-houses",
+   "kind": "general"
+  },
+  {
+   "at": 2027,
+   "code": "w8.planets-in-the-houses.house-8",
+   "title": "Cung 8 (cung của Cái chết và Tái sinh; cũng là cung của Di sản)",
+   "parent": "w8.planets-in-the-houses",
+   "kind": "general"
+  },
+  {
+   "at": 2038,
+   "code": "w8.planets-in-the-houses.house-9",
+   "title": "Cung 9 (cung của Khám phá tinh thần)",
+   "parent": "w8.planets-in-the-houses",
+   "kind": "general"
+  },
+  {
+   "at": 2049,
+   "code": "w8.planets-in-the-houses.house-10",
+   "title": "Cung 10 (cung của Sự nghiệp)",
+   "parent": "w8.planets-in-the-houses",
+   "kind": "general"
+  },
+  {
+   "at": 2060,
+   "code": "w8.planets-in-the-houses.house-11",
+   "title": "Cung 11 (cung của Hy vọng và Ước nguyện; cũng là cung của Bạn bè)",
+   "parent": "w8.planets-in-the-houses",
+   "kind": "general"
+  },
+  {
+   "at": 2071,
+   "code": "w8.planets-in-the-houses.house-12",
+   "title": "Cung 12 (cung của Bí mật, Nỗi buồn và Tự hủy hoại)",
+   "parent": "w8.planets-in-the-houses",
+   "kind": "general"
+  },
+  {
+   "at": 2082,
+   "code": "w9",
+   "title": "9 · Cách luận giải lá số của bạn",
+   "kind": "general"
+  },
+  {
+   "at": 2090,
+   "code": "w9.what-is-a-birth-chart",
+   "title": "Lá số là gì?",
+   "parent": "w9"
+  },
+  {
+   "at": 2100,
+   "code": "w9.oprah-winfrey-s-birth-chart",
+   "title": "Lá số của Oprah Winfrey",
+   "parent": "w9"
+  },
+  {
+   "at": 2102,
+   "code": "w9.interpretation",
+   "title": "Luận giải",
+   "parent": "w9"
+  },
+  {
+   "at": 2108,
+   "code": "w9.interpretation.planet-in-what-sign-in-what-house",
+   "title": "Hành tinh · Ở cung hoàng đạo nào · Ở cung địa bàn nào",
+   "parent": "w9.interpretation"
+  },
+  {
+   "at": 2109,
+   "code": "w9.interpretation.sun-aquarius-second-house",
+   "title": "Mặt Trời · Bảo Bình · Cung 2",
+   "parent": "w9.interpretation"
+  },
+  {
+   "at": 2113,
+   "code": "w9.interpretation.planet-in-what-sign",
+   "title": "Hành tinh · Ở cung hoàng đạo nào",
+   "parent": "w9.interpretation"
+  },
+  {
+   "at": 2114,
+   "code": "w9.interpretation.sun-aquarius",
+   "title": "Mặt Trời · Bảo Bình",
+   "parent": "w9.interpretation"
+  },
+  {
+   "at": 2118,
+   "code": "w9.interpretation.in-what-house",
+   "title": "Ở cung địa bàn nào",
+   "parent": "w9.interpretation"
+  },
+  {
+   "at": 2119,
+   "code": "w9.interpretation.second-house",
+   "title": "Cung 2",
+   "parent": "w9.interpretation"
+  },
+  {
+   "at": 2121,
+   "code": "w9.sample-chart",
+   "title": "Lá số mẫu",
+   "parent": "w9"
+  },
+  {
+   "at": 2123,
+   "code": "w9.ascendant-in-sagittarius",
+   "title": "Cung Mọc Nhân Mã",
+   "parent": "w9"
+  },
+  {
+   "at": 2125,
+   "code": "w9.ascendant-in-sagittarius.planet-in-what-sign",
+   "title": "Hành tinh · Ở cung hoàng đạo nào",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2126,
+   "code": "w9.ascendant-in-sagittarius.sun-in-aquarius",
+   "title": "Mặt Trời · Ở Bảo Bình",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2128,
+   "code": "w9.ascendant-in-sagittarius.moon-in-sagittarius",
+   "title": "Mặt Trăng · Ở Nhân Mã",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2131,
+   "code": "w9.ascendant-in-sagittarius.in-what-house",
+   "title": "Ở cung địa bàn nào",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2132,
+   "code": "w9.ascendant-in-sagittarius.in-second-house",
+   "title": "Ở cung 2",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2136,
+   "code": "w9.ascendant-in-sagittarius.in-eleventh-house",
+   "title": "Ở cung 11",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2138,
+   "code": "w9.ascendant-in-sagittarius.planet-in-what-sign-in-what-house",
+   "title": "Hành tinh · Ở cung hoàng đạo nào · Ở cung địa bàn nào",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2139,
+   "code": "w9.ascendant-in-sagittarius.mercury-in-aquarius",
+   "title": "Sao Thủy · Ở Bảo Bình",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2141,
+   "code": "w9.ascendant-in-sagittarius.venus-in-aquarius",
+   "title": "Sao Kim · Ở Bảo Bình",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2143,
+   "code": "w9.ascendant-in-sagittarius.mars-in-scorpio",
+   "title": "Sao Hỏa · Ở Bò Cạp",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2146,
+   "code": "w9.ascendant-in-sagittarius.jupiter-in-gemini",
+   "title": "Sao Mộc · Ở Song Tử",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2148,
+   "code": "w9.ascendant-in-sagittarius.in-second-house-2",
+   "title": "Ở cung 2",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2150,
+   "code": "w9.ascendant-in-sagittarius.in-second-house-3",
+   "title": "Ở cung 2",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2152,
+   "code": "w9.ascendant-in-sagittarius.in-eleventh-house-2",
+   "title": "Ở cung 11",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2155,
+   "code": "w9.ascendant-in-sagittarius.in-sixth-house",
+   "title": "Ở cung 6",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2157,
+   "code": "w9.ascendant-in-sagittarius.planet-in-what-sign-2",
+   "title": "Hành tinh · Ở cung hoàng đạo nào",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2158,
+   "code": "w9.ascendant-in-sagittarius.saturn-in-scorpio",
+   "title": "Sao Thổ · Ở Bò Cạp",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2162,
+   "code": "w9.ascendant-in-sagittarius.uranus-in-cancer",
+   "title": "Thiên Vương · Ở Cự Giải",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2164,
+   "code": "w9.ascendant-in-sagittarius.neptune-in-libra",
+   "title": "Hải Vương · Ở Thiên Bình",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2168,
+   "code": "w9.ascendant-in-sagittarius.pluto-in-leo",
+   "title": "Diêm Vương · Ở Sư Tử",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2170,
+   "code": "w9.ascendant-in-sagittarius.in-what-house-2",
+   "title": "Ở cung địa bàn nào",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2171,
+   "code": "w9.ascendant-in-sagittarius.in-tenth-house",
+   "title": "Ở cung 10",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2173,
+   "code": "w9.ascendant-in-sagittarius.in-seventh-house",
+   "title": "Ở cung 7",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2175,
+   "code": "w9.ascendant-in-sagittarius.in-tenth-house-2",
+   "title": "Ở cung 10",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2178,
+   "code": "w9.ascendant-in-sagittarius.in-eighth-house",
+   "title": "Ở cung 8",
+   "parent": "w9.ascendant-in-sagittarius"
+  },
+  {
+   "at": 2192,
+   "code": "w9.other-things-to-look-for-in-a-chart",
+   "title": "Những điều khác cần xem xét trong lá số",
+   "parent": "w9"
+  },
+  {
+   "at": 2193,
+   "code": "w9.other-things-to-look-for-in-a-chart.the-elements-formula",
+   "title": "Công thức nguyên tố",
+   "parent": "w9.other-things-to-look-for-in-a-chart"
+  },
+  {
+   "at": 2195,
+   "code": "w9.other-things-to-look-for-in-a-chart.the-elements-formula.element-keyword",
+   "title": "Nguyên tố · Từ khóa",
+   "parent": "w9.other-things-to-look-for-in-a-chart.the-elements-formula"
+  },
+  {
+   "at": 2207,
+   "code": "w9.other-things-to-look-for-in-a-chart.the-elements-formula.sample",
+   "title": "Lá số mẫu",
+   "parent": "w9.other-things-to-look-for-in-a-chart.the-elements-formula",
+   "kind": "general"
+  },
+  {
+   "at": 2219,
+   "code": "w9.other-things-to-look-for-in-a-chart.the-qualities-formula",
+   "title": "Công thức thể thức",
+   "parent": "w9.other-things-to-look-for-in-a-chart"
+  },
+  {
+   "at": 2228,
+   "code": "w9.other-things-to-look-for-in-a-chart.the-qualities-formula.quality-keywords",
+   "title": "Thể thức · Từ khóa",
+   "parent": "w9.other-things-to-look-for-in-a-chart.the-qualities-formula"
+  },
+  {
+   "at": 2236,
+   "code": "w9.other-things-to-look-for-in-a-chart.the-qualities-formula.sample",
+   "title": "Lá số mẫu",
+   "parent": "w9.other-things-to-look-for-in-a-chart.the-qualities-formula",
+   "kind": "general"
+  },
+  {
+   "at": 2247,
+   "code": "w9.what-chart-type-are-you",
+   "title": "Bạn thuộc kiểu lá số nào?",
+   "parent": "w9"
+  },
+  {
+   "at": 2259,
+   "code": "w9.what-chart-type-are-you.sample",
+   "title": "Lá số mẫu",
+   "parent": "w9.what-chart-type-are-you",
+   "kind": "general"
+  },
+  {
+   "at": 2264,
+   "code": "w9.in-what-part-of-the-horoscope-are-you-st",
+   "title": "Bạn mạnh ở phần nào của lá số?",
+   "parent": "w9"
+  },
+  {
+   "at": 2271,
+   "code": "w9.in-what-part-of-the-horoscope-are-you-st.sample",
+   "title": "Lá số mẫu",
+   "parent": "w9.in-what-part-of-the-horoscope-are-you-st",
+   "kind": "general"
+  },
+  {
+   "at": 2278,
+   "code": "w9.in-what-part-of-the-horoscope-are-you-st.sample-2",
+   "title": "Lá số mẫu",
+   "parent": "w9.in-what-part-of-the-horoscope-are-you-st",
+   "kind": "general"
+  },
+  {
+   "at": 2282,
+   "code": "w9.what-is-the-ruling-planet-of-your-chart",
+   "title": "Chủ tinh lá số của bạn là hành tinh nào?",
+   "parent": "w9"
+  },
+  {
+   "at": 2284,
+   "code": "w9.what-is-the-ruling-planet-of-your-chart.sample",
+   "title": "Lá số mẫu",
+   "parent": "w9.what-is-the-ruling-planet-of-your-chart",
+   "kind": "general"
+  },
+  {
+   "at": 2289,
+   "code": "w9.what-is-the-ruler-of-your-sun",
+   "title": "Hành tinh nào cai quản Mặt Trời của bạn?",
+   "parent": "w9"
+  },
+  {
+   "at": 2293,
+   "code": "w9.what-is-the-ruler-of-your-sun.sample",
+   "title": "Lá số mẫu",
+   "parent": "w9.what-is-the-ruler-of-your-sun",
+   "kind": "general"
+  },
+  {
+   "at": 2296,
+   "code": "w9.what-is-the-ruler-of-your-moon",
+   "title": "Hành tinh nào cai quản Mặt Trăng của bạn?",
+   "parent": "w9"
+  },
+  {
+   "at": 2299,
+   "code": "w9.what-is-the-ruler-of-your-moon.sample",
+   "title": "Lá số mẫu",
+   "parent": "w9.what-is-the-ruler-of-your-moon",
+   "kind": "general"
+  },
+  {
+   "at": 2303,
+   "code": "w9.the-four-power-points-in-your-chart",
+   "title": "Bốn điểm quyền lực trong lá số của bạn",
+   "parent": "w9"
+  },
+  {
+   "at": 2322,
+   "code": "w9.the-four-power-points-in-your-chart.sample",
+   "title": "Lá số mẫu",
+   "parent": "w9.the-four-power-points-in-your-chart",
+   "kind": "general"
+  },
+  {
+   "at": 2328,
+   "code": "w9.have-you-any-planets-in-their-dominion",
+   "title": "Bạn có hành tinh nào ở trong lãnh địa của nó không?",
+   "parent": "w9"
+  },
+  {
+   "at": 2333,
+   "code": "w9.have-you-any-planets-in-their-dominion.sample",
+   "title": "Lá số mẫu",
+   "parent": "w9.have-you-any-planets-in-their-dominion",
+   "kind": "general"
+  },
+  {
+   "at": 2335,
+   "code": "w9.have-you-any-planets-in-mutual-reception",
+   "title": "Bạn có hành tinh nào ở thế tiếp nhận tương hỗ không?",
+   "parent": "w9"
+  },
+  {
+   "at": 2337,
+   "code": "w9.have-you-any-planets-in-mutual-reception.sample",
+   "title": "Lá số mẫu",
+   "parent": "w9.have-you-any-planets-in-mutual-reception",
+   "kind": "general"
+  },
+  {
+   "at": 2341,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag",
+   "title": "Đầu và đuôi con Rồng của bạn nằm ở đâu?",
+   "parent": "w9"
+  },
+  {
+   "at": 2344,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.north-node-1",
+   "title": "La Hầu ở cung 1",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(north-node) & house(north-node, 1)"
+  },
+  {
+   "at": 2346,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.north-node-2",
+   "title": "La Hầu ở cung 2",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(north-node) & house(north-node, 2)"
+  },
+  {
+   "at": 2348,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.north-node-3",
+   "title": "La Hầu ở cung 3",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(north-node) & house(north-node, 3)"
+  },
+  {
+   "at": 2350,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.north-node-4",
+   "title": "La Hầu ở cung 4",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(north-node) & house(north-node, 4)"
+  },
+  {
+   "at": 2352,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.north-node-5",
+   "title": "La Hầu ở cung 5",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(north-node) & house(north-node, 5)"
+  },
+  {
+   "at": 2354,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.north-node-6",
+   "title": "La Hầu ở cung 6",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(north-node) & house(north-node, 6)"
+  },
+  {
+   "at": 2356,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.north-node-7",
+   "title": "La Hầu ở cung 7",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(north-node) & house(north-node, 7)"
+  },
+  {
+   "at": 2358,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.south-node-7",
+   "title": "Kế Đô ở cung 7",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(south-node) & house(south-node, 7)"
+  },
+  {
+   "at": 2360,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.south-node-8",
+   "title": "Kế Đô ở cung 8",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(south-node) & house(south-node, 8)"
+  },
+  {
+   "at": 2362,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.south-node-9",
+   "title": "Kế Đô ở cung 9",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(south-node) & house(south-node, 9)"
+  },
+  {
+   "at": 2364,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.south-node-10",
+   "title": "Kế Đô ở cung 10",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(south-node) & house(south-node, 10)"
+  },
+  {
+   "at": 2366,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.south-node-11",
+   "title": "Kế Đô ở cung 11",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(south-node) & house(south-node, 11)"
+  },
+  {
+   "at": 2368,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.south-node-12",
+   "title": "Kế Đô ở cung 12",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(south-node) & house(south-node, 12)"
+  },
+  {
+   "at": 2370,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.south-node-1",
+   "title": "Kế Đô ở cung 1",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(south-node) & house(south-node, 1)"
+  },
+  {
+   "at": 2372,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.north-node-8",
+   "title": "La Hầu ở cung 8",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(north-node) & house(north-node, 8)"
+  },
+  {
+   "at": 2374,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.north-node-9",
+   "title": "La Hầu ở cung 9",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(north-node) & house(north-node, 9)"
+  },
+  {
+   "at": 2376,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.north-node-10",
+   "title": "La Hầu ở cung 10",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(north-node) & house(north-node, 10)"
+  },
+  {
+   "at": 2378,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.north-node-11",
+   "title": "La Hầu ở cung 11",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(north-node) & house(north-node, 11)"
+  },
+  {
+   "at": 2380,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.north-node-12",
+   "title": "La Hầu ở cung 12",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(north-node) & house(north-node, 12)"
+  },
+  {
+   "at": 2382,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.sample",
+   "title": "Lá số mẫu",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "general"
+  },
+  {
+   "at": 2383,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.south-node-2",
+   "title": "Kế Đô ở cung 2",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(south-node) & house(south-node, 2)"
+  },
+  {
+   "at": 2385,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.south-node-3",
+   "title": "Kế Đô ở cung 3",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(south-node) & house(south-node, 3)"
+  },
+  {
+   "at": 2387,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.south-node-4",
+   "title": "Kế Đô ở cung 4",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(south-node) & house(south-node, 4)"
+  },
+  {
+   "at": 2389,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.south-node-5",
+   "title": "Kế Đô ở cung 5",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(south-node) & house(south-node, 5)"
+  },
+  {
+   "at": 2391,
+   "code": "w9.where-are-the-head-and-tail-of-your-drag.south-node-6",
+   "title": "Kế Đô ở cung 6",
+   "parent": "w9.where-are-the-head-and-tail-of-your-drag",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(south-node) & house(south-node, 6)"
+  },
+  {
+   "at": 2395,
+   "code": "w10",
+   "title": "10 · Góc chiếu và so lá số (synastry): đi sâu hơn vào lá số chiêm tinh của bạn",
+   "kind": "general"
+  },
+  {
+   "at": 2396,
+   "code": "w10.probing-deeper-into-your-birth-chart",
+   "title": "Đi sâu hơn vào lá số chiêm tinh của bạn",
+   "parent": "w10"
+  },
+  {
+   "at": 2397,
+   "code": "w10.the-aspects-in-a-chart",
+   "title": "Các góc chiếu trong lá số",
+   "parent": "w10"
+  },
+  {
+   "at": 2406,
+   "code": "w10.what-is-an-aspect",
+   "title": "Góc chiếu là gì?",
+   "parent": "w10"
+  },
+  {
+   "at": 2420,
+   "code": "w10.the-meaning-of-the-aspects",
+   "title": "Ý nghĩa của các góc chiếu",
+   "parent": "w10"
+  },
+  {
+   "at": 2425,
+   "code": "w10.sun-aspects",
+   "title": "Góc chiếu của Mặt Trời",
+   "parent": "w10"
+  },
+  {
+   "at": 2426,
+   "code": "w10.sun-aspects.sun-moon",
+   "title": "Mặt Trời và Mặt Trăng",
+   "parent": "w10.sun-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, moon)"
+  },
+  {
+   "at": 2430,
+   "code": "w10.sun-aspects.sun-mercury",
+   "title": "Mặt Trời và Sao Thủy",
+   "parent": "w10.sun-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, mercury)"
+  },
+  {
+   "at": 2433,
+   "code": "w10.sun-aspects.sun-venus",
+   "title": "Mặt Trời và Sao Kim",
+   "parent": "w10.sun-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, venus)"
+  },
+  {
+   "at": 2436,
+   "code": "w10.sun-aspects.sun-mars",
+   "title": "Mặt Trời và Sao Hỏa",
+   "parent": "w10.sun-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, mars)"
+  },
+  {
+   "at": 2440,
+   "code": "w10.sun-aspects.sun-jupiter",
+   "title": "Mặt Trời và Sao Mộc",
+   "parent": "w10.sun-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, jupiter)"
+  },
+  {
+   "at": 2444,
+   "code": "w10.sun-aspects.sun-saturn",
+   "title": "Mặt Trời và Sao Thổ",
+   "parent": "w10.sun-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, saturn)"
+  },
+  {
+   "at": 2448,
+   "code": "w10.sun-aspects.sun-uranus",
+   "title": "Mặt Trời và Thiên Vương",
+   "parent": "w10.sun-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, uranus)"
+  },
+  {
+   "at": 2452,
+   "code": "w10.sun-aspects.sun-neptune",
+   "title": "Mặt Trời và Hải Vương",
+   "parent": "w10.sun-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, neptune)"
+  },
+  {
+   "at": 2456,
+   "code": "w10.sun-aspects.sun-pluto",
+   "title": "Mặt Trời và Diêm Vương",
+   "parent": "w10.sun-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, pluto)"
+  },
+  {
+   "at": 2460,
+   "code": "w10.moon-aspects",
+   "title": "Góc chiếu của Mặt Trăng",
+   "parent": "w10"
+  },
+  {
+   "at": 2461,
+   "code": "w10.moon-aspects.moon-mercury",
+   "title": "Mặt Trăng và Sao Thủy",
+   "parent": "w10.moon-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, mercury)"
+  },
+  {
+   "at": 2465,
+   "code": "w10.moon-aspects.moon-venus",
+   "title": "Mặt Trăng và Sao Kim",
+   "parent": "w10.moon-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, venus)"
+  },
+  {
+   "at": 2469,
+   "code": "w10.moon-aspects.moon-mars",
+   "title": "Mặt Trăng và Sao Hỏa",
+   "parent": "w10.moon-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, mars)"
+  },
+  {
+   "at": 2473,
+   "code": "w10.moon-aspects.moon-jupiter",
+   "title": "Mặt Trăng và Sao Mộc",
+   "parent": "w10.moon-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, jupiter)"
+  },
+  {
+   "at": 2477,
+   "code": "w10.moon-aspects.moon-saturn",
+   "title": "Mặt Trăng và Sao Thổ",
+   "parent": "w10.moon-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, saturn)"
+  },
+  {
+   "at": 2481,
+   "code": "w10.moon-aspects.moon-uranus",
+   "title": "Mặt Trăng và Thiên Vương",
+   "parent": "w10.moon-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, uranus)"
+  },
+  {
+   "at": 2485,
+   "code": "w10.moon-aspects.moon-neptune",
+   "title": "Mặt Trăng và Hải Vương",
+   "parent": "w10.moon-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, neptune)"
+  },
+  {
+   "at": 2489,
+   "code": "w10.moon-aspects.moon-pluto",
+   "title": "Mặt Trăng và Diêm Vương",
+   "parent": "w10.moon-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, pluto)"
+  },
+  {
+   "at": 2493,
+   "code": "w10.mercury-aspects",
+   "title": "Góc chiếu của Sao Thủy",
+   "parent": "w10"
+  },
+  {
+   "at": 2494,
+   "code": "w10.mercury-aspects.mercury-venus",
+   "title": "Sao Thủy và Sao Kim",
+   "parent": "w10.mercury-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, venus)"
+  },
+  {
+   "at": 2498,
+   "code": "w10.mercury-aspects.mercury-mars",
+   "title": "Sao Thủy và Sao Hỏa",
+   "parent": "w10.mercury-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, mars)"
+  },
+  {
+   "at": 2502,
+   "code": "w10.mercury-aspects.mercury-jupiter",
+   "title": "Sao Thủy và Sao Mộc",
+   "parent": "w10.mercury-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, jupiter)"
+  },
+  {
+   "at": 2506,
+   "code": "w10.mercury-aspects.mercury-saturn",
+   "title": "Sao Thủy và Sao Thổ",
+   "parent": "w10.mercury-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, saturn)"
+  },
+  {
+   "at": 2510,
+   "code": "w10.mercury-aspects.mercury-uranus",
+   "title": "Sao Thủy và Thiên Vương",
+   "parent": "w10.mercury-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, uranus)"
+  },
+  {
+   "at": 2514,
+   "code": "w10.mercury-aspects.mercury-neptune",
+   "title": "Sao Thủy và Hải Vương",
+   "parent": "w10.mercury-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, neptune)"
+  },
+  {
+   "at": 2518,
+   "code": "w10.mercury-aspects.mercury-pluto",
+   "title": "Sao Thủy và Diêm Vương",
+   "parent": "w10.mercury-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, pluto)"
+  },
+  {
+   "at": 2522,
+   "code": "w10.venus-aspects",
+   "title": "Góc chiếu của Sao Kim",
+   "parent": "w10"
+  },
+  {
+   "at": 2523,
+   "code": "w10.venus-aspects.venus-mars",
+   "title": "Sao Kim và Sao Hỏa",
+   "parent": "w10.venus-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, mars)"
+  },
+  {
+   "at": 2527,
+   "code": "w10.venus-aspects.venus-jupiter",
+   "title": "Sao Kim và Sao Mộc",
+   "parent": "w10.venus-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, jupiter)"
+  },
+  {
+   "at": 2531,
+   "code": "w10.venus-aspects.venus-saturn",
+   "title": "Sao Kim và Sao Thổ",
+   "parent": "w10.venus-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, saturn)"
+  },
+  {
+   "at": 2535,
+   "code": "w10.venus-aspects.venus-uranus",
+   "title": "Sao Kim và Thiên Vương",
+   "parent": "w10.venus-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, uranus)"
+  },
+  {
+   "at": 2539,
+   "code": "w10.venus-aspects.venus-neptune",
+   "title": "Sao Kim và Hải Vương",
+   "parent": "w10.venus-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, neptune)"
+  },
+  {
+   "at": 2543,
+   "code": "w10.venus-aspects.venus-pluto",
+   "title": "Sao Kim và Diêm Vương",
+   "parent": "w10.venus-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, pluto)"
+  },
+  {
+   "at": 2547,
+   "code": "w10.mars-aspects",
+   "title": "Góc chiếu của Sao Hỏa",
+   "parent": "w10"
+  },
+  {
+   "at": 2548,
+   "code": "w10.mars-aspects.mars-jupiter",
+   "title": "Sao Hỏa và Sao Mộc",
+   "parent": "w10.mars-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, jupiter)"
+  },
+  {
+   "at": 2552,
+   "code": "w10.mars-aspects.mars-saturn",
+   "title": "Sao Hỏa và Sao Thổ",
+   "parent": "w10.mars-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, saturn)"
+  },
+  {
+   "at": 2556,
+   "code": "w10.mars-aspects.mars-uranus",
+   "title": "Sao Hỏa và Thiên Vương",
+   "parent": "w10.mars-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, uranus)"
+  },
+  {
+   "at": 2560,
+   "code": "w10.mars-aspects.mars-neptune",
+   "title": "Sao Hỏa và Hải Vương",
+   "parent": "w10.mars-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, neptune)"
+  },
+  {
+   "at": 2564,
+   "code": "w10.mars-aspects.mars-pluto",
+   "title": "Sao Hỏa và Diêm Vương",
+   "parent": "w10.mars-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, pluto)"
+  },
+  {
+   "at": 2568,
+   "code": "w10.jupiter-aspects",
+   "title": "Góc chiếu của Sao Mộc",
+   "parent": "w10"
+  },
+  {
+   "at": 2569,
+   "code": "w10.jupiter-aspects.jupiter-saturn",
+   "title": "Sao Mộc và Sao Thổ",
+   "parent": "w10.jupiter-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, saturn)"
+  },
+  {
+   "at": 2573,
+   "code": "w10.jupiter-aspects.jupiter-uranus",
+   "title": "Sao Mộc và Thiên Vương",
+   "parent": "w10.jupiter-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, uranus)"
+  },
+  {
+   "at": 2577,
+   "code": "w10.jupiter-aspects.jupiter-neptune",
+   "title": "Sao Mộc và Hải Vương",
+   "parent": "w10.jupiter-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, neptune)"
+  },
+  {
+   "at": 2581,
+   "code": "w10.jupiter-aspects.jupiter-pluto",
+   "title": "Sao Mộc và Diêm Vương",
+   "parent": "w10.jupiter-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, pluto)"
+  },
+  {
+   "at": 2585,
+   "code": "w10.saturn-aspects",
+   "title": "Góc chiếu của Sao Thổ",
+   "parent": "w10"
+  },
+  {
+   "at": 2586,
+   "code": "w10.saturn-aspects.saturn-uranus",
+   "title": "Sao Thổ và Thiên Vương",
+   "parent": "w10.saturn-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(saturn, uranus)"
+  },
+  {
+   "at": 2590,
+   "code": "w10.saturn-aspects.saturn-neptune",
+   "title": "Sao Thổ và Hải Vương",
+   "parent": "w10.saturn-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(saturn, neptune)"
+  },
+  {
+   "at": 2594,
+   "code": "w10.saturn-aspects.saturn-pluto",
+   "title": "Sao Thổ và Diêm Vương",
+   "parent": "w10.saturn-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(saturn, pluto)"
+  },
+  {
+   "at": 2598,
+   "code": "w10.uranus-aspects",
+   "title": "Góc chiếu của Thiên Vương",
+   "parent": "w10"
+  },
+  {
+   "at": 2599,
+   "code": "w10.uranus-aspects.uranus-neptune",
+   "title": "Thiên Vương và Hải Vương",
+   "parent": "w10.uranus-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(uranus, neptune)"
+  },
+  {
+   "at": 2603,
+   "code": "w10.uranus-aspects.uranus-pluto",
+   "title": "Thiên Vương và Diêm Vương",
+   "parent": "w10.uranus-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(uranus, pluto)"
+  },
+  {
+   "at": 2607,
+   "code": "w10.neptune-and-pluto-aspects",
+   "title": "Góc chiếu của Hải Vương và Diêm Vương",
+   "parent": "w10"
+  },
+  {
+   "at": 2608,
+   "code": "w10.neptune-and-pluto-aspects.neptune-pluto",
+   "title": "Hải Vương và Diêm Vương",
+   "parent": "w10.neptune-and-pluto-aspects",
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(neptune, pluto)"
+  },
+  {
+   "at": 2613,
+   "code": "w10.the-art-of-prediction",
+   "title": "Nghệ thuật dự đoán",
+   "parent": "w10",
+   "kind": "general"
+  },
+  {
+   "at": 2624,
+   "code": "w10.synastry-for-lovers",
+   "title": "So lá số (synastry): dành cho những người đang yêu",
+   "parent": "w10",
+   "kind": "general"
+  },
+  {
+   "at": 2628,
+   "code": "w10.synastry-for-lovers.how-far-apart-influence",
+   "title": "Cách nhau bao xa · Ảnh hưởng",
+   "parent": "w10.synastry-for-lovers"
+  },
+  {
+   "at": 2632,
+   "code": "w10.synastry-for-lovers.name-of-the-aspect",
+   "title": "Tên góc chiếu",
+   "parent": "w10.synastry-for-lovers"
+  },
+  {
+   "at": 2641,
+   "code": "w10.synastry-for-lovers.the-sun-and-the-moon",
+   "title": "Mặt Trời và Mặt Trăng",
+   "parent": "w10.synastry-for-lovers"
+  },
+  {
+   "at": 2650,
+   "code": "w10.synastry-for-lovers.major-points-of-incompatibility",
+   "title": "Những điểm bất tương hợp chính",
+   "parent": "w10.synastry-for-lovers"
+  },
+  {
+   "at": 2655,
+   "code": "w10.synastry-for-lovers.the-sun-and-ascendant",
+   "title": "Mặt Trời và cung Mọc",
+   "parent": "w10.synastry-for-lovers"
+  },
+  {
+   "at": 2659,
+   "code": "w10.synastry-for-lovers.venus-and-mars",
+   "title": "Sao Kim và Sao Hỏa",
+   "parent": "w10.synastry-for-lovers"
+  }
+ ],
+ "paras": {
+  "100": {
+   "kind": "general"
+  },
+  "138": {
+   "kind": "general"
+  },
+  "179": {
+   "kind": "general"
+  },
+  "219": {
+   "kind": "general"
+  },
+  "257": {
+   "kind": "general"
+  },
+  "298": {
+   "kind": "general"
+  },
+  "336": {
+   "kind": "general"
+  },
+  "377": {
+   "kind": "general"
+  },
+  "417": {
+   "kind": "general"
+  },
+  "457": {
+   "kind": "general"
+  },
+  "500": {
+   "kind": "general"
+  },
+  "536": {
+   "kind": "general"
+  },
+  "1323": {
+   "kind": "general"
+  },
+  "1337": {
+   "kind": "general"
+  },
+  "1352": {
+   "kind": "general"
+  },
+  "1366": {
+   "kind": "general"
+  },
+  "1382": {
+   "kind": "general"
+  },
+  "1396": {
+   "kind": "general"
+  },
+  "1408": {
+   "kind": "general"
+  },
+  "1423": {
+   "kind": "general"
+  },
+  "1437": {
+   "kind": "general"
+  },
+  "1452": {
+   "kind": "general"
+  },
+  "1466": {
+   "kind": "general"
+  },
+  "1483": {
+   "kind": "general"
+  },
+  "1645": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & in(mercury, aries)"
+  },
+  "1646": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & in(mercury, taurus)"
+  },
+  "1647": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & in(mercury, gemini)"
+  },
+  "1648": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & in(mercury, cancer)"
+  },
+  "1649": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & in(mercury, leo)"
+  },
+  "1650": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & in(mercury, virgo)"
+  },
+  "1651": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & in(mercury, libra)"
+  },
+  "1652": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & in(mercury, scorpio)"
+  },
+  "1653": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & in(mercury, sagittarius)"
+  },
+  "1654": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & in(mercury, capricorn)"
+  },
+  "1655": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & in(mercury, aquarius)"
+  },
+  "1656": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & in(mercury, pisces)"
+  },
+  "1673": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & in(venus, aries)"
+  },
+  "1674": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & in(venus, taurus)"
+  },
+  "1675": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & in(venus, gemini)"
+  },
+  "1676": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & in(venus, cancer)"
+  },
+  "1677": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & in(venus, leo)"
+  },
+  "1678": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & in(venus, virgo)"
+  },
+  "1679": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & in(venus, libra)"
+  },
+  "1680": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & in(venus, scorpio)"
+  },
+  "1681": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & in(venus, sagittarius)"
+  },
+  "1682": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & in(venus, capricorn)"
+  },
+  "1683": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & in(venus, aquarius)"
+  },
+  "1684": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & in(venus, pisces)"
+  },
+  "1707": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & in(mars, aries)"
+  },
+  "1708": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & in(mars, taurus)"
+  },
+  "1709": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & in(mars, gemini)"
+  },
+  "1710": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & in(mars, cancer)"
+  },
+  "1711": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & in(mars, leo)"
+  },
+  "1712": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & in(mars, virgo)"
+  },
+  "1713": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & in(mars, libra)"
+  },
+  "1714": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & in(mars, scorpio)"
+  },
+  "1716": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & in(mars, sagittarius)"
+  },
+  "1717": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & in(mars, capricorn)"
+  },
+  "1718": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & in(mars, aquarius)"
+  },
+  "1719": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & in(mars, pisces)"
+  },
+  "1743": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & in(jupiter, aries)"
+  },
+  "1744": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & in(jupiter, taurus)"
+  },
+  "1745": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & in(jupiter, gemini)"
+  },
+  "1746": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & in(jupiter, cancer)"
+  },
+  "1747": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & in(jupiter, leo)"
+  },
+  "1748": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & in(jupiter, virgo)"
+  },
+  "1749": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & in(jupiter, libra)"
+  },
+  "1750": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & in(jupiter, scorpio)"
+  },
+  "1751": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & in(jupiter, sagittarius)"
+  },
+  "1752": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & in(jupiter, capricorn)"
+  },
+  "1753": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & in(jupiter, aquarius)"
+  },
+  "1754": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & in(jupiter, pisces)"
+  },
+  "1781": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & in(saturn, aries)"
+  },
+  "1782": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & in(saturn, taurus)"
+  },
+  "1783": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & in(saturn, gemini)"
+  },
+  "1784": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & in(saturn, cancer)"
+  },
+  "1785": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & in(saturn, leo)"
+  },
+  "1786": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & in(saturn, virgo)"
+  },
+  "1787": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & in(saturn, libra)"
+  },
+  "1788": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & in(saturn, scorpio)"
+  },
+  "1789": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & in(saturn, sagittarius)"
+  },
+  "1790": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & in(saturn, capricorn)"
+  },
+  "1791": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & in(saturn, aquarius)"
+  },
+  "1792": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & in(saturn, pisces)"
+  },
+  "1813": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & in(uranus, aries)"
+  },
+  "1814": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & in(uranus, taurus)"
+  },
+  "1815": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & in(uranus, gemini)"
+  },
+  "1816": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & in(uranus, cancer)"
+  },
+  "1817": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & in(uranus, leo)"
+  },
+  "1818": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & in(uranus, virgo)"
+  },
+  "1819": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & in(uranus, libra)"
+  },
+  "1820": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & in(uranus, scorpio)"
+  },
+  "1821": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & in(uranus, sagittarius)"
+  },
+  "1822": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & in(uranus, capricorn)"
+  },
+  "1823": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & in(uranus, aquarius)"
+  },
+  "1824": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & in(uranus, pisces)"
+  },
+  "1846": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & in(neptune, aries)"
+  },
+  "1847": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & in(neptune, taurus)"
+  },
+  "1848": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & in(neptune, gemini)"
+  },
+  "1849": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & in(neptune, cancer)"
+  },
+  "1850": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & in(neptune, leo)"
+  },
+  "1851": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & in(neptune, virgo)"
+  },
+  "1852": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & in(neptune, libra)"
+  },
+  "1853": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & in(neptune, scorpio)"
+  },
+  "1854": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & in(neptune, sagittarius)"
+  },
+  "1855": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & in(neptune, capricorn)"
+  },
+  "1856": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & in(neptune, aquarius)"
+  },
+  "1857": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & in(neptune, pisces)"
+  },
+  "1881": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & in(pluto, aries)"
+  },
+  "1882": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & in(pluto, taurus)"
+  },
+  "1883": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & in(pluto, gemini)"
+  },
+  "1884": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & in(pluto, cancer)"
+  },
+  "1885": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & in(pluto, leo)"
+  },
+  "1886": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & in(pluto, virgo)"
+  },
+  "1887": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & in(pluto, libra)"
+  },
+  "1888": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & in(pluto, scorpio)"
+  },
+  "1889": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & in(pluto, sagittarius)"
+  },
+  "1890": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & in(pluto, capricorn)"
+  },
+  "1949": {
+   "kind": "rule",
+   "topic": "sun",
+   "when": "house(sun, 1)"
+  },
+  "1950": {
+   "kind": "rule",
+   "topic": "moon",
+   "when": "house(moon, 1)"
+  },
+  "1951": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & house(mercury, 1)"
+  },
+  "1952": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & house(venus, 1)"
+  },
+  "1953": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & house(mars, 1)"
+  },
+  "1954": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & house(jupiter, 1)"
+  },
+  "1955": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & house(saturn, 1)"
+  },
+  "1956": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & house(uranus, 1)"
+  },
+  "1957": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & house(neptune, 1)"
+  },
+  "1958": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & house(pluto, 1)"
+  },
+  "1960": {
+   "kind": "rule",
+   "topic": "sun",
+   "when": "house(sun, 2)"
+  },
+  "1961": {
+   "kind": "rule",
+   "topic": "moon",
+   "when": "house(moon, 2)"
+  },
+  "1962": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & house(mercury, 2)"
+  },
+  "1963": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & house(venus, 2)"
+  },
+  "1965": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & house(mars, 2)"
+  },
+  "1966": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & house(jupiter, 2)"
+  },
+  "1967": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & house(saturn, 2)"
+  },
+  "1968": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & house(uranus, 2)"
+  },
+  "1969": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & house(neptune, 2)"
+  },
+  "1970": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & house(pluto, 2)"
+  },
+  "1972": {
+   "kind": "rule",
+   "topic": "sun",
+   "when": "house(sun, 3)"
+  },
+  "1973": {
+   "kind": "rule",
+   "topic": "moon",
+   "when": "house(moon, 3)"
+  },
+  "1974": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & house(mercury, 3)"
+  },
+  "1975": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & house(venus, 3)"
+  },
+  "1976": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & house(mars, 3)"
+  },
+  "1977": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & house(jupiter, 3)"
+  },
+  "1978": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & house(saturn, 3)"
+  },
+  "1979": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & house(uranus, 3)"
+  },
+  "1980": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & house(neptune, 3)"
+  },
+  "1981": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & house(pluto, 3)"
+  },
+  "1983": {
+   "kind": "rule",
+   "topic": "sun",
+   "when": "house(sun, 4)"
+  },
+  "1984": {
+   "kind": "rule",
+   "topic": "moon",
+   "when": "house(moon, 4)"
+  },
+  "1985": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & house(mercury, 4)"
+  },
+  "1986": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & house(venus, 4)"
+  },
+  "1987": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & house(mars, 4)"
+  },
+  "1988": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & house(jupiter, 4)"
+  },
+  "1989": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & house(saturn, 4)"
+  },
+  "1990": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & house(uranus, 4)"
+  },
+  "1991": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & house(neptune, 4)"
+  },
+  "1992": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & house(pluto, 4)"
+  },
+  "1994": {
+   "kind": "rule",
+   "topic": "sun",
+   "when": "house(sun, 5)"
+  },
+  "1995": {
+   "kind": "rule",
+   "topic": "moon",
+   "when": "house(moon, 5)"
+  },
+  "1996": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & house(mercury, 5)"
+  },
+  "1997": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & house(venus, 5)"
+  },
+  "1998": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & house(mars, 5)"
+  },
+  "1999": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & house(jupiter, 5)"
+  },
+  "2000": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & house(saturn, 5)"
+  },
+  "2001": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & house(uranus, 5)"
+  },
+  "2002": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & house(neptune, 5)"
+  },
+  "2003": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & house(pluto, 5)"
+  },
+  "2005": {
+   "kind": "rule",
+   "topic": "sun",
+   "when": "house(sun, 6)"
+  },
+  "2006": {
+   "kind": "rule",
+   "topic": "moon",
+   "when": "house(moon, 6)"
+  },
+  "2007": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & house(mercury, 6)"
+  },
+  "2008": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & house(venus, 6)"
+  },
+  "2010": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & house(mars, 6)"
+  },
+  "2011": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & house(jupiter, 6)"
+  },
+  "2012": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & house(saturn, 6)"
+  },
+  "2013": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & house(uranus, 6)"
+  },
+  "2014": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & house(neptune, 6)"
+  },
+  "2015": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & house(pluto, 6)"
+  },
+  "2017": {
+   "kind": "rule",
+   "topic": "sun",
+   "when": "house(sun, 7)"
+  },
+  "2018": {
+   "kind": "rule",
+   "topic": "moon",
+   "when": "house(moon, 7)"
+  },
+  "2019": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & house(mercury, 7)"
+  },
+  "2020": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & house(venus, 7)"
+  },
+  "2021": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & house(mars, 7)"
+  },
+  "2022": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & house(jupiter, 7)"
+  },
+  "2023": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & house(saturn, 7)"
+  },
+  "2024": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & house(uranus, 7)"
+  },
+  "2025": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & house(neptune, 7)"
+  },
+  "2026": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & house(pluto, 7)"
+  },
+  "2028": {
+   "kind": "rule",
+   "topic": "sun",
+   "when": "house(sun, 8)"
+  },
+  "2029": {
+   "kind": "rule",
+   "topic": "moon",
+   "when": "house(moon, 8)"
+  },
+  "2030": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & house(mercury, 8)"
+  },
+  "2031": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & house(venus, 8)"
+  },
+  "2032": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & house(mars, 8)"
+  },
+  "2033": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & house(jupiter, 8)"
+  },
+  "2034": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & house(saturn, 8)"
+  },
+  "2035": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & house(uranus, 8)"
+  },
+  "2036": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & house(neptune, 8)"
+  },
+  "2037": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & house(pluto, 8)"
+  },
+  "2039": {
+   "kind": "rule",
+   "topic": "sun",
+   "when": "house(sun, 9)"
+  },
+  "2040": {
+   "kind": "rule",
+   "topic": "moon",
+   "when": "house(moon, 9)"
+  },
+  "2041": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & house(mercury, 9)"
+  },
+  "2042": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & house(venus, 9)"
+  },
+  "2043": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & house(mars, 9)"
+  },
+  "2044": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & house(jupiter, 9)"
+  },
+  "2045": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & house(saturn, 9)"
+  },
+  "2046": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & house(uranus, 9)"
+  },
+  "2047": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & house(neptune, 9)"
+  },
+  "2048": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & house(pluto, 9)"
+  },
+  "2050": {
+   "kind": "rule",
+   "topic": "sun",
+   "when": "house(sun, 10)"
+  },
+  "2051": {
+   "kind": "rule",
+   "topic": "moon",
+   "when": "house(moon, 10)"
+  },
+  "2052": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & house(mercury, 10)"
+  },
+  "2053": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & house(venus, 10)"
+  },
+  "2054": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & house(mars, 10)"
+  },
+  "2055": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & house(jupiter, 10)"
+  },
+  "2056": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & house(saturn, 10)"
+  },
+  "2057": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & house(uranus, 10)"
+  },
+  "2058": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & house(neptune, 10)"
+  },
+  "2059": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & house(pluto, 10)"
+  },
+  "2061": {
+   "kind": "rule",
+   "topic": "sun",
+   "when": "house(sun, 11)"
+  },
+  "2062": {
+   "kind": "rule",
+   "topic": "moon",
+   "when": "house(moon, 11)"
+  },
+  "2063": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & house(mercury, 11)"
+  },
+  "2064": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & house(venus, 11)"
+  },
+  "2065": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & house(mars, 11)"
+  },
+  "2066": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & house(jupiter, 11)"
+  },
+  "2067": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & house(saturn, 11)"
+  },
+  "2068": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & house(uranus, 11)"
+  },
+  "2069": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & house(neptune, 11)"
+  },
+  "2070": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & house(pluto, 11)"
+  },
+  "2072": {
+   "kind": "rule",
+   "topic": "sun",
+   "when": "house(sun, 12)"
+  },
+  "2073": {
+   "kind": "rule",
+   "topic": "moon",
+   "when": "house(moon, 12)"
+  },
+  "2074": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury) & house(mercury, 12)"
+  },
+  "2075": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus) & house(venus, 12)"
+  },
+  "2076": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars) & house(mars, 12)"
+  },
+  "2077": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter) & house(jupiter, 12)"
+  },
+  "2078": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn) & house(saturn, 12)"
+  },
+  "2079": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus) & house(uranus, 12)"
+  },
+  "2080": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune) & house(neptune, 12)"
+  },
+  "2081": {
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto) & house(pluto, 12)"
+  },
+  "2427": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, moon, trine, sextile)"
+  },
+  "2428": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, moon, square, opposition)"
+  },
+  "2429": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, moon, conjunction)"
+  },
+  "2432": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, mercury, conjunction)"
+  },
+  "2435": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, venus, conjunction)"
+  },
+  "2437": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, mars, trine, sextile)"
+  },
+  "2438": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, mars, square, opposition)"
+  },
+  "2439": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, mars, conjunction)"
+  },
+  "2441": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, jupiter, trine, sextile)"
+  },
+  "2442": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, jupiter, square, opposition)"
+  },
+  "2443": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, jupiter, conjunction)"
+  },
+  "2445": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, saturn, trine, sextile)"
+  },
+  "2446": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, saturn, square, opposition)"
+  },
+  "2447": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, saturn, conjunction)"
+  },
+  "2449": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, uranus, trine, sextile)"
+  },
+  "2450": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, uranus, square, opposition)"
+  },
+  "2451": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, uranus, conjunction)"
+  },
+  "2453": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, neptune, trine, sextile)"
+  },
+  "2454": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, neptune, square, opposition)"
+  },
+  "2455": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, neptune, conjunction)"
+  },
+  "2457": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, pluto, trine, sextile)"
+  },
+  "2458": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, pluto, square, opposition)"
+  },
+  "2459": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(sun, pluto, conjunction)"
+  },
+  "2462": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, mercury, trine, sextile)"
+  },
+  "2463": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, mercury, square, opposition)"
+  },
+  "2464": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, mercury, conjunction)"
+  },
+  "2466": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, venus, trine, sextile)"
+  },
+  "2467": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, venus, square, opposition)"
+  },
+  "2468": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, venus, conjunction)"
+  },
+  "2470": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, mars, trine, sextile)"
+  },
+  "2471": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, mars, square, opposition)"
+  },
+  "2472": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, mars, conjunction)"
+  },
+  "2474": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, jupiter, trine, sextile)"
+  },
+  "2475": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, jupiter, square, opposition)"
+  },
+  "2476": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, jupiter, conjunction)"
+  },
+  "2478": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, saturn, trine, sextile)"
+  },
+  "2479": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, saturn, square, opposition)"
+  },
+  "2480": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, saturn, conjunction)"
+  },
+  "2482": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, uranus, trine, sextile)"
+  },
+  "2483": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, uranus, square, opposition)"
+  },
+  "2484": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, uranus, conjunction)"
+  },
+  "2486": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, neptune, trine, sextile)"
+  },
+  "2487": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, neptune, square, opposition)"
+  },
+  "2488": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, neptune, conjunction)"
+  },
+  "2490": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, pluto, trine, sextile)"
+  },
+  "2491": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, pluto, square, opposition)"
+  },
+  "2492": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(moon, pluto, conjunction)"
+  },
+  "2495": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, venus, trine, sextile)"
+  },
+  "2496": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, venus, square, opposition)"
+  },
+  "2497": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, venus, conjunction)"
+  },
+  "2499": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, mars, trine, sextile)"
+  },
+  "2500": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, mars, square, opposition)"
+  },
+  "2501": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, mars, conjunction)"
+  },
+  "2503": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, jupiter, trine, sextile)"
+  },
+  "2504": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, jupiter, square, opposition)"
+  },
+  "2505": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, jupiter, conjunction)"
+  },
+  "2507": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, saturn, trine, sextile)"
+  },
+  "2508": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, saturn, square, opposition)"
+  },
+  "2509": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, saturn, conjunction)"
+  },
+  "2511": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, uranus, trine, sextile)"
+  },
+  "2512": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, uranus, square, opposition)"
+  },
+  "2513": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, uranus, conjunction)"
+  },
+  "2515": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, neptune, trine, sextile)"
+  },
+  "2516": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, neptune, square, opposition)"
+  },
+  "2517": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, neptune, conjunction)"
+  },
+  "2519": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, pluto, trine, sextile)"
+  },
+  "2520": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, pluto, square, opposition)"
+  },
+  "2521": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mercury, pluto, conjunction)"
+  },
+  "2524": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, mars, trine, sextile)"
+  },
+  "2525": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, mars, square, opposition)"
+  },
+  "2526": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, mars, conjunction)"
+  },
+  "2528": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, jupiter, trine, sextile)"
+  },
+  "2529": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, jupiter, square, opposition)"
+  },
+  "2530": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, jupiter, conjunction)"
+  },
+  "2532": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, saturn, trine, sextile)"
+  },
+  "2533": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, saturn, square, opposition)"
+  },
+  "2534": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, saturn, conjunction)"
+  },
+  "2536": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, uranus, trine, sextile)"
+  },
+  "2537": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, uranus, square, opposition)"
+  },
+  "2538": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, uranus, conjunction)"
+  },
+  "2540": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, neptune, trine, sextile)"
+  },
+  "2541": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, neptune, square, opposition)"
+  },
+  "2542": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, neptune, conjunction)"
+  },
+  "2544": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, pluto, trine, sextile)"
+  },
+  "2545": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, pluto, square, opposition)"
+  },
+  "2546": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(venus, pluto, conjunction)"
+  },
+  "2549": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, jupiter, trine, sextile)"
+  },
+  "2550": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, jupiter, square, opposition)"
+  },
+  "2551": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, jupiter, conjunction)"
+  },
+  "2553": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, saturn, trine, sextile)"
+  },
+  "2554": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, saturn, square, opposition)"
+  },
+  "2555": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, saturn, conjunction)"
+  },
+  "2557": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, uranus, trine, sextile)"
+  },
+  "2558": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, uranus, square, opposition)"
+  },
+  "2559": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, uranus, conjunction)"
+  },
+  "2561": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, neptune, trine, sextile)"
+  },
+  "2562": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, neptune, square, opposition)"
+  },
+  "2563": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, neptune, conjunction)"
+  },
+  "2565": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, pluto, trine, sextile)"
+  },
+  "2566": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, pluto, square, opposition)"
+  },
+  "2567": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(mars, pluto, conjunction)"
+  },
+  "2570": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, saturn, trine, sextile)"
+  },
+  "2571": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, saturn, square, opposition)"
+  },
+  "2572": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, saturn, conjunction)"
+  },
+  "2574": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, uranus, trine, sextile)"
+  },
+  "2575": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, uranus, square, opposition)"
+  },
+  "2576": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, uranus, conjunction)"
+  },
+  "2578": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, neptune, trine, sextile)"
+  },
+  "2579": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, neptune, square, opposition)"
+  },
+  "2580": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, neptune, conjunction)"
+  },
+  "2582": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, pluto, trine, sextile)"
+  },
+  "2583": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, pluto, square, opposition)"
+  },
+  "2584": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(jupiter, pluto, conjunction)"
+  },
+  "2587": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(saturn, uranus, trine, sextile)"
+  },
+  "2588": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(saturn, uranus, square, opposition)"
+  },
+  "2589": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(saturn, uranus, conjunction)"
+  },
+  "2591": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(saturn, neptune, trine, sextile)"
+  },
+  "2592": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(saturn, neptune, square, opposition)"
+  },
+  "2593": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(saturn, neptune, conjunction)"
+  },
+  "2595": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(saturn, pluto, trine, sextile)"
+  },
+  "2596": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(saturn, pluto, square, opposition)"
+  },
+  "2597": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(saturn, pluto, conjunction)"
+  },
+  "2600": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(uranus, neptune, trine, sextile)"
+  },
+  "2601": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(uranus, neptune, square, opposition)"
+  },
+  "2602": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(uranus, neptune, conjunction)"
+  },
+  "2604": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(uranus, pluto, trine, sextile)"
+  },
+  "2605": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(uranus, pluto, square, opposition)"
+  },
+  "2606": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(uranus, pluto, conjunction)"
+  },
+  "2610": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(neptune, pluto, trine, sextile)"
+  },
+  "2611": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(neptune, pluto, square, opposition)"
+  },
+  "2612": {
+   "kind": "rule",
+   "topic": "aspect",
+   "when": "aspect(neptune, pluto, conjunction)"
+  }
+ }
+}

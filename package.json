@@ -22,6 +22,7 @@
     "kb:book": "npm run build:engine && npm run book -w @mystic/kb",
     "kb:bundle": "npm run build:engine && npm run bundle -w @mystic/kb",
     "kb:numerology": "npm run build:engine && npm run numerology -w @mystic/kb",
+    "kb:astrology": "npm run build:engine && npm run astrology -w @mystic/kb",
     "db:generate": "npm run db:generate -w @mystic/api",
     "start": "npm run start -w @mystic/api",
     "dev:web": "npm run dev -w @mystic/web"

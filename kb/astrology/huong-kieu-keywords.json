@@ -1,0 +1,411 @@
+{
+ "source": {
+  "code": "astrology.hk-keywords",
+  "file": "huong-kieu-keywords.jsonl",
+  "title": "Ba nhóm từ khóa",
+  "author": "Kiều Thị Thu Hương (cô Hương Kiều)",
+  "label": "Lời cô",
+  "description": "Bảng từ khóa mới của cô (\"3 nhóm từ khóa\"): chức năng của mỗi hành tinh, từ khóa của dấu hiệu hoàng đạo và cung địa bàn đi cùng nó, lời lưu ý, và các điểm khác trên lá số."
+ },
+ "entries": [
+  {
+   "at": 1,
+   "code": "mars",
+   "title": "Sao Hoả",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mars)"
+  },
+  {
+   "at": 4,
+   "code": "sign-aries",
+   "title": "Bạch Dương — Cardinal Fire",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(aries)"
+  },
+  {
+   "at": 6,
+   "code": "house-1",
+   "title": "Cung 1 — Angular House",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(1)"
+  },
+  {
+   "at": 9,
+   "code": "venus-taurus",
+   "title": "Sao Kim (Kim Ngưu)",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus)"
+  },
+  {
+   "at": 11,
+   "code": "sign-taurus",
+   "title": "Kim Ngưu — Fixed Earth",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(taurus)"
+  },
+  {
+   "at": 13,
+   "code": "house-2",
+   "title": "Cung 2 — Succedent House",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(2)"
+  },
+  {
+   "at": 16,
+   "code": "mercury-gemini",
+   "title": "Sao Thuỷ (Song Tử)",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury)"
+  },
+  {
+   "at": 19,
+   "code": "sign-gemini",
+   "title": "Song Tử — Mutable Air",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(gemini)"
+  },
+  {
+   "at": 21,
+   "code": "house-3",
+   "title": "Cung 3 — Cadent House",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(3)"
+  },
+  {
+   "at": 23,
+   "code": "moon",
+   "title": "Mặt trăng",
+   "kind": "rule",
+   "topic": "moon",
+   "when": "focus(moon)"
+  },
+  {
+   "at": 26,
+   "code": "sign-cancer",
+   "title": "Cự Giải — Cardinal Water",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(cancer)"
+  },
+  {
+   "at": 28,
+   "code": "house-4",
+   "title": "Cung 4",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(4)"
+  },
+  {
+   "at": 31,
+   "code": "sun",
+   "title": "Mặt trời",
+   "kind": "rule",
+   "topic": "sun",
+   "when": "focus(sun)"
+  },
+  {
+   "at": 34,
+   "code": "sign-leo",
+   "title": "Sư Tử — Fixed Fire",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(leo)"
+  },
+  {
+   "at": 36,
+   "code": "house-5",
+   "title": "Cung 5",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(5)"
+  },
+  {
+   "at": 38,
+   "code": "mercury-virgo",
+   "title": "Sao Thuỷ (Xử Nữ)",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(mercury)"
+  },
+  {
+   "at": 40,
+   "code": "sign-virgo",
+   "title": "Xử Nữ — Mutable Earth",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(virgo)"
+  },
+  {
+   "at": 42,
+   "code": "house-6",
+   "title": "Cung 6",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(6)"
+  },
+  {
+   "at": 45,
+   "code": "venus-libra",
+   "title": "Sao Kim (Thiên Bình)",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(venus)"
+  },
+  {
+   "at": 48,
+   "code": "sign-libra",
+   "title": "Thiên Bình — Cardinal Air",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(libra)"
+  },
+  {
+   "at": 50,
+   "code": "house-7",
+   "title": "Cung 7",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(7)"
+  },
+  {
+   "at": 52,
+   "code": "pluto",
+   "title": "Diêm vương tinh",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(pluto)"
+  },
+  {
+   "at": 55,
+   "code": "sign-scorpio",
+   "title": "Bò Cạp — Fixed Water",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(scorpio)"
+  },
+  {
+   "at": 57,
+   "code": "house-8",
+   "title": "Cung 8",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(8)"
+  },
+  {
+   "at": 60,
+   "code": "jupiter",
+   "title": "Sao Mộc",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(jupiter)"
+  },
+  {
+   "at": 63,
+   "code": "sign-sagittarius",
+   "title": "Nhân Mã — Mutable Fire",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(sagittarius)"
+  },
+  {
+   "at": 65,
+   "code": "house-9",
+   "title": "Cung 9",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(9)"
+  },
+  {
+   "at": 68,
+   "code": "saturn",
+   "title": "Sao Thổ",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(saturn)"
+  },
+  {
+   "at": 71,
+   "code": "sign-capricorn",
+   "title": "Ma Kết — Cardinal Earth",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(capricorn)"
+  },
+  {
+   "at": 73,
+   "code": "house-10",
+   "title": "Cung 10",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(10)"
+  },
+  {
+   "at": 76,
+   "code": "uranus",
+   "title": "Sao Thiên Vương",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(uranus)"
+  },
+  {
+   "at": 79,
+   "code": "sign-aquarius",
+   "title": "Bảo Bình — Fixed Air",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(aquarius)"
+  },
+  {
+   "at": 81,
+   "code": "house-11",
+   "title": "Cung 11",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(11)"
+  },
+  {
+   "at": 84,
+   "code": "neptune",
+   "title": "Sao Hải Vương",
+   "kind": "rule",
+   "topic": "planet",
+   "when": "focus(neptune)"
+  },
+  {
+   "at": 87,
+   "code": "sign-pisces",
+   "title": "Song Ngư — Mutable Water",
+   "kind": "rule",
+   "topic": "sign",
+   "when": "focus_sign(pisces)"
+  },
+  {
+   "at": 89,
+   "code": "house-12",
+   "title": "Cung 12",
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(12)"
+  },
+  {
+   "at": 92,
+   "code": "point-vertex",
+   "title": "Vertex (Vx)",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(vertex)"
+  },
+  {
+   "at": 94,
+   "code": "point-antivertex",
+   "title": "Anti Vertex",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(antivertex)"
+  },
+  {
+   "at": 96,
+   "code": "point-lilith",
+   "title": "Nguyệt Bột (Lilith)",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(lilith)"
+  },
+  {
+   "at": 98,
+   "code": "point-ziqi",
+   "title": "Tử Khí",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(ziqi)"
+  },
+  {
+   "at": 100,
+   "code": "point-north-node",
+   "title": "La Hầu",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(north-node)"
+  },
+  {
+   "at": 102,
+   "code": "point-south-node",
+   "title": "Kế đô",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(south-node)"
+  },
+  {
+   "at": 104,
+   "code": "point-chiron",
+   "title": "Chiron",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(chiron)"
+  },
+  {
+   "at": 106,
+   "code": "point-fortune",
+   "title": "Fortuna",
+   "kind": "rule",
+   "topic": "point",
+   "when": "focus(fortune)"
+  }
+ ],
+ "paras": {
+  "8": {
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(1)"
+  },
+  "15": {
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(2)"
+  },
+  "30": {
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(4)"
+  },
+  "44": {
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(6)"
+  },
+  "59": {
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(8)"
+  },
+  "67": {
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(9)"
+  },
+  "75": {
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(10)"
+  },
+  "83": {
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(11)"
+  },
+  "91": {
+   "kind": "rule",
+   "topic": "house",
+   "when": "focus_house(12)"
+  }
+ }
+}
