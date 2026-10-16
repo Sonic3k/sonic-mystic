@@ -5,12 +5,15 @@
    xung with AC and MC up to 10°. Reading her lines:
    - "X ở A hay cung N, +5 điểm" gives the 5 once (any of them); "mỗi nhân tố" / "mỗi cái" gives it for each;
    - "hành tinh khác" are the ten planets other than the one tested and those the same kind of line names (Mặt Trời,
-     Mặt Trăng); in the test of Mặt Trời, Mặt Trăng in cung 5 counts as another planet there, as no line names it;
+     Mặt Trăng); in the test of Mặt Trời, Mặt Trăng in cung 5 counts as another planet there, as no line names it, and
+     in the test of Chiron the lights count in "vùng của Chiron", which no other line scores (as the class's
+     homework "Nộp bài tính nhân tố trội" does: "Sun Sagittarius: 2");
    - the weak aspects are every aspect but those four (her list "lục hợp, bán lục hợp, Q, bQ, 45, 135,…");
    - in the test of Mặt Trăng, "góc chiếu yếu … với mặt trăng" is read as with Mặt Trời (the Moon cannot aspect itself);
    - "quạt xếp, chữ T lớn, tam giác lớn…" are the structures: quạt xếp (three or more planets in a sign), chữ T, tam
      giác lớn, con diều, đại thập tự, ngón tay định mệnh, đại lục hợp and the two rectangles;
-   - the lines asking you to add 2–5 points by your own feeling are left to you, as she says. */
+   - the lines asking you to add 2–5 points by your own feeling are left to you, as she says: what in the chart they
+     name (an aspect to La Hầu or Kế Đô, Fortuna in the sign or the house) is listed, not counted. */
 import type { AstroChart } from './chart.js';
 import { ASPECT, BODY, PLANETS, SIGN, separation, lowerFirst, type AspectCode, type BodyCode, type PlanetCode, type SignCode } from './zodiac.js';
 
@@ -23,10 +26,14 @@ export interface DominantItem {
   points: number;
   why: string;
 }
+/** what a line "cộng 2 đến 5 điểm … nếu tự bạn cảm thấy" names and the chart has: for the reader to weigh */
+export interface DominantChoice { line: number; why: string }
 export interface DominantTest {
   body: DominantBody; total: number; level: DominantLevel; items: DominantItem[];
+  /** the factors her "add 2–5 points by your own feeling" line names, found in the chart (not in the total) */
+  choices: DominantChoice[];
   /** Venus, "PHIÊN BẢN 2": with Kim Ngưu and cung 2 counted too */
-  withTaurus?: { total: number; level: DominantLevel; items: DominantItem[] };
+  withTaurus?: { total: number; level: DominantLevel; items: DominantItem[]; choices: DominantChoice[] };
   /** some lines could not be scored (no birth time: no AC, MC, houses) */
   partial: boolean;
 }
@@ -47,6 +54,8 @@ interface TestSpec {
   lines: {
     lights: number; eclipse?: number; strong: number; weak: number; inSign: number; nodes?: number; otherInSign: number;
     lightsInHouse: number; icCancer?: number; otherInHouse: number; pattern?: number; ownPlace: number;
+    /** "cộng 2 đến 5 điểm … nếu tự bạn cảm thấy": its line, and whether it names Fortuna in the house too */
+    feel?: number; feelHouse?: boolean;
   };
   /** what her line "X ở …" gives 5 points for (once, unless `each`) */
   own: { signs?: SignCode[]; house?: boolean; cuspSign?: boolean; notOnMc?: boolean; each?: boolean };
@@ -60,25 +69,25 @@ interface TestSpec {
 
 const SPECS: TestSpec[] = [
   { body: 'sun', signs: ['leo'], house: 5, luminary: true, own: {},
-    lines: { lights: 1, eclipse: 2, strong: 3, weak: 4, inSign: 5, otherInSign: 6, ownPlace: 7, lightsInHouse: 7, otherInHouse: 8, pattern: 10 } },
+    lines: { lights: 1, eclipse: 2, strong: 3, weak: 4, inSign: 5, otherInSign: 6, ownPlace: 7, lightsInHouse: 7, otherInHouse: 8, pattern: 10, feel: 9 } },
   { body: 'moon', signs: ['cancer'], house: 4, luminary: true, own: {},
-    lines: { lights: 1, eclipse: 2, strong: 3, weak: 4, inSign: 5, nodes: 6, otherInSign: 7, lightsInHouse: 8, icCancer: 9, otherInHouse: 10, pattern: 12, ownPlace: 8 } },
+    lines: { lights: 1, eclipse: 2, strong: 3, weak: 4, inSign: 5, nodes: 6, otherInSign: 7, lightsInHouse: 8, icCancer: 9, otherInHouse: 10, pattern: 12, ownPlace: 8, feel: 11 } },
   { body: 'mercury', signs: ['gemini', 'virgo'], house: 3, luminary: false, own: { signs: ['gemini', 'virgo'], house: true },
-    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9 } },
+    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9, feel: 10 } },
   { body: 'venus', signs: ['libra'], house: 7, luminary: false, own: { signs: ['libra'], house: true },
-    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9 } },
+    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9, feel: 10 } },
   { body: 'mars', signs: ['aries'], house: 1, luminary: false, own: { signs: ['aries', 'leo', 'sagittarius'], house: true },
-    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9 } },
+    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9, feel: 10, feelHouse: true } },
   { body: 'jupiter', signs: ['sagittarius'], house: 9, luminary: false, own: { signs: ['aries', 'leo', 'sagittarius'] },
-    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9 } },
+    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9, feel: 10, feelHouse: true } },
   { body: 'saturn', signs: ['capricorn'], house: 10, luminary: false, own: { signs: ['capricorn'], house: true, notOnMc: true }, nearMc: true,
-    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9 } },
+    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9, feel: 10, feelHouse: true } },
   { body: 'uranus', signs: ['aquarius'], house: 11, luminary: false, own: { signs: ['aquarius'], house: true, cuspSign: true },
-    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9 } },
+    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9, feel: 10, feelHouse: true } },
   { body: 'neptune', signs: ['pisces'], house: 12, luminary: false, own: { signs: ['pisces'], cuspSign: true },
-    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9 } },
+    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9, feel: 10, feelHouse: true } },
   { body: 'pluto', signs: ['scorpio'], house: 8, luminary: false, own: { signs: ['scorpio'], house: true, cuspSign: true },
-    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9 } },
+    lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8, pattern: 9, feel: 10, feelHouse: true } },
   { body: 'chiron', signs: ['virgo'], house: 6, luminary: false, own: { signs: ['virgo'], house: true, cuspSign: true, each: true }, region: ['libra', 'scorpio', 'sagittarius'],
     lines: { lights: 1, strong: 2, weak: 3, inSign: 4, ownPlace: 5, otherInSign: 6, lightsInHouse: 7, otherInHouse: 8 } },
 ];
@@ -110,7 +119,7 @@ export function dominantOf(c: AstroChart): DominantResult {
   const ruler = time ? SIGN[pl.asc!.sign].rulers[0] : null;
   const patterns = c.patterns.filter(p => STRUCTURES.has(p.kind));
 
-  const run = (s: TestSpec, signs: SignCode[], house: number, part: 'all' | 'taurus'): { items: DominantItem[]; partial: boolean } => {
+  const run = (s: TestSpec, signs: SignCode[], house: number, part: 'all' | 'taurus'): { items: DominantItem[]; choices: DominantChoice[]; partial: boolean } => {
     const X = s.body, L = s.lines, items: DominantItem[] = [];
     let partial = false;
     const give = (line: number, points: number, why: string) => items.push({ line, points, why });
@@ -183,7 +192,7 @@ export function dominantOf(c: AstroChart): DominantResult {
     // the other planets in those signs (Chiron: in its region)
     const lineOS = part === 'taurus' ? 13 : L.otherInSign;
     const regionSigns = s.region ?? signs;
-    for (const b of others) if (inSign(b, regionSigns)) give(lineOS, s.luminary ? 5 : s.region ? 2 : 3, `${nameOf(b)} ở ${SIGN[pl[b]!.sign].name}`);
+    for (const b of s.region ? PLANETS : others) if (inSign(b, regionSigns)) give(lineOS, s.luminary ? 5 : s.region ? 2 : 3, `${nameOf(b)} ở ${SIGN[pl[b]!.sign].name}`);
     // the house
     if (!time) partial = true;
     else {
@@ -214,7 +223,22 @@ export function dominantOf(c: AstroChart): DominantResult {
       const hit = patterns.find(p => p.bodies.includes(X as PlanetCode));
       if (hit) give(L.pattern, 5, `${nameOf(X)} thuộc ${patternName(hit.kind)}`);
     }
-    return { items, partial };
+    // "cộng 2 đến 5 điểm … nếu tự bạn cảm thấy": what the line names, for the reader to weigh
+    const choices: DominantChoice[] = [];
+    const feel = part === 'taurus' ? 16 : L.feel;
+    if (feel) {
+      if (part === 'all') {
+        const toNodes = (['north-node', 'south-node'] as BodyCode[]).map(n => ({ n, r: asp(X, n) })).filter(x => x.r);
+        if (toNodes.length) choices.push({ line: feel, why: `${nameOf(X)} ${toNodes.map(x => `${lowerFirst(ASPECT[x.r!.k].name)} ${BODY[x.n].name}`).join(', ')}` });
+        if (X === 'sun') for (const n of ['north-node', 'south-node'] as BodyCode[]) if (inSign(n, signs)) choices.push({ line: feel, why: `${BODY[n].name} ở ${signNames}` });
+      }
+      if (!time) partial = true;
+      else if (pl.fortune) {
+        const at = [signs.includes(pl.fortune.sign) ? SIGN[pl.fortune.sign].name : null, L.feelHouse && part === 'all' && pl.fortune.house === house ? `cung ${house}` : null].filter(Boolean);
+        if (at.length) choices.push({ line: feel, why: `Fortuna ở ${at.join(', ')}` });
+      }
+    }
+    return { items, choices, partial };
   };
 
   const tests: DominantTest[] = [];
@@ -222,11 +246,11 @@ export function dominantOf(c: AstroChart): DominantResult {
     if (!pl[s.body]) continue;
     const r = run(s, s.signs, s.house, 'all');
     const total = r.items.reduce((n, x) => n + x.points, 0);
-    const t: DominantTest = { body: s.body, total, level: levelOf(s.body, total), items: r.items, partial: r.partial };
+    const t: DominantTest = { body: s.body, total, level: levelOf(s.body, total), items: r.items, choices: r.choices, partial: r.partial };
     if (s.body === 'venus') {
       const v2 = run(s, ['taurus'], 2, 'taurus');
       const items = [...r.items, ...v2.items], n = items.reduce((m, x) => m + x.points, 0);
-      t.withTaurus = { total: n, level: levelOf('venus', n), items };
+      t.withTaurus = { total: n, level: levelOf('venus', n), items, choices: [...r.choices, ...v2.choices] };
     }
     tests.push(t);
   }

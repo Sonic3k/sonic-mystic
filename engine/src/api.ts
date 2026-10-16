@@ -14,8 +14,6 @@ export interface DisciplineDto { code: string; name: string; description: string
 export interface SourceDto {
   code: string; discipline: string; title: string; author: string | null; kind: SourceKind;
   description: string | null; note: string | null; sourceFile: string | null;
-  /** who may read its text: anyone, or the owner only (a published book) */
-  access: 'public' | 'owner';
   entries: number; passages: number; rules: number; reviewNotes: number;
 }
 

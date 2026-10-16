@@ -157,26 +157,23 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
   describe('nhân số học', { skip: !hasBook && 'the numerology bundle is not built here' }, () => {
     const quynh = { birth: { year: 1974, month: 5, day: 1 }, gender: 'female', names: [{ text: 'Quỳnh' }] };
 
-    test('the book is imported once, and its text is the owner\'s', async () => {
+    test('the book is imported once, and anyone reads it', async () => {
       const h = await api<{ numerology: { rules: number } | null }>('/health');
       assert.equal(h.data.numerology?.rules, 585);
       const src = await api<SourceDto[]>('/sources?discipline=numerology');
       assert.equal(src.data[0].code, 'numerology.ldqh');
-      assert.equal(src.data[0].access, 'owner');
       const pool = createPool(appUrl, false);
       const again = await importNumerology(createDb(pool), readNumerologyBundle(numerologyDir)!);
       await pool.end();
       assert.equal(again.skipped, true);
-      // anyone may compute the numbers; the book's words are the owner's
+      // the numbers, the book, its readings and lookups: no token needed, even with ADMIN_TOKEN set
       const c = await anon<{ chart: { ruling: number } }>('/numerology/chart', quynh);
       assert.equal(c.status, 200);
       assert.equal(c.data.chart.ruling, 9);
-      for (const path of ['/numerology/book', '/numerology/book/p5.9', '/numerology/catalog', '/numerology/lookup?symbols=chu-dao:9', '/sources/numerology.ldqh/entries']) assert.equal((await anon(path)).status, 401, path);
-      assert.equal((await anon('/numerology/reading', quynh)).status, 401);
+      for (const path of ['/numerology/book', '/numerology/book/p5.9', '/numerology/catalog', '/numerology/lookup?symbols=chu-dao:9', '/sources/numerology.ldqh/entries']) assert.equal((await anon(path)).status, 200, path);
+      assert.equal((await anon('/numerology/reading', quynh)).status, 200);
       const s1 = await anon<SearchResultDto>(`/search?discipline=numerology&q=${encodeURIComponent('kim tự tháp')}`);
-      assert.equal(s1.data.total, 0);
-      const s2 = await api<SearchResultDto>(`/search?discipline=numerology&q=${encodeURIComponent('kim tự tháp')}`);
-      assert.ok(s2.data.total > 0);
+      assert.ok(s1.data.total > 0);
     });
 
     test('a reading reads as the book reads the author\'s own chart', async () => {
@@ -288,18 +285,18 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
   });
 
   describe('chiêm tinh: the sources', { skip: !hasAstrology && 'the astrology bundle is not built here' }, () => {
-    test('the sources are imported once, and their text is the owner\'s', async () => {
+    test('the sources are imported once, and anyone reads them', async () => {
       const h = await api<{ astrology: { rules: number; sources: number } | null }>('/health');
       assert.equal(h.data.astrology?.sources, 6);
       assert.ok((h.data.astrology?.rules ?? 0) > 2000);
       const src = await api<SourceDto[]>('/sources?discipline=astrology');
-      assert.deepEqual(src.data.map(s => s.access), ['owner', 'owner', 'owner', 'owner', 'owner', 'owner']);
+      assert.equal(src.data.length, 6);
       const pool = createPool(appUrl, false);
       const again = await importAstrology(createDb(pool), readAstrologyBundle(astrologyDir)!);
       await pool.end();
       assert.equal(again.skipped, true);
-      for (const path of ['/astrology/book', '/astrology/catalog', '/astrology/lookup?symbols=sun@aquarius']) assert.equal((await anon(path)).status, 401, path);
-      assert.equal((await anon('/astrology/reading', oprah)).status, 401);
+      for (const path of ['/astrology/book', '/astrology/catalog', '/astrology/lookup?symbols=sun@aquarius']) assert.equal((await anon(path)).status, 200, path);
+      assert.equal((await anon('/astrology/reading', oprah)).status, 200);
     });
 
     test('a reading: every part, every passage cited, why it was chosen', async () => {

@@ -60,8 +60,6 @@ export const sources = pgTable('sources', {
   description: text('description'),
   sourceFile: text('source_file'),
   note: text('note'),
-  /** who may read its text: anyone, or the owner only (a published book, under its author's copyright) */
-  access: text('access', { enum: ['public', 'owner'] }).notNull().default('public'),
   sortOrder: smallint('sort_order').notNull().default(0),
   ...audit,
 });

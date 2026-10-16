@@ -327,11 +327,11 @@ export class PeopleService {
     const { p } = await this.profileRows(id);
     if (p.disciplineCode === 'astrology') {
       const { computed } = await this.astrologyInput(id);
-      return this.astrology.readingOf(computed, await this.astrology.book(true));
+      return this.astrology.readingOf(computed, await this.astrology.book());
     }
     if (p.disciplineCode === 'numerology') {
       const { computed, profile } = await this.numerologyInput(id);
-      const k = await this.numerology.book(true);
+      const k = await this.numerology.book();
       return this.numerology.readingOf(computed, k, year ?? profile.viewYear ?? null, name);
     }
     const { profile, birth, settings } = await this.profileInput(id);

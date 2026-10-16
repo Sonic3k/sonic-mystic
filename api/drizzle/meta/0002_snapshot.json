@@ -1,5 +1,5 @@
 {
-  "id": "0807436f-0ce1-449f-85e6-5b96bce5866a",
+  "id": "0d1008c2-8fcc-4d55-80d8-2a860899b6fd",
   "prevId": "8744f82e-3e66-4b25-8c2d-b74ea6c8bacc",
   "version": "7",
   "dialect": "postgresql",
@@ -2015,13 +2015,6 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
-        },
-        "access": {
-          "name": "access",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'public'"
         },
         "sort_order": {
           "name": "sort_order",

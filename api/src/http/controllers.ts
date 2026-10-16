@@ -6,9 +6,7 @@ import { z } from 'zod';
 import type { DisciplineDto } from '@mystic/engine/api';
 import { AiService } from '../ai/ai.service.js';
 import { BooksService } from '../books/books.service.js';
-import { Access, ZodPipe, isOwner } from '../common/access.js';
-import { APP_CONFIG } from '../common/tokens.js';
-import type { AppConfig } from '../config.js';
+import { Access, ZodPipe } from '../common/access.js';
 import { DB, type Db } from '../db/db.js';
 import { disciplines, imports } from '../db/schema.js';
 import { KnowledgeService } from '../kb/knowledge.service.js';
@@ -86,20 +84,20 @@ export class MetaController {
 @Controller()
 @Access('public')
 export class BooksController {
-  constructor(@Inject(BooksService) private readonly books: BooksService, @Inject(APP_CONFIG) private readonly config: AppConfig) {}
+  constructor(@Inject(BooksService) private readonly books: BooksService) {}
 
   @Get('sources')
   sources(@Query('discipline') discipline = 'tuvi') { return this.books.sources(discipline); }
 
   @Get('sources/:code/entries')
-  entries(@Param('code') code: string, @Req() req: Request) { return this.books.entries(code, isOwner(this.config, req)); }
+  entries(@Param('code') code: string) { return this.books.entries(code); }
 
   @Get('sources/:code/entries/:key')
-  entry(@Param('code') code: string, @Param('key') key: string, @Req() req: Request) { return this.books.entry(code, key, isOwner(this.config, req)); }
+  entry(@Param('code') code: string, @Param('key') key: string) { return this.books.entry(code, key); }
 
   @Get('search')
-  search(@Query('q') q = '', @Query('discipline') discipline = 'tuvi', @Query('limit') limit?: string, @Req() req?: Request) {
-    return this.books.search(q, discipline, optInt(limit), req ? isOwner(this.config, req) : false);
+  search(@Query('q') q = '', @Query('discipline') discipline = 'tuvi', @Query('limit') limit?: string) {
+    return this.books.search(q, discipline, optInt(limit));
   }
 
   @Patch('passages/:id')
@@ -155,15 +153,13 @@ async function readGzipBody(req: Request, max: number, hint: string): Promise<un
   try { return JSON.parse(gunzipSync(Buffer.concat(parts), { maxOutputLength: 96 * 1024 * 1024 }).toString('utf8')); } catch (e) { throw new BadRequestException(`Không đọc được gói: ${(e as Error).message}`); }
 }
 
-/** Nhân số học: computing the numbers is open to anyone; the book's text (readings, the book, lookups) is the owner's
-    while its source is marked so */
+/** Nhân số học: the numbers, the readings, the book and its lookups */
 @Controller('numerology')
 @Access('public')
 export class NumerologyController {
   constructor(
     @Inject(NumerologyService) private readonly numerology: NumerologyService,
     @Inject(KnowledgeService) private readonly knowledge: KnowledgeService,
-    @Inject(APP_CONFIG) private readonly config: AppConfig,
     @Inject(DB) private readonly db: Db,
   ) {}
 
@@ -173,22 +169,22 @@ export class NumerologyController {
 
   @Post('reading')
   @HttpCode(200)
-  reading(@Body(new ZodPipe(NumerologyBody)) body: NumerologyBodyT, @Req() req: Request) { return this.numerology.reading(body, isOwner(this.config, req)); }
+  reading(@Body(new ZodPipe(NumerologyBody)) body: NumerologyBodyT) { return this.numerology.reading(body); }
 
   @Get('book')
-  toc(@Req() req: Request) { return this.numerology.toc(isOwner(this.config, req)); }
+  toc() { return this.numerology.toc(); }
 
   @Get('book/:code')
-  entry(@Param('code') code: string, @Req() req: Request) { return this.numerology.entry(code, isOwner(this.config, req)); }
+  entry(@Param('code') code: string) { return this.numerology.entry(code); }
 
   /** ?symbols=chu-dao:7,so:1 — the passages whose condition speaks of all of them (optionally in one part: &topic=bieu_do) */
   @Get('lookup')
-  lookup(@Query('symbols') symbols = '', @Query('topic') topic: string | undefined, @Req() req: Request) {
-    return this.numerology.lookup(symbols.split(',').map(x => x.trim()).filter(Boolean), isOwner(this.config, req), topic || undefined);
+  lookup(@Query('symbols') symbols = '', @Query('topic') topic: string | undefined) {
+    return this.numerology.lookup(symbols.split(',').map(x => x.trim()).filter(Boolean), topic || undefined);
   }
 
   @Get('catalog')
-  catalog(@Req() req: Request) { return this.numerology.catalog(isOwner(this.config, req)); }
+  catalog() { return this.numerology.catalog(); }
 
   /** whether the book is loaded, and which bundle */
   @Get('bundle')
@@ -198,7 +194,7 @@ export class NumerologyController {
     return { loaded: !!n, knowledgeVersion: n?.version ?? null, rules: n?.rules.size ?? 0, entries: n?.order.length ?? 0, bundleVersion: last?.bundleVersion ?? null, importedAt: last?.importedAt.toISOString() ?? null };
   }
 
-  /** the owner loads the book: the bundle built where the book is, gzipped (kb: npm run upload:numerology) */
+  /** loads the book: the bundle built where the book is, gzipped (kb: npm run upload:numerology) */
   @Put('bundle')
   @Access('owner')
   async upload(@Req() req: Request, @Query('force') force?: string) {
@@ -214,14 +210,13 @@ export class NumerologyController {
   }
 }
 
-/** Chiêm tinh: computing a chart is open to anyone; the sources' text (readings, the sources, lookups) is the owner's */
+/** Chiêm tinh: the chart, the readings, the sources and their lookups */
 @Controller('astrology')
 @Access('public')
 export class AstrologyController {
   constructor(
     @Inject(AstrologyService) private readonly astrology: AstrologyService,
     @Inject(KnowledgeService) private readonly knowledge: KnowledgeService,
-    @Inject(APP_CONFIG) private readonly config: AppConfig,
     @Inject(DB) private readonly db: Db,
   ) {}
 
@@ -231,22 +226,22 @@ export class AstrologyController {
 
   @Post('reading')
   @HttpCode(200)
-  reading(@Body(new ZodPipe(AstrologyBody)) body: AstrologyBodyT, @Req() req: Request) { return this.astrology.reading(body, isOwner(this.config, req)); }
+  reading(@Body(new ZodPipe(AstrologyBody)) body: AstrologyBodyT) { return this.astrology.reading(body); }
 
   @Get('book')
-  toc(@Req() req: Request) { return this.astrology.toc(isOwner(this.config, req)); }
+  toc() { return this.astrology.toc(); }
 
   @Get('book/:source/:code')
-  entry(@Param('source') source: string, @Param('code') code: string, @Req() req: Request) { return this.astrology.entry(source, code, isOwner(this.config, req)); }
+  entry(@Param('source') source: string, @Param('code') code: string) { return this.astrology.entry(source, code); }
 
   /** ?symbols=sun@aries,house:7 — the passages whose condition speaks of all of them (optionally in one part: &topic=sun) */
   @Get('lookup')
-  lookup(@Query('symbols') symbols = '', @Query('topic') topic: string | undefined, @Req() req: Request) {
-    return this.astrology.lookup(symbols.split(',').map(x => x.trim()).filter(Boolean), isOwner(this.config, req), topic || undefined);
+  lookup(@Query('symbols') symbols = '', @Query('topic') topic: string | undefined) {
+    return this.astrology.lookup(symbols.split(',').map(x => x.trim()).filter(Boolean), topic || undefined);
   }
 
   @Get('catalog')
-  catalog(@Req() req: Request) { return this.astrology.catalog(isOwner(this.config, req)); }
+  catalog() { return this.astrology.catalog(); }
 
   /** whether the sources are loaded, and which bundle */
   @Get('bundle')
@@ -256,7 +251,7 @@ export class AstrologyController {
     return { loaded: !!a, knowledgeVersion: a?.version ?? null, rules: a?.rules.size ?? 0, sources: a?.sources.length ?? 0, entries: a?.order.length ?? 0, bundleVersion: last?.bundleVersion ?? null, importedAt: last?.importedAt.toISOString() ?? null };
   }
 
-  /** the owner loads the sources: the bundle built where they are, gzipped (kb: npm run upload:astrology) */
+  /** loads the sources: the bundle built where they are, gzipped (kb: npm run upload:astrology) */
   @Put('bundle')
   @Access('owner')
   async upload(@Req() req: Request, @Query('force') force?: string) {

@@ -79,12 +79,12 @@ export class ReadingsService {
     try {
       if (discipline === 'astrology') {
         const { computed } = await this.people.astrologyInput(profileId);
-        const k = await this.astrology.book(true);
+        const k = await this.astrology.book();
         return scope => astrologyHash(computed, scope, this.astrology.matched(computed, k));
       }
       if (discipline === 'numerology') {
         const { computed } = await this.people.numerologyInput(profileId);
-        const k = await this.numerology.book(true);
+        const k = await this.numerology.book();
         return (scope, year) => numerologyHash(computed, scope, year, this.numerology.matched(computed, k, year));
       }
       const pi = await this.people.profileInput(profileId);
@@ -107,7 +107,7 @@ export class ReadingsService {
       if (!astrologyScopeOk(scope)) throw new BadRequestException(`Phạm vi không hợp lệ: ${scope} (tong-hop)`);
       year = body.viewYear ?? profile.viewYear ?? todayVn().year;
       const { computed } = await this.people.astrologyInput(profileId);
-      const k = await this.astrology.book(true);
+      const k = await this.astrology.book();
       const codes = this.astrology.matched(computed, k);
       inputHash = astrologyHash(computed, scope, codes);
       allowed = new Set(codes);
@@ -116,7 +116,7 @@ export class ReadingsService {
       if (!numerologyScopeOk(scope)) throw new BadRequestException(`Phạm vi không hợp lệ: ${scope} (tong-hop, hoặc nam-YYYY)`);
       year = body.viewYear ?? (scope.startsWith('nam-') ? Number(scope.slice(4)) : profile.viewYear ?? todayVn().year);
       const { computed } = await this.people.numerologyInput(profileId);
-      const k = await this.numerology.book(true);
+      const k = await this.numerology.book();
       const codes = this.numerology.matched(computed, k, year);
       inputHash = numerologyHash(computed, scope, year, codes);
       allowed = new Set(codes);

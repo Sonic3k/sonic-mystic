@@ -31,7 +31,7 @@ export interface NumerologyKnowledge {
   entries: Map<string, NumerologyEntry>;
   /** entries in the book's order */
   order: NumerologyEntry[];
-  source: NumerologySourceDto & { id: number; access: 'public' | 'owner' };
+  source: NumerologySourceDto & { id: number };
 }
 const TOPIC_CODES = new Set<string>(TOPICS.map(t => t.code));
 const RULE_KINDS = new Set(['rule', 'advice', 'child', 'general']);
@@ -45,7 +45,7 @@ export interface AstrologyKnowledge {
   symbols: Map<string, string[]>;
   ruleOfPassage: Map<number, string>;
   /** the sources in the order a reading quotes them, each with who may read it */
-  sources: (AstrologySourceDto & { id: number; access: 'public' | 'owner' })[];
+  sources: (AstrologySourceDto & { id: number })[];
   /** entries by "source/code", in each source's order */
   entries: Map<string, AstrologyEntry>;
   order: AstrologyEntry[];
@@ -141,7 +141,7 @@ export class KnowledgeService {
       kb: { rules: compileAstrology(raw), entries: Object.fromEntries(order.map(e => [e.key, { code: e.key, title: e.title, parent: e.parent ? entryKey(e.source, e.parent) : undefined, ord: e.ordinal }])) },
       version: hash.digest('hex').slice(0, 16),
       rules: dtos, symbols: syms, ruleOfPassage, entries: byKey, order,
-      sources: srcs.map(x => ({ id: x.id, code: x.code, title: x.title, author: x.author, description: x.description, note: x.note, access: x.access, label: label(x.code), translator: x.code === 'astrology.woolfolk' ? 'Claude' : null })),
+      sources: srcs.map(x => ({ id: x.id, code: x.code, title: x.title, author: x.author, description: x.description, note: x.note, label: label(x.code), translator: x.code === 'astrology.woolfolk' ? 'Claude' : null })),
     };
   }
 
@@ -187,7 +187,7 @@ export class KnowledgeService {
       kb: { rules: compileNumerology(raw), entries: Object.fromEntries(order.map(e => [e.code, { code: e.code, title: e.title, parent: e.parent ?? undefined, ord: e.ordinal }])) },
       version: hash.digest('hex').slice(0, 16),
       rules: dtos, symbols: syms, ruleOfPassage, entries: byCode, order,
-      source: { id: src.id, code: src.code, title: src.title, author: src.author, description: src.description, note: src.note, access: src.access },
+      source: { id: src.id, code: src.code, title: src.title, author: src.author, description: src.description, note: src.note },
     };
   }
 

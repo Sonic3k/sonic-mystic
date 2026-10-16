@@ -1,7 +1,7 @@
 /* Loads the Chiêm tinh bundle — cô Hương Kiều's textbook, keyword table, test of the dominant planets and handout on
    Bạch Dương, the class's translation of Bil Tierney's book on aspects, and Woolfolk's book in Claude's translation —
    into the database, one source per book. The sources' text is not kept in the repository, so the bundle comes from
-   disk (kb/bundle/astrology, built where the sources are) or is uploaded by the owner. As with Nhân số học,
+   disk (kb/bundle/astrology, built where the sources are) or is uploaded (PUT /api/astrology/bundle). As with Nhân số học,
    everything is written by its stable key and what was edited in the database is kept. */
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -120,9 +120,8 @@ export async function importAstrology(db: Db, raw: AstrologyBundle, opts: { forc
     let written = 0, keptEdited = 0, removed = 0;
     for (const [order, book] of b.book.books.entries()) {
       const s = book.source;
-      // published works: their text is the owner's to read
       const [src] = await tx.insert(sources).values({
-        disciplineCode: 'astrology', code: s.code, title: s.title, author: s.author, kind: 'book', sourceFile: s.file, note: s.note ?? null, access: 'owner', sortOrder: order,
+        disciplineCode: 'astrology', code: s.code, title: s.title, author: s.author, kind: 'book', sourceFile: s.file, note: s.note ?? null, sortOrder: order,
         description: s.description ?? null,
       }).onConflictDoUpdate({ target: sources.code, set: { title: sql`excluded.title`, author: sql`excluded.author`, kind: sql`excluded.kind`, sourceFile: sql`excluded.source_file`, note: sql`excluded.note`, description: sql`excluded.description`, sortOrder: sql`excluded.sort_order`, updatedAt: now } })
         .returning({ id: sources.id });

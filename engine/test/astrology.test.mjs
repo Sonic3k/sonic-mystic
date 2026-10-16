@@ -143,6 +143,34 @@ test('her test of the dominant planets ("Đi tìm nhân tố trội")', () => {
   assert.ok(noon.notes.length >= 1);
 });
 
+test('her test against the class\'s homework "Nộp bài tính nhân tố trội"', () => {
+  // the chart the homework scores, found from what it lists (Mặt Trời 3° Nhân Mã on the AC in cung 12, Mặt Trăng 29° Sư Tử
+  // on the MC in cung 9, Sao Thổ Song Ngư in cung 3, Thiên Vương and Hải Vương Ma Kết in cung 2, Sao Kim in cung 11…)
+  const hw = A.buildAstroChart(JSON.parse(fs.readFileSync(new URL('./fixtures/class-homework.json', import.meta.url), 'utf8')));
+  const t = b => hw.dominant.tests.find(x => x.body === b);
+  const has = (b, line, points, re) => assert.ok(t(b).items.some(i => i.line === line && i.points === points && re.test(i.why)), `${b}: line ${line} +${points} ${re}`);
+  // Nhật kế: "Sun đồng vị AC: 15 · Sun vuông góc MC: 10 · Sun vuông góc Moon: 10 · Sun đồng vị Jupiter, Pluto, vuông góc
+  // Saturn: 6 · Sun Venus: 4 · Moon Leo: 10 · Mar Leo: 5 · Sun thuộc cấu trúc T-square: 5"
+  has('sun', 1, 15, /đồng vị AC/); has('sun', 1, 10, /vuông góc MC/); has('sun', 1, 10, /vuông góc Mặt Trăng/);
+  has('sun', 3, 6, /Sao Mộc/); has('sun', 3, 6, /Sao Thổ/); has('sun', 3, 6, /Diêm Vương/); has('sun', 4, 4, /Sao Kim/);
+  has('sun', 5, 10, /Mặt Trăng ở Sư Tử/); has('sun', 6, 5, /Sao Hỏa ở Sư Tử/); has('sun', 10, 5, /chữ T/);
+  // "Fortuna ở Sư tử: 3": her line 9 leaves it to the reader — listed, not counted
+  assert.ok(t('sun').choices.some(c => c.line === 9 && /Fortuna ở Sư Tử/.test(c.why)));
+  assert.ok(!t('sun').items.some(i => /Fortuna/.test(i.why)));
+  // Kim tinh kế 11, "Tính Kim ngưu: Uranus cung 2: 3, Neptune cung 2: 3"
+  assert.deepEqual(t('venus').withTaurus.items.filter(i => i.line === 15).map(i => i.points), [3, 3]);
+  // Hỏa tinh kế: "Mars ở Leo: 5" (Sao Hỏa in another fire sign)
+  has('mars', 5, 5, /Sao Hỏa ở Sư Tử/);
+  // Mộc tinh kế: "AC Sagittarius: 10 · Mặt trời Sagittarius: 5 · Moon cung 9: 5 · Mar cung 9: 3"; "Fortuna cung 9" is the reader's
+  has('jupiter', 4, 10, /AC ở Nhân Mã/); has('jupiter', 4, 5, /Mặt Trời ở Nhân Mã/); has('jupiter', 7, 5, /Mặt Trăng ở cung 9/); has('jupiter', 8, 3, /Sao Hỏa ở cung 9/);
+  assert.ok(t('jupiter').choices.some(c => /Fortuna ở cung 9/.test(c.why)));
+  // Thổ tinh kế: "Moon có độ lệch góc vs MC: 5" (within 10° of the MC, from cung 9)
+  has('saturn', 7, 5, /Mặt Trăng cách MC/);
+  // Chiron kế, "Vùng Chiron: … Sun Sagittarius: 2"
+  has('chiron', 6, 2, /Mặt Trời ở Nhân Mã/); has('chiron', 5, 5, /Chiron ở Xử Nữ/); has('chiron', 4, 5, /MC ở Xử Nữ/);
+  for (const x of hw.dominant.tests) assert.equal(x.total, x.items.reduce((n, i) => n + i.points, 0));
+});
+
 test('Tử Khí by her spreadsheet: 310.58° on 1/6/2009, 0.0352° a day', () => {
   assert.equal(+A.ziqiAt(A.ZIQI_EPOCH_JD).toFixed(2), 310.58);
   assert.equal(+A.ziqiAt(A.ZIQI_EPOCH_JD + 1000).toFixed(2), 345.78);

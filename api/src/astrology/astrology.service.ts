@@ -1,7 +1,7 @@
 /* Chiêm tinh on the server: the chart of a birth (positions from the Swiss Ephemeris; anyone may compute it), and what
    the sources say of it — a reading, the sources themselves section by section, and lookups by planet, sign, house,
    aspect or structure. The sources are under their authors' copyright, so their text is the owner's to read. */
-import { BadRequestException, Inject, Injectable, InternalServerErrorException, NotFoundException, ServiceUnavailableException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, InternalServerErrorException, NotFoundException, ServiceUnavailableException } from '@nestjs/common';
 import { asc, count, inArray } from 'drizzle-orm';
 import { z } from 'zod';
 import { ENGINE_VERSION } from '@mystic/engine';
@@ -61,11 +61,10 @@ export function astrologyOf(birth: AstrologyBirthDto, gender: Gender | null): As
 export class AstrologyService {
   constructor(@Inject(DB) private readonly db: Db, @Inject(KnowledgeService) private readonly knowledge: KnowledgeService) {}
 
-  /** the sources, or a 503 while none is loaded; a 401 when their text is the owner's and the caller is not */
-  async book(owner: boolean): Promise<AstrologyKnowledge> {
+  /** the sources, or a 503 while none is loaded */
+  async book(): Promise<AstrologyKnowledge> {
     const k = await this.knowledge.astrology();
     if (!k) throw new ServiceUnavailableException('Tài liệu Chiêm tinh chưa được nạp vào cơ sở dữ liệu');
-    if (k.sources.some(s => s.access === 'owner') && !owner) throw new UnauthorizedException('Tài liệu này chỉ chủ nhà đọc được (cần mã chủ nhà)');
     return k;
   }
 
@@ -73,8 +72,8 @@ export class AstrologyService {
     return astrologyOf(body.birth, body.gender);
   }
 
-  async reading(body: AstrologyBodyT, owner: boolean): Promise<AstrologyReadingDto> {
-    const k = await this.book(owner);
+  async reading(body: AstrologyBodyT): Promise<AstrologyReadingDto> {
+    const k = await this.book();
     return this.readingOf(this.chart(body), k);
   }
 
@@ -101,8 +100,8 @@ export class AstrologyService {
 
   // ── the sources ──
 
-  async toc(owner: boolean): Promise<AstrologyBookDto> {
-    const k = await this.book(owner);
+  async toc(): Promise<AstrologyBookDto> {
+    const k = await this.book();
     const pc = await this.db.select({ entryId: passages.entryId, n: count() }).from(passages).where(inArray(passages.entryId, k.order.map(e => e.id))).groupBy(passages.entryId);
     const pn = new Map(pc.map(x => [x.entryId, x.n]));
     const rn = new Map<string, number>();
@@ -118,8 +117,8 @@ export class AstrologyService {
   }
 
   /** an entry with every section under it, passage by passage, each passage with the rule it is */
-  async entry(source: string, code: string, owner: boolean): Promise<AstrologyEntryDto> {
-    const k = await this.book(owner);
+  async entry(source: string, code: string): Promise<AstrologyEntryDto> {
+    const k = await this.book();
     const src = k.sources.find(s => s.code === source || s.code === `astrology.${source}`);
     const e = src ? k.entries.get(entryKey(src.code, code)) : undefined;
     if (!src || !e) throw new NotFoundException('Không có mục này trong tài liệu');
@@ -149,8 +148,8 @@ export class AstrologyService {
   }
 
   /** every passage whose condition speaks of all the given things ("sun@aries", "house:7", "pattern:t-square"…) */
-  async lookup(codes: string[], owner: boolean, topic?: string): Promise<AstrologyLookupDto> {
-    const k = await this.book(owner);
+  async lookup(codes: string[], topic?: string): Promise<AstrologyLookupDto> {
+    const k = await this.book();
     const cat = this.symbols(k);
     const want = [...new Set(codes)];
     const symbols = want.map(c => cat.find(s => s.code === c)).filter((s): s is AstrologySymbolDto => !!s);
@@ -171,8 +170,8 @@ export class AstrologyService {
     return { symbols, total: hits.length, groups: [...groups.values()] };
   }
 
-  async catalog(owner: boolean): Promise<AstrologyCatalogDto> {
-    const k = await this.book(owner);
+  async catalog(): Promise<AstrologyCatalogDto> {
+    const k = await this.book();
     return { symbols: this.symbols(k), topics: TOPICS.map(t => ({ code: t.code, title: t.title })), sources: k.sources.map(sourceDto) };
   }
 
@@ -205,6 +204,6 @@ export class AstrologyService {
 }
 
 const sourceDto = (s: AstrologyKnowledge['sources'][number]): AstrologySourceDto => {
-  const { id: _id, access: _a, ...rest } = s;
+  const { id: _id, ...rest } = s;
   return rest;
 };

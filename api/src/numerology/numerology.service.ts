@@ -1,7 +1,7 @@
 /* Nhân số học on the server: the numbers of a birth date and a name (anyone may compute them), and what Lê Đỗ Quỳnh
    Hương's book says of them — a reading, the book itself section by section, and lookups by number or arrow. The book
    is under its author's copyright, so its text is the owner's to read unless its source is opened to the public. */
-import { BadRequestException, Inject, Injectable, NotFoundException, ServiceUnavailableException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, NotFoundException, ServiceUnavailableException } from '@nestjs/common';
 import { asc, count, inArray } from 'drizzle-orm';
 import { z } from 'zod';
 import { ENGINE_VERSION } from '@mystic/engine';
@@ -76,11 +76,10 @@ export function numerologyOf(birth: Pick<BirthDto, 'calendar' | 'year' | 'month'
 export class NumerologyService {
   constructor(@Inject(DB) private readonly db: Db, @Inject(KnowledgeService) private readonly knowledge: KnowledgeService) {}
 
-  /** the book, or a 503 while it is not loaded; a 401 when its text is the owner's and the caller is not */
-  async book(owner: boolean): Promise<NumerologyKnowledge> {
+  /** the book, or a 503 while it is not loaded */
+  async book(): Promise<NumerologyKnowledge> {
     const k = await this.knowledge.numerology();
     if (!k) throw new ServiceUnavailableException('Sách Nhân số học chưa được nạp vào cơ sở dữ liệu');
-    if (k.source.access === 'owner' && !owner) throw new UnauthorizedException('Sách này chỉ chủ nhà đọc được (cần mã chủ nhà)');
     return k;
   }
 
@@ -88,8 +87,8 @@ export class NumerologyService {
     return numerologyOf(body.birth, body.gender, normalizeNames(body.names));
   }
 
-  async reading(body: NumerologyBodyT, owner: boolean): Promise<NumerologyReadingDto> {
-    const k = await this.book(owner);
+  async reading(body: NumerologyBodyT): Promise<NumerologyReadingDto> {
+    const k = await this.book();
     const c = this.chart(body);
     return this.readingOf(c, k, body.viewYear ?? null);
   }
@@ -105,7 +104,7 @@ export class NumerologyService {
     }));
     const rules: Record<string, NumerologyRuleDto> = {};
     for (const code of used) { const d = k.rules.get(code); if (d) rules[code] = d; }
-    const { id: _id, access: _a, ...source } = k.source;
+    const { id: _id, ...source } = k.source;
     return {
       engineVersion: ENGINE_VERSION, knowledgeVersion: k.version,
       solar: { year: c.solar.year, month: c.solar.month, day: c.solar.day, fromLunar: c.solar.fromLunar, note: c.solar.note },
@@ -120,14 +119,14 @@ export class NumerologyService {
 
   // ── the book ──
 
-  async toc(owner: boolean): Promise<NumerologyBookDto> {
-    const k = await this.book(owner);
+  async toc(): Promise<NumerologyBookDto> {
+    const k = await this.book();
     const pc = await this.db.select({ entryId: passages.entryId, n: count() }).from(passages).where(inArray(passages.entryId, k.order.map(e => e.id))).groupBy(passages.entryId);
     const pn = new Map(pc.map(x => [x.entryId, x.n]));
     const rn = new Map<string, number>();
     for (const r of k.rules.values()) if (r.active) rn.set(r.entry, (rn.get(r.entry) ?? 0) + 1);
     const topicOfEntry = this.topicOfEntries(k);
-    const { id: _id, access: _a, ...source } = k.source;
+    const { id: _id, ...source } = k.source;
     return {
       source,
       toc: k.order.map(e => ({ code: e.code, title: e.title, parent: e.parent, depth: e.depth, kind: e.depth === 0 && /^p\d+$/.test(e.code) ? 'part' : 'section', page: e.page, topic: topicOfEntry.get(e.code) ?? null, passages: pn.get(e.id) ?? 0, rules: rn.get(e.code) ?? 0 })),
@@ -136,8 +135,8 @@ export class NumerologyService {
   }
 
   /** an entry with every section under it, paragraph by paragraph, each paragraph with the rule it is */
-  async entry(code: string, owner: boolean): Promise<NumerologyEntryDto> {
-    const k = await this.book(owner);
+  async entry(code: string): Promise<NumerologyEntryDto> {
+    const k = await this.book();
     const e = k.entries.get(code);
     if (!e) throw new NotFoundException('Không có mục này trong sách');
     const under = new Set([code]);
@@ -158,13 +157,13 @@ export class NumerologyService {
     const siblings = k.order.filter(x => x.parent === e.parent);
     const i = siblings.findIndex(x => x.code === code);
     const near = (x: typeof e | undefined) => (x ? { code: x.code, title: x.title } : null);
-    const { id: _id, access: _a, ...source } = k.source;
+    const { id: _id, ...source } = k.source;
     return { code: e.code, title: e.title, page: e.page, topic: topicOfEntry.get(e.code) ?? null, path, sections, prev: near(siblings[i - 1]), next: near(siblings[i + 1]), source };
   }
 
   /** every passage whose condition speaks of all the given numbers or arrows ("chu-dao:7", "muiten-trong:4-5-6"…) */
-  async lookup(codes: string[], owner: boolean, topic?: string): Promise<NumerologyLookupDto> {
-    const k = await this.book(owner);
+  async lookup(codes: string[], topic?: string): Promise<NumerologyLookupDto> {
+    const k = await this.book();
     const cat = this.symbols(k);
     const want = [...new Set(codes)];
     const symbols = want.map(c => cat.find(s => s.code === c)).filter((s): s is NumerologySymbolDto => !!s);
@@ -184,8 +183,8 @@ export class NumerologyService {
     return { symbols, total: hits.length, groups: [...groups.values()] };
   }
 
-  async catalog(owner: boolean): Promise<NumerologyCatalogDto> {
-    const k = await this.book(owner);
+  async catalog(): Promise<NumerologyCatalogDto> {
+    const k = await this.book();
     const tables = await this.tablesOf(k.order.map(e => e.id));
     const codeOf = new Map(k.order.map(e => [e.id, e.code]));
     return {

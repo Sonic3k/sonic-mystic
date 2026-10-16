@@ -1,6 +1,6 @@
-/* Who may call what. 'public': anyone (the book, tra cứu, setting up a chart) — but the text of a source marked for
-   the owner (a published book, under copyright) is answered only to isOwner. 'owner': the family's own data —
-   open while ADMIN_TOKEN is not set (as Sonic Hub is for now), closed to anyone without it once it is.
+/* Who may call what. 'public': anyone (the books, tra cứu, setting up a chart, the readings). 'owner': the family's
+   own data and every edit — open while ADMIN_TOKEN is not set (as Sonic Hub is for now), closed to anyone without it
+   once it is.
    'sync': Sonic Hub only, signed with SYNC_TOKEN (closed when no token is configured). */
 import { BadRequestException, type CanActivate, type ExecutionContext, ForbiddenException, Inject, Injectable, type PipeTransform, SetMetadata, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
@@ -15,8 +15,7 @@ export const Access = (level: AccessLevel) => SetMetadata(ACCESS, level);
 
 const headerOf = (req: Request, n: string) => { const v = req.headers[n]; return Array.isArray(v) ? v[0] : v; };
 
-/** whether a request comes from the owner (always, while ADMIN_TOKEN is not set) — for public routes whose answer
-    depends on it, such as a book whose text only the owner may read */
+/** whether a request comes from the owner (always, while ADMIN_TOKEN is not set) */
 export function isOwner(config: AppConfig, req: Request): boolean {
   if (!config.adminToken) return true;
   const token = headerOf(req, 'x-admin-token') ?? headerOf(req, 'authorization')?.replace(/^Bearer\s+/i, '');
