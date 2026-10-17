@@ -9,10 +9,10 @@ import { PLACES } from '@mystic/engine/birth';
 import { api } from '../api';
 import { Failed, errorText } from '../components/Owner';
 import { Sheet } from '../components/Sheet';
-import { GIO, thisYear } from '../lib/params';
+import { HOURS, thisYear } from '../lib/params';
 import { SONIC_HUB, birthComplete, birthLine, dateComplete, genderName, profilesLine } from '../lib/people';
 import { dateVi, useTitle } from '../lib/text';
-import { nsFacts } from './ns/Home';
+import { numerologyFacts } from './numerology/Home';
 
 const hubLink = (s: SubjectDto) => s.links.find(l => l.system === SONIC_HUB);
 
@@ -23,7 +23,7 @@ export function PeoplePage() {
   const nav = useNavigate(), qc = useQueryClient();
   const link = useMutation({
     mutationFn: (personId: string) => api.linkSonicHub(personId),
-    onSuccess: s => { void qc.invalidateQueries({ queryKey: ['subjects'] }); nav(`/nguoi/${s.id}`); },
+    onSuccess: s => { void qc.invalidateQueries({ queryKey: ['subjects'] }); nav(`/people/${s.id}`); },
   });
   useTitle('Người');
   if (subjects.isError) return <div className="wrap page tv"><Failed error={subjects.error} /></div>;
@@ -33,10 +33,10 @@ export function PeoplePage() {
   return (
     <div className="wrap page tv">
       <div className="ptitle"><h1>Người<small>những người đã xem</small></h1>
-        <button type="button" className="tv-btn son" style={{ marginLeft: 'auto' }} onClick={() => setAdding(true)}>Thêm người</button></div>
+        <button type="button" className="tv-btn accent" style={{ marginLeft: 'auto' }} onClick={() => setAdding(true)}>Thêm người</button></div>
       {!subjects.data.length && <div className="card empty">Chưa có ai. Liên kết một người từ Sonic Hub bên dưới, thêm người mới, hoặc lưu một lá số.</div>}
       <div className="hh-people">{subjects.data.map(s => (
-        <Link key={s.id} className="hh-person" to={`/nguoi/${s.id}`}>
+        <Link key={s.id} className="hh-person" to={`/people/${s.id}`}>
           <b>{s.displayName}{hubLink(s) && <span className="hh-tag">Sonic Hub</span>}</b>
           <small>{[genderName(s.gender), birthLine(s.birth)].filter(Boolean).join(' · ') || 'chưa có ngày sinh'}</small>
           <small>{profilesLine(s)}</small>
@@ -54,7 +54,7 @@ export function PeoplePage() {
         </section>
       )}
       {persons.isError && <p className="tv-muted" style={{ marginTop: 24, fontSize: 13 }}>Chưa đọc được danh sách người từ Sonic Hub: {errorText(persons.error)}</p>}
-      {adding && <SubjectSheet onClose={() => setAdding(false)} onSaved={s => nav(`/nguoi/${s.id}`)} />}
+      {adding && <SubjectSheet onClose={() => setAdding(false)} onSaved={s => nav(`/people/${s.id}`)} />}
     </div>
   );
 }
@@ -63,10 +63,10 @@ export function SubjectPage() {
   const { id = '' } = useParams();
   const q = useQuery({ queryKey: ['subject', id], queryFn: () => api.subject(id), retry: false });
   const s = q.data;
-  const tuvi = s?.profiles.filter(p => p.discipline === 'tuvi') ?? [], ns = s?.profiles.filter(p => p.discipline === 'numerology') ?? [];
+  const tuvi = s?.profiles.filter(p => p.discipline === 'tuvi') ?? [], numerology = s?.profiles.filter(p => p.discipline === 'numerology') ?? [];
   const astro = s?.profiles.filter(p => p.discipline === 'astrology') ?? [];
   const brief = useQuery({ queryKey: ['brief', id], queryFn: () => api.brief(id), retry: false, enabled: tuvi.length > 0 });
-  const nsBrief = useQuery({ queryKey: ['brief', id, 'numerology'], queryFn: () => api.brief(id, 'numerology'), retry: false, enabled: ns.length > 0 });
+  const numerologyBrief = useQuery({ queryKey: ['brief', id, 'numerology'], queryFn: () => api.brief(id, 'numerology'), retry: false, enabled: numerology.length > 0 });
   const astroBrief = useQuery({ queryKey: ['brief', id, 'astrology'], queryFn: () => api.brief(id, 'astrology'), retry: false, enabled: astro.length > 0 });
   const [editing, setEditing] = useState(false);
   const nav = useNavigate(), qc = useQueryClient();
@@ -76,18 +76,18 @@ export function SubjectPage() {
     onSuccess: p => { refreshAll(); nav(`/tu-vi/profile/${p.id}`); },
   });
   /* nhân số học needs only the date; the names read come from the person's name (the given name first) */
-  const makeNs = useMutation({
+  const makeNumerology = useMutation({
     mutationFn: () => api.createProfile({ subjectId: id, discipline: 'numerology' }),
-    onSuccess: p => { refreshAll(); nav(`/nhan-so-hoc/profile/${p.id}`); },
+    onSuccess: p => { refreshAll(); nav(`/numerology/profile/${p.id}`); },
   });
   /* chiêm tinh reads the person's own date, clock time and place (no time: the planets in the signs only) */
   const makeAstro = useMutation({
     mutationFn: () => api.createProfile({ subjectId: id, discipline: 'astrology' }),
-    onSuccess: p => { refreshAll(); nav(`/chiem-tinh/profile/${p.id}`); },
+    onSuccess: p => { refreshAll(); nav(`/astrology/profile/${p.id}`); },
   });
   const pull = useMutation({ mutationFn: () => api.linkSonicHub(hubLink(s!)!.externalId), onSuccess: refreshAll });
   useTitle(s?.displayName ?? 'Người');
-  if (q.isError) return <div className="wrap page tv"><Failed error={q.error}><Link className="tv-link" to="/nguoi">Về danh sách</Link></Failed></div>;
+  if (q.isError) return <div className="wrap page tv"><Failed error={q.error}><Link className="tv-link" to="/people">Về danh sách</Link></Failed></div>;
   if (!s) return <div className="wrap page tv"><div className="card empty">Đang mở…</div></div>;
   const link = hubLink(s), ready = birthComplete(s.gender, s.birth), dated = dateComplete(s.birth);
   return (
@@ -105,9 +105,9 @@ export function SubjectPage() {
             {!tuvi.length && <div className="tv-empty">Chưa có lá số nào.</div>}
           </div>
           <div className="tv-acts" style={{ marginTop: 14 }}>
-            <button type="button" className="tv-btn son" disabled={!ready || make.isPending} onClick={() => make.mutate()} title={ready ? undefined : 'Cần giới tính, ngày tháng năm và giờ sinh'}>
+            <button type="button" className="tv-btn accent" disabled={!ready || make.isPending} onClick={() => make.mutate()} title={ready ? undefined : 'Cần giới tính, ngày tháng năm và giờ sinh'}>
               {make.isPending ? 'Đang lập…' : 'Lập lá số từ ngày giờ sinh này'}</button>
-            <Link className="tv-btn ghost" to={`/tu-vi?nguoi=${s.id}`}>Lập với giờ hoặc ngày khác…</Link>
+            <Link className="tv-btn ghost" to={`/tu-vi?person=${s.id}`}>Lập với giờ hoặc ngày khác…</Link>
           </div>
           {!ready && <p className="tv-muted" style={{ fontSize: 13 }}>Còn thiếu {[!s.gender && 'giới tính', !(s.birth.year && s.birth.month && s.birth.day) && 'ngày sinh', !(s.birth.time || s.birth.hourBranch !== null) && 'giờ sinh'].filter(Boolean).join(', ')}{link ? ' — sửa ở Sonic Hub rồi bấm «Cập nhật từ Sonic Hub».' : '.'}</p>}
           {make.isError && <p className="tv-err">{errorText(make.error)}</p>}
@@ -115,39 +115,39 @@ export function SubjectPage() {
           {brief.data && <Brief b={brief.data} linked={!!link} voice={l => (l.layer === 'primary' ? 'Lời bà' : 'Bổ sung')} />}
 
           <section className="ns" style={{ marginTop: 36 }}>
-            <div className="hd"><h2>Nhân số học</h2><span>{ns.length}</span></div>
+            <div className="hd"><h2>Nhân số học</h2><span>{numerology.length}</span></div>
             <div className="tv-profiles">
-              {ns.map(p => (
-                <Link key={p.id} className="tv-profile-item" to={`/nhan-so-hoc/profile/${p.id}`}>
+              {numerology.map(p => (
+                <Link key={p.id} className="tv-profile-item" to={`/numerology/profile/${p.id}`}>
                   <b>{p.name ?? 'Hồ sơ'}{p.label && <span className="hh-tag">{p.label}</span>}</b><span>{p.aiReadings ? 'có bài tổng hợp' : ''}</span>
-                  <small>{[nsFacts(p).line, `lưu ${dateVi(p.createdAt)}`].filter(Boolean).join(' · ')}</small>
+                  <small>{[numerologyFacts(p).line, `lưu ${dateVi(p.createdAt)}`].filter(Boolean).join(' · ')}</small>
                 </Link>))}
-              {!ns.length && <div className="tv-empty">Chưa có hồ sơ nhân số học.</div>}
+              {!numerology.length && <div className="tv-empty">Chưa có hồ sơ nhân số học.</div>}
             </div>
             <div className="tv-acts" style={{ marginTop: 14 }}>
-              <button type="button" className="tv-btn son" disabled={!dated || makeNs.isPending} onClick={() => makeNs.mutate()} title={dated ? undefined : 'Cần ngày tháng năm sinh'}>
-                {makeNs.isPending ? 'Đang lập…' : 'Lập hồ sơ nhân số học'}</button>
-              <Link className="tv-btn ghost" to={`/nhan-so-hoc?nguoi=${s.id}`}>Xem với tên hoặc ngày khác…</Link>
+              <button type="button" className="tv-btn accent" disabled={!dated || makeNumerology.isPending} onClick={() => makeNumerology.mutate()} title={dated ? undefined : 'Cần ngày tháng năm sinh'}>
+                {makeNumerology.isPending ? 'Đang lập…' : 'Lập hồ sơ nhân số học'}</button>
+              <Link className="tv-btn ghost" to={`/numerology?person=${s.id}`}>Xem với tên hoặc ngày khác…</Link>
             </div>
             {!dated && <p className="tv-muted" style={{ fontSize: 13 }}>Còn thiếu ngày sinh{link ? ' — sửa ở Sonic Hub rồi bấm «Cập nhật từ Sonic Hub».' : '.'}</p>}
-            {makeNs.isError && <p className="tv-err">{errorText(makeNs.error)}</p>}
-            {nsBrief.data && <Brief b={nsBrief.data} linked={!!link} voice={l => (l.layer === 'added' ? 'Luận thêm' : l.source.startsWith('Tóm lược') ? 'Tóm lược sách' : 'Lời sách')} />}
+            {makeNumerology.isError && <p className="tv-err">{errorText(makeNumerology.error)}</p>}
+            {numerologyBrief.data && <Brief b={numerologyBrief.data} linked={!!link} voice={l => (l.layer === 'added' ? 'Luận thêm' : l.source.startsWith('Tóm lược') ? 'Tóm lược sách' : 'Lời sách')} />}
           </section>
 
           <section className="as" style={{ marginTop: 36 }}>
             <div className="hd"><h2>Chiêm tinh</h2><span>{astro.length}</span></div>
             <div className="tv-profiles">
               {astro.map(p => (
-                <Link key={p.id} className="tv-profile-item" to={`/chiem-tinh/profile/${p.id}`}>
+                <Link key={p.id} className="tv-profile-item" to={`/astrology/profile/${p.id}`}>
                   <b>{p.label || 'Lá số chiêm tinh'}</b><span>{p.aiReadings ? 'có bài tổng hợp' : ''}</span>
                   <small>{[birthLine(p.birth), `lưu ${dateVi(p.createdAt)}`].filter(Boolean).join(' · ')}</small>
                 </Link>))}
               {!astro.length && <div className="tv-empty">Chưa có lá số chiêm tinh.</div>}
             </div>
             <div className="tv-acts" style={{ marginTop: 14 }}>
-              <button type="button" className="tv-btn son" disabled={!dated || s.birth.calendar !== 'solar' || makeAstro.isPending} onClick={() => makeAstro.mutate()} title={dated ? undefined : 'Cần ngày tháng năm sinh'}>
+              <button type="button" className="tv-btn accent" disabled={!dated || s.birth.calendar !== 'solar' || makeAstro.isPending} onClick={() => makeAstro.mutate()} title={dated ? undefined : 'Cần ngày tháng năm sinh'}>
                 {makeAstro.isPending ? 'Đang lập…' : 'Lập lá số chiêm tinh'}</button>
-              <Link className="tv-btn ghost" to={`/chiem-tinh?nguoi=${s.id}`}>Lập với giờ hoặc nơi khác…</Link>
+              <Link className="tv-btn ghost" to={`/astrology?person=${s.id}`}>Lập với giờ hoặc nơi khác…</Link>
             </div>
             {(!dated || !s.birth.time || s.birth.latitude === null) && <p className="tv-muted" style={{ fontSize: 13 }}>{!dated ? 'Còn thiếu ngày sinh.' : `Chưa có ${[!s.birth.time && 'giờ sinh (giờ đồng hồ)', s.birth.latitude === null && 'nơi sinh'].filter(Boolean).join(' và ')}: lá số chưa có cung Mọc và các cung địa bàn.`}</p>}
             {makeAstro.isError && <p className="tv-err">{errorText(makeAstro.error)}</p>}
@@ -158,7 +158,7 @@ export function SubjectPage() {
           <dl className="tv-facts">
             <dt>Giới tính</dt><dd>{genderName(s.gender) ?? '—'}</dd>
             <dt>Ngày sinh</dt><dd>{s.birth.day && s.birth.month && s.birth.year ? `${s.birth.day}/${s.birth.month}${s.birth.leapMonth ? ' nhuận' : ''}/${s.birth.year}${s.birth.calendar === 'lunar' ? ' âm lịch' : ''}` : '—'}</dd>
-            <dt>Giờ sinh</dt><dd>{s.birth.time ?? (s.birth.hourBranch !== null ? `giờ ${GIO[s.birth.hourBranch].n}` : '—')}{s.birth.timeApprox ? ' (ước chừng)' : ''}</dd>
+            <dt>Giờ sinh</dt><dd>{s.birth.time ?? (s.birth.hourBranch !== null ? `giờ ${HOURS[s.birth.hourBranch].n}` : '—')}{s.birth.timeApprox ? ' (ước chừng)' : ''}</dd>
             <dt>Nơi sinh</dt><dd>{s.birth.place ?? (s.birth.latitude !== null ? `${s.birth.latitude}, ${s.birth.longitude}` : '—')}</dd>
             {s.birth.timeZone && <><dt>Múi giờ</dt><dd>{s.birth.timeZone}{s.birth.utcOffsetMinutes !== null ? ` (UTC${s.birth.utcOffsetMinutes >= 0 ? '+' : '−'}${Math.abs(s.birth.utcOffsetMinutes) / 60})` : ''}</dd></>}
           </dl>
@@ -171,7 +171,7 @@ export function SubjectPage() {
           {pull.isError && <p className="tv-err">{errorText(pull.error)}</p>}
         </aside>
       </div>
-      {editing && <SubjectSheet subject={s} onClose={() => setEditing(false)} onSaved={() => refreshAll()} onDeleted={() => nav('/nguoi', { replace: true })} />}
+      {editing && <SubjectSheet subject={s} onClose={() => setEditing(false)} onSaved={() => refreshAll()} onDeleted={() => nav('/people', { replace: true })} />}
     </div>
   );
 }
@@ -184,8 +184,8 @@ function Brief({ b, linked, voice }: { b: BriefDto; linked: boolean; voice: (l: 
       <div className="tv-card">
         <dl className="tv-facts">{b.facts.map(f => <Fragment key={f.label}><dt>{f.label}</dt><dd>{f.value}</dd></Fragment>)}</dl>
         {b.lines.map((l, i) => (
-          <p key={i} className={l.layer === 'primary' ? 'tv-brief-ba' : 'tv-brief-bs'}>
-            <span className={`tv-voice ${l.layer === 'primary' ? 'ba' : 'bs'}`}>{voice(l)}</span> {l.text}
+          <p key={i} className={l.layer === 'primary' ? 'tv-brief-primary' : 'tv-brief-added'}>
+            <span className={`tv-voice ${l.layer === 'primary' ? 'primary' : 'added'}`}>{voice(l)}</span> {l.text}
           </p>))}
         {linked && <p className="tv-muted" style={{ fontSize: 12.5, margin: '10px 0 0' }}>Bản tóm tắt này cũng hiện ở trang người trong Sonic Hub.</p>}
       </div>
@@ -244,7 +244,7 @@ function SubjectSheet({ subject: s, onClose, onSaved, onDeleted }: { subject?: S
             {calendar === 'solar'
               ? <label className="tv-f half"><span>Giờ sinh (để trống nếu không biết)</span><input type="time" value={time} onChange={e => setTime(e.target.value)} /></label>
               : <label className="tv-f half"><span>Giờ sinh</span><select value={branch ?? ''} onChange={e => setBranch(e.target.value === '' ? null : +e.target.value)}>
-                  <option value="">Không biết</option>{GIO.map(g => <option key={g.i} value={g.i}>Giờ {g.n} ({g.span})</option>)}</select></label>}
+                  <option value="">Không biết</option>{HOURS.map(g => <option key={g.i} value={g.i}>Giờ {g.n} ({g.span})</option>)}</select></label>}
             <label className="tv-f half tv-check" style={{ flexDirection: 'row', alignSelf: 'end', paddingBottom: 10 }}><input type="checkbox" checked={approx} onChange={e => setApprox(e.target.checked)} />Giờ ước chừng</label>
             <label className="tv-f"><span>Nơi sinh</span>
               <select value={place} onChange={e => setPlace(e.target.value)}>
@@ -259,12 +259,12 @@ function SubjectSheet({ subject: s, onClose, onSaved, onDeleted }: { subject?: S
         <div className="sheet-foot">
           {s && (ask
             ? <span className="tv-row" style={{ alignItems: 'center' }}><span className="tv-muted" style={{ fontSize: 13 }}>Xoá người này cùng mọi lá số?</span>
-                <button type="button" className="tv-btn son" disabled={del.isPending} onClick={() => del.mutate()}>Xoá</button>
+                <button type="button" className="tv-btn accent" disabled={del.isPending} onClick={() => del.mutate()}>Xoá</button>
                 <button type="button" className="tv-btn ghost" onClick={() => setAsk(false)}>Không</button></span>
             : <span><button type="button" className="tv-link" onClick={() => setAsk(true)}>Xoá người này</button></span>)}
           {!s && <span />}
           <button type="button" className="tv-btn ghost" onClick={onClose}>Huỷ</button>
-          <button type="button" className="tv-btn son" disabled={save.isPending || (!owned && !name.trim())} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu'}</button>
+          <button type="button" className="tv-btn accent" disabled={save.isPending || (!owned && !name.trim())} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu'}</button>
         </div>
     </Sheet>
   );

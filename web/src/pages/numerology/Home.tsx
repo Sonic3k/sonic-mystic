@@ -7,16 +7,16 @@ import { BirthError, solarDateOf } from '@mystic/engine/birth';
 import { NumerologyError, buildNumerology, label as L } from '@mystic/engine/numerology';
 import type { Gender, NumerologyNameDto, ProfileSummaryDto, SubjectDto } from '@mystic/engine/api';
 import { api } from '../../api';
-import { defaultNames, dmy, fromNsSearch, toNsSearch, withPrimary, SAMPLE, type NsParams } from '../../lib/ns';
+import { defaultNames, dmy, fromNumerologySearch, toNumerologySearch, withPrimary, SAMPLE, type NumerologyParams } from '../../lib/numerology';
 import { fold, useTitle } from '../../lib/text';
-import { useNsBook } from './Reading';
+import { useNumerologyBook } from './Reading';
 
 interface Form { full: string; cal: 'solar' | 'lunar'; d: string; m: string; y: string; leap: boolean; gender: Gender | null; names: NumerologyNameDto[] | null; pick: number }
 const blank: Form = { full: '', cal: 'solar', d: '', m: '', y: '', leap: false, gender: null, names: null, pick: 0 };
 const num = (s: string) => (/^\s*\d+\s*$/.test(s) ? Number(s) : NaN);
 
 /** the form as the reading it asks for, or what is wrong with it */
-function readForm(f: Form): { params: NsParams | null; error: string | null } {
+function readForm(f: Form): { params: NumerologyParams | null; error: string | null } {
   const day = num(f.d), month = num(f.m), year = num(f.y);
   if (!f.d.trim() && !f.m.trim() && !f.y.trim()) return { params: null, error: null };
   if (!Number.isInteger(day) || !Number.isInteger(month) || !Number.isInteger(year)) return { params: null, error: 'Nhập đủ ngày, tháng và năm sinh.' };
@@ -27,7 +27,7 @@ function readForm(f: Form): { params: NsParams | null; error: string | null } {
 }
 
 /** the numbers of a reading, worked out here as the form is typed (the page then reads them from the book) */
-function numbersOf(p: NsParams) {
+function numbersOf(p: NumerologyParams) {
   try {
     const solar = solarDateOf({ ...p.birth, latitude: p.birth.latitude ?? null });
     const chart = buildNumerology({ year: solar.year, month: solar.month, day: solar.day, gender: p.gender, names: p.names });
@@ -38,7 +38,7 @@ function numbersOf(p: NsParams) {
   }
 }
 
-function formOf(p: NsParams): Form {
+function formOf(p: NumerologyParams): Form {
   const auto = defaultNames(p.full);
   const same = auto.length === p.names.length && auto.every((n, i) => n.text === p.names[i].text && n.label === p.names[i].label);
   return {
@@ -51,13 +51,13 @@ function formOfSubject(s: SubjectDto): Form {
   return { ...blank, full: s.displayName, cal: b.calendar, d: b.day ? String(b.day) : '', m: b.month ? String(b.month) : '', y: b.year ? String(b.year) : '', leap: b.leapMonth, gender: s.gender };
 }
 
-export default function NsHome() {
+export default function NumerologyHome() {
   const [sp] = useSearchParams();
-  const subjectId = sp.get('nguoi');
+  const subjectId = sp.get('person');
   const subject = useQuery({ queryKey: ['subject', subjectId], queryFn: () => api.subject(subjectId!), enabled: !!subjectId, retry: false });
-  /* a link back from a reading carries its birth and names; "?nguoi=" alone fills the form with what is known of that person */
+  /* a link back from a reading carries its birth and names; "?person=" alone fills the form with what is known of that person */
   const initial = useMemo<Form | null>(() => {
-    const own = fromNsSearch(sp);
+    const own = fromNumerologySearch(sp);
     if (own) return formOf(own);
     if (subjectId) return subject.data ? formOfSubject(subject.data) : subject.isError ? blank : null;
     return blank;
@@ -83,7 +83,7 @@ function BirthForm({ initial, subjectId }: { initial: Form; subjectId: string | 
   const r = params ? numbersOf(params) : null;
   const names = params?.names ?? (f.names ?? defaultNames(f.full)).map((n, i) => ({ ...n, primary: i === f.pick }));
   const pick = (i: number) => set(f.names ? { names: withPrimary(f.names, i), pick: i } : { pick: i });
-  const go = (p: NsParams) => nav(`/nhan-so-hoc/xem?${toNsSearch(p)}${subjectId ? `&nguoi=${subjectId}` : ''}`);
+  const go = (p: NumerologyParams) => nav(`/numerology/view?${toNumerologySearch(p)}${subjectId ? `&person=${subjectId}` : ''}`);
   const submit = (e: React.FormEvent) => { e.preventDefault(); if (params && r?.chart) go(params); };
   const msg = error ?? r?.error ?? null;
   return (
@@ -114,7 +114,7 @@ function BirthForm({ initial, subjectId }: { initial: Form; subjectId: string | 
             <button key={t} type="button" className={f.gender === v ? 'on' : ''} onClick={() => set({ gender: v })}>{t}</button>))}</div>
         </div>
         <div className="tv-form-foot">
-          <button className="tv-btn son" type="submit" disabled={!r?.chart}>Xem các con số</button>
+          <button className="tv-btn accent" type="submit" disabled={!r?.chart}>Xem các con số</button>
           <SampleLink />
         </div>
         <div className="tv-form-foot" aria-live="polite">
@@ -131,11 +131,11 @@ function BirthForm({ initial, subjectId }: { initial: Form; subjectId: string | 
 function SampleLink() {
   const q = useQuery({ queryKey: ['subjects'], queryFn: api.subjects, retry: false });
   const saved = (q.data ?? []).flatMap(s => s.profiles).find(p => p.discipline === 'numerology' && p.label === 'ví dụ trong sách');
-  return <Link className="tv-btn ghost" to={saved ? `/nhan-so-hoc/profile/${saved.id}` : `/nhan-so-hoc/xem?${toNsSearch(SAMPLE)}`}>Mở ví dụ trong sách</Link>;
+  return <Link className="tv-btn ghost" to={saved ? `/numerology/profile/${saved.id}` : `/numerology/view?${toNumerologySearch(SAMPLE)}`}>Mở ví dụ trong sách</Link>;
 }
 
 function BookCard() {
-  const book = useNsBook();
+  const book = useNumerologyBook();
   const b = book.data;
   const parts = b?.toc.filter(e => e.kind === 'part').length ?? 0;
   const rules = b?.toc.reduce((n, e) => n + e.rules, 0) ?? 0;
@@ -146,9 +146,9 @@ function BookCard() {
       <p style={{ margin: '2px 0 14px', color: 'var(--ink2)', fontSize: 13.5 }}>{[b?.source.author ?? 'Lê Đỗ Quỳnh Hương', b?.source.description].filter(Boolean).join(' · ')}</p>
       {b && <div className="tv-stats"><div><b>{parts}</b><span>phần</span></div><div><b>{b.toc.length}</b><span>mục</span></div><div><b>{rules}</b><span>đoạn nói về một người</span></div></div>}
       {book.isError && <p className="tv-muted" style={{ fontSize: 13 }}>Sách chưa được nạp.</p>}
-      <div className="tv-acts"><Link className="tv-btn ghost" to="/nhan-so-hoc/sach">Đọc sách</Link><Link className="tv-btn ghost" to="/nhan-so-hoc/tra-cuu">Tra cứu theo con số</Link></div>
+      <div className="tv-acts"><Link className="tv-btn ghost" to="/numerology/books">Đọc sách</Link><Link className="tv-btn ghost" to="/numerology/lookup">Tra cứu theo con số</Link></div>
       <div className="tv-legend">
-        <p><span className="tv-voice ba">Lời sách</span> Mỗi đoạn của sách được gắn điều kiện: khi xem cho một người, chỉ những đoạn nói về con số của người ấy hiện ra, kèm lý do.</p>
+        <p><span className="tv-voice primary">Lời sách</span> Mỗi đoạn của sách được gắn điều kiện: khi xem cho một người, chỉ những đoạn nói về con số của người ấy hiện ra, kèm lý do.</p>
         <p><span className="tv-voice ai">Claude luận thêm</span> Bài tổng hợp của mỗi người do Claude viết từ những đoạn đó; ý nào không phải của sách luôn được ghi rõ.</p>
       </div>
     </div>
@@ -156,7 +156,7 @@ function BookCard() {
 }
 
 /** a saved profile's numbers, from the birth it keeps */
-export function nsFacts(p: ProfileSummaryDto): { date: string; line: string } {
+export function numerologyFacts(p: ProfileSummaryDto): { date: string; line: string } {
   const b = p.birth;
   const date = b.day && b.month && b.year ? `${b.day}/${b.month}${b.leapMonth ? ' nhuận' : ''}/${b.year}${b.calendar === 'lunar' ? ' âm lịch' : ''}` : 'chưa có ngày sinh';
   if (!b.day || !b.month || !b.year) return { date, line: '' };
@@ -175,14 +175,14 @@ function Saved() {
   const f = fold(find.trim());
   const list = f ? all.filter(({ s, p }) => fold(`${p.name ?? ''} ${s.displayName}`).includes(f)) : all;
   return (
-    <section style={{ marginTop: 32 }} id="da-luu">
+    <section style={{ marginTop: 32 }} id="saved">
       <div className="hd"><h2>Đã lưu</h2><span>{all.length}</span>
         {all.length > 12 && <input className="tv-input" style={{ marginLeft: 'auto', maxWidth: 220, height: 34 }} value={find} onChange={e => setFind(e.target.value)} placeholder="Tìm người…" aria-label="Tìm trong hồ sơ đã lưu" />}</div>
       <div className="tv-saved-list">{list.map(({ s, p }) => {
-        const x = nsFacts(p);
+        const x = numerologyFacts(p);
         const g = p.gender === 'female' ? 'Nữ' : p.gender === 'male' ? 'Nam' : '';
         return (
-          <Link key={p.id} className="tv-saved-item" to={`/nhan-so-hoc/profile/${p.id}`}>
+          <Link key={p.id} className="tv-saved-item" to={`/numerology/profile/${p.id}`}>
             <b>{p.name ?? s.displayName}{p.label && <span className="hh-tag">{p.label === 'ví dụ trong sách' ? 'ví dụ' : p.label}</span>}</b>
             <small>{[g, x.date].filter(Boolean).join(' · ')}{p.name && p.name !== s.displayName ? ` · ${s.displayName}` : ''}</small>
             <small>{[x.line, p.aiReadings ? 'có bài tổng hợp' : 'chưa có bài tổng hợp'].filter(Boolean).join(' · ')}</small>

@@ -4,15 +4,15 @@ import { useId } from 'react';
 import { Link } from 'react-router';
 import { ARROW_BY_CODE, TOPICS, describeWhen, label, type NumerologyChart, type Topic } from '@mystic/engine/numerology';
 import type { NumerologyGroupDto, NumerologyMatchDto, NumerologyRuleDto, NumerologyTocEntryDto } from '@mystic/engine/api';
-import { chainOf, dmy, unitOf } from '../../lib/ns';
+import { chainOf, dmy, unitOf } from '../../lib/numerology';
 
 const ROWS = [[3, 6, 9], [2, 5, 8], [1, 4, 7]];
-const PLANE: Record<string, string> = { tri_nao: 'Trí não', tinh_than: 'Tinh thần', the_chat: 'Thể chất' };
+const PLANE: Record<string, string> = { mind: 'Trí não', spirit: 'Tinh thần', physical: 'Thể chất' };
 export const L = (n: number | null | undefined) => label(n);
 export const short = (s: string) => s.replace(/^Mũi tên /, '');
 
 /** the 3 × 3 chart (3 6 9 / 2 5 8 / 1 4 7): full arrows drawn through, empty ones dashed, a name's numbers in ink */
-export function NsGrid({ counts, add, full, empty = [], faint = [], isolated = [], cell = 74 }: {
+export function NumerologyGrid({ counts, add, full, empty = [], faint = [], isolated = [], cell = 74 }: {
   counts: number[]; add?: number[] | null; full: string[]; empty?: string[]; faint?: string[]; isolated?: number[]; cell?: number;
 }) {
   const id = useId().replace(/:/g, '');
@@ -123,8 +123,8 @@ export function Board({ c, nameIdx, mode, onMode, onName }: {
       <div className="ns-chart">
         <div className="tv-k">Biểu đồ ngày sinh{withName ? ` · thêm tên ${nm.text}` : ''}</div>
         <div className="ns-gridwrap">
-          <NsGrid counts={g.counts} add={withName ? nm.effect.added : null} full={full} empty={empty} faint={withName ? nm.effect.newArrows : []} isolated={isolated} />
-          <div className="ns-planes">{(['tri_nao', 'tinh_than', 'the_chat'] as const).map(p => <div key={p}><b>{PLANE[p]}</b>{(withName ? nm.combined.planes[p] : g.planes[p])} số</div>)}</div>
+          <NumerologyGrid counts={g.counts} add={withName ? nm.effect.added : null} full={full} empty={empty} faint={withName ? nm.effect.newArrows : []} isolated={isolated} />
+          <div className="ns-planes">{(['mind', 'spirit', 'physical'] as const).map(p => <div key={p}><b>{PLANE[p]}</b>{(withName ? nm.combined.planes[p] : g.planes[p])} số</div>)}</div>
         </div>
         {nm && <div className="seg" role="group" aria-label="Biểu đồ">
           <button type="button" className={mode === 'birth' ? 'on' : ''} onClick={() => onMode('birth')}>Ngày sinh</button>
@@ -171,7 +171,7 @@ export function Line({ m, rule, toc, hl }: { m: NumerologyMatchDto; rule: Numero
     <div className={`ns-line ${rule.kind}${hl ? ' hl' : ''}`} id={`r-${rule.code}`}>
       <p>{rule.text}</p>
       <div className="ns-why">{tag}{why.map((w, i) => <span key={i} className="w">{w}</span>)}
-        {rule.page !== null && <Link to={`/nhan-so-hoc/sach/${unitOf(rule.entry, toc)}?cau=${encodeURIComponent(rule.code)}`}>tr. {rule.page}</Link>}</div>
+        {rule.page !== null && <Link to={`/numerology/books/${unitOf(rule.entry, toc)}?rule=${encodeURIComponent(rule.code)}`}>tr. {rule.page}</Link>}</div>
     </div>
   );
 }
@@ -183,7 +183,7 @@ export function Groups({ groups, rules, toc, hl }: { groups: NumerologyGroupDto[
     const path = g.path.slice(1, -1);
     return (
       <div key={g.entry} className="tv-group">
-        <div className="tv-gh"><b>{g.title}</b>{path.length > 0 && <span>{path.join(' › ')}</span>}<Link to={`/nhan-so-hoc/sach/${unitOf(g.entry, toc)}`}>Đọc trong sách ›</Link></div>
+        <div className="tv-gh"><b>{g.title}</b>{path.length > 0 && <span>{path.join(' › ')}</span>}<Link to={`/numerology/books/${unitOf(g.entry, toc)}`}>Đọc trong sách ›</Link></div>
         <div className="tv-lines">{g.matches.map(m => <Line key={m.rule} m={m} rule={rules[m.rule]} toc={toc} hl={hl === m.rule} />)}</div>
       </div>
     );
@@ -204,9 +204,9 @@ export function Explain({ general, rules, topic }: { general: NumerologyMatchDto
   const t = TOPICS.find(x => x.code === topic)!;
   return (
     <div className="ns-expl">
-      <h4><span className="tv-voice ba">Sách giải thích</span></h4><small>{t.title} · Phần {t.part}</small>
+      <h4><span className="tv-voice primary">Sách giải thích</span></h4><small>{t.title} · Phần {t.part}</small>
       {general.length ? general.map(m => <p key={m.rule}>{rules[m.rule]?.text}</p>) : <p className="tv-muted" style={{ fontFamily: 'var(--sans)', fontSize: 12.5 }}>Phần này không có đoạn giải thích riêng.</p>}
-      <Link className="tv-link" to={`/nhan-so-hoc/sach/p${t.part}`}>Đọc Phần {t.part} trong sách ›</Link>
+      <Link className="tv-link" to={`/numerology/books/p${t.part}`}>Đọc Phần {t.part} trong sách ›</Link>
     </div>
   );
 }

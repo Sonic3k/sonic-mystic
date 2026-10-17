@@ -9,7 +9,7 @@ import { z } from 'zod';
 import type { AiReadingDto, AstrologyChartDto, Layer, TuViSettings } from '@mystic/engine/api';
 import { hashOf, type BirthInput, type ReadingLine } from '@mystic/engine/tuvi';
 import { DB, type Db } from '../db/db.js';
-import { dataMigrations, readingItemRefs, readingItems, readingSections, readings, rules } from '../db/schema.js';
+import { dataMigrations, readingItemRefs, readingItems, readingSections, readings, rules, subjectLinks } from '../db/schema.js';
 import { KnowledgeService } from '../kb/knowledge.service.js';
 import { NumerologyService, todayVn, type Computed } from '../numerology/numerology.service.js';
 import { AstrologyService } from '../astrology/astrology.service.js';
@@ -106,9 +106,10 @@ export class ReadingsService {
    * Once, after the names in the code became English (drizzle 0003 renamed the scopes, the Tử vi settings and the
    * books' codes in place): a reading that matched its chart under the old names still matches it, so it is not shown
    * as stale. Each reading's hash is computed again the old way — the old scope, and for Tử vi the old words for the
-   * gender and the placements — and where that is the stored hash, the hash of the new names is stored.
+   * gender and the placements — and where that is the stored hash, the hash of the new names is stored. The briefs of
+   * everyone linked to Sonic Hub are sent again, so they link to the pages by their new addresses.
    */
-  async rehashAfterRename(): Promise<{ checked: number; rehashed: number } | null> {
+  async rehashAfterRename(): Promise<{ checked: number; rehashed: number; briefs: number } | null> {
     const name = '0003_english_names';
     if ((await this.db.select().from(dataMigrations).where(eq(dataMigrations.name, name))).length) return null;
     const rows = await this.db.select().from(readings);
@@ -126,8 +127,10 @@ export class ReadingsService {
         rehashed++;
       }
     }
+    const linked = await this.db.selectDistinct({ id: subjectLinks.subjectId }).from(subjectLinks);
+    for (const l of linked) await this.sync.briefChanged(l.id);
     await this.db.insert(dataMigrations).values({ name }).onConflictDoNothing();
-    return { checked: rows.length, rehashed };
+    return { checked: rows.length, rehashed, briefs: linked.length };
   }
 
   /** a reading's hash under the old names (see rehashAfterRename) and under the new */

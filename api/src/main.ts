@@ -40,7 +40,7 @@ export async function createApp(config: AppConfig): Promise<NestExpressApplicati
   });
   // once: the written readings keep matching their charts after the names in the code became English
   const rehash = await app.get(ReadingsService).rehashAfterRename();
-  if (rehash) log.log(`readings after the rename: ${rehash.rehashed} of ${rehash.checked} rehashed`);
+  if (rehash) log.log(`after the rename: ${rehash.rehashed} of ${rehash.checked} readings rehashed, ${rehash.briefs} briefs queued`);
   app.setGlobalPrefix('api');
   app.enableCors({ origin: config.corsOrigins });
   app.use(compression());

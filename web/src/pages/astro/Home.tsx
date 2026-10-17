@@ -60,9 +60,9 @@ function readForm(f: Form): { params: AstroParams | null; error: string | null }
 
 export default function AstroHome() {
   const [sp] = useSearchParams();
-  const subjectId = sp.get('nguoi');
+  const subjectId = sp.get('person');
   const subject = useQuery({ queryKey: ['subject', subjectId], queryFn: () => api.subject(subjectId!), enabled: !!subjectId, retry: false });
-  /* a link back from a chart carries its birth; "?nguoi=" alone fills the form with what is known of that person */
+  /* a link back from a chart carries its birth; "?person=" alone fills the form with what is known of that person */
   const initial = useMemo<Form | null>(() => {
     const own = fromAstroSearch(sp);
     if (own) return formOf(own);
@@ -89,7 +89,7 @@ function BirthForm({ initial, subjectId }: { initial: Form; subjectId: string | 
   /* a known place fills its coordinates */
   const setPlace = (place: string) => { const p = placeNamed(place); set(p ? { place: p.name, lat: String(p.latitude), lon: String(p.longitude) } : { place }); };
   const { params, error } = readForm(f);
-  const submit = (e: React.FormEvent) => { e.preventDefault(); if (params) nav(`/chiem-tinh/xem?${toAstroSearch(params)}${subjectId ? `&nguoi=${subjectId}` : ''}`); };
+  const submit = (e: React.FormEvent) => { e.preventDefault(); if (params) nav(`/astrology/view?${toAstroSearch(params)}${subjectId ? `&person=${subjectId}` : ''}`); };
   return (
     <form className="tv-card" onSubmit={submit} autoComplete="off">
       <h2>Ngày giờ và nơi sinh</h2>
@@ -109,7 +109,7 @@ function BirthForm({ initial, subjectId }: { initial: Form; subjectId: string | 
           <option value="female">Nữ</option><option value="male">Nam</option><option value="">Không ghi</option></select></label>
       </div>
       <div className="as-form-foot">
-        <button className="tv-btn son" type="submit" disabled={!params}>Xem lá số</button>
+        <button className="tv-btn accent" type="submit" disabled={!params}>Xem lá số</button>
         {error ? <span className="tv-err">{error}</span> : <span className="tv-muted">Hà Nội, Huế, Đà Nẵng, TP Hồ Chí Minh… có sẵn tọa độ.</span>}
       </div>
     </form>
@@ -126,7 +126,7 @@ function SampleCard() {
     <div className="tv-card">
       <h2>Ví dụ trong sách</h2>
       <p>Woolfolk dùng lá số của Oprah Winfrey (sinh 29/1/1954, 4:30 sáng, Kosciusko, Mississippi) để dạy cách luận ở chương 9. Lá số tính ở đây khớp với những gì sách in: cung Mọc 29° Nhân Mã, Mặt Trời 9° Bảo Bình ở cung 2…</p>
-      <Link className="tv-link" to={saved ? `/chiem-tinh/profile/${saved.id}` : `/chiem-tinh/xem?${toAstroSearch(SAMPLE)}`}>Mở lá số này ›</Link>
+      <Link className="tv-link" to={saved ? `/astrology/profile/${saved.id}` : `/astrology/view?${toAstroSearch(SAMPLE)}`}>Mở lá số này ›</Link>
       {sources.length > 0 && <>
         <div className="tv-k" style={{ margin: '18px 0 6px' }}>Đọc từ {sources.length === 6 ? 'sáu' : sources.length} tài liệu</div>
         {sources.map(s => <p key={s.code} className="as-src"><b>{s.title}</b> · {s.author}{s.translator ? ` · ${s.translator} dịch` : ''}</p>)}
@@ -144,13 +144,13 @@ function Saved() {
   const f = fold(find.trim());
   const list = f ? all.filter(({ s }) => fold(s.displayName).includes(f)) : all;
   return (
-    <section style={{ marginTop: 32 }} id="da-luu">
+    <section style={{ marginTop: 32 }} id="saved">
       <div className="hd"><h2>Đã lưu</h2><span>{all.length}</span>
         {all.length > 12 && <input className="tv-input" style={{ marginLeft: 'auto', maxWidth: 220, height: 34 }} value={find} onChange={e => setFind(e.target.value)} placeholder="Tìm người…" aria-label="Tìm trong hồ sơ đã lưu" />}</div>
       <div className="tv-saved-list">{list.map(({ s, p }) => {
         const g = p.gender === 'female' ? 'Nữ' : p.gender === 'male' ? 'Nam' : '';
         return (
-          <Link key={p.id} className="tv-saved-item" to={`/chiem-tinh/profile/${p.id}`}>
+          <Link key={p.id} className="tv-saved-item" to={`/astrology/profile/${p.id}`}>
             <b>{s.displayName}{p.label && <span className="hh-tag">{p.label === SAMPLE_LABEL ? 'ví dụ' : p.label}</span>}</b>
             <small>{[g, birthLine(p.birth)].filter(Boolean).join(' · ')}</small>
             <small>{p.birth.time ? '' : 'chưa có giờ sinh · '}{p.aiReadings ? 'có bài tổng hợp' : 'chưa có bài tổng hợp'}</small>

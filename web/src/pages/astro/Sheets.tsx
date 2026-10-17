@@ -38,7 +38,7 @@ export function AstroSaveSheet({ params, subjectId, onClose }: { params: AstroPa
       else sid = (await api.createSubject({ displayName: name.trim(), gender: params.gender, birth })).id;
       return api.createProfile({ subjectId: sid, discipline: 'astrology', label: label.trim() || null, note: note.trim() || null, gender: params.gender, birth });
     },
-    onSuccess: p => { void qc.invalidateQueries({ queryKey: ['subjects'] }); void qc.invalidateQueries({ queryKey: ['subject'] }); onClose(); nav(`/chiem-tinh/profile/${p.id}`, { replace: true }); },
+    onSuccess: p => { void qc.invalidateQueries({ queryKey: ['subjects'] }); void qc.invalidateQueries({ queryKey: ['subject'] }); onClose(); nav(`/astrology/profile/${p.id}`, { replace: true }); },
   });
   const invalid = who === 'new' && !name.trim();
   return (
@@ -59,7 +59,7 @@ export function AstroSaveSheet({ params, subjectId, onClose }: { params: AstroPa
       )}
       {save.isError && <p className="tv-err">{errorText(save.error)}</p>}
       <div className="sheet-foot"><span className="tv-muted" style={{ fontSize: 12.5 }}>Bài tổng hợp được viết sau cho hồ sơ đã lưu.</span>
-        <button type="button" className="tv-btn son" disabled={save.isPending || invalid || subjects.isError} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu hồ sơ'}</button>
+        <button type="button" className="tv-btn accent" disabled={save.isPending || invalid || subjects.isError} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu hồ sơ'}</button>
       </div>
     </Sheet>
   );
@@ -79,7 +79,7 @@ export function AstroProfileSheet({ profile, onClose }: { profile: ProfileDto; o
     mutationFn: () => api.deleteProfile(profile.id),
     onSuccess: () => {
       onClose();
-      nav(`/nguoi/${profile.subject.id}`, { replace: true });
+      nav(`/people/${profile.subject.id}`, { replace: true });
       /* once this page has gone, the deleted profile's queries are dropped (asking for them again would only 404) */
       setTimeout(() => { for (const k of [['profile', profile.id], ['astro-profile-reading', profile.id], ['ai-readings', profile.id]]) qc.removeQueries({ queryKey: k }); }, 100);
       for (const k of ['subjects', 'subject', 'brief']) void qc.invalidateQueries({ queryKey: [k] });
@@ -96,11 +96,11 @@ export function AstroProfileSheet({ profile, onClose }: { profile: ProfileDto; o
       <div className="sheet-foot">
         {ask
           ? <span className="tv-row" style={{ alignItems: 'center' }}><span className="tv-muted" style={{ fontSize: 13 }}>Xoá hồ sơ và bài tổng hợp?</span>
-              <button type="button" className="tv-btn son" disabled={del.isPending} onClick={() => del.mutate()}>Xoá</button>
+              <button type="button" className="tv-btn accent" disabled={del.isPending} onClick={() => del.mutate()}>Xoá</button>
               <button type="button" className="tv-btn ghost" onClick={() => setAsk(false)}>Không</button></span>
           : <span><button type="button" className="tv-link" onClick={() => setAsk(true)}>Xoá hồ sơ này</button></span>}
         <button type="button" className="tv-btn ghost" onClick={onClose}>Huỷ</button>
-        <button type="button" className="tv-btn son" disabled={save.isPending} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu'}</button>
+        <button type="button" className="tv-btn accent" disabled={save.isPending} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu'}</button>
       </div>
     </Sheet>
   );

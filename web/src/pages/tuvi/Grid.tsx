@@ -1,6 +1,6 @@
 /* The lá số drawn the classic way: twelve palaces around a centre, Tỵ at the top left, Dần at the bottom left. */
 import { BRANCHES, LEVEL_MARK, STEMS, canChiName, khongWeight, mod12, type Chart } from '@mystic/engine/tuvi';
-import { GIO } from '../../lib/params';
+import { HOURS } from '../../lib/params';
 
 /** branch → [row, column] of the 4×4 board */
 export const POS: Record<number, [number, number]> = { 5: [1, 1], 6: [1, 2], 7: [1, 3], 8: [1, 4], 4: [2, 1], 9: [2, 4], 3: [3, 1], 10: [3, 4], 2: [4, 1], 1: [4, 2], 0: [4, 3], 11: [4, 4] };
@@ -20,7 +20,7 @@ export default function Grid({ chart, name, selected, onSelect, marks = {} }: {
   const solar = `${pad(chart.solar[0])}/${pad(chart.solar[1])}/${chart.solar[2]}`;
   const clock = i.calendar === 'solar' ? `${pad(i.hour)}:${pad(i.minute ?? 0)}` : '';
   const sun = chart.solarClock ? ` (giờ mặt trời ${pad(chart.solarClock.hour)}:${pad(chart.solarClock.minute)})` : '';
-  const notOurs = [...(chart.options.variant === 'sach' ? ['An Hỏa Linh, Tứ Hóa tuổi Canh, Thiên Phúc tuổi Quý theo sách phổ thông.'] : []), ...chart.notes];
+  const notOurs = [...(chart.options.variant === 'books' ? ['An Hỏa Linh, Tứ Hóa tuổi Canh, Thiên Phúc tuổi Quý theo sách phổ thông.'] : []), ...chart.notes];
   return (
     <div className="tv-grid" role="grid" aria-label="Lá số tử vi">
       {chart.palaces.map(c => {
@@ -63,7 +63,7 @@ export default function Grid({ chart, name, selected, onSelect, marks = {} }: {
         <dl>
           <dt>Dương lịch</dt><dd>{solar}{clock && ` · ${clock}`}{sun}</dd>
           <dt>Âm lịch</dt><dd>{chart.lunar.day}/{chart.lunar.month}{chart.lunar.leap ? ' (nhuận)' : ''} năm {canChiName(chart.stem, chart.branch)}</dd>
-          <dt>Giờ</dt><dd>{GIO[chart.hour].n} ({GIO[chart.hour].span})</dd>
+          <dt>Giờ</dt><dd>{HOURS[chart.hour].n} ({HOURS[chart.hour].span})</dd>
           <dt>Âm dương</dt><dd>{chart.amDuong}</dd>
           <dt>Mệnh</dt><dd>{chart.napAm.name}</dd>
           <dt>Cục</dt><dd>{chart.cuc.name}</dd>
@@ -71,7 +71,7 @@ export default function Grid({ chart, name, selected, onSelect, marks = {} }: {
           <dt>Thân chủ</dt><dd>{chart.thanChu}</dd>
           <dt>Thân cư</dt><dd>{chart.palaces[chart.than].role}</dd>
         </dl>
-        <p className="tv-mini-info">{chart.lunar.day}/{chart.lunar.month} {canChiName(chart.stem, chart.branch)} · giờ {GIO[chart.hour].n}<br />{chart.amDuong} · {chart.napAm.name}<br />{chart.cuc.name}</p>
+        <p className="tv-mini-info">{chart.lunar.day}/{chart.lunar.month} {canChiName(chart.stem, chart.branch)} · giờ {HOURS[chart.hour].n}<br />{chart.amDuong} · {chart.napAm.name}<br />{chart.cuc.name}</p>
         {notOurs.length > 0 && <p className="notes"><b>Không phải ghi chép của bà:</b> {notOurs.join(' ')}</p>}
       </div>
     </div>

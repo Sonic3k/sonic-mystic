@@ -7,7 +7,7 @@ import { api } from '../../api';
 import { Failed, errorText } from '../../components/Owner';
 import { Sheet } from '../../components/Sheet';
 import { SONIC_HUB } from '../../lib/people';
-import type { NsParams } from '../../lib/ns';
+import type { NumerologyParams } from '../../lib/numerology';
 
 const NOTE = 'Đổi tên đọc thì bài tổng hợp cũ được đánh dấu để viết lại.';
 
@@ -48,7 +48,7 @@ function NameRows({ rows, setRows }: { rows: NumerologyNameDto[]; setRows: (r: N
 }
 
 /** who the reading is about: someone already here, a person from Sonic Hub (linked on save), or someone new */
-export function SaveSheet({ params, subjectId, onClose }: { params: NsParams; subjectId: string | null; onClose: () => void }) {
+export function SaveSheet({ params, subjectId, onClose }: { params: NumerologyParams; subjectId: string | null; onClose: () => void }) {
   const subjects = useQuery({ queryKey: ['subjects'], queryFn: api.subjects, retry: false });
   const persons = useQuery({ queryKey: ['hub-persons'], queryFn: api.sonicHubPersons, retry: false, staleTime: 300_000 });
   const [who, setWho] = useState(subjectId ? `s:${subjectId}` : 'new');
@@ -71,7 +71,7 @@ export function SaveSheet({ params, subjectId, onClose }: { params: NsParams; su
         gender: params.gender, birth, names: cleanNames(rows),
       });
     },
-    onSuccess: p => { void qc.invalidateQueries({ queryKey: ['subjects'] }); void qc.invalidateQueries({ queryKey: ['subject'] }); onClose(); nav(`/nhan-so-hoc/profile/${p.id}`, { replace: true }); },
+    onSuccess: p => { void qc.invalidateQueries({ queryKey: ['subjects'] }); void qc.invalidateQueries({ queryKey: ['subject'] }); onClose(); nav(`/numerology/profile/${p.id}`, { replace: true }); },
   });
   const invalid = (who === 'new' && !name.trim()) || !cleanNames(rows).length;
   return (
@@ -93,7 +93,7 @@ export function SaveSheet({ params, subjectId, onClose }: { params: NsParams; su
       )}
       {save.isError && <p className="tv-err">{errorText(save.error)}</p>}
       <div className="sheet-foot"><span className="tv-muted" style={{ fontSize: 12.5 }}>{NOTE}</span>
-        <button type="button" className="tv-btn son" disabled={save.isPending || invalid || subjects.isError} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu hồ sơ'}</button>
+        <button type="button" className="tv-btn accent" disabled={save.isPending || invalid || subjects.isError} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu hồ sơ'}</button>
       </div>
     </Sheet>
   );
@@ -113,9 +113,9 @@ export function ProfileSheet({ profile, onClose }: { profile: ProfileDto; onClos
     mutationFn: () => api.deleteProfile(profile.id),
     onSuccess: () => {
       onClose();
-      nav(`/nguoi/${profile.subject.id}`, { replace: true });
+      nav(`/people/${profile.subject.id}`, { replace: true });
       /* once this page has gone, the deleted profile's queries are dropped (asking for them again would only 404) */
-      setTimeout(() => { for (const k of [['profile', profile.id], ['ns-profile-reading', profile.id], ['ai-readings', profile.id]]) qc.removeQueries({ queryKey: k }); }, 100);
+      setTimeout(() => { for (const k of [['profile', profile.id], ['numerology-profile-reading', profile.id], ['ai-readings', profile.id]]) qc.removeQueries({ queryKey: k }); }, 100);
       for (const k of ['subjects', 'subject', 'brief']) void qc.invalidateQueries({ queryKey: [k] });
     },
   });
@@ -130,11 +130,11 @@ export function ProfileSheet({ profile, onClose }: { profile: ProfileDto; onClos
       <div className="sheet-foot">
         {ask
           ? <span className="tv-row" style={{ alignItems: 'center' }}><span className="tv-muted" style={{ fontSize: 13 }}>Xoá hồ sơ và bài tổng hợp?</span>
-              <button type="button" className="tv-btn son" disabled={del.isPending} onClick={() => del.mutate()}>Xoá</button>
+              <button type="button" className="tv-btn accent" disabled={del.isPending} onClick={() => del.mutate()}>Xoá</button>
               <button type="button" className="tv-btn ghost" onClick={() => setAsk(false)}>Không</button></span>
           : <span><button type="button" className="tv-link" onClick={() => setAsk(true)}>Xoá hồ sơ này</button></span>}
         <button type="button" className="tv-btn ghost" onClick={onClose}>Huỷ</button>
-        <button type="button" className="tv-btn son" disabled={save.isPending} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu'}</button>
+        <button type="button" className="tv-btn accent" disabled={save.isPending} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu'}</button>
       </div>
     </Sheet>
   );
@@ -149,7 +149,7 @@ export function NamesSheet({ names, profileId, onClose, onSave }: {
   const save = useMutation({
     mutationFn: async (list: NumerologyNameDto[]) => { if (profileId) await api.updateProfile(profileId, { names: list }); return list; },
     onSuccess: list => {
-      if (profileId) for (const k of ['profile', 'ns-profile-reading', 'ai-readings', 'subjects', 'subject', 'brief']) void qc.invalidateQueries({ queryKey: [k] });
+      if (profileId) for (const k of ['profile', 'numerology-profile-reading', 'ai-readings', 'subjects', 'subject', 'brief']) void qc.invalidateQueries({ queryKey: [k] });
       onSave(list);
     },
   });
@@ -158,7 +158,7 @@ export function NamesSheet({ names, profileId, onClose, onSave }: {
       <div className="tv-form" style={{ marginTop: 12 }}><NameRows rows={rows} setRows={setRows} /></div>
       {save.isError && <p className="tv-err">{errorText(save.error)}</p>}
       <div className="sheet-foot"><span className="tv-muted" style={{ fontSize: 12.5 }}>{NOTE}</span>
-        <button type="button" className="tv-btn son" disabled={save.isPending} onClick={() => save.mutate(cleanNames(rows))}>{save.isPending ? 'Đang lưu…' : 'Dùng các tên này'}</button>
+        <button type="button" className="tv-btn accent" disabled={save.isPending} onClick={() => save.mutate(cleanNames(rows))}>{save.isPending ? 'Đang lưu…' : 'Dùng các tên này'}</button>
       </div>
     </Sheet>
   );

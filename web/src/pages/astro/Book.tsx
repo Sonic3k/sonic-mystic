@@ -48,7 +48,7 @@ function BookCard({ s, toc }: { s: { code: string; title: string; author: string
       <h3>{s.title}</h3>
       <p>{s.author}{s.translator ? ` · ${s.translator} dịch` : ''} · <span className={`tv-voice ${voiceClass(label)}`}>{label}</span>{s.description && <><br />{s.description}</>}{s.note && <><br /><span className="tv-muted">{s.note}</span></>}</p>
       <nav className="ns-toc as-toc">{tops.map(e => (
-        <Link key={e.code} to={`/chiem-tinh/sach/${short(s.code)}/${encodeURIComponent(e.code)}`}>{e.title}<small>{size.get(e.code) ?? 0}</small></Link>))}</nav>
+        <Link key={e.code} to={`/astrology/books/${short(s.code)}/${encodeURIComponent(e.code)}`}>{e.title}<small>{size.get(e.code) ?? 0}</small></Link>))}</nav>
     </div>
   );
 }
@@ -62,10 +62,10 @@ export function AstroBookEntry() {
   const shallow = !!size && (size.get(code) ?? 0) > WHOLE;
   const q = useQuery({ queryKey: ['astro-entry', source, code, shallow], queryFn: () => api.astroEntry(source, code, shallow), enabled: !!size || book.isError, retry: false });
   const e = q.data;
-  /* the passage a link points at: a passage of a reading (?cau=its rule) or a search hit (?doan=its id) */
-  const doan = Number(sp.get('doan')) || null;
-  const cau = sp.get('cau') ?? (doan && e ? e.sections.flatMap(s => s.passages).find(p => p.id === doan)?.rule?.code ?? null : null);
-  const target = cau ? `p-${cau}` : doan ? `b${doan}` : null;
+  /* the passage a link points at: a passage of a reading (?rule=its code) or a search hit (?passage=its id) */
+  const passageId = Number(sp.get('passage')) || null;
+  const ruleCode = sp.get('rule') ?? (passageId && e ? e.sections.flatMap(s => s.passages).find(p => p.id === passageId)?.rule?.code ?? null : null);
+  const target = ruleCode ? `p-${ruleCode}` : passageId ? `b${passageId}` : null;
   useTitle(e ? `${e.title} · Chiêm tinh` : 'Tài liệu · Chiêm tinh');
   useEffect(() => {
     if (!e) return;
@@ -73,7 +73,7 @@ export function AstroBookEntry() {
     if (el) requestAnimationFrame(() => el.scrollIntoView({ block: 'center' }));
     else window.scrollTo(0, 0);
   }, [e, target]);
-  if (q.isError) return page(<Failed error={q.error}><Link className="tv-link" to="/chiem-tinh/sach">Về tài liệu</Link></Failed>);
+  if (q.isError) return page(<Failed error={q.error}><Link className="tv-link" to="/astrology/books">Về tài liệu</Link></Failed>);
   if (!e) return page(<div className="tv-empty">Đang mở tài liệu…</div>);
   const kids = (c: string) => (toc ?? []).filter(x => x.parent === c);
   /* a table where its passage stands; a cell of more than one line has its first line as its label. One of long
@@ -94,7 +94,7 @@ export function AstroBookEntry() {
   };
   const para = (p: AstrologyPassageDto, tables: TableDto[]) => {
     const r = p.rule;
-    const on = (cau && r?.code === cau) || (!r && doan === p.id);
+    const on = (ruleCode && r?.code === ruleCode) || (!r && passageId === p.id);
     const t = p.kind === 'table' ? tables.find(x => x.key === p.key) : undefined;
     /* a long list of names (the famous people of a sign) reads in columns */
     const cols = !!p.items && p.items.length > 8 && p.items.every(x => x.length <= 34);
@@ -115,8 +115,8 @@ export function AstroBookEntry() {
   const [vc, vl] = voices.size === 1 ? VOICE[[...voices][0]] : [voiceClass(label), label];
   const head = (t: string, cls: string, id: string) => <h2 className={`${cls}${isCaps(t) ? ' caps' : ''}`} id={id}>{t}</h2>;
   return page(<>
-    <div className="ns-crumb"><Link to="/chiem-tinh/sach">Tài liệu</Link><span>›</span><span>{e.source.title}</span>
-      {e.path.map(x => <span key={x.code} style={{ display: 'contents' }}><span>›</span><Link to={`/chiem-tinh/sach/${source}/${encodeURIComponent(x.code)}`}>{x.title}</Link></span>)}</div>
+    <div className="ns-crumb"><Link to="/astrology/books">Tài liệu</Link><span>›</span><span>{e.source.title}</span>
+      {e.path.map(x => <span key={x.code} style={{ display: 'contents' }}><span>›</span><Link to={`/astrology/books/${source}/${encodeURIComponent(x.code)}`}>{x.title}</Link></span>)}</div>
     <div className="ptitle"><h1 className={isCaps(e.title) ? 'caps' : ''}>{e.title}{e.page !== null && <small>tr. {e.page}</small>}</h1>
       <span><span className={`tv-voice ${vc}`}>{vl}</span></span></div>
     <div className="tv-entry">
@@ -131,18 +131,18 @@ export function AstroBookEntry() {
         {shallow && <div className="tv-bookgrid">{e.sections.slice(1).map(s => {
           const sub = kids(s.code);
           return (
-            <Link key={s.code} className="tv-entry-card" to={`/chiem-tinh/sach/${source}/${encodeURIComponent(s.code)}`}>
+            <Link key={s.code} className="tv-entry-card" to={`/astrology/books/${source}/${encodeURIComponent(s.code)}`}>
               <b>{s.title}</b>{sub.length > 0 && <p>{sub.map(x => x.title).join(' · ')}</p>}<small>{[s.page !== null ? `tr. ${s.page}` : '', size?.get(s.code) ? `${size.get(s.code)} đoạn` : ''].filter(Boolean).join(' · ')}</small>
             </Link>);
         })}</div>}
         {!shallow && !e.sections.some(s => s.passages.length) && <div className="tv-empty">Mục này không có đoạn văn riêng.</div>}
-        <div className="tv-pn">{e.prev ? <Link to={`/chiem-tinh/sach/${source}/${encodeURIComponent(e.prev.code)}`}>‹ {e.prev.title}</Link> : <span />}{e.next && <Link to={`/chiem-tinh/sach/${source}/${encodeURIComponent(e.next.code)}`}>{e.next.title} ›</Link>}</div>
+        <div className="tv-pn">{e.prev ? <Link to={`/astrology/books/${source}/${encodeURIComponent(e.prev.code)}`}>‹ {e.prev.title}</Link> : <span />}{e.next && <Link to={`/astrology/books/${source}/${encodeURIComponent(e.next.code)}`}>{e.next.title} ›</Link>}</div>
       </div>
       <div className="tv-aside">
         {!shallow && e.sections.length > 1 && <div className="as-side"><h4>Trong mục này</h4><nav className="ns-toc">{e.sections.slice(1).map(s => (
           <button key={s.code} type="button" style={{ paddingLeft: 8 + Math.max(0, s.depth - 1) * 14 }}
             onClick={() => document.getElementById(`s-${s.code}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>{s.title}</button>))}</nav></div>}
-        <div className="tv-bs"><h4>Đọc mục này thế nào</h4><p>Dưới mỗi đoạn nói về một người là điều kiện của nó: đoạn ấy chỉ hiện trong bài đọc của ai có lá số như vậy. Đoạn của Woolfolk do Claude dịch, nguyên văn tiếng Anh in nghiêng ngay dưới.</p></div>
+        <div className="tv-added-box"><h4>Đọc mục này thế nào</h4><p>Dưới mỗi đoạn nói về một người là điều kiện của nó: đoạn ấy chỉ hiện trong bài đọc của ai có lá số như vậy. Đoạn của Woolfolk do Claude dịch, nguyên văn tiếng Anh in nghiêng ngay dưới.</p></div>
       </div>
     </div>
   </>);

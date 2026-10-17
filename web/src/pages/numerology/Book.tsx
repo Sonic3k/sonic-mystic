@@ -8,14 +8,14 @@ import type { NumerologyPassageDto, NumerologyTocEntryDto, TableDto } from '@mys
 import { api } from '../../api';
 import { Failed } from '../../components/Owner';
 import { useTitle } from '../../lib/text';
-import { NsGrid } from './Parts';
-import { useNsBook } from './Reading';
+import { NumerologyGrid } from './Parts';
+import { useNumerologyBook } from './Reading';
 
 const ROWN = [3, 6, 9, 2, 5, 8, 1, 4, 7];
 const page = (body: React.ReactNode) => <div className="wrap page tv ns">{body}</div>;
 
-export function NsBookIndex() {
-  const book = useNsBook();
+export function NumerologyBookIndex() {
+  const book = useNumerologyBook();
   useTitle('Sách · Nhân số học');
   const b = book.data;
   const kids = useMemo(() => {
@@ -40,7 +40,7 @@ export function NsBookIndex() {
   const card = (e: NumerologyTocEntryDto) => {
     const sub = kids.get(e.code) ?? [], n = size.get(e.code) ?? 0;
     return (
-      <Link key={e.code} className="tv-entry-card" to={`/nhan-so-hoc/sach/${e.code}`}>
+      <Link key={e.code} className="tv-entry-card" to={`/numerology/books/${e.code}`}>
         <b>{e.title}</b>{sub.length > 0 && <p>{sub.map(x => x.title).join(' · ')}</p>}<small>{[e.page !== null ? `tr. ${e.page}` : '', n ? `${n} đoạn` : ''].filter(Boolean).join(' · ')}</small>
       </Link>
     );
@@ -63,15 +63,15 @@ export function NsBookIndex() {
   </>);
 }
 
-export function NsBookEntry() {
+export function NumerologyBookEntry() {
   const { code = '' } = useParams();
   const [sp] = useSearchParams();
-  const q = useQuery({ queryKey: ['ns-entry', code], queryFn: () => api.nsEntry(code), retry: false });
+  const q = useQuery({ queryKey: ['numerology-entry', code], queryFn: () => api.numerologyEntry(code), retry: false });
   const e = q.data;
-  /* the paragraph a link points at: a passage of a reading (?cau=its rule) or a search hit (?doan=its id) */
-  const doan = Number(sp.get('doan')) || null;
-  const cau = sp.get('cau') ?? (doan && e ? e.sections.flatMap(s => s.passages).find(p => p.id === doan)?.rule?.code ?? null : null);
-  const target = cau ? `p-${cau}` : doan ? `b${doan}` : null;
+  /* the paragraph a link points at: a passage of a reading (?rule=its code) or a search hit (?passage=its id) */
+  const passageId = Number(sp.get('passage')) || null;
+  const ruleCode = sp.get('rule') ?? (passageId && e ? e.sections.flatMap(s => s.passages).find(p => p.id === passageId)?.rule?.code ?? null : null);
+  const target = ruleCode ? `p-${ruleCode}` : passageId ? `b${passageId}` : null;
   useTitle(e ? `${e.title} · Nhân số học` : 'Sách · Nhân số học');
   /* a link to a paragraph opens the book there; another section opens at its top */
   useEffect(() => {
@@ -80,7 +80,7 @@ export function NsBookEntry() {
     if (el) requestAnimationFrame(() => el.scrollIntoView({ block: 'center' }));
     else window.scrollTo(0, 0);
   }, [e, target]);
-  if (q.isError) return page(<Failed error={q.error}><Link className="tv-link" to="/nhan-so-hoc/sach">Về mục lục</Link></Failed>);
+  if (q.isError) return page(<Failed error={q.error}><Link className="tv-link" to="/numerology/books">Về mục lục</Link></Failed>);
   if (!e) return page(<div className="tv-empty">Đang mở sách…</div>);
   const para = (p: NumerologyPassageDto) => {
     if (p.kind === 'figure') {
@@ -90,14 +90,14 @@ export function NsBookEntry() {
         const counts = Array(10).fill(0) as number[];
         f.grid.flat().forEach((s, i) => { const t = s.replace(/[()]/g, ''); if (/^\d+$/.test(t) && i < 9) counts[ROWN[i]] = t.length; });
         const g = gridOf(counts);
-        grid = <NsGrid counts={counts} full={g.arrows} empty={g.empty} cell={40} />;
+        grid = <NumerologyGrid counts={counts} full={g.arrows} empty={g.empty} cell={40} />;
       }
-      return <figure key={p.id} className={`ns-fig${doan === p.id ? ' hl' : ''}`} id={`b${p.id}`}>{grid}<figcaption><b>{f.caption ?? 'Hình'}</b>{f.notes ?? ''}{p.page !== null && <><br /><span className="tv-muted">tr. {p.page}</span></>}</figcaption></figure>;
+      return <figure key={p.id} className={`ns-fig${passageId === p.id ? ' hl' : ''}`} id={`b${p.id}`}>{grid}<figcaption><b>{f.caption ?? 'Hình'}</b>{f.notes ?? ''}{p.page !== null && <><br /><span className="tv-muted">tr. {p.page}</span></>}</figcaption></figure>;
     }
     const r = p.rule;
     const tag = p.role === 'advice' ? <span className="ns-tag adv">Lời khuyên</span> : p.role === 'child' ? <span className="ns-tag kid">Với trẻ nhỏ</span> : p.role === 'example' ? <span className="ns-tag ex">Ví dụ</span> : null;
     return (
-      <div key={p.id} className={`tv-para role-${p.role}${(cau && r?.code === cau) || (!r && doan === p.id) ? ' hl' : ''}`} id={r ? `p-${r.code}` : `b${p.id}`}>
+      <div key={p.id} className={`tv-para role-${p.role}${(ruleCode && r?.code === ruleCode) || (!r && passageId === p.id) ? ' hl' : ''}`} id={r ? `p-${r.code}` : `b${p.id}`}>
         {p.page !== null && <span className="ns-pg">{p.page}</span>}
         <p>{tag}{tag && ' '}{p.text}</p>
         {r && r.kind !== 'general' && <div className="ns-when">{describeWhen(r.when)}</div>}
@@ -112,7 +112,7 @@ export function NsBookEntry() {
     </table></div>
   );
   return page(<>
-    <div className="ns-crumb"><Link to="/nhan-so-hoc/sach">Sách</Link>{e.path.slice(0, -1).map(x => <span key={x.code} style={{ display: 'contents' }}><span>›</span><Link to={`/nhan-so-hoc/sach/${x.code}`}>{x.title}</Link></span>)}</div>
+    <div className="ns-crumb"><Link to="/numerology/books">Sách</Link>{e.path.slice(0, -1).map(x => <span key={x.code} style={{ display: 'contents' }}><span>›</span><Link to={`/numerology/books/${x.code}`}>{x.title}</Link></span>)}</div>
     <div className="ptitle"><h1>{e.title}{e.page !== null && <small>tr. {e.page}</small>}</h1></div>
     <div className="tv-entry">
       <div className="tv-entry-text ns-text">
@@ -124,13 +124,13 @@ export function NsBookEntry() {
           </div>
         ))}
         {!e.sections.some(s => s.passages.length) && <div className="tv-empty">Mục này không có đoạn văn riêng; các phần bên trong ở mục lục.</div>}
-        <div className="tv-pn">{e.prev ? <Link to={`/nhan-so-hoc/sach/${e.prev.code}`}>‹ {e.prev.title}</Link> : <span />}{e.next && <Link to={`/nhan-so-hoc/sach/${e.next.code}`}>{e.next.title} ›</Link>}</div>
+        <div className="tv-pn">{e.prev ? <Link to={`/numerology/books/${e.prev.code}`}>‹ {e.prev.title}</Link> : <span />}{e.next && <Link to={`/numerology/books/${e.next.code}`}>{e.next.title} ›</Link>}</div>
       </div>
       <div className="tv-aside">
         {e.sections.length > 1 && <div className="ns-expl"><h4>Trong mục này</h4><nav className="ns-toc">{e.sections.slice(1).map(s => (
           <button key={s.code} type="button" style={{ paddingLeft: 8 + Math.max(0, s.depth - e.sections[0].depth - 1) * 14 }}
             onClick={() => document.getElementById(`s-${s.code}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>{s.title}</button>))}</nav></div>}
-        <div className="tv-bs"><h4>Đọc mục này thế nào</h4><p>Dưới mỗi đoạn nói về một người là điều kiện của nó, chữ tím: đoạn ấy chỉ hiện trong bài đọc của ai có con số đó. Đoạn ví dụ, cách tính và hình minh họa không vào bài đọc.</p></div>
+        <div className="tv-added-box"><h4>Đọc mục này thế nào</h4><p>Dưới mỗi đoạn nói về một người là điều kiện của nó, chữ tím: đoạn ấy chỉ hiện trong bài đọc của ai có con số đó. Đoạn ví dụ, cách tính và hình minh họa không vào bài đọc.</p></div>
       </div>
     </div>
   </>);

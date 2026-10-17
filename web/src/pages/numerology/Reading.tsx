@@ -1,6 +1,6 @@
 /* One person's numbers and what Lê Đỗ Quỳnh Hương's book says of them: the board, then three tabs — the synthesis
    Claude wrote (Tổng hợp), the book's passages on the person (Tính cách), and the years and peaks (Thời vận).
-   Opened from a link (/nhan-so-hoc/xem?…) or from a saved profile (/nhan-so-hoc/profile/:id). */
+   Opened from a link (/numerology/view?…) or from a saved profile (/numerology/profile/:id). */
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
@@ -9,13 +9,13 @@ import type { AiReadingDto, NumerologyReadingDto, NumerologyRuleDto, NumerologyS
 import { api } from '../../api';
 import { Failed } from '../../components/Owner';
 import { SONIC_HUB } from '../../lib/people';
-import { dmShort, dmy, fromNsSearch, nsRequest, toNsSearch, withPrimary, type NsParams } from '../../lib/ns';
+import { dmShort, dmy, fromNumerologySearch, numerologyRequest, toNumerologySearch, withPrimary, type NumerologyParams } from '../../lib/numerology';
 import { dateVi, useTitle } from '../../lib/text';
 import { Board, Explain, Groups, L, LifeLine, STAGE, splitGroups } from './Parts';
 import { NamesSheet, ProfileSheet, SaveSheet } from './Sheets';
 
-type Tab = 'tong' | 'tinh' | 'van';
-export const useNsBook = () => useQuery({ queryKey: ['ns-book'], queryFn: api.nsBook, staleTime: 600_000, retry: false });
+type Tab = 'synthesis' | 'traits' | 'time';
+export const useNumerologyBook = () => useQuery({ queryKey: ['numerology-book'], queryFn: api.numerologyBook, staleTime: 600_000, retry: false });
 const UTC8 = 'Đổi ngày âm ra dương lịch theo lịch tính cho UTC+8, lịch dùng trước năm 1968 (ở miền Nam đến 1975).';
 const lunarOf = (b: { calendar: string; day: number | null; month: number | null; year: number | null; leapMonth?: boolean }) =>
   b.calendar === 'lunar' && b.day && b.month && b.year ? `${b.day}/${b.month}${b.leapMonth ? ' nhuận' : ''}/${b.year}` : null;
@@ -25,71 +25,71 @@ const arrowName = (code: string, kind: 'full' | 'empty') => (kind === 'full' ? A
 const page = (body: React.ReactNode) => <div className="wrap page tv ns">{body}</div>;
 
 /** a reading opened from a link: the birth and the names are in the URL */
-export function NsXemPage() {
+export function NumerologyViewPage() {
   const [sp, setSp] = useSearchParams();
-  const params = useMemo(() => fromNsSearch(sp), [sp]);
-  const key = params ? toNsSearch(params) : '';
-  const reading = useQuery({ queryKey: ['ns-reading', key], queryFn: () => api.nsReading(nsRequest(params!)), enabled: !!params, retry: false, placeholderData: keepPreviousData });
+  const params = useMemo(() => fromNumerologySearch(sp), [sp]);
+  const key = params ? toNumerologySearch(params) : '';
+  const reading = useQuery({ queryKey: ['numerology-reading', key], queryFn: () => api.numerologyReading(numerologyRequest(params!)), enabled: !!params, retry: false, placeholderData: keepPreviousData });
   const [sheet, setSheet] = useState<'save' | 'names' | null>(null);
   useTitle(params?.names.find(n => n.primary)?.text || params?.full || 'Nhân số học');
-  if (!params) return page(<div className="tv-empty">Thiếu ngày sinh. <Link className="tv-link" to="/nhan-so-hoc">Xem các con số</Link></div>);
-  const edit = <Link className="tv-link" to={`/nhan-so-hoc?${key}`}>Sửa ngày sinh</Link>;
+  if (!params) return page(<div className="tv-empty">Thiếu ngày sinh. <Link className="tv-link" to="/numerology">Xem các con số</Link></div>);
+  const edit = <Link className="tv-link" to={`/numerology?${key}`}>Sửa ngày sinh</Link>;
   if (reading.isError) return page(<Failed error={reading.error}>{edit}</Failed>);
   if (!reading.data) return page(<div className="tv-empty">Đang tính các con số…</div>);
   /* the birth and the names change the link; what is being looked at (tab, part, peak, chart) stays */
-  const set = (p: Partial<NsParams>) => {
-    const n = new URLSearchParams(toNsSearch({ ...params, ...p }));
-    for (const k of ['xem', 'phan', 'dinh', 'bd', 'nguoi']) { const v = sp.get(k); if (v) n.set(k, v); }
+  const set = (p: Partial<NumerologyParams>) => {
+    const n = new URLSearchParams(toNumerologySearch({ ...params, ...p }));
+    for (const k of ['view', 'part', 'peak', 'board', 'person']) { const v = sp.get(k); if (v) n.set(k, v); }
     setSp(n, { replace: true });
   };
   return (
     <>
-      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={null} written={null} defTab="tinh"
+      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={null} written={null} defTab="traits"
         title={params.names.find(n => n.primary)?.text || params.full || 'Các con số'} full={params.full} gender={params.gender} lunar={lunarOf(params.birth)}
         onName={i => set({ names: withPrimary(params.names, i) })} onYear={y => set({ viewYear: y })}
         actions={<>
           <button type="button" className="tv-btn ghost" onClick={() => setSheet('names')}>Sửa tên</button>
-          <Link className="tv-btn ghost" to={`/nhan-so-hoc?${key}`}>Sửa ngày sinh</Link>
-          <button type="button" className="tv-btn son" onClick={() => setSheet('save')}>Lưu hồ sơ</button>
+          <Link className="tv-btn ghost" to={`/numerology?${key}`}>Sửa ngày sinh</Link>
+          <button type="button" className="tv-btn accent" onClick={() => setSheet('save')}>Lưu hồ sơ</button>
         </>} />
-      {sheet === 'save' && <SaveSheet params={params} subjectId={sp.get('nguoi')} onClose={() => setSheet(null)} />}
+      {sheet === 'save' && <SaveSheet params={params} subjectId={sp.get('person')} onClose={() => setSheet(null)} />}
       {sheet === 'names' && <NamesSheet names={params.names} onClose={() => setSheet(null)} onSave={names => { set({ names }); setSheet(null); }} />}
     </>
   );
 }
 
 /** a saved profile: the birth and the names as they were saved, and the synthesis written for it */
-export function NsProfilePage() {
+export function NumerologyProfilePage() {
   const { id = '' } = useParams();
   const [sp, setSp] = useSearchParams();
-  const year = Number(sp.get('nam')) || null;
-  const nameView = sp.get('ten') !== null && Number.isInteger(Number(sp.get('ten'))) ? Number(sp.get('ten')) : null;
+  const year = Number(sp.get('year')) || null;
+  const nameView = sp.get('name') !== null && Number.isInteger(Number(sp.get('name'))) ? Number(sp.get('name')) : null;
   const profile = useQuery({ queryKey: ['profile', id], queryFn: () => api.profile(id), retry: false });
   const ok = profile.data?.discipline === 'numerology';
-  const reading = useQuery({ queryKey: ['ns-profile-reading', id, year, nameView], queryFn: () => api.nsProfileReading(id, year, nameView), enabled: ok, retry: false, placeholderData: keepPreviousData });
+  const reading = useQuery({ queryKey: ['numerology-profile-reading', id, year, nameView], queryFn: () => api.numerologyProfileReading(id, year, nameView), enabled: ok, retry: false, placeholderData: keepPreviousData });
   const written = useQuery({ queryKey: ['ai-readings', id], queryFn: () => api.aiReadings(id), enabled: ok, retry: false });
   const [sheet, setSheet] = useState<'names' | 'edit' | null>(null);
   const p = profile.data;
   useTitle(p ? p.names?.find(n => n.primary)?.text ?? p.subject.displayName : 'Nhân số học');
-  const back = <Link className="tv-link" to="/nhan-so-hoc">Nhân số học</Link>;
+  const back = <Link className="tv-link" to="/numerology">Nhân số học</Link>;
   if (profile.isError) return page(<Failed error={profile.error}>{back}</Failed>);
   if (p && !ok) return page(<div className="tv-empty">Đây là lá số tử vi. <Link className="tv-link" to={`/tu-vi/profile/${p.id}`}>Mở lá số</Link></div>);
   if (reading.isError) return page(<Failed error={reading.error}>{back}</Failed>);
   if (!p || !reading.data || written.isPending) return page(<div className="tv-empty">Đang mở hồ sơ…</div>);
   const set = (k: string, v: string | null) => { const n = new URLSearchParams(sp); if (v === null) n.delete(k); else n.set(k, v); setSp(n, { replace: true }); };
   const primary = Math.max(0, (p.names ?? []).findIndex(n => n.primary));
-  const sum = (written.data ?? []).filter(w => w.scope === 'tong-hop').sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0] ?? null;
+  const sum = (written.data ?? []).filter(w => w.scope === 'synthesis').sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0] ?? null;
   const read = reading.data.name ?? primary;
   return (
     <>
-      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={p} written={sum} primary={primary} defTab={sum ? 'tong' : 'tinh'}
+      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={p} written={sum} primary={primary} defTab={sum ? 'synthesis' : 'traits'}
         title={p.names?.[read]?.text ?? p.subject.displayName} full={p.subject.displayName} gender={p.gender} lunar={lunarOf(p.birth)}
-        onName={i => set('ten', i === primary ? null : String(i))} onYear={y => set('nam', y ? String(y) : null)}
+        onName={i => set('name', i === primary ? null : String(i))} onYear={y => set('year', y ? String(y) : null)}
         actions={<>
           <button type="button" className="tv-btn ghost" onClick={() => setSheet('names')}>Sửa tên</button>
           <button type="button" className="tv-btn ghost" onClick={() => setSheet('edit')}>Sửa hồ sơ</button>
         </>} />
-      {sheet === 'names' && <NamesSheet names={p.names ?? []} profileId={p.id} onClose={() => setSheet(null)} onSave={() => { set('ten', null); setSheet(null); }} />}
+      {sheet === 'names' && <NamesSheet names={p.names ?? []} profileId={p.id} onClose={() => setSheet(null)} onSave={() => { set('name', null); setSheet(null); }} />}
       {sheet === 'edit' && <ProfileSheet profile={p} onClose={() => setSheet(null)} />}
     </>
   );
@@ -101,9 +101,9 @@ function ReadingView({ r, sp, setSp, profile, written, primary = 0, defTab, titl
   title: string; full: string; gender: ProfileDto['gender']; lunar: string | null;
   onName: (i: number) => void; onYear: (y: number | null) => void; actions: React.ReactNode;
 }) {
-  const toc = useNsBook().data?.toc;
+  const toc = useNumerologyBook().data?.toc;
   const c = r.chart;
-  const tab = (['tong', 'tinh', 'van'].includes(sp.get('xem') ?? '') ? sp.get('xem') : defTab) as Tab;
+  const tab = (['synthesis', 'traits', 'time'].includes(sp.get('view') ?? '') ? sp.get('view') : defTab) as Tab;
   const set = (k: string, v: string | null) => { const n = new URLSearchParams(sp); if (v === null) n.delete(k); else n.set(k, v); setSp(n, { replace: true }); };
   const [hl, setHl] = useState<string | null>(null);
   /* a passage cited by the synthesis is shown where the reading has it, once that tab has been drawn */
@@ -118,13 +118,13 @@ function ReadingView({ r, sp, setSp, profile, written, primary = 0, defTab, titl
   const goTo = (code: string) => {
     const rule = r.rules[code];
     if (!rule) return;
-    const time = ['nam', 'dinh', 'giai_doan'].includes(rule.topic);
+    const time = ['year', 'peaks', 'stages'].includes(rule.topic);
     const n = new URLSearchParams(sp);
-    n.set('xem', time ? 'van' : 'tinh');
-    if (!time) { if (rule.topic === 'chu_dao') n.delete('phan'); else n.set('phan', rule.topic); }
-    if (rule.topic === 'dinh') {
-      const s = r.sections.find(x => x.topic === 'dinh' && x.groups.some(gr => gr.matches.some(m => m.rule === code)));
-      if (s && peakOf(s)) n.set('dinh', String(peakOf(s)));
+    n.set('view', time ? 'time' : 'traits');
+    if (!time) { if (rule.topic === 'ruling') n.delete('part'); else n.set('part', rule.topic); }
+    if (rule.topic === 'peaks') {
+      const s = r.sections.find(x => x.topic === 'peaks' && x.groups.some(gr => gr.matches.some(m => m.rule === code)));
+      if (s && peakOf(s)) n.set('peak', String(peakOf(s)));
     }
     setSp(n, { replace: true });
     setHl(code);
@@ -138,7 +138,7 @@ function ReadingView({ r, sp, setSp, profile, written, primary = 0, defTab, titl
           <p>{[g, `sinh ${c.input.day}/${c.input.month}/${c.input.year} dương lịch${r.solar.fromLunar && lunar ? ` (đổi từ ${lunar} âm lịch)` : ''}`,
             nm ? `đọc theo tên ${nm.text}${nm.label && nm.label !== nm.text ? ` (${nm.label.toLowerCase()})` : ''}` : 'chưa có tên'].filter(Boolean).join(' · ')}</p>
           {profile && <p className="tv-muted" style={{ fontSize: 12.5, marginTop: 4 }}>
-            <Link className="tv-link" to={`/nguoi/${profile.subject.id}`}>{profile.subject.displayName}</Link>
+            <Link className="tv-link" to={`/people/${profile.subject.id}`}>{profile.subject.displayName}</Link>
             {profile.subject.links.some(l => l.system === SONIC_HUB) && <> · <span className="tv-linked">liên kết Sonic Hub</span></>}
             {profile.note && <> · {profile.note}</>}
           </p>}
@@ -148,19 +148,19 @@ function ReadingView({ r, sp, setSp, profile, written, primary = 0, defTab, titl
       </div>
       {r.solar.fromLunar && /UTC\+8/.test(r.solar.note ?? '') && <div className="tv-calwarn">{UTC8}</div>}
 
-      <Board c={c} nameIdx={r.name} mode={sp.get('bd') === 'ten' ? 'name' : 'birth'} onMode={m => set('bd', m === 'name' ? 'ten' : null)} onName={onName} />
+      <Board c={c} nameIdx={r.name} mode={sp.get('board') === 'name' ? 'name' : 'birth'} onMode={m => set('board', m === 'name' ? 'name' : null)} onName={onName} />
 
       <div className="tv-tabs" id="doc">
         <div className="seg" role="tablist" aria-label="Phần đọc">
-          {([['tong', 'Tổng hợp'], ['tinh', 'Tính cách'], ['van', 'Thời vận']] as const).map(([k, t]) => (
-            <button key={k} type="button" role="tab" aria-selected={tab === k} className={tab === k ? 'on' : ''} onClick={() => set('xem', k === defTab ? null : k)}>{t}</button>))}
+          {([['synthesis', 'Tổng hợp'], ['traits', 'Tính cách'], ['time', 'Thời vận']] as const).map(([k, t]) => (
+            <button key={k} type="button" role="tab" aria-selected={tab === k} className={tab === k ? 'on' : ''} onClick={() => set('view', k === defTab ? null : k)}>{t}</button>))}
         </div>
-        <span className="tv-voice ba">Lời sách</span><span className="tv-voice ai">Claude luận thêm — không phải lời sách</span>
+        <span className="tv-voice primary">Lời sách</span><span className="tv-voice ai">Claude luận thêm — không phải lời sách</span>
         <span className="tv-caution">Nhân số học để tham khảo, chiêm nghiệm. Các con số chỉ khuynh hướng.</span>
       </div>
-      {tab === 'tong' && <SumTab r={r} written={written} profile={profile} primary={primary} toc={toc} onGoTo={goTo} />}
-      {tab === 'tinh' && <TraitsTab r={r} part={sp.get('phan')} setPart={v => set('phan', v === 'chu_dao' ? null : v)} toc={toc} hl={hl} />}
-      {tab === 'van' && <TimeTab r={r} peak={Number(sp.get('dinh')) || null} setPeak={i => set('dinh', String(i))} onYear={onYear} toc={toc} hl={hl} />}
+      {tab === 'synthesis' && <SumTab r={r} written={written} profile={profile} primary={primary} toc={toc} onGoTo={goTo} />}
+      {tab === 'traits' && <TraitsTab r={r} part={sp.get('part')} setPart={v => set('part', v === 'ruling' ? null : v)} toc={toc} hl={hl} />}
+      {tab === 'time' && <TimeTab r={r} peak={Number(sp.get('peak')) || null} setPeak={i => set('peak', String(i))} onYear={onYear} toc={toc} hl={hl} />}
     </div>
   );
 }
@@ -191,7 +191,7 @@ function SumTab({ r, written, profile, primary, toc, onGoTo }: {
     <div className="tv-read">
       <div className="tv-read-main">
         <div className="ns-sum-head">
-          <span className="tv-voice ba">Tóm lược sách</span><span className="tv-voice ai">{who} luận thêm</span>
+          <span className="tv-voice primary">Tóm lược sách</span><span className="tv-voice ai">{who} luận thêm</span>
           <span>{who} viết ngày {dateVi(written.createdAt)}, cho năm {written.viewYear} · từ {matched} đoạn sách khớp</span>
           <span className={`ns-ok${written.stale ? ' old' : ''}`}>{written.stale ? 'hồ sơ đã đổi từ khi viết' : 'còn khớp với hồ sơ'}</span>
         </div>
@@ -218,7 +218,7 @@ function SumTab({ r, written, profile, primary, toc, onGoTo }: {
       <div className="tv-read-side">
         <div className="ns-expl"><h4>Trong bài</h4><nav className="ns-toc">{written.sections.map((sec, si) => (
           <button key={si} type="button" onClick={() => document.getElementById(`sum-${si}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>{sec.title}</button>))}</nav></div>
-        <div className="tv-bs"><h4>Bài này viết thế nào</h4>
+        <div className="tv-added-box"><h4>Bài này viết thế nào</h4>
           <p>Phần <b>tóm lược</b> chỉ kể lại những đoạn sách khớp với các con số và tên {primaryName ?? 'của người này'}; mỗi ý dẫn số đoạn, bấm để xem lời sách. Phần <b>luận thêm</b> là ý của {who} nối các đoạn lại, không phải lời sách.</p>
           <p style={{ margin: 0 }}>Khi đổi tên đọc hay khi sách được sửa, bài được đánh dấu cũ để viết lại.</p></div>
       </div>
@@ -235,16 +235,16 @@ function TopicCounts({ r }: { r: NumerologyReadingDto }) {
 
 function TraitsTab({ r, part, setPart, toc, hl }: { r: NumerologyReadingDto; part: string | null; setPart: (v: Topic) => void; toc?: NumerologyTocEntryDto[]; hl: string | null }) {
   const c = r.chart, nm = r.name !== null ? c.names[r.name] : null;
-  const parts: [Topic, string][] = [['chu_dao', `Chủ đạo ${L(c.ruling)}`], ['ngay_sinh', `Ngày sinh ${L(c.birthday)}`], ['bieu_do', 'Biểu đồ'], ['mui_ten', 'Mũi tên'], ...(nm ? [['ten', `Tên ${nm.text}`] as [Topic, string]] : [])];
-  const cur = (parts.some(([k]) => k === part) ? part : 'chu_dao') as Topic;
+  const parts: [Topic, string][] = [['ruling', `Chủ đạo ${L(c.ruling)}`], ['birthday', `Ngày sinh ${L(c.birthday)}`], ['grid', 'Biểu đồ'], ['arrows', 'Mũi tên'], ...(nm ? [['name', `Tên ${nm.text}`] as [Topic, string]] : [])];
+  const cur = (parts.some(([k]) => k === part) ? part : 'ruling') as Topic;
   const of = (k: Topic) => { const s = r.sections.find(x => x.topic === k); return s ? splitGroups(s.groups, r.rules) : { said: [], general: [] }; };
   const { said, general } = of(cur);
   const head: Partial<Record<Topic, [string, string]>> = {
-    chu_dao: [`Con số chủ đạo ${L(c.ruling)}`, `tổng các chữ số ngày sinh ${c.sum}`],
-    ngay_sinh: [`Con số ngày sinh ${L(c.birthday)}`, c.birthday === c.ruling ? 'trùng Con số chủ đạo' : `sinh ngày ${c.input.day}, khác Con số chủ đạo`],
-    bieu_do: ['Biểu đồ ngày sinh', [3, 6, 9, 2, 5, 8, 1, 4, 7].filter(n => c.grid.counts[n]).map(n => String(n).repeat(c.grid.counts[n])).join(' · ')],
-    mui_ten: ['Các mũi tên', [...c.grid.arrows.map(a => arrowName(a, 'full')), ...c.grid.empty.map(a => arrowName(a, 'empty'))].join(' · ') || 'không có mũi tên nào'],
-    ten: nm ? [`Tên ${nm.text}`, `linh hồn ${L(nm.soul)} · biểu đạt ${L(nm.expression)} · tên riêng ${L(nm.nameNumber)}`] : undefined,
+    ruling: [`Con số chủ đạo ${L(c.ruling)}`, `tổng các chữ số ngày sinh ${c.sum}`],
+    birthday: [`Con số ngày sinh ${L(c.birthday)}`, c.birthday === c.ruling ? 'trùng Con số chủ đạo' : `sinh ngày ${c.input.day}, khác Con số chủ đạo`],
+    grid: ['Biểu đồ ngày sinh', [3, 6, 9, 2, 5, 8, 1, 4, 7].filter(n => c.grid.counts[n]).map(n => String(n).repeat(c.grid.counts[n])).join(' · ')],
+    arrows: ['Các mũi tên', [...c.grid.arrows.map(a => arrowName(a, 'full')), ...c.grid.empty.map(a => arrowName(a, 'empty'))].join(' · ') || 'không có mũi tên nào'],
+    name: nm ? [`Tên ${nm.text}`, `linh hồn ${L(nm.soul)} · biểu đạt ${L(nm.expression)} · tên riêng ${L(nm.nameNumber)}`] : undefined,
   };
   const [h, sub] = head[cur] ?? ['', ''];
   return (
@@ -272,8 +272,8 @@ function TimeTab({ r, peak, setPeak, onYear, toc, hl }: {
   const pk = peak && peak >= 1 && peak <= 4 ? peak : (now.nextPeak ?? now.lastPeak ?? P[0]).index;
   const empty = { said: [], general: [] };
   const part = (t: Topic) => { const s = r.sections.find(x => x.topic === t); return s ? splitGroups(s.groups, r.rules) : empty; };
-  const peakSecs = r.sections.filter(s => s.topic === 'dinh');
-  const ys = part('nam'), gs = part('giai_doan');
+  const peakSecs = r.sections.filter(s => s.topic === 'peaks');
+  const ys = part('year'), gs = part('stages');
   const pkSec = peakSecs.find(x => peakOf(x) === pk);
   const ps = pkSec ? splitGroups(pkSec.groups, r.rules) : empty;
   const peakGeneral = peakSecs.flatMap(s => splitGroups(s.groups, r.rules).general);
@@ -296,7 +296,7 @@ function TimeTab({ r, peak, setPeak, onYear, toc, hl }: {
             ? `Đang ở khúc giao thời từ năm ${tr.from} sang năm ${tr.to}, đến khoảng ${dmy(tr.until)}.`
             : `Năm đang sống.${next ? ` Năm ${next.n} bắt đầu ${dmy(next.start)}; khúc giao thời kéo dài hai đến năm tháng từ ngày ấy.` : ''}`}</p>}
           <Groups groups={ys.said} rules={r.rules} toc={toc} hl={hl} />
-          {ys.general.length > 0 && <Explain general={ys.general} rules={r.rules} topic="nam" />}
+          {ys.general.length > 0 && <Explain general={ys.general} rules={r.rules} topic="year" />}
         </div>
         <div>
           <div className="tv-phead"><h3>Bốn đỉnh cao</h3><span>{now.nextPeak ? `đang hướng tới đỉnh ${now.nextPeak.index}` : 'đã qua cả bốn đỉnh'}</span></div>
@@ -307,7 +307,7 @@ function TimeTab({ r, peak, setPeak, onYear, toc, hl }: {
           <Groups groups={ps.said} rules={r.rules} toc={toc} hl={hl} />
           <div className="tv-phead" style={{ marginTop: 24 }}><h3>Giai đoạn {STAGE[now.stage]}</h3><span>{now.age} tuổi</span></div>
           <Groups groups={gs.said} rules={r.rules} toc={toc} hl={hl} />
-          {peakGeneral.length > 0 && <Explain general={peakGeneral} rules={r.rules} topic="dinh" />}
+          {peakGeneral.length > 0 && <Explain general={peakGeneral} rules={r.rules} topic="peaks" />}
         </div>
       </div>
     </>

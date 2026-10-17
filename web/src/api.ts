@@ -78,12 +78,12 @@ export const api = {
   deleteProfile: (id: string) => call<void>('DELETE', `/profiles/${id}`),
 
   // nhân số học
-  nsReading: (r: NumerologyRequest) => call<NumerologyReadingDto>('POST', '/numerology/reading', r),
-  nsProfileReading: (id: string, year?: number | null, name?: number | null) => get<NumerologyReadingDto>(`/profiles/${id}/reading${q({ year, name })}`),
-  nsBook: () => get<NumerologyBookDto>('/numerology/book'),
-  nsEntry: (code: string) => get<NumerologyEntryDto>(`/numerology/book/${encodeURIComponent(code)}`),
-  nsLookup: (symbols: string[], topic?: string) => get<NumerologyLookupDto>(`/numerology/lookup${q({ symbols: symbols.join(','), topic })}`),
-  nsCatalog: () => get<NumerologyCatalogDto>('/numerology/catalog'),
+  numerologyReading: (r: NumerologyRequest) => call<NumerologyReadingDto>('POST', '/numerology/reading', r),
+  numerologyProfileReading: (id: string, year?: number | null, name?: number | null) => get<NumerologyReadingDto>(`/profiles/${id}/reading${q({ year, name })}`),
+  numerologyBook: () => get<NumerologyBookDto>('/numerology/book'),
+  numerologyEntry: (code: string) => get<NumerologyEntryDto>(`/numerology/book/${encodeURIComponent(code)}`),
+  numerologyLookup: (symbols: string[], topic?: string) => get<NumerologyLookupDto>(`/numerology/lookup${q({ symbols: symbols.join(','), topic })}`),
+  numerologyCatalog: () => get<NumerologyCatalogDto>('/numerology/catalog'),
 
   // chiêm tinh
   astroChart: (r: AstrologyRequest) => call<AstrologyChartDto>('POST', '/astrology/chart', r),
@@ -100,4 +100,4 @@ export const api = {
   removeReading: (id: string) => call<void>('DELETE', `/ai-readings/${id}`),
 };
 
-export const SOURCES = { luan: 'tuvi.ba.luan', phan1: 'tuvi.ba.phan1', supplement: 'tuvi.bo-sung' } as const;
+export const SOURCES = { notes: 'tuvi.grandma.notes', setup: 'tuvi.grandma.setup', supplement: 'tuvi.supplement' } as const;

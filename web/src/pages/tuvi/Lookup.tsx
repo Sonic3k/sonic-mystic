@@ -10,8 +10,8 @@ import { fold, useTitle } from '../../lib/text';
 import { ruleHref } from './Reading';
 
 const hitHref = (h: SearchHitDto) =>
-  h.sourceCode === SOURCES.luan ? (h.entryCode === 'preface' ? '/tu-vi/phan-1#mo-dau' : `/tu-vi/sach/${h.entryRef}${h.passageRef !== null ? `#p${h.passageRef}` : ''}`)
-    : h.sourceCode === SOURCES.phan1 ? '/tu-vi/phan-1' : null;
+  h.sourceCode === SOURCES.notes ? (h.entryCode === 'preface' ? '/tu-vi/setup#preface' : `/tu-vi/books/${h.entryRef}${h.passageRef !== null ? `#p${h.passageRef}` : ''}`)
+    : h.sourceCode === SOURCES.setup ? '/tu-vi/setup' : null;
 
 export default function Lookup() {
   const [sp, setSp] = useSearchParams();
@@ -52,7 +52,7 @@ export default function Lookup() {
           {needle.length >= 2 && search.data?.hits.map(h => {
             const href = hitHref(h);
             const body = <><small>{h.sourceKind === 'family' ? '' : 'Bổ sung · '}{h.entryTitle}{h.section ? ` · cung ${h.section}` : ''}</small><p>{mark(h.text.replace(/^[-*•+]\s*/, ''))}</p></>;
-            return href ? <Link key={h.passageId} className="tv-hit" to={href}>{body}</Link> : <div key={h.passageId} className="tv-hit bs">{body}</div>;
+            return href ? <Link key={h.passageId} className="tv-hit" to={href}>{body}</Link> : <div key={h.passageId} className="tv-hit added">{body}</div>;
           })}
           {picked.length > 0 && (
             <>
@@ -62,8 +62,8 @@ export default function Lookup() {
               {combo.data?.rules.map(r => {
                 const href = ruleHref(r);
                 const where = r.at.map(a => (a === '*' ? 'mọi cung' : a)).join(', ');
-                const body = <><small>{r.source === 'bo-sung' ? `Bổ sung · ${nameOf(r.star ?? '')}` : combo.data.entryTitles[String(r.entryRef)] ?? ''} · {where}</small><p>{r.ctx ? `(${r.ctx}) ` : ''}{r.text}</p></>;
-                return href ? <Link key={r.code} className="tv-hit" to={href}>{body}</Link> : <div key={r.code} className="tv-hit bs">{body}</div>;
+                const body = <><small>{r.source === 'supplement' ? `Bổ sung · ${nameOf(r.star ?? '')}` : combo.data.entryTitles[String(r.entryRef)] ?? ''} · {where}</small><p>{r.ctx ? `(${r.ctx}) ` : ''}{r.text}</p></>;
+                return href ? <Link key={r.code} className="tv-hit" to={href}>{body}</Link> : <div key={r.code} className="tv-hit added">{body}</div>;
               })}
             </>
           )}

@@ -1,6 +1,6 @@
 /* One person's chart and what cô Hương Kiều's materials, the class's Tierney and Woolfolk say of it: the board, then
    three tabs — the synthesis Claude wrote (Tổng hợp), the sources' passages part by part (Luận giải), and the detail
-   of the chart (Lá số chi tiết). Opened from a link (/chiem-tinh/xem?…) or a saved profile (/chiem-tinh/profile/:id). */
+   of the chart (Lá số chi tiết). Opened from a link (/astrology/view?…) or a saved profile (/astrology/profile/:id). */
 import { useEffect, useRef, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
@@ -14,31 +14,31 @@ import { dateVi, useTitle } from '../../lib/text';
 import { Board, Detail, Groups, Side, said } from './Parts';
 import { AstroProfileSheet, AstroSaveSheet } from './Sheets';
 
-type Tab = 'tong' | 'luan' | 'laso';
+type Tab = 'synthesis' | 'reading' | 'chart';
 const page = (body: React.ReactNode) => <div className="wrap page tv as">{body}</div>;
 
 /** a chart opened from a link: the birth is in the URL */
-export function AstroXemPage() {
+export function AstroViewPage() {
   const [sp, setSp] = useSearchParams();
   const params = fromAstroSearch(sp);
   const key = params ? toAstroSearch(params) : '';
   const reading = useQuery({ queryKey: ['astro-reading', key], queryFn: () => api.astroReading(astroRequest(params!)), enabled: !!params, retry: false, placeholderData: keepPreviousData });
   const [saving, setSaving] = useState(false);
   useTitle(params?.name || 'Chiêm tinh');
-  if (!params) return page(<div className="tv-empty">Thiếu ngày sinh. <Link className="tv-link" to="/chiem-tinh">Lập lá số</Link></div>);
-  const back = `/chiem-tinh?${key}${sp.get('nguoi') ? `&nguoi=${sp.get('nguoi')}` : ''}`;
+  if (!params) return page(<div className="tv-empty">Thiếu ngày sinh. <Link className="tv-link" to="/astrology">Lập lá số</Link></div>);
+  const back = `/astrology?${key}${sp.get('person') ? `&person=${sp.get('person')}` : ''}`;
   if (reading.isError) return page(<Failed error={reading.error}><Link className="tv-link" to={back}>Sửa ngày giờ</Link></Failed>);
   if (!reading.data) return page(<div className="tv-empty">Đang lập lá số…</div>);
   const sample = isSample(params.birth);
   return (
     <>
-      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={null} written={null} defTab="luan"
+      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={null} written={null} defTab="reading"
         title={params.name || 'Lá số chiêm tinh'} tags={sample ? [SAMPLE_LABEL] : []} gender={params.gender}
         actions={<>
           <Link className="tv-btn ghost" to={back}>Sửa ngày giờ</Link>
-          <button type="button" className="tv-btn son" onClick={() => setSaving(true)}>Lưu hồ sơ</button>
+          <button type="button" className="tv-btn accent" onClick={() => setSaving(true)}>Lưu hồ sơ</button>
         </>} />
-      {saving && <AstroSaveSheet params={params} subjectId={sp.get('nguoi')} onClose={() => setSaving(false)} />}
+      {saving && <AstroSaveSheet params={params} subjectId={sp.get('person')} onClose={() => setSaving(false)} />}
     </>
   );
 }
@@ -54,15 +54,15 @@ export function AstroProfilePage() {
   const [editing, setEditing] = useState(false);
   const p = profile.data;
   useTitle(p ? p.subject.displayName : 'Chiêm tinh');
-  const back = <Link className="tv-link" to="/chiem-tinh">Chiêm tinh</Link>;
+  const back = <Link className="tv-link" to="/astrology">Chiêm tinh</Link>;
   if (profile.isError) return page(<Failed error={profile.error}>{back}</Failed>);
-  if (p && !ok) return page(<div className="tv-empty">Đây không phải hồ sơ chiêm tinh. <Link className="tv-link" to={`/nguoi/${p.subject.id}`}>Mở trang người</Link></div>);
+  if (p && !ok) return page(<div className="tv-empty">Đây không phải hồ sơ chiêm tinh. <Link className="tv-link" to={`/people/${p.subject.id}`}>Mở trang người</Link></div>);
   if (reading.isError) return page(<Failed error={reading.error}>{back}</Failed>);
   if (!p || !reading.data || written.isPending) return page(<div className="tv-empty">Đang mở hồ sơ…</div>);
-  const sum = (written.data ?? []).filter(w => w.scope === 'tong-hop').sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0] ?? null;
+  const sum = (written.data ?? []).filter(w => w.scope === 'synthesis').sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0] ?? null;
   return (
     <>
-      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={p} written={sum} defTab={sum ? 'tong' : 'luan'}
+      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={p} written={sum} defTab={sum ? 'synthesis' : 'reading'}
         title={p.subject.displayName} tags={[p.label].filter((x): x is string => !!x)} gender={p.gender}
         actions={<button type="button" className="tv-btn ghost" onClick={() => setEditing(true)}>Sửa hồ sơ</button>} />
       {editing && <AstroProfileSheet profile={p} onClose={() => setEditing(false)} />}
@@ -76,7 +76,7 @@ function ReadingView({ r, sp, setSp, profile, written, defTab, title, tags, gend
   title: string; tags: string[]; gender: ProfileDto['gender']; actions: React.ReactNode;
 }) {
   const ch = r.chart, i = ch.input;
-  const tab = (['tong', 'luan', 'laso'].includes(sp.get('xem') ?? '') ? sp.get('xem') : defTab) as Tab;
+  const tab = (['synthesis', 'reading', 'chart'].includes(sp.get('view') ?? '') ? sp.get('view') : defTab) as Tab;
   const set = (patch: Record<string, string | null>) => { const n = new URLSearchParams(sp); for (const [k, v] of Object.entries(patch)) { if (v === null) n.delete(k); else n.set(k, v); } setSp(n, { replace: true }); };
   const [hl, setHl] = useState<string | null>(null);
   /* a passage cited by the synthesis is shown where the reading has it, once that tab has been drawn */
@@ -96,7 +96,7 @@ function ReadingView({ r, sp, setSp, profile, written, defTab, title, tags, gend
     if (!s) return;
     const list = sectionsOf(r, s.topic);
     const k = Math.max(0, list.indexOf(s));
-    set({ xem: defTab === 'luan' ? null : 'luan', phan: s.topic === 'sun' ? null : s.topic, muc: k ? String(k) : null });
+    set({ view: defTab === 'reading' ? null : 'reading', part: s.topic === 'sun' ? null : s.topic, item: k ? String(k) : null });
     setHl(code);
     scrollTo.current = `r-${code}`;
   };
@@ -107,7 +107,7 @@ function ReadingView({ r, sp, setSp, profile, written, defTab, title, tags, gend
           <h1>{title}{tags.map(t => <span key={t} className="hh-tag">{t}</span>)}</h1>
           <p>{[g, born, place].filter(Boolean).join(' · ')}</p>
           {profile && <p className="tv-muted" style={{ fontSize: 12.5, marginTop: 4 }}>
-            <Link className="tv-link" to={`/nguoi/${profile.subject.id}`}>{profile.subject.displayName}</Link>
+            <Link className="tv-link" to={`/people/${profile.subject.id}`}>{profile.subject.displayName}</Link>
             {profile.subject.links.some(l => l.system === SONIC_HUB) && <> · <span className="tv-linked">liên kết Sonic Hub</span></>}
             {profile.note && <> · {profile.note}</>}
           </p>}
@@ -123,16 +123,16 @@ function ReadingView({ r, sp, setSp, profile, written, defTab, title, tags, gend
 
       <div className="tv-tabs" id="doc">
         <div className="seg" role="tablist" aria-label="Phần đọc">
-          {([['tong', 'Tổng hợp'], ['luan', 'Luận giải'], ['laso', 'Lá số chi tiết']] as const).map(([k, t]) => (
-            <button key={k} type="button" role="tab" aria-selected={tab === k} className={tab === k ? 'on' : ''} onClick={() => set({ xem: k === defTab ? null : k })}>{t}</button>))}
+          {([['synthesis', 'Tổng hợp'], ['reading', 'Luận giải'], ['chart', 'Lá số chi tiết']] as const).map(([k, t]) => (
+            <button key={k} type="button" role="tab" aria-selected={tab === k} className={tab === k ? 'on' : ''} onClick={() => set({ view: k === defTab ? null : k })}>{t}</button>))}
         </div>
         <span className="tv-voice hk">Lời cô</span><span className="tv-voice tie">Bản dịch Tierney</span><span className="tv-voice wf">Woolfolk · Claude dịch</span><span className="tv-voice ai">Claude luận thêm — không phải lời cô</span>
         <span className="tv-caution">Chiêm tinh để tham khảo, chiêm nghiệm: lá số chỉ khuynh hướng, không định đoạt.</span>
       </div>
-      {tab === 'tong' && <SumTab r={r} written={written} profile={profile} onGoTo={goTo} />}
-      {tab === 'luan' && <LuanTab r={r} part={sp.get('phan')} focus={Number(sp.get('muc')) || 0} hl={hl}
-        setPart={t => set({ phan: t === 'sun' ? null : t, muc: null })} setFocus={k => set({ muc: k ? String(k) : null })} />}
-      {tab === 'laso' && <Detail ch={ch} />}
+      {tab === 'synthesis' && <SumTab r={r} written={written} profile={profile} onGoTo={goTo} />}
+      {tab === 'reading' && <ReadingTab r={r} part={sp.get('part')} focus={Number(sp.get('item')) || 0} hl={hl}
+        setPart={t => set({ part: t === 'sun' ? null : t, item: null })} setFocus={k => set({ item: k ? String(k) : null })} />}
+      {tab === 'chart' && <Detail ch={ch} />}
     </div>
   );
 }
@@ -160,7 +160,7 @@ function chipOf(s: AstrologySectionDto, r: AstrologyReadingDto): React.ReactNode
 const HEAD: Partial<Record<Topic, string>> = { sun: 'Mặt Trời', moon: 'Mặt Trăng', asc: 'Cung Mọc', love: 'Mặt Trời trong tình yêu', aspect: 'Góc chiếu' };
 const FOCUS_IS_TITLE: Topic[] = ['planet', 'house', 'pattern', 'dominant', 'point'];
 
-function LuanTab({ r, part, focus, hl, setPart, setFocus }: {
+function ReadingTab({ r, part, focus, hl, setPart, setFocus }: {
   r: AstrologyReadingDto; part: string | null; focus: number; hl: string | null; setPart: (t: Topic) => void; setFocus: (k: number) => void;
 }) {
   const parts = PART_ORDER.filter(t => r.sections.some(s => s.topic === t));
@@ -181,7 +181,7 @@ function LuanTab({ r, part, focus, hl, setPart, setFocus }: {
       <div className="tv-read">
         <div className="tv-read-main">
           <div className="tv-phead"><h3>{head}</h3>{sec?.focus && !FOCUS_IS_TITLE.includes(t) && <span>{sec.focus}</span>}</div>
-          {test && <p className="ns-note" style={{ background: 'var(--ba-soft)', color: '#18504C' }}>{BODY[test.body].name} được <b>{test.total} điểm</b> trong bài test của cô ({LEVEL_NAME[test.level]}). Từng dòng được cộng điểm ở “Lá số chi tiết”.</p>}
+          {test && <p className="ns-note" style={{ background: 'var(--primary-soft)', color: '#18504C' }}>{BODY[test.body].name} được <b>{test.total} điểm</b> trong bài test của cô ({LEVEL_NAME[test.level]}). Từng dòng được cộng điểm ở “Lá số chi tiết”.</p>}
           {sec ? <Groups sec={sec} rules={r.rules} hl={hl} /> : <div className="tv-empty">Tài liệu không có đoạn nào khớp ở phần này.</div>}
         </div>
         <div className="tv-read-side"><Side sec={intro ?? sec} topic={t} rules={r.rules} titleOf={titleOf} /></div>
@@ -240,7 +240,7 @@ function SumTab({ r, written, profile, onGoTo }: { r: AstrologyReadingDto; writt
       <div className="tv-read-side">
         <div className="as-side"><h4>Trong bài</h4><nav className="ns-toc">{written.sections.map((sec, si) => (
           <button key={si} type="button" onClick={() => document.getElementById(`sum-${si}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>{sec.title}</button>))}</nav></div>
-        <div className="tv-bs"><h4>Bài này viết thế nào</h4>
+        <div className="tv-added-box"><h4>Bài này viết thế nào</h4>
           <p>Phần <b>tóm lược</b> chỉ kể lại những đoạn của cô, của Tierney và của Woolfolk khớp với lá số; mỗi ý dẫn số đoạn, bấm để xem nguyên văn. Phần <b>luận thêm</b> là ý của {who}, ghép theo cách tổ hợp từ khóa của cô — không phải lời cô.</p>
           <p style={{ margin: 0 }}>Khi hồ sơ hay tài liệu được sửa, bài được đánh dấu cũ để viết lại.</p></div>
         {counts}

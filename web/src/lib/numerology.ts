@@ -3,7 +3,7 @@
 import { nameVariants } from '@mystic/engine/numerology';
 import type { Gender, NumerologyBirthDto, NumerologyNameDto, NumerologyRequest, NumerologyTocEntryDto } from '@mystic/engine/api';
 
-export interface NsParams {
+export interface NumerologyParams {
   /** the person's full name, as typed (the names read come from it unless edited) */
   full: string;
   birth: NumerologyBirthDto & { leapMonth: boolean };
@@ -25,39 +25,39 @@ export function withPrimary(names: NumerologyNameDto[], i: number): NumerologyNa
   return names.map((n, k) => ({ ...n, primary: k === i }));
 }
 
-export function toNsSearch(p: NsParams): string {
+export function toNumerologySearch(p: NumerologyParams): string {
   const s = new URLSearchParams();
-  if (p.full) s.set('n', p.full);
-  s.set('ngay', `${p.birth.year}-${pad(p.birth.month)}-${pad(p.birth.day)}`);
-  if (p.birth.calendar === 'lunar') { s.set('c', 'a'); if (p.birth.leapMonth) s.set('nhuan', '1'); }
-  if (p.gender) s.set('g', p.gender === 'female' ? 'nu' : 'nam');
+  if (p.full) s.set('name', p.full);
+  s.set('date', `${p.birth.year}-${pad(p.birth.month)}-${pad(p.birth.day)}`);
+  if (p.birth.calendar === 'lunar') { s.set('calendar', 'lunar'); if (p.birth.leapMonth) s.set('leap', '1'); }
+  if (p.gender) s.set('gender', p.gender);
   const auto = defaultNames(p.full);
   const same = auto.length === p.names.length && auto.every((n, i) => n.text === p.names[i].text && n.label === p.names[i].label);
-  if (!same) for (const n of p.names) s.append('ten', `${n.label ?? ''}:${n.text}`);
+  if (!same) for (const n of p.names) s.append('names', `${n.label ?? ''}:${n.text}`);
   const pi = p.names.findIndex(n => n.primary);
-  if (pi > 0) s.set('chinh', String(pi));
-  if (p.viewYear) s.set('nam', String(p.viewYear));
+  if (pi > 0) s.set('primary', String(pi));
+  if (p.viewYear) s.set('year', String(p.viewYear));
   return s.toString();
 }
 
-export function fromNsSearch(sp: URLSearchParams): NsParams | null {
-  const d = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(sp.get('ngay') ?? '');
+export function fromNumerologySearch(sp: URLSearchParams): NumerologyParams | null {
+  const d = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(sp.get('date') ?? '');
   if (!d) return null;
-  const full = sp.get('n') ?? '';
-  const listed = sp.getAll('ten').map(t => { const i = t.indexOf(':'); return i < 0 ? { label: null, text: t.trim(), primary: false } : { label: t.slice(0, i).trim() || null, text: t.slice(i + 1).trim(), primary: false }; }).filter(n => n.text);
+  const full = sp.get('name') ?? '';
+  const listed = sp.getAll('names').map(t => { const i = t.indexOf(':'); return i < 0 ? { label: null, text: t.trim(), primary: false } : { label: t.slice(0, i).trim() || null, text: t.slice(i + 1).trim(), primary: false }; }).filter(n => n.text);
   const names = listed.length ? listed : defaultNames(full);
-  const pi = Math.min(Math.max(0, Number(sp.get('chinh')) || 0), Math.max(0, names.length - 1));
-  const nam = Number(sp.get('nam'));
+  const pi = Math.min(Math.max(0, Number(sp.get('primary')) || 0), Math.max(0, names.length - 1));
+  const year = Number(sp.get('year'));
   return {
     full,
-    birth: { calendar: sp.get('c') === 'a' ? 'lunar' : 'solar', year: +d[1], month: +d[2], day: +d[3], leapMonth: sp.get('nhuan') === '1', latitude: null },
-    gender: sp.get('g') === 'nu' ? 'female' : sp.get('g') === 'nam' ? 'male' : null,
+    birth: { calendar: sp.get('calendar') === 'lunar' ? 'lunar' : 'solar', year: +d[1], month: +d[2], day: +d[3], leapMonth: sp.get('leap') === '1', latitude: null },
+    gender: sp.get('gender') === 'female' ? 'female' : sp.get('gender') === 'male' ? 'male' : null,
     names: withPrimary(names, pi),
-    viewYear: Number.isInteger(nam) && nam > 1800 ? nam : null,
+    viewYear: Number.isInteger(year) && year > 1800 ? year : null,
   };
 }
 
-export const nsRequest = (p: NsParams): NumerologyRequest => ({ birth: p.birth, gender: p.gender, names: p.names, ...(p.viewYear ? { viewYear: p.viewYear } : {}) });
+export const numerologyRequest = (p: NumerologyParams): NumerologyRequest => ({ birth: p.birth, gender: p.gender, names: p.names, ...(p.viewYear ? { viewYear: p.viewYear } : {}) });
 
 /** how the sum of the digits comes down to the ruling number: 27 → 9, 29 → 11, 22 → 22/4 */
 export function chainOf(sum: number, label: (n: number) => string): string {
@@ -87,7 +87,7 @@ export function unitOf(code: string, toc: NumerologyTocEntryDto[] | undefined): 
 }
 
 /** "Lê Đỗ Quỳnh Hương" sinh 1/5/1974 → the request of the book's own example */
-export const SAMPLE: NsParams = {
+export const SAMPLE: NumerologyParams = {
   full: 'Lê Đỗ Quỳnh Hương',
   birth: { calendar: 'solar', year: 1974, month: 5, day: 1, leapMonth: false, latitude: null },
   gender: 'female',

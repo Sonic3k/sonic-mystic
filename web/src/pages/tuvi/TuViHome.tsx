@@ -6,16 +6,16 @@ import { leapOfYear, lunarMonthLength, type BirthInput } from '@mystic/engine/tu
 import { PLACES } from '@mystic/engine/birth';
 import { SOURCES, api } from '../../api';
 import { needsToken } from '../../components/Owner';
-import { GIO, blankParams, chartHref, clockOffsetFor, fromSearch, fromSubject, settingsOf, type ChartParams } from '../../lib/params';
+import { HOURS, blankParams, chartHref, clockOffsetFor, fromSearch, fromSubject, settingsOf, type ChartParams } from '../../lib/params';
 import { birthComplete } from '../../lib/people';
 import { dateVi, useTitle } from '../../lib/text';
 import { SettingsFields } from './Settings';
 
 export default function TuViHome() {
   const [sp] = useSearchParams();
-  const subjectId = sp.get('nguoi');
+  const subjectId = sp.get('person');
   const subject = useQuery({ queryKey: ['subject', subjectId], queryFn: () => api.subject(subjectId!), enabled: !!subjectId, retry: false });
-  /* a link back from a chart carries its birth; "?nguoi=" alone fills the form with what is known of that person */
+  /* a link back from a chart carries its birth; "?person=" alone fills the form with what is known of that person */
   const initial = useMemo<ChartParams | null>(() => {
     const own = fromSearch(sp);
     if (own) return own;
@@ -71,17 +71,17 @@ function BirthForm({ initial, subjectId }: { initial: ChartParams; subjectId: st
     e.preventDefault();
     if (error) return;
     const q = { ...p, input: { ...i, utcOffsetMinutes: offset } };
-    nav(chartHref(q) + (subjectId ? `&nguoi=${subjectId}` : ''));
+    nav(chartHref(q) + (subjectId ? `&person=${subjectId}` : ''));
   };
   return (
     <form className="tv-form" onSubmit={submit}>
       <label className="tv-f half"><span>Họ tên</span><input value={p.name} onChange={e => setP(x => ({ ...x, name: e.target.value }))} placeholder="không bắt buộc" /></label>
       <label className="tv-f half"><span>Hoặc lấy từ người đã lưu</span>
-        <select value={subjectId ?? ''} onChange={e => nav(e.target.value ? `/tu-vi?nguoi=${e.target.value}` : '/tu-vi')} disabled={!ready.length}>
+        <select value={subjectId ?? ''} onChange={e => nav(e.target.value ? `/tu-vi?person=${e.target.value}` : '/tu-vi')} disabled={!ready.length}>
           <option value="">{ready.length ? '— chọn người —' : subjects.isError && needsToken(subjects.error) ? '(cần mã chủ nhà)' : '(chưa có ai đủ ngày giờ sinh)'}</option>
           {ready.map(s => <option key={s.id} value={s.id}>{s.displayName}</option>)}</select></label>
       <div className="tv-f half"><span>Giới tính</span>
-        <div className="seg"><a className={i.gender === 'nam' ? 'on' : ''} onClick={() => setI({ gender: 'nam' })}>Nam</a><a className={i.gender === 'nu' ? 'on' : ''} onClick={() => setI({ gender: 'nu' })}>Nữ</a></div></div>
+        <div className="seg"><a className={i.gender === 'male' ? 'on' : ''} onClick={() => setI({ gender: 'male' })}>Nam</a><a className={i.gender === 'female' ? 'on' : ''} onClick={() => setI({ gender: 'female' })}>Nữ</a></div></div>
       <div className="tv-f half"><span>Ngày sinh theo</span>
         <div className="seg">
           <a className={solar ? 'on' : ''} onClick={() => setI({ calendar: 'solar', leap: false, hour: 12, minute: 0 })}>Dương lịch</a>
@@ -97,9 +97,9 @@ function BirthForm({ initial, subjectId }: { initial: ChartParams; subjectId: st
         </label>
       )}
       {solar
-        ? <label className="tv-f half"><span>Giờ sinh <small className="tv-muted">= giờ {GIO[Math.floor((i.hour + 1) / 2) % 12].n}</small></span><input type="time" value={`${pad(i.hour)}:${pad(i.minute ?? 0)}`}
+        ? <label className="tv-f half"><span>Giờ sinh <small className="tv-muted">= giờ {HOURS[Math.floor((i.hour + 1) / 2) % 12].n}</small></span><input type="time" value={`${pad(i.hour)}:${pad(i.minute ?? 0)}`}
             onChange={e => { const [h, m] = e.target.value.split(':').map(Number); if (Number.isInteger(h)) setI({ hour: h, minute: m || 0 }); }} required /></label>
-        : <label className="tv-f half"><span>Giờ sinh</span><select value={i.hour} onChange={e => setI({ hour: +e.target.value })}>{GIO.map(g => <option key={g.i} value={g.i}>Giờ {g.n} ({g.span})</option>)}</select></label>}
+        : <label className="tv-f half"><span>Giờ sinh</span><select value={i.hour} onChange={e => setI({ hour: +e.target.value })}>{HOURS.map(g => <option key={g.i} value={g.i}>Giờ {g.n} ({g.span})</option>)}</select></label>}
       <label className="tv-f half"><span>Nơi sinh</span>
         <select value={place >= 0 ? String(place) : hasPlace ? 'own' : 'none'} onChange={e => pickPlace(e.target.value)}>
           <option value="none">Không rõ / không cần</option>
@@ -113,7 +113,7 @@ function BirthForm({ initial, subjectId }: { initial: ChartParams; subjectId: st
             <option value={420}>UTC+7</option><option value={480}>UTC+8 (miền Nam 1960–1975)</option></select></label>
       )}
       <div className="tv-form-foot">
-        <button type="submit" className="tv-btn son" disabled={!!error}>Lập lá số</button>
+        <button type="submit" className="tv-btn accent" disabled={!!error}>Lập lá số</button>
         {error && <span className="tv-err">{error}</span>}
       </div>
     </form>
@@ -122,30 +122,30 @@ function BirthForm({ initial, subjectId }: { initial: ChartParams; subjectId: st
 
 function BookCard() {
   const sources = useQuery({ queryKey: ['sources'], queryFn: () => api.sources() });
-  const entries = useQuery({ queryKey: ['entries', SOURCES.luan], queryFn: () => api.entries(SOURCES.luan) });
+  const entries = useQuery({ queryKey: ['entries', SOURCES.notes], queryFn: () => api.entries(SOURCES.notes) });
   const catalog = useQuery({ queryKey: ['catalog'], queryFn: api.catalog, staleTime: Infinity });
   const quote = useQuery({ queryKey: ['search', 'ngôi Đế cực', 1], queryFn: () => api.search('ngôi Đế cực', 1), staleTime: Infinity });
-  const luan = sources.data?.find(s => s.code === SOURCES.luan);
+  const notes = sources.data?.find(s => s.code === SOURCES.notes);
   const stars = entries.data?.filter(e => e.kind === 'symbol') ?? [];
   const mains = (catalog.data?.stars ?? []).filter(s => s.kind === 'chinh');
   const refOf = (code: string) => stars.find(e => e.symbols.includes(code))?.ref;
   const hit = quote.data?.hits[0];
   return (
     <div className="tv-card tv-book-card">
-      <span className="tv-voice ba">Sách của bà</span>
-      <h2 style={{ marginTop: 8 }}>{luan?.title ?? 'Luận Tử Vi'}</h2>
+      <span className="tv-voice primary">Sách của bà</span>
+      <h2 style={{ marginTop: 8 }}>{notes?.title ?? 'Luận Tử Vi'}</h2>
       <p>Bà viết dở năm 2011: phần lập lá số, rồi từng sao, luận ở từng cung. Mọi câu đều được số hoá để so với lá số — giữ nguyên lời bà.</p>
-      {luan && <div className="tv-stats"><div><b>{stars.length || '…'}</b><span>mục sao</span></div><div><b>{luan.passages.toLocaleString('vi-VN')}</b><span>đoạn</span></div><div><b>{luan.rules.toLocaleString('vi-VN')}</b><span>câu luận</span></div></div>}
+      {notes && <div className="tv-stats"><div><b>{stars.length || '…'}</b><span>mục sao</span></div><div><b>{notes.passages.toLocaleString('vi-VN')}</b><span>đoạn</span></div><div><b>{notes.rules.toLocaleString('vi-VN')}</b><span>câu luận</span></div></div>}
       {hit && <blockquote>{hit.text.replace(/^[-*•+]\s*/, '')}<small>— mục {hit.entryTitle}</small></blockquote>}
-      <div className="tv-chips">{mains.map(s => { const ref = refOf(s.code); return <Link key={s.code} className="tv-chip" to={ref != null ? `/tu-vi/sach/${ref}` : '/tu-vi/sach'}>{s.name}</Link>; })}</div>
+      <div className="tv-chips">{mains.map(s => { const ref = refOf(s.code); return <Link key={s.code} className="tv-chip" to={ref != null ? `/tu-vi/books/${ref}` : '/tu-vi/books'}>{s.name}</Link>; })}</div>
       <div className="tv-acts" style={{ marginTop: 16 }}>
-        <Link className="tv-btn ghost" to="/tu-vi/sach">Đọc sách của bà</Link>
-        <Link className="tv-btn ghost" to="/tu-vi/tra-cuu">Tra cứu</Link>
-        <Link className="tv-btn ghost" to="/tu-vi/phan-1">Phần I · An sao</Link>
+        <Link className="tv-btn ghost" to="/tu-vi/books">Đọc sách của bà</Link>
+        <Link className="tv-btn ghost" to="/tu-vi/lookup">Tra cứu</Link>
+        <Link className="tv-btn ghost" to="/tu-vi/setup">Phần I · An sao</Link>
       </div>
       <div className="tv-legend">
-        <p><span className="tv-voice ba">Lời bà</span> — nguyên văn của bà, kiểu chữ có chân, vạch son bên trái. Không câu nào bị viết lại.</p>
-        <p><span className="tv-voice bs">Bổ sung</span> — kiến thức tử vi phổ thông và luận giải của AI, luôn tách riêng, ghi rõ không phải của bà.</p>
+        <p><span className="tv-voice primary">Lời bà</span> — nguyên văn của bà, kiểu chữ có chân, vạch son bên trái. Không câu nào bị viết lại.</p>
+        <p><span className="tv-voice added">Bổ sung</span> — kiến thức tử vi phổ thông và luận giải của AI, luôn tách riêng, ghi rõ không phải của bà.</p>
       </div>
     </div>
   );
@@ -157,7 +157,7 @@ function Saved() {
   if (!list.length) return null;
   return (
     <section className="tv-saved">
-      <div className="hd"><h2>Lá số đã lưu</h2><span>{list.length}</span><Link to="/nguoi">Tất cả người ›</Link></div>
+      <div className="hd"><h2>Lá số đã lưu</h2><span>{list.length}</span><Link to="/people">Tất cả người ›</Link></div>
       <div className="tv-saved-list">{list.map(({ s, p }) => (
         <Link key={p.id} className="tv-saved-item" to={`/tu-vi/profile/${p.id}`}>
           <b>{s.displayName}{p.label && <span className="hh-tag">{p.label}</span>}</b>

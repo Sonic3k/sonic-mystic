@@ -55,33 +55,33 @@ export const placeNamed = (name: string) => PLACES.find(p => p.name.toLowerCase(
 
 export function toAstroSearch(p: AstroParams): string {
   const s = new URLSearchParams();
-  if (p.name) s.set('n', p.name);
+  if (p.name) s.set('name', p.name);
   const b = p.birth;
-  s.set('ngay', `${b.year}-${pad(b.month)}-${pad(b.day)}`);
-  if (b.time) s.set('gio', b.time);
-  if (b.timeApprox) s.set('uoc', '1');
+  s.set('date', `${b.year}-${pad(b.month)}-${pad(b.day)}`);
+  if (b.time) s.set('time', b.time);
+  if (b.timeApprox) s.set('approx', '1');
   if (b.timeZone) s.set('tz', b.timeZone); else if (b.utcOffsetMinutes !== null) s.set('utc', String(b.utcOffsetMinutes));
-  if (b.place) s.set('noi', b.place);
+  if (b.place) s.set('place', b.place);
   if (b.latitude !== null && b.longitude !== null) { s.set('lat', String(b.latitude)); s.set('lon', String(b.longitude)); }
-  if (p.gender) s.set('g', p.gender === 'female' ? 'nu' : 'nam');
+  if (p.gender) s.set('gender', p.gender);
   return s.toString();
 }
 
 export function fromAstroSearch(sp: URLSearchParams): AstroParams | null {
-  const d = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(sp.get('ngay') ?? '');
+  const d = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(sp.get('date') ?? '');
   if (!d) return null;
-  const time = /^\d{1,2}:\d{2}$/.test(sp.get('gio') ?? '') ? sp.get('gio')!.padStart(5, '0') : null;
+  const time = /^\d{1,2}:\d{2}$/.test(sp.get('time') ?? '') ? sp.get('time')!.padStart(5, '0') : null;
   const lat = Number(sp.get('lat')), lon = Number(sp.get('lon'));
   const has = sp.get('lat') !== null && sp.get('lon') !== null && Number.isFinite(lat) && Number.isFinite(lon);
   const utc = sp.get('utc');
   return {
-    name: sp.get('n') ?? '',
+    name: sp.get('name') ?? '',
     birth: {
-      year: +d[1], month: +d[2], day: +d[3], time, timeApprox: sp.get('uoc') === '1',
+      year: +d[1], month: +d[2], day: +d[3], time, timeApprox: sp.get('approx') === '1',
       timeZone: sp.get('tz') ?? (utc === null ? 'Asia/Ho_Chi_Minh' : null), utcOffsetMinutes: utc !== null && Number.isFinite(Number(utc)) ? Number(utc) : null,
-      place: sp.get('noi'), latitude: has ? lat : null, longitude: has ? lon : null,
+      place: sp.get('place'), latitude: has ? lat : null, longitude: has ? lon : null,
     },
-    gender: sp.get('g') === 'nu' ? 'female' : sp.get('g') === 'nam' ? 'male' : null,
+    gender: sp.get('gender') === 'female' ? 'female' : sp.get('gender') === 'male' ? 'male' : null,
   };
 }
 
