@@ -6,10 +6,9 @@ import { createHash } from 'node:crypto';
 import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { and, asc, desc, eq, inArray } from 'drizzle-orm';
 import { z } from 'zod';
-import type { AiReadingDto, AstrologyChartDto, Layer, TuViSettings } from '@mystic/engine/api';
-import { hashOf, type BirthInput, type ReadingLine } from '@mystic/engine/tuvi';
+import type { AiReadingDto, AstrologyChartDto, Layer } from '@mystic/engine/api';
 import { DB, type Db } from '../db/db.js';
-import { dataMigrations, readingItemRefs, readingItems, readingSections, readings, rules, subjectLinks } from '../db/schema.js';
+import { readingItemRefs, readingItems, readingSections, readings, rules } from '../db/schema.js';
 import { KnowledgeService } from '../kb/knowledge.service.js';
 import { NumerologyService, todayVn, type Computed } from '../numerology/numerology.service.js';
 import { AstrologyService } from '../astrology/astrology.service.js';
@@ -55,13 +54,6 @@ export function numerologyHash(c: Computed, scope: string, year: number, codes: 
   return hash16(`${ch.input.year}-${ch.input.month}-${ch.input.day}|${ch.input.gender ?? ''}|${ch.input.names.map(n => `${n.label ?? ''}:${n.text}:${n.primary ? 1 : 0}`).join(',')}|${scope}|${year}|${codes.join(',')}`);
 }
 
-/** a Tử vi reading's hash as it was computed before the rename: gender nam/nu, placements ba/sach */
-function oldTuviHash(birth: BirthInput, settings: TuViSettings, scope: string, year: number, lines: ReadingLine[]): string {
-  const b = { ...birth, gender: birth.gender === 'male' ? 'nam' : 'nu' };
-  const s = { ...settings, variant: settings.variant === 'books' ? 'sach' : 'ba' };
-  return hashOf(`${JSON.stringify(b)}|${JSON.stringify(s)}|${scope}|${year}|${lines.map(l => l.ref).join(',')}`);
-}
-
 @Injectable()
 export class ReadingsService {
   constructor(
@@ -97,64 +89,6 @@ export class ReadingsService {
       const pi = await this.people.profileInput(profileId);
       const k = await this.knowledge.get();
       return (scope, year) => { try { return tuviInput(pi.birth, pi.settings, k, scope, year).hash; } catch { return null; } };
-    } catch {
-      return null;
-    }
-  }
-
-  /**
-   * Once, after the names in the code became English (drizzle 0003 renamed the scopes, the Tử vi settings and the
-   * books' codes in place): a reading that matched its chart under the old names still matches it, so it is not shown
-   * as stale. Each reading's hash is computed again the old way — the old scope, and for Tử vi the old words for the
-   * gender and the placements — and where that is the stored hash, the hash of the new names is stored. The briefs of
-   * everyone linked to Sonic Hub are sent again, so they link to the pages by their new addresses.
-   */
-  async rehashAfterRename(): Promise<{ checked: number; rehashed: number; briefs: number } | null> {
-    const name = '0003_english_names';
-    if ((await this.db.select().from(dataMigrations).where(eq(dataMigrations.name, name))).length) return null;
-    const rows = await this.db.select().from(readings);
-    const byProfile = new Map<string, (typeof rows)[number][]>();
-    for (const r of rows) byProfile.set(r.profileId, [...(byProfile.get(r.profileId) ?? []), r]);
-    let rehashed = 0;
-    for (const [profileId, rs] of byProfile) {
-      const { profile } = await this.people.profileHead(profileId);
-      const hashes = await this.hashesBeforeAndNow(profileId, profile.disciplineCode);
-      if (!hashes) continue;
-      for (const r of rs) {
-        const h = hashes(r.scope, r.viewYear);
-        if (!h || r.inputHash !== h.before || h.now === h.before) continue;
-        await this.db.update(readings).set({ inputHash: h.now, updatedAt: r.updatedAt }).where(eq(readings.id, r.id));
-        rehashed++;
-      }
-    }
-    const linked = await this.db.selectDistinct({ id: subjectLinks.subjectId }).from(subjectLinks);
-    for (const l of linked) await this.sync.briefChanged(l.id);
-    await this.db.insert(dataMigrations).values({ name }).onConflictDoNothing();
-    return { checked: rows.length, rehashed, briefs: linked.length };
-  }
-
-  /** a reading's hash under the old names (see rehashAfterRename) and under the new */
-  private async hashesBeforeAndNow(profileId: string, discipline: string): Promise<((scope: string, year: number) => { before: string; now: string } | null) | null> {
-    const oldScope = (s: string) => (s === 'synthesis' ? 'tong-hop' : s === 'overview' ? 'tong-quan' : s.replace(/^year-(\d{4})$/, 'nam-$1'));
-    try {
-      if (discipline === 'astrology') {
-        const { computed } = await this.people.astrologyInput(profileId);
-        const codes = this.astrology.matched(computed, await this.astrology.book());
-        return scope => ({ before: astrologyHash(computed, oldScope(scope), codes), now: astrologyHash(computed, scope, codes) });
-      }
-      if (discipline === 'numerology') {
-        const { computed } = await this.people.numerologyInput(profileId);
-        const k = await this.numerology.book();
-        return (scope, year) => { const codes = this.numerology.matched(computed, k, year); return { before: numerologyHash(computed, oldScope(scope), year, codes), now: numerologyHash(computed, scope, year, codes) }; };
-      }
-      const pi = await this.people.profileInput(profileId);
-      const k = await this.knowledge.get();
-      return (scope, year) => {
-        try {
-          const now = tuviInput(pi.birth, pi.settings, k, scope, year);
-          return { before: oldTuviHash(pi.birth, pi.settings, oldScope(scope), year, now.lines), now: now.hash };
-        } catch { return null; }
-      };
     } catch {
       return null;
     }
