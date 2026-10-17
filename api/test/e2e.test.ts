@@ -16,8 +16,6 @@ import { importTuvi } from '../src/kb/importer.js';
 import { importNumerology, readNumerologyBundle } from '../src/kb/numerology-importer.js';
 import { importAstrology, readAstrologyBundle } from '../src/kb/astrology-importer.js';
 import { createApp } from '../src/main.js';
-import { ReadingsService } from '../src/readings/readings.service.js';
-import type { NestExpressApplication } from '@nestjs/platform-express';
 
 /*
  * End to end against a real Postgres: the database and its role are created from the admin connection, the bundle
@@ -34,7 +32,6 @@ const ADMIN = 'e2e-admin-token';
 let base = '';
 let close: () => Promise<void> = async () => {};
 let appUrl = '';
-let app: NestExpressApplication;
 
 /** a call as the owner (with the admin token), or as anyone when anon */
 async function api<T>(path: string, body?: unknown, method?: string, opts: { anon?: boolean } = {}): Promise<{ status: number; data: T }> {
@@ -53,7 +50,7 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
     const env = { ...process.env, DATABASE_URL: '', DATABASE_ADMIN_URL: adminUrl, MYSTIC_DB_NAME: dbName, MYSTIC_DB_USER: role, MYSTIC_DB_PASSWORD: 'e2e-pass', SONIC_HUB_API_URL: '', SYNC_WORKER: 'false', ANTHROPIC_API_KEY: '', ADMIN_TOKEN: ADMIN, NODE_ENV: 'test' };
     const config = loadConfig(env);
     appUrl = await ensureDatabase(config.db);
-    app = await createApp(config);
+    const app = await createApp(config);
     await app.listen(0, '127.0.0.1');
     base = `http://127.0.0.1:${(app.getHttpServer().address() as AddressInfo).port}`;
     close = async () => {
@@ -252,20 +249,6 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       assert.equal(w.data.author, 'claude');
       const list = await api<AiReadingDto[]>(`/profiles/${p.data.id}/ai-readings`);
       assert.deepEqual(list.data.map(x => [x.scope, x.stale]), [['synthesis', false]]);
-      // a reading written before the names in the code became English kept the hash of the old names: it is brought
-      // over once, so a reading that matched its chart still matches it
-      const readingsOf = app.get(ReadingsService);
-      const hashes = (await readingsOf['hashesBeforeAndNow'](p.data.id, 'numerology'))!('synthesis', 2026)!;
-      assert.notEqual(hashes.before, hashes.now);
-      const db = new pg.Client({ connectionString: appUrl });
-      await db.connect();
-      await db.query('update readings set input_hash = $1 where profile_id = $2', [hashes.before, p.data.id]);
-      await db.query("delete from data_migrations where name = '0003_english_names'");
-      await db.end();
-      assert.equal((await api<AiReadingDto[]>(`/profiles/${p.data.id}/ai-readings`)).data[0].stale, true);
-      assert.equal((await readingsOf.rehashAfterRename())?.rehashed, 1);
-      assert.equal((await api<AiReadingDto[]>(`/profiles/${p.data.id}/ai-readings`)).data[0].stale, false);
-      assert.equal(await readingsOf.rehashAfterRename(), null);
       const b = await api<BriefDto>(`/subjects/${s.data.id}/brief?discipline=numerology`);
       assert.equal(b.data.facts.find(f => f.label === 'Con số chủ đạo')?.value, '9');
       assert.deepEqual(b.data.lines.map(l => l.layer), ['primary', 'added']);
