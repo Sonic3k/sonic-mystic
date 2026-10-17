@@ -48,14 +48,14 @@
   },
   {
    "at": 61,
-   "code": "venus.phien-ban-1-kim-tinh",
+   "code": "venus.version-1",
    "title": "PHIÊN BẢN 1: Kim Tinh Kế không tính đến Kim Ngưu",
    "parent": "venus",
    "kind": "general"
   },
   {
    "at": 72,
-   "code": "venus.phien-ban-2-neu-ban-",
+   "code": "venus.version-2",
    "title": "PHIÊN BẢN 2: Nếu bạn thuộc trường phái tin rằng Kim Tinh làm chủ cả cung số 2 và Kim Ngưu, hãy tính thêm các nhân tố sau:",
    "parent": "venus",
    "kind": "general"

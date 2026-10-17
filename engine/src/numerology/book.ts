@@ -25,7 +25,7 @@ export interface BookEntry {
   at: number;
   /** the part of a reading it belongs to */
   topic: Topic | null;
-  /** the numbers and arrows the whole entry is about ("chu-dao:9", "muiten-trong:4-5-6"…) */
+  /** the numbers and arrows the whole entry is about ("ruling:9", "empty-arrow:4-5-6"…) */
   symbols: string[];
   paras: BookPara[];
 }

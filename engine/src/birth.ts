@@ -51,7 +51,7 @@ export function birthInputOf(gender: Gender | null, b: BirthDto): BirthInput {
     else throw new BirthError('Chưa có giờ sinh');
   }
   return {
-    gender: gender === 'male' ? 'nam' : 'nu', calendar: b.calendar, year: b.year, month: b.month, day: b.day,
+    gender, calendar: b.calendar, year: b.year, month: b.month, day: b.day,
     leap: b.calendar === 'lunar' && b.leapMonth, hour, minute,
     latitude: b.latitude, longitude: b.longitude, utcOffsetMinutes: b.utcOffsetMinutes,
   };

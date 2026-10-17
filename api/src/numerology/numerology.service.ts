@@ -161,7 +161,7 @@ export class NumerologyService {
     return { code: e.code, title: e.title, page: e.page, topic: topicOfEntry.get(e.code) ?? null, path, sections, prev: near(siblings[i - 1]), next: near(siblings[i + 1]), source };
   }
 
-  /** every passage whose condition speaks of all the given numbers or arrows ("chu-dao:7", "muiten-trong:4-5-6"…) */
+  /** every passage whose condition speaks of all the given numbers or arrows ("ruling:7", "empty-arrow:4-5-6"…) */
   async lookup(codes: string[], topic?: string): Promise<NumerologyLookupDto> {
     const k = await this.book();
     const cat = this.symbols(k);

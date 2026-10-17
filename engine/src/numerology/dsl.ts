@@ -5,7 +5,7 @@
      arrow(1-5-9) · empty(4-5-6) · double(1-5-9)      a full arrow, an empty arrow, an arrow of pairs (11-55-99)
      isolated(9) · isolated(9, 2)           a corner number cut off from the chart (with that many of it)
      arrows(0) · empties(3+)                how many full / empty arrows the birth chart has
-     plane(tri_nao, 0)                      digits on a plane: tri_nao (3-6-9), tinh_than (2-5-8), the_chat (1-4-7)
+     plane(mind, 0)                         digits on a plane: mind (3-6-9), spirit (2-5-8), physical (1-4-7)
      pyear(9)                  the personal year read          stage(2)   the stage of life (1 niên thiếu, 2 trưởng thành, 3 viên mãn)
      peak(10) · peak_at(3, 10)  the peak read has that number / the third peak has it
      soul(5) · expression(22/4) · name_number(7)       the numbers of the name read
@@ -55,7 +55,7 @@ function checkArg(kind: ArgKind, a: string): string | null {
     case 'digit': { const n = parseNumber(a); return n === null || n < 1 || n > 9 ? `cần một số 1–9: "${a}"` : null; }
     case 'spec': return specOf(a) ? null : `cần một số lượng như 2, 5+ hoặc 2-3: "${a}"`;
     case 'arrow': return findArrow(a) ? null : `không có mũi tên "${a}"`;
-    case 'plane': return PLANE_CODES.has(a.trim() as Plane) ? null : `không có trục "${a}" (tri_nao, tinh_than, the_chat)`;
+    case 'plane': return PLANE_CODES.has(a.trim() as Plane) ? null : `không có trục "${a}" (mind, spirit, physical)`;
     case 'peak': return /^[1-4]$/.test(a.trim()) ? null : `đỉnh phải là 1–4: "${a}"`;
     case 'stage': return /^[1-3]$/.test(a.trim()) ? null : `giai đoạn phải là 1–3: "${a}"`;
   }
@@ -202,7 +202,7 @@ export function evaluate(node: Node, x: Ctx): Result {
   }
 }
 
-/** the numbers and arrows a condition speaks of ("so:7", "muiten:1-5-9", "muiten-trong:4-5-6", "chu-dao:22"…), for
+/** the numbers and arrows a condition speaks of ("digit:7", "arrow:1-5-9", "empty-arrow:4-5-6", "ruling:22"…), for
     looking passages up — a full arrow and the same arrow empty are two different things in the book */
 export function symbolsOf(node: Node | undefined): Set<string> {
   const out = new Set<string>();
@@ -212,19 +212,19 @@ export function symbolsOf(node: Node | undefined): Set<string> {
     const a: string[] = n.args;
     const each = (prefix: string, list: string[]) => list.forEach(v => { const p = parseNumber(v); if (p !== null) out.add(`${prefix}:${p}`); });
     switch (n.fn) {
-      case 'ruling': each('chu-dao', a); break;
-      case 'day': each('ngay-sinh', a); break;
-      case 'count': case 'isolated': each('so', [a[0]]); break;
-      case 'has': case 'lacks': each('so', a); break;
-      case 'arrow': case 'double': { const ar = findArrow(a[0]); if (ar) out.add(`muiten:${ar.code}`); break; }
-      case 'empty': case 'name_breaks': { const ar = findArrow(a[0]); if (ar) out.add(`muiten-trong:${ar.code}`); break; }
-      case 'pyear': each('nam', a); break;
-      case 'peak': each('dinh', a); break;
-      case 'peak_at': each('dinh', a.slice(1)); break;
-      case 'soul': each('linh-hon', a); break;
-      case 'expression': each('bieu-dat', a); break;
-      case 'name_number': each('ten-rieng', a); break;
-      case 'stage': a.forEach(v => out.add(`giai-doan:${v.trim()}`)); break;
+      case 'ruling': each('ruling', a); break;
+      case 'day': each('birthday', a); break;
+      case 'count': case 'isolated': each('digit', [a[0]]); break;
+      case 'has': case 'lacks': each('digit', a); break;
+      case 'arrow': case 'double': { const ar = findArrow(a[0]); if (ar) out.add(`arrow:${ar.code}`); break; }
+      case 'empty': case 'name_breaks': { const ar = findArrow(a[0]); if (ar) out.add(`empty-arrow:${ar.code}`); break; }
+      case 'pyear': each('year', a); break;
+      case 'peak': each('peak', a); break;
+      case 'peak_at': each('peak', a.slice(1)); break;
+      case 'soul': each('soul', a); break;
+      case 'expression': each('expression', a); break;
+      case 'name_number': each('name-number', a); break;
+      case 'stage': a.forEach(v => out.add(`stage:${v.trim()}`)); break;
     }
   };
   walk(node);
@@ -234,16 +234,16 @@ export function symbolsOf(node: Node | undefined): Set<string> {
 /** every symbol a passage can be about, with the book's name for it */
 export function symbolCatalogue(): { code: string; name: string; kind: string }[] {
   const out: { code: string; name: string; kind: string }[] = [];
-  for (const n of [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22]) out.push({ code: `chu-dao:${n}`, name: `Con số chủ đạo ${label(n)}`, kind: 'chu-dao' });
-  for (const n of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22]) out.push({ code: `ngay-sinh:${n}`, name: `Con số ngày sinh ${label(n)}`, kind: 'ngay-sinh' });
-  for (let n = 1; n <= 9; n++) out.push({ code: `so:${n}`, name: `Số ${n} trong Biểu đồ ngày sinh`, kind: 'so' });
-  for (const a of ARROWS) out.push({ code: `muiten:${a.code}`, name: `${a.full} (${a.code})`, kind: 'muiten' });
-  for (const a of ARROWS) if (a.empty) out.push({ code: `muiten-trong:${a.code}`, name: `${a.empty} (trống ${a.code})`, kind: 'muiten-trong' });
-  for (let n = 1; n <= 9; n++) out.push({ code: `nam:${n}`, name: `Năm cá nhân ${n}`, kind: 'nam' });
-  for (let n = 1; n <= 11; n++) out.push({ code: `dinh:${n}`, name: `Đỉnh cao mang số ${n}`, kind: 'dinh' });
-  for (const n of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22]) out.push({ code: `linh-hon:${n}`, name: `Con số linh hồn ${label(n)}`, kind: 'linh-hon' });
-  for (const n of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22]) out.push({ code: `bieu-dat:${n}`, name: `Con số biểu đạt ${label(n)}`, kind: 'bieu-dat' });
-  for (const n of [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22]) out.push({ code: `ten-rieng:${n}`, name: `Con số tên riêng ${label(n)}`, kind: 'ten-rieng' });
-  for (const [n, s] of [[1, 'niên thiếu'], [2, 'trưởng thành'], [3, 'viên mãn']] as const) out.push({ code: `giai-doan:${n}`, name: `Giai đoạn ${s}`, kind: 'giai-doan' });
+  for (const n of [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22]) out.push({ code: `ruling:${n}`, name: `Con số chủ đạo ${label(n)}`, kind: 'ruling' });
+  for (const n of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22]) out.push({ code: `birthday:${n}`, name: `Con số ngày sinh ${label(n)}`, kind: 'birthday' });
+  for (let n = 1; n <= 9; n++) out.push({ code: `digit:${n}`, name: `Số ${n} trong Biểu đồ ngày sinh`, kind: 'digit' });
+  for (const a of ARROWS) out.push({ code: `arrow:${a.code}`, name: `${a.full} (${a.code})`, kind: 'arrow' });
+  for (const a of ARROWS) if (a.empty) out.push({ code: `empty-arrow:${a.code}`, name: `${a.empty} (trống ${a.code})`, kind: 'empty-arrow' });
+  for (let n = 1; n <= 9; n++) out.push({ code: `year:${n}`, name: `Năm cá nhân ${n}`, kind: 'year' });
+  for (let n = 1; n <= 11; n++) out.push({ code: `peak:${n}`, name: `Đỉnh cao mang số ${n}`, kind: 'peak' });
+  for (const n of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22]) out.push({ code: `soul:${n}`, name: `Con số linh hồn ${label(n)}`, kind: 'soul' });
+  for (const n of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22]) out.push({ code: `expression:${n}`, name: `Con số biểu đạt ${label(n)}`, kind: 'expression' });
+  for (const n of [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22]) out.push({ code: `name-number:${n}`, name: `Con số tên riêng ${label(n)}`, kind: 'name-number' });
+  for (const [n, s] of [[1, 'niên thiếu'], [2, 'trưởng thành'], [3, 'viên mãn']] as const) out.push({ code: `stage:${n}`, name: `Giai đoạn ${s}`, kind: 'stage' });
   return out;
 }

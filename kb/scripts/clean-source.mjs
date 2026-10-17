@@ -3,7 +3,7 @@
 //   raw/*.orig.txt  — the original copy: TCVN3 runs still as legacy bytes, but the paragraphs typed later
 //                     in Unicode are intact there (the font fixer converted those a second time: "thì" → "thỡ").
 // The two files have the same lines and the same words per line, so the merge is word by word.
-// Run: npm run kb:book (from the repo root)  → kb/sources/tuvi/luan-tv-2011-11.txt
+// Run: npm run kb:book (from the repo root)  → kb/sources/tuvi/grandma-notes-2011-11.txt
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const kb = path.resolve(dir, '..');
 const read = f => fs.readFileSync(path.join(kb, 'sources/tuvi/raw', f), 'utf8').split('\n');
-const fixed = read('luan-tv-2011-11.fixed.txt'), orig = read('luan-tv-2011-11.orig.txt');
+const fixed = read('grandma-notes-2011-11.fixed.txt'), orig = read('grandma-notes-2011-11.orig.txt');
 if (fixed.length !== orig.length) throw new Error('line counts differ');
 
 const VALID_LATIN1 = 'ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúý';
@@ -62,6 +62,6 @@ const out = fixed.map((f, i) => {
   return merged;
 });
 
-fs.writeFileSync(path.join(kb, 'sources/tuvi/luan-tv-2011-11.txt'), out.join('\n'));
+fs.writeFileSync(path.join(kb, 'sources/tuvi/grandma-notes-2011-11.txt'), out.join('\n'));
 fs.writeFileSync(path.join(kb, 'sources/tuvi/clean-report.txt'), report.join('\n'));
 console.log(`lines: ${out.length}, changed: ${report.length}`);

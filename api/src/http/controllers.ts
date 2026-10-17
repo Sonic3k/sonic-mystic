@@ -21,7 +21,7 @@ import type { SonicHubPerson } from '../sync/sonic-hub.client.js';
 import { TuViService } from '../tuvi/tuvi.service.js';
 
 const Birth = z.object({
-  gender: z.enum(['nam', 'nu']),
+  gender: z.enum(['male', 'female']),
   calendar: z.enum(['solar', 'lunar']),
   year: z.number().int(), month: z.number().int(), day: z.number().int(),
   leap: z.boolean().optional(),
@@ -30,7 +30,7 @@ const Birth = z.object({
   utcOffsetMinutes: z.number().int().min(-720).max(840).nullish(),
 });
 const Settings = z.object({
-  variant: z.enum(['ba', 'sach']), leapMonth: z.enum(['same', 'split15']), tyNextDay: z.boolean(),
+  variant: z.enum(['grandma', 'books']), leapMonth: z.enum(['same', 'split15']), tyNextDay: z.boolean(),
   lunarCalendar: z.enum(['auto', 'utc7', 'utc8']), hourBasis: z.enum(['clock', 'true_solar']),
 }).partial();
 const TuViBody = z.object({ birth: Birth, settings: Settings.optional(), viewYear: z.number().int().min(1800).max(2200).optional() });
@@ -177,7 +177,7 @@ export class NumerologyController {
   @Get('book/:code')
   entry(@Param('code') code: string) { return this.numerology.entry(code); }
 
-  /** ?symbols=chu-dao:7,so:1 — the passages whose condition speaks of all of them (optionally in one part: &topic=bieu_do) */
+  /** ?symbols=ruling:7,digit:1 — the passages whose condition speaks of all of them (optionally in one part: &topic=grid) */
   @Get('lookup')
   lookup(@Query('symbols') symbols = '', @Query('topic') topic: string | undefined) {
     return this.numerology.lookup(symbols.split(',').map(x => x.trim()).filter(Boolean), topic || undefined);
@@ -358,7 +358,7 @@ export class PeopleController {
   @Post('profiles/:id/ai-readings')
   generate(@Param('id') id: string, @Body(new ZodPipe(AiBody)) body: z.infer<typeof AiBody>) { return this.ai.generate(id, body.scope, body.viewYear); }
 
-  /** saves a reading written with Claude for one scope ('tong-hop' for nhân số học; a tử vi scope); it replaces the
+  /** saves a reading written with Claude for one scope ('synthesis' for nhân số học and chiêm tinh; a tử vi scope); it replaces the
       one of the same scope and year */
   @Put('profiles/:id/readings/:scope')
   putReading(@Param('id') id: string, @Param('scope') scope: string, @Body(new ZodPipe(WrittenBody)) body: WrittenBodyT) { return this.readings.put(id, scope, body); }

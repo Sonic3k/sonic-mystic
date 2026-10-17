@@ -6,13 +6,13 @@ import { createHash } from 'node:crypto';
 import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { and, asc, desc, eq, inArray } from 'drizzle-orm';
 import { z } from 'zod';
-import type { AiReadingDto, Layer } from '@mystic/engine/api';
+import type { AiReadingDto, AstrologyChartDto, Layer, TuViSettings } from '@mystic/engine/api';
+import { hashOf, type BirthInput, type ReadingLine } from '@mystic/engine/tuvi';
 import { DB, type Db } from '../db/db.js';
-import { readingItemRefs, readingItems, readingSections, readings, rules } from '../db/schema.js';
+import { dataMigrations, readingItemRefs, readingItems, readingSections, readings, rules } from '../db/schema.js';
 import { KnowledgeService } from '../kb/knowledge.service.js';
 import { NumerologyService, todayVn, type Computed } from '../numerology/numerology.service.js';
 import { AstrologyService } from '../astrology/astrology.service.js';
-import type { AstrologyChartDto } from '@mystic/engine/api';
 import { PeopleService } from '../people/people.service.js';
 import { SyncService } from '../sync/sync.service.js';
 import { scopeOk, tuviInput } from '../ai/lines.js';
@@ -30,11 +30,11 @@ export const WrittenBody = z.object({
 export type WrittenBodyT = z.infer<typeof WrittenBody>;
 
 /** nhân số học: the synthesis of the whole chart, or of one year */
-export const numerologyScopeOk = (scope: string) => scope === 'tong-hop' || /^nam-\d{4}$/.test(scope);
+export const numerologyScopeOk = (scope: string) => scope === 'synthesis' || /^year-\d{4}$/.test(scope);
 /** chiêm tinh: the reading of the whole chart */
-export const astrologyScopeOk = (scope: string) => scope === 'tong-hop';
+export const astrologyScopeOk = (scope: string) => scope === 'synthesis';
 /** the scopes whose reading is the one a brief quotes */
-const OVERVIEW = new Set(['tong-quan', 'tong-hop']);
+const OVERVIEW = new Set(['overview', 'synthesis']);
 
 export interface StoredReading {
   scope: string; viewYear: number; author: string; model: string | null; caution: string | null; inputHash: string;
@@ -53,6 +53,13 @@ export function astrologyHash(c: AstrologyChartDto, scope: string, codes: string
 export function numerologyHash(c: Computed, scope: string, year: number, codes: string[]): string {
   const ch = c.chart;
   return hash16(`${ch.input.year}-${ch.input.month}-${ch.input.day}|${ch.input.gender ?? ''}|${ch.input.names.map(n => `${n.label ?? ''}:${n.text}:${n.primary ? 1 : 0}`).join(',')}|${scope}|${year}|${codes.join(',')}`);
+}
+
+/** a Tử vi reading's hash as it was computed before the rename: gender nam/nu, placements ba/sach */
+function oldTuviHash(birth: BirthInput, settings: TuViSettings, scope: string, year: number, lines: ReadingLine[]): string {
+  const b = { ...birth, gender: birth.gender === 'male' ? 'nam' : 'nu' };
+  const s = { ...settings, variant: settings.variant === 'books' ? 'sach' : 'ba' };
+  return hashOf(`${JSON.stringify(b)}|${JSON.stringify(s)}|${scope}|${year}|${lines.map(l => l.ref).join(',')}`);
 }
 
 @Injectable()
@@ -96,6 +103,61 @@ export class ReadingsService {
   }
 
   /**
+   * Once, after the names in the code became English (drizzle 0003 renamed the scopes, the Tử vi settings and the
+   * books' codes in place): a reading that matched its chart under the old names still matches it, so it is not shown
+   * as stale. Each reading's hash is computed again the old way — the old scope, and for Tử vi the old words for the
+   * gender and the placements — and where that is the stored hash, the hash of the new names is stored.
+   */
+  async rehashAfterRename(): Promise<{ checked: number; rehashed: number } | null> {
+    const name = '0003_english_names';
+    if ((await this.db.select().from(dataMigrations).where(eq(dataMigrations.name, name))).length) return null;
+    const rows = await this.db.select().from(readings);
+    const byProfile = new Map<string, (typeof rows)[number][]>();
+    for (const r of rows) byProfile.set(r.profileId, [...(byProfile.get(r.profileId) ?? []), r]);
+    let rehashed = 0;
+    for (const [profileId, rs] of byProfile) {
+      const { profile } = await this.people.profileHead(profileId);
+      const hashes = await this.hashesBeforeAndNow(profileId, profile.disciplineCode);
+      if (!hashes) continue;
+      for (const r of rs) {
+        const h = hashes(r.scope, r.viewYear);
+        if (!h || r.inputHash !== h.before || h.now === h.before) continue;
+        await this.db.update(readings).set({ inputHash: h.now, updatedAt: r.updatedAt }).where(eq(readings.id, r.id));
+        rehashed++;
+      }
+    }
+    await this.db.insert(dataMigrations).values({ name }).onConflictDoNothing();
+    return { checked: rows.length, rehashed };
+  }
+
+  /** a reading's hash under the old names (see rehashAfterRename) and under the new */
+  private async hashesBeforeAndNow(profileId: string, discipline: string): Promise<((scope: string, year: number) => { before: string; now: string } | null) | null> {
+    const oldScope = (s: string) => (s === 'synthesis' ? 'tong-hop' : s === 'overview' ? 'tong-quan' : s.replace(/^year-(\d{4})$/, 'nam-$1'));
+    try {
+      if (discipline === 'astrology') {
+        const { computed } = await this.people.astrologyInput(profileId);
+        const codes = this.astrology.matched(computed, await this.astrology.book());
+        return scope => ({ before: astrologyHash(computed, oldScope(scope), codes), now: astrologyHash(computed, scope, codes) });
+      }
+      if (discipline === 'numerology') {
+        const { computed } = await this.people.numerologyInput(profileId);
+        const k = await this.numerology.book();
+        return (scope, year) => { const codes = this.numerology.matched(computed, k, year); return { before: numerologyHash(computed, oldScope(scope), year, codes), now: numerologyHash(computed, scope, year, codes) }; };
+      }
+      const pi = await this.people.profileInput(profileId);
+      const k = await this.knowledge.get();
+      return (scope, year) => {
+        try {
+          const now = tuviInput(pi.birth, pi.settings, k, scope, year);
+          return { before: oldTuviHash(pi.birth, pi.settings, oldScope(scope), year, now.lines), now: now.hash };
+        } catch { return null; }
+      };
+    } catch {
+      return null;
+    }
+  }
+
+  /**
    * Saves a reading written elsewhere (with Claude): it replaces the profile's reading of the same scope and year.
    * Refs are checked against what the profile's own reading matched — a ref it did not match is dropped, and a
    * primary idea left with none is saved as added.
@@ -104,7 +166,7 @@ export class ReadingsService {
     const { profile } = await this.people.profileHead(profileId);
     let year: number, inputHash: string, allowed: Set<string>, quote: Map<string, string>;
     if (profile.disciplineCode === 'astrology') {
-      if (!astrologyScopeOk(scope)) throw new BadRequestException(`Phạm vi không hợp lệ: ${scope} (tong-hop)`);
+      if (!astrologyScopeOk(scope)) throw new BadRequestException(`Phạm vi không hợp lệ: ${scope} (synthesis)`);
       year = body.viewYear ?? profile.viewYear ?? todayVn().year;
       const { computed } = await this.people.astrologyInput(profileId);
       const k = await this.astrology.book();
@@ -113,8 +175,8 @@ export class ReadingsService {
       allowed = new Set(codes);
       quote = new Map(codes.map(c => [c, k.rules.get(c)?.text ?? '']));
     } else if (profile.disciplineCode === 'numerology') {
-      if (!numerologyScopeOk(scope)) throw new BadRequestException(`Phạm vi không hợp lệ: ${scope} (tong-hop, hoặc nam-YYYY)`);
-      year = body.viewYear ?? (scope.startsWith('nam-') ? Number(scope.slice(4)) : profile.viewYear ?? todayVn().year);
+      if (!numerologyScopeOk(scope)) throw new BadRequestException(`Phạm vi không hợp lệ: ${scope} (synthesis, hoặc year-YYYY)`);
+      year = body.viewYear ?? (scope.startsWith('year-') ? Number(scope.slice(5)) : profile.viewYear ?? todayVn().year);
       const { computed } = await this.people.numerologyInput(profileId);
       const k = await this.numerology.book();
       const codes = this.numerology.matched(computed, k, year);
@@ -128,7 +190,7 @@ export class ReadingsService {
       const k = await this.knowledge.get();
       const input = tuviInput(pi.birth, pi.settings, k, scope, year);
       inputHash = input.hash;
-      allowed = new Set(input.lines.filter(l => l.source === 'ba').map(l => l.ref));
+      allowed = new Set(input.lines.filter(l => l.source === 'grandma').map(l => l.ref));
       quote = new Map(input.lines.map(l => [l.ref, l.text]));
     }
     const cited = [...new Set(body.sections.flatMap(s => s.items.flatMap(i => i.refs)))];

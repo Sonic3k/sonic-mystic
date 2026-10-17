@@ -9,7 +9,7 @@ import { parse, findTarget } from '@mystic/engine/tuvi';
 
 const dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../bundle/tuvi');
 const read = f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
-const book = read('book.json'), { rules } = read('rules.json'), supp = read('supplement.json'), phan1 = read('phan1.json'), manifest = read('manifest.json');
+const book = read('book.json'), { rules } = read('rules.json'), supp = read('supplement.json'), setup = read('setup.json'), manifest = read('manifest.json');
 
 test('manifest matches the bundle', () => {
   assert.equal(manifest.rules, rules.length);
@@ -31,7 +31,7 @@ test('every condition parses', () => {
 });
 
 test('Phần I has its steps, tables and the three differences', () => {
-  assert.ok(phan1.steps.length >= 7);
-  assert.equal(phan1.hoaGiap.rows.length, 30);
-  assert.equal(phan1.differences.length, 3);
+  assert.ok(setup.steps.length >= 7);
+  assert.equal(setup.hoaGiap.rows.length, 30);
+  assert.equal(setup.differences.length, 3);
 });

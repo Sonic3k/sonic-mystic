@@ -260,8 +260,8 @@ export function evaluate(node: Node, ctx: EvalCtx): Result {
       const others = MAIN(chart, p).filter(id => id !== s.id);
       return others.length === 0 ? { ok: true, why: [`${s.name} đơn thủ`] } : F;
     }
-    case 'male': return chart.input.gender === 'nam' ? T : F;
-    case 'female': return chart.input.gender === 'nu' ? T : F;
+    case 'male': return chart.input.gender === 'male' ? T : F;
+    case 'female': return chart.input.gender === 'female' ? T : F;
     case 'yang': return chart.yang ? T : F;
     case 'yin': return chart.yang ? F : T;
     case 'stem': return a.some(x => x.t === 'stem' && x.stem === chart.stem) ? { ok: true, why: [`tuổi ${STEMS[chart.stem]}`] } : F;

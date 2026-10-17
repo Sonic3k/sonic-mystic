@@ -23,7 +23,7 @@ const rnd = n => {
 };
 const chartOf = (year, month, day, hour, gender) =>
   E.buildChart({ gender, calendar: 'lunar', year, month, day, hour }, OPTS, true);
-const sample = Array.from({ length: sampleN }, () => chartOf(1924 + rnd(120), 1 + rnd(12), 1 + rnd(30), rnd(12), rnd(2) ? 'nam' : 'nu'));
+const sample = Array.from({ length: sampleN }, () => chartOf(1924 + rnd(120), 1 + rnd(12), 1 + rnd(30), rnd(12), rnd(2) ? 'male' : 'female'));
 
 /** branches of the chart where the rule is read */
 const ROLE = new Map();
@@ -42,7 +42,7 @@ const holds = (chart, node, palaces) => branchesFor(chart, palaces).some(p =>
 
 function exhaustive(node, palaces) {
   for (let y = 1984; y < 2044; y++) for (let m = 1; m <= 12; m++) for (let d = 1; d <= 30; d++) for (let h = 0; h < 12; h++)
-    for (const g of ['nam', 'nu']) if (holds(chartOf(y, m, d, h, g), node, palaces)) return { y, m, d, h, g };
+    for (const g of ['male', 'female']) if (holds(chartOf(y, m, d, h, g), node, palaces)) return { y, m, d, h, g };
   return null;
 }
 

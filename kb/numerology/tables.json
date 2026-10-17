@@ -2,8 +2,8 @@
  "about": "Các bảng của sách, chép thành bảng dữ liệu (bảng ngày sinh và bảng tuổi đỉnh cao đối chiếu với hình trang 548–549 và 701).",
  "tables": [
   {
-   "entry": "p12.chu-cai",
-   "key": "chu-cai",
+   "entry": "p12.letters",
+   "key": "letters",
    "title": "Mỗi chữ cái tương ứng một con số",
    "columns": [
     "1",
@@ -53,8 +53,8 @@
    ]
   },
   {
-   "entry": "p8.cach-tinh",
-   "key": "ngay-sinh",
+   "entry": "p8.method",
+   "key": "birthdays",
    "title": "Bảng đối chiếu ngày sinh với Con số ngày sinh",
    "columns": [
     "Ngày sinh",
@@ -188,8 +188,8 @@
    ]
   },
   {
-   "entry": "p11.do-tuoi",
-   "key": "do-tuoi",
+   "entry": "p11.ages",
+   "key": "ages",
    "title": "Độ tuổi đạt bốn đỉnh cao tương ứng với các Con số chủ đạo",
    "columns": [
     "Con số chủ đạo",
@@ -279,8 +279,8 @@
    ]
   },
   {
-   "entry": "p9.giao-thoi",
-   "key": "giao-thoi",
+   "entry": "p9.transitions",
+   "key": "transitions",
    "title": "Các khúc giao thời và độ dài các Năm cá nhân",
    "columns": [
     "Năm cá nhân hiện tại sang năm cá nhân kế tiếp",

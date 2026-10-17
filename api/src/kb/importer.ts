@@ -25,14 +25,14 @@ interface Supplement {
   stars: { star: string; about: string; rules: { id: string; palaces: string[]; text: string; when: string; tone: string }[] }[];
 }
 interface Table { cols: string[]; rows: (string | number)[][] }
-interface Phan1 {
+interface Setup {
   source: string; hoaGiap: Table;
   steps: { title: string; lines?: string[]; table?: Table; note?: string }[];
   triet: string[][];
-  differences: { what: string; ba: string; sach: string }[];
+  differences: { what: string; grandma: string; books: string }[];
 }
 
-export const SOURCE_CODES = { luan: 'tuvi.ba.luan', phan1: 'tuvi.ba.phan1', supplement: 'tuvi.bo-sung' } as const;
+export const SOURCE_CODES = { notes: 'tuvi.grandma.notes', setup: 'tuvi.grandma.setup', supplement: 'tuvi.supplement' } as const;
 
 const DESCRIPTIONS: Record<string, string> = {
   tuvi: 'Tử vi đẩu số theo ghi chép của bà: lập lá số, luận từng cung, vận hạn.',
@@ -62,7 +62,7 @@ export function readBundle(dir: string) {
     book: read<Book>('book.json'),
     rules: read<{ rules: RawRule[] }>('rules.json').rules,
     supplement: read<Supplement>('supplement.json'),
-    phan1: read<Phan1>('phan1.json'),
+    setup: read<Setup>('setup.json'),
   };
 }
 
@@ -79,20 +79,20 @@ export async function importTuvi(db: Db, bundleDir: string, opts: { force?: bool
 
     // sources
     const src = await tx.insert(sources).values([
-      { disciplineCode: 'tuvi', code: SOURCE_CODES.luan, title: b.book.source.title, author: 'Bà ngoại', kind: 'family' as const, sourceFile: b.book.source.file, note: b.book.source.note, sortOrder: 0,
+      { disciplineCode: 'tuvi', code: SOURCE_CODES.notes, title: b.book.source.title, author: 'Bà ngoại', kind: 'family' as const, sourceFile: b.book.source.file, note: b.book.source.note, sortOrder: 0,
         description: 'Bà viết dở năm 2011: phần mở đầu về an sao, tính hạn, rồi từng sao, luận ở từng cung.' },
-      { disciplineCode: 'tuvi', code: SOURCE_CODES.phan1, title: 'Tử vi đẩu số — Phần I: Lập lá số tử vi', author: 'Bà ngoại', kind: 'family' as const, sourceFile: 'TT. so bo.doc', note: b.phan1.source, sortOrder: 1,
+      { disciplineCode: 'tuvi', code: SOURCE_CODES.setup, title: 'Tử vi đẩu số — Phần I: Lập lá số tử vi', author: 'Bà ngoại', kind: 'family' as const, sourceFile: 'TT. so bo.doc', note: b.setup.source, sortOrder: 1,
         description: 'Cách bà lập lá số: tìm Mệnh, Cục, âm dương, giờ, an Mệnh Thân, an Tử Vi và các chính tinh.' },
       { disciplineCode: 'tuvi', code: SOURCE_CODES.supplement, title: 'Bổ sung — kiến thức tử vi phổ thông', author: null, kind: 'supplement' as const, sourceFile: null, note: null, sortOrder: 9, description: b.supplement.about },
     ]).onConflictDoUpdate({ target: sources.code, set: { title: sql`excluded.title`, author: sql`excluded.author`, kind: sql`excluded.kind`, sourceFile: sql`excluded.source_file`, note: sql`excluded.note`, description: sql`excluded.description`, sortOrder: sql`excluded.sort_order`, updatedAt: now } })
       .returning({ id: sources.id, code: sources.code });
     const sourceId = Object.fromEntries(src.map(s => [s.code, s.id])) as Record<string, number>;
-    const luan = sourceId[SOURCE_CODES.luan], phan1 = sourceId[SOURCE_CODES.phan1], supp = sourceId[SOURCE_CODES.supplement];
+    const notes = sourceId[SOURCE_CODES.notes], setup = sourceId[SOURCE_CODES.setup], supp = sourceId[SOURCE_CODES.supplement];
 
     // symbols: the engine's star catalogue
     const symRows = await tx.insert(symbols).values(STARS.map((s, i) => ({
       disciplineCode: 'tuvi', code: s.id, name: s.name, kind: s.kind, tone: s.tone ?? null, ring: s.ring ?? null,
-      sourceId: s.source === 'bo-sung' ? supp : luan, sortOrder: i,
+      sourceId: s.source === 'supplement' ? supp : notes, sortOrder: i,
     }))).onConflictDoUpdate({ target: [symbols.disciplineCode, symbols.code], set: { name: sql`excluded.name`, kind: sql`excluded.kind`, tone: sql`excluded.tone`, ring: sql`excluded.ring`, sourceId: sql`excluded.source_id`, sortOrder: sql`excluded.sort_order`, updatedAt: now } })
       .returning({ id: symbols.id, code: symbols.code });
     const symbolId = Object.fromEntries(symRows.map(s => [s.code, s.id])) as Record<string, number>;
@@ -101,7 +101,7 @@ export async function importTuvi(db: Db, bundleDir: string, opts: { force?: bool
     const aliasRows = STARS.flatMap(s => [...new Set(s.aliases ?? [])].map(alias => ({ symbolId: symbolId[s.id], alias })));
     if (aliasRows.length) await tx.insert(symbolAliases).values(aliasRows);
     await tx.delete(symbolDignities).where(inArray(symbolDignities.symbolId, allSymbolIds));
-    const dignityRows = STARS.flatMap(s => (['M', 'V', 'D', 'B', 'H'] as Level[]).flatMap(level => (s.bright?.[level] ?? []).map(position => ({ symbolId: symbolId[s.id], position, level, sourceId: luan }))));
+    const dignityRows = STARS.flatMap(s => (['M', 'V', 'D', 'B', 'H'] as Level[]).flatMap(level => (s.bright?.[level] ?? []).map(position => ({ symbolId: symbolId[s.id], position, level, sourceId: notes }))));
     if (dignityRows.length) await tx.insert(symbolDignities).values(dignityRows).onConflictDoNothing();
     const groupRows = await tx.insert(symbolGroups).values(GROUPS.map(g => ({ disciplineCode: 'tuvi', code: slug(g.name), name: g.name, mode: g.mode, minCount: g.min ?? null, note: g.note ?? null })))
       .onConflictDoUpdate({ target: [symbolGroups.disciplineCode, symbolGroups.code], set: { name: sql`excluded.name`, mode: sql`excluded.mode`, minCount: sql`excluded.min_count`, note: sql`excluded.note`, updatedAt: now } })
@@ -119,11 +119,11 @@ export async function importTuvi(db: Db, bundleDir: string, opts: { force?: bool
     // entries of the three sources
     type EntryRow = typeof entries.$inferInsert & { symbols?: string[] };
     const entryRows: EntryRow[] = [
-      { sourceId: luan, code: 'preface', kind: 'preface', title: 'Mở đầu — an Tuần, trung tinh, các vòng sao, tính hạn', sourceRef: b.book.preface[0]?.id ?? null, ordinal: 0 },
-      ...b.book.entries.map((e, i) => ({ sourceId: luan, code: `e${e.line}`, kind: 'symbol', title: e.name, sourceRef: e.line, ordinal: i + 1, symbols: e.stars ?? [e.star] })),
-      { sourceId: phan1, code: 'hoa-giap', kind: 'table', title: 'Lục thập hoa giáp', sourceRef: null, ordinal: 0 },
-      ...b.phan1.steps.map((s, i) => ({ sourceId: phan1, code: `step.${i + 1}`, kind: 'step', title: s.title, sourceRef: null, ordinal: i + 1 })),
-      { sourceId: phan1, code: 'triet', kind: 'table', title: 'An Triệt Lộ', sourceRef: null, ordinal: b.phan1.steps.length + 1 },
+      { sourceId: notes, code: 'preface', kind: 'preface', title: 'Mở đầu — an Tuần, trung tinh, các vòng sao, tính hạn', sourceRef: b.book.preface[0]?.id ?? null, ordinal: 0 },
+      ...b.book.entries.map((e, i) => ({ sourceId: notes, code: `e${e.line}`, kind: 'symbol', title: e.name, sourceRef: e.line, ordinal: i + 1, symbols: e.stars ?? [e.star] })),
+      { sourceId: setup, code: 'hoa-giap', kind: 'table', title: 'Lục thập hoa giáp', sourceRef: null, ordinal: 0 },
+      ...b.setup.steps.map((s, i) => ({ sourceId: setup, code: `step.${i + 1}`, kind: 'step', title: s.title, sourceRef: null, ordinal: i + 1 })),
+      { sourceId: setup, code: 'triet', kind: 'table', title: 'An Triệt Lộ', sourceRef: null, ordinal: b.setup.steps.length + 1 },
       { sourceId: supp, code: 'about', kind: 'about', title: 'Lớp bổ sung là gì', sourceRef: null, ordinal: 0 },
       ...b.supplement.palaces.map((p, i) => ({ sourceId: supp, code: `palace.${p.palace}`, kind: 'palace', title: p.palace, sourceRef: null, ordinal: 10 + i })),
       ...b.supplement.principles.map((p, i) => ({ sourceId: supp, code: `principle.${p.id}`, kind: 'principle', title: p.title, sourceRef: null, ordinal: 100 + i })),
@@ -145,10 +145,10 @@ export async function importTuvi(db: Db, bundleDir: string, opts: { force?: bool
     const pRows: PassageRow[] = [];
     const push = (entry: number, key: string, ordinal: number, kind: string, text: string, section: string | null = null, sourceRef: number | null = null) =>
       pRows.push({ entryId: entry, key, ordinal, kind, section, sourceRef, originalText: text, text, searchText: fold(text) });
-    b.book.preface.forEach((l, i) => push(eid(luan, 'preface'), `p${l.id}`, i, 'line', l.text, null, l.id));
-    for (const e of b.book.entries) e.paras.forEach((p, i) => push(eid(luan, `e${e.line}`), `p${p.id}`, i, p.kind, p.text, p.sec?.length ? p.sec.join(' · ') : null, p.id));
-    b.phan1.steps.forEach((s, i) => {
-      const id = eid(phan1, `step.${i + 1}`);
+    b.book.preface.forEach((l, i) => push(eid(notes, 'preface'), `p${l.id}`, i, 'line', l.text, null, l.id));
+    for (const e of b.book.entries) e.paras.forEach((p, i) => push(eid(notes, `e${e.line}`), `p${p.id}`, i, p.kind, p.text, p.sec?.length ? p.sec.join(' · ') : null, p.id));
+    b.setup.steps.forEach((s, i) => {
+      const id = eid(setup, `step.${i + 1}`);
       (s.lines ?? []).forEach((l, k) => push(id, `l${k + 1}`, k, 'line', l));
       if (s.note) push(id, 'note', 1000, 'app_note', s.note);
     });
@@ -174,23 +174,23 @@ export async function importTuvi(db: Db, bundleDir: string, opts: { force?: bool
     const passageId = new Map(pIds.map(p => [`${p.entryId}:${p.key}`, p.id]));
 
     // tables (Phần I)
-    const tabled = [eid(phan1, 'hoa-giap'), eid(phan1, 'triet'), ...b.phan1.steps.map((_, i) => eid(phan1, `step.${i + 1}`))];
+    const tabled = [eid(setup, 'hoa-giap'), eid(setup, 'triet'), ...b.setup.steps.map((_, i) => eid(setup, `step.${i + 1}`))];
     await tx.delete(entryTables).where(inArray(entryTables.entryId, tabled));
     const addTable = async (entry: number, key: string, title: string | null, t: Table) => {
       const [row] = await tx.insert(entryTables).values({ entryId: entry, key, title, columns: t.cols.map(String) }).returning({ id: entryTables.id });
       if (t.rows.length) await tx.insert(entryTableRows).values(t.rows.map((r, i) => ({ tableId: row.id, ordinal: i, cells: r.map(c => String(c)) })));
     };
-    await addTable(eid(phan1, 'hoa-giap'), 'table', 'Lục thập hoa giáp', b.phan1.hoaGiap);
-    await addTable(eid(phan1, 'triet'), 'table', 'An Triệt Lộ', { cols: ['Tuổi (can)', 'Triệt ở giữa hai cung'], rows: b.phan1.triet });
-    for (const [i, s] of b.phan1.steps.entries()) if (s.table) await addTable(eid(phan1, `step.${i + 1}`), 'table', null, s.table);
+    await addTable(eid(setup, 'hoa-giap'), 'table', 'Lục thập hoa giáp', b.setup.hoaGiap);
+    await addTable(eid(setup, 'triet'), 'table', 'An Triệt Lộ', { cols: ['Tuổi (can)', 'Triệt ở giữa hai cung'], rows: b.setup.triet });
+    for (const [i, s] of b.setup.steps.entries()) if (s.table) await addTable(eid(setup, `step.${i + 1}`), 'table', null, s.table);
 
     // rules: grandma's, then the supplement's
     type RuleRow = typeof rules.$inferInsert & { at: string[] };
     const entryByLine = new Map(b.book.entries.map(e => [e.line, e]));
     const rRows: RuleRow[] = [];
     b.rules.forEach((r, i) => {
-      const e = entryByLine.get(r.e)!, entry = eid(luan, `e${r.e}`);
-      rRows.push({ disciplineCode: 'tuvi', code: r.i, sourceId: luan, entryId: entry, passageId: passageId.get(`${entry}:p${r.p}`) ?? null, symbolId: symbolId[e.star] ?? null,
+      const e = entryByLine.get(r.e)!, entry = eid(notes, `e${r.e}`);
+      rRows.push({ disciplineCode: 'tuvi', code: r.i, sourceId: notes, entryId: entry, passageId: passageId.get(`${entry}:p${r.p}`) ?? null, symbolId: symbolId[e.star] ?? null,
         ordinal: i, originalText: r.t, text: r.t, context: r.c ?? null, condition: r.w ?? null, tone: r.o, reviewNote: r.r ?? null, at: r.at });
     });
     let k = 0;
@@ -216,11 +216,11 @@ export async function importTuvi(db: Db, bundleDir: string, opts: { force?: bool
     }
     written += rRows.length;
     const codes = rRows.map(r => r.code);
-    const removed = await tx.delete(rules).where(and(inArray(rules.sourceId, [luan, supp]), notInArray(rules.code, codes), isNull(rules.editedAt))).returning({ id: rules.id });
-    const keptRules = (await tx.select({ n: sql<number>`count(*)::int` }).from(rules).where(and(inArray(rules.sourceId, [luan, supp]), sql`${rules.editedAt} is not null`)))[0].n;
+    const removed = await tx.delete(rules).where(and(inArray(rules.sourceId, [notes, supp]), notInArray(rules.code, codes), isNull(rules.editedAt))).returning({ id: rules.id });
+    const keptRules = (await tx.select({ n: sql<number>`count(*)::int` }).from(rules).where(and(inArray(rules.sourceId, [notes, supp]), sql`${rules.editedAt} is not null`)))[0].n;
 
     // where each rule is read, and the stars its condition speaks of
-    const saved = await tx.select({ id: rules.id, code: rules.code, condition: rules.condition }).from(rules).where(inArray(rules.sourceId, [luan, supp]));
+    const saved = await tx.select({ id: rules.id, code: rules.code, condition: rules.condition }).from(rules).where(inArray(rules.sourceId, [notes, supp]));
     const ruleId = new Map(saved.map(r => [r.code, r.id]));
     const savedIds = saved.map(r => r.id);
     for (const part of chunks(savedIds, 2000)) { await tx.delete(ruleTargets).where(inArray(ruleTargets.ruleId, part)); await tx.delete(ruleSymbols).where(inArray(ruleSymbols.ruleId, part)); }
@@ -233,7 +233,7 @@ export async function importTuvi(db: Db, bundleDir: string, opts: { force?: bool
     for (const part of chunks(sRows, 1000)) await tx.insert(ruleSymbols).values(part).onConflictDoNothing();
 
     // where grandma differs from the books
-    await tx.insert(variants).values(b.phan1.differences.map((d, i) => ({ disciplineCode: 'tuvi', code: slug(d.what), title: d.what, primaryText: d.ba, alternativeText: d.sach, primarySourceId: phan1, ordinal: i })))
+    await tx.insert(variants).values(b.setup.differences.map((d, i) => ({ disciplineCode: 'tuvi', code: slug(d.what), title: d.what, primaryText: d.grandma, alternativeText: d.books, primarySourceId: setup, ordinal: i })))
       .onConflictDoUpdate({ target: [variants.disciplineCode, variants.code], set: { title: sql`excluded.title`, primaryText: sql`excluded.primary_text`, alternativeText: sql`excluded.alternative_text`, ordinal: sql`excluded.ordinal`, updatedAt: now } });
 
     const keptEdited = keptPassages + keptRules;

@@ -25,14 +25,14 @@ test('the calendar of the time: UTC+8 before 1968, and in the South until 1975',
   // Tết Mậu Thân: 29/1/1968 in the North, 30/1 in the South
   assert.deepEqual(E.solarToLunar(29, 1, 1968, 8), { day: 30, month: 12, year: 1967, leap: false });
   assert.deepEqual(E.solarToLunar(30, 1, 1968, 8), { day: 1, month: 1, year: 1968, leap: false });
-  const south = E.buildChart({ gender: 'nam', calendar: 'solar', year: 1968, month: 1, day: 29, hour: 10, latitude: 10.8 });
+  const south = E.buildChart({ gender: 'male', calendar: 'solar', year: 1968, month: 1, day: 29, hour: 10, latitude: 10.8 });
   assert.equal(south.lunarZone, 8);
   assert.deepEqual(south.lunar, { day: 30, month: 12, year: 1967, leap: false });
   assert.ok(south.calendarWarning, 'the two calendars disagree that day');
-  const north = E.buildChart({ gender: 'nam', calendar: 'solar', year: 1968, month: 1, day: 29, hour: 10, latitude: 21.03 });
+  const north = E.buildChart({ gender: 'male', calendar: 'solar', year: 1968, month: 1, day: 29, hour: 10, latitude: 21.03 });
   assert.equal(north.lunarZone, 7);
   assert.deepEqual(north.lunar, { day: 1, month: 1, year: 1968, leap: false });
-  const forced = E.buildChart({ gender: 'nam', calendar: 'solar', year: 1968, month: 1, day: 29, hour: 10, latitude: 10.8 }, { ...E.defaultOptions(), lunarCalendar: 'utc7' });
+  const forced = E.buildChart({ gender: 'male', calendar: 'solar', year: 1968, month: 1, day: 29, hour: 10, latitude: 10.8 }, { ...E.defaultOptions(), lunarCalendar: 'utc7' });
   assert.equal(forced.lunarZone, 7);
 });
 
@@ -41,7 +41,7 @@ test('sun time at the birthplace (optional)', () => {
   const t = E.trueSolarTime(8, 2, 1990, 9, 5, 105.8542, 420);
   assert.equal(t.hour, 8);
   assert.ok(t.minute >= 52 && t.minute <= 56, `got ${t.hour}:${t.minute}`);
-  const base = { gender: 'nam', calendar: 'solar', year: 1990, month: 2, day: 8, hour: 9, minute: 5, latitude: 21.0285, longitude: 105.8542, utcOffsetMinutes: 420 };
+  const base = { gender: 'male', calendar: 'solar', year: 1990, month: 2, day: 8, hour: 9, minute: 5, latitude: 21.0285, longitude: 105.8542, utcOffsetMinutes: 420 };
   assert.equal(BR[E.buildChart(base).hour], 'Tỵ', 'clock');
   assert.equal(BR[E.buildChart(base, { ...E.defaultOptions(), hourBasis: 'true_solar' }).hour], 'Thìn', 'sun');
 });
@@ -72,8 +72,8 @@ test("grandma's tables: Tìm Cục", () => {
 });
 
 test('whole charts hold together', () => {
-  for (const [y, m, d, h, g] of [[1990, 5, 12, 14, 'nam'], [1962, 11, 3, 2, 'nu'], [2025, 8, 30, 23, 'nam'], [1945, 2, 14, 9, 'nu'], [2001, 12, 31, 0, 'nam']]) {
-    for (const variant of ['ba', 'sach']) {
+  for (const [y, m, d, h, g] of [[1990, 5, 12, 14, 'male'], [1962, 11, 3, 2, 'female'], [2025, 8, 30, 23, 'male'], [1945, 2, 14, 9, 'female'], [2001, 12, 31, 0, 'male']]) {
+    for (const variant of ['grandma', 'books']) {
       const c = E.buildChart({ gender: g, calendar: 'solar', year: y, month: m, day: d, hour: h }, { ...E.defaultOptions(), variant, viewYear: 2026 });
       assert.equal(c.palaces.reduce((a, p) => a + p.stars.filter(s => s.kind === 'chinh').length, 0), 14);
       assert.equal((c.pos.thien_phu + c.pos.tu_vi) % 12, 4);
@@ -84,20 +84,20 @@ test('whole charts hold together', () => {
 });
 
 test('a lunar input round-trips to its solar date', () => {
-  const c = E.buildChart({ gender: 'nu', calendar: 'lunar', year: 1990, month: 1, day: 13, hour: 5 });
+  const c = E.buildChart({ gender: 'female', calendar: 'lunar', year: 1990, month: 1, day: 13, hour: 5 });
   assert.deepEqual(c.solar, [8, 2, 1990]);
   assert.equal(c.lunarZone, 7);
 });
 
 test('Canh Ngọ 1990: one of the three places grandma differs from the books', () => {
-  const c = E.buildChart({ gender: 'nam', calendar: 'solar', year: 1990, month: 2, day: 8, hour: 9, minute: 5 });
+  const c = E.buildChart({ gender: 'male', calendar: 'solar', year: 1990, month: 2, day: 8, hour: 9, minute: 5 });
   assert.deepEqual(c.lunar, { day: 13, month: 1, year: 1990, leap: false });
   assert.equal(E.canChiName(c.stem, c.branch), 'Canh Ngọ');
   assert.equal(BR[c.hour], 'Tỵ');
   assert.ok(c.variantStars.includes('hoa_khoa') && c.variantStars.includes('hoa_ky'));
   assert.equal(c.pos.hoa_ky, c.pos.thai_am, "grandma: Kỵ on Thái Âm");
-  const sach = E.buildChart({ gender: 'nam', calendar: 'solar', year: 1990, month: 2, day: 8, hour: 9, minute: 5 }, { ...E.defaultOptions(), variant: 'sach' });
-  assert.equal(sach.pos.hoa_ky, sach.pos.thien_dong, 'books: Kỵ on Thiên Đồng');
+  const books = E.buildChart({ gender: 'male', calendar: 'solar', year: 1990, month: 2, day: 8, hour: 9, minute: 5 }, { ...E.defaultOptions(), variant: 'books' });
+  assert.equal(books.pos.hoa_ky, books.pos.thien_dong, 'books: Kỵ on Thiên Đồng');
 });
 
 test('the condition language parses and reads a chart', () => {
@@ -105,7 +105,7 @@ test('the condition language parses and reads a chart', () => {
   assert.deepEqual(p.errors, []);
   const bad = E.parse('in(Sao Không Có)');
   assert.ok(bad.errors.length > 0);
-  const c = E.buildChart({ gender: 'nam', calendar: 'solar', year: 1990, month: 2, day: 8, hour: 9, minute: 5 });
+  const c = E.buildChart({ gender: 'male', calendar: 'solar', year: 1990, month: 2, day: 8, hour: 9, minute: 5 });
   const r = E.evaluate(E.parse('male()').node, { chart: c, p: c.menh });
   assert.equal(r.ok, true);
 });

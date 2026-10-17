@@ -18,7 +18,7 @@ export interface SourceDto {
 }
 
 export interface RuleDto {
-  code: string; source: 'ba' | 'bo-sung'; sourceCode: string;
+  code: string; source: 'grandma' | 'supplement'; sourceCode: string;
   text: string; ctx: string | null; when: string | null; tone: Tone; review: string | null;
   at: string[]; star: string | null; entryRef: number | null; paraRef: number | null;
   edited: boolean; active: boolean;
@@ -76,13 +76,13 @@ export interface MatchDto { rule: string; why: string[] }
 export interface GroupDto { key: string; star: string | null; name: string; entryRef: number | null; inPalace: boolean; matches: MatchDto[] }
 export interface ViewReadingDto {
   view: View; branch: number; about: string | null;
-  counts: { ba: number; boSung: number; cat: number; hung: number };
-  ba: GroupDto[]; boSung: GroupDto[];
+  counts: { grandma: number; supplement: number; cat: number; hung: number };
+  grandma: GroupDto[]; supplement: GroupDto[];
 }
 export interface HanReadingDto {
   year: number; age: number; canChi: string;
-  dai: { branch: number; from: number; to: number; ba: GroupDto[]; boSung: GroupDto[] } | null;
-  tieu: { branch: number; dong: boolean; ba: GroupDto[]; boSung: GroupDto[] };
+  dai: { branch: number; from: number; to: number; grandma: GroupDto[]; supplement: GroupDto[] } | null;
+  tieu: { branch: number; dong: boolean; grandma: GroupDto[]; supplement: GroupDto[] };
   months: number[];
 }
 export interface TuViReadingDto {

@@ -126,7 +126,7 @@ export class SyncService implements OnModuleInit, OnModuleDestroy {
 
     // lines: the overview the AI wrote for this profile, else grandma's first sentences about the stars in Mệnh
     const lines: BriefDto['lines'] = [];
-    const [ai] = await this.db.select({ id: readings.id, updatedAt: readings.updatedAt }).from(readings).where(and(eq(readings.profileId, p.id), eq(readings.scope, 'tong-quan'))).orderBy(desc(readings.updatedAt)).limit(1);
+    const [ai] = await this.db.select({ id: readings.id, updatedAt: readings.updatedAt }).from(readings).where(and(eq(readings.profileId, p.id), eq(readings.scope, 'overview'))).orderBy(desc(readings.updatedAt)).limit(1);
     if (ai) {
       const items = await this.db.select({ layer: readingItems.layer, text: readingItems.text, s: readingSections.ordinal, o: readingItems.ordinal }).from(readingItems)
         .innerJoin(readingSections, eq(readingSections.id, readingItems.sectionId)).where(eq(readingSections.readingId, ai.id)).orderBy(asc(readingSections.ordinal), asc(readingItems.ordinal));
@@ -137,7 +137,7 @@ export class SyncService implements OnModuleInit, OnModuleDestroy {
     if (!lines.length) {
       const k = await this.knowledge.get();
       const r = readView(chart, k.kb, 'Mệnh', year);
-      for (const g of r.ba.filter(x => x.inPalace)) for (const m of g.matches) {
+      for (const g of r.grandma.filter(x => x.inPalace)) for (const m of g.matches) {
         if (lines.length >= 3) break;
         lines.push({ layer: 'primary', text: m.rule.ctx ? `(${m.rule.ctx}) ${m.rule.text}` : m.rule.text, source: `Lời bà · ${g.name}` });
       }
@@ -166,7 +166,7 @@ export class SyncService implements OnModuleInit, OnModuleDestroy {
       ...(c.patterns.length ? [{ label: 'Cấu trúc', value: c.patterns.map(patternText).join('; ') }] : []),
     ];
     const lines: BriefDto['lines'] = [];
-    const [w] = await this.db.select({ id: readings.id, author: readings.author, updatedAt: readings.updatedAt }).from(readings).where(and(eq(readings.profileId, p.id), eq(readings.scope, 'tong-hop'))).orderBy(desc(readings.updatedAt)).limit(1);
+    const [w] = await this.db.select({ id: readings.id, author: readings.author, updatedAt: readings.updatedAt }).from(readings).where(and(eq(readings.profileId, p.id), eq(readings.scope, 'synthesis'))).orderBy(desc(readings.updatedAt)).limit(1);
     if (w) {
       const items = await this.db.select({ layer: readingItems.layer, text: readingItems.text }).from(readingItems)
         .innerJoin(readingSections, eq(readingSections.id, readingItems.sectionId)).where(eq(readingSections.readingId, w.id)).orderBy(asc(readingSections.ordinal), asc(readingItems.ordinal));
@@ -183,7 +183,7 @@ export class SyncService implements OnModuleInit, OnModuleDestroy {
     const base = this.config.publicWebUrl;
     return {
       discipline: 'astrology', title: 'Chiêm tinh', subjectId, profileId: p.id, profileLabel: p.label,
-      url: base ? `${base}/chiem-tinh/profile/${p.id}` : null, facts, lines, updatedAt: (w && w.updatedAt > p.updatedAt ? w.updatedAt : p.updatedAt).toISOString(),
+      url: base ? `${base}/astrology/profile/${p.id}` : null, facts, lines, updatedAt: (w && w.updatedAt > p.updatedAt ? w.updatedAt : p.updatedAt).toISOString(),
     };
   }
 
@@ -211,7 +211,7 @@ export class SyncService implements OnModuleInit, OnModuleDestroy {
 
     // lines: the synthesis written for this profile, else the book's summary of the ruling number
     const lines: BriefDto['lines'] = [];
-    const [w] = await this.db.select({ id: readings.id, author: readings.author, updatedAt: readings.updatedAt }).from(readings).where(and(eq(readings.profileId, p.id), eq(readings.scope, 'tong-hop'))).orderBy(desc(readings.updatedAt)).limit(1);
+    const [w] = await this.db.select({ id: readings.id, author: readings.author, updatedAt: readings.updatedAt }).from(readings).where(and(eq(readings.profileId, p.id), eq(readings.scope, 'synthesis'))).orderBy(desc(readings.updatedAt)).limit(1);
     if (w) {
       const items = await this.db.select({ layer: readingItems.layer, text: readingItems.text }).from(readingItems)
         .innerJoin(readingSections, eq(readingSections.id, readingItems.sectionId)).where(eq(readingSections.readingId, w.id)).orderBy(asc(readingSections.ordinal), asc(readingItems.ordinal));
@@ -222,13 +222,13 @@ export class SyncService implements OnModuleInit, OnModuleDestroy {
     if (!lines.length) {
       const k = await this.knowledge.numerology();
       const r = k ? readNumerology(c, k.kb) : null;
-      const sum = r?.sections.find(s => s.topic === 'chu_dao')?.groups.find(g => g.entry.endsWith('.tom-lai'));
+      const sum = r?.sections.find(s => s.topic === 'ruling')?.groups.find(g => g.entry.endsWith('.summary'));
       for (const m of sum?.matches.slice(0, 2) ?? []) lines.push({ layer: 'primary', text: m.rule.text, source: `Sách Nhân số học · ${sum!.title} (tr. ${m.rule.page})` });
     }
     const base = this.config.publicWebUrl;
     return {
       discipline: 'numerology', title: 'Nhân số học', subjectId, profileId: p.id, profileLabel: p.label,
-      url: base ? `${base}/nhan-so-hoc/profile/${p.id}` : null, facts, lines, updatedAt: (w && w.updatedAt > p.updatedAt ? w.updatedAt : p.updatedAt).toISOString(),
+      url: base ? `${base}/numerology/profile/${p.id}` : null, facts, lines, updatedAt: (w && w.updatedAt > p.updatedAt ? w.updatedAt : p.updatedAt).toISOString(),
     };
   }
 }
