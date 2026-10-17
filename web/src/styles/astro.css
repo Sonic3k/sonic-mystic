@@ -121,6 +121,17 @@
 .as-toc a { display: flex; gap: 8px; align-items: baseline; }
 .as-toc a small { margin-left: auto; font-size: 11.5px; color: var(--ink3); font-variant-numeric: tabular-nums; }
 .as-items { margin: 0; padding-left: 20px; font-family: var(--serif); font-size: 16.5px; line-height: 1.6; }
+.as-items.as-cols { columns: 3 12em; column-gap: 28px; }
+.as-items.as-cols li { break-inside: avoid; }
+/* a source's table where it stands in the text: cells wrap, a cell's label above its words */
+.as .tv-para .tv-table-wrap { margin: 2px 0 6px; }
+.as-table td { white-space: normal; vertical-align: top; font-family: var(--serif); font-size: 15px; line-height: 1.5; }
+.as-table td b { font-family: var(--sans); font-size: 13px; font-weight: 600; }
+.as-table th { white-space: normal; }
+.as-table td:first-child { min-width: 6em; }
+.tv-table-wrap.as-plain { display: inline-block; vertical-align: top; min-width: min(100%, 360px); max-width: 100%; }
+.tv-table-wrap.as-plain .as-table td { padding-right: 28px; }
+.as .tv-para .as-en { white-space: pre-line; }
 .as .ptitle h1.caps { font-size: 24px; letter-spacing: .02em; }
 .as .ns-h2.caps, .as .ns-h3.caps { font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: .04em; }
 .as .tv-para .as-en { margin-top: 6px; }
@@ -132,6 +143,13 @@
   .as-detail { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 640px) {
+  .as-table.as-stack thead { display: none; }
+  .as-table.as-stack tr { display: block; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  .as-table.as-stack tr:last-child { border-bottom: 0; }
+  .as-table.as-stack td { display: block; padding: 3px 0; border: 0; }
+  .as-table.as-stack td[data-label]::before { content: attr(data-label); display: block; font-family: var(--sans); font-size: 11px; font-weight: 600; color: var(--ink3); }
+  .as-table.as-stack td:first-child { font-weight: 600; }
+  .as-table.as-stack td:first-child::before { display: none; }
   .as-board { padding: 14px; }
   .as-form .tv-f.as-c4, .as-form .tv-f.as-c5, .as-form .tv-f.as-c7, .as-form .tv-f.as-c8 { grid-column: span 12; }
   .as-form .tv-f.as-c4:nth-child(-n+3) { grid-column: span 4; }
