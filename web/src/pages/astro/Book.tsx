@@ -76,26 +76,39 @@ export function AstroBookEntry() {
   if (q.isError) return page(<Failed error={q.error}><Link className="tv-link" to="/chiem-tinh/sach">Về tài liệu</Link></Failed>);
   if (!e) return page(<div className="tv-empty">Đang mở tài liệu…</div>);
   const kids = (c: string) => (toc ?? []).filter(x => x.parent === c);
-  const para = (p: AstrologyPassageDto) => {
+  /* a table where its passage stands; a cell of more than one line has its first line as its label. One of long
+     cells reads row by row on a phone, each cell under its column's heading */
+  const table = (t: TableDto) => {
+    const heads = t.columns.some(Boolean);
+    const stack = heads && t.rows.some(r => r.some(c => c.length > 60));
+    return (
+      <div key={t.key} className={`tv-table-wrap${heads ? '' : ' as-plain'}`}><table className={`tv-table as-table${stack ? ' as-stack' : ''}`}>
+        {t.title && <caption style={{ captionSide: 'top', textAlign: 'left', padding: '8px 10px', fontSize: 13, fontWeight: 600 }}>{t.title}</caption>}
+        {heads && <thead><tr>{t.columns.map((c, i) => <th key={i}>{c}</th>)}</tr></thead>}
+        <tbody>{t.rows.map((row, i) => <tr key={i}>{row.map((c, j) => {
+          const n = c.indexOf('\n');
+          return <td key={j} data-label={heads ? t.columns[j] : undefined}>{n < 0 ? c : <><b>{c.slice(0, n)}</b><br />{c.slice(n + 1)}</>}</td>;
+        })}</tr>)}</tbody>
+      </table></div>
+    );
+  };
+  const para = (p: AstrologyPassageDto, tables: TableDto[]) => {
     const r = p.rule;
     const on = (cau && r?.code === cau) || (!r && doan === p.id);
+    const t = p.kind === 'table' ? tables.find(x => x.key === p.key) : undefined;
+    /* a long list of names (the famous people of a sign) reads in columns */
+    const cols = !!p.items && p.items.length > 8 && p.items.every(x => x.length <= 34);
     return (
       <div key={p.id} className={`tv-para role-${p.role}${on ? ' hl' : ''}`} id={r ? `p-${r.code}` : `b${p.id}`}>
         {p.page !== null && <span className="ns-pg">{p.page}</span>}
-        {p.items ? <ul className="as-items">{p.items.map((x, i) => <li key={i}>{x}</li>)}</ul>
+        {t ? table(t)
+          : p.items ? <ul className={`as-items${cols ? ' as-cols' : ''}`}>{p.items.map((x, i) => <li key={i}>{x}</li>)}</ul>
           : <p>{p.label && <b style={{ fontFamily: 'var(--sans)', fontSize: 13 }}>{p.label} </b>}{p.text}</p>}
         {p.en && <p className="as-en">{p.en}</p>}
         {r && r.kind !== 'general' && <div className="ns-when">{describeWhen(r.when)}</div>}
       </div>
     );
   };
-  const table = (t: TableDto) => (
-    <div key={t.key} className="tv-table-wrap"><table className="tv-table">
-      {t.title && <caption style={{ captionSide: 'top', textAlign: 'left', padding: '8px 10px', fontSize: 13, fontWeight: 600 }}>{t.title}</caption>}
-      <thead><tr>{t.columns.map((c, i) => <th key={i}>{c}</th>)}</tr></thead>
-      <tbody>{t.rows.map((row, i) => <tr key={i}>{row.map((c, j) => <td key={j}>{c}</td>)}</tr>)}</tbody>
-    </table></div>
-  );
   const label = e.source.label ?? 'Lời cô';
   /* whose words these are: the textbook's twelve signs are Tierney's, translated */
   const voices = new Set(e.sections.flatMap(s => s.passages.map(p => p.voice)).filter((v): v is NonNullable<typeof v> => !!v));
@@ -111,8 +124,8 @@ export function AstroBookEntry() {
         {e.sections.map((s, i) => (
           <div key={s.code}>
             {i > 0 && !shallow && head(s.title, s.depth === 1 ? 'ns-h2' : 'ns-h3', `s-${s.code}`)}
-            {s.passages.map(para)}
-            {s.tables.map(table)}
+            {s.passages.map(p => para(p, s.tables))}
+            {s.tables.filter(t => !s.passages.some(p => p.kind === 'table' && p.key === t.key)).map(table)}
           </div>
         ))}
         {shallow && <div className="tv-bookgrid">{e.sections.slice(1).map(s => {

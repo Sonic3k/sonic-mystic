@@ -1442,7 +1442,8 @@
    "at": 1216,
    "code": "w3.decanates-pisces.what-is-a-cusp",
    "title": "Điểm giáp ranh là gì?",
-   "parent": "w3.decanates-pisces"
+   "parent": "w3",
+   "kind": "general"
   },
   {
    "at": 1227,
@@ -2361,12 +2362,6 @@
    "parent": "w8"
   },
   {
-   "at": 1924,
-   "code": "w8.rulers-of-the-houses.house-natural-ruler",
-   "title": "Cung địa bàn · Chủ quản tự nhiên",
-   "parent": "w8.rulers-of-the-houses"
-  },
-  {
    "at": 1926,
    "code": "w8.kinds-of-houses",
    "title": "Các loại cung địa bàn",
@@ -2383,12 +2378,6 @@
    "code": "w8.kinds-of-houses.houses-divided-into-four-groups",
    "title": "Các cung địa bàn chia thành bốn nhóm",
    "parent": "w8.kinds-of-houses"
-  },
-  {
-   "at": 1941,
-   "code": "w8.kinds-of-houses.houses-divided-into-four-groups.3-houses-of-relationships",
-   "title": "3. Các cung Quan hệ",
-   "parent": "w8.kinds-of-houses.houses-divided-into-four-groups"
   },
   {
    "at": 1945,
@@ -2505,202 +2494,10 @@
    "parent": "w9"
   },
   {
-   "at": 2108,
-   "code": "w9.interpretation.planet-in-what-sign-in-what-house",
-   "title": "Hành tinh · Ở cung hoàng đạo nào · Ở cung địa bàn nào",
-   "parent": "w9.interpretation"
-  },
-  {
-   "at": 2109,
-   "code": "w9.interpretation.sun-aquarius-second-house",
-   "title": "Mặt Trời · Bảo Bình · Cung 2",
-   "parent": "w9.interpretation"
-  },
-  {
-   "at": 2113,
-   "code": "w9.interpretation.planet-in-what-sign",
-   "title": "Hành tinh · Ở cung hoàng đạo nào",
-   "parent": "w9.interpretation"
-  },
-  {
-   "at": 2114,
-   "code": "w9.interpretation.sun-aquarius",
-   "title": "Mặt Trời · Bảo Bình",
-   "parent": "w9.interpretation"
-  },
-  {
-   "at": 2118,
-   "code": "w9.interpretation.in-what-house",
-   "title": "Ở cung địa bàn nào",
-   "parent": "w9.interpretation"
-  },
-  {
-   "at": 2119,
-   "code": "w9.interpretation.second-house",
-   "title": "Cung 2",
-   "parent": "w9.interpretation"
-  },
-  {
    "at": 2121,
    "code": "w9.sample-chart",
    "title": "Lá số mẫu",
    "parent": "w9"
-  },
-  {
-   "at": 2123,
-   "code": "w9.ascendant-in-sagittarius",
-   "title": "Cung Mọc Nhân Mã",
-   "parent": "w9"
-  },
-  {
-   "at": 2125,
-   "code": "w9.ascendant-in-sagittarius.planet-in-what-sign",
-   "title": "Hành tinh · Ở cung hoàng đạo nào",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2126,
-   "code": "w9.ascendant-in-sagittarius.sun-in-aquarius",
-   "title": "Mặt Trời · Ở Bảo Bình",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2128,
-   "code": "w9.ascendant-in-sagittarius.moon-in-sagittarius",
-   "title": "Mặt Trăng · Ở Nhân Mã",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2131,
-   "code": "w9.ascendant-in-sagittarius.in-what-house",
-   "title": "Ở cung địa bàn nào",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2132,
-   "code": "w9.ascendant-in-sagittarius.in-second-house",
-   "title": "Ở cung 2",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2136,
-   "code": "w9.ascendant-in-sagittarius.in-eleventh-house",
-   "title": "Ở cung 11",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2138,
-   "code": "w9.ascendant-in-sagittarius.planet-in-what-sign-in-what-house",
-   "title": "Hành tinh · Ở cung hoàng đạo nào · Ở cung địa bàn nào",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2139,
-   "code": "w9.ascendant-in-sagittarius.mercury-in-aquarius",
-   "title": "Sao Thủy · Ở Bảo Bình",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2141,
-   "code": "w9.ascendant-in-sagittarius.venus-in-aquarius",
-   "title": "Sao Kim · Ở Bảo Bình",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2143,
-   "code": "w9.ascendant-in-sagittarius.mars-in-scorpio",
-   "title": "Sao Hỏa · Ở Bò Cạp",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2146,
-   "code": "w9.ascendant-in-sagittarius.jupiter-in-gemini",
-   "title": "Sao Mộc · Ở Song Tử",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2148,
-   "code": "w9.ascendant-in-sagittarius.in-second-house-2",
-   "title": "Ở cung 2",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2150,
-   "code": "w9.ascendant-in-sagittarius.in-second-house-3",
-   "title": "Ở cung 2",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2152,
-   "code": "w9.ascendant-in-sagittarius.in-eleventh-house-2",
-   "title": "Ở cung 11",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2155,
-   "code": "w9.ascendant-in-sagittarius.in-sixth-house",
-   "title": "Ở cung 6",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2157,
-   "code": "w9.ascendant-in-sagittarius.planet-in-what-sign-2",
-   "title": "Hành tinh · Ở cung hoàng đạo nào",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2158,
-   "code": "w9.ascendant-in-sagittarius.saturn-in-scorpio",
-   "title": "Sao Thổ · Ở Bò Cạp",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2162,
-   "code": "w9.ascendant-in-sagittarius.uranus-in-cancer",
-   "title": "Thiên Vương · Ở Cự Giải",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2164,
-   "code": "w9.ascendant-in-sagittarius.neptune-in-libra",
-   "title": "Hải Vương · Ở Thiên Bình",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2168,
-   "code": "w9.ascendant-in-sagittarius.pluto-in-leo",
-   "title": "Diêm Vương · Ở Sư Tử",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2170,
-   "code": "w9.ascendant-in-sagittarius.in-what-house-2",
-   "title": "Ở cung địa bàn nào",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2171,
-   "code": "w9.ascendant-in-sagittarius.in-tenth-house",
-   "title": "Ở cung 10",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2173,
-   "code": "w9.ascendant-in-sagittarius.in-seventh-house",
-   "title": "Ở cung 7",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2175,
-   "code": "w9.ascendant-in-sagittarius.in-tenth-house-2",
-   "title": "Ở cung 10",
-   "parent": "w9.ascendant-in-sagittarius"
-  },
-  {
-   "at": 2178,
-   "code": "w9.ascendant-in-sagittarius.in-eighth-house",
-   "title": "Ở cung 8",
-   "parent": "w9.ascendant-in-sagittarius"
   },
   {
    "at": 2192,
@@ -2715,12 +2512,6 @@
    "parent": "w9.other-things-to-look-for-in-a-chart"
   },
   {
-   "at": 2195,
-   "code": "w9.other-things-to-look-for-in-a-chart.the-elements-formula.element-keyword",
-   "title": "Nguyên tố · Từ khóa",
-   "parent": "w9.other-things-to-look-for-in-a-chart.the-elements-formula"
-  },
-  {
    "at": 2207,
    "code": "w9.other-things-to-look-for-in-a-chart.the-elements-formula.sample",
    "title": "Lá số mẫu",
@@ -2732,12 +2523,6 @@
    "code": "w9.other-things-to-look-for-in-a-chart.the-qualities-formula",
    "title": "Công thức thể thức",
    "parent": "w9.other-things-to-look-for-in-a-chart"
-  },
-  {
-   "at": 2228,
-   "code": "w9.other-things-to-look-for-in-a-chart.the-qualities-formula.quality-keywords",
-   "title": "Thể thức · Từ khóa",
-   "parent": "w9.other-things-to-look-for-in-a-chart.the-qualities-formula"
   },
   {
    "at": 2236,
@@ -2861,7 +2646,34 @@
    "at": 2341,
    "code": "w9.where-are-the-head-and-tail-of-your-drag",
    "title": "Đầu và đuôi con Rồng của bạn nằm ở đâu?",
-   "parent": "w9"
+   "parent": "w9",
+   "children": [
+    "w9.where-are-the-head-and-tail-of-your-drag.north-node-1",
+    "w9.where-are-the-head-and-tail-of-your-drag.south-node-7",
+    "w9.where-are-the-head-and-tail-of-your-drag.north-node-2",
+    "w9.where-are-the-head-and-tail-of-your-drag.south-node-8",
+    "w9.where-are-the-head-and-tail-of-your-drag.north-node-3",
+    "w9.where-are-the-head-and-tail-of-your-drag.south-node-9",
+    "w9.where-are-the-head-and-tail-of-your-drag.north-node-4",
+    "w9.where-are-the-head-and-tail-of-your-drag.south-node-10",
+    "w9.where-are-the-head-and-tail-of-your-drag.north-node-5",
+    "w9.where-are-the-head-and-tail-of-your-drag.south-node-11",
+    "w9.where-are-the-head-and-tail-of-your-drag.north-node-6",
+    "w9.where-are-the-head-and-tail-of-your-drag.south-node-12",
+    "w9.where-are-the-head-and-tail-of-your-drag.north-node-7",
+    "w9.where-are-the-head-and-tail-of-your-drag.south-node-1",
+    "w9.where-are-the-head-and-tail-of-your-drag.north-node-8",
+    "w9.where-are-the-head-and-tail-of-your-drag.south-node-2",
+    "w9.where-are-the-head-and-tail-of-your-drag.north-node-9",
+    "w9.where-are-the-head-and-tail-of-your-drag.south-node-3",
+    "w9.where-are-the-head-and-tail-of-your-drag.north-node-10",
+    "w9.where-are-the-head-and-tail-of-your-drag.south-node-4",
+    "w9.where-are-the-head-and-tail-of-your-drag.north-node-11",
+    "w9.where-are-the-head-and-tail-of-your-drag.south-node-5",
+    "w9.where-are-the-head-and-tail-of-your-drag.north-node-12",
+    "w9.where-are-the-head-and-tail-of-your-drag.south-node-6",
+    "w9.where-are-the-head-and-tail-of-your-drag.sample"
+   ]
   },
   {
    "at": 2344,
@@ -3590,18 +3402,6 @@
    "kind": "general"
   },
   {
-   "at": 2628,
-   "code": "w10.synastry-for-lovers.how-far-apart-influence",
-   "title": "Cách nhau bao xa · Ảnh hưởng",
-   "parent": "w10.synastry-for-lovers"
-  },
-  {
-   "at": 2632,
-   "code": "w10.synastry-for-lovers.name-of-the-aspect",
-   "title": "Tên góc chiếu",
-   "parent": "w10.synastry-for-lovers"
-  },
-  {
    "at": 2641,
    "code": "w10.synastry-for-lovers.the-sun-and-the-moon",
    "title": "Mặt Trời và Mặt Trăng",
@@ -3699,6 +3499,19 @@
   "1483": {
    "kind": "general"
   },
+  "1639": {
+   "entry": "w7.mercury"
+  },
+  "1640": {
+   "entry": "w7.mercury"
+  },
+  "1641": {
+   "entry": "w7.mercury"
+  },
+  "1642": {
+   "entry": "w7.mercury",
+   "kind": "general"
+  },
   "1645": {
    "kind": "rule",
    "topic": "planet",
@@ -3758,6 +3571,20 @@
    "kind": "rule",
    "topic": "planet",
    "when": "focus(mercury) & in(mercury, pisces)"
+  },
+  "1667": {
+   "entry": "w7.venus"
+  },
+  "1668": {
+   "entry": "w7.venus"
+  },
+  "1669": {
+   "entry": "w7.venus",
+   "kind": "general"
+  },
+  "1670": {
+   "entry": "w7.venus",
+   "kind": "general"
   },
   "1673": {
    "kind": "rule",
@@ -3819,6 +3646,15 @@
    "topic": "planet",
    "when": "focus(venus) & in(venus, pisces)"
   },
+  "1702": {
+   "entry": "w7.mars"
+  },
+  "1703": {
+   "entry": "w7.mars"
+  },
+  "1704": {
+   "entry": "w7.mars"
+  },
   "1707": {
    "kind": "rule",
    "topic": "planet",
@@ -3879,6 +3715,18 @@
    "topic": "planet",
    "when": "focus(mars) & in(mars, pisces)"
   },
+  "1737": {
+   "entry": "w7.jupiter"
+  },
+  "1738": {
+   "entry": "w7.jupiter"
+  },
+  "1739": {
+   "entry": "w7.jupiter"
+  },
+  "1740": {
+   "entry": "w7.jupiter"
+  },
   "1743": {
    "kind": "rule",
    "topic": "planet",
@@ -3938,6 +3786,24 @@
    "kind": "rule",
    "topic": "planet",
    "when": "focus(jupiter) & in(jupiter, pisces)"
+  },
+  "1773": {
+   "entry": "w7.saturn"
+  },
+  "1774": {
+   "entry": "w7.saturn"
+  },
+  "1775": {
+   "entry": "w7.saturn"
+  },
+  "1776": {
+   "entry": "w7.saturn"
+  },
+  "1777": {
+   "entry": "w7.saturn"
+  },
+  "1778": {
+   "entry": "w7.saturn"
   },
   "1781": {
    "kind": "rule",
@@ -4768,6 +4634,54 @@
    "kind": "rule",
    "topic": "planet",
    "when": "focus(pluto) & house(pluto, 12)"
+  },
+  "2212": {
+   "entry": "w9.other-things-to-look-for-in-a-chart.the-elements-formula"
+  },
+  "2213": {
+   "entry": "w9.other-things-to-look-for-in-a-chart.the-elements-formula"
+  },
+  "2214": {
+   "entry": "w9.other-things-to-look-for-in-a-chart.the-elements-formula"
+  },
+  "2260": {
+   "entry": "w9.what-chart-type-are-you"
+  },
+  "2275": {
+   "entry": "w9.in-what-part-of-the-horoscope-are-you-st"
+  },
+  "2276": {
+   "entry": "w9.in-what-part-of-the-horoscope-are-you-st"
+  },
+  "2277": {
+   "entry": "w9.in-what-part-of-the-horoscope-are-you-st"
+  },
+  "2279": {
+   "entry": "w9.in-what-part-of-the-horoscope-are-you-st"
+  },
+  "2280": {
+   "entry": "w9.in-what-part-of-the-horoscope-are-you-st"
+  },
+  "2285": {
+   "entry": "w9.what-is-the-ruling-planet-of-your-chart"
+  },
+  "2286": {
+   "entry": "w9.what-is-the-ruling-planet-of-your-chart"
+  },
+  "2301": {
+   "entry": "w9.what-is-the-ruler-of-your-moon"
+  },
+  "2338": {
+   "entry": "w9.have-you-any-planets-in-mutual-reception"
+  },
+  "2339": {
+   "entry": "w9.have-you-any-planets-in-mutual-reception"
+  },
+  "2393": {
+   "entry": "w9.where-are-the-head-and-tail-of-your-drag.sample"
+  },
+  "2394": {
+   "entry": "w9.where-are-the-head-and-tail-of-your-drag.sample"
   },
   "2427": {
    "kind": "rule",

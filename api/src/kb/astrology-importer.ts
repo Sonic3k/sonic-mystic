@@ -31,7 +31,7 @@ const BundleSchema = z.object({
         paras: z.array(z.object({
           id: z.number().int(), kind: z.string(), role: KIND, page: z.number().int().nullable(), pages: z.array(z.number().int()).optional(), text: z.string(), voice: VOICE,
           label: z.string().optional(), en: z.string().optional(), labelEn: z.string().optional(), items: z.array(z.string()).optional(),
-          columns: z.array(z.tuple([z.string(), z.string()])).optional(), rows: z.array(z.record(z.string(), z.unknown())).optional(),
+          columns: z.array(z.tuple([z.string(), z.string()])).optional(), rows: z.array(z.record(z.string(), z.unknown())).optional(), title: z.string().nullable().optional(),
           forms: z.array(z.string()).optional(), usage: z.string().optional(), facet: z.string().optional(),
         })),
       })).min(1),
@@ -90,7 +90,7 @@ export function readAstrologyBundle(dir: string): AstrologyBundle | null {
 
 const now = sql`now()`;
 const keyOf = (paraId: number) => `b${paraId}`;
-/** her table of dignities as rows of text: Hành tinh, Vượng, Tử, Tướng, Tù */
+/** a table as rows of text, column by column (her dignities: Hành tinh, Vượng, Tử, Tướng, Tù) */
 function tableOf(columns: [string, string][], rows: Record<string, unknown>[]): { columns: string[]; rows: string[][] } {
   return {
     columns: columns.map(c => c[1]),
@@ -183,12 +183,13 @@ export async function importAstrology(db: Db, raw: AstrologyBundle, opts: { forc
       const passageId = new Map(pIds.map(p => [p.key, p.id]));
       keptEdited += pIds.filter(p => p.editedAt).length;
 
-      // her table of dignities
+      // the tables (her dignities, Woolfolk's), each keyed as the passage it stands for; captioned with the entry's
+      // title unless the source gives one (or none)
       await tx.delete(entryTables).where(inArray(entryTables.entryId, sourceEntryIds));
-      for (const e of book.entries) for (const p of e.paras) {
+      for (const e of book.entries) for (const [i, p] of e.paras.entries()) {
         if (p.kind !== 'table' || !p.columns || !p.rows) continue;
         const t = tableOf(p.columns, p.rows);
-        const [row] = await tx.insert(entryTables).values({ entryId: eid(e.code), key: `b${p.id}`, ordinal: 0, title: e.title, columns: t.columns }).returning({ id: entryTables.id });
+        const [row] = await tx.insert(entryTables).values({ entryId: eid(e.code), key: keyOf(p.id), ordinal: i, title: p.title !== undefined ? p.title : e.title, columns: t.columns }).returning({ id: entryTables.id });
         await tx.insert(entryTableRows).values(t.rows.map((r, k) => ({ tableId: row.id, ordinal: k, cells: r })));
         written += t.rows.length;
       }

@@ -7,8 +7,10 @@
 //   rules.json     every passage that speaks of a person, with the condition under which it does and the part of a
 //                  reading it belongs to — checked here against the engine's condition language
 //   manifest.json  a hash of all of it: the API imports again only when it changes
-// Sources: kb/sources/astrology/*.jsonl (one block per line, in reading order) and kb/astrology/*.json (one entry per
-// heading of a source, and the passage-by-passage overrides). Run after any edit of a map: npm run kb:astrology
+// Sources: kb/sources/astrology/*.jsonl (one block per line, in reading order; a block's id is its line, so a block that
+// was folded into another stays as {"kind":"void"}) and kb/astrology/*.json (one entry per heading of a source, and the
+// passage-by-passage overrides: kind, when, topic, and entry — the entry a passage belongs to when the page's layout put
+// it under another heading, as the main text running past a sidebar). Run after any edit of a map: npm run kb:astrology
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -27,7 +29,14 @@ const errors = [];
 /** whose words a passage is: her own, Tierney's (the 12 signs of her textbook are his "All Round the Zodiac"), Woolfolk's */
 const voiceOf = (src, block) => (src === 'astrology.tierney' || (src === 'astrology.hk' && block.page >= 41 && block.page <= 147 && block.kind !== 'heading') ? 'tierney'
   : src === 'astrology.woolfolk' ? 'woolfolk' : 'hk');
-const textOf = b => (b.kind === 'keywords' ? b.items.join('\n') : b.kind === 'table' ? b.rows.map(r => `${r.planet}: Vượng ${r.exaltation.join(', ')}; Tử ${r.fall.join(', ')}; Tướng ${r.ruler.join(', ')}; Tù ${r.detriment.join(', ')}`).join('\n') : b.text);
+/** a passage's text: a table's is its rows, one to a line (her dignities in her words; any other cell by cell) */
+const isDignities = b => b.columns[0]?.[0] === 'planet' && b.rows.every(r => Array.isArray(r.exaltation));
+const cellText = v => (Array.isArray(v) ? v.join(', ') : String(v ?? '')).replace(/\n/g, ': ');
+const textOf = b => (b.kind === 'keywords' ? b.items.join('\n')
+  : b.kind === 'table' ? (isDignities(b)
+    ? b.rows.map(r => `${r.planet}: Vượng ${r.exaltation.join(', ')}; Tử ${r.fall.join(', ')}; Tướng ${r.ruler.join(', ')}; Tù ${r.detriment.join(', ')}`)
+    : b.rows.map(r => b.columns.map(([k]) => cellText(r[k])).filter(Boolean).join(' · '))).join('\n')
+  : b.text);
 
 const books = [];
 const rules = [];
@@ -51,8 +60,13 @@ for (const name of MAPS) {
   const inherit = (e, key) => { for (let x = e; x; x = x.parent ? byCode.get(x.parent) : undefined) if (x[key] !== undefined) return x[key]; return undefined; };
 
   const entries = [];
+  const built = new Map();
   let cur = null;
   for (const b of blocks) {
+    if (b.kind === 'void') {
+      if (map.paras?.[String(b.id)]) errors.push(`${short} đoạn ${b.id}: khối đã gộp vào khối khác (void) mà vẫn có ghi đè`);
+      continue;
+    }
     if (b.kind === 'heading') {
       const e = byAt.get(b.id);
       if (!e) continue;
@@ -68,11 +82,15 @@ for (const name of MAPS) {
       const topic = inherit(e, 'topic') ?? null;
       cur = { code: e.code, title: e.title, parent: e.parent ?? null, page: b.page ?? null, at: b.id, topic: Array.isArray(topic) ? topic[0] : topic, symbols: [...symbolsOf(parsed?.node)], ...(b.en ? { en: b.en } : {}), paras: [] };
       entries.push(cur);
+      built.set(cur.code, cur);
       continue;
     }
-    if (!cur) { errors.push(`${short}: khối ${b.id} nằm trước đề mục đầu tiên`); continue; }
-    const e = byCode.get(cur.code), o = map.paras?.[String(b.id)] ?? {};
-    for (const k of Object.keys(o)) if (!['kind', 'when', 'topic'].includes(k)) errors.push(`${short} đoạn ${b.id}: khóa lạ "${k}"`);
+    const o = map.paras?.[String(b.id)] ?? {};
+    for (const k of Object.keys(o)) if (!['kind', 'when', 'topic', 'entry'].includes(k)) errors.push(`${short} đoạn ${b.id}: khóa lạ "${k}"`);
+    // the entry the passage belongs to: the heading above it, or the one the map names (an entry already begun)
+    const home = o.entry ? built.get(o.entry) : cur;
+    if (!home) { errors.push(o.entry ? `${short} đoạn ${b.id}: "entry" ${o.entry} không phải một mục đứng trước đoạn này` : `${short}: khối ${b.id} nằm trước đề mục đầu tiên`); continue; }
+    const e = byCode.get(home.code);
     const role = o.kind ?? inherit(e, 'kind') ?? 'general';
     if (!ROLES.has(role)) errors.push(`${short} đoạn ${b.id}: kind "${role}"`);
     const text = textOf(b);
@@ -82,10 +100,10 @@ for (const name of MAPS) {
     if (b.en) p.en = b.en;
     if (b.label_en) p.labelEn = b.label_en;
     if (b.items) p.items = b.items;
-    if (b.kind === 'table') { p.columns = b.columns; p.rows = b.rows; }
+    if (b.kind === 'table') { p.columns = b.columns; p.rows = b.rows; if (b.title !== undefined) p.title = b.title; }
     if (b.forms) { p.forms = b.forms; if (b.usage) p.usage = b.usage; }
     if (b.facet) p.facet = b.facet;
-    cur.paras.push(p);
+    home.paras.push(p);
     const when = o.when ?? inherit(e, 'when') ?? null;
     const topics = [o.topic ?? inherit(e, 'topic') ?? []].flat();
     if (role === 'rule' || (role === 'general' && o.when)) {
@@ -94,10 +112,22 @@ for (const name of MAPS) {
       const parsed = parse(when);
       for (const m of parsed.errors) errors.push(`${short} đoạn ${b.id}: điều kiện lỗi — ${m} — ${when}`);
       topics.forEach(tp => rules.push({
-        i: `${short}.b${b.id}${topics.length > 1 ? `.${tp}` : ''}`, s: map.source.code, e: cur.code, p: b.id, pg: b.page ?? null, t: text, w: when, k: role, tp, o: ord++,
+        i: `${short}.b${b.id}${topics.length > 1 ? `.${tp}` : ''}`, s: map.source.code, e: home.code, p: b.id, pg: b.page ?? null, t: text, w: when, k: role, tp, o: ord++,
         sy: [...symbolsOf(parsed.node)], v: p.voice, ...(p.label ? { lb: p.label } : {}), ...(p.en ? { en: p.en } : {}), ...(p.items ? { it: p.items } : {}),
       }));
     }
+  }
+  // a parent that lists the order of its sections (Woolfolk's table of the Nodes reads row by row across two columns):
+  // each section, with everything under it, takes its place in that order
+  for (const pe of map.entries.filter(x => x.children !== undefined)) {
+    const kids = entries.filter(x => x.parent === pe.code).map(x => x.code);
+    if (!Array.isArray(pe.children) || kids.length !== pe.children.length || kids.some(c => !pe.children.includes(c))) { errors.push(`${short}/${pe.code}: "children" phải là danh sách kể đủ và đúng các mục con`); continue; }
+    const under = code => { const set = new Set([code]); for (const x of entries) if (x.parent && set.has(x.parent)) set.add(x.code); return entries.filter(x => set.has(x.code)); };
+    const groups = pe.children.map(under);
+    const moved = new Set(groups.flat());
+    const start = Math.min(...groups.map(g => entries.indexOf(g[0])));
+    const rest = entries.filter(x => !moved.has(x));
+    entries.splice(0, entries.length, ...rest.slice(0, start), ...groups.flat(), ...rest.slice(start));
   }
   books.push({ source: map.source, entries });
 }
