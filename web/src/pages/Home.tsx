@@ -6,7 +6,7 @@ import { api } from '../api';
 import { SONIC_HUB, birthLine, genderName, profilesLine } from '../lib/people';
 import { useTitle } from '../lib/text';
 
-const PATH: Record<string, string> = { tuvi: '/tu-vi', numerology: '/nhan-so-hoc', astrology: '/chiem-tinh' };
+const PATH: Record<string, string> = { tuvi: '/tu-vi', numerology: '/numerology', astrology: '/astrology' };
 const ABOUT: Record<string, string> = {
   tuvi: 'Lập lá số và luận từng cung theo sổ tay «Luận Tử Vi» bà viết năm 2011.',
   astrology: 'Lá số chiêm tinh theo ngày giờ và nơi sinh, luận theo giáo trình của cô Hương Kiều, bản dịch Tierney và sách của Woolfolk.',
@@ -30,10 +30,10 @@ export default function Home() {
           <p>Chiêm tinh luận theo giáo trình và các bài của cô Hương Kiều, bản dịch Tierney của lớp và sách của Woolfolk; mỗi đoạn ghi rõ là lời ai.</p>
           <p>Mỗi người có thể có nhiều lá số ở những thời điểm khác nhau; bản tóm tắt của lá số mới nhất hiện cả ở trang người trong Sonic Hub.</p>
           <div className="tv-acts" style={{ marginTop: 6 }}>
-            <Link className="tv-btn son" to="/tu-vi">Lập lá số tử vi</Link>
-            <Link className="tv-btn ghost" to="/tu-vi/sach">Đọc sách của bà</Link>
-            <Link className="tv-btn ghost" to="/nhan-so-hoc">Xem các con số</Link>
-            <Link className="tv-btn ghost" to="/chiem-tinh">Lập lá số chiêm tinh</Link>
+            <Link className="tv-btn accent" to="/tu-vi">Lập lá số tử vi</Link>
+            <Link className="tv-btn ghost" to="/tu-vi/books">Đọc sách của bà</Link>
+            <Link className="tv-btn ghost" to="/numerology">Xem các con số</Link>
+            <Link className="tv-btn ghost" to="/astrology">Lập lá số chiêm tinh</Link>
           </div>
         </div>
         <div className="hh-disc">
@@ -45,9 +45,9 @@ export default function Home() {
 
       {!!people.data?.length && (
         <section style={{ marginTop: 32 }}>
-          <div className="hd"><h2>Người đã xem</h2><span>{people.data.length}</span><Link to="/nguoi">Tất cả ›</Link></div>
+          <div className="hd"><h2>Người đã xem</h2><span>{people.data.length}</span><Link to="/people">Tất cả ›</Link></div>
           <div className="hh-people">{people.data.slice(0, 9).map(s => (
-            <Link key={s.id} className="hh-person" to={`/nguoi/${s.id}`}>
+            <Link key={s.id} className="hh-person" to={`/people/${s.id}`}>
               <b>{s.displayName}{s.links.some(l => l.system === SONIC_HUB) && <span className="hh-tag">Sonic Hub</span>}</b>
               <small>{[genderName(s.gender), birthLine(s.birth)].filter(Boolean).join(' · ') || 'chưa có ngày sinh'}</small>
               <small>{profilesLine(s)}</small>

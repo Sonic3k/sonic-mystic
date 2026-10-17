@@ -1,5 +1,5 @@
 /* Lập lá số — every placement follows grandma's "Phần I: Lập lá số tử vi" (TT. so bo + the start of Luận TV 11.2011).
-   Where her method differs from the books most apps follow, `variant: 'sach'` switches to the books' way:
+   Where her method differs from the books most apps follow, `variant: 'books'` switches to the books' way:
    Hỏa/Linh, Tứ Hóa of Canh years, Thiên Phúc of Quý years. Things she did not write down (a birth in a leap month,
    a birth between 23:00 and 24:00, which lunar calendar a date was written in, clock or sun time) are settings,
    shown on the chart as not hers. */
@@ -7,7 +7,7 @@ import { BRANCHES, BRANCH_ELEMENT, PALACES, STEMS, STARS, STAR_BY_ID, brightOf, 
 import { leapMonthOf, lunarToSolar, lunarZoneFor, solarToLunar, type LunarDate } from './lunar.js';
 import { trueSolarTime } from './solar-time.js';
 
-export type Gender = 'nam' | 'nu';
+export type Gender = 'male' | 'female';
 
 export interface BirthInput {
   name?: string;
@@ -25,8 +25,8 @@ export interface BirthInput {
 }
 
 export interface ChartOptions {
-  /** 'ba' = grandma's placements (default); 'sach' = the common books' placements for the few stars where they differ */
-  variant: 'ba' | 'sach';
+  /** 'grandma' = grandma's placements (default); 'books' = the common books' placements for the few stars where they differ */
+  variant: 'grandma' | 'books';
   /** born in a leap month: 'same' = count as that month; 'split15' = days 1–15 that month, 16–30 the next */
   leapMonth: 'same' | 'split15';
   /** solar input, 23:00–23:59: giờ Tý of the next day (true) or of the same day */
@@ -39,13 +39,13 @@ export interface ChartOptions {
   hourBasis?: 'clock' | 'true_solar';
 }
 
-export const defaultOptions = (): ChartOptions => ({ variant: 'ba', leapMonth: 'same', tyNextDay: true, viewYear: new Date().getFullYear(), lunarCalendar: 'auto', hourBasis: 'clock' });
+export const defaultOptions = (): ChartOptions => ({ variant: 'grandma', leapMonth: 'same', tyNextDay: true, viewYear: new Date().getFullYear(), lunarCalendar: 'auto', hourBasis: 'clock' });
 
 const pad2 = (n: number) => String(n).padStart(2, '0');
 const lunarText = (l: LunarDate) => `${l.day}/${l.month}${l.leap ? ' nhuận' : ''}/${l.year}`;
 const sameLunar = (a: LunarDate, b: LunarDate) => a.day === b.day && a.month === b.month && a.year === b.year && a.leap === b.leap;
 
-export interface PlacedStar { id: string; name: string; kind: StarDef['kind']; tone?: StarDef['tone']; ring?: StarDef['ring']; level?: Level; source?: 'bo-sung'; hoa?: string }
+export interface PlacedStar { id: string; name: string; kind: StarDef['kind']; tone?: StarDef['tone']; ring?: StarDef['ring']; level?: Level; source?: 'supplement'; hoa?: string }
 
 export interface PalaceCell {
   branch: number; stem: number; role: Palace; isThan: boolean;
@@ -82,13 +82,13 @@ export function tuViPosition(cuc: number, day: number): number {
 }
 
 /** Tứ Hóa by year stem: Lộc, Quyền, Khoa, Kỵ */
-const TU_HOA_BA: string[][] = [
+const TU_HOA_GRANDMA: string[][] = [
   ['Liêm Trinh', 'Phá Quân', 'Vũ Khúc', 'Thái Dương'], ['Thiên Cơ', 'Thiên Lương', 'Tử Vi', 'Thái Âm'], ['Thiên Đồng', 'Thiên Cơ', 'Văn Xương', 'Liêm Trinh'],
   ['Thái Âm', 'Thiên Đồng', 'Thiên Cơ', 'Cự Môn'], ['Tham Lang', 'Thái Âm', 'Hữu Bật', 'Thiên Cơ'], ['Vũ Khúc', 'Tham Lang', 'Thiên Lương', 'Văn Khúc'],
   ['Thái Dương', 'Vũ Khúc', 'Thiên Đồng', 'Thái Âm'], ['Cự Môn', 'Thái Dương', 'Văn Khúc', 'Văn Xương'], ['Thiên Lương', 'Tử Vi', 'Thiên Phủ', 'Vũ Khúc'],
   ['Phá Quân', 'Cự Môn', 'Thái Âm', 'Tham Lang'],
 ];
-const TU_HOA_SACH_CANH = ['Thái Dương', 'Vũ Khúc', 'Thái Âm', 'Thiên Đồng'];
+const TU_HOA_BOOKS_CANH = ['Thái Dương', 'Vũ Khúc', 'Thái Âm', 'Thiên Đồng'];
 const HOA_IDS = ['hoa_loc', 'hoa_quyen', 'hoa_khoa', 'hoa_ky'];
 
 const B = (n: string) => BRANCHES.indexOf(n as (typeof BRANCHES)[number]);
@@ -99,8 +99,8 @@ const KHOI = list(['Sửu', 'Tý', 'Hợi', 'Hợi', 'Sửu', 'Tý', 'Ngọ', 'N
 const VIET = list(['Mùi', 'Thân', 'Dậu', 'Dậu', 'Mùi', 'Thân', 'Dần', 'Dần', 'Tỵ', 'Tỵ']);
 const THIEN_TRU = list(['Tỵ', 'Ngọ', 'Tý', 'Tỵ', 'Ngọ', 'Thân', 'Dần', 'Ngọ', 'Dậu', 'Tuất']);
 const THIEN_QUAN = list(['Mùi', 'Thìn', 'Tỵ', 'Dần', 'Mão', 'Dậu', 'Hợi', 'Dậu', 'Tuất', 'Ngọ']);
-const THIEN_PHUC_BA = list(['Dậu', 'Thân', 'Tý', 'Hợi', 'Mão', 'Dần', 'Ngọ', 'Tỵ', 'Ngọ', 'Tý']);
-const THIEN_PHUC_SACH = list(['Dậu', 'Thân', 'Tý', 'Hợi', 'Mão', 'Dần', 'Ngọ', 'Tỵ', 'Ngọ', 'Tỵ']);
+const THIEN_PHUC_GRANDMA = list(['Dậu', 'Thân', 'Tý', 'Hợi', 'Mão', 'Dần', 'Ngọ', 'Tỵ', 'Ngọ', 'Tý']);
+const THIEN_PHUC_BOOKS = list(['Dậu', 'Thân', 'Tý', 'Hợi', 'Mão', 'Dần', 'Ngọ', 'Tỵ', 'Ngọ', 'Tỵ']);
 const LUU_HA = list(['Dậu', 'Tuất', 'Mùi', 'Thân', 'Tỵ', 'Ngọ', 'Thìn', 'Mão', 'Hợi', 'Dần']);
 /** year-branch trines: 0 Thân Tý Thìn · 1 Dần Ngọ Tuất · 2 Tỵ Dậu Sửu · 3 Hợi Mão Mùi */
 const trine = (b: number) => [0, 2, 1, 3][b % 4];
@@ -214,7 +214,7 @@ export function buildChart(input: BirthInput, opts: ChartOptions = defaultOption
   }
   const day = lunar.day;
   const { stem, branch } = canChiYear(lunar.year);
-  const yang = stem % 2 === 0, male = input.gender === 'nam';
+  const yang = stem % 2 === 0, male = input.gender === 'male';
   const forward = yang === male;
   const amDuong = `${yang ? 'Dương' : 'Âm'} ${male ? 'Nam' : 'Nữ'}`;
 
@@ -264,7 +264,7 @@ export function buildChart(input: BirthInput, opts: ChartOptions = defaultOption
   put('thien_khoi', KHOI[stem]); put('thien_viet', VIET[stem]); put('thien_tru', THIEN_TRU[stem]);
   put('luu_nien_van_tinh', LUU_NIEN_VAN_TINH[stem]);
   put('thien_quan', THIEN_QUAN[stem]);
-  put('thien_phuc', (opts.variant === 'sach' ? THIEN_PHUC_SACH : THIEN_PHUC_BA)[stem]);
+  put('thien_phuc', (opts.variant === 'books' ? THIEN_PHUC_BOOKS : THIEN_PHUC_GRANDMA)[stem]);
   put('luu_ha', LUU_HA[stem]);
   const loc = LOC_TON[stem];
   put('loc_ton', loc); put('kinh_duong', loc + 1); put('da_la', loc - 1);
@@ -276,7 +276,7 @@ export function buildChart(input: BirthInput, opts: ChartOptions = defaultOption
   put('dau_quan', branch - (month - 1) + hour);
   // Hỏa, Linh
   const variantStars: string[] = [];
-  if (opts.variant === 'sach') {
+  if (opts.variant === 'books') {
     put('hoa_tinh', HOA_START[g] + (forward ? hour : -hour)); put('linh_tinh', LINH_START[g] + (forward ? -hour : hour));
   } else {
     // "Từ cung khởi theo tuổi, tính thuận đến giờ sinh … Nam khởi Hỏa trước; Nữ khởi Linh trước"
@@ -287,12 +287,12 @@ export function buildChart(input: BirthInput, opts: ChartOptions = defaultOption
   const ts = TRANG_SINH[cuc.element];
   SINH_RING.forEach((id, i) => put(id, ts + (forward ? i : -i)));
   // Tứ Hóa
-  const hoa = opts.variant === 'sach' && stem === 6 ? TU_HOA_SACH_CANH : TU_HOA_BA[stem];
+  const hoa = opts.variant === 'books' && stem === 6 ? TU_HOA_BOOKS_CANH : TU_HOA_GRANDMA[stem];
   const hoaOf: Record<string, string> = {};
   hoa.forEach((name, i) => { const s = STARS.find(x => x.name === name)!; put(HOA_IDS[i], pos[s.id]); hoaOf[s.id] = STAR_BY_ID[HOA_IDS[i]].name; });
-  if (opts.variant === 'ba') {
-    const sachHoa = HOA_START[g] + (forward ? hour : -hour), sachLinh = LINH_START[g] + (forward ? -hour : hour);
-    if (mod12(sachHoa) !== pos.hoa_tinh || mod12(sachLinh) !== pos.linh_tinh) variantStars.push('hoa_tinh', 'linh_tinh');
+  if (opts.variant === 'grandma') {
+    const booksHoa = HOA_START[g] + (forward ? hour : -hour), booksLinh = LINH_START[g] + (forward ? -hour : hour);
+    if (mod12(booksHoa) !== pos.hoa_tinh || mod12(booksLinh) !== pos.linh_tinh) variantStars.push('hoa_tinh', 'linh_tinh');
     if (stem === 6) variantStars.push('hoa_khoa', 'hoa_ky');
     if (stem === 9) variantStars.push('thien_phuc');
   }

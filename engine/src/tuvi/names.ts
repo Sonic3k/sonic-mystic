@@ -50,8 +50,8 @@ export interface StarDef {
   tone?: 'cat' | 'hung' | 'trung';
   ring?: 'loc' | 'tue' | 'sinh';
   bright?: Partial<Record<Level, string[]>>;
-  /** 'bo-sung' when grandma's notes have no entry for the star */
-  source?: 'bo-sung';
+  /** 'supplement' when grandma's notes have no entry for the star */
+  source?: 'supplement';
 }
 export interface GroupDef { name: string; aliases?: string[]; mode: 'all' | 'any' | 'min'; min?: number; stars: string[]; note?: string }
 

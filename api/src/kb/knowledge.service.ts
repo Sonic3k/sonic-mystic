@@ -1,6 +1,6 @@
 /* The knowledge the engines read, built from the database and kept in memory until something is edited or imported.
-   Tử vi: grandma's rules become the engine's 'ba' rules; every other source (the supplement now, other books later)
-   'bo-sung'. Nhân số học: Lê Đỗ Quỳnh Hương's book, each rule read with its paragraph's text (so rewording a passage
+   Tử vi: grandma's rules become the engine's 'grandma' rules; every other source (the supplement now, other books later)
+   'supplement'. Nhân số học: Lê Đỗ Quỳnh Hương's book, each rule read with its paragraph's text (so rewording a passage
    rewords what a reading shows). */
 import { createHash } from 'node:crypto';
 import { Inject, Injectable } from '@nestjs/common';
@@ -213,14 +213,14 @@ export class KnowledgeService {
     }
 
     const dtos = new Map<string, RuleDto>();
-    const ba: Omit<Rule, 'node' | 'stars'>[] = [], bs: Omit<Rule, 'node' | 'stars'>[] = [];
+    const own: Omit<Rule, 'node' | 'stars'>[] = [], added: Omit<Rule, 'node' | 'stars'>[] = [];
     const hash = createHash('sha256');
     for (const r of rows) {
       const src = srcById.get(r.sourceId)!;
       const family = src.kind === 'family';
       const at = targets.get(r.id) ?? [];
       const dto: RuleDto = {
-        code: r.code, source: family ? 'ba' : 'bo-sung', sourceCode: src.code, text: r.text, ctx: r.ctx, when: r.when, tone: r.tone as Tone,
+        code: r.code, source: family ? 'grandma' : 'supplement', sourceCode: src.code, text: r.text, ctx: r.ctx, when: r.when, tone: r.tone as Tone,
         review: r.review, at, star: r.star, entryRef: family ? r.entryRef : null, paraRef: family ? r.paraRef : null, edited: !!r.editedAt, active: r.active,
       };
       hash.update(`${r.code}|${r.text}|${r.ctx ?? ''}|${r.when ?? ''}|${r.tone}|${r.active}|${at.join(',')}\n`);
@@ -230,7 +230,7 @@ export class KnowledgeService {
         id: r.code, source: dto.source, sourceCode: src.code, entry: dto.entryRef ?? undefined, para: dto.paraRef ?? undefined, star: r.star ?? undefined,
         at, text: r.text, ctx: r.ctx ?? undefined, when: r.when ?? undefined, tone: r.tone as Tone, review: r.review ?? undefined,
       };
-      (family ? ba : bs).push(rule);
+      (family ? own : added).push(rule);
     }
 
     // the supplement's notes: about each palace, the principles, about the stars grandma did not write about
@@ -251,7 +251,7 @@ export class KnowledgeService {
     for (const n of names) if (n.ref !== null) entryName[n.ref] = n.title;
 
     return {
-      kb: { rules: compile(ba), supplement: compile(bs), palaceAbout, principles, starAbout, entryName },
+      kb: { rules: compile(own), supplement: compile(added), palaceAbout, principles, starAbout, entryName },
       version: hash.digest('hex').slice(0, 16),
       rules: dtos,
       sources: Object.fromEntries(srcRows.map(s => [s.code, { title: s.title, kind: s.kind }])),

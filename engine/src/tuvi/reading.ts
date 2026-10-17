@@ -6,8 +6,8 @@ import { evaluate, parse, starsOf, type Node } from './dsl.js';
 import { BRANCHES, BRANCH_ELEMENT, PALACES, STAR_BY_ID, findTarget, mod12, type Element, type Palace, type Target } from './names.js';
 
 export type Tone = 'cat' | 'hung' | 'trung' | 'mixed';
-/** the voice of a rule: 'ba' = a family source (grandma's notes); 'bo-sung' = anything else (supplement, other books) */
-export type Source = 'ba' | 'bo-sung';
+/** the voice of a rule: 'grandma' = a family source (grandma's notes); 'supplement' = anything else (the supplement, other books) */
+export type Source = 'grandma' | 'supplement';
 
 export interface Rule {
   id: string; source: Source;
@@ -70,7 +70,7 @@ function matchRules(chart: Chart, rules: Rule[], p: number, want: (t: Set<Target
 function group(chart: Chart, p: number, matches: Match[], kb: Kb): Group[] {
   const by = new Map<string, Group>();
   for (const m of matches) {
-    const key = m.rule.source === 'ba' ? `e${m.rule.entry}` : `s${m.rule.star}`;
+    const key = m.rule.source === 'grandma' ? `e${m.rule.entry}` : `s${m.rule.star}`;
     let g = by.get(key);
     if (!g) {
       const star = m.rule.star;
@@ -91,27 +91,27 @@ function group(chart: Chart, p: number, matches: Match[], kb: Kb): Group[] {
 
 export interface PalaceReading {
   view: View; branch: number;
-  ba: Group[]; boSung: Group[];
+  grandma: Group[]; supplement: Group[];
   about?: string;
-  counts: { ba: number; boSung: number; cat: number; hung: number };
+  counts: { grandma: number; supplement: number; cat: number; hung: number };
 }
 
 export function readView(chart: Chart, kb: Kb, view: View, year = chart.options.viewYear): PalaceReading {
   const p = branchOfView(chart, view);
   /* a palace shows the rules written for it and the "any palace" ones; the Thân view, the rules written for Thân */
   const want = (t: Set<Target | '*'>) => (view === 'Thân' ? t.has('Thân') : t.has(view) || t.has('*'));
-  const ba = matchRules(chart, kb.rules, p, want, year), bs = matchRules(chart, kb.supplement, p, want, year);
-  const tone = (t: Tone) => ba.filter(m => m.rule.tone === t).length;
+  const own = matchRules(chart, kb.rules, p, want, year), added = matchRules(chart, kb.supplement, p, want, year);
+  const tone = (t: Tone) => own.filter(m => m.rule.tone === t).length;
   return {
-    view, branch: p, ba: group(chart, p, ba, kb), boSung: group(chart, p, bs, kb), about: kb.palaceAbout[view],
-    counts: { ba: ba.length, boSung: bs.length, cat: tone('cat'), hung: tone('hung') },
+    view, branch: p, grandma: group(chart, p, own, kb), supplement: group(chart, p, added, kb), about: kb.palaceAbout[view],
+    counts: { grandma: own.length, supplement: added.length, cat: tone('cat'), hung: tone('hung') },
   };
 }
 
 export interface HanReading {
   year: number; age: number; canChi: string;
-  dai: { branch: number; from: number; to: number; ba: Group[]; boSung: Group[] } | null;
-  tieu: { branch: number; dong: boolean; ba: Group[]; boSung: Group[] };
+  dai: { branch: number; from: number; to: number; grandma: Group[]; supplement: Group[] } | null;
+  tieu: { branch: number; dong: boolean; grandma: Group[]; supplement: Group[] };
   months: number[];
 }
 
@@ -123,8 +123,8 @@ export function readHan(chart: Chart, kb: Kb, year: number): HanReading {
   const age = ageIn(chart, year), d = daiHanAt(chart, age), t = tieuHanAt(chart, year);
   const want = (s: Set<Target | '*'>) => s.has('Hạn');
   const at = (b: number) => ({
-    ba: group(chart, b, matchRules(chart, kb.rules, b, want, year, true), kb),
-    boSung: group(chart, b, matchRules(chart, kb.supplement, b, want, year, true), kb),
+    grandma: group(chart, b, matchRules(chart, kb.rules, b, want, year, true), kb),
+    supplement: group(chart, b, matchRules(chart, kb.supplement, b, want, year, true), kb),
   });
   const cell = d === null ? null : chart.palaces[d];
   return {
@@ -191,7 +191,7 @@ export function chartSummary(chart: Chart, year: number): string {
   const h = hanOf(chart, year), age = ageIn(chart, year);
   const i = chart.input;
   return [
-    `Giới tính: ${i.gender === 'nam' ? 'Nam' : 'Nữ'} · ${chart.amDuong}`,
+    `Giới tính: ${i.gender === 'male' ? 'Nam' : 'Nữ'} · ${chart.amDuong}`,
     `Sinh ngày âm lịch ${chart.lunar.day}/${chart.lunar.month}${chart.lunar.leap ? ' nhuận' : ''} năm ${STEMS_VI[chart.stem]} ${BRANCHES[chart.branch]} (${chart.lunar.year}), giờ ${BRANCHES[chart.hour]}`,
     `Mệnh: ${chart.napAm.name} · Cục: ${chart.cuc.name} · Mệnh chủ: ${chart.menhChu} · Thân chủ: ${chart.thanChu} · Thân cư ${chart.palaces[chart.than].role}`,
     ...chart.palaces.map(c => c.branch).sort((a, b) => mod12(a - chart.menh) - mod12(b - chart.menh)).map(S),

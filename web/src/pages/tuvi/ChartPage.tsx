@@ -1,5 +1,5 @@
 /* One person's lá số: the chart, then grandma's sentences palace by palace, the luck periods, and an overview.
-   The API sets up and reads the chart; this page only shows it. Opened from a link (/tu-vi/la-so?…) or from a saved
+   The API sets up and reads the chart; this page only shows it. Opened from a link (/tu-vi/chart?…) or from a saved
    profile (/tu-vi/profile/:id). */
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router';
@@ -10,14 +10,14 @@ import { api } from '../../api';
 import { Failed, errorText } from '../../components/Owner';
 import { Sheet } from '../../components/Sheet';
 import { birthDtoOf, fromProfile, fromSearch, settingsOf, thisYear, toSearch, tuviSettings, type ChartParams } from '../../lib/params';
-import { SONIC_HUB, genderOf } from '../../lib/people';
+import { SONIC_HUB } from '../../lib/people';
 import { useTitle } from '../../lib/text';
 import Grid from './Grid';
-import { AiBox, BoSung, Groups, RulesContext, type ToneFilter } from './Reading';
+import { AiBox, Groups, RulesContext, Supplement, type ToneFilter } from './Reading';
 import { SettingsFields } from './Settings';
 
-type Tab = 'cung' | 'han' | 'tong';
-const TABS: Tab[] = ['cung', 'han', 'tong'];
+type Tab = 'cung' | 'han' | 'overview';
+const TABS: Tab[] = ['cung', 'han', 'overview'];
 /** the palaces the overview is written from (the API's AI reading uses the same) */
 const KEY_VIEWS: View[] = ['Mệnh', 'Thân', 'Phúc Đức', 'Quan Lộc', 'Tài Bạch', 'Phu Thê'];
 const HOA_IDS = new Set(['hoa_loc', 'hoa_quyen', 'hoa_khoa', 'hoa_ky']);
@@ -35,9 +35,9 @@ export default function ChartPage() {
     try { return fromProfile(p); } catch { return null; }
   }, [id, p, sp]);
 
-  const an = sp.get('an');
-  const variant = an === 'sach' ? 'sach' : an === 'ba' ? 'ba' : undefined;
-  const year = Number(sp.get('nam')) || (id ? p?.viewYear ?? thisYear() : params?.options.viewYear ?? thisYear());
+  const v = sp.get('variant');
+  const variant = v === 'books' || v === 'grandma' ? v : undefined;
+  const year = Number(sp.get('year')) || (id ? p?.viewYear ?? thisYear() : params?.options.viewYear ?? thisYear());
   const settings: TuViSettings | null = !params ? null : p ? { ...tuviSettings(p), ...(variant ? { variant } : {}) } : settingsOf(params.options);
   /* a saved profile is read by the API from what it stored; a link, or a profile shown with another variant, is sent as it is */
   const custom = !p || (variant !== undefined && variant !== tuviSettings(p).variant);
@@ -71,7 +71,7 @@ function ChartView({ r, params, profile, year, loading, sp, setSp }: {
 }) {
   const chart = r.chart;
   const set = (k: string, v: string | null) => { const n = new URLSearchParams(sp); if (v === null || v === '') n.delete(k); else n.set(k, v); setSp(n, { replace: true }); };
-  const tab = (TABS.includes(sp.get('xem') as Tab) ? sp.get('xem') : 'cung') as Tab;
+  const tab = (TABS.includes(sp.get('view') as Tab) ? sp.get('view') : 'cung') as Tab;
   const view = (VIEWS.includes(sp.get('cung') as View) ? sp.get('cung') : 'Mệnh') as View;
   const [hl, setHl] = useState<string | null>(null);
   const [sheet, setSheet] = useState<'save' | 'edit' | null>(null);
@@ -86,14 +86,14 @@ function ChartView({ r, params, profile, year, loading, sp, setSp }: {
   }, [r.han]);
   /* the lines of grandma on screen, so an AI citation can scroll to its line */
   const present = useMemo(() => {
-    const gs = tab === 'cung' ? r.views[view].ba : tab === 'han' ? [...(r.han.dai?.ba ?? []), ...r.han.tieu.ba] : r.views['Mệnh'].ba.filter(g => g.inPalace).slice(0, 3);
+    const gs = tab === 'cung' ? r.views[view].grandma : tab === 'han' ? [...(r.han.dai?.grandma ?? []), ...r.han.tieu.grandma] : r.views['Mệnh'].grandma.filter(g => g.inPalace).slice(0, 3);
     return new Set(gs.flatMap(g => g.matches.map(m => m.rule)));
   }, [r, tab, view]);
 
   const pick = (b: number) => {
     const role = chart.palaces[b].role, n = new URLSearchParams(sp);
     if (role === 'Mệnh') n.delete('cung'); else n.set('cung', role);
-    n.delete('xem');
+    n.delete('view');
     setSp(n, { replace: true });
     requestAnimationFrame(() => document.getElementById('doc')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   };
@@ -103,7 +103,7 @@ function ChartView({ r, params, profile, year, loading, sp, setSp }: {
     requestAnimationFrame(() => requestAnimationFrame(() => document.getElementById(`r-${code}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' })));
     return true;
   };
-  const setVariant = (v: 'ba' | 'sach') => set('an', profile ? (v === savedVariant ? null : v) : v === 'ba' ? null : 'sach');
+  const setVariant = (v: 'grandma' | 'books') => set('variant', profile ? (v === savedVariant ? null : v) : v === 'grandma' ? null : 'books');
   const i = params.input, b = profile?.birth;
   const birth = i.calendar === 'solar'
     ? `${i.day}/${i.month}/${i.year} dương lịch, ${pad(i.hour)}:${pad(i.minute ?? 0)}${b?.timeApprox ? ' (ước chừng)' : ''}`
@@ -114,26 +114,26 @@ function ChartView({ r, params, profile, year, loading, sp, setSp }: {
       <div className="tv-chart-head">
         <div>
           <h1>{params.name || 'Lá số tử vi'}{profile?.label && <span className="hh-tag">{profile.label}</span>}</h1>
-          <p>{i.gender === 'nam' ? 'Nam' : 'Nữ'} · sinh {birth}{b?.place ? ` · ${b.place}` : ''} · {chart.amDuong} · {chart.napAm.name}</p>
+          <p>{i.gender === 'male' ? 'Nam' : 'Nữ'} · sinh {birth}{b?.place ? ` · ${b.place}` : ''} · {chart.amDuong} · {chart.napAm.name}</p>
           {profile && <p className="tv-muted" style={{ fontSize: 12.5, marginTop: 2 }}>
-            <Link className="tv-link" to={`/nguoi/${profile.subject.id}`}>Trang của {profile.subject.displayName}</Link>
+            <Link className="tv-link" to={`/people/${profile.subject.id}`}>Trang của {profile.subject.displayName}</Link>
             {profile.subject.links.some(l => l.system === SONIC_HUB) && <> · <span className="tv-linked">liên kết Sonic Hub</span></>}
             {profile.note && <> · {profile.note}</>}
           </p>}
         </div>
         <div className="acts">
           <div className="seg" title="Cách an mấy sao mà bà an khác sách phổ thông">
-            <a className={chart.options.variant === 'ba' ? 'on' : ''} onClick={() => setVariant('ba')}>An theo bà</a>
-            <a className={chart.options.variant === 'sach' ? 'on' : ''} onClick={() => setVariant('sach')}>Theo sách</a>
+            <a className={chart.options.variant === 'grandma' ? 'on' : ''} onClick={() => setVariant('grandma')}>An theo bà</a>
+            <a className={chart.options.variant === 'books' ? 'on' : ''} onClick={() => setVariant('books')}>Theo sách</a>
           </div>
           {profile
             ? <>
                 <button type="button" className="tv-btn ghost" onClick={() => setSheet('edit')}>Sửa</button>
-                <Link className="tv-btn ghost" to={`/tu-vi?${toSearch(params)}&nguoi=${profile.subject.id}`} title="Lập một lá số khác (giờ, ngày khác) cho người này">Lập lại</Link>
+                <Link className="tv-btn ghost" to={`/tu-vi?${toSearch(params)}&person=${profile.subject.id}`} title="Lập một lá số khác (giờ, ngày khác) cho người này">Lập lại</Link>
               </>
             : <>
-                <Link className="tv-btn ghost" to={`/tu-vi?${toSearch(params)}${sp.get('nguoi') ? `&nguoi=${sp.get('nguoi')}` : ''}`}>Sửa</Link>
-                <button type="button" className="tv-btn son" onClick={() => setSheet('save')}>Lưu lá số</button>
+                <Link className="tv-btn ghost" to={`/tu-vi?${toSearch(params)}${sp.get('person') ? `&person=${sp.get('person')}` : ''}`}>Sửa</Link>
+                <button type="button" className="tv-btn accent" onClick={() => setSheet('save')}>Lưu lá số</button>
               </>}
         </div>
       </div>
@@ -143,20 +143,20 @@ function ChartView({ r, params, profile, year, loading, sp, setSp }: {
 
       <div className="tv-tabs" id="doc">
         <div className="seg">
-          <a className={tab === 'cung' ? 'on' : ''} onClick={() => set('xem', null)}>Luận từng cung</a>
-          <a className={tab === 'han' ? 'on' : ''} onClick={() => set('xem', 'han')}>Vận hạn</a>
-          <a className={tab === 'tong' ? 'on' : ''} onClick={() => set('xem', 'tong')}>Tổng quan</a>
+          <a className={tab === 'cung' ? 'on' : ''} onClick={() => set('view', null)}>Luận từng cung</a>
+          <a className={tab === 'han' ? 'on' : ''} onClick={() => set('view', 'han')}>Vận hạn</a>
+          <a className={tab === 'overview' ? 'on' : ''} onClick={() => set('view', 'overview')}>Tổng quan</a>
         </div>
-        <span className="tv-voice ba">Lời bà</span><span className="tv-voice bs">Bổ sung — không phải của bà</span>
+        <span className="tv-voice primary">Lời bà</span><span className="tv-voice added">Bổ sung — không phải của bà</span>
         <span className="tv-caution">Tử vi để tham khảo, chiêm nghiệm; câu nào nói về tai ách nên đọc như lời nhắc giữ gìn.</span>
       </div>
 
       {tab === 'cung' && <PalaceTab r={r} view={view} hl={hl} onRef={onRef} onView={v => set('cung', v === 'Mệnh' ? null : v)} profileId={profileId} year={year} />}
-      {tab === 'han' && <HanTab r={r} year={year} loading={loading} setYear={y => set('nam', y === (profile?.viewYear ?? thisYear()) ? null : String(y))}
+      {tab === 'han' && <HanTab r={r} year={year} loading={loading} setYear={y => set('year', y === (profile?.viewYear ?? thisYear()) ? null : String(y))}
         hl={hl} onRef={onRef} onPalace={pick} profileId={profileId} homeYear={profile?.viewYear ?? thisYear()} />}
-      {tab === 'tong' && <TongTab r={r} onPalace={pick} profileId={profileId} year={year} onRef={onRef} hl={hl} />}
+      {tab === 'overview' && <OverviewTab r={r} onPalace={pick} profileId={profileId} year={year} onRef={onRef} hl={hl} />}
 
-      {sheet === 'save' && <SaveSheet params={params} year={year} subjectId={sp.get('nguoi')} onClose={() => setSheet(null)} />}
+      {sheet === 'save' && <SaveSheet params={params} year={year} subjectId={sp.get('person')} onClose={() => setSheet(null)} />}
       {sheet === 'edit' && profile && <EditSheet profile={profile} onClose={() => setSheet(null)} />}
     </div>
   );
@@ -172,7 +172,7 @@ function PalaceTab({ r, view, hl, onRef, onView, profileId, year }: {
   return (
     <>
       <div className="tv-strip">{VIEWS.map(x => (
-        <button key={x} type="button" className={x === view ? 'on' : ''} onClick={() => onView(x)}>{x === 'Thân' ? `Thân (${chart.palaces[chart.than].role})` : x}<small>{r.views[x].counts.ba}</small></button>
+        <button key={x} type="button" className={x === view ? 'on' : ''} onClick={() => onView(x)}>{x === 'Thân' ? `Thân (${chart.palaces[chart.than].role})` : x}<small>{r.views[x].counts.grandma}</small></button>
       ))}</div>
       <div className="tv-read">
         <div className="tv-read-main">
@@ -184,18 +184,18 @@ function PalaceTab({ r, view, hl, onRef, onView, profileId, year }: {
             {chart.tuan.includes(c.branch) && <span>Tuần</span>}{chart.triet.includes(c.branch) && <span>Triệt</span>}
           </div>
           <div className="tv-filter">
-            <span className="tv-voice ba">Lời bà · {v.counts.ba} câu</span>
+            <span className="tv-voice primary">Lời bà · {v.counts.grandma} câu</span>
             <div className="seg">
               <a className={filter === 'all' ? 'on' : ''} onClick={() => setFilter('all')}>Tất cả</a>
               <a className={filter === 'cat' ? 'on' : ''} onClick={() => setFilter('cat')}>Tốt · {v.counts.cat}</a>
               <a className={filter === 'hung' ? 'on' : ''} onClick={() => setFilter('hung')}>Xấu · {v.counts.hung}</a>
             </div>
           </div>
-          <Groups groups={v.ba} filter={filter} hlRef={hl} />
+          <Groups groups={v.grandma} filter={filter} hlRef={hl} />
         </div>
         <div className="tv-read-side">
-          <BoSung about={v.about} groups={v.boSung} principles={view === 'Mệnh' ? r.principles : undefined} />
-          <AiBox profileId={profileId} scope={view} year={year} baLines={v.counts.ba} onRef={onRef} />
+          <Supplement about={v.about} groups={v.supplement} principles={view === 'Mệnh' ? r.principles : undefined} />
+          <AiBox profileId={profileId} scope={view} year={year} grandmaLines={v.counts.grandma} onRef={onRef} />
         </div>
       </div>
     </>
@@ -230,23 +230,23 @@ function HanTab({ r, year, loading, setYear, hl, onRef, onPalace, profileId, hom
         <div className="tv-han-col">
           <h3>{dai ? `Đại hạn ${h.dai!.from}–${h.dai!.to} · cung ${dai.role}` : 'Chưa vào đại hạn đầu'}</h3>
           {dai && <span>{STEMS[dai.stem]} {BRANCHES[dai.branch]} · {starsOf(dai.branch)} · <a className="tv-link" onClick={() => onPalace(dai.branch)} style={{ cursor: 'pointer' }}>luận cung này ›</a></span>}
-          {h.dai && <><Groups groups={h.dai.ba} hlRef={hl} /><BoSung groups={h.dai.boSung} principles={g('dai_han')} /></>}
+          {h.dai && <><Groups groups={h.dai.grandma} hlRef={hl} /><Supplement groups={h.dai.supplement} principles={g('dai_han')} /></>}
         </div>
         <div className="tv-han-col">
           <h3>{h.tieu.dong ? `Đồng hạn ${h.year}` : `Tiểu hạn ${h.year}`} · cung {tieu.role}</h3>
           <span>{STEMS[tieu.stem]} {BRANCHES[tieu.branch]} · {starsOf(tieu.branch)} · <a className="tv-link" onClick={() => onPalace(tieu.branch)} style={{ cursor: 'pointer' }}>luận cung này ›</a></span>
-          <Groups groups={h.tieu.ba} hlRef={hl} />
-          <BoSung groups={h.tieu.boSung} principles={g('tieu_han')} />
+          <Groups groups={h.tieu.grandma} hlRef={hl} />
+          <Supplement groups={h.tieu.supplement} principles={g('tieu_han')} />
           <div className="tv-k" style={{ marginTop: 18 }}>Hạn từng tháng (theo cách bà ghi: nguyệt nghịch, thời thuận)</div>
           <div className="tv-months">{h.months.map((b, m) => <div key={m}><b>Tháng {m + 1}</b>{chart.palaces[b].role}</div>)}</div>
         </div>
       </div>
-      {!loading && <div style={{ marginTop: 24 }}><AiBox wide profileId={profileId} scope={`han-${h.year}`} year={h.year} baLines={(h.dai ? count(h.dai.ba) : 0) + count(h.tieu.ba)} onRef={onRef} /></div>}
+      {!loading && <div style={{ marginTop: 24 }}><AiBox wide profileId={profileId} scope={`han-${h.year}`} year={h.year} grandmaLines={(h.dai ? count(h.dai.grandma) : 0) + count(h.tieu.grandma)} onRef={onRef} /></div>}
     </>
   );
 }
 
-function TongTab({ r, onPalace, profileId, year, onRef, hl }: {
+function OverviewTab({ r, onPalace, profileId, year, onRef, hl }: {
   r: TuViReadingDto; onPalace: (b: number) => void; profileId: string | null; year: number; onRef: (code: string) => boolean; hl: string | null;
 }) {
   const chart = r.chart;
@@ -262,16 +262,16 @@ function TongTab({ r, onPalace, profileId, year, onRef, hl }: {
             <tr key={c.branch} style={{ cursor: 'pointer' }} onClick={() => onPalace(c.branch)}>
               <td><b>{c.role}</b>{c.isThan ? ' · Thân' : ''}</td><td>{STEMS[c.stem]} {BRANCHES[c.branch]}</td>
               <td>{c.stars.filter(s => s.kind === 'chinh').map(s => s.name).join(', ') || <span className="tv-muted">vô chính diệu</span>}</td>
-              <td>{v.counts.ba}</td><td style={{ color: 'var(--cat)' }}>{v.counts.cat}</td><td style={{ color: 'var(--hung)' }}>{v.counts.hung}</td>
+              <td>{v.counts.grandma}</td><td style={{ color: 'var(--cat)' }}>{v.counts.cat}</td><td style={{ color: 'var(--hung)' }}>{v.counts.hung}</td>
             </tr>); })}</tbody>
         </table></div>
         <div className="tv-k" style={{ margin: '24px 0 8px' }}>Mệnh — những câu về chính tinh thủ Mệnh</div>
-        <Groups groups={r.views['Mệnh'].ba.filter(g => g.inPalace).slice(0, 3)} limit={4} hlRef={hl} />
+        <Groups groups={r.views['Mệnh'].grandma.filter(g => g.inPalace).slice(0, 3)} limit={4} hlRef={hl} />
       </div>
       <div className="tv-read-side">
-        <BoSung title="Bổ sung · cách đọc lá số này" groups={[]} principles={r.principles} />
-        <BoSung title="Bổ sung · khái niệm" groups={[]} principles={general} />
-        <AiBox profileId={profileId} scope="tong-quan" year={year} baLines={KEY_VIEWS.reduce((n, v) => n + r.views[v].counts.ba, 0)} onRef={onRef} />
+        <Supplement title="Bổ sung · cách đọc lá số này" groups={[]} principles={r.principles} />
+        <Supplement title="Bổ sung · khái niệm" groups={[]} principles={general} />
+        <AiBox profileId={profileId} scope="overview" year={year} grandmaLines={KEY_VIEWS.reduce((n, v) => n + r.views[v].counts.grandma, 0)} onRef={onRef} />
       </div>
     </div>
   );
@@ -293,7 +293,7 @@ function SaveSheet({ params, year, subjectId, onClose }: { params: ChartParams; 
   const picked = who.startsWith('s:') ? subjects.data?.find(s => s.id === who.slice(2)) : undefined;
   const save = useMutation({
     mutationFn: async () => {
-      const gender = genderOf(params.input.gender), birth = birthDtoOf(params.input);
+      const gender = params.input.gender, birth = birthDtoOf(params.input);
       let sid: string;
       if (who.startsWith('s:')) sid = who.slice(2);
       else if (who.startsWith('h:')) sid = (await api.linkSonicHub(who.slice(2))).id;
@@ -322,7 +322,7 @@ function SaveSheet({ params, year, subjectId, onClose }: { params: ChartParams; 
       {save.isError && <p className="tv-err">{errorText(save.error)}</p>}
       <div className="sheet-foot"><span />
         <button type="button" className="tv-btn ghost" onClick={onClose}>Huỷ</button>
-        <button type="button" className="tv-btn son" disabled={save.isPending || invalid || subjects.isError} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu'}</button>
+        <button type="button" className="tv-btn accent" disabled={save.isPending || invalid || subjects.isError} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu'}</button>
       </div>
     </Sheet>
   );
@@ -344,7 +344,7 @@ function EditSheet({ profile, onClose }: { profile: ProfileDto; onClose: () => v
     mutationFn: () => api.deleteProfile(profile.id),
     onSuccess: () => {
       onClose();
-      nav(`/nguoi/${profile.subject.id}`, { replace: true });
+      nav(`/people/${profile.subject.id}`, { replace: true });
       /* once this page has gone, the deleted profile's queries are dropped (asking for them again would only 404) */
       setTimeout(() => { for (const k of [['profile', profile.id], ['reading', `profile:${profile.id}`], ['ai-readings', profile.id]]) qc.removeQueries({ queryKey: k }); }, 100);
       ['subjects', 'subject', 'brief'].forEach(k => void qc.invalidateQueries({ queryKey: [k] }));
@@ -363,11 +363,11 @@ function EditSheet({ profile, onClose }: { profile: ProfileDto; onClose: () => v
       <div className="sheet-foot">
         {ask
           ? <span className="tv-row" style={{ alignItems: 'center' }}><span className="tv-muted" style={{ fontSize: 13 }}>Xoá lá số và các bài luận?</span>
-              <button type="button" className="tv-btn son" disabled={del.isPending} onClick={() => del.mutate()}>Xoá</button>
+              <button type="button" className="tv-btn accent" disabled={del.isPending} onClick={() => del.mutate()}>Xoá</button>
               <button type="button" className="tv-btn ghost" onClick={() => setAsk(false)}>Không</button></span>
           : <span><button type="button" className="tv-link" onClick={() => setAsk(true)}>Xoá lá số này</button></span>}
         <button type="button" className="tv-btn ghost" onClick={onClose}>Huỷ</button>
-        <button type="button" className="tv-btn son" disabled={save.isPending} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu'}</button>
+        <button type="button" className="tv-btn accent" disabled={save.isPending} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu'}</button>
       </div>
     </Sheet>
   );

@@ -9,7 +9,7 @@ import { findStar, findTarget, norm } from '@mystic/engine/tuvi';
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const kb = path.resolve(dir, '..');
 
-const lines = fs.readFileSync(path.join(kb, 'sources/tuvi/luan-tv-2011-11.txt'), 'utf8').split('\n');
+const lines = fs.readFileSync(path.join(kb, 'sources/tuvi/grandma-notes-2011-11.txt'), 'utf8').split('\n');
 const unescape = s => s.replace(/\\([-*()!.#+_[\]>])/g, '$1').replace(/\s+$/, '');
 
 /** "Cung Mệnh Thân:", "Cung Tài Điền:", "Cung hạn =" … → the palaces the section speaks of (null if not a section line) */

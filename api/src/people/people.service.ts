@@ -29,7 +29,7 @@ export const SubjectBody = z.object({
 export type SubjectInput = z.infer<typeof SubjectBody>;
 
 export const SettingsBody = z.object({
-  variant: z.enum(['ba', 'sach']).default('ba'),
+  variant: z.enum(['grandma', 'books']).default('grandma'),
   leapMonth: z.enum(['same', 'split15']).default('same'),
   tyNextDay: z.boolean().default(true),
   lunarCalendar: z.enum(['auto', 'utc7', 'utc8']).default('auto'),
@@ -65,7 +65,7 @@ type SettingsRow = typeof tuviProfileSettings.$inferSelect;
 
 const iso = (d: Date | null) => (d ? d.toISOString() : null);
 const settingsDto = (s: SettingsRow | undefined): TuViSettings => ({
-  variant: s?.variant ?? 'ba', leapMonth: s?.leapMonth ?? 'same', tyNextDay: s?.tyNextDay ?? true, lunarCalendar: s?.lunarCalendar ?? 'auto', hourBasis: s?.hourBasis ?? 'clock',
+  variant: s?.variant ?? 'grandma', leapMonth: s?.leapMonth ?? 'same', tyNextDay: s?.tyNextDay ?? true, lunarCalendar: s?.lunarCalendar ?? 'auto', hourBasis: s?.hourBasis ?? 'clock',
 });
 
 @Injectable()
@@ -237,7 +237,7 @@ export class PeopleService {
     const id = await this.db.transaction(async tx => {
       const [p] = await tx.insert(profiles).values({
         subjectId: s.id, disciplineCode: 'numerology', label: input.label, viewYear: input.viewYear, note: input.note, gender,
-        ...birthColumns(birth), engineVersion: ENGINE_VERSION, knowledgeVersion: k?.version ?? 'chua-nap',
+        ...birthColumns(birth), engineVersion: ENGINE_VERSION, knowledgeVersion: k?.version ?? 'not-loaded',
       }).returning({ id: profiles.id });
       if (names.length) await tx.insert(numerologyProfileNames).values(names.map((n, i) => ({ profileId: p.id, ordinal: i, label: n.label, text: n.text, primary: n.primary })));
       await tx.update(subjects).set({ updatedAt: new Date() }).where(eq(subjects.id, s.id));
@@ -257,7 +257,7 @@ export class PeopleService {
     const id = await this.db.transaction(async tx => {
       const [p] = await tx.insert(profiles).values({
         subjectId: s.id, disciplineCode: 'astrology', label: input.label, viewYear: input.viewYear, note: input.note, gender,
-        ...birthColumns(birth), engineVersion: ENGINE_VERSION, knowledgeVersion: k?.version ?? 'chua-nap',
+        ...birthColumns(birth), engineVersion: ENGINE_VERSION, knowledgeVersion: k?.version ?? 'not-loaded',
       }).returning({ id: profiles.id });
       await tx.update(subjects).set({ updatedAt: new Date() }).where(eq(subjects.id, s.id));
       return p.id;

@@ -15,7 +15,7 @@ const thisYear = () => new Date().getFullYear();
 export function optionsOf(settings: Partial<TuViSettings> | undefined, viewYear?: number): ChartOptions {
   const d = defaultOptions();
   return {
-    variant: settings?.variant === 'sach' ? 'sach' : 'ba',
+    variant: settings?.variant === 'books' ? 'books' : 'grandma',
     leapMonth: settings?.leapMonth === 'split15' ? 'split15' : 'same',
     tyNextDay: settings?.tyNextDay !== false,
     lunarCalendar: settings?.lunarCalendar === 'utc7' || settings?.lunarCalendar === 'utc8' ? settings.lunarCalendar : 'auto',
@@ -27,7 +27,7 @@ export function optionsOf(settings: Partial<TuViSettings> | undefined, viewYear?
 /** a chart, or a 400 that says what is wrong with the birth */
 export function chartOf(birth: BirthInput, options: ChartOptions): Chart {
   if (!birth || (birth.calendar !== 'solar' && birth.calendar !== 'lunar')) throw new BadRequestException('Thiếu ngày sinh');
-  if (birth.gender !== 'nam' && birth.gender !== 'nu') throw new BadRequestException('Chưa chọn giới tính');
+  if (birth.gender !== 'male' && birth.gender !== 'female') throw new BadRequestException('Chưa chọn giới tính');
   const { year, month, day, hour } = birth;
   if (![year, month, day, hour].every(Number.isInteger)) throw new BadRequestException('Ngày giờ sinh không hợp lệ');
   if (year < 1800 || year > 2200) throw new BadRequestException('Năm sinh phải từ 1800 đến 2200');
@@ -69,13 +69,13 @@ export class TuViService {
     }));
     const views = Object.fromEntries(VIEWS.map(v => {
       const r = readView(chart, k.kb, v, viewYear);
-      return [v, { view: r.view, branch: r.branch, about: r.about ?? null, counts: r.counts, ba: groups(r.ba), boSung: groups(r.boSung) }];
+      return [v, { view: r.view, branch: r.branch, about: r.about ?? null, counts: r.counts, grandma: groups(r.grandma), supplement: groups(r.supplement) }];
     })) as TuViReadingDto['views'];
     const h = readHan(chart, k.kb, viewYear);
     const han: TuViReadingDto['han'] = {
       year: h.year, age: h.age, canChi: h.canChi, months: h.months,
-      dai: h.dai ? { branch: h.dai.branch, from: h.dai.from, to: h.dai.to, ba: groups(h.dai.ba), boSung: groups(h.dai.boSung) } : null,
-      tieu: { branch: h.tieu.branch, dong: h.tieu.dong, ba: groups(h.tieu.ba), boSung: groups(h.tieu.boSung) },
+      dai: h.dai ? { branch: h.dai.branch, from: h.dai.from, to: h.dai.to, grandma: groups(h.dai.grandma), supplement: groups(h.dai.supplement) } : null,
+      tieu: { branch: h.tieu.branch, dong: h.tieu.dong, grandma: groups(h.tieu.grandma), supplement: groups(h.tieu.supplement) },
     };
     const rules: Record<string, RuleDto> = {};
     for (const code of used) { const r = k.rules.get(code); if (r) rules[code] = r; }

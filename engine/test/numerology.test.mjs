@@ -205,7 +205,7 @@ test('the condition language', () => {
   assert.ok(!ok('day(22/4) | ruling(2, 11)').ok);
   assert.deepEqual(ok('count(1, 3) & isolated(1)').why, ['Ba số 1 (111)', 'số 111 bị cô lập']);
   for (const bad of ['ruling(12)', 'count(1)', 'arrow(1-2-4)', 'foo()', 'ruling(7', 'plane(heart, 1)']) assert.ok(N.parse(bad).errors.length, bad);
-  assert.deepEqual([...N.symbolsOf(N.parse('arrow(1-5-9) & count(1, 2+) & !ruling(7)').node)], ['muiten:1-5-9', 'so:1']);
+  assert.deepEqual([...N.symbolsOf(N.parse('arrow(1-5-9) & count(1, 2+) & !ruling(7)').node)], ['arrow:1-5-9', 'digit:1']);
 });
 
 test('conditions read in words', () => {
@@ -215,7 +215,7 @@ test('conditions read in words', () => {
   assert.equal(N.describeWhen('count(2, 5+)'), 'Từ năm số 2');
   assert.equal(N.describeWhen('count(3, 0)'), 'Không có số 3');
   assert.equal(N.describeWhen('empty(4-5-6) & isolated(1)'), 'Mũi tên Uất giận · Số 1 bị cô lập');
-  assert.equal(N.describeWhen('plane(tri_nao, 3+)'), 'Trục Trí não có từ ba số');
+  assert.equal(N.describeWhen('plane(mind, 3+)'), 'Trục Trí não có từ ba số');
   assert.equal(N.describeWhen('name_reinforces() | !name_compensates()'), 'Tên dồn thêm vào Biểu đồ ngày sinh hoặc không phải: Tên bù đắp cho Biểu đồ ngày sinh');
   assert.equal(N.describeWhen('peak_at(3, 10) & stage(2)'), 'Đỉnh thứ 3 mang số 10 · Giai đoạn trưởng thành');
   assert.equal(N.describeWhen('nonsense('), 'nonsense(');

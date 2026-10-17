@@ -18,7 +18,7 @@ const BN = (b: BodyCode) => (b === 'asc' ? 'Cung Mọc' : b === 'mc' ? 'MC' : BO
 const SN = (s: keyof typeof SIGN) => SIGN[s].name;
 const short = (source: string) => source.replace(/^astrology\./, '');
 /** where a passage is read in the sources */
-export const bookLink = (source: string, entry: string, rule?: string) => `/chiem-tinh/sach/${short(source)}/${encodeURIComponent(entry)}${rule ? `?cau=${encodeURIComponent(rule)}` : ''}`;
+export const bookLink = (source: string, entry: string, rule?: string) => `/astrology/books/${short(source)}/${encodeURIComponent(entry)}${rule ? `?rule=${encodeURIComponent(rule)}` : ''}`;
 
 // ── the wheel ──
 

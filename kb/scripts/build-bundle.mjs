@@ -2,7 +2,7 @@
 //   book.json        grandma's notebook, paragraph by paragraph (built by build-book.mjs)
 //   rules.json       the digitized rules from tuvi/rules/*.json (reviewed by hand), each pointing back to its paragraph
 //   supplement.json  the "bổ sung" layer — common knowledge, never grandma's
-//   phan1.json       grandma's Phần I: how to set up a chart
+//   setup.json       grandma's Phần I: how to set up a chart
 //   manifest.json    a hash of all of it: the API imports again only when the hash changes, and never overwrites a row
 //                    someone edited in the database
 // Run after any edit of a rule file: npm run kb:bundle (from the repo root)
@@ -31,11 +31,11 @@ for (const f of fs.readdirSync(path.join(kb, 'tuvi/rules')).filter(f => f.endsWi
 const ids = new Set();
 for (const r of rules) { if (ids.has(r.i)) throw new Error(`duplicate rule id ${r.i}`); ids.add(r.i); }
 fs.writeFileSync(path.join(out, 'rules.json'), JSON.stringify({ rules }));
-for (const f of ['supplement.json', 'phan1.json']) fs.copyFileSync(path.join(kb, 'tuvi', f), path.join(out, f));
+for (const f of ['supplement.json', 'setup.json']) fs.copyFileSync(path.join(kb, 'tuvi', f), path.join(out, f));
 
 const stars = fs.readFileSync(path.resolve(kb, '../engine/src/tuvi/stars.json'));
 const hash = crypto.createHash('sha256');
-for (const f of ['book.json', 'rules.json', 'supplement.json', 'phan1.json']) hash.update(fs.readFileSync(path.join(out, f)));
+for (const f of ['book.json', 'rules.json', 'supplement.json', 'setup.json']) hash.update(fs.readFileSync(path.join(out, f)));
 hash.update(stars);
 const manifest = { discipline: 'tuvi', version: hash.digest('hex').slice(0, 16), rules: rules.length, entries: book.entries.length, built: new Date().toISOString().slice(0, 10) };
 fs.writeFileSync(path.join(out, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');

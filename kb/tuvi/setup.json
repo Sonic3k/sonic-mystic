@@ -62,8 +62,8 @@
   ],
   "triet": [["Giáp Kỷ", "Thân Dậu"], ["Ất Canh", "Ngọ Mùi"], ["Bính Tân", "Thìn Tỵ"], ["Đinh Nhâm", "Dần Mão"], ["Mậu Quý", "Tý Sửu"]],
   "differences": [
-    { "what": "Hỏa Tinh – Linh Tinh", "ba": "Cung khởi theo tuổi; Nam khởi Hỏa trước, Nữ khởi Linh trước; cả hai đều tính thuận đến giờ sinh.", "sach": "Dương Nam, Âm Nữ: Hỏa thuận, Linh nghịch; Âm Nam, Dương Nữ: Hỏa nghịch, Linh thuận." },
-    { "what": "Tứ Hóa tuổi Canh", "ba": "Lộc Thái Dương, Quyền Vũ Khúc, Khoa Thiên Đồng, Kỵ Thái Âm.", "sach": "Lộc Thái Dương, Quyền Vũ Khúc, Khoa Thái Âm, Kỵ Thiên Đồng." },
-    { "what": "Thiên Phúc tuổi Quý", "ba": "Cung Tý.", "sach": "Cung Tỵ." }
+    { "what": "Hỏa Tinh – Linh Tinh", "grandma": "Cung khởi theo tuổi; Nam khởi Hỏa trước, Nữ khởi Linh trước; cả hai đều tính thuận đến giờ sinh.", "books": "Dương Nam, Âm Nữ: Hỏa thuận, Linh nghịch; Âm Nam, Dương Nữ: Hỏa nghịch, Linh thuận." },
+    { "what": "Tứ Hóa tuổi Canh", "grandma": "Lộc Thái Dương, Quyền Vũ Khúc, Khoa Thiên Đồng, Kỵ Thái Âm.", "books": "Lộc Thái Dương, Quyền Vũ Khúc, Khoa Thái Âm, Kỵ Thiên Đồng." },
+    { "what": "Thiên Phúc tuổi Quý", "grandma": "Cung Tý.", "books": "Cung Tỵ." }
   ]
 }

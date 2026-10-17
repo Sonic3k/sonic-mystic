@@ -18,7 +18,7 @@ function T({ t, serifCols = [] }: { t: Pick<TableDto, 'columns' | 'rows'>; serif
   );
 }
 
-export default function Phan1() {
+export default function SetupPage() {
   const q = useQuery({ queryKey: ['setup'], queryFn: api.setup, staleTime: 600_000 });
   useTitle('Phần I · Lập lá số');
   useEffect(() => { if (q.data && location.hash) requestAnimationFrame(() => document.querySelector(location.hash)?.scrollIntoView()); }, [q.data]);
@@ -35,7 +35,7 @@ export default function Phan1() {
           <h3>{x.title}</h3>
           {x.table && <T t={x.table} />}
           {x.lines.map((l, i) => <p key={i}>{l}</p>)}
-          {x.appNote && <p className="tv-note-bs" style={{ fontFamily: 'var(--sans)', fontSize: 13 }}>Ghi chú của ứng dụng (không phải của bà): {x.appNote}</p>}
+          {x.appNote && <p className="tv-note-added" style={{ fontFamily: 'var(--sans)', fontSize: 13 }}>Ghi chú của ứng dụng (không phải của bà): {x.appNote}</p>}
         </div>
       ))}
 
@@ -52,16 +52,16 @@ export default function Phan1() {
 
       {s.triet && <div className="tv-step"><h3>{s.triet.title ?? 'An Triệt Lộ'}</h3><T t={s.triet} /></div>}
 
-      <div className="tv-step" id="mo-dau">
+      <div className="tv-step" id="preface">
         <h3>An Tuần, trung tinh, tiểu tinh, các vòng sao, tính hạn</h3>
         {s.preface.map((l, i) => <p key={i}>{l.replace(/\\-/g, '-').replace(/\\\)/g, ')')}</p>)}
       </div>
 
-      <div className="tv-step" id="khac">
+      <div className="tv-step" id="differences">
         <h3>Những chỗ bà an khác sách phổ thông</h3>
         <p className="tv-muted" style={{ fontFamily: 'var(--sans)', fontSize: 13 }}>Lá số mặc định an theo bà; nút «Theo sách» trên lá số đổi những chỗ này sang cách của sách.</p>
         <div className="tv-diff">{s.variants.map(d => (
-          <div key={d.code}><b>{d.title}</b><p><span className="tv-voice ba">Bà</span> {d.primaryText}</p><p><span className="tv-voice bs">Sách</span> {d.alternativeText}</p></div>
+          <div key={d.code}><b>{d.title}</b><p><span className="tv-voice primary">Bà</span> {d.primaryText}</p><p><span className="tv-voice added">Sách</span> {d.alternativeText}</p></div>
         ))}</div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 /* Every passage of the sources that speaks of a body, a sign, a house, an aspect, a structure — or of several together
    (Mặt Trăng ở Nhân Mã, Sao Kim ở cung 7, Mặt Trời – Sao Thổ vuông góc) — and the sources searched by their words.
-   The choice is in the URL: ?sao=moon&dh=sagittarius, ?cung=7, ?goc=square, ?ct=t-square, ?q=… */
+   The choice is in the URL: ?body=moon&sign=sagittarius, ?house=7, ?aspect=square, ?pattern=t-square, ?q=… */
 import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
@@ -17,26 +17,26 @@ const name = (b: BodyCode) => (b === 'asc' ? 'Cung Mọc' : b === 'mc' ? 'MC' : 
 const SHOWN = 40;
 
 /** the choice as the symbols every passage found must speak of */
-function symbolsOf(sao: string[], dh: string | null, cung: string | null, goc: string | null, ct: string | null): string[] {
+function symbolsOf(bodies: string[], sign: string | null, house: string | null, aspect: string | null, pattern: string | null): string[] {
   const out: string[] = [];
-  const [a, b] = sao as BodyCode[];
+  const [a, b] = bodies as BodyCode[];
   if (a && b) out.push([a, b].sort().join('~'));
-  else if (a && dh) out.push(`${a}@${dh}`);
-  else if (a && cung) out.push(`${a}@h${cung}`);
+  else if (a && sign) out.push(`${a}@${sign}`);
+  else if (a && house) out.push(`${a}@h${house}`);
   else if (a) out.push(`body:${a}`);
-  if (dh && !(a && !b)) out.push(`sign:${dh}`);
-  if (cung && !(a && !b && !dh)) out.push(`house:${cung}`);
-  if (goc) out.push(`aspect:${goc}`);
-  if (ct) out.push(`pattern:${ct}`);
+  if (sign && !(a && !b)) out.push(`sign:${sign}`);
+  if (house && !(a && !b && !sign)) out.push(`house:${house}`);
+  if (aspect) out.push(`aspect:${aspect}`);
+  if (pattern) out.push(`pattern:${pattern}`);
   return out;
 }
 
 export default function AstroLookup() {
   const [sp, setSp] = useSearchParams();
-  const sao = sp.getAll('sao').slice(0, 2), dh = sp.get('dh'), cung = sp.get('cung'), goc = sp.get('goc'), ct = sp.get('ct');
+  const bodies = sp.getAll('body').slice(0, 2), sign = sp.get('sign'), house = sp.get('house'), aspect = sp.get('aspect'), pattern = sp.get('pattern');
   const q = sp.get('q') ?? '';
   const [text, setText] = useState(q);
-  const want = symbolsOf(sao, dh, cung, goc, ct);
+  const want = symbolsOf(bodies, sign, house, aspect, pattern);
   const catalog = useQuery({ queryKey: ['astro-catalog'], queryFn: api.astroCatalog, staleTime: 600_000, retry: false });
   const look = useQuery({ queryKey: ['astro-lookup', want.join(',')], queryFn: () => api.astroLookup(want), enabled: want.length > 0, retry: false, placeholderData: keepPreviousData });
   const found = useQuery({ queryKey: ['astro-search', q], queryFn: () => api.search(q, SHOWN, 'astrology'), enabled: q.trim().length >= 2, retry: false });
@@ -47,8 +47,8 @@ export default function AstroLookup() {
   const pick = (k: string, v: string, cur: string | null) => put(k, cur === v ? null : v);
   const toggleBody = (b: string) => {
     const n = new URLSearchParams(sp);
-    const list = sao.includes(b) ? sao.filter(x => x !== b) : [...sao, b].slice(-2);
-    n.delete('sao'); for (const x of list) n.append('sao', x);
+    const list = bodies.includes(b) ? bodies.filter(x => x !== b) : [...bodies, b].slice(-2);
+    n.delete('body'); for (const x of list) n.append('body', x);
     setSp(n, { replace: true });
   };
   const needle = fold(q.trim());
@@ -63,11 +63,11 @@ export default function AstroLookup() {
   const groups = look.data?.groups ?? [];
   const total = look.data?.total ?? 0;
   const named = [
-    sao.length === 2 ? `${name(sao[0] as BodyCode)} – ${name(sao[1] as BodyCode)}` : sao[0] ? name(sao[0] as BodyCode) : null,
-    dh ? `${sao.length === 1 ? 'ở ' : ''}${SIGN[dh as keyof typeof SIGN]?.name ?? dh}` : null,
-    cung ? `${sao.length === 1 && !dh ? 'ở ' : ''}cung ${cung}` : null,
-    goc ? ASPECTS.find(a => a.code === goc)?.name.toLowerCase() ?? goc : null,
-    ct ? PATTERN_NAME[ct as PatternKind] ?? ct : null,
+    bodies.length === 2 ? `${name(bodies[0] as BodyCode)} – ${name(bodies[1] as BodyCode)}` : bodies[0] ? name(bodies[0] as BodyCode) : null,
+    sign ? `${bodies.length === 1 ? 'ở ' : ''}${SIGN[sign as keyof typeof SIGN]?.name ?? sign}` : null,
+    house ? `${bodies.length === 1 && !sign ? 'ở ' : ''}cung ${house}` : null,
+    aspect ? ASPECTS.find(a => a.code === aspect)?.name.toLowerCase() ?? aspect : null,
+    pattern ? PATTERN_NAME[pattern as PatternKind] ?? pattern : null,
   ].filter(Boolean).join(' ');
   return (
     <div className="wrap page tv as">
@@ -81,7 +81,7 @@ export default function AstroLookup() {
           <div className="hd"><h2>Tìm “{q.trim()}”</h2><span>{found.data ? `${found.data.total} đoạn${found.data.total > found.data.hits.length ? `, hiện ${found.data.hits.length}` : ''}` : found.isError ? '' : 'đang tìm…'}</span></div>
           {found.isError && <Failed error={found.error} />}
           {found.data?.hits.map(h => (
-            <Link key={h.passageId} className="tv-hit" to={`/chiem-tinh/sach/${h.sourceCode.replace(/^astrology\./, '')}/${encodeURIComponent(h.entryCode)}?doan=${h.passageId}`}>
+            <Link key={h.passageId} className="tv-hit" to={`/astrology/books/${h.sourceCode.replace(/^astrology\./, '')}/${encodeURIComponent(h.entryCode)}?passage=${h.passageId}`}>
               <small>{titleOf(h.sourceCode)} › {h.entryTitle}</small><p>{mark(h.text)}</p>
             </Link>))}
           {found.data && !found.data.hits.length && <div className="tv-empty">Không thấy trong tài liệu.</div>}
@@ -89,18 +89,18 @@ export default function AstroLookup() {
       )}
       {catalog.isError ? <Failed error={catalog.error} /> : (
         <div className="tv-card"><div className="ns-pickers">
-          {chips('Sao / điểm', BODIES.map(b => [b, name(b), `body:${b}`]), v => sao.includes(v), toggleBody)}
-          {chips('Dấu hiệu', SIGNS.map(s => [s.code, s.name, `sign:${s.code}`]), v => dh === v, v => pick('dh', v, dh))}
-          {chips('Cung địa bàn', Array.from({ length: 12 }, (_, i) => [String(i + 1), `Cung ${i + 1}`, `house:${i + 1}`]), v => cung === v, v => pick('cung', v, cung))}
-          {chips('Góc chiếu', ASPECTS.map(a => [a.code, a.name, `aspect:${a.code}`]), v => goc === v, v => pick('goc', v, goc))}
-          {chips('Cấu trúc', PATTERNS.map(p => [p, PATTERN_NAME[p], `pattern:${p}`]), v => ct === v, v => pick('ct', v, ct))}
+          {chips('Sao / điểm', BODIES.map(b => [b, name(b), `body:${b}`]), v => bodies.includes(v), toggleBody)}
+          {chips('Dấu hiệu', SIGNS.map(s => [s.code, s.name, `sign:${s.code}`]), v => sign === v, v => pick('sign', v, sign))}
+          {chips('Cung địa bàn', Array.from({ length: 12 }, (_, i) => [String(i + 1), `Cung ${i + 1}`, `house:${i + 1}`]), v => house === v, v => pick('house', v, house))}
+          {chips('Góc chiếu', ASPECTS.map(a => [a.code, a.name, `aspect:${a.code}`]), v => aspect === v, v => pick('aspect', v, aspect))}
+          {chips('Cấu trúc', PATTERNS.map(p => [p, PATTERN_NAME[p], `pattern:${p}`]), v => pattern === v, v => pick('pattern', v, pattern))}
         </div></div>
       )}
       <section style={{ marginTop: 28 }}>
         <div className="hd"><h2>{want.length ? named : 'Chưa chọn gì'}</h2><span>{want.length && look.data ? `${total} đoạn · ${groups.length} mục` : ''}</span>
           {want.length > 0 && <button type="button" className="tv-link" style={{ marginLeft: 'auto' }} onClick={() => { const n = new URLSearchParams(); if (q) n.set('q', q); setSp(n, { replace: true }); }}>Bỏ chọn</button>}</div>
         {look.isError && <Failed error={look.error} />}
-        {want.length > 0 && look.data && !groups.length && <div className="tv-empty">Tài liệu không có đoạn nào nói về {want.length > 1 || sao.length === 2 ? 'tất cả những điều này cùng lúc' : 'điều này'}.</div>}
+        {want.length > 0 && look.data && !groups.length && <div className="tv-empty">Tài liệu không có đoạn nào nói về {want.length > 1 || bodies.length === 2 ? 'tất cả những điều này cùng lúc' : 'điều này'}.</div>}
         {want.length > 0 && groups.map(g => {
           const r0 = g.rules[0], path = g.path.slice(0, -1);
           return (

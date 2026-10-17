@@ -27,13 +27,13 @@ const loading = (q: { isError: boolean; error: unknown }, what = 'Đang mở sá
   <div className="wrap page tv">{q.isError ? <Failed error={q.error} /> : <div className="card empty">{what}</div>}</div>;
 
 export function BookIndex() {
-  const entries = useQuery({ queryKey: ['entries', SOURCES.luan], queryFn: () => api.entries(SOURCES.luan) });
+  const entries = useQuery({ queryKey: ['entries', SOURCES.notes], queryFn: () => api.entries(SOURCES.notes) });
   const supp = useQuery({ queryKey: ['entries', SOURCES.supplement], queryFn: () => api.entries(SOURCES.supplement) });
   const catalog = useQuery({ queryKey: ['catalog'], queryFn: api.catalog, staleTime: Infinity });
   const sources = useQuery({ queryKey: ['sources'], queryFn: () => api.sources() });
   useTitle('Sách của bà');
   if (!entries.data || !catalog.data) return loading(entries.isError ? entries : catalog);
-  const luan = sources.data?.find(s => s.code === SOURCES.luan);
+  const notes = sources.data?.find(s => s.code === SOURCES.notes);
   const symbolEntries = entries.data.filter(e => e.kind === 'symbol');
   const byStar = new Map<string, EntrySummaryDto>();
   for (const e of symbolEntries) for (const s of e.symbols) if (!byStar.has(s)) byStar.set(s, e);
@@ -46,18 +46,18 @@ export function BookIndex() {
     if (shown.has(e.id)) return null;
     shown.add(e.id);
     return (
-      <Link key={s.code} className="tv-entry-card" to={`/tu-vi/sach/${e.ref}`}>
+      <Link key={s.code} className="tv-entry-card" to={`/tu-vi/books/${e.ref}`}>
         <b>{e.title}</b><p>{e.firstLine}</p><small>{e.passages} đoạn · {e.rules} câu luận{e.reviewNotes ? ` · ${e.reviewNotes} cần xem lại` : ''}</small>
       </Link>
     );
   };
   return (
     <div className="wrap page tv">
-      <div className="ptitle"><h1>Sách của bà<small>{luan?.title}</small></h1></div>
-      <p className="tv-sub">{symbolEntries.length} mục sao, viết dở năm 2011. <b>Lời bà giữ nguyên</b> — chỉ sửa những chữ bị lỗi khi chuyển phông chữ cũ. {luan?.note}</p>
+      <div className="ptitle"><h1>Sách của bà<small>{notes?.title}</small></h1></div>
+      <p className="tv-sub">{symbolEntries.length} mục sao, viết dở năm 2011. <b>Lời bà giữ nguyên</b> — chỉ sửa những chữ bị lỗi khi chuyển phông chữ cũ. {notes?.note}</p>
       <div className="tv-acts" style={{ marginBottom: 8 }}>
-        <Link className="tv-btn ghost" to="/tu-vi/phan-1">Phần I · Lập lá số</Link>
-        <Link className="tv-btn ghost" to="/tu-vi/tra-cuu">Tìm trong sách</Link>
+        <Link className="tv-btn ghost" to="/tu-vi/setup">Phần I · Lập lá số</Link>
+        <Link className="tv-btn ghost" to="/tu-vi/lookup">Tìm trong sách</Link>
       </div>
       {GROUPS.map(g => (
         <section key={g.title}>
@@ -72,11 +72,11 @@ export function BookIndex() {
 
 export function BookEntryPage() {
   const { ref = '' } = useParams(), loc = useLocation();
-  const q = useQuery({ queryKey: ['entry', SOURCES.luan, ref], queryFn: () => api.entry(SOURCES.luan, ref), retry: false });
+  const q = useQuery({ queryKey: ['entry', SOURCES.notes, ref], queryFn: () => api.entry(SOURCES.notes, ref), retry: false });
   const hash = Number(loc.hash.replace('#p', '')) || null;
   useTitle(q.data ? `${q.data.title} · Sách của bà` : 'Sách của bà');
   useEffect(() => { if (hash && q.data) requestAnimationFrame(() => document.getElementById(`p${hash}`)?.scrollIntoView({ block: 'center' })); }, [hash, q.data]);
-  if (!q.data) return q.isError ? <div className="wrap page tv"><Failed error={q.error}><Link className="tv-link" to="/tu-vi/sach">Về mục lục</Link></Failed></div> : loading(q);
+  if (!q.data) return q.isError ? <div className="wrap page tv"><Failed error={q.error}><Link className="tv-link" to="/tu-vi/books">Về mục lục</Link></Failed></div> : loading(q);
   return <Entry e={q.data} hash={hash} />;
 }
 
@@ -99,13 +99,13 @@ function Entry({ e, hash }: { e: EntryDto; hash: number | null }) {
   const bright = e.symbols.filter(s => LEVELS.some(l => s.dignities[l]?.length));
   const nav = (x: EntryDto['prev'], dir: 'prev' | 'next') => {
     if (!x) return <span />;
-    const to = x.code === 'preface' ? '/tu-vi/phan-1#mo-dau' : `/tu-vi/sach/${x.ref}`;
+    const to = x.code === 'preface' ? '/tu-vi/setup#preface' : `/tu-vi/books/${x.ref}`;
     return <Link to={to}>{dir === 'prev' ? `‹ ${x.code === 'preface' ? 'Mở đầu' : x.title}` : `${x.title} ›`}</Link>;
   };
   return (
     <div className="wrap page tv">
       <div className="ptitle"><h1 style={{ fontFamily: 'var(--serif)', fontWeight: 600 }}>{e.title}</h1>
-        <span>mục {e.ordinal} · <Link className="tv-link" to="/tu-vi/sach">mục lục</Link></span>
+        <span>mục {e.ordinal} · <Link className="tv-link" to="/tu-vi/books">mục lục</Link></span>
         <button type="button" className={`tv-btn ghost tv-edit-toggle ${editing ? 'on' : ''}`} onClick={() => setEditing(x => !x)}>{editing ? 'Xong sửa chữ' : 'Sửa chữ'}</button></div>
       {editing && <p className="tv-calwarn">Đang sửa chữ: mỗi đoạn và mỗi câu luận có nút «sửa». Chữ lúc nhập từ sách luôn được giữ lại để so và lấy lại; lần nhập sách sau không ghi đè chữ đã sửa.</p>}
       <div className="tv-entry">
@@ -129,15 +129,15 @@ function Entry({ e, hash }: { e: EntryDto; hash: number | null }) {
         </div>
         <div className="tv-aside">
           <div className="tv-card" style={{ padding: '14px 16px' }}>
-            <span className="tv-voice ba">Lời bà</span>
+            <span className="tv-voice primary">Lời bà</span>
             <p style={{ margin: '8px 0 0', fontSize: 13, color: 'var(--ink2)', lineHeight: 1.55 }}>Mỗi đoạn được tách thành câu luận có điều kiện để so với lá số. Bấm số «câu luận» dưới đoạn để xem máy hiểu thế nào; đoạn nào có ghi chú «cần xem lại» là chỗ máy phải đoán ý bà.</p>
           </div>
           {e.supplement.map(x => (
-            <aside key={x.symbol} className="tv-bs">
-              <h4><span className="tv-voice bs">Bổ sung · {x.name}</span></h4>
+            <aside key={x.symbol} className="tv-added-box">
+              <h4><span className="tv-voice added">Bổ sung · {x.name}</span></h4>
               <small>Kiến thức tử vi phổ thông — không phải ghi chép của bà.</small>
               {x.about && <p>{x.about}</p>}
-              {x.rules.map(r => <div key={r.code} className="bsl">{r.text}<small>{r.at.join(', ')}</small></div>)}
+              {x.rules.map(r => <div key={r.code} className="added-line">{r.text}<small>{r.at.join(', ')}</small></div>)}
             </aside>
           ))}
         </div>
@@ -161,7 +161,7 @@ function Para({ p, hl, editing, onSaved }: { p: PassageDto; hl: boolean; editing
             {p.originalText && draft !== p.originalText && <button type="button" className="tv-link" onClick={() => setDraft(p.originalText!)}>Lấy lại chữ lúc nhập</button>}
             <span />
             <button type="button" className="tv-btn ghost" onClick={() => setDraft(null)}>Huỷ</button>
-            <button type="button" className="tv-btn son" disabled={save.isPending || !draft.trim() || draft === p.text} onClick={() => save.mutate(draft)}>{save.isPending ? 'Đang lưu…' : 'Lưu'}</button>
+            <button type="button" className="tv-btn accent" disabled={save.isPending || !draft.trim() || draft === p.text} onClick={() => save.mutate(draft)}>{save.isPending ? 'Đang lưu…' : 'Lưu'}</button>
           </div>
           {save.isError && <p className="tv-err">{errorText(save.error)}</p>}
         </div>
@@ -198,7 +198,7 @@ function RuleRow({ r, editing, onSaved }: { r: RuleDto; editing: boolean; onSave
       <label><span>Điều kiện (máy kiểm với lá số)</span><input className="mono" value={d.when} onChange={e => setD({ ...d, when: e.target.value })} placeholder="để trống: chỉ giữ lời, không so với lá số" /></label>
       <div className="tv-edit-foot"><span />
         <button type="button" className="tv-btn ghost" onClick={() => setD(null)}>Huỷ</button>
-        <button type="button" className="tv-btn son" disabled={save.isPending || !d.text.trim()} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu'}</button>
+        <button type="button" className="tv-btn accent" disabled={save.isPending || !d.text.trim()} onClick={() => save.mutate()}>{save.isPending ? 'Đang lưu…' : 'Lưu'}</button>
       </div>
       {save.isError && <p className="tv-err">{errorText(save.error)}</p>}
     </div>

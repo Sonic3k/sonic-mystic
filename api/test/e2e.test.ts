@@ -16,6 +16,8 @@ import { importTuvi } from '../src/kb/importer.js';
 import { importNumerology, readNumerologyBundle } from '../src/kb/numerology-importer.js';
 import { importAstrology, readAstrologyBundle } from '../src/kb/astrology-importer.js';
 import { createApp } from '../src/main.js';
+import { ReadingsService } from '../src/readings/readings.service.js';
+import type { NestExpressApplication } from '@nestjs/platform-express';
 
 /*
  * End to end against a real Postgres: the database and its role are created from the admin connection, the bundle
@@ -32,6 +34,7 @@ const ADMIN = 'e2e-admin-token';
 let base = '';
 let close: () => Promise<void> = async () => {};
 let appUrl = '';
+let app: NestExpressApplication;
 
 /** a call as the owner (with the admin token), or as anyone when anon */
 async function api<T>(path: string, body?: unknown, method?: string, opts: { anon?: boolean } = {}): Promise<{ status: number; data: T }> {
@@ -50,7 +53,7 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
     const env = { ...process.env, DATABASE_URL: '', DATABASE_ADMIN_URL: adminUrl, MYSTIC_DB_NAME: dbName, MYSTIC_DB_USER: role, MYSTIC_DB_PASSWORD: 'e2e-pass', SONIC_HUB_API_URL: '', SYNC_WORKER: 'false', ANTHROPIC_API_KEY: '', ADMIN_TOKEN: ADMIN, NODE_ENV: 'test' };
     const config = loadConfig(env);
     appUrl = await ensureDatabase(config.db);
-    const app = await createApp(config);
+    app = await createApp(config);
     await app.listen(0, '127.0.0.1');
     base = `http://127.0.0.1:${(app.getHttpServer().address() as AddressInfo).port}`;
     close = async () => {
@@ -69,10 +72,10 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
     assert.equal(h.data.ok, true);
     assert.equal(h.data.rules, 4721);
     const src = await api<SourceDto[]>('/sources');
-    const luan = src.data.find(s => s.code === 'tuvi.ba.luan')!;
-    assert.equal(luan.kind, 'family');
-    assert.equal(luan.rules, 4631);
-    assert.equal(src.data.find(s => s.code === 'tuvi.bo-sung')!.kind, 'supplement');
+    const notes = src.data.find(s => s.code === 'tuvi.grandma.notes')!;
+    assert.equal(notes.kind, 'family');
+    assert.equal(notes.rules, 4631);
+    assert.equal(src.data.find(s => s.code === 'tuvi.supplement')!.kind, 'supplement');
     const pool = createPool(appUrl, false);
     const again = await importTuvi(createDb(pool), loadConfig({ ...process.env, DATABASE_URL: appUrl }).kbBundleDir);
     await pool.end();
@@ -80,7 +83,7 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
   });
 
   test('an edit in the database survives a new import', async () => {
-    const e = await api<EntryDto>('/sources/tuvi.ba.luan/entries/158');
+    const e = await api<EntryDto>('/sources/tuvi.grandma.notes/entries/158');
     const p = e.data.passages.find(x => x.kind !== 'meta')!;
     const edited = await api(`/passages/${p.id}`, { text: `${p.text} (đã sửa)` }, 'PATCH');
     assert.equal(edited.status, 200);
@@ -94,7 +97,7 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
     await pool.end();
     assert.equal(re.skipped, false);
     assert.ok(re.keptEdited >= 2);
-    const after = await api<EntryDto>('/sources/tuvi.ba.luan/entries/158');
+    const after = await api<EntryDto>('/sources/tuvi.grandma.notes/entries/158');
     const p2 = after.data.passages.find(x => x.id === p.id)!;
     assert.ok(p2.text.endsWith('(đã sửa)'));
     assert.equal(p2.originalText, p.text);
@@ -111,13 +114,13 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
   });
 
   test('a reading has every palace, Thân and the hạn', async () => {
-    const r = await api<TuViReadingDto>('/tuvi/reading', { birth: { gender: 'nam', calendar: 'solar', year: 1990, month: 2, day: 8, hour: 9, minute: 5 }, viewYear: 2026 });
+    const r = await api<TuViReadingDto>('/tuvi/reading', { birth: { gender: 'male', calendar: 'solar', year: 1990, month: 2, day: 8, hour: 9, minute: 5 }, viewYear: 2026 });
     assert.equal(r.status, 200);
     assert.equal(Object.keys(r.data.views).length, 13);
-    assert.ok(r.data.views['Mệnh'].counts.ba > 0);
-    const codes = r.data.views['Mệnh'].ba.flatMap(g => g.matches.map(m => m.rule));
+    assert.ok(r.data.views['Mệnh'].counts.grandma > 0);
+    const codes = r.data.views['Mệnh'].grandma.flatMap(g => g.matches.map(m => m.rule));
     for (const c of codes) assert.ok(r.data.rules[c], c);
-    const bad = await api('/tuvi/reading', { birth: { gender: 'nam', calendar: 'solar', year: 1990, month: 2, day: 30, hour: 9 } });
+    const bad = await api('/tuvi/reading', { birth: { gender: 'male', calendar: 'solar', year: 1990, month: 2, day: 30, hour: 9 } });
     assert.equal(bad.status, 400);
   });
 
@@ -126,8 +129,8 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
     assert.equal(s.status, 201);
     const p1 = await api<ProfileDto>('/profiles', { subjectId: s.data.id, label: 'Năm 2026', viewYear: 2026 });
     assert.equal(p1.status, 201);
-    const p2 = await api<ProfileDto>('/profiles', { subjectId: s.data.id, label: 'Theo sách', viewYear: 2027, settings: { variant: 'sach' } });
-    assert.equal(p2.data.settings?.variant, 'sach');
+    const p2 = await api<ProfileDto>('/profiles', { subjectId: s.data.id, label: 'Theo sách', viewYear: 2027, settings: { variant: 'books' } });
+    assert.equal(p2.data.settings?.variant, 'books');
     const subject = await api<SubjectDto>(`/subjects/${s.data.id}`);
     assert.equal(subject.data.profiles.length, 2);
     const reading = await api<TuViReadingDto>(`/profiles/${p1.data.id}/reading`);
@@ -136,7 +139,7 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
     const brief = await api<{ facts: { label: string }[]; lines: unknown[] }>(`/subjects/${s.data.id}/brief`);
     assert.equal(brief.status, 200);
     assert.ok(brief.data.facts.some(f => f.label === 'Mệnh'));
-    const noAi = await api(`/profiles/${p1.data.id}/ai-readings`, { scope: 'tong-quan' });
+    const noAi = await api(`/profiles/${p1.data.id}/ai-readings`, { scope: 'overview' });
     assert.equal(noAi.status, 503);
     assert.equal((await api(`/profiles/${p2.data.id}`, undefined, 'DELETE')).status, 204);
     assert.equal((await api(`/subjects/${s.data.id}`, undefined, 'DELETE')).status, 204);
@@ -170,7 +173,7 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       const c = await anon<{ chart: { ruling: number } }>('/numerology/chart', quynh);
       assert.equal(c.status, 200);
       assert.equal(c.data.chart.ruling, 9);
-      for (const path of ['/numerology/book', '/numerology/book/p5.9', '/numerology/catalog', '/numerology/lookup?symbols=chu-dao:9', '/sources/numerology.ldqh/entries']) assert.equal((await anon(path)).status, 200, path);
+      for (const path of ['/numerology/book', '/numerology/book/p5.9', '/numerology/catalog', '/numerology/lookup?symbols=ruling:9', '/sources/numerology.ldqh/entries']) assert.equal((await anon(path)).status, 200, path);
       assert.equal((await anon('/numerology/reading', quynh)).status, 200);
       const s1 = await anon<SearchResultDto>(`/search?discipline=numerology&q=${encodeURIComponent('kim tự tháp')}`);
       assert.ok(s1.data.total > 0);
@@ -179,9 +182,9 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
     test('a reading reads as the book reads the author\'s own chart', async () => {
       const r = await api<NumerologyReadingDto>('/numerology/reading', quynh);
       assert.equal(r.status, 200);
-      assert.deepEqual(r.data.sections.map(s => s.topic), ['chu_dao', 'ngay_sinh', 'bieu_do', 'mui_ten', 'ten', 'dinh', 'dinh', 'dinh', 'dinh', 'giai_doan', 'nam']);
+      assert.deepEqual(r.data.sections.map(s => s.topic), ['ruling', 'birthday', 'grid', 'arrows', 'name', 'peaks', 'peaks', 'peaks', 'peaks', 'stages', 'year']);
       for (const s of r.data.sections) for (const g of s.groups) for (const m of g.matches) assert.ok(r.data.rules[m.rule], m.rule);
-      assert.ok(r.data.sections[0].groups.some(g => g.entry === 'p5.9.tom-lai'));
+      assert.ok(r.data.sections[0].groups.some(g => g.entry === 'p5.9.summary'));
       const y = await api<NumerologyReadingDto>('/numerology/reading', { ...quynh, viewYear: 2019 });
       assert.equal(y.data.pyear, 9);
       const lunar = await api<NumerologyReadingDto>('/numerology/reading', { birth: { calendar: 'lunar', year: 1962, month: 3, day: 12 } });
@@ -192,19 +195,19 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
     test('the book, section by section, and lookups', async () => {
       const toc = await api<NumerologyBookDto>('/numerology/book');
       assert.equal(toc.data.toc.length, 315);
-      assert.equal(toc.data.topics.find(t => t.code === 'chu_dao')?.entry, 'p5');
+      assert.equal(toc.data.topics.find(t => t.code === 'ruling')?.entry, 'p5');
       const e = await api<NumerologyEntryDto>('/numerology/book/p5.9');
-      assert.deepEqual(e.data.sections.map(s => s.code), ['p5.9', 'p5.9.muc-dich', 'p5.9.dieu-kien', 'p5.9.dac-diem', 'p5.9.khac-phuc', 'p5.9.phat-trien', 'p5.9.nghe-nghiep', 'p5.9.tom-lai']);
+      assert.deepEqual(e.data.sections.map(s => s.code), ['p5.9', 'p5.9.purpose', 'p5.9.conditions', 'p5.9.traits', 'p5.9.to-overcome', 'p5.9.growth', 'p5.9.careers', 'p5.9.summary']);
       assert.equal(e.data.next?.code, 'p5.10');
       assert.ok(e.data.sections.flatMap(s => s.passages).every(p => p.role === 'rule' || p.role === 'advice' || p.rule === null));
-      assert.equal((await api('/numerology/book/khong-co')).status, 404);
-      const l = await api<NumerologyLookupDto>('/numerology/lookup?symbols=muiten-trong:4-5-6');
-      assert.ok(l.data.groups.some(g => g.entry === 'p7.456-trong'));
-      assert.ok(l.data.groups.flatMap(g => g.rules).every(r => !r.entry.startsWith('p7.456') || r.entry.startsWith('p7.456-trong')));
+      assert.equal((await api('/numerology/book/no-such-entry')).status, 404);
+      const l = await api<NumerologyLookupDto>('/numerology/lookup?symbols=empty-arrow:4-5-6');
+      assert.ok(l.data.groups.some(g => g.entry === 'p7.456-empty'));
+      assert.ok(l.data.groups.flatMap(g => g.rules).every(r => !r.entry.startsWith('p7.456') || r.entry.startsWith('p7.456-empty')));
     });
 
     test('an edit of the book survives a new import, and the reading shows it', async () => {
-      const e = await api<NumerologyEntryDto>('/numerology/book/p5.9.tom-lai');
+      const e = await api<NumerologyEntryDto>('/numerology/book/p5.9.summary');
       const p = e.data.sections[0].passages[0];
       assert.equal((await api(`/passages/${p.id}`, { text: `${p.text} (đã sửa)` }, 'PATCH')).status, 200);
       const bad = await api(`/rules/${p.rule!.code}`, { condition: 'ruling(12)' }, 'PATCH');
@@ -239,7 +242,7 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       const r = await api<NumerologyReadingDto>(`/profiles/${p.data.id}/reading`);
       assert.equal(r.data.chart.ruling, 9);
       const codes = r.data.sections[0].groups.flatMap(g => g.matches.map(m => m.rule));
-      const w = await api<AiReadingDto>(`/profiles/${p.data.id}/readings/tong-hop`, {
+      const w = await api<AiReadingDto>(`/profiles/${p.data.id}/readings/synthesis`, {
         viewYear: 2026, caution: 'Chỉ để tham khảo.',
         sections: [{ title: 'Con số chủ đạo 9', items: [{ layer: 'primary', text: 'Tóm lược.', refs: [codes[0], 'ldqh.b0'] }, { layer: 'primary', text: 'Không dẫn.', refs: [] }, { layer: 'added', text: 'Luận thêm.' }] }],
       }, 'PUT');
@@ -248,7 +251,21 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       assert.deepEqual(w.data.sections[0].items.map(i => i.layer), ['primary', 'added', 'added']);
       assert.equal(w.data.author, 'claude');
       const list = await api<AiReadingDto[]>(`/profiles/${p.data.id}/ai-readings`);
-      assert.deepEqual(list.data.map(x => [x.scope, x.stale]), [['tong-hop', false]]);
+      assert.deepEqual(list.data.map(x => [x.scope, x.stale]), [['synthesis', false]]);
+      // a reading written before the names in the code became English kept the hash of the old names: it is brought
+      // over once, so a reading that matched its chart still matches it
+      const readingsOf = app.get(ReadingsService);
+      const hashes = (await readingsOf['hashesBeforeAndNow'](p.data.id, 'numerology'))!('synthesis', 2026)!;
+      assert.notEqual(hashes.before, hashes.now);
+      const db = new pg.Client({ connectionString: appUrl });
+      await db.connect();
+      await db.query('update readings set input_hash = $1 where profile_id = $2', [hashes.before, p.data.id]);
+      await db.query("delete from data_migrations where name = '0003_english_names'");
+      await db.end();
+      assert.equal((await api<AiReadingDto[]>(`/profiles/${p.data.id}/ai-readings`)).data[0].stale, true);
+      assert.equal((await readingsOf.rehashAfterRename())?.rehashed, 1);
+      assert.equal((await api<AiReadingDto[]>(`/profiles/${p.data.id}/ai-readings`)).data[0].stale, false);
+      assert.equal(await readingsOf.rehashAfterRename(), null);
       const b = await api<BriefDto>(`/subjects/${s.data.id}/brief?discipline=numerology`);
       assert.equal(b.data.facts.find(f => f.label === 'Con số chủ đạo')?.value, '9');
       assert.deepEqual(b.data.lines.map(l => l.layer), ['primary', 'added']);
@@ -258,7 +275,7 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       const after = await api<AiReadingDto[]>(`/profiles/${p.data.id}/ai-readings`);
       assert.equal(after.data[0].stale, true);
       assert.equal((await api(`/profiles/${p.data.id}/readings/han-2026`, { sections: [{ title: 'x', items: [{ layer: 'added', text: 'y' }] }] }, 'PUT')).status, 400);
-      assert.equal((await api(`/profiles/${p.data.id}/ai-readings`, { scope: 'tong-hop' })).status, 503);
+      assert.equal((await api(`/profiles/${p.data.id}/ai-readings`, { scope: 'synthesis' })).status, 503);
       assert.equal((await api(`/subjects/${s.data.id}`, undefined, 'DELETE')).status, 204);
     });
   });
@@ -330,7 +347,7 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       const l = await api<AstrologyLookupDto>('/astrology/lookup?symbols=moon@sagittarius');
       assert.ok(l.data.total >= 1);
       assert.ok(l.data.groups.every(g => g.rules.every(x => x.when.includes('sagittarius'))));
-      assert.equal((await api('/astrology/book/hk/khong-co')).status, 404);
+      assert.equal((await api('/astrology/book/hk/no-such-entry')).status, 404);
       // a whole chapter, shallowly: its own passages, then only the titles of its sections
       const ch = await api<AstrologyEntryDto>('/astrology/book/woolfolk/w1?shallow=1');
       assert.ok(ch.data.sections[0].passages.length > 0);
@@ -346,7 +363,7 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       const r = await api<AstrologyReadingDto>(`/profiles/${p.data.id}/reading`);
       assert.equal(r.data.chart.placements.asc!.sign, 'sagittarius');
       const codes = r.data.sections.find(x => x.topic === 'sun')!.groups.flatMap(g => g.matches.map(m => m.rule));
-      const w = await api<AiReadingDto>(`/profiles/${p.data.id}/readings/tong-hop`, {
+      const w = await api<AiReadingDto>(`/profiles/${p.data.id}/readings/synthesis`, {
         caution: 'Chỉ để tham khảo.',
         sections: [{ title: 'Mặt Trời ở Bảo Bình', items: [{ layer: 'primary', text: 'Tóm lược.', refs: [codes[0], 'woolfolk.b0'] }, { layer: 'added', text: 'Luận thêm.' }] }],
       }, 'PUT');
@@ -363,12 +380,12 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
 
 describe('ai helpers', () => {
   test('reads an answer with stray text and raw line breaks', () => {
-    const j = jsonIn('Đây là bài:\n{"sections":[{"title":"Mệnh","ba":[{"text":"dòng một\ndòng hai","refs":["a.1"]}],"them":[]}],"caution":"x"}\ncảm ơn') as { sections: { ba: { text: string }[] }[] };
-    assert.equal(j.sections[0].ba[0].text, 'dòng một\ndòng hai');
+    const j = jsonIn('Đây là bài:\n{"sections":[{"title":"Mệnh","primary":[{"text":"dòng một\ndòng hai","refs":["a.1"]}],"added":[]}],"caution":"x"}\ncảm ơn') as { sections: { primary: { text: string }[] }[] };
+    assert.equal(j.sections[0].primary[0].text, 'dòng một\ndòng hai');
     assert.equal(jsonIn('không có json'), null);
   });
   test('scopes', () => {
-    for (const s of ['tong-quan', 'Mệnh', 'Thân', 'Quan Lộc', 'han-2026']) assert.ok(scopeOk(s), s);
-    for (const s of ['', 'han-26', 'Cung lạ']) assert.ok(!scopeOk(s), s);
+    for (const s of ['overview', 'Mệnh', 'Thân', 'Quan Lộc', 'han-2026']) assert.ok(scopeOk(s), s);
+    for (const s of ['', 'han-26', 'tong-quan', 'Cung lạ']) assert.ok(!scopeOk(s), s);
   });
 });

@@ -20,29 +20,29 @@ const MAX_TEXT = 1200;
 export const SYSTEM = `Bạn giúp một gia đình đọc lá số tử vi theo ghi chép tử vi của bà (bà ngoại của chủ nhà) để lại.
 
 Bạn sẽ nhận được:
-- Phạm vi cần luận và năm xem. Ví dụ: "tong-quan" là tổng quan cả lá số; tên một cung như "Quan Lộc" là riêng cung đó; "han-2026" là vận hạn năm 2026.
+- Phạm vi cần luận và năm xem. Ví dụ: "overview" là tổng quan cả lá số; tên một cung như "Quan Lộc" là riêng cung đó; "han-2026" là vận hạn năm 2026.
 - Lá số: dữ liệu lá số đã an sao (các cung, các sao, đại hạn, tiểu hạn…).
 - Các câu đã khớp với lá số, mỗi dòng một câu: [mã] (cung · nguồn) nội dung — why.
-  Nguồn "ba" là câu trong ghi chép của bà; nguồn "bo-sung" là câu lấy từ sách khác, không phải của bà.
+  Nguồn "grandma" là câu trong ghi chép của bà; nguồn "supplement" là câu lấy từ sách khác, không phải của bà.
   Phần why là lý do câu khớp với lá số: sao nào, ở cung nào, miếu hay hãm, có gặp Tuần, Triệt không…
 
 Bài luận gồm hai lớp, phải tách bạch tuyệt đối.
 
-Lớp "ba" (lời của bà):
-- Chỉ được tóm lược, sắp xếp, nối ý những câu có nguồn "ba" được đưa vào.
+Lớp "primary" (lời của bà):
+- Chỉ được tóm lược, sắp xếp, nối ý những câu có nguồn "grandma" được đưa vào.
 - Mỗi ý phải kèm "refs": mã của các câu gốc, chép đúng như trong ngoặc vuông.
 - Không thêm bất cứ ý nào không có trong các câu đó, kể cả những điều sách tử vi nào cũng nói.
-- Câu nguồn "bo-sung" không bao giờ được đưa vào lớp "ba".
+- Câu nguồn "supplement" không bao giờ được đưa vào lớp "primary".
 - Giữ thuật ngữ của bà.
 - Khi các câu trái nhau thì nói rõ là trái nhau, và nêu yếu tố làm nặng hay nhẹ có trong phần why (miếu hãm, Tuần Triệt…).
-- Nhóm ý nào không có câu nguồn "ba" thì để "ba" là mảng rỗng.
+- Nhóm ý nào không có câu nguồn "grandma" thì để "primary" là mảng rỗng.
 
-Lớp "them" (luận giải thêm):
-- Luận giải thêm theo kiến thức tử vi phổ thông, sách khác và hiểu biết của bạn; có thể dựa vào các câu nguồn "bo-sung".
+Lớp "added" (luận giải thêm):
+- Luận giải thêm theo kiến thức tử vi phổ thông, sách khác và hiểu biết của bạn; có thể dựa vào các câu nguồn "supplement".
 - Viết như ý kiến bổ sung, không bao giờ gán cho bà (không viết "bà dặn", "theo bà", "theo ghi chép"…).
-- Không lặp lại những gì đã có ở lớp "ba".
+- Không lặp lại những gì đã có ở lớp "primary".
 
-Mỗi section ứng với một nhóm ý: theo cung; hoặc theo tính cách, công danh, tài lộc, gia đạo… khi phạm vi là tổng quan; hoặc theo đại hạn, tiểu hạn khi phạm vi là vận hạn. "title" là tên ngắn của nhóm ý; mỗi ý trong "ba" và "them" là một đoạn ngắn. Viết gọn: tối đa 8 nhóm ý, mỗi lớp trong một nhóm tối đa 5 ý.
+Mỗi section ứng với một nhóm ý: theo cung; hoặc theo tính cách, công danh, tài lộc, gia đạo… khi phạm vi là tổng quan; hoặc theo đại hạn, tiểu hạn khi phạm vi là vận hạn. "title" là tên ngắn của nhóm ý; mỗi ý trong "primary" và "added" là một đoạn ngắn. Viết gọn: tối đa 8 nhóm ý, mỗi lớp trong một nhóm tối đa 5 ý.
 
 Văn phong: tiếng Việt tự nhiên, ấm áp, mạch lạc. Nói xu hướng chứ không phán định mệnh. Những ý về bệnh tật, tai nạn, chết chóc, con cái, hôn nhân đổ vỡ phải nói nhẹ nhàng, như điều nên lưu tâm. Không đưa lời khuyên y tế, pháp lý, tài chính cụ thể.
 
@@ -51,7 +51,7 @@ Không bịa sao, vị trí sao, tuổi hay số liệu không có trong dữ li
 "caution": một câu nhắc rằng tử vi chỉ để tham khảo, chiêm nghiệm.
 
 Chỉ trả về một đối tượng JSON đúng cấu trúc sau, không kèm chữ nào khác (không markdown, không lời dẫn):
-{"sections":[{"title":"…","ba":[{"text":"…","refs":["<mã>"]}],"them":[{"text":"…"}]}],"caution":"…"}`;
+{"sections":[{"title":"…","primary":[{"text":"…","refs":["<mã>"]}],"added":[{"text":"…"}]}],"caution":"…"}`;
 
 const RETRY = 'Trả lời lại, chỉ một đối tượng JSON hợp lệ đúng cấu trúc đã yêu cầu.';
 const SHORTER = 'Lần trước bài viết dài quá giới hạn. Lần này viết gọn: tối đa 7 nhóm ý, mỗi lớp trong một nhóm tối đa 4 ý, mỗi ý 1–3 câu.';
@@ -66,10 +66,10 @@ const ANSWER_SCHEMA = {
         type: 'object',
         properties: {
           title: { type: 'string' },
-          ba: { type: 'array', items: { type: 'object', properties: { text: { type: 'string' }, refs: { type: 'array', items: { type: 'string' } } }, required: ['text', 'refs'], additionalProperties: false } },
-          them: { type: 'array', items: { type: 'object', properties: { text: { type: 'string' } }, required: ['text'], additionalProperties: false } },
+          primary: { type: 'array', items: { type: 'object', properties: { text: { type: 'string' }, refs: { type: 'array', items: { type: 'string' } } }, required: ['text', 'refs'], additionalProperties: false } },
+          added: { type: 'array', items: { type: 'object', properties: { text: { type: 'string' } }, required: ['text'], additionalProperties: false } },
         },
-        required: ['title', 'ba', 'them'],
+        required: ['title', 'primary', 'added'],
         additionalProperties: false,
       },
     },
@@ -82,8 +82,8 @@ const ANSWER_SCHEMA = {
 const Answer = z.object({
   sections: z.array(z.object({
     title: z.string().default(''),
-    ba: z.array(z.object({ text: z.string(), refs: z.array(z.string()).default([]) })).default([]),
-    them: z.array(z.object({ text: z.string() })).default([]),
+    primary: z.array(z.object({ text: z.string(), refs: z.array(z.string()).default([]) })).default([]),
+    added: z.array(z.object({ text: z.string() })).default([]),
   })).min(1),
   caution: z.string().nullish(),
 });
@@ -132,8 +132,8 @@ export class AiService {
     const year = viewYear ?? (scope.startsWith('han-') ? Number(scope.slice(4)) : profile.viewYear ?? new Date().getFullYear());
     const k = await this.knowledge.get();
     const { chart, lines, hash: inputHash } = tuviInput(pi.birth, pi.settings, k, scope, year);
-    const baRefs = new Set(lines.filter(l => l.source === 'ba').map(l => l.ref));
-    if (!baRefs.size) throw new BadRequestException('Không có câu nào của bà khớp với phạm vi này để luận');
+    const grandmaRefs = new Set(lines.filter(l => l.source === 'grandma').map(l => l.ref));
+    if (!grandmaRefs.size) throw new BadRequestException('Không có câu nào của bà khớp với phạm vi này để luận');
     const text = lines.map(l => {
       let t = oneLine(l.text);
       if (t.length > MAX_TEXT) t = `${t.slice(0, MAX_TEXT - 1)}…`;
@@ -146,8 +146,8 @@ export class AiService {
     for (const l of lines) quote.set(l.ref, k.rules.get(l.ref)?.text ?? l.text);
     return this.readings.store(profileId, {
       scope, viewYear: year, author: 'ai', model: this.config.ai.model, caution: answer.caution ?? null, inputHash,
-      sections: answer.sections.map(s => ({ title: s.title, items: [...s.ba.map(b => ({ layer: 'primary' as const, text: b.text, refs: b.refs })), ...s.them.map(t => ({ layer: 'added' as const, text: t.text, refs: [] }))] })),
-    }, baRefs, quote);
+      sections: answer.sections.map(s => ({ title: s.title, items: [...s.primary.map(b => ({ layer: 'primary' as const, text: b.text, refs: b.refs })), ...s.added.map(t => ({ layer: 'added' as const, text: t.text, refs: [] }))] })),
+    }, grandmaRefs, quote);
   }
 
   /**

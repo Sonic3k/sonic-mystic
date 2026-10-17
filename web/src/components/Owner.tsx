@@ -16,7 +16,7 @@ export function TokenBox() {
       <p>Nhập mã chủ nhà để mở. Mã chỉ lưu trên trình duyệt này.</p>
       <div className="tv-row">
         <input type="password" value={v} onChange={e => setV(e.target.value)} autoComplete="current-password" aria-label="Mã chủ nhà" />
-        <button className="tv-btn son" type="submit" disabled={!v.trim()}>Mở</button>
+        <button className="tv-btn accent" type="submit" disabled={!v.trim()}>Mở</button>
       </div>
     </form>
   );

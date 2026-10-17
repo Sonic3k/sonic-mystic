@@ -28,6 +28,7 @@ import {
  *  people      subjects (the person read) ← subject_links (who else knows them: Sonic Hub) → profiles (one reading
  *              of one person at one moment, with the birth exactly as read) → readings (written ones: AI for now).
  *  sync        outbox — briefs waiting to be sent to Sonic Hub.
+ *  upkeep      data_migrations — the changes the app made once to its own data.
  */
 
 const ts = (name: string) => timestamp(name, { withTimezone: true, mode: 'date' });
@@ -314,7 +315,7 @@ export const profiles = pgTable('profiles', {
 /** how a tử vi profile places its stars (settings grandma did not write down are marked so on the chart) */
 export const tuviProfileSettings = pgTable('tuvi_profile_settings', {
   profileId: uuid('profile_id').primaryKey().references(() => profiles.id, { onDelete: 'cascade' }),
-  variant: text('variant', { enum: ['ba', 'sach'] }).notNull().default('ba'),
+  variant: text('variant', { enum: ['grandma', 'books'] }).notNull().default('grandma'),
   leapMonth: text('leap_month', { enum: ['same', 'split15'] }).notNull().default('same'),
   tyNextDay: boolean('ty_next_day').notNull().default(true),
   lunarCalendar: text('lunar_calendar', { enum: ['auto', 'utc7', 'utc8'] }).notNull().default('auto'),
@@ -336,7 +337,7 @@ export const numerologyProfileNames = pgTable('numerology_profile_names', {
 export const readings = pgTable('readings', {
   id: uuid('id').primaryKey().defaultRandom(),
   profileId: uuid('profile_id').notNull().references(() => profiles.id, { onDelete: 'cascade' }),
-  /** "tong-quan" · a palace ("Quan Lộc") or "Thân" · "han-2026" */
+  /** tử vi: "overview" · a palace ("Quan Lộc") or "Thân" · "han-2026"; nhân số học: "synthesis" · "year-2026"; chiêm tinh: "synthesis" */
   scope: text('scope').notNull(),
   viewYear: smallint('view_year').notNull(),
   author: text('author').notNull().default('ai'),
@@ -386,3 +387,11 @@ export const outbox = pgTable('outbox', {
   sentAt: ts('sent_at'),
   createdAt: ts('created_at').notNull().defaultNow(),
 }, t => [index('outbox_due').on(t.sentAt, t.nextAttemptAt)]);
+
+// ── upkeep ────────────────────────────────────────────────────────────────────
+
+/** a change made once to the data by the app itself (beside the SQL migrations), so it is not made again */
+export const dataMigrations = pgTable('data_migrations', {
+  name: text('name').primaryKey(),
+  ranAt: ts('ran_at').notNull().defaultNow(),
+});

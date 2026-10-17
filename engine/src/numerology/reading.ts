@@ -5,16 +5,16 @@ import { evaluate, parse, type Ctx, type Node } from './dsl.js';
 import { label } from './numbers.js';
 
 /** where a passage is read: the parts of a reading, in the book's order */
-export type Topic = 'chu_dao' | 'ngay_sinh' | 'bieu_do' | 'mui_ten' | 'ten' | 'dinh' | 'giai_doan' | 'nam';
+export type Topic = 'ruling' | 'birthday' | 'grid' | 'arrows' | 'name' | 'peaks' | 'stages' | 'year';
 export const TOPICS: { code: Topic; title: string; part: number }[] = [
-  { code: 'chu_dao', title: 'Con số chủ đạo', part: 5 },
-  { code: 'ngay_sinh', title: 'Con số ngày sinh', part: 8 },
-  { code: 'bieu_do', title: 'Biểu đồ ngày sinh', part: 6 },
-  { code: 'mui_ten', title: 'Các mũi tên chỉ đặc điểm', part: 7 },
-  { code: 'ten', title: 'Sức mạnh của tên riêng', part: 12 },
-  { code: 'dinh', title: 'Bốn đỉnh cao của đời người', part: 11 },
-  { code: 'giai_doan', title: 'Ba giai đoạn của đời người', part: 10 },
-  { code: 'nam', title: 'Năm cá nhân', part: 9 },
+  { code: 'ruling', title: 'Con số chủ đạo', part: 5 },
+  { code: 'birthday', title: 'Con số ngày sinh', part: 8 },
+  { code: 'grid', title: 'Biểu đồ ngày sinh', part: 6 },
+  { code: 'arrows', title: 'Các mũi tên chỉ đặc điểm', part: 7 },
+  { code: 'name', title: 'Sức mạnh của tên riêng', part: 12 },
+  { code: 'peaks', title: 'Bốn đỉnh cao của đời người', part: 11 },
+  { code: 'stages', title: 'Ba giai đoạn của đời người', part: 10 },
+  { code: 'year', title: 'Năm cá nhân', part: 9 },
 ];
 
 /** what a passage is to the person read: the book describing them, its advice, its words about children, or the
@@ -80,13 +80,13 @@ export function readNumerology(chart: NumerologyChart, kb: Kb, opts: { year?: nu
     const groups = match(kb, topic, x, !sections.some(s => s.topic === topic));
     if (groups.length) sections.push({ topic, title: title(topic), focus, groups });
   };
-  add('chu_dao', `Con số chủ đạo ${label(chart.ruling)}`, base);
-  add('ngay_sinh', `Con số ngày sinh ${label(chart.birthday)}`, base);
-  add('bieu_do', null, base);
-  add('mui_ten', null, base);
-  if (name) add('ten', name.text, base);
-  for (const p of chart.pyramid.peaks) add('dinh', `Đỉnh thứ ${p.index} · ${p.age} tuổi (${p.year}) · số ${p.n}`, { ...base, peak: p });
-  add('giai_doan', null, base);
-  add('nam', `Năm cá nhân ${pyear}${opts.year ? ` (${opts.year})` : ''}`, base);
+  add('ruling', `Con số chủ đạo ${label(chart.ruling)}`, base);
+  add('birthday', `Con số ngày sinh ${label(chart.birthday)}`, base);
+  add('grid', null, base);
+  add('arrows', null, base);
+  if (name) add('name', name.text, base);
+  for (const p of chart.pyramid.peaks) add('peaks', `Đỉnh thứ ${p.index} · ${p.age} tuổi (${p.year}) · số ${p.n}`, { ...base, peak: p });
+  add('stages', null, base);
+  add('year', `Năm cá nhân ${pyear}${opts.year ? ` (${opts.year})` : ''}`, base);
   return { sections, matched: sections.reduce((n, s) => n + s.groups.reduce((m, g) => m + g.matches.length, 0), 0), pyear };
 }

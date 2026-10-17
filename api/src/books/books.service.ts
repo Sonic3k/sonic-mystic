@@ -94,7 +94,7 @@ export class BooksService {
     if (s.kind === 'family' && symCodes.length) {
       supplement = symCodes.map(c => ({
         symbol: c, name: STARS.find(x => x.id === c)?.name ?? c, about: k.kb.starAbout[c] ?? null,
-        rules: [...k.rules.values()].filter(r => r.source === 'bo-sung' && r.star === c),
+        rules: [...k.rules.values()].filter(r => r.source === 'supplement' && r.star === c),
       })).filter(x => x.about || x.rules.length);
     }
     const [prev] = await this.db.select({ ref: entries.sourceRef, code: entries.code, title: entries.title }).from(entries).where(and(eq(entries.sourceId, s.id), lt(entries.ordinal, e.ordinal))).orderBy(sql`${entries.ordinal} desc`).limit(1);
@@ -163,13 +163,13 @@ export class BooksService {
   // ── Phần I and the catalogue ──
 
   async setup(): Promise<SetupDto> {
-    const s = await this.sourceRow(SOURCE_CODES.phan1);
+    const s = await this.sourceRow(SOURCE_CODES.setup);
     const es = await this.db.select().from(entries).where(eq(entries.sourceId, s.id)).orderBy(asc(entries.ordinal));
     const ps = await this.db.select().from(passages).where(inArray(passages.entryId, es.map(e => e.id))).orderBy(asc(passages.entryId), asc(passages.ordinal));
     const tables = new Map<number, TableDto>();
     for (const e of es) { const [t] = await this.tables([e.id]); if (t) tables.set(e.id, t); }
-    const luan = await this.sourceRow(SOURCE_CODES.luan);
-    const [pre] = await this.db.select({ id: entries.id }).from(entries).where(and(eq(entries.sourceId, luan.id), eq(entries.code, 'preface')));
+    const notes = await this.sourceRow(SOURCE_CODES.notes);
+    const [pre] = await this.db.select({ id: entries.id }).from(entries).where(and(eq(entries.sourceId, notes.id), eq(entries.code, 'preface')));
     const preface = pre ? (await this.db.select({ text: passages.text }).from(passages).where(eq(passages.entryId, pre.id)).orderBy(asc(passages.ordinal))).map(p => p.text) : [];
     const vs = await this.db.select().from(variants).where(eq(variants.disciplineCode, 'tuvi')).orderBy(asc(variants.ordinal));
     const byCode = (c: string) => es.find(e => e.code === c);
@@ -194,8 +194,8 @@ export class BooksService {
   }
 
   async catalog(): Promise<CatalogDto> {
-    const luan = await this.sourceRow(SOURCE_CODES.luan);
-    const withEntry = new Set((await this.db.select({ code: symbols.code }).from(entrySymbols).innerJoin(symbols, eq(symbols.id, entrySymbols.symbolId)).innerJoin(entries, eq(entries.id, entrySymbols.entryId)).where(eq(entries.sourceId, luan.id))).map(x => x.code));
+    const notes = await this.sourceRow(SOURCE_CODES.notes);
+    const withEntry = new Set((await this.db.select({ code: symbols.code }).from(entrySymbols).innerJoin(symbols, eq(symbols.id, entrySymbols.symbolId)).innerJoin(entries, eq(entries.id, entrySymbols.entryId)).where(eq(entries.sourceId, notes.id))).map(x => x.code));
     const groups = await this.db.select().from(symbolGroups).where(eq(symbolGroups.disciplineCode, 'tuvi')).orderBy(asc(symbolGroups.id));
     const members = await this.db.select({ groupId: symbolGroupMembers.groupId, code: symbols.code, ordinal: symbolGroupMembers.ordinal }).from(symbolGroupMembers).innerJoin(symbols, eq(symbols.id, symbolGroupMembers.symbolId)).orderBy(asc(symbolGroupMembers.ordinal));
     const gAliases = await this.db.select().from(symbolGroupAliases);
@@ -249,7 +249,7 @@ export class BooksService {
     const dto = k.rules.get(code);
     if (dto) return dto;
     const [after] = await this.db.select().from(rules).where(eq(rules.id, r.id));
-    return { code, source: 'ba', sourceCode: '', text: after.text, ctx: after.context, when: after.condition, tone: after.tone as Tone, review: after.reviewNote, at: [], star: null, entryRef: null, paraRef: null, edited: true, active: after.active };
+    return { code, source: 'grandma', sourceCode: '', text: after.text, ctx: after.context, when: after.condition, tone: after.tone as Tone, review: after.reviewNote, at: [], star: null, entryRef: null, paraRef: null, edited: true, active: after.active };
   }
 
   /** a rule of the numerology book: its condition (checked with the book's condition language), whether it is read,

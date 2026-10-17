@@ -1,5 +1,5 @@
 {
-  "about": "Star catalogue. 'bright' is grandma's own miếu/vượng/đắc/bình/hãm table copied from the header of each star in 'Luận TV 11.2011' (M miếu · V vượng · D đắc · B bình · H hãm); a branch she did not list has no mark. 'tone' is how the chart colours a minor star, taken from the kind of star she names in the same header (Cát tinh, Quý tinh … / Hung tinh, Sát tinh, Hại tinh …). Stars she gave no entry are marked source 'bo-sung'.",
+  "about": "Star catalogue. 'bright' is grandma's own miếu/vượng/đắc/bình/hãm table copied from the header of each star in 'Luận TV 11.2011' (M miếu · V vượng · D đắc · B bình · H hãm); a branch she did not list has no mark. 'tone' is how the chart colours a minor star, taken from the kind of star she names in the same header (Cát tinh, Quý tinh … / Hung tinh, Sát tinh, Hại tinh …). Stars she gave no entry are marked source 'supplement'.",
   "stars": [
     {
       "id": "tu_vi",
@@ -879,7 +879,7 @@
       "name": "Địa Giải",
       "kind": "phu",
       "tone": "cat",
-      "source": "bo-sung"
+      "source": "supplement"
     },
     {
       "id": "thien_quan",
@@ -1356,7 +1356,7 @@
       "name": "Quán Sách",
       "kind": "phu",
       "tone": "hung",
-      "source": "bo-sung"
+      "source": "supplement"
     },
     {
       "id": "trang_sinh",

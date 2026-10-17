@@ -10,6 +10,7 @@ import { createDb, createPool, ensureDatabase, runMigrations } from './db/db.js'
 import { importTuvi, upsertDisciplines } from './kb/importer.js';
 import { importNumerology, readNumerologyBundle } from './kb/numerology-importer.js';
 import { importAstrology, readAstrologyBundle } from './kb/astrology-importer.js';
+import { ReadingsService } from './readings/readings.service.js';
 
 /** the database first (created on the shared server when missing), its schema, the knowledge, then the app */
 export async function createApp(config: AppConfig): Promise<NestExpressApplication> {
@@ -37,6 +38,9 @@ export async function createApp(config: AppConfig): Promise<NestExpressApplicati
   const app = await NestFactory.create<NestExpressApplication>(AppModule.forRoot(config, pool), {
     logger: process.env.NODE_ENV === 'test' ? ['error'] : ['log', 'warn', 'error'],
   });
+  // once: the written readings keep matching their charts after the names in the code became English
+  const rehash = await app.get(ReadingsService).rehashAfterRename();
+  if (rehash) log.log(`after the rename: ${rehash.rehashed} of ${rehash.checked} readings rehashed, ${rehash.briefs} briefs queued`);
   app.setGlobalPrefix('api');
   app.enableCors({ origin: config.corsOrigins });
   app.use(compression());

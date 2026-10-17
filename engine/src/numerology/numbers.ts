@@ -34,15 +34,15 @@ export const toDigit = (n: number): number => reduce(n, 1, 9, false);
 /** the grid as the book draws it: 3 6 9 on top, 2 5 8 in the middle, 1 4 7 at the bottom */
 export const GRID_ROWS = [[3, 6, 9], [2, 5, 8], [1, 4, 7]] as const;
 
-export type Plane = 'tri_nao' | 'tinh_than' | 'the_chat';
+export type Plane = 'mind' | 'spirit' | 'physical';
 export const PLANES: { code: Plane; nums: [number, number, number]; name: string; self: string }[] = [
-  { code: 'tri_nao', nums: [3, 6, 9], name: 'Trục ngang Trí não', self: 'Thể Ý thức' },
-  { code: 'tinh_than', nums: [2, 5, 8], name: 'Trục ngang Tinh thần', self: 'Thể Siêu thức' },
-  { code: 'the_chat', nums: [1, 4, 7], name: 'Trục ngang Thể chất', self: 'Thể Cơ bản' },
+  { code: 'mind', nums: [3, 6, 9], name: 'Trục ngang Trí não', self: 'Thể Ý thức' },
+  { code: 'spirit', nums: [2, 5, 8], name: 'Trục ngang Tinh thần', self: 'Thể Siêu thức' },
+  { code: 'physical', nums: [1, 4, 7], name: 'Trục ngang Thể chất', self: 'Thể Cơ bản' },
 ];
 /** the plane of a number 1..9, and of the ruling/name numbers (10 → Thể chất, 11 → Tinh thần, 22/4 → both) */
 export function planesOf(n: number): Plane[] {
-  if (n === 22) return ['the_chat', 'tinh_than'];
+  if (n === 22) return ['physical', 'spirit'];
   const d = n === 10 ? 1 : n === 11 ? 2 : n;
   return PLANES.filter(p => p.nums.includes(d)).map(p => p.code);
 }
