@@ -83,7 +83,8 @@ p, h1, h2, h3, h4, h5, dl, dd, figure, blockquote { margin: 0; }
 .wrap { max-width: var(--wrap); margin: 0 auto; padding-left: var(--gut-l); padding-right: var(--gut-r); }
 [hidden] { display: none !important; }
 .page { padding-bottom: 72px; animation: enter .4s ease both; }
-@keyframes enter { from { opacity: 0; transform: translateY(4px); } }
+/* opacity only: a transform would make the page the frame of every fixed box inside it (the contents button) */
+@keyframes enter { from { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; scroll-behavior: auto !important; } }
 
 /* ═══ the bar ═══ */

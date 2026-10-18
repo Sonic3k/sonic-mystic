@@ -100,8 +100,8 @@ function ReadingView({ r, sp, setSp, profile, written, defTab, approx, title, ta
   const g = gender === 'female' ? 'Nữ' : gender === 'male' ? 'Nam' : '';
   const time = i.local.hour !== null && i.local.minute !== null ? `${String(i.local.hour).padStart(2, '0')}:${String(i.local.minute).padStart(2, '0')}` : null;
   const born = `sinh ngày ${i.local.day}/${i.local.month}/${i.local.year}${time ? ` lúc ${time} (${offsetText(r.offsetMinutes)})` : ', chưa có giờ sinh'}`;
-  const place = i.place ? `tại ${i.place.name ?? 'nơi sinh'}, ${latLon(i.place.latitude, i.place.longitude)}` : 'chưa có nơi sinh';
-  const birth = [g, born].filter(Boolean).join(', ') + ` ${place}.`;
+  const where = i.place ? ` tại ${i.place.name ?? 'nơi sinh'}, ${latLon(i.place.latitude, i.place.longitude)}` : ', chưa có nơi sinh';
+  const birth = g ? `${g}, ${born}${where}.` : `S${born.slice(1)}${where}.`;
   const w = r.window, asc = ch.placements.asc;
   const notes = [...new Set([...r.notes, ...ch.notes])];
   const hlText = useMemo(() => astroHighlighter(), []);
@@ -114,7 +114,10 @@ function ReadingView({ r, sp, setSp, profile, written, defTab, approx, title, ta
     setHl(code);
     scrollTo.current = `r-${code}`;
   };
-  const room = useMemo(() => astroRoom(r, hlText, who, goTo), [r, hlText, who]); // eslint-disable-line react-hooks/exhaustive-deps
+  /* the reading's sources call the newest goTo (it builds on the address as it is now) */
+  const go = useRef(goTo);
+  go.current = goTo;
+  const room = useMemo(() => astroRoom(r, hlText, who, code => go.current(code)), [r, hlText, who]);
   return (
     <div className="wrap page as">
       <header className="phead">

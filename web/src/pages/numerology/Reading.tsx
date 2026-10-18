@@ -139,7 +139,10 @@ function ReadingView({ r, sp, setSp, profile, written, primary = 0, defTab, titl
     setHl(code);
     scrollTo.current = `r-${code}`;
   };
-  const room = useMemo(() => numRoom(r, hlText, who, primary, goTo), [r, hlText, who, primary]); // eslint-disable-line react-hooks/exhaustive-deps
+  /* the reading's sources call the newest goTo (it builds on the address as it is now) */
+  const go = useRef(goTo);
+  go.current = goTo;
+  const room = useMemo(() => numRoom(r, hlText, who, primary, code => go.current(code)), [r, hlText, who, primary]);
   const birth = `${g ? `${g}, ` : ''}sinh ngày ${c.input.day}/${c.input.month}/${c.input.year} (dương lịch${r.solar.fromLunar && lunar ? `, đổi từ ${lunar} âm lịch` : ''}).`;
   const names = c.names.map(n => `${n.text}${n.label && n.label !== n.text ? ` (${n.label.toLowerCase()})` : ''}`).join(', ');
   const mode: 'birth' | 'name' = sp.get('board') === 'name' ? 'name' : 'birth';
