@@ -1,20 +1,71 @@
 /* The people readings are about. Someone linked to Sonic Hub takes their name and birth from there (edited there);
    each person can have several profiles — one reading at one moment — and the latest one's brief goes back to
-   their page in Sonic Hub. */
-import { Fragment, useState } from 'react';
+   their page in Sonic Hub. The list shows, for each person, the key figure of each room they have a chart in. */
+import { Fragment, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { BirthDto, BriefDto, Gender, SubjectDto } from '@mystic/engine/api';
+import { useMutation, useQueries, useQuery, useQueryClient, type UseQueryResult } from '@tanstack/react-query';
+import type { BirthDto, BriefDto, Gender, ProfileSummaryDto, SubjectDto } from '@mystic/engine/api';
 import { PLACES } from '@mystic/engine/birth';
 import { api } from '../api';
+import { AstroBadgeView, NumBadgeView, TuviBadgeView } from '../components/Badges';
 import { Failed, errorText } from '../components/Owner';
+import { EMBLEM } from '../components/Shell';
 import { Sheet } from '../components/Sheet';
+import { astroBadge, newest, numBadge, tuviBadge } from '../lib/badges';
 import { HOURS, thisYear } from '../lib/params';
-import { SONIC_HUB, birthComplete, birthLine, dateComplete, genderName, profilesLine } from '../lib/people';
-import { dateVi, useTitle } from '../lib/text';
+import { SONIC_HUB, birthComplete, birthLine, birthPhrase, dateComplete, genderName } from '../lib/people';
+import { dateVi, fold, useTitle } from '../lib/text';
 import { numerologyFacts } from './numerology/Home';
 
 const hubLink = (s: SubjectDto) => s.links.find(l => l.system === SONIC_HUB);
+const PROFILE_URL: Record<string, string> = { tuvi: '/tu-vi/profile/', astrology: '/astrology/profile/', numerology: '/numerology/profile/' };
+const useBrief = (id: string, discipline: string, enabled: boolean) =>
+  useQuery({ queryKey: discipline === 'tuvi' ? ['brief', id] : ['brief', id, discipline], queryFn: () => api.brief(id, discipline), retry: false, enabled, staleTime: 60_000 });
+
+/** one row a person: their name and birth, then each room's key figure, which opens that room's newest chart */
+export function PeopleTable({ q, alone, action }: { q: UseQueryResult<SubjectDto[]>; alone?: boolean; action?: React.ReactNode }) {
+  const [find, setFind] = useState('');
+  const nav = useNavigate();
+  const list = q.data ?? [];
+  const astro = list.map(s => newest(s, 'astrology') ? s.id : null);
+  const briefs = useQueries({ queries: astro.map(id => ({ queryKey: ['brief', id ?? '', 'astrology'], queryFn: () => api.brief(id!, 'astrology'), enabled: !!id, retry: false, staleTime: 60_000 })) });
+  const rows = useMemo(() => list.map((s, i) => {
+    const tv = newest(s, 'tuvi'), as = newest(s, 'astrology'), ns = newest(s, 'numerology');
+    return { s, tv, as, ns, tvb: tv ? tuviBadge(tv) : null, nsb: ns ? numBadge(ns) : null, i };
+  }), [list]);
+  const count = (d: string) => list.reduce((n, s) => n + s.profiles.filter(p => p.discipline === d).length, 0);
+  const f = fold(find.trim());
+  const shown = f ? rows.filter(r => fold(`${r.s.displayName} ${r.ns?.name ?? ''}`).includes(f)) : rows;
+  const none = <span className="pp-none">—</span>;
+  return (
+    <section className={`people${alone ? ' alone' : ''}`} id="people">
+      <div className="people-h"><h2>Người</h2>
+        <span>{q.data ? `${list.length} người: ${count('numerology')} hồ sơ nhân số học, ${count('tuvi')} lá số tử vi, ${count('astrology')} lá số chiêm tinh` : 'Đang mở…'}</span>
+        {list.length > 0 && <label className="find"><svg width="15" height="15" viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" strokeWidth="1.6" /><path d="m14 14 4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
+          <input value={find} onChange={e => setFind(e.target.value)} placeholder="Tìm theo tên" autoComplete="off" aria-label="Tìm người theo tên" /></label>}
+        {action}
+      </div>
+      {q.isError ? <div className="people-empty"><Failed error={q.error} /></div>
+        : q.data && !list.length ? <p className="people-empty">Chưa có ai. Liên kết một người từ Sonic Hub, thêm người mới, hoặc lưu một lá số.</p>
+          : <div className="ptable"><table>
+            <thead><tr><th>Người</th><th>Tử vi · cung Mệnh</th><th>Chiêm tinh · Mặt Trời, Mặt Trăng, cung Mọc</th><th>Nhân số học · chủ đạo, ngày sinh</th></tr></thead>
+            <tbody>{shown.map(({ s, tv, as, ns, tvb, nsb, i }) => {
+              const ab = briefs[i]?.data ? astroBadge(briefs[i].data) : null;
+              return (
+                <tr key={s.id} onClick={() => nav(`/people/${s.id}`)}>
+                  <td className="pp-name"><b><Link to={`/people/${s.id}`} onClick={e => e.stopPropagation()}>{s.displayName}</Link></b>
+                    <small>{[genderName(s.gender), birthPhrase(s.birth)].filter(Boolean).join(', ') || 'chưa có ngày sinh'}</small></td>
+                  <td>{tv && tvb ? <TuviBadgeView b={tvb} to={PROFILE_URL.tuvi + tv.id} /> : none}</td>
+                  <td>{as ? ab ? <AstroBadgeView b={ab} to={PROFILE_URL.astrology + as.id} /> : briefs[i]?.isPending ? <span className="bdg bdg-as wait">…</span> : <Link className="pp-tag" to={PROFILE_URL.astrology + as.id} onClick={e => e.stopPropagation()}>mở lá số</Link> : none}</td>
+                  <td>{ns && nsb ? <NumBadgeView b={nsb} to={PROFILE_URL.numerology + ns.id} /> : none}</td>
+                </tr>
+              );
+            })}</tbody>
+          </table></div>}
+      {list.length > 0 && <p className="people-foot">Bấm một dòng để mở trang của người đó; bấm vào hình của một môn để mở lá số mới nhất của môn ấy.</p>}
+    </section>
+  );
+}
 
 export function PeoplePage() {
   const subjects = useQuery({ queryKey: ['subjects'], queryFn: api.subjects, retry: false });
@@ -26,28 +77,17 @@ export function PeoplePage() {
     onSuccess: s => { void qc.invalidateQueries({ queryKey: ['subjects'] }); nav(`/people/${s.id}`); },
   });
   useTitle('Người');
-  if (subjects.isError) return <div className="wrap page tv"><Failed error={subjects.error} /></div>;
-  if (!subjects.data) return <div className="wrap page tv"><div className="card empty">Đang mở…</div></div>;
-  const linked = new Set(subjects.data.flatMap(s => s.links.filter(l => l.system === SONIC_HUB).map(l => l.externalId)));
+  const linked = new Set((subjects.data ?? []).flatMap(s => s.links.filter(l => l.system === SONIC_HUB).map(l => l.externalId)));
   const hub = (persons.data ?? []).filter(p => !linked.has(p.id));
   return (
-    <div className="wrap page tv">
-      <div className="ptitle"><h1>Người<small>những người đã xem</small></h1>
-        <button type="button" className="tv-btn accent" style={{ marginLeft: 'auto' }} onClick={() => setAdding(true)}>Thêm người</button></div>
-      {!subjects.data.length && <div className="card empty">Chưa có ai. Liên kết một người từ Sonic Hub bên dưới, thêm người mới, hoặc lưu một lá số.</div>}
-      <div className="hh-people">{subjects.data.map(s => (
-        <Link key={s.id} className="hh-person" to={`/people/${s.id}`}>
-          <b>{s.displayName}{hubLink(s) && <span className="hh-tag">Sonic Hub</span>}</b>
-          <small>{[genderName(s.gender), birthLine(s.birth)].filter(Boolean).join(' · ') || 'chưa có ngày sinh'}</small>
-          <small>{profilesLine(s)}</small>
-        </Link>))}</div>
-
-      {hub.length > 0 && (
-        <section style={{ marginTop: 32 }}>
+    <div className="wrap hub page">
+      <PeopleTable q={subjects} alone action={<button type="button" className="btn solid" onClick={() => setAdding(true)}>Thêm người</button>} />
+      {subjects.data && hub.length > 0 && (
+        <section className="hub-more">
           <div className="hd"><h2>Từ Sonic Hub</h2><span>chưa liên kết · bấm để lấy tên và ngày giờ sinh từ Sonic Hub</span></div>
-          <div className="hh-people">{hub.map(p => (
-            <button key={p.id} type="button" className="hh-person" style={{ textAlign: 'left' }} disabled={link.isPending} onClick={() => link.mutate(p.id)}>
-              <b>{p.displayName || p.name}{p.isSelf && <span className="hh-tag">chủ nhà</span>}</b>
+          <div className="hub-persons">{hub.map(p => (
+            <button key={p.id} type="button" className="hub-person" disabled={link.isPending} onClick={() => link.mutate(p.id)}>
+              <b>{p.displayName || p.name}{p.isSelf && <span className="pp-tag">chủ nhà</span>}</b>
               <small>{p.displayName && p.displayName !== p.name ? p.name : 'Liên kết'}</small>
             </button>))}</div>
           {link.isError && <p className="tv-err">{errorText(link.error)}</p>}
@@ -59,15 +99,36 @@ export function PeoplePage() {
   );
 }
 
+/** a room's part of a person's page: its charts, the way to make one, and the brief Sonic Hub keeps */
+function RoomPart({ cls, emblem, title, list, badge, label, sub, actions, note, brief }: {
+  cls: string; emblem: React.ReactNode; title: string; list: ProfileSummaryDto[]; badge: (p: ProfileSummaryDto) => React.ReactNode;
+  label: (p: ProfileSummaryDto) => React.ReactNode; sub: (p: ProfileSummaryDto) => string; actions: React.ReactNode; note?: React.ReactNode; brief?: React.ReactNode;
+}) {
+  return (
+    <section className={`sr ${cls}`}>
+      <div className="sr-h">{emblem}<h2>{title}</h2><span>{list.length ? `${list.length} ${cls === 'sr-num' ? 'hồ sơ' : 'lá số'}` : 'chưa có'}</span></div>
+      <div className="sr-b">
+        {list.length > 0 && <div className="prof-list">{list.map(p => (
+          <div key={p.id} className="prof">
+            <Link className="prof-n" to={PROFILE_URL[p.discipline] + p.id}>{label(p)}</Link><small>{sub(p)}</small>{badge(p)}
+          </div>))}</div>}
+        <div className="sr-acts">{actions}</div>
+        {note}
+        {brief}
+      </div>
+    </section>
+  );
+}
+
 export function SubjectPage() {
   const { id = '' } = useParams();
   const q = useQuery({ queryKey: ['subject', id], queryFn: () => api.subject(id), retry: false });
   const s = q.data;
-  const tuvi = s?.profiles.filter(p => p.discipline === 'tuvi') ?? [], numerology = s?.profiles.filter(p => p.discipline === 'numerology') ?? [];
-  const astro = s?.profiles.filter(p => p.discipline === 'astrology') ?? [];
-  const brief = useQuery({ queryKey: ['brief', id], queryFn: () => api.brief(id), retry: false, enabled: tuvi.length > 0 });
-  const numerologyBrief = useQuery({ queryKey: ['brief', id, 'numerology'], queryFn: () => api.brief(id, 'numerology'), retry: false, enabled: numerology.length > 0 });
-  const astroBrief = useQuery({ queryKey: ['brief', id, 'astrology'], queryFn: () => api.brief(id, 'astrology'), retry: false, enabled: astro.length > 0 });
+  const by = (d: string) => (s?.profiles.filter(p => p.discipline === d) ?? []).sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+  const tuvi = by('tuvi'), numerology = by('numerology'), astro = by('astrology');
+  const brief = useBrief(id, 'tuvi', tuvi.length > 0);
+  const numerologyBrief = useBrief(id, 'numerology', numerology.length > 0);
+  const astroBrief = useBrief(id, 'astrology', astro.length > 0);
   const [editing, setEditing] = useState(false);
   const nav = useNavigate(), qc = useQueryClient();
   const refreshAll = () => ['subject', 'subjects', 'brief'].forEach(k => void qc.invalidateQueries({ queryKey: [k] }));
@@ -87,88 +148,68 @@ export function SubjectPage() {
   });
   const pull = useMutation({ mutationFn: () => api.linkSonicHub(hubLink(s!)!.externalId), onSuccess: refreshAll });
   useTitle(s?.displayName ?? 'Người');
-  if (q.isError) return <div className="wrap page tv"><Failed error={q.error}><Link className="tv-link" to="/people">Về danh sách</Link></Failed></div>;
-  if (!s) return <div className="wrap page tv"><div className="card empty">Đang mở…</div></div>;
+  if (q.isError) return <div className="wrap page"><Failed error={q.error}><Link className="tv-link" to="/people">Về danh sách</Link></Failed></div>;
+  if (!s) return <div className="wrap page"><div className="card empty" style={{ marginTop: 24 }}>Đang mở…</div></div>;
   const link = hubLink(s), ready = birthComplete(s.gender, s.birth), dated = dateComplete(s.birth);
+  const fromHub = link ? ', sửa ở Sonic Hub rồi bấm «Cập nhật từ Sonic Hub».' : '.';
+  const ab = astroBrief.data ? astroBadge(astroBrief.data) : null;
   return (
-    <div className="wrap page tv">
-      <div className="ptitle"><h1>{s.displayName}</h1><span>{[genderName(s.gender), birthLine(s.birth)].filter(Boolean).join(' · ')}</span></div>
-      <div className="tv-subject">
-        <div>
-          <div className="hd"><h2>Lá số tử vi</h2><span>{tuvi.length}</span></div>
-          <div className="tv-profiles">
-            {tuvi.map(p => (
-              <Link key={p.id} className="tv-profile-item" to={`/tu-vi/profile/${p.id}`}>
-                <b>{p.label || 'Lá số'}</b><span>{p.aiReadings ? `${p.aiReadings} bài AI` : ''}</span>
-                <small>{[p.viewYear ? `xem năm ${p.viewYear}` : '', `lưu ${dateVi(p.createdAt)}`].filter(Boolean).join(' · ')}</small>
-              </Link>))}
-            {!tuvi.length && <div className="tv-empty">Chưa có lá số nào.</div>}
-          </div>
-          <div className="tv-acts" style={{ marginTop: 14 }}>
-            <button type="button" className="tv-btn accent" disabled={!ready || make.isPending} onClick={() => make.mutate()} title={ready ? undefined : 'Cần giới tính, ngày tháng năm và giờ sinh'}>
-              {make.isPending ? 'Đang lập…' : 'Lập lá số từ ngày giờ sinh này'}</button>
-            <Link className="tv-btn ghost" to={`/tu-vi?person=${s.id}`}>Lập với giờ hoặc ngày khác…</Link>
-          </div>
-          {!ready && <p className="tv-muted" style={{ fontSize: 13 }}>Còn thiếu {[!s.gender && 'giới tính', !(s.birth.year && s.birth.month && s.birth.day) && 'ngày sinh', !(s.birth.time || s.birth.hourBranch !== null) && 'giờ sinh'].filter(Boolean).join(', ')}{link ? ' — sửa ở Sonic Hub rồi bấm «Cập nhật từ Sonic Hub».' : '.'}</p>}
-          {make.isError && <p className="tv-err">{errorText(make.error)}</p>}
-
-          {brief.data && <Brief b={brief.data} linked={!!link} voice={l => (l.layer === 'primary' ? 'Lời bà' : 'Bổ sung')} />}
-
-          <section className="ns" style={{ marginTop: 36 }}>
-            <div className="hd"><h2>Nhân số học</h2><span>{numerology.length}</span></div>
-            <div className="tv-profiles">
-              {numerology.map(p => (
-                <Link key={p.id} className="tv-profile-item" to={`/numerology/profile/${p.id}`}>
-                  <b>{p.name ?? 'Hồ sơ'}{p.label && <span className="hh-tag">{p.label}</span>}</b><span>{p.aiReadings ? 'có bài tổng hợp' : ''}</span>
-                  <small>{[numerologyFacts(p).line, `lưu ${dateVi(p.createdAt)}`].filter(Boolean).join(' · ')}</small>
-                </Link>))}
-              {!numerology.length && <div className="tv-empty">Chưa có hồ sơ nhân số học.</div>}
-            </div>
-            <div className="tv-acts" style={{ marginTop: 14 }}>
-              <button type="button" className="tv-btn accent" disabled={!dated || makeNumerology.isPending} onClick={() => makeNumerology.mutate()} title={dated ? undefined : 'Cần ngày tháng năm sinh'}>
-                {makeNumerology.isPending ? 'Đang lập…' : 'Lập hồ sơ nhân số học'}</button>
-              <Link className="tv-btn ghost" to={`/numerology?person=${s.id}`}>Xem với tên hoặc ngày khác…</Link>
-            </div>
-            {!dated && <p className="tv-muted" style={{ fontSize: 13 }}>Còn thiếu ngày sinh{link ? ' — sửa ở Sonic Hub rồi bấm «Cập nhật từ Sonic Hub».' : '.'}</p>}
-            {makeNumerology.isError && <p className="tv-err">{errorText(makeNumerology.error)}</p>}
-            {numerologyBrief.data && <Brief b={numerologyBrief.data} linked={!!link} voice={l => (l.layer === 'added' ? 'Luận thêm' : l.source.startsWith('Tóm lược') ? 'Tóm lược sách' : 'Lời sách')} />}
-          </section>
-
-          <section className="as" style={{ marginTop: 36 }}>
-            <div className="hd"><h2>Chiêm tinh</h2><span>{astro.length}</span></div>
-            <div className="tv-profiles">
-              {astro.map(p => (
-                <Link key={p.id} className="tv-profile-item" to={`/astrology/profile/${p.id}`}>
-                  <b>{p.label || 'Lá số chiêm tinh'}</b><span>{p.aiReadings ? 'có bài tổng hợp' : ''}</span>
-                  <small>{[birthLine(p.birth), `lưu ${dateVi(p.createdAt)}`].filter(Boolean).join(' · ')}</small>
-                </Link>))}
-              {!astro.length && <div className="tv-empty">Chưa có lá số chiêm tinh.</div>}
-            </div>
-            <div className="tv-acts" style={{ marginTop: 14 }}>
-              <button type="button" className="tv-btn accent" disabled={!dated || s.birth.calendar !== 'solar' || makeAstro.isPending} onClick={() => makeAstro.mutate()} title={dated ? undefined : 'Cần ngày tháng năm sinh'}>
-                {makeAstro.isPending ? 'Đang lập…' : 'Lập lá số chiêm tinh'}</button>
-              <Link className="tv-btn ghost" to={`/astrology?person=${s.id}`}>Lập với giờ hoặc nơi khác…</Link>
-            </div>
-            {(!dated || !s.birth.time || s.birth.latitude === null) && <p className="tv-muted" style={{ fontSize: 13 }}>{!dated ? 'Còn thiếu ngày sinh.' : `Chưa có ${[!s.birth.time && 'giờ sinh (giờ đồng hồ)', s.birth.latitude === null && 'nơi sinh'].filter(Boolean).join(' và ')}: lá số chưa có cung Mọc và các cung địa bàn.`}</p>}
-            {makeAstro.isError && <p className="tv-err">{errorText(makeAstro.error)}</p>}
-            {astroBrief.data && <Brief b={astroBrief.data} linked={!!link} voice={l => (l.layer === 'added' ? 'Luận thêm' : l.source.startsWith('Tóm lược') ? 'Tóm lược tài liệu' : 'Lời tài liệu')} />}
-          </section>
+    <div className="wrap page">
+      <header className="phead">
+        <h1>{s.displayName}{link && <span className="hh-tag">Sonic Hub</span>}</h1>
+        <p className="birth">{[genderName(s.gender), birthPhrase(s.birth)].filter(Boolean).join(', ') || 'Chưa có ngày sinh.'}</p>
+        <div className="acts">
+          <button type="button" className="btn" onClick={() => setEditing(true)}>{link?.ownsIdentity ? 'Sửa ghi chú' : 'Sửa'}</button>
+          {link && <button type="button" className="btn" disabled={pull.isPending} onClick={() => pull.mutate()}>{pull.isPending ? 'Đang cập nhật…' : 'Cập nhật từ Sonic Hub'}</button>}
         </div>
-        <aside className="tv-card" style={{ padding: '16px 18px' }}>
-          <dl className="tv-facts">
+      </header>
+      {pull.isError && <p className="tv-err">{errorText(pull.error)}</p>}
+      <div className="subj">
+        <div className="subj-rooms">
+          <RoomPart cls="sr-tuvi" emblem={EMBLEM.tuvi} title="Tử vi" list={tuvi}
+            label={p => p.label || 'Lá số'}
+            sub={p => [p.viewYear ? `xem năm ${p.viewYear}` : '', p.aiReadings ? `${p.aiReadings} bài luận` : '', `lưu ${dateVi(p.createdAt)}`].filter(Boolean).join(' · ')}
+            badge={p => { const b = tuviBadge(p); return b ? <TuviBadgeView b={b} to={PROFILE_URL.tuvi + p.id} /> : null; }}
+            actions={<>
+              <button type="button" className="btn solid" disabled={!ready || make.isPending} onClick={() => make.mutate()} title={ready ? undefined : 'Cần giới tính, ngày tháng năm và giờ sinh'}>
+                {make.isPending ? 'Đang lập…' : 'Lập lá số từ ngày giờ sinh này'}</button>
+              <Link className="btn" to={`/tu-vi?person=${s.id}`}>Lập với giờ hoặc ngày khác…</Link></>}
+            note={<>{!ready && <p className="sr-note">Còn thiếu {[!s.gender && 'giới tính', !(s.birth.year && s.birth.month && s.birth.day) && 'ngày sinh', !(s.birth.time || s.birth.hourBranch !== null) && 'giờ sinh'].filter(Boolean).join(', ')}{fromHub}</p>}
+              {make.isError && <p className="tv-err">{errorText(make.error)}</p>}</>}
+            brief={brief.data && <Brief b={brief.data} linked={!!link} voice={l => (l.layer === 'primary' ? 'Lời bà' : 'Bổ sung')} />} />
+          <RoomPart cls="sr-astro" emblem={EMBLEM.astro} title="Chiêm tinh" list={astro}
+            label={p => p.label || 'Lá số chiêm tinh'}
+            sub={p => [birthLine(p.birth), p.aiReadings ? 'có bài tổng hợp' : '', `lưu ${dateVi(p.createdAt)}`].filter(Boolean).join(' · ')}
+            badge={p => (ab && p.id === astro[0]?.id ? <AstroBadgeView b={ab} to={PROFILE_URL.astrology + p.id} /> : null)}
+            actions={<>
+              <button type="button" className="btn solid" disabled={!dated || s.birth.calendar !== 'solar' || makeAstro.isPending} onClick={() => makeAstro.mutate()} title={dated ? undefined : 'Cần ngày tháng năm sinh'}>
+                {makeAstro.isPending ? 'Đang lập…' : 'Lập lá số chiêm tinh'}</button>
+              <Link className="btn" to={`/astrology?person=${s.id}`}>Lập với giờ hoặc nơi khác…</Link></>}
+            note={<>{(!dated || !s.birth.time || s.birth.latitude === null) && <p className="sr-note">{!dated ? 'Còn thiếu ngày sinh.' : `Chưa có ${[!s.birth.time && 'giờ sinh (giờ đồng hồ)', s.birth.latitude === null && 'nơi sinh'].filter(Boolean).join(' và ')}: lá số chưa có cung Mọc và các cung địa bàn.`}</p>}
+              {makeAstro.isError && <p className="tv-err">{errorText(makeAstro.error)}</p>}</>}
+            brief={astroBrief.data && <Brief b={astroBrief.data} linked={!!link} voice={l => (l.layer === 'added' ? 'Luận thêm' : l.source.startsWith('Tóm lược') ? 'Tóm lược tài liệu' : 'Lời tài liệu')} />} />
+          <RoomPart cls="sr-num" emblem={EMBLEM.num} title="Nhân số học" list={numerology}
+            label={p => <>{p.name ?? 'Hồ sơ'}{p.label && <span className="pp-tag">{p.label}</span>}</>}
+            sub={p => [numerologyFacts(p).line, p.aiReadings ? 'có bài tổng hợp' : '', `lưu ${dateVi(p.createdAt)}`].filter(Boolean).join(' · ')}
+            badge={p => { const b = numBadge(p); return b ? <NumBadgeView b={b} to={PROFILE_URL.numerology + p.id} /> : null; }}
+            actions={<>
+              <button type="button" className="btn solid" disabled={!dated || makeNumerology.isPending} onClick={() => makeNumerology.mutate()} title={dated ? undefined : 'Cần ngày tháng năm sinh'}>
+                {makeNumerology.isPending ? 'Đang lập…' : 'Lập hồ sơ nhân số học'}</button>
+              <Link className="btn" to={`/numerology?person=${s.id}`}>Xem với tên hoặc ngày khác…</Link></>}
+            note={<>{!dated && <p className="sr-note">Còn thiếu ngày sinh{fromHub}</p>}
+              {makeNumerology.isError && <p className="tv-err">{errorText(makeNumerology.error)}</p>}</>}
+            brief={numerologyBrief.data && <Brief b={numerologyBrief.data} linked={!!link} voice={l => (l.layer === 'added' ? 'Luận thêm' : l.source.startsWith('Tóm lược') ? 'Tóm lược sách' : 'Lời sách')} />} />
+        </div>
+        <aside className="card subj-facts">
+          <dl>
             <dt>Giới tính</dt><dd>{genderName(s.gender) ?? '—'}</dd>
             <dt>Ngày sinh</dt><dd>{s.birth.day && s.birth.month && s.birth.year ? `${s.birth.day}/${s.birth.month}${s.birth.leapMonth ? ' nhuận' : ''}/${s.birth.year}${s.birth.calendar === 'lunar' ? ' âm lịch' : ''}` : '—'}</dd>
             <dt>Giờ sinh</dt><dd>{s.birth.time ?? (s.birth.hourBranch !== null ? `giờ ${HOURS[s.birth.hourBranch].n}` : '—')}{s.birth.timeApprox ? ' (ước chừng)' : ''}</dd>
             <dt>Nơi sinh</dt><dd>{s.birth.place ?? (s.birth.latitude !== null ? `${s.birth.latitude}, ${s.birth.longitude}` : '—')}</dd>
             {s.birth.timeZone && <><dt>Múi giờ</dt><dd>{s.birth.timeZone}{s.birth.utcOffsetMinutes !== null ? ` (UTC${s.birth.utcOffsetMinutes >= 0 ? '+' : '−'}${Math.abs(s.birth.utcOffsetMinutes) / 60})` : ''}</dd></>}
           </dl>
-          {s.note && <p style={{ fontSize: 13.5, margin: '0 0 12px' }}>{s.note}</p>}
-          {link && <p style={{ margin: '0 0 12px' }}><span className="tv-linked">liên kết Sonic Hub</span>{link.syncedAt && <small className="tv-muted" style={{ marginLeft: 8, fontSize: 12 }}>cập nhật {dateVi(link.syncedAt)}</small>}</p>}
-          <div className="tv-row" style={{ flexDirection: 'column' }}>
-            <button type="button" className="tv-btn ghost" onClick={() => setEditing(true)}>{link?.ownsIdentity ? 'Sửa ghi chú' : 'Sửa'}</button>
-            {link && <button type="button" className="tv-btn ghost" disabled={pull.isPending} onClick={() => pull.mutate()}>{pull.isPending ? 'Đang cập nhật…' : 'Cập nhật từ Sonic Hub'}</button>}
-          </div>
-          {pull.isError && <p className="tv-err">{errorText(pull.error)}</p>}
+          {s.note && <p style={{ fontSize: 13.5, margin: 0 }}>{s.note}</p>}
+          {link && <p style={{ margin: 0 }}><span className="tv-linked">liên kết Sonic Hub</span>{link.syncedAt && <small className="tv-muted" style={{ marginLeft: 8, fontSize: 12 }}>cập nhật {dateVi(link.syncedAt)}</small>}</p>}
         </aside>
       </div>
       {editing && <SubjectSheet subject={s} onClose={() => setEditing(false)} onSaved={() => refreshAll()} onDeleted={() => nav('/people', { replace: true })} />}
@@ -179,17 +220,12 @@ export function SubjectPage() {
 /** the brief a person's newest profile in a discipline keeps (it also goes to their page in Sonic Hub) */
 function Brief({ b, linked, voice }: { b: BriefDto; linked: boolean; voice: (l: BriefDto['lines'][number]) => string }) {
   return (
-    <section className="tv-brief" style={{ marginTop: 28 }}>
-      <div className="hd"><h2>{b.title}</h2>{b.profileLabel && <span>theo «{b.profileLabel}»</span>}</div>
-      <div className="tv-card">
-        <dl className="tv-facts">{b.facts.map(f => <Fragment key={f.label}><dt>{f.label}</dt><dd>{f.value}</dd></Fragment>)}</dl>
-        {b.lines.map((l, i) => (
-          <p key={i} className={l.layer === 'primary' ? 'tv-brief-primary' : 'tv-brief-added'}>
-            <span className={`tv-voice ${l.layer === 'primary' ? 'primary' : 'added'}`}>{voice(l)}</span> {l.text}
-          </p>))}
-        {linked && <p className="tv-muted" style={{ fontSize: 12.5, margin: '10px 0 0' }}>Bản tóm tắt này cũng hiện ở trang người trong Sonic Hub.</p>}
-      </div>
-    </section>
+    <div className="brief">
+      <h3>Tóm tắt{b.profileLabel ? ` theo «${b.profileLabel}»` : ''}</h3>
+      <dl>{b.facts.map(f => <Fragment key={f.label}><dt>{f.label}</dt><dd>{f.value}</dd></Fragment>)}</dl>
+      {b.lines.map((l, i) => <p key={i} className={`bl${l.layer === 'added' ? ' added' : ''}`}><i>{voice(l)}</i>{l.text}</p>)}
+      {linked && <p className="foot">Bản tóm tắt này cũng hiện ở trang người trong Sonic Hub.</p>}
+    </div>
   );
 }
 

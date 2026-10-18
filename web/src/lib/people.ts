@@ -15,6 +15,13 @@ export function birthLine(b: BirthDto): string {
   return parts.join(' · ');
 }
 
+/** "8/2/1990 lúc 09:05 (ước chừng), Hà Nội": the birth as a sentence says it */
+export function birthPhrase(b: BirthDto): string {
+  const d = b.day && b.month && b.year ? `${b.day}/${b.month}${b.calendar === 'lunar' && b.leapMonth ? ' nhuận' : ''}/${b.year}${b.calendar === 'lunar' ? ' âm lịch' : ''}` : b.year ? `năm ${b.year}` : '';
+  const t = b.time ? `lúc ${b.time}` : b.hourBranch !== null ? `giờ ${HOURS[b.hourBranch].n}` : '';
+  return [[d, t && `${t}${b.timeApprox ? ' (ước chừng)' : ''}`].filter(Boolean).join(' '), b.place].filter(Boolean).join(', ');
+}
+
 /** a birth complete enough to set up a chart */
 export const birthComplete = (g: Gender | null, b: BirthDto) => !!g && !!b.year && !!b.month && !!b.day && (!!b.time || b.hourBranch !== null);
 

@@ -1,28 +1,33 @@
-/* One person's numbers and what Lê Đỗ Quỳnh Hương's book says of them: the board, then three tabs — the synthesis
-   Claude wrote (Tổng hợp), the book's passages on the person (Tính cách), and the years and peaks (Thời vận).
-   Opened from a link (/numerology/view?…) or from a saved profile (/numerology/profile/:id). */
+/* One person's numbers in the Nhân số học room: the plate (the ruling number worked out, the chart with its arrows,
+   the pyramid, the name letter by letter, the nine-year ruler), then three tabs — the reading Claude wrote (Luận
+   giải), the book's passages on the person (Theo sách), and the years and peaks (Thời vận). Opened from a link
+   (/numerology/view?…) or a saved profile (/numerology/profile/:id).
+   Where one is: ?view=synthesis | traits | time, ?part=<topic>, ?peak=<1–4>, ?board=name, ?year=, ?name=. */
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { ARROW_BY_CODE, TOPICS, type Topic } from '@mystic/engine/numerology';
-import type { AiReadingDto, NumerologyReadingDto, NumerologyRuleDto, NumerologySectionDto, NumerologyTocEntryDto, ProfileDto } from '@mystic/engine/api';
+import { TOPICS, type Topic } from '@mystic/engine/numerology';
+import type { AiReadingDto, NumerologyReadingDto, NumerologySectionDto, NumerologyTocEntryDto, ProfileDto } from '@mystic/engine/api';
 import { api } from '../../api';
 import { Failed } from '../../components/Owner';
-import { SONIC_HUB } from '../../lib/people';
-import { dmShort, dmy, fromNumerologySearch, numerologyRequest, toNumerologySearch, withPrimary, type NumerologyParams } from '../../lib/numerology';
-import { dateVi, useTitle } from '../../lib/text';
-import { Board, Explain, Groups, L, LifeLine, STAGE, splitGroups } from './Parts';
+import { ProfilePick } from '../../components/ProfilePick';
+import { ReadingLayout, jump } from '../../components/Reading';
+import { useRememberChart } from '../../components/Shell';
+import { dmy, fromNumerologySearch, numerologyRequest, toNumerologySearch, withPrimary, type NumerologyParams } from '../../lib/numerology';
+import { useTitle } from '../../lib/text';
+import { BookBlock, GridFig, L, NameFig, NsCompanion, PyramidFig, Ruling, STAGE, Tri, YearsFig, numHighlighter, numRoom } from './Parts';
 import { NamesSheet, ProfileSheet, SaveSheet } from './Sheets';
 
 type Tab = 'synthesis' | 'traits' | 'time';
+const TABS: [Tab, string][] = [['synthesis', 'Luận giải'], ['traits', 'Theo sách'], ['time', 'Thời vận']];
 export const useNumerologyBook = () => useQuery({ queryKey: ['numerology-book'], queryFn: api.numerologyBook, staleTime: 600_000, retry: false });
 const UTC8 = 'Đổi ngày âm ra dương lịch theo lịch tính cho UTC+8, lịch dùng trước năm 1968 (ở miền Nam đến 1975).';
 const lunarOf = (b: { calendar: string; day: number | null; month: number | null; year: number | null; leapMonth?: boolean }) =>
   b.calendar === 'lunar' && b.day && b.month && b.year ? `${b.day}/${b.month}${b.leapMonth ? ' nhuận' : ''}/${b.year}` : null;
 /** the peak a section of the reading is about («Đỉnh thứ 2 · …»): a peak the book says nothing of has no section */
 const peakOf = (s: NumerologySectionDto) => Number(/^Đỉnh thứ (\d)/.exec(s.focus ?? '')?.[1] ?? 0);
-const arrowName = (code: string, kind: 'full' | 'empty') => (kind === 'full' ? ARROW_BY_CODE[code]?.full : ARROW_BY_CODE[code]?.empty) ?? code;
-const page = (body: React.ReactNode) => <div className="wrap page tv ns">{body}</div>;
+const page = (body: React.ReactNode) => <div className="wrap page ns">{body}</div>;
+const wait = (t: React.ReactNode) => page(<div className="card empty tv-wait">{t}</div>);
 
 /** a reading opened from a link: the birth and the names are in the URL */
 export function NumerologyViewPage() {
@@ -32,10 +37,10 @@ export function NumerologyViewPage() {
   const reading = useQuery({ queryKey: ['numerology-reading', key], queryFn: () => api.numerologyReading(numerologyRequest(params!)), enabled: !!params, retry: false, placeholderData: keepPreviousData });
   const [sheet, setSheet] = useState<'save' | 'names' | null>(null);
   useTitle(params?.names.find(n => n.primary)?.text || params?.full || 'Nhân số học');
-  if (!params) return page(<div className="tv-empty">Thiếu ngày sinh. <Link className="tv-link" to="/numerology">Xem các con số</Link></div>);
+  if (!params) return wait(<>Thiếu ngày sinh. <Link className="tv-link" to="/numerology">Xem các con số</Link></>);
   const edit = <Link className="tv-link" to={`/numerology?${key}`}>Sửa ngày sinh</Link>;
   if (reading.isError) return page(<Failed error={reading.error}>{edit}</Failed>);
-  if (!reading.data) return page(<div className="tv-empty">Đang tính các con số…</div>);
+  if (!reading.data) return wait('Đang tính các con số…');
   /* the birth and the names change the link; what is being looked at (tab, part, peak, chart) stays */
   const set = (p: Partial<NumerologyParams>) => {
     const n = new URLSearchParams(toNumerologySearch({ ...params, ...p }));
@@ -48,9 +53,9 @@ export function NumerologyViewPage() {
         title={params.names.find(n => n.primary)?.text || params.full || 'Các con số'} full={params.full} gender={params.gender} lunar={lunarOf(params.birth)}
         onName={i => set({ names: withPrimary(params.names, i) })} onYear={y => set({ viewYear: y })}
         actions={<>
-          <button type="button" className="tv-btn ghost" onClick={() => setSheet('names')}>Sửa tên</button>
-          <Link className="tv-btn ghost" to={`/numerology?${key}`}>Sửa ngày sinh</Link>
-          <button type="button" className="tv-btn accent" onClick={() => setSheet('save')}>Lưu hồ sơ</button>
+          <button type="button" className="btn" onClick={() => setSheet('names')}>Sửa tên</button>
+          <Link className="btn" to={`/numerology?${key}`}>Sửa ngày sinh</Link>
+          <button type="button" className="btn solid" onClick={() => setSheet('save')}>Lưu hồ sơ</button>
         </>} />
       {sheet === 'save' && <SaveSheet params={params} subjectId={sp.get('person')} onClose={() => setSheet(null)} />}
       {sheet === 'names' && <NamesSheet names={params.names} onClose={() => setSheet(null)} onSave={names => { set({ names }); setSheet(null); }} />}
@@ -73,9 +78,9 @@ export function NumerologyProfilePage() {
   useTitle(p ? p.names?.find(n => n.primary)?.text ?? p.subject.displayName : 'Nhân số học');
   const back = <Link className="tv-link" to="/numerology">Nhân số học</Link>;
   if (profile.isError) return page(<Failed error={profile.error}>{back}</Failed>);
-  if (p && !ok) return page(<div className="tv-empty">Đây là lá số tử vi. <Link className="tv-link" to={`/tu-vi/profile/${p.id}`}>Mở lá số</Link></div>);
+  if (p && !ok) return wait(<>Đây là lá số tử vi. <Link className="tv-link" to={`/tu-vi/profile/${p.id}`}>Mở lá số</Link></>);
   if (reading.isError) return page(<Failed error={reading.error}>{back}</Failed>);
-  if (!p || !reading.data || written.isPending) return page(<div className="tv-empty">Đang mở hồ sơ…</div>);
+  if (!p || !reading.data || written.isPending) return wait('Đang mở hồ sơ…');
   const set = (k: string, v: string | null) => { const n = new URLSearchParams(sp); if (v === null) n.delete(k); else n.set(k, v); setSp(n, { replace: true }); };
   const primary = Math.max(0, (p.names ?? []).findIndex(n => n.primary));
   const sum = (written.data ?? []).filter(w => w.scope === 'synthesis').sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0] ?? null;
@@ -86,8 +91,8 @@ export function NumerologyProfilePage() {
         title={p.names?.[read]?.text ?? p.subject.displayName} full={p.subject.displayName} gender={p.gender} lunar={lunarOf(p.birth)}
         onName={i => set('name', i === primary ? null : String(i))} onYear={y => set('year', y ? String(y) : null)}
         actions={<>
-          <button type="button" className="tv-btn ghost" onClick={() => setSheet('names')}>Sửa tên</button>
-          <button type="button" className="tv-btn ghost" onClick={() => setSheet('edit')}>Sửa hồ sơ</button>
+          <button type="button" className="btn" onClick={() => setSheet('names')}>Sửa tên</button>
+          <button type="button" className="btn" onClick={() => setSheet('edit')}>Sửa hồ sơ</button>
         </>} />
       {sheet === 'names' && <NamesSheet names={p.names ?? []} profileId={p.id} onClose={() => setSheet(null)} onSave={() => { set('name', null); setSheet(null); }} />}
       {sheet === 'edit' && <ProfileSheet profile={p} onClose={() => setSheet(null)} />}
@@ -103,213 +108,156 @@ function ReadingView({ r, sp, setSp, profile, written, primary = 0, defTab, titl
 }) {
   const toc = useNumerologyBook().data?.toc;
   const c = r.chart;
-  const tab = (['synthesis', 'traits', 'time'].includes(sp.get('view') ?? '') ? sp.get('view') : defTab) as Tab;
-  const set = (k: string, v: string | null) => { const n = new URLSearchParams(sp); if (v === null) n.delete(k); else n.set(k, v); setSp(n, { replace: true }); };
+  useRememberChart('num', title);
+  const tab = (TABS.some(([k]) => k === sp.get('view')) ? sp.get('view') : defTab) as Tab;
+  const set = (patch: Record<string, string | null>) => { const n = new URLSearchParams(sp); for (const [k, v] of Object.entries(patch)) { if (v === null) n.delete(k); else n.set(k, v); } setSp(n, { replace: true }); };
   const [hl, setHl] = useState<string | null>(null);
-  /* a passage cited by the synthesis is shown where the reading has it, once that tab has been drawn */
+  /* a passage cited by the reading is shown where its tab has it, once that tab has been drawn */
   const scrollTo = useRef<string | null>(null);
   useEffect(() => {
     const el = scrollTo.current ? document.getElementById(scrollTo.current) : null;
     if (el) { scrollTo.current = null; el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
   });
-  const nm = r.name !== null ? c.names[r.name] : null;
+  const nameIdx = r.name;
+  const nm = nameIdx !== null ? c.names[nameIdx] : null;
   const g = gender === 'female' ? 'Nữ' : gender === 'male' ? 'Nam' : '';
   const sample = !profile && c.input.day === 1 && c.input.month === 5 && c.input.year === 1974 && nm?.text === 'Quỳnh';
+  const who = written?.author === 'ai' ? 'AI' : 'Claude';
+  const hlText = useMemo(() => numHighlighter(), []);
   const goTo = (code: string) => {
     const rule = r.rules[code];
     if (!rule) return;
     const time = ['year', 'peaks', 'stages'].includes(rule.topic);
-    const n = new URLSearchParams(sp);
-    n.set('view', time ? 'time' : 'traits');
-    if (!time) { if (rule.topic === 'ruling') n.delete('part'); else n.set('part', rule.topic); }
+    const patch: Record<string, string | null> = { view: time ? 'time' : 'traits' };
+    if (patch.view === defTab) patch.view = null;
+    if (!time) patch.part = rule.topic === 'ruling' ? null : rule.topic;
     if (rule.topic === 'peaks') {
       const s = r.sections.find(x => x.topic === 'peaks' && x.groups.some(gr => gr.matches.some(m => m.rule === code)));
-      if (s && peakOf(s)) n.set('peak', String(peakOf(s)));
+      if (s && peakOf(s)) patch.peak = String(peakOf(s));
     }
-    setSp(n, { replace: true });
+    set(patch);
     setHl(code);
     scrollTo.current = `r-${code}`;
   };
+  /* the reading's sources call the newest goTo (it builds on the address as it is now) */
+  const go = useRef(goTo);
+  go.current = goTo;
+  const room = useMemo(() => numRoom(r, hlText, who, primary, code => go.current(code)), [r, hlText, who, primary]);
+  const birth = `${g ? `${g}, ` : ''}sinh ngày ${c.input.day}/${c.input.month}/${c.input.year} (dương lịch${r.solar.fromLunar && lunar ? `, đổi từ ${lunar} âm lịch` : ''}).`;
+  const names = c.names.map(n => `${n.text}${n.label && n.label !== n.text ? ` (${n.label.toLowerCase()})` : ''}`).join(', ');
+  const mode: 'birth' | 'name' = sp.get('board') === 'name' ? 'name' : 'birth';
+  const selYear = r.viewYear ?? c.now.year.year;
   return (
-    <div className="wrap page tv ns">
-      <div className="tv-chart-head">
-        <div>
-          <h1>{title}{profile?.label && <span className="hh-tag">{profile.label}</span>}{sample && <span className="hh-tag">ví dụ trong sách</span>}</h1>
-          <p>{[g, `sinh ${c.input.day}/${c.input.month}/${c.input.year} dương lịch${r.solar.fromLunar && lunar ? ` (đổi từ ${lunar} âm lịch)` : ''}`,
-            nm ? `đọc theo tên ${nm.text}${nm.label && nm.label !== nm.text ? ` (${nm.label.toLowerCase()})` : ''}` : 'chưa có tên'].filter(Boolean).join(' · ')}</p>
-          {profile && <p className="tv-muted" style={{ fontSize: 12.5, marginTop: 4 }}>
-            <Link className="tv-link" to={`/people/${profile.subject.id}`}>{profile.subject.displayName}</Link>
-            {profile.subject.links.some(l => l.system === SONIC_HUB) && <> · <span className="tv-linked">liên kết Sonic Hub</span></>}
-            {profile.note && <> · {profile.note}</>}
-          </p>}
-          {!profile && full && nm && full !== nm.text && <p className="tv-muted" style={{ fontSize: 12.5, marginTop: 4 }}>{full}</p>}
+    <div className="wrap page ns">
+      <header className="phead">
+        <h1>{title}<ProfilePick profile={profile} fallback="Hồ sơ" extra={[...(nm?.label ? [`đọc theo ${nm.label.toLowerCase()}`] : []), ...(sample ? ['ví dụ trong sách'] : [])]} /></h1>
+        <p className="birth">{birth}{names ? ` Các tên đã lưu: ${names}.` : ' Chưa có tên.'}{!profile && full && nm && full !== nm.text ? ` Họ tên: ${full}.` : ''}
+          {profile && <> <Link to={`/people/${profile.subject.id}`}>Trang của {profile.subject.displayName}</Link></>}{profile?.note && <> · {profile.note}</>}</p>
+        <div className="acts">
+          {c.names.length > 1 && <div className="switch" role="group" aria-label="Đọc theo tên">{c.names.map((n, i) => (
+            <button key={i} type="button" className={i === nameIdx ? 'on' : ''} onClick={() => onName(i)}>{n.text}</button>))}</div>}
+          {actions}
         </div>
-        <div className="acts">{actions}</div>
-      </div>
+      </header>
       {r.solar.fromLunar && /UTC\+8/.test(r.solar.note ?? '') && <div className="tv-calwarn">{UTC8}</div>}
 
-      <Board c={c} nameIdx={r.name} mode={sp.get('board') === 'name' ? 'name' : 'birth'} onMode={m => set('board', m === 'name' ? 'name' : null)} onName={onName} />
-
-      <div className="tv-tabs" id="doc">
-        <div className="seg" role="tablist" aria-label="Phần đọc">
-          {([['synthesis', 'Tổng hợp'], ['traits', 'Tính cách'], ['time', 'Thời vận']] as const).map(([k, t]) => (
-            <button key={k} type="button" role="tab" aria-selected={tab === k} className={tab === k ? 'on' : ''} onClick={() => set('view', k === defTab ? null : k)}>{t}</button>))}
+      <div className="ns-plate">
+        <div className="nfig"><Ruling c={c} nameIdx={nameIdx} /></div>
+        <div className="nfig"><GridFig c={c} nameIdx={nameIdx} mode={mode} onMode={m => set({ board: m === 'name' ? 'name' : null })} /></div>
+        <div className="nfig pyr"><PyramidFig c={c} /></div>
+        <div className="ns-row2">
+          <div className="nfig"><NameFig c={c} nameIdx={nameIdx} /></div>
+          <div className="nfig"><YearsFig c={c} sel={selYear} onYear={y => { onYear(y); }} /></div>
         </div>
-        <span className="tv-voice primary">Lời sách</span><span className="tv-voice ai">Claude luận thêm — không phải lời sách</span>
-        <span className="tv-caution">Nhân số học để tham khảo, chiêm nghiệm. Các con số chỉ khuynh hướng.</span>
       </div>
-      {tab === 'synthesis' && <SumTab r={r} written={written} profile={profile} primary={primary} toc={toc} onGoTo={goTo} />}
-      {tab === 'traits' && <TraitsTab r={r} part={sp.get('part')} setPart={v => set('part', v === 'ruling' ? null : v)} toc={toc} hl={hl} />}
-      {tab === 'time' && <TimeTab r={r} peak={Number(sp.get('peak')) || null} setPeak={i => set('peak', String(i))} onYear={onYear} toc={toc} hl={hl} />}
+
+      <nav className="tabs ns-tabs" role="tablist" aria-label="Phần đọc">{TABS.map(([k, t]) => (
+        <button key={k} type="button" role="tab" aria-selected={tab === k} className={`tab${tab === k ? ' on' : ''}`} onClick={() => set({ view: k === defTab ? null : k })}>{t}</button>))}</nav>
+      {tab === 'synthesis' && (written
+        ? <ReadingLayout ai={written} room={room} fresh="còn khớp với hồ sơ" old="hồ sơ đã đổi từ khi viết, nên viết lại"
+            voices={<><span><i className="vc" style={{ background: '#151515' }} />Tóm lược lời sách</span><span><i className="vc" style={{ background: 'var(--blue)' }} />{who} luận thêm</span></>}
+            top={profile && nameIdx !== null && nameIdx !== primary ? <p className="ns-note">Bài luận viết theo tên {profile.names?.[primary]?.text}; bảng số phía trên đang đọc theo tên {nm?.text}.</p> : null}
+            companion={k => <NsCompanion r={r} s={written.sections[k]} primary={nameIdx ?? primary} />} />
+        : <NoReading r={r} profile={profile} />)}
+      {tab === 'traits' && <TraitsTab r={r} part={sp.get('part')} toc={toc} hl={hlText} focus={hl} />}
+      {tab === 'time' && <TimeTab r={r} peak={Number(sp.get('peak')) || null} setPeak={i => set({ peak: String(i) })} onYear={onYear} toc={toc} hl={hlText} focus={hl} />}
     </div>
   );
 }
 
-// ── Tổng hợp ──
-
-function SumTab({ r, written, profile, primary, toc, onGoTo }: {
-  r: NumerologyReadingDto; written: AiReadingDto | null; profile: ProfileDto | null; primary: number; toc?: NumerologyTocEntryDto[]; onGoTo: (code: string) => void;
-}) {
-  const [open, setOpen] = useState<Set<string>>(new Set());
-  const by = useMemo(() => new Map((toc ?? []).map(e => [e.code, e])), [toc]);
-  const pathOf = (entry: string) => { const out: string[] = []; for (let e = by.get(entry); e; e = e.parent ? by.get(e.parent) : undefined) out.unshift(e.title); return out.slice(1).join(' › '); };
-  if (!written) {
-    return (
-      <div className="tv-read">
-        <div className="tv-read-main"><div className="tv-empty">{profile
-          ? 'Chưa có bài tổng hợp cho người này. Bài tổng hợp do Claude viết từ những đoạn sách khớp ở hai phần Tính cách và Thời vận, rồi lưu vào hồ sơ; khi có, bài hiện ở đây.'
-          : 'Bài tổng hợp được viết cho hồ sơ đã lưu: lưu hồ sơ này, rồi Claude viết bài từ những đoạn sách khớp ở hai phần Tính cách và Thời vận; khi có, bài hiện ở đây.'}</div></div>
-        <div className="tv-read-side"><TopicCounts r={r} /></div>
-      </div>
-    );
-  }
-  const who = written.author === 'ai' ? 'AI' : 'Claude';
-  const matched = r.sections.reduce((n, s) => n + s.groups.reduce((k, gr) => k + gr.matches.length, 0), 0);
-  const primaryName = profile?.names?.[primary]?.text ?? null;
-  const other = profile && r.name !== null && r.name !== primary;
-  return (
-    <div className="tv-read">
-      <div className="tv-read-main">
-        <div className="ns-sum-head">
-          <span className="tv-voice primary">Tóm lược sách</span><span className="tv-voice ai">{who} luận thêm</span>
-          <span>{who} viết ngày {dateVi(written.createdAt)}, cho năm {written.viewYear} · từ {matched} đoạn sách khớp</span>
-          <span className={`ns-ok${written.stale ? ' old' : ''}`}>{written.stale ? 'hồ sơ đã đổi từ khi viết' : 'còn khớp với hồ sơ'}</span>
-        </div>
-        {other && <p className="ns-note">Bài tổng hợp viết theo tên {primaryName}; bảng số phía trên đang đọc theo tên {r.chart.names[r.name!]?.text}.</p>}
-        {written.sections.map((sec, si) => (
-          <div key={si} className="ns-sum"><h3 id={`sum-${si}`}>{sec.title}</h3>
-            {sec.items.map((it, ii) => {
-              const id = `${si}-${ii}`, isOpen = open.has(id);
-              const toggle = () => setOpen(s => { const n = new Set(s); if (n.has(id)) n.delete(id); else n.add(id); return n; });
-              const refs = it.refs.length > 0 && <span className="ns-refs">{it.refs.map((ref, j) => <button key={ref.code} type="button" aria-expanded={isOpen} aria-label="Xem đoạn sách được dẫn" onClick={toggle}>{j + 1}</button>)}</span>;
-              const quotes = isOpen && (
-                <div className="ns-quotes">{it.refs.map((ref, j) => {
-                  const rule: NumerologyRuleDto | undefined = r.rules[ref.code];
-                  return <p key={ref.code} className="ns-quote">{j + 1}. {rule?.text ?? ref.quoted}
-                    <small>{rule ? <>tr. {rule.page} · {pathOf(rule.entry)} · <button type="button" onClick={() => onGoTo(ref.code)}>xem trong bài đọc ›</button></> : 'đoạn này không có trong bài đọc đang xem'}</small></p>;
-                })}</div>);
-              return it.layer === 'primary'
-                ? <div key={ii} className="ns-item src"><p>{it.text}{refs}</p>{quotes}</div>
-                : <div key={ii} className="ns-item add"><span className="tv-voice ai">{who} luận thêm</span><p>{it.text}{refs}</p>{quotes}</div>;
-            })}
-          </div>))}
-        {written.caution && <p className="tv-muted" style={{ fontSize: 12.5, fontStyle: 'italic' }}>{written.caution}</p>}
-      </div>
-      <div className="tv-read-side">
-        <div className="ns-expl"><h4>Trong bài</h4><nav className="ns-toc">{written.sections.map((sec, si) => (
-          <button key={si} type="button" onClick={() => document.getElementById(`sum-${si}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>{sec.title}</button>))}</nav></div>
-        <div className="tv-added-box"><h4>Bài này viết thế nào</h4>
-          <p>Phần <b>tóm lược</b> chỉ kể lại những đoạn sách khớp với các con số và tên {primaryName ?? 'của người này'}; mỗi ý dẫn số đoạn, bấm để xem lời sách. Phần <b>luận thêm</b> là ý của {who} nối các đoạn lại, không phải lời sách.</p>
-          <p style={{ margin: 0 }}>Khi đổi tên đọc hay khi sách được sửa, bài được đánh dấu cũ để viết lại.</p></div>
-      </div>
-    </div>
-  );
-}
-
-function TopicCounts({ r }: { r: NumerologyReadingDto }) {
+function NoReading({ r, profile }: { r: NumerologyReadingDto; profile: ProfileDto | null }) {
   const n = (t: Topic) => r.sections.filter(s => s.topic === t).reduce((k, s) => k + s.groups.reduce((a, gr) => a + gr.matches.filter(m => r.rules[m.rule]?.kind !== 'general').length, 0), 0);
-  return <div className="ns-expl"><h4>Sách nói về người này</h4>{TOPICS.map(t => <p key={t.code} className="row"><span>{t.title}</span><b>{n(t.code)}</b></p>)}</div>;
-}
-
-// ── Tính cách ──
-
-function TraitsTab({ r, part, setPart, toc, hl }: { r: NumerologyReadingDto; part: string | null; setPart: (v: Topic) => void; toc?: NumerologyTocEntryDto[]; hl: string | null }) {
-  const c = r.chart, nm = r.name !== null ? c.names[r.name] : null;
-  const parts: [Topic, string][] = [['ruling', `Chủ đạo ${L(c.ruling)}`], ['birthday', `Ngày sinh ${L(c.birthday)}`], ['grid', 'Biểu đồ'], ['arrows', 'Mũi tên'], ...(nm ? [['name', `Tên ${nm.text}`] as [Topic, string]] : [])];
-  const cur = (parts.some(([k]) => k === part) ? part : 'ruling') as Topic;
-  const of = (k: Topic) => { const s = r.sections.find(x => x.topic === k); return s ? splitGroups(s.groups, r.rules) : { said: [], general: [] }; };
-  const { said, general } = of(cur);
-  const head: Partial<Record<Topic, [string, string]>> = {
-    ruling: [`Con số chủ đạo ${L(c.ruling)}`, `tổng các chữ số ngày sinh ${c.sum}`],
-    birthday: [`Con số ngày sinh ${L(c.birthday)}`, c.birthday === c.ruling ? 'trùng Con số chủ đạo' : `sinh ngày ${c.input.day}, khác Con số chủ đạo`],
-    grid: ['Biểu đồ ngày sinh', [3, 6, 9, 2, 5, 8, 1, 4, 7].filter(n => c.grid.counts[n]).map(n => String(n).repeat(c.grid.counts[n])).join(' · ')],
-    arrows: ['Các mũi tên', [...c.grid.arrows.map(a => arrowName(a, 'full')), ...c.grid.empty.map(a => arrowName(a, 'empty'))].join(' · ') || 'không có mũi tên nào'],
-    name: nm ? [`Tên ${nm.text}`, `linh hồn ${L(nm.soul)} · biểu đạt ${L(nm.expression)} · tên riêng ${L(nm.nameNumber)}`] : undefined,
-  };
-  const [h, sub] = head[cur] ?? ['', ''];
   return (
-    <>
-      <div className="tv-strip">{parts.map(([k, t]) => <button key={k} type="button" className={cur === k ? 'on' : ''} onClick={() => setPart(k)}>{t}<small>{of(k).said.reduce((n, gr) => n + gr.matches.length, 0)}</small></button>)}</div>
-      <div className="tv-read">
-        <div className="tv-read-main">
-          <div className="tv-phead"><h3>{h}</h3><span>{sub}</span></div>
-          <Groups groups={said} rules={r.rules} toc={toc} hl={hl} />
-        </div>
-        <div className="tv-read-side"><Explain general={general} rules={r.rules} topic={cur} /></div>
-      </div>
-    </>
+    <div className="ns-pane no-rd">
+      <div className="writer"><p>{profile
+        ? 'Chưa có bài luận giải cho người này. Bài do Claude viết từ những đoạn sách khớp ở hai phần Theo sách và Thời vận, rồi lưu vào hồ sơ; khi có, bài hiện ở đây.'
+        : 'Bài luận giải được viết cho hồ sơ đã lưu: lưu hồ sơ này, rồi Claude viết bài từ những đoạn sách khớp ở hai phần Theo sách và Thời vận; khi có, bài hiện ở đây.'}</p></div>
+      <dl className="counts">{TOPICS.map(t => <div key={t.code}><dt>{t.title}</dt><dd>{n(t.code)} đoạn</dd></div>)}</dl>
+    </div>
   );
 }
 
-// ── Thời vận ──
+// ── Theo sách: what the book says of the person, part by part ──
 
-function TimeTab({ r, peak, setPeak, onYear, toc, hl }: {
-  r: NumerologyReadingDto; peak: number | null; setPeak: (i: number) => void; onYear: (y: number | null) => void; toc?: NumerologyTocEntryDto[]; hl: string | null;
+function TraitsTab({ r, part, toc, hl, focus }: { r: NumerologyReadingDto; part: string | null; toc?: NumerologyTocEntryDto[]; hl: (t: string) => React.ReactNode; focus: string | null }) {
+  const c = r.chart, nm = r.name !== null ? c.names[r.name] : null;
+  const isMaster = (n: number) => n === 11 || n === 22;
+  const parts: { k: Topic; title: string; sub: string; em: React.ReactNode }[] = [
+    { k: 'ruling', title: `Con số chủ đạo ${L(c.ruling)}`, sub: `tổng các chữ số ngày sinh ${c.sum}`, em: <span className={`ns-em circle${isMaster(c.ruling) ? ' master' : ''}`}><b>{c.ruling}</b></span> },
+    { k: 'birthday', title: `Con số ngày sinh ${L(c.birthday)}`, sub: c.birthday === c.ruling ? 'trùng Con số chủ đạo' : `sinh ngày ${c.input.day}`, em: <span className="ns-em square"><b>{c.birthday}</b></span> },
+    { k: 'grid', title: 'Biểu đồ ngày sinh', sub: [3, 6, 9, 2, 5, 8, 1, 4, 7].filter(n => c.grid.counts[n]).map(n => String(n).repeat(c.grid.counts[n])).join(' · '), em: <span className="ns-em"><svg viewBox="0 0 50 50" aria-hidden="true"><rect className="s" x="6" y="6" width="38" height="38" /><path className="s" d="M18.7 6v38M31.3 6v38M6 18.7h38M6 31.3h38" /></svg></span> },
+    { k: 'arrows', title: 'Các mũi tên', sub: `${c.grid.arrows.length} mũi tên đầy, ${c.grid.empty.length} mũi tên trống`, em: <span className="ns-em"><svg viewBox="0 0 50 50" aria-hidden="true"><rect className="s" x="6" y="6" width="38" height="38" /><path d="M10 10 40 40" stroke="var(--red)" strokeWidth="2.4" strokeDasharray="5 4" fill="none" /></svg></span> },
+    ...(nm ? [{ k: 'name' as Topic, title: `Tên ${nm.text}`, sub: `linh hồn ${L(nm.soul)} · biểu đạt ${L(nm.expression)} · tên riêng ${L(nm.nameNumber)}`, em: <span className="ns-em square"><b>{nm.nameNumber}</b></span> }] : []),
+  ];
+  useEffect(() => {
+    if (part && parts.some(x => x.k === part)) { const t = setTimeout(() => jump(`part-${part}`), 60); return () => clearTimeout(t); }
+  }, [part]); // eslint-disable-line react-hooks/exhaustive-deps
+  const groupsOf = (k: Topic) => r.sections.filter(s => s.topic === k).flatMap(s => s.groups);
+  return (
+    <div className="ns-pane">
+      <div className="ns-jump">{parts.map(x => <a key={x.k} href={`#part-${x.k}`} onClick={e => { e.preventDefault(); jump(`part-${x.k}`); }}>{x.title}</a>)}</div>
+      {parts.map(x => <BookBlock key={x.k} id={`part-${x.k}`} emblem={x.em} title={x.title} sub={x.sub} groups={groupsOf(x.k)} rules={r.rules} toc={toc} hl={hl} focus={focus} topic={x.k} />)}
+    </div>
+  );
+}
+
+// ── Thời vận: the pyramid, the peaks, the years ──
+
+function TimeTab({ r, peak, setPeak, onYear, toc, hl, focus }: {
+  r: NumerologyReadingDto; peak: number | null; setPeak: (i: number) => void; onYear: (y: number | null) => void; toc?: NumerologyTocEntryDto[]; hl: (t: string) => React.ReactNode; focus: string | null;
 }) {
   const c = r.chart, now = c.now, P = c.pyramid.peaks;
   const selYear = r.viewYear ?? now.year.year;
   const sel = c.years.find(y => y.year === selYear);
   const pk = peak && peak >= 1 && peak <= 4 ? peak : (now.nextPeak ?? now.lastPeak ?? P[0]).index;
-  const empty = { said: [], general: [] };
-  const part = (t: Topic) => { const s = r.sections.find(x => x.topic === t); return s ? splitGroups(s.groups, r.rules) : empty; };
-  const peakSecs = r.sections.filter(s => s.topic === 'peaks');
-  const ys = part('year'), gs = part('stages');
-  const pkSec = peakSecs.find(x => peakOf(x) === pk);
-  const ps = pkSec ? splitGroups(pkSec.groups, r.rules) : empty;
-  const peakGeneral = peakSecs.flatMap(s => splitGroups(s.groups, r.rules).general);
-  const peakYears = new Map(P.map(p => [p.year, p.index]));
+  const peakSec = r.sections.find(x => x.topic === 'peaks' && peakOf(x) === pk);
+  const peakGeneral = r.sections.filter(s => s.topic === 'peaks' && !peakOf(s)).flatMap(s => s.groups);
+  const groupsOf = (t: Topic) => r.sections.filter(s => s.topic === t).flatMap(s => s.groups);
   const tr = now.transition, next = c.years.find(y => y.year === now.year.year + 1);
+  const p = P.find(x => x.index === pk);
   return (
-    <>
-      <LifeLine c={c} />
-      <div className="tv-k" style={{ margin: '0 0 8px' }}>Chu kỳ chín năm · bấm một năm để đọc</div>
-      <div className="ns-years">{c.years.map(y => (
-        <button key={y.year} type="button" className={`${y.year === now.year.year ? 'now ' : ''}${y.year === selYear ? 'sel' : ''}`} aria-pressed={y.year === selYear}
-          onClick={() => onYear(y.year === now.year.year ? null : y.year)}>
-          <span>{y.year}</span><b>{y.n}</b><small>{dmShort(y.start)}–{dmShort(y.end)}</small>
-          {peakYears.has(y.year) ? <i>đỉnh {peakYears.get(y.year)}</i> : y.year === now.year.year ? <i>đang sống</i> : null}
-        </button>))}</div>
-      <div className="ns-two">
-        <div>
-          <div className="tv-phead"><h3>Năm cá nhân {r.pyear} · {selYear}</h3>{sel && <span>{dmy(sel.start)} – {dmy(sel.end)} · {sel.months} tháng</span>}</div>
-          {selYear === now.year.year && <p className="ns-note">{tr
-            ? `Đang ở khúc giao thời từ năm ${tr.from} sang năm ${tr.to}, đến khoảng ${dmy(tr.until)}.`
-            : `Năm đang sống.${next ? ` Năm ${next.n} bắt đầu ${dmy(next.start)}; khúc giao thời kéo dài hai đến năm tháng từ ngày ấy.` : ''}`}</p>}
-          <Groups groups={ys.said} rules={r.rules} toc={toc} hl={hl} />
-          {ys.general.length > 0 && <Explain general={ys.general} rules={r.rules} topic="year" />}
-        </div>
-        <div>
-          <div className="tv-phead"><h3>Bốn đỉnh cao</h3><span>{now.nextPeak ? `đang hướng tới đỉnh ${now.nextPeak.index}` : 'đã qua cả bốn đỉnh'}</span></div>
-          <div className="ns-peaks">{P.map(p => (
-            <button key={p.index} type="button" className={`${p.index === pk ? 'sel ' : ''}${now.nextPeak?.index === p.index ? 'next' : ''}`} aria-pressed={p.index === pk} onClick={() => setPeak(p.index)}>
-              <small>Đỉnh {p.index}{now.nextPeak?.index === p.index ? ' · tới' : p.age <= now.age ? ' · đã qua' : ''}</small><b>{L(p.n)}</b><span>{p.age} tuổi · {p.year}</span>
-            </button>))}</div>
-          <Groups groups={ps.said} rules={r.rules} toc={toc} hl={hl} />
-          <div className="tv-phead" style={{ marginTop: 24 }}><h3>Giai đoạn {STAGE[now.stage]}</h3><span>{now.age} tuổi</span></div>
-          <Groups groups={gs.said} rules={r.rules} toc={toc} hl={hl} />
-          {peakGeneral.length > 0 && <Explain general={peakGeneral} rules={r.rules} topic="peaks" />}
-        </div>
-      </div>
-    </>
+    <div className="ns-pane time-wrap">
+      <div className="nfig pyr"><PyramidFig c={c} onPeak={setPeak} sel={pk} /><p className="fig-note">Bấm một đỉnh để đọc lời sách về đỉnh ấy.</p></div>
+      <div className="nfig"><h3>Bốn đỉnh cao</h3>
+        <table className="peaks-t"><thead><tr><th /><th>Số</th><th>Tuổi</th><th>Năm</th><th /></tr></thead>
+          <tbody>{P.map(x => (
+            <tr key={x.index} className={[now.lastPeak?.index === x.index ? 'now' : '', x.index === pk ? 'sel' : ''].filter(Boolean).join(' ') || undefined} onClick={() => setPeak(x.index)}>
+              <td><button type="button" className="row-pick" onClick={e => { e.stopPropagation(); setPeak(x.index); }} aria-pressed={x.index === pk}>Đỉnh {x.index}</button></td>
+              <td className="n">{L(x.n)}</td><td>{x.age} tuổi</td><td>{x.year}</td>
+              <td>{now.lastPeak?.index === x.index ? 'đang ở đỉnh này' : now.nextPeak?.index === x.index ? 'đỉnh tới' : x.age <= now.age ? 'đã qua' : ''}</td></tr>))}</tbody></table></div>
+      <BookBlock emblem={<span className="ns-em tri"><Tri /><b>{p ? L(p.n) : ''}</b></span>} title={`Đỉnh ${pk}${p ? `: số ${L(p.n)}` : ''}`} sub={p ? `${p.age} tuổi, năm ${p.year}` : undefined}
+        groups={[...peakGeneral, ...(peakSec?.groups ?? [])]} rules={r.rules} toc={toc} hl={hl} focus={focus} topic="peaks" />
+      <BookBlock emblem={<span className="ns-em tri"><Tri /><b>{now.stage}</b></span>} title={`Giai đoạn ${STAGE[now.stage]}`} sub={`${now.age} tuổi`} groups={groupsOf('stages')} rules={r.rules} toc={toc} hl={hl} focus={focus} topic="stages" />
+      <div className="nfig"><h3>Các năm cá nhân <small>một năm cá nhân bắt đầu ở đầu tháng sau sinh nhật âm của năm trước, như sách tính; bấm một năm để đọc</small></h3>
+        <table className="peaks-t"><thead><tr><th>Năm</th><th>Số</th><th>Từ – đến</th><th>Dài</th><th /></tr></thead>
+          <tbody>{c.years.map(y => (
+            <tr key={y.year} className={[y.year === now.year.year ? 'now' : '', y.year === selYear ? 'sel' : ''].filter(Boolean).join(' ') || undefined} onClick={() => onYear(y.year === now.year.year ? null : y.year)}>
+              <td><button type="button" className="row-pick" aria-pressed={y.year === selYear} onClick={e => { e.stopPropagation(); onYear(y.year === now.year.year ? null : y.year); }}>{y.year}</button></td>
+              <td className="n">{y.n}</td><td>{dmy(y.start)} – {dmy(y.end)}</td><td>{y.months} tháng</td><td>năm thế giới {y.world === 22 ? '22/4' : y.world}{y.year === now.year.year ? ' · đang sống' : ''}</td></tr>))}</tbody></table></div>
+      <BookBlock emblem={<span className="ns-em tri"><Tri /><b>{r.pyear}</b></span>} title={`Năm cá nhân ${r.pyear} · ${selYear}`} sub={sel ? `${dmy(sel.start)} – ${dmy(sel.end)}, ${sel.months} tháng` : undefined}
+        groups={groupsOf('year')} rules={r.rules} toc={toc} hl={hl} focus={focus} topic="year">
+        {selYear === now.year.year && <p className="ns-note">{tr ? `Đang ở khúc giao thời từ năm ${tr.from} sang năm ${tr.to}, đến khoảng ${dmy(tr.until)}.` : `Năm đang sống.${next ? ` Năm ${next.n} bắt đầu ${dmy(next.start)}; khúc giao thời kéo dài hai đến năm tháng từ ngày ấy.` : ''}`}</p>}
+      </BookBlock>
+    </div>
   );
 }
