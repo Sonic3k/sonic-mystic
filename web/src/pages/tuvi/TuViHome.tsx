@@ -144,8 +144,8 @@ function BookCard() {
         <Link className="tv-btn ghost" to="/tu-vi/setup">Phần I · An sao</Link>
       </div>
       <div className="tv-legend">
-        <p><span className="tv-voice primary">Lời bà</span> — nguyên văn của bà, kiểu chữ có chân, vạch son bên trái. Không câu nào bị viết lại.</p>
-        <p><span className="tv-voice added">Bổ sung</span> — kiến thức tử vi phổ thông và luận giải của AI, luôn tách riêng, ghi rõ không phải của bà.</p>
+        <p><span className="tv-voice primary">Lời bà</span> — nguyên văn của bà, kiểu chữ có chân; chấm xanh là câu tốt, chấm đỏ là câu xấu. Không câu nào bị viết lại.</p>
+        <p><span className="tv-voice added">Bổ sung</span> — kiến thức tử vi phổ thông (dấu 補) và phần luận thêm của AI (dấu 論), luôn tách riêng, chữ thường, ghi rõ không phải của bà.</p>
       </div>
     </div>
   );

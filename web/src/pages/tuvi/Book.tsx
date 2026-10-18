@@ -104,7 +104,7 @@ function Entry({ e, hash }: { e: EntryDto; hash: number | null }) {
   };
   return (
     <div className="wrap page tv">
-      <div className="ptitle"><h1 style={{ fontFamily: 'var(--serif)', fontWeight: 600 }}>{e.title}</h1>
+      <div className="ptitle"><h1>{e.title}</h1>
         <span>mục {e.ordinal} · <Link className="tv-link" to="/tu-vi/books">mục lục</Link></span>
         <button type="button" className={`tv-btn ghost tv-edit-toggle ${editing ? 'on' : ''}`} onClick={() => setEditing(x => !x)}>{editing ? 'Xong sửa chữ' : 'Sửa chữ'}</button></div>
       {editing && <p className="tv-calwarn">Đang sửa chữ: mỗi đoạn và mỗi câu luận có nút «sửa». Chữ lúc nhập từ sách luôn được giữ lại để so và lấy lại; lần nhập sách sau không ghi đè chữ đã sửa.</p>}
