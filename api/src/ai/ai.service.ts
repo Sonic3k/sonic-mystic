@@ -144,10 +144,10 @@ export class AiService {
     const answer = await this.ask(user);
     const quote = new Map<string, string>();
     for (const l of lines) quote.set(l.ref, k.rules.get(l.ref)?.text ?? l.text);
-    return this.readings.store(profileId, {
+    return this.readings.store({ profileId, subjectId: profile.subjectId }, {
       scope, viewYear: year, author: 'ai', model: this.config.ai.model, caution: answer.caution ?? null, inputHash,
       sections: answer.sections.map(s => ({ title: s.title, items: [...s.primary.map(b => ({ layer: 'primary' as const, text: b.text, refs: b.refs })), ...s.added.map(t => ({ layer: 'added' as const, text: t.text, refs: [] }))] })),
-    }, grandmaRefs, quote);
+    }, { allowed: grandmaRefs, quote });
   }
 
   /**

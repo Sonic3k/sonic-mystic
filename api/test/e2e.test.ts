@@ -142,6 +142,61 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
     assert.equal((await api(`/subjects/${s.data.id}`, undefined, 'DELETE')).status, 204);
   });
 
+  test('a reading weighed section by section, its Nhận định, and the person\'s Nhận định chung', async () => {
+    const s = await api<SubjectDto>('/subjects', { displayName: 'Người cân', gender: 'female', birth: { calendar: 'solar', year: 1985, month: 7, day: 15, time: '06:30' } });
+    const p = await api<ProfileDto>('/profiles', { subjectId: s.data.id, viewYear: 2026 });
+    assert.equal(p.status, 201);
+    const r = await api<TuViReadingDto>(`/profiles/${p.data.id}/reading?year=2026`);
+    const menh = r.data.views['Mệnh'].grandma.flatMap(g => g.matches.map(m => m.rule))[0];
+    // a line of the year's hạn: the overview may cite it now that it speaks of the year it is read in
+    const han = [...(r.data.han.dai?.grandma ?? []), ...r.data.han.tieu.grandma].flatMap(g => g.matches.map(m => m.rule)).find(c => c !== menh)!;
+    // a passage of grandma's notes on how a chart is weighed, cited by its id
+    const passage = (await api<EntryDto>('/sources/tuvi.grandma.notes/entries/158')).data.passages.find(x => x.kind !== 'meta')!;
+    const w = await api<AiReadingDto>(`/profiles/${p.data.id}/readings/overview`, {
+      viewYear: 2026,
+      sections: [
+        { title: 'Cách cân', weight: 'intro', items: [{ layer: 'primary', text: 'Xếp theo sức nặng.', refs: [`p:${passage.id}`] }] },
+        { title: 'Mệnh: trọng điểm', weight: 'key', basis: ['Sao sáng', 'Không gặp Tuần Triệt'], items: [{ layer: 'primary', text: 'Lời bà về Mệnh.', refs: [menh] }, { layer: 'added', text: 'Luận thêm.' }] },
+        { title: 'Năm 2026', weight: 'current', items: [{ layer: 'primary', text: 'Lời bà về hạn.', refs: [han] }] },
+        { title: 'Sao nhỏ', weight: 'minor', items: [{ layer: 'added', text: 'Quá nhỏ.' }] },
+      ],
+    }, 'PUT');
+    assert.equal(w.status, 200, JSON.stringify(w.data));
+    assert.equal(w.data.dropped, undefined);
+    assert.deepEqual(w.data.sections.map(x => x.weight), ['intro', 'key', 'current', 'minor']);
+    assert.deepEqual(w.data.sections[1].basis, ['Sao sáng', 'Không gặp Tuần Triệt']);
+    assert.deepEqual(w.data.sections[3].basis, []);
+    const intro = w.data.sections[0].items[0];
+    assert.equal(intro.layer, 'primary');
+    assert.equal(intro.refs[0].quoted, passage.text);
+    assert.deepEqual([intro.refs[0].src?.kind, intro.refs[0].src?.source, intro.refs[0].src?.paraRef], ['family', 'tuvi.grandma.notes', passage.ref]);
+    assert.equal(w.data.sections[1].items[0].refs[0].src?.kind, 'family');
+    assert.equal(w.data.sections[2].items[0].refs[0].code, han);
+    assert.equal(w.data.subjectId, s.data.id);
+    // the brief quotes what weighs, not the note on how it was weighed
+    const b = await api<BriefDto>(`/subjects/${s.data.id}/brief`);
+    assert.equal(b.data.lines[0].text, 'Lời bà về Mệnh.');
+    // a reading whose every rule is another chart's is refused
+    assert.equal((await api(`/profiles/${p.data.id}/readings/overview`, { sections: [{ title: 'x', items: [{ layer: 'primary', text: 'y', refs: ['khong_co.0.0'] }] }] }, 'PUT')).status, 400);
+    // the Nhận định: plain words, nothing cited
+    const nd = await api<AiReadingDto>(`/profiles/${p.data.id}/readings/summary`, { viewYear: 2026, sections: [{ title: 'Con người', items: [{ layer: 'primary', text: 'Một người hiền.', refs: [menh] }] }] }, 'PUT');
+    assert.equal(nd.status, 200, JSON.stringify(nd.data));
+    assert.deepEqual(nd.data.sections[0].items.map(i => [i.layer, i.refs.length]), [['added', 0]]);
+    const list = await api<AiReadingDto[]>(`/profiles/${p.data.id}/ai-readings`);
+    assert.deepEqual(list.data.map(x => [x.scope, x.stale]).sort(), [['overview', false], ['summary', false]]);
+    // the person as a whole
+    const all = await api<AiReadingDto>(`/subjects/${s.data.id}/readings/summary`, { sections: [{ title: 'Con người', items: [{ layer: 'added', text: 'Gộp cả ba môn.' }] }] }, 'PUT');
+    assert.equal(all.status, 200, JSON.stringify(all.data));
+    assert.equal(all.data.profileId, null);
+    assert.equal((await api(`/subjects/${s.data.id}/readings/overview`, { sections: [{ title: 'x', items: [{ layer: 'added', text: 'y' }] }] }, 'PUT')).status, 400);
+    const mine = await api<AiReadingDto[]>(`/subjects/${s.data.id}/readings`);
+    assert.deepEqual(mine.data.map(x => [x.scope, x.profileId, x.sections[0].items[0].text]), [['summary', null, 'Gộp cả ba môn.']]);
+    assert.equal((await api<SubjectDto>(`/subjects/${s.data.id}`)).data.profiles[0].aiReadings, 2);
+    assert.equal((await api(`/ai-readings/${all.data.id}`, undefined, 'DELETE')).status, 204);
+    assert.equal((await api<AiReadingDto[]>(`/subjects/${s.data.id}/readings`)).data.length, 0);
+    assert.equal((await api(`/subjects/${s.data.id}`, undefined, 'DELETE')).status, 204);
+  });
+
   test('Sonic Hub pushes need the sync token', async () => {
     const r = await api('/links/sonic-hub/abc', { name: 'X' }, 'PUT');
     assert.equal(r.status, 403);
@@ -239,13 +294,19 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       const r = await api<NumerologyReadingDto>(`/profiles/${p.data.id}/reading`);
       assert.equal(r.data.chart.ruling, 9);
       const codes = r.data.sections[0].groups.flatMap(g => g.matches.map(m => m.rule));
+      // a passage of the book this chart did not match (how another number reads) may be cited on how it was weighed
+      const other = (await api<NumerologyEntryDto>('/numerology/book/p5.11')).data.sections.flatMap(x => x.passages).find(x => x.rule && !codes.includes(x.rule.code))!.rule!;
       const w = await api<AiReadingDto>(`/profiles/${p.data.id}/readings/synthesis`, {
         viewYear: 2026, caution: 'Chỉ để tham khảo.',
-        sections: [{ title: 'Con số chủ đạo 9', items: [{ layer: 'primary', text: 'Tóm lược.', refs: [codes[0], 'ldqh.b0'] }, { layer: 'primary', text: 'Không dẫn.', refs: [] }, { layer: 'added', text: 'Luận thêm.' }] }],
+        sections: [
+          { title: 'Cách cân', weight: 'intro', items: [{ layer: 'primary', text: 'Theo thứ bậc sách đặt ra.', refs: [other.code] }] },
+          { title: 'Con số chủ đạo 9', weight: 'key', items: [{ layer: 'primary', text: 'Tóm lược.', refs: [codes[0], 'ldqh.b0'] }, { layer: 'primary', text: 'Không dẫn.', refs: [] }, { layer: 'added', text: 'Luận thêm.' }] },
+        ],
       }, 'PUT');
       assert.equal(w.status, 200);
       assert.deepEqual(w.data.dropped, ['ldqh.b0']);
-      assert.deepEqual(w.data.sections[0].items.map(i => i.layer), ['primary', 'added', 'added']);
+      assert.deepEqual(w.data.sections[1].items.map(i => i.layer), ['primary', 'added', 'added']);
+      assert.deepEqual([w.data.sections[0].items[0].layer, w.data.sections[0].items[0].refs[0].src?.kind, w.data.sections[0].items[0].refs[0].src?.paraRef], ['primary', 'book', other.page]);
       assert.equal(w.data.author, 'claude');
       const list = await api<AiReadingDto[]>(`/profiles/${p.data.id}/ai-readings`);
       assert.deepEqual(list.data.map(x => [x.scope, x.stale]), [['synthesis', false]]);

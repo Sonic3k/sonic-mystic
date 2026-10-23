@@ -1,3 +1,4 @@
+import { sql } from 'drizzle-orm';
 import {
   type AnyPgColumn,
   boolean,
@@ -333,11 +334,14 @@ export const numerologyProfileNames = pgTable('numerology_profile_names', {
   primary: boolean('primary').notNull().default(false),
 }, t => [primaryKey({ columns: [t.profileId, t.ordinal] })]);
 
-/** a written reading of a profile — by the app's AI call, or written with Claude and saved here */
+/** a written reading of a profile — by the app's AI call, or written with Claude and saved here — or, with no profile,
+    of the person as a whole (the Nhận định chung, drawn from the readings of all their profiles) */
 export const readings = pgTable('readings', {
   id: uuid('id').primaryKey().defaultRandom(),
-  profileId: uuid('profile_id').notNull().references(() => profiles.id, { onDelete: 'cascade' }),
-  /** tử vi: "overview" · a palace ("Quan Lộc") or "Thân" · "han-2026"; nhân số học: "synthesis" · "year-2026"; chiêm tinh: "synthesis" */
+  profileId: uuid('profile_id').references(() => profiles.id, { onDelete: 'cascade' }),
+  subjectId: uuid('subject_id').notNull().references(() => subjects.id, { onDelete: 'cascade' }),
+  /** tử vi: "overview" · a palace ("Quan Lộc") or "Thân" · "han-2026"; nhân số học: "synthesis" · "year-2026"; chiêm tinh:
+      "synthesis"; any profile: "summary" (its Nhận định, read first). The person (no profile): "summary" */
   scope: text('scope').notNull(),
   viewYear: smallint('view_year').notNull(),
   author: text('author').notNull().default('ai'),
@@ -345,13 +349,21 @@ export const readings = pgTable('readings', {
   inputHash: text('input_hash'),
   caution: text('caution'),
   ...audit,
-}, t => [uniqueIndex('readings_profile_scope_year').on(t.profileId, t.scope, t.viewYear)]);
+}, t => [
+  uniqueIndex('readings_profile_scope_year').on(t.profileId, t.scope, t.viewYear).where(sql`${t.profileId} is not null`),
+  uniqueIndex('readings_subject_scope_year').on(t.subjectId, t.scope, t.viewYear).where(sql`${t.profileId} is null`),
+  index('readings_subject').on(t.subjectId),
+]);
 
 export const readingSections = pgTable('reading_sections', {
   id: serialId(),
   readingId: uuid('reading_id').notNull().references(() => readings.id, { onDelete: 'cascade' }),
   ordinal: smallint('ordinal').notNull(),
   title: text('title').notNull(),
+  /** how much it weighs on the chart (intro | key | normal | current | minor); null in a reading not weighed */
+  weight: text('weight', { enum: ['intro', 'key', 'normal', 'current', 'minor'] }),
+  /** why it weighs that much, a few short phrases */
+  basis: text('basis').array(),
 }, t => [index('reading_sections_reading').on(t.readingId, t.ordinal)]);
 
 /** primary = retells grandma's matched lines and cites them; added = everything else, never passed off as hers */

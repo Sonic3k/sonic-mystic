@@ -11,15 +11,15 @@ import type { AiReadingDto, AstrologyReadingDto, AstrologySectionDto, ProfileDto
 import { api } from '../../api';
 import { Failed } from '../../components/Owner';
 import { ProfilePick } from '../../components/ProfilePick';
-import { ReadingLayout } from '../../components/Reading';
+import { ReadingLayout, SummaryLayout, jump } from '../../components/Reading';
 import { useRememberChart } from '../../components/Shell';
 import { PART_ORDER, PART_TITLE, SAMPLE_LABEL, astroRequest, dm, fromAstroSearch, isSample, offsetText, toAstroSearch } from '../../lib/astro';
 import { useTitle } from '../../lib/text';
 import { AspectsPane, AstroCompanion, AstroGlance, BodyDot, SectionView, TablePane, Wheel, astroHighlighter, astroRoom, astroVoices, said } from './Parts';
 import { AstroProfileSheet, AstroSaveSheet } from './Sheets';
 
-type Tab = 'synthesis' | 'reading' | 'chart' | 'aspects';
-const TABS: [Tab, string][] = [['synthesis', 'Luận giải'], ['reading', 'Theo tài liệu'], ['chart', 'Bảng vị trí'], ['aspects', 'Góc chiếu']];
+type Tab = 'summary' | 'synthesis' | 'reading' | 'chart' | 'aspects';
+const TABS: [Tab, string][] = [['summary', 'Nhận định'], ['synthesis', 'Luận giải'], ['reading', 'Theo tài liệu'], ['chart', 'Bảng vị trí'], ['aspects', 'Góc chiếu']];
 const page = (body: React.ReactNode) => <div className="wrap page as">{body}</div>;
 const wait = (t: string) => page(<div className="card empty tv-wait">{t}</div>);
 
@@ -37,7 +37,7 @@ export function AstroViewPage() {
   if (!reading.data) return wait('Đang lập lá số…');
   return (
     <>
-      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={null} written={null} defTab="reading" approx={!!params.birth.timeApprox}
+      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={null} written={null} summary={null} defTab="reading" approx={!!params.birth.timeApprox}
         title={params.name || 'Lá số chiêm tinh'} tags={isSample(params.birth) ? [SAMPLE_LABEL] : []} gender={params.gender}
         actions={<>
           <Link className="btn" to={back}>Sửa ngày giờ</Link>
@@ -64,10 +64,11 @@ export function AstroProfilePage() {
   if (p && !ok) return page(<div className="card empty tv-wait">Đây không phải hồ sơ chiêm tinh. <Link className="tv-link" to={`/people/${p.subject.id}`}>Mở trang người</Link></div>);
   if (reading.isError) return page(<Failed error={reading.error}>{back}</Failed>);
   if (!p || !reading.data || written.isPending) return wait('Đang mở hồ sơ…');
-  const sum = (written.data ?? []).filter(w => w.scope === 'synthesis').sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0] ?? null;
+  const newest = (scope: string) => (written.data ?? []).filter(w => w.scope === scope).sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0] ?? null;
+  const sum = newest('synthesis'), nd = newest('summary');
   return (
     <>
-      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={p} written={sum} defTab={sum ? 'synthesis' : 'reading'} approx={p.birth.timeApprox}
+      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={p} written={sum} summary={nd} defTab={nd ? 'summary' : sum ? 'synthesis' : 'reading'} approx={p.birth.timeApprox}
         title={p.subject.displayName} tags={[]} gender={p.gender}
         actions={<button type="button" className="btn" onClick={() => setEditing(true)}>Sửa hồ sơ</button>} />
       {editing && <AstroProfileSheet profile={p} onClose={() => setEditing(false)} />}
@@ -81,14 +82,15 @@ const latLon = (lat: number, lon: number) => {
   return `${f(lat)} ${lat >= 0 ? 'Bắc' : 'Nam'}, ${f(lon)} ${lon >= 0 ? 'Đông' : 'Tây'}`;
 };
 
-function ReadingView({ r, sp, setSp, profile, written, defTab, approx, title, tags, gender, actions }: {
+function ReadingView({ r, sp, setSp, profile, written, summary, defTab, approx, title, tags, gender, actions }: {
   r: AstrologyReadingDto; sp: URLSearchParams; setSp: ReturnType<typeof useSearchParams>[1];
-  profile: ProfileDto | null; written: AiReadingDto | null; defTab: Tab; approx: boolean;
+  profile: ProfileDto | null; written: AiReadingDto | null; summary: AiReadingDto | null; defTab: Tab; approx: boolean;
   title: string; tags: string[]; gender: ProfileDto['gender']; actions: React.ReactNode;
 }) {
   const ch = r.chart, i = ch.input;
   useRememberChart('astro', title);
-  const tab = (TABS.some(([k]) => k === sp.get('view')) ? sp.get('view') : defTab) as Tab;
+  const tabs = TABS.filter(([k]) => k !== 'summary' || summary);
+  const tab = (tabs.some(([k]) => k === sp.get('view')) ? sp.get('view') : defTab) as Tab;
   const set = (patch: Record<string, string | null>) => { const n = new URLSearchParams(sp); for (const [k, v] of Object.entries(patch)) { if (v === null) n.delete(k); else n.set(k, v); } setSp(n, { replace: true }); };
   const [hl, setHl] = useState<string | null>(null);
   /* a passage cited by the reading is shown where the sources' tab has it, once that tab has been drawn */
@@ -118,6 +120,11 @@ function ReadingView({ r, sp, setSp, profile, written, defTab, approx, title, ta
   const go = useRef(goTo);
   go.current = goTo;
   const room = useMemo(() => astroRoom(r, hlText, who, code => go.current(code)), [r, hlText, who]);
+  /* from the Nhận định into the Luận giải, at one of its sections or at its top */
+  const readFrom = (i: number | null) => {
+    set({ view: defTab === 'synthesis' ? null : 'synthesis' });
+    setTimeout(() => { if (i === null) document.querySelector('.as-tabs')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); else jump(`s${i}`); }, 60);
+  };
   return (
     <div className="wrap page as">
       <header className="phead">
@@ -135,8 +142,9 @@ function ReadingView({ r, sp, setSp, profile, written, defTab, approx, title, ta
         <AstroGlance ch={ch} />
       </div>
 
-      <nav className="tabs as-tabs" role="tablist" aria-label="Đọc lá số">{TABS.map(([k, t]) => (
+      <nav className="tabs as-tabs" role="tablist" aria-label="Đọc lá số">{tabs.map(([k, t]) => (
         <button key={k} type="button" role="tab" aria-selected={tab === k} className={`tab${tab === k ? ' on' : ''}`} onClick={() => set({ view: k === defTab ? null : k })}>{t}</button>))}</nav>
+      {tab === 'summary' && summary && <SummaryLayout ai={summary} main={written} room={room} sub="Đọc trước: lá số nói gì, bằng lời thường" onRead={readFrom} />}
       {tab === 'synthesis' && (written
         ? <ReadingLayout ai={written} room={room} voices={astroVoices(who)} companion={k => <AstroCompanion ch={ch} s={written.sections[k]} />} />
         : <NoReading r={r} profile={profile} />)}

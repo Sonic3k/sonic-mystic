@@ -29,6 +29,13 @@
       "when": 1792255828023,
       "tag": "0003_english_names",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1792780372062,
+      "tag": "0004_nhan_dinh",
+      "breakpoints": true
     }
   ]
 }

@@ -42,4 +42,11 @@ export function tuviInput(birth: BirthInput, settings: TuViSettings, k: Knowledg
   return { chart, lines, hash: hashOf(`${JSON.stringify(birth)}|${JSON.stringify(settings)}|${scope}|${year}|${lines.map(l => l.ref).join(',')}`) };
 }
 
+/** every line the chart matched, in any scope: the overview, each palace, Thân and the hạn of the year — what a reading
+    of the whole chart (which speaks of every palace and of the year it is read in) may cite */
+export function allTuviLines(birth: BirthInput, settings: TuViSettings, k: Knowledge, year: number): ReadingLine[] {
+  const chart = chartOf(birth, optionsOf(settings, year));
+  return ['overview', 'Thân', ...PALACES, `han-${year}`].flatMap(s => linesFor(chart, k, s, year));
+}
+
 export { chartSummary };

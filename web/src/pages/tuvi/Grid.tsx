@@ -13,7 +13,7 @@ export const MONTH = ['', 'Giêng', 'Hai', 'Ba', 'Tư', 'Năm', 'Sáu', 'Bảy',
 const pad = (n: number) => String(n).padStart(2, '0');
 export const triOf = (b: number) => [b, (b + 4) % 12, (b + 8) % 12, (b + 6) % 12];
 export const Lv = ({ l }: { l?: PlacedStar['level'] }) => (l ? <i className={`lv ${l}`} title={LEVEL_NAME[l]}>{LEVEL_MARK[l]}</i> : null);
-export type TvTab = 'cung' | 'luan' | 'han';
+export type TvTab = 'nhan' | 'cung' | 'luan' | 'han';
 
 export default function Board({ r, name, sel, tab, spot, onSelect }: {
   r: TuViReadingDto; name: string; sel: number; tab: TvTab; spot: number[]; onSelect: (b: number) => void;

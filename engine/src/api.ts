@@ -139,10 +139,42 @@ export interface ProfileDto {
 export interface SonicHubPersonDto { id: string; name: string; displayName: string | null; nickname: string | null; avatarUrl: string | null; isSelf: boolean }
 
 // ── AI readings ──
-export interface AiItemDto { layer: Layer; text: string; refs: { code: string; quoted: string }[] }
-export interface AiSectionDto { title: string; items: AiItemDto[] }
+/**
+ * How much a section of a reading weighs on the chart, by the source's own rules (brightness, Tuần Triệt, dignity, orb,
+ * the book's order of the numbers): intro = how it was weighed; key = what governs the chart; normal = has an effect,
+ * does not govern; current = the period being lived; minor = weakened or too small (one short line each).
+ */
+export type Weight = 'intro' | 'key' | 'normal' | 'current' | 'minor';
+export const WEIGHTS: readonly Weight[] = ['intro', 'key', 'normal', 'current', 'minor'];
+/** where a cited passage stands in its source — sent for every ref, so one the chart did not match (a passage on how to
+    weigh, say) can be shown and linked too */
+export interface RefSourceDto {
+  /** the source's code ("grandma", "astrology.hk", "ldqh"…) and its kind */
+  source: string; kind: SourceKind;
+  /** whose words (chiêm tinh: hk, tierney, woolfolk), the run-in label of the passage */
+  voice: string | null; label: string | null;
+  /** the entry it is under: its code and title, and where it starts in the source (a line of grandma's notes; a page) */
+  entry: string; entryTitle: string; entryRef: number | null;
+  /** where the passage itself is (a line of grandma's notes; a page of a book) */
+  paraRef: number | null;
+}
+export interface AiRefDto { code: string; quoted: string; src: RefSourceDto | null }
+export interface AiItemDto { layer: Layer; text: string; refs: AiRefDto[] }
+export interface AiSectionDto {
+  title: string; items: AiItemDto[];
+  /** null: a reading written before readings were weighed */
+  weight: Weight | null;
+  /** why it weighs what it does ("Triệt ở Mùi chỉ 3 phần", "Vuông AC, lệch 0°17′") */
+  basis: string[];
+}
 export interface AiReadingDto {
-  id: string; profileId: string; scope: string; viewYear: number;
+  id: string;
+  /** the profile it reads; null for one written of the person as a whole (the Nhận định chung) */
+  profileId: string | null;
+  subjectId: string;
+  /** a profile: tử vi "overview", a palace, "Thân", "han-YYYY"; nhân số học, chiêm tinh "synthesis"; any "summary" (the
+      Nhận định, read first). The person: "summary" */
+  scope: string; viewYear: number;
   /** who wrote it: 'ai' (the app's AI call) or 'claude' (written with Claude and saved here) */
   author: string;
   model: string | null; inputHash: string | null;
@@ -156,7 +188,7 @@ export interface AiStatusDto { ai: boolean; model: string }
 /** a reading written elsewhere (with Claude) and saved to a profile: each idea that retells the book cites its passages */
 export interface WrittenReadingInput {
   viewYear?: number; author?: string; model?: string | null; caution?: string | null;
-  sections: { title: string; items: { layer: Layer; text: string; refs?: string[] }[] }[];
+  sections: { title: string; weight?: Weight | null; basis?: string[]; items: { layer: Layer; text: string; refs?: string[] }[] }[];
 }
 
 // ── the brief Sonic Hub keeps beside a person ──

@@ -68,6 +68,8 @@ export const api = {
   updateSubject: (id: string, b: SubjectInput) => call<SubjectDto>('PUT', `/subjects/${id}`, b),
   deleteSubject: (id: string) => call<void>('DELETE', `/subjects/${id}`),
   brief: (id: string, discipline = 'tuvi') => get<BriefDto>(`/subjects/${id}/brief${q({ discipline })}`),
+  /** the readings of the person as a whole (the Nhận định chung) */
+  subjectReadings: (id: string) => get<AiReadingDto[]>(`/subjects/${id}/readings`),
   sonicHubPersons: () => get<SonicHubPersonDto[]>('/links/sonic-hub/persons'),
   linkSonicHub: (personId: string) => call<SubjectDto>('POST', `/links/sonic-hub/${encodeURIComponent(personId)}`),
 
