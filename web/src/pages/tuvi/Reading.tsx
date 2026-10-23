@@ -9,7 +9,7 @@ import type { Chart, Principle } from '@mystic/engine/tuvi';
 import type { AiReadingDto, AiSectionDto, GroupDto, MatchDto, RuleDto, TuViReadingDto } from '@mystic/engine/api';
 import { api } from '../../api';
 import { errorText, needsToken } from '../../components/Owner';
-import { highlight, parseTitle, wordsRe, type RoomReading } from '../../components/Reading';
+import { highlight, parseTitle, sectionText, wordsRe, type RoomReading } from '../../components/Reading';
 
 export const TONE_NAME = { cat: 'tốt', hung: 'xấu', mixed: 'tốt xấu lẫn', trung: 'mô tả' } as const;
 export type ToneFilter = 'all' | 'cat' | 'hung';
@@ -130,23 +130,24 @@ export function Supplement({ title = 'Bổ sung, không phải lời bà', about
 
 // ── written readings ──
 
-/** which palaces (branches) a section of a reading speaks of, from its title */
+/** which palaces (branches) a section of a reading speaks of, from its title and why it weighs what it does — in the
+    order they are named */
 export function sectionPalaces(s: AiSectionDto, r: TuViReadingDto): number[] {
-  const t = s.title, out = new Set<number>();
+  const t = sectionText(s), found: [number, number][] = [];
   const byRole = (role: string) => r.chart.palaces.find(p => p.role === role)?.branch;
-  for (const role of Object.keys(ROLE_HZ)) if (new RegExp(`(?<![\\p{L}])${role}(?![\\p{L}])`, 'u').test(t)) { const b = byRole(role); if (b !== undefined) out.add(b); }
-  const add = (role: string) => { const b = byRole(role); if (b !== undefined) out.add(b); };
-  if (/Tài lộc/.test(t)) add('Tài Bạch');
-  if (/Hôn nhân/.test(t)) add('Phu Thê');
-  if (/Thân cư/.test(t)) out.add(r.chart.than);
-  const y = /năm (\d{4})/.exec(t);
-  if (y && Number(y[1]) === r.han.year) { if (r.han.dai) out.add(r.han.dai.branch); out.add(r.han.tieu.branch); }
-  return [...out];
+  const add = (at: number, b: number | undefined) => { if (b !== undefined && at >= 0) found.push([at, b]); };
+  for (const role of Object.keys(ROLE_HZ)) add(t.search(new RegExp(`(?<![\\p{L}])${role}(?![\\p{L}])`, 'u')), byRole(role));
+  add(t.search(/Tài lộc/), byRole('Tài Bạch'));
+  add(t.search(/Hôn nhân/), byRole('Phu Thê'));
+  add(t.search(/Thân cư/), r.chart.than);
+  const y = /năm (\d{4})/i.exec(t);
+  if (y && Number(y[1]) === r.han.year) { if (r.han.dai) add(y.index, r.han.dai.branch); add(y.index, r.han.tieu.branch); }
+  return [...new Set(found.sort((a, b) => a[0] - b[0]).map(x => x[1]))];
 }
 
-/** a section's seal: 運 for the year, the palace's own (命, 財, 妻…), 身 for Thân, 論 otherwise */
+/** a section's seal: 運 for the year and the period being lived, 身 for Thân, the palace's own (命, 財, 妻…), 論 otherwise */
 export function tvSealOf(s: AiSectionDto, r: TuViReadingDto): { c: string; k: string } {
-  if (/năm \d{4}/.test(s.title)) return { c: '運', k: 'kim' };
+  if (/năm \d{4}/i.test(s.title) || s.weight === 'current') return { c: '運', k: 'kim' };
   if (/Thân cư/.test(s.title)) return { c: '身', k: '' };
   const p = r.chart.palaces[sectionPalaces(s, r)[0] ?? -1];
   return { c: (p && ROLE_SEAL[p.role]) ?? '論', k: '' };
@@ -158,14 +159,19 @@ export function tuviRoom(r: TuViReadingDto, hl: (t: string) => React.ReactNode, 
     emblem: (s, _t, _added, small) => { const { c, k } = tvSealOf(s, r); return <Seal c={c} k={`${k}${small ? '' : ' lg'}`} s={small ? 26 : undefined} />; },
     srcLabel: refs => `${refs.length} câu của bà`,
     srcList: refs => refs.map(x => {
-      const rule = r.rules[x.code], href = rule ? ruleHref(rule) : null;
+      /* a line the chart matched is read from the reading's rules; one on how a chart is weighed (Tuần Triệt…), from
+         where it stands in her notes */
+      const rule = r.rules[x.code], at = rule ?? (x.src ? { entryRef: x.src.entryRef, paraRef: x.src.paraRef } : null);
+      const href = at ? ruleHref(at) : null, para = at?.paraRef ?? null;
+      const own = rule ? rule.source !== 'supplement' : x.src?.kind !== 'supplement';
       return (
         <blockquote key={x.code}>{hl(rule?.text ?? x.quoted)}
-          <cite>{rule?.source === 'supplement' ? 'Bổ sung' : 'Lời bà'}{rule?.paraRef != null && <>, {href ? <Link to={href}>đoạn {rule.paraRef}</Link> : `đoạn ${rule.paraRef}`}</>}
+          <cite>{own ? 'Lời bà' : 'Bổ sung'}{!rule && x.src && ` · ${starCase(x.src.entryTitle)}`}{para != null && <>, {href ? <Link to={href}>đoạn {para}</Link> : `đoạn ${para}`}</>}
             {rule?.tone === 'cat' ? ' · câu tốt' : rule?.tone === 'hung' ? ' · câu xấu' : ''}</cite></blockquote>
       );
     }),
     added: <><ChuSeal c="論" />Luận thêm, không phải lời bà</>,
+    current: ['Vận đang đi', 'đại hạn và năm hiện tại'],
     keyChip: (k, i) => { const t = tones[k]; return <span key={i} className={`key ${t === 'chinh' ? 'st-m' : t === 'cat' ? 'st-c' : t === 'hung' ? 'st-h' : ''}`}>{k}</span>; },
   };
 }

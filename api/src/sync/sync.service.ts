@@ -2,7 +2,7 @@
    the added ones (grandma's notes for Tử vi, the book for Nhân số học). Every change queues a send in the outbox; a
    background loop delivers it and retries until Sonic Hub has it. */
 import { Inject, Injectable, Logger, type OnModuleDestroy, type OnModuleInit } from '@nestjs/common';
-import { and, asc, desc, eq, isNull, lte, sql } from 'drizzle-orm';
+import { and, asc, desc, eq, isNull, lte, notInArray, or, sql } from 'drizzle-orm';
 import { BRANCHES, STEMS, canChiName, readView } from '@mystic/engine/tuvi';
 import { ARROW_BY_CODE, label, readNumerology } from '@mystic/engine/numerology';
 import type { BriefDto } from '@mystic/engine/api';
@@ -23,6 +23,8 @@ const dmy = (iso: string) => { const [y, m, d] = iso.split('-').map(Number); ret
 const GIO_SPAN = (b: number) => (b === 0 ? '23–1 giờ' : `${2 * b - 1}–${2 * b + 1} giờ`);
 const LEVEL = { M: 'miếu', V: 'vượng', D: 'đắc', B: 'bình', H: 'hãm' } as const;
 const thisYear = () => new Date().getFullYear();
+/** the sections of a reading a brief quotes from: not the note on how it was weighed, nor what weighs little */
+const quoted = or(isNull(readingSections.weight), notInArray(readingSections.weight, ['intro', 'minor']));
 
 @Injectable()
 export class SyncService implements OnModuleInit, OnModuleDestroy {
@@ -129,7 +131,7 @@ export class SyncService implements OnModuleInit, OnModuleDestroy {
     const [ai] = await this.db.select({ id: readings.id, updatedAt: readings.updatedAt }).from(readings).where(and(eq(readings.profileId, p.id), eq(readings.scope, 'overview'))).orderBy(desc(readings.updatedAt)).limit(1);
     if (ai) {
       const items = await this.db.select({ layer: readingItems.layer, text: readingItems.text, s: readingSections.ordinal, o: readingItems.ordinal }).from(readingItems)
-        .innerJoin(readingSections, eq(readingSections.id, readingItems.sectionId)).where(eq(readingSections.readingId, ai.id)).orderBy(asc(readingSections.ordinal), asc(readingItems.ordinal));
+        .innerJoin(readingSections, eq(readingSections.id, readingItems.sectionId)).where(and(eq(readingSections.readingId, ai.id), quoted)).orderBy(asc(readingSections.ordinal), asc(readingItems.ordinal));
       for (const it of items.filter(i => i.layer === 'primary').slice(0, 3)) lines.push({ layer: 'primary', text: it.text, source: 'Tóm lược lời bà' });
       const added = items.find(i => i.layer === 'added');
       if (added) lines.push({ layer: 'added', text: added.text, source: 'AI luận thêm — không phải lời bà' });
@@ -169,7 +171,7 @@ export class SyncService implements OnModuleInit, OnModuleDestroy {
     const [w] = await this.db.select({ id: readings.id, author: readings.author, updatedAt: readings.updatedAt }).from(readings).where(and(eq(readings.profileId, p.id), eq(readings.scope, 'synthesis'))).orderBy(desc(readings.updatedAt)).limit(1);
     if (w) {
       const items = await this.db.select({ layer: readingItems.layer, text: readingItems.text }).from(readingItems)
-        .innerJoin(readingSections, eq(readingSections.id, readingItems.sectionId)).where(eq(readingSections.readingId, w.id)).orderBy(asc(readingSections.ordinal), asc(readingItems.ordinal));
+        .innerJoin(readingSections, eq(readingSections.id, readingItems.sectionId)).where(and(eq(readingSections.readingId, w.id), quoted)).orderBy(asc(readingSections.ordinal), asc(readingItems.ordinal));
       for (const it of items.filter(x => x.layer === 'primary').slice(0, 3)) lines.push({ layer: 'primary', text: it.text, source: 'Tóm lược tài liệu chiêm tinh (cô Hương Kiều, Tierney, Woolfolk)' });
       const added = items.find(x => x.layer === 'added');
       if (added) lines.push({ layer: 'added', text: added.text, source: `${w.author === 'ai' ? 'AI' : 'Claude'} luận thêm — không phải lời cô` });
@@ -214,7 +216,7 @@ export class SyncService implements OnModuleInit, OnModuleDestroy {
     const [w] = await this.db.select({ id: readings.id, author: readings.author, updatedAt: readings.updatedAt }).from(readings).where(and(eq(readings.profileId, p.id), eq(readings.scope, 'synthesis'))).orderBy(desc(readings.updatedAt)).limit(1);
     if (w) {
       const items = await this.db.select({ layer: readingItems.layer, text: readingItems.text }).from(readingItems)
-        .innerJoin(readingSections, eq(readingSections.id, readingItems.sectionId)).where(eq(readingSections.readingId, w.id)).orderBy(asc(readingSections.ordinal), asc(readingItems.ordinal));
+        .innerJoin(readingSections, eq(readingSections.id, readingItems.sectionId)).where(and(eq(readingSections.readingId, w.id), quoted)).orderBy(asc(readingSections.ordinal), asc(readingItems.ordinal));
       for (const it of items.filter(i => i.layer === 'primary').slice(0, 3)) lines.push({ layer: 'primary', text: it.text, source: 'Tóm lược sách Nhân số học (Lê Đỗ Quỳnh Hương)' });
       const added = items.find(i => i.layer === 'added');
       if (added) lines.push({ layer: 'added', text: added.text, source: `${w.author === 'ai' ? 'AI' : 'Claude'} luận thêm — không phải lời sách` });

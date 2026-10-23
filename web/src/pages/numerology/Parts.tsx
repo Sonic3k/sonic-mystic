@@ -191,12 +191,13 @@ export function numHighlighter() {
 export function nsParse(s: AiSectionDto, c: NumerologyChart, primary: number | null) {
   const t = s.title;
   let m: RegExpExecArray | null;
-  if ((m = /Con số chủ đạo (\d+)/.exec(t))) return { kind: 'circle', n: +m[1], topic: 'ruling' } as const;
-  if ((m = /Con số ngày sinh (\d+)/.exec(t))) return { kind: 'square', n: +m[1], topic: 'birthday' } as const;
+  if ((m = /(?:Con s|S)ố chủ đạo (\d+)/.exec(t))) return { kind: 'circle', n: +m[1], topic: 'ruling' } as const;
+  if ((m = /(?:Con s|S)ố ngày sinh (\d+)/.exec(t))) return { kind: 'square', n: +m[1], topic: 'birthday' } as const;
   if (/Biểu đồ/.test(t)) return { kind: 'grid', n: 0, topic: 'grid' } as const;
   if (/mũi tên/i.test(t) && !/^Tên/.test(t)) return { kind: 'arrow', n: 0, topic: 'arrows' } as const;
   if (/^Tên /.test(t)) return { kind: 'square', n: (primary !== null ? c.names[primary]?.nameNumber : null) ?? 0, topic: 'name' } as const;
-  if ((m = /năm cá nhân (\d+)/.exec(t))) return { kind: 'tri', n: +m[1], topic: 'time' } as const;
+  if ((m = /năm cá nhân (\d+)/i.exec(t))) return { kind: 'tri', n: +m[1], topic: 'time' } as const;
+  if ((m = /^Đỉnh (?:thứ \S+|\d)[^:]*? số (\d+)/.exec(t))) return { kind: 'tri', n: +m[1], topic: 'time' } as const;
   if (/Luận thêm/.test(t)) return { kind: 'add', n: 0, topic: 'added' } as const;
   return { kind: 'square', n: 0, topic: '' } as const;
 }
@@ -211,16 +212,21 @@ export function NsEmblem({ s, c, primary }: { s: AiSectionDto; c: NumerologyChar
   return <span className="ns-em add"><svg viewBox="0 0 50 50" aria-hidden="true"><circle className="s" cx="25" cy="25" r="18" /><path className="s" d="M25 16v18M16 25h18" /></svg></span>;
 }
 
-export function numRoom(r: NumerologyReadingDto, hl: (t: string) => React.ReactNode, who: string, primary: number | null, goTo: (code: string) => void): RoomReading {
+export function numRoom(r: NumerologyReadingDto, hl: (t: string) => React.ReactNode, who: string, primary: number | null, goTo: (code: string) => void, toc?: NumerologyTocEntryDto[]): RoomReading {
+  const pageOf = (x: Ref) => (r.rules[x.code] ? r.rules[x.code].page : x.src?.paraRef ?? null);
   return {
     hl,
     emblem: s => <NsEmblem s={s} c={r.chart} primary={primary} />,
-    srcLabel: refs => { const pages = [...new Set(refs.map(x => r.rules[x.code]?.page).filter((p): p is number => p != null))].sort((a, b) => a - b); return `${refs.length} đoạn sách${pages.length ? `, tr. ${pages.join(', ')}` : ''}`; },
+    srcLabel: refs => { const pages = [...new Set(refs.map(x => pageOf(x)).filter((p): p is number => p != null))].sort((a, b) => a - b); return `${refs.length} đoạn sách${pages.length ? `, tr. ${pages.join(', ')}` : ''}`; },
     srcList: (refs: Ref[]) => refs.map(x => {
-      const rule = r.rules[x.code];
-      return <blockquote key={x.code}>{rule?.text ?? x.quoted}<cite>Sách{rule?.page != null ? `, trang ${rule.page}` : ''}{rule ? <button type="button" onClick={() => goTo(x.code)}>xem trong bài đọc theo sách ›</button> : ' · đoạn này không có trong bài đọc đang xem'}</cite></blockquote>;
+      /* a passage the chart matched is read in the book's reading; one on how the numbers are weighed, in the book */
+      const rule = r.rules[x.code], page = pageOf(x);
+      return <blockquote key={x.code}>{rule?.text ?? x.quoted}<cite>Sách{page != null ? `, trang ${page}` : ''}
+        {rule ? <button type="button" onClick={() => goTo(x.code)}>xem trong bài đọc theo sách ›</button>
+          : x.src ? <Link to={`/numerology/books/${unitOf(x.src.entry, toc)}?rule=${encodeURIComponent(x.code)}`}>đọc trong sách ›</Link> : ' · đoạn này không có trong bài đọc đang xem'}</cite></blockquote>;
     }),
     added: <><span style={{ fontWeight: 700 }}>+</span> Luận thêm của {who}, không phải lời sách</>,
+    current: ['Thời vận', 'đỉnh cao và năm cá nhân hiện tại'],
   };
 }
 

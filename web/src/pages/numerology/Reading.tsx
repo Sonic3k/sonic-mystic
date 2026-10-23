@@ -11,15 +11,15 @@ import type { AiReadingDto, NumerologyReadingDto, NumerologySectionDto, Numerolo
 import { api } from '../../api';
 import { Failed } from '../../components/Owner';
 import { ProfilePick } from '../../components/ProfilePick';
-import { ReadingLayout, jump } from '../../components/Reading';
+import { ReadingLayout, SummaryLayout, jump } from '../../components/Reading';
 import { useRememberChart } from '../../components/Shell';
 import { dmy, fromNumerologySearch, numerologyRequest, toNumerologySearch, withPrimary, type NumerologyParams } from '../../lib/numerology';
 import { useTitle } from '../../lib/text';
 import { BookBlock, GridFig, L, NameFig, NsCompanion, PyramidFig, Ruling, STAGE, Tri, YearsFig, numHighlighter, numRoom } from './Parts';
 import { NamesSheet, ProfileSheet, SaveSheet } from './Sheets';
 
-type Tab = 'synthesis' | 'traits' | 'time';
-const TABS: [Tab, string][] = [['synthesis', 'Luận giải'], ['traits', 'Theo sách'], ['time', 'Thời vận']];
+type Tab = 'summary' | 'synthesis' | 'traits' | 'time';
+const TABS: [Tab, string][] = [['summary', 'Nhận định'], ['synthesis', 'Luận giải'], ['traits', 'Theo sách'], ['time', 'Thời vận']];
 export const useNumerologyBook = () => useQuery({ queryKey: ['numerology-book'], queryFn: api.numerologyBook, staleTime: 600_000, retry: false });
 const UTC8 = 'Đổi ngày âm ra dương lịch theo lịch tính cho UTC+8, lịch dùng trước năm 1968 (ở miền Nam đến 1975).';
 const lunarOf = (b: { calendar: string; day: number | null; month: number | null; year: number | null; leapMonth?: boolean }) =>
@@ -49,7 +49,7 @@ export function NumerologyViewPage() {
   };
   return (
     <>
-      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={null} written={null} defTab="traits"
+      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={null} written={null} summary={null} defTab="traits"
         title={params.names.find(n => n.primary)?.text || params.full || 'Các con số'} full={params.full} gender={params.gender} lunar={lunarOf(params.birth)}
         onName={i => set({ names: withPrimary(params.names, i) })} onYear={y => set({ viewYear: y })}
         actions={<>
@@ -83,11 +83,12 @@ export function NumerologyProfilePage() {
   if (!p || !reading.data || written.isPending) return wait('Đang mở hồ sơ…');
   const set = (k: string, v: string | null) => { const n = new URLSearchParams(sp); if (v === null) n.delete(k); else n.set(k, v); setSp(n, { replace: true }); };
   const primary = Math.max(0, (p.names ?? []).findIndex(n => n.primary));
-  const sum = (written.data ?? []).filter(w => w.scope === 'synthesis').sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0] ?? null;
+  const newest = (scope: string) => (written.data ?? []).filter(w => w.scope === scope).sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0] ?? null;
+  const sum = newest('synthesis'), nd = newest('summary');
   const read = reading.data.name ?? primary;
   return (
     <>
-      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={p} written={sum} primary={primary} defTab={sum ? 'synthesis' : 'traits'}
+      <ReadingView r={reading.data} sp={sp} setSp={setSp} profile={p} written={sum} summary={nd} primary={primary} defTab={nd ? 'summary' : sum ? 'synthesis' : 'traits'}
         title={p.names?.[read]?.text ?? p.subject.displayName} full={p.subject.displayName} gender={p.gender} lunar={lunarOf(p.birth)}
         onName={i => set('name', i === primary ? null : String(i))} onYear={y => set('year', y ? String(y) : null)}
         actions={<>
@@ -100,16 +101,17 @@ export function NumerologyProfilePage() {
   );
 }
 
-function ReadingView({ r, sp, setSp, profile, written, primary = 0, defTab, title, full, gender, lunar, onName, onYear, actions }: {
+function ReadingView({ r, sp, setSp, profile, written, summary, primary = 0, defTab, title, full, gender, lunar, onName, onYear, actions }: {
   r: NumerologyReadingDto; sp: URLSearchParams; setSp: ReturnType<typeof useSearchParams>[1];
-  profile: ProfileDto | null; written: AiReadingDto | null; primary?: number; defTab: Tab;
+  profile: ProfileDto | null; written: AiReadingDto | null; summary: AiReadingDto | null; primary?: number; defTab: Tab;
   title: string; full: string; gender: ProfileDto['gender']; lunar: string | null;
   onName: (i: number) => void; onYear: (y: number | null) => void; actions: React.ReactNode;
 }) {
   const toc = useNumerologyBook().data?.toc;
   const c = r.chart;
   useRememberChart('num', title);
-  const tab = (TABS.some(([k]) => k === sp.get('view')) ? sp.get('view') : defTab) as Tab;
+  const tabs = TABS.filter(([k]) => k !== 'summary' || summary);
+  const tab = (tabs.some(([k]) => k === sp.get('view')) ? sp.get('view') : defTab) as Tab;
   const set = (patch: Record<string, string | null>) => { const n = new URLSearchParams(sp); for (const [k, v] of Object.entries(patch)) { if (v === null) n.delete(k); else n.set(k, v); } setSp(n, { replace: true }); };
   const [hl, setHl] = useState<string | null>(null);
   /* a passage cited by the reading is shown where its tab has it, once that tab has been drawn */
@@ -142,7 +144,12 @@ function ReadingView({ r, sp, setSp, profile, written, primary = 0, defTab, titl
   /* the reading's sources call the newest goTo (it builds on the address as it is now) */
   const go = useRef(goTo);
   go.current = goTo;
-  const room = useMemo(() => numRoom(r, hlText, who, primary, code => go.current(code)), [r, hlText, who, primary]);
+  const room = useMemo(() => numRoom(r, hlText, who, primary, code => go.current(code), toc), [r, hlText, who, primary, toc]);
+  /* from the Nhận định into the Luận giải, at one of its sections or at its top */
+  const readFrom = (i: number | null) => {
+    set({ view: defTab === 'synthesis' ? null : 'synthesis' });
+    setTimeout(() => { if (i === null) document.querySelector('.ns-tabs')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); else jump(`s${i}`); }, 60);
+  };
   const birth = `${g ? `${g}, ` : ''}sinh ngày ${c.input.day}/${c.input.month}/${c.input.year} (dương lịch${r.solar.fromLunar && lunar ? `, đổi từ ${lunar} âm lịch` : ''}).`;
   const names = c.names.map(n => `${n.text}${n.label && n.label !== n.text ? ` (${n.label.toLowerCase()})` : ''}`).join(', ');
   const mode: 'birth' | 'name' = sp.get('board') === 'name' ? 'name' : 'birth';
@@ -171,8 +178,9 @@ function ReadingView({ r, sp, setSp, profile, written, primary = 0, defTab, titl
         </div>
       </div>
 
-      <nav className="tabs ns-tabs" role="tablist" aria-label="Phần đọc">{TABS.map(([k, t]) => (
+      <nav className="tabs ns-tabs" role="tablist" aria-label="Phần đọc">{tabs.map(([k, t]) => (
         <button key={k} type="button" role="tab" aria-selected={tab === k} className={`tab${tab === k ? ' on' : ''}`} onClick={() => set({ view: k === defTab ? null : k })}>{t}</button>))}</nav>
+      {tab === 'summary' && summary && <SummaryLayout ai={summary} main={written} room={room} sub="Đọc trước: các con số nói gì, bằng lời thường" onRead={readFrom} />}
       {tab === 'synthesis' && (written
         ? <ReadingLayout ai={written} room={room} fresh="còn khớp với hồ sơ" old="hồ sơ đã đổi từ khi viết, nên viết lại"
             voices={<><span><i className="vc" style={{ background: '#151515' }} />Tóm lược lời sách</span><span><i className="vc" style={{ background: 'var(--blue)' }} />{who} luận thêm</span></>}

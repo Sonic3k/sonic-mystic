@@ -2,7 +2,7 @@
    grandma's sentences star by star, the written reading (Luận giải), or the year with its hạn. The API sets up and
    reads the chart; this page only shows it. Opened from a link (/tu-vi/chart?…) or a saved profile (/tu-vi/profile/:id).
    Where one is: ?view=overview (Luận giải) | han (the year), ?cung=<palace>, ?year=, ?variant=grandma|books. */
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { BRANCHES, STEMS, VIEWS, khongWeight, type Principle, type View } from '@mystic/engine/tuvi';
@@ -11,7 +11,7 @@ import { api } from '../../api';
 import { Failed, errorText } from '../../components/Owner';
 import { ProfilePick } from '../../components/ProfilePick';
 import { useRememberChart } from '../../components/Shell';
-import { Byline, Section, jump, parseTitle, useSpy, type RoomReading } from '../../components/Reading';
+import { Byline, KeyLinks, ReadingArticle, Section, SummaryText, jump, keysOf, parseTitle, useSpy, weighOf, weighedGroups, type RoomReading } from '../../components/Reading';
 import { Sheet } from '../../components/Sheet';
 import { birthDtoOf, fromProfile, fromSearch, HOURS, settingsOf, thisYear, toSearch, tuviSettings, type ChartParams } from '../../lib/params';
 import { SONIC_HUB } from '../../lib/people';
@@ -81,7 +81,6 @@ function ChartView({ r, params, profile, year, loading, sp, setSp }: {
     for (const [k, v] of Object.entries(patch)) { if (v === null || v === '') n.delete(k); else n.set(k, v); }
     setSp(n, { replace: true });
   };
-  const tab: TvTab = sp.get('view') === 'overview' ? 'luan' : sp.get('view') === 'han' ? 'han' : 'cung';
   const view = (VIEWS.includes(sp.get('cung') as View) ? sp.get('cung') : 'Mệnh') as View;
   const sel = view === 'Thân' ? chart.than : r.views[view].branch;
   const [sheet, setSheet] = useState<'save' | 'edit' | null>(null);
@@ -94,17 +93,25 @@ function ChartView({ r, params, profile, year, loading, sp, setSp }: {
   const profileId = profile?.id ?? null;
   const ai = useAiReadings(profileId);
   const overview = readingOf(ai.list, 'overview', year);
+  const summary = readingOf(ai.list, 'summary', year);
+  /* the Nhận định is read first, when there is one: a saved profile opens on it unless a palace or a tab is asked for */
+  const v = sp.get('view');
+  const tab: TvTab = v === 'overview' ? 'luan' : v === 'han' ? 'han' : v === 'summary' && summary ? 'nhan'
+    : v === 'cung' || sp.has('cung') || !summary ? 'cung' : 'nhan';
+  const deciding = !!profileId && ai.stored.isPending && !v && !sp.has('cung');
   const savedVariant = profile ? tuviSettings(profile).variant : undefined;
   const spotPalaces = tab === 'luan' && overview && spot >= 0 && overview.sections[spot] ? sectionPalaces(overview.sections[spot], r) : [];
 
   const toPanel = () => requestAnimationFrame(() => panel.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   const pick = (b: number) => {
     const role = chart.palaces[b].role;
-    set({ view: null, cung: role === 'Mệnh' ? null : role });
+    set({ view: summary ? 'cung' : null, cung: role === 'Mệnh' ? null : role });
     if (window.innerWidth < 1180) toPanel();
   };
-  const goTab = (t: TvTab, scroll = false) => { set({ view: t === 'luan' ? 'overview' : t === 'han' ? 'han' : null }); if (scroll) toPanel(); };
+  const viewOf = (t: TvTab) => (t === 'luan' ? 'overview' : t === 'han' ? 'han' : t === 'nhan' ? (sp.has('cung') ? 'summary' : null) : summary ? 'cung' : null);
+  const goTab = (t: TvTab, scroll = false) => { set({ view: viewOf(t) }); if (scroll) toPanel(); };
   const read = (i: number) => { setReadAt(i); goTab('luan'); };
+  const readFrom = (i: number | null) => { if (i === null) goTab('luan', true); else read(i); };
   const setVariant = (v: 'grandma' | 'books') => set({ variant: profile ? (v === savedVariant ? null : v) : v === 'grandma' ? null : 'books' });
   const homeYear = profile?.viewYear ?? thisYear();
   const setYear = (y: number) => set({ year: y === homeYear ? null : String(y) });
@@ -115,7 +122,7 @@ function ChartView({ r, params, profile, year, loading, sp, setSp }: {
   const birth = i.calendar === 'solar'
     ? `${g}, sinh ngày ${i.day}/${i.month}/${i.year} lúc ${pad(i.hour)}:${pad(i.minute ?? 0)}${b?.timeApprox ? ' (giờ ước chừng)' : ''}${b?.place ? ` tại ${b.place}` : ''}. Âm lịch ${lunarLine}.`
     : `${g}, sinh ${lunarLine} âm lịch${b?.timeApprox ? ' (giờ ước chừng)' : ''}${b?.place ? `, tại ${b.place}` : ''}. Dương lịch ${chart.solar[0]}/${chart.solar[1]}/${chart.solar[2]}.`;
-  const tabs: [TvTab, string][] = [['cung', `Cung ${chart.palaces[sel].role}`], ['luan', 'Luận giải'], ['han', `Năm ${H.year}`]];
+  const tabs: [TvTab, string][] = [...(summary ? [['nhan', 'Nhận định'] as [TvTab, string]] : []), ['cung', `Cung ${chart.palaces[sel].role}`], ['luan', 'Luận giải'], ['han', `Năm ${H.year}`]];
 
   return (
     <HlContext.Provider value={hl}>
@@ -148,11 +155,13 @@ function ChartView({ r, params, profile, year, loading, sp, setSp }: {
           <Board r={r} name={params.name} sel={sel} tab={tab} spot={spotPalaces} onSelect={pick} />
           <section className="tv-panel" ref={panel} id="doc">
             <nav className="tabs" role="tablist" aria-label="Đọc lá số">{tabs.map(([k, n]) => (
-              <button key={k} type="button" role="tab" aria-selected={tab === k} className={`tab${tab === k ? ' on' : ''}`} onClick={() => goTab(k)}>{n}</button>))}</nav>
+              <button key={k} type="button" role="tab" aria-selected={!deciding && tab === k} className={`tab${!deciding && tab === k ? ' on' : ''}`} onClick={() => goTab(k)}>{n}</button>))}</nav>
             <div className="pane">
-              {tab === 'cung' && <PalacePane r={r} sel={sel} tones={tones} year={year} profileId={profileId} list={ai.list} overview={overview} onRead={read} />}
-              {tab === 'luan' && <LuanPane r={r} room={room} overview={overview} year={year} profileId={profileId} onSpot={setSpot} readAt={readAt} onRead={() => setReadAt(null)} />}
-              {tab === 'han' && <HanPane r={r} room={room} tones={tones} year={year} homeYear={homeYear} loading={loading} setYear={setYear} onPalace={pick}
+              {deciding && <p className="tv-muted">Đang mở…</p>}
+              {!deciding && tab === 'nhan' && summary && <NhanPane r={r} room={room} summary={summary} overview={overview} onRead={readFrom} />}
+              {!deciding && tab === 'cung' && <PalacePane r={r} sel={sel} tones={tones} year={year} profileId={profileId} list={ai.list} overview={overview} onRead={read} />}
+              {!deciding && tab === 'luan' && <LuanPane r={r} room={room} overview={overview} year={year} profileId={profileId} onSpot={setSpot} readAt={readAt} onRead={() => setReadAt(null)} />}
+              {!deciding && tab === 'han' && <HanPane r={r} room={room} tones={tones} year={year} homeYear={homeYear} loading={loading} setYear={setYear} onPalace={pick}
                 profileId={profileId} list={ai.list} overview={overview} />}
             </div>
           </section>
@@ -269,7 +278,41 @@ function PaneReading({ ai, r, idp, title }: { ai: AiReadingDto; r: TuViReadingDt
     <div className="pane-rd">
       <div className="gm-head"><Seal c="論" k="chu" s={30} /><h3>{title}</h3></div>
       <Byline ai={ai} />
-      <article className="rd">{ai.sections.map((s, i) => <Section key={i} s={s} i={i} room={room} idp={idp} />)}{ai.caution && <p className="caution">{ai.caution}</p>}</article>
+      <article className="rd"><ReadingArticle ai={ai} room={room} idp={idp} />{ai.caution && <p className="caution">{ai.caution}</p>}</article>
+    </div>
+  );
+}
+
+// ── the Nhận định ──
+
+/** the chart in plain words, read first; under it, the parts of the Luận giải it was drawn from (the panel is narrow) */
+function NhanPane({ r, room, summary, overview, onRead }: {
+  r: TuViReadingDto; room: RoomReading; summary: AiReadingDto; overview: AiReadingDto | undefined; onRead: (i: number | null) => void;
+}) {
+  return (
+    <div className="nd tv-nd">
+      <div className="nd-main"><SummaryText ai={summary} hl={room.hl} sub="Đọc trước: lá số nói gì, bằng lời thường" /></div>
+      <div className="nd-aside">
+        {keysOf(overview).length > 0 && <><h4>Rút ra từ những trọng điểm này</h4>
+          <div className="tv-mini-toc"><KeyLinks ai={overview} room={room} onRead={onRead} emblem={s => { const { c, k } = tvSealOf(s, r); return <Seal c={c} k={k} />; }} /></div></>}
+        {overview && <button type="button" className="go" onClick={() => onRead(null)}>Đọc Luận giải ›</button>}
+      </div>
+    </div>
+  );
+}
+
+/** the Luận giải's contents as chips: by weight when it is weighed, what weighs little as one chip at the end */
+function TvMiniToc({ ai, r, room, spot }: { ai: AiReadingDto; r: TuViReadingDto; room: RoomReading; spot: number }) {
+  const chip = (i: number) => {
+    const s = ai.sections[i], { c, k } = tvSealOf(s, r);
+    return <a key={i} href={`#s${i}`} className={i === spot ? 'on' : ''} onClick={e => { e.preventDefault(); jump(`s${i}`); }}><Seal c={c} k={k} />{parseTitle(s.title).subj}</a>;
+  };
+  const w = weighOf(ai);
+  if (!w) return <div className="tv-mini-toc">{ai.sections.map((_, i) => chip(i))}</div>;
+  return (
+    <div className="tv-mini-toc wt-mini">
+      {weighedGroups(w, room).map(x => <Fragment key={x.g}><div className={`toc-g w-${x.g}`}>{x.name}</div>{x.idx.map(chip)}</Fragment>)}
+      {w.minor.length > 0 && <a href="#s-minor" className={w.minor.includes(spot) ? 'on' : ''} onClick={e => { e.preventDefault(); jump('s-minor'); }}><span className="wt-dash">–</span>Ít tác dụng ({w.minor.length})</a>}
     </div>
   );
 }
@@ -302,11 +345,8 @@ function LuanPane({ r, room, overview, year, profileId, onSpot, readAt, onRead }
     <div ref={box}>
       <Byline ai={overview} />
       <TuviVoices />
-      <div className="tv-mini-toc">{overview.sections.map((s, i) => {
-        const { c, k } = tvSealOf(s, r);
-        return <a key={i} href={`#s${i}`} className={i === spot ? 'on' : ''} onClick={e => { e.preventDefault(); jump(`s${i}`); }}><Seal c={c} k={k} />{parseTitle(s.title).subj}</a>;
-      })}</div>
-      <article className="rd">{overview.sections.map((s, i) => <Section key={i} s={s} i={i} room={room} />)}{overview.caution && <p className="caution">{overview.caution}</p>}</article>
+      <TvMiniToc ai={overview} r={r} room={room} spot={spot} />
+      <article className="rd"><ReadingArticle ai={overview} room={room} />{overview.caution && <p className="caution">{overview.caution}</p>}</article>
       <Supplement title="Cách đọc lá số" principles={general} />
       <AiWriter profileId={profileId} scope="overview" year={year} grandmaLines={lines} mine={overview} what="cả lá số" />
     </div>
@@ -323,7 +363,7 @@ function HanPane({ r, room, tones, year, homeYear, loading, setYear, onPalace, p
   const order = [...chart.palaces].sort((a, b) => a.daiHan[0] - b.daiHan[0]);
   const tieu = chart.palaces[H.tieu.branch], dai = H.dai ? chart.palaces[H.dai.branch] : null;
   const mine = readingOf(list, `han-${H.year}`, H.year);
-  const yearSec = overview?.sections.map((s, i) => ({ s, i })).find(({ s }) => s.title.includes(`năm ${H.year}`));
+  const yearSec = overview?.sections.map((s, i) => ({ s, i })).find(({ s }) => new RegExp(`năm ${H.year}`, 'i').test(s.title));
   const gen = [r.general.dai_han, r.general.tieu_han].filter((p): p is Principle => !!p);
   return (
     <div className={loading ? 'loading' : undefined}>

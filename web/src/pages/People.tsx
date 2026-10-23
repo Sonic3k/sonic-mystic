@@ -4,11 +4,12 @@
 import { Fragment, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 import { useMutation, useQueries, useQuery, useQueryClient, type UseQueryResult } from '@tanstack/react-query';
-import type { BirthDto, BriefDto, Gender, ProfileSummaryDto, SubjectDto } from '@mystic/engine/api';
+import type { AiReadingDto, BirthDto, BriefDto, Gender, ProfileSummaryDto, SubjectDto } from '@mystic/engine/api';
 import { PLACES } from '@mystic/engine/birth';
 import { api } from '../api';
 import { AstroBadgeView, NumBadgeView, TuviBadgeView } from '../components/Badges';
 import { Failed, errorText } from '../components/Owner';
+import { SummaryText } from '../components/Reading';
 import { EMBLEM } from '../components/Shell';
 import { Sheet } from '../components/Sheet';
 import { astroBadge, newest, numBadge, tuviBadge } from '../lib/badges';
@@ -129,6 +130,8 @@ export function SubjectPage() {
   const brief = useBrief(id, 'tuvi', tuvi.length > 0);
   const numerologyBrief = useBrief(id, 'numerology', numerology.length > 0);
   const astroBrief = useBrief(id, 'astrology', astro.length > 0);
+  const whole = useQuery({ queryKey: ['subject-readings', id], queryFn: () => api.subjectReadings(id), retry: false, enabled: !!s });
+  const nd = (whole.data ?? []).find(x => x.scope === 'summary');
   const [editing, setEditing] = useState(false);
   const nav = useNavigate(), qc = useQueryClient();
   const refreshAll = () => ['subject', 'subjects', 'brief'].forEach(k => void qc.invalidateQueries({ queryKey: [k] }));
@@ -164,6 +167,11 @@ export function SubjectPage() {
         </div>
       </header>
       {pull.isError && <p className="tv-err">{errorText(pull.error)}</p>}
+      {nd && <WholeReading ai={nd} rooms={[
+        ['Tử vi', <span className="seal" aria-hidden="true">紫</span>, tuvi[0]],
+        ['Chiêm tinh', <span className="as-em"><span className="gl-dot" aria-hidden="true">☉︎</span></span>, astro[0]],
+        ['Nhân số học', (() => { const b = numerology[0] ? numBadge(numerology[0]) : null; return b ? <span className={`ns-em circle${b.ruling === 11 || b.ruling === 22 ? ' master' : ''}`}><b>{b.ruling}</b></span> : EMBLEM.num; })(), numerology[0]],
+      ]} />}
       <div className="subj">
         <div className="subj-rooms">
           <RoomPart cls="sr-tuvi" emblem={EMBLEM.tuvi} title="Tử vi" list={tuvi}
@@ -214,6 +222,20 @@ export function SubjectPage() {
       </div>
       {editing && <SubjectSheet subject={s} onClose={() => setEditing(false)} onSaved={() => refreshAll()} onDeleted={() => nav('/people', { replace: true })} />}
     </div>
+  );
+}
+
+/** the Nhận định chung: the person read through every room at once, in plain words; beside it, the way into each room */
+function WholeReading({ ai, rooms }: { ai: AiReadingDto; rooms: [string, React.ReactNode, ProfileSummaryDto | undefined][] }) {
+  const have = rooms.filter((x): x is [string, React.ReactNode, ProfileSummaryDto] => !!x[2]);
+  const names = have.map(x => x[0]);
+  const sub = names.length === 3 ? `Gộp cả ba môn: ${names.join(', ')}` : names.length ? `Gộp từ ${names.join(' và ')}` : 'Gộp từ các lá số của người này';
+  return (
+    <section className="nd nd-person">
+      <div className="nd-main"><SummaryText ai={ai} title="Nhận định chung" sub={sub} /></div>
+      {have.length > 0 && <aside className="nd-aside"><nav className="toc"><h4>Đọc riêng từng môn</h4>
+        {have.map(([name, em, p]) => <Link key={name} to={PROFILE_URL[p.discipline] + p.id}>{em}<span>{name}</span></Link>)}</nav></aside>}
+    </section>
   );
 }
 

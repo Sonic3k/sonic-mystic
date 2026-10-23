@@ -182,39 +182,50 @@ export function astroHighlighter() {
   }]);
 }
 
-/** what a section of a reading is about: the bodies and signs its title names */
-export function asParse(s: AiSectionDto) {
-  const t = s.title, bodies: [number, BodyCode][] = [], signs: [number, SignCode][] = [];
+/** the bodies and signs a text names, in the order it names them */
+function named(t: string) {
+  const bodies: [number, BodyCode][] = [], signs: [number, SignCode][] = [];
   for (const b of Object.values(BODY)) { const i = t.indexOf(b.name); if (i >= 0 && b.name.length > 2) bodies.push([i, b.code]); }
   if (/\bMC\b/.test(t)) bodies.push([t.indexOf('MC'), 'mc']);
   if (t.includes('Cung Mọc')) bodies.push([t.indexOf('Cung Mọc'), 'asc']);
   for (const sg of SIGNS) { const i = t.indexOf(sg.name); if (i >= 0) signs.push([i, sg.code]); }
   bodies.sort((a, b) => a[0] - b[0]); signs.sort((a, b) => a[0] - b[0]);
+  return { bodies: bodies.map(x => x[1]).filter(k => k !== 'mc' || bodies.length === 1), signs: signs.map(x => x[1]) };
+}
+
+/** what a section of a reading is about: the bodies and signs its title names (and the body its basis names first,
+    for a title that names a sign or a house but no body — «Sáu hành tinh Ma Kết», read as Sao Thổ's) */
+export function asParse(s: AiSectionDto) {
+  const t = named(s.title), b = named((s.basis ?? []).join(' · '));
   return {
-    bodies: bodies.map(x => x[1]).filter(k => k !== 'mc' || bodies.length === 1), signs: signs.map(x => x[1]),
-    aspect: /^Góc chiếu/.test(t), added: /^Luận thêm/.test(t),
+    bodies: t.bodies, signs: t.signs, focus: t.bodies[0] ?? b.bodies.find(x => x !== 'mc') ?? null,
+    aspect: /^Góc chiếu/.test(s.title), added: /^Luận thêm/.test(s.title),
   };
 }
 
 export function astroRoom(r: AstrologyReadingDto, hl: (t: string) => React.ReactNode, who: string, goTo: (code: string) => void): RoomReading {
   const rules = r.rules;
+  const voiceOf = (x: Ref): AstrologyVoice | 'other' => (rules[x.code]?.voice ?? (x.src?.voice as AstrologyVoice | null) ?? voiceOfCode(x.code));
   return {
     hl,
     emblem: (s, _t, added, small) => {
       const P = asParse(s);
       if (P.added || added) return <span className="as-em"><span className={`gl-dot manicule${small ? ' sm' : ''}`}>{T('☞')}</span></span>;
       if (P.aspect) return <span className="as-em"><span className={`gl-dot${small ? ' sm' : ''}`}>{T('□')}</span></span>;
-      const b = P.bodies[0], sg = P.signs[0];
+      const b = P.focus, sg = P.signs[0];
       if (!b && sg) return <span className="as-em"><span className={`gl-dot${small ? ' sm' : ''}`}><span style={{ color: '#FFF6DF' }}>{T(SIGN[sg].glyph)}</span></span></span>;
       return <span className="as-em"><BodyDot b={b ?? 'sun'} sm={small} />{!small && sg && <span className={`sg ${SIGN[sg].element}`}>{T(SIGN[sg].glyph)}</span>}</span>;
     },
-    srcLabel: refs => `${refs.length} đoạn · ${[...new Set(refs.map(x => VOICE_NAME[rules[x.code]?.voice ?? voiceOfCode(x.code)]))].join(', ')}`,
+    srcLabel: refs => `${refs.length} đoạn · ${[...new Set(refs.map(x => VOICE_NAME[voiceOf(x)]))].join(', ')}`,
     srcList: (refs: Ref[]) => refs.map(x => {
-      const rule = rules[x.code], v = rule?.voice ?? voiceOfCode(x.code);
+      /* a passage the chart matched is read from the reading; one on how a chart is weighed (orbs, the test of the
+         dominant planets…), from where it stands in its source */
+      const rule = rules[x.code], v = voiceOf(x), page = rule ? rule.page : x.src?.paraRef ?? null, label = rule ? rule.label : x.src?.label ?? null;
       return (
         <blockquote key={x.code}>{rule?.items ? rule.items.join(' · ') : rule?.text ?? x.quoted}
-          <cite><span className={`vl ${v}`}>{VOICE_NAME[v]}</span>{rule?.label ? ` · ${rule.label}` : ''}{rule?.page != null ? `, trang ${rule.page}` : ''}
-            {rule && <button type="button" onClick={() => goTo(x.code)}>xem trong phần Theo tài liệu ›</button>}</cite></blockquote>
+          <cite><span className={`vl ${v}`}>{VOICE_NAME[v]}</span>{label ? ` · ${label}` : !rule && x.src ? ` · ${x.src.entryTitle}` : ''}{page != null ? `, trang ${page}` : ''}
+            {rule ? <button type="button" onClick={() => goTo(x.code)}>xem trong phần Theo tài liệu ›</button>
+              : x.src && <Link to={bookLink(x.src.source, x.src.entry, x.code)}>đọc trong tài liệu ›</Link>}</cite></blockquote>
       );
     }),
     added: <><span className="sym" style={{ fontSize: 17 }}>{T('☞')}</span>Luận thêm của {who}, không phải lời cô hay sách</>,
@@ -226,16 +237,18 @@ export const astroVoices = (who: string) => <>
   <span><i className="vc tierney" />Bản dịch Tierney</span><span><i className="vc claude" />{who} luận thêm</span>
 </>;
 
-/** the bodies a section of the reading is about (or the planets in the sign it names) */
+/** the bodies a section of the reading is about (or the planets in the sign it names, or the body its basis names) */
 export function hiOf(ch: AstroChart, s: AiSectionDto | undefined): Set<BodyCode> | null {
   if (!s) return null;
   const P = asParse(s), set = new Set<BodyCode>(P.bodies.filter(b => PLANETS.includes(b as never)));
   if (!set.size && P.signs.length) for (const k of PLANETS) if (ch.placements[k]?.sign === P.signs[0]) set.add(k);
+  if (!set.size && P.focus && PLANETS.includes(P.focus as never)) set.add(P.focus);
   return set.size ? set : null;
 }
 
 export function AstroCompanion({ ch, s }: { ch: AstroChart; s: AiSectionDto | undefined }) {
-  const hi = hiOf(ch, s), first = hi ? [...hi][0] : null;
+  const hi = hiOf(ch, s), focus = s ? asParse(s).focus : null;
+  const first = hi ? (focus && hi.has(focus) ? focus : [...hi][0]) : null;
   let card: React.ReactNode = null;
   if (first && ch.placements[first]) {
     const p = ch.placements[first]!, sg = SIGN[p.sign];

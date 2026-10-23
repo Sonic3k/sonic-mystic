@@ -295,6 +295,14 @@ export class PeopleController {
   @HttpCode(204)
   async deleteSubject(@Param('id') id: string) { await this.people.deleteSubject(id); }
 
+  /** the readings of the person as a whole (the Nhận định chung, written from all their profiles) */
+  @Get('subjects/:id/readings')
+  subjectReadings(@Param('id') id: string) { return this.readings.listSubject(id); }
+
+  /** saves the Nhận định chung of a person ('summary'), written with Claude; it replaces the one of the same year */
+  @Put('subjects/:id/readings/:scope')
+  putSubjectReading(@Param('id') id: string, @Param('scope') scope: string, @Body(new ZodPipe(WrittenBody)) body: WrittenBodyT) { return this.readings.putSubject(id, scope, body); }
+
   @Get('subjects/:id/brief')
   async brief(@Param('id') id: string, @Query('discipline') discipline = 'tuvi') {
     if (!['tuvi', 'numerology', 'astrology'].includes(discipline)) throw new BadRequestException(`Chưa có môn ${discipline}`);
@@ -358,8 +366,8 @@ export class PeopleController {
   @Post('profiles/:id/ai-readings')
   generate(@Param('id') id: string, @Body(new ZodPipe(AiBody)) body: z.infer<typeof AiBody>) { return this.ai.generate(id, body.scope, body.viewYear); }
 
-  /** saves a reading written with Claude for one scope ('synthesis' for nhân số học and chiêm tinh; a tử vi scope); it replaces the
-      one of the same scope and year */
+  /** saves a reading written with Claude for one scope ('synthesis' for nhân số học and chiêm tinh; a tử vi scope; 'summary',
+      the Nhận định, for any); it replaces the one of the same scope and year */
   @Put('profiles/:id/readings/:scope')
   putReading(@Param('id') id: string, @Param('scope') scope: string, @Body(new ZodPipe(WrittenBody)) body: WrittenBodyT) { return this.readings.put(id, scope, body); }
 
