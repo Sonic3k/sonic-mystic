@@ -7,7 +7,7 @@ import { gzipSync } from 'node:zlib';
 import pg from 'pg';
 import type {
   AiReadingDto, AstrologyBookDto, AstrologyChartDto, AstrologyEntryDto, AstrologyLookupDto, AstrologyReadingDto, BriefDto, EntryDto, NumerologyBookDto,
-  NumerologyEntryDto, NumerologyLookupDto, NumerologyReadingDto, ProfileDto, SearchResultDto, SourceDto, SubjectDto, TuViReadingDto,
+  NumerologyEntryDto, NumerologyLookupDto, NumerologyReadingDto, ProfileDto, ReadingPlanDto, SearchResultDto, SourceDto, SubjectDto, TuViReadingDto,
 } from '@mystic/engine/api';
 import { jsonIn, scopeOk } from '../src/ai/ai.service.js';
 import { loadConfig } from '../src/config.js';
@@ -348,10 +348,13 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
   describe('chiêm tinh: the sources', { skip: !hasAstrology && 'the astrology bundle is not built here' }, () => {
     test('the sources are imported once, and anyone reads them', async () => {
       const h = await api<{ astrology: { rules: number; sources: number } | null }>('/health');
-      assert.equal(h.data.astrology?.sources, 6);
+      assert.equal(h.data.astrology?.sources, 9);
       assert.ok((h.data.astrology?.rules ?? 0) > 2000);
       const src = await api<SourceDto[]>('/sources?discipline=astrology');
-      assert.equal(src.data.length, 6);
+      assert.equal(src.data.length, 9);
+      // the weighting rules are what Claude drew up from the others, not a book
+      assert.equal(src.data.find(s => s.code === 'astrology.method')?.kind, 'supplement');
+      assert.equal(src.data.find(s => s.code === 'astrology.books')?.kind, 'book');
       const pool = createPool(appUrl, false);
       const again = await importAstrology(createDb(pool), readAstrologyBundle(astrologyDir)!);
       await pool.end();
@@ -371,6 +374,10 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       const woolfolk = Object.values(r.data.rules).find(x => x.voice === 'woolfolk')!;
       assert.ok(woolfolk.en && woolfolk.en.length > 0 && woolfolk.en !== woolfolk.text);
       assert.equal(r.data.sources.find(s => s.code === 'astrology.woolfolk')?.translator, 'Claude');
+      // the class's notes speak of a person too, in their own voice: Mặt Trời ở cung của nó
+      const notes = sun.groups.filter(g => g.source === 'astrology.hk-notes').flatMap(g => g.matches);
+      assert.ok(notes.length > 0 && notes.every(m => r.data.rules[m.rule].voice === 'notes'));
+      assert.ok(notes.some(m => m.why.some(w => /^Mặt Trời ở cung \d+$/.test(w))));
       // a woman reads Woolfolk's words on the Aquarius woman, not on the man
       const love = r.data.sections.find(s => s.topic === 'love')!;
       assert.ok(love.groups.some(g => /phụ nữ/.test(g.title)) && !love.groups.some(g => /đàn ông/.test(g.title)));
@@ -380,7 +387,20 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
 
     test('the sources, section by section, and lookups', async () => {
       const toc = await api<AstrologyBookDto>('/astrology/book');
-      assert.equal(toc.data.sources.length, 6);
+      assert.equal(toc.data.sources.length, 9);
+      const books = toc.data.sources.find(s => s.source.code === 'astrology.books')!.source;
+      assert.equal(books.label, 'Sách khác');
+      assert.equal(books.translator, 'Claude');
+      assert.equal(toc.data.sources.find(s => s.source.code === 'astrology.hk-notes')!.source.label, 'Ghi chép lớp');
+      // each weighting rule stands as a section, with the passages it rests on named as a reader would look them up
+      const k1 = await api<AstrologyEntryDto>('/astrology/book/method/k1');
+      assert.equal(k1.data.source.label, 'Claude tổng hợp');
+      const said = k1.data.sections[0].passages;
+      assert.ok(said.every(p => p.voice === 'claude'));
+      assert.ok(said.some(p => p.label === 'Dựa trên:' && /Đi tìm nhân tố trội/.test(p.text) && /The Inner Sky/.test(p.text)));
+      assert.ok(!said.some(p => /\b[a-z-]+\.b\d+\b/.test(p.text)));
+      const forrest = await api<AstrologyEntryDto>('/astrology/book/books/forrest-focal');
+      assert.ok(forrest.data.sections[0].passages.every(p => p.voice === 'books' && p.en && p.en !== p.text));
       const kw = toc.data.sources.find(s => s.source.code === 'astrology.hk-keywords')!;
       const venus = kw.toc.find(e => e.code === 'venus-taurus')!;
       const e = await api<AstrologyEntryDto>(`/astrology/book/hk-keywords/${venus.code}`);
@@ -413,6 +433,25 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       }, 'PUT');
       assert.equal(w.status, 200);
       assert.deepEqual(w.data.dropped, ['woolfolk.b0']);
+      // what whoever writes the reading is given: how to write it, the rules, and this chart weighed by them
+      const plan = await api<ReadingPlanDto>(`/profiles/${p.data.id}/readings/plan`);
+      assert.equal(plan.status, 200);
+      assert.ok(plan.data.spec.includes('Nguyên tắc cân') && plan.data.spec.includes('K1'));
+      assert.equal(plan.data.rules?.length, 14);
+      assert.ok(plan.data.weights!.factors.some(f => f.id === 'sun' && f.level === 'key'));
+      // a passage of the other books is cited by its block, and kept as that passage; the checker says what is off
+      const w2 = await api<AiReadingDto>(`/profiles/${p.data.id}/readings/synthesis`, {
+        sections: [
+          { title: 'Cách cân', weight: 'intro', items: [{ layer: 'primary', text: 'Bộ ba nền tảng trước.', refs: ['books.b3'] }] },
+          { title: 'Mặt Trời ở Bảo Bình', weight: 'minor', factors: ['sun'], items: [{ layer: 'primary', text: 'Tóm lược.', refs: [codes[0]] }] },
+        ],
+      }, 'PUT');
+      assert.equal(w2.status, 200);
+      assert.equal(w2.data.dropped, undefined);
+      const ref = w2.data.sections[0].items[0].refs[0];
+      assert.match(ref.code, /^p:\d+$/);
+      assert.equal(ref.src?.source, 'astrology.books');
+      assert.ok(w2.data.warnings?.some(x => /Ít tác dụng/.test(x)));
       const b = await api<BriefDto>(`/subjects/${s.data.id}/brief?discipline=astrology`);
       assert.equal(b.data.title, 'Chiêm tinh');
       assert.ok(b.data.facts.some(f => f.label === 'Cung Mọc' && /Nhân Mã/.test(f.value)));

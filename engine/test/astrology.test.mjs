@@ -214,3 +214,149 @@ test('the condition language', () => {
   assert.deepEqual([...A.symbolsOf(A.parse('in(mercury, gemini) & house(mercury, 3) & aspect(sun, moon, square)').node)].sort(),
     ['aspect:square', 'body:mercury', 'body:moon', 'body:sun', 'house:3', 'mercury@gemini', 'mercury@h3', 'moon~sun', 'sign:gemini']);
 });
+
+// ── how much each part of a chart weighs (weigh.ts): one set of rules for every chart ──
+/** a chart from longitudes (and daily speeds), with equal houses whose first cusp is at `cusp1` */
+function sky(lons, { cusp1 = 0, speeds = {} } = {}) {
+  const bodies = {};
+  for (const [k, v] of Object.entries(lons)) bodies[k] = { lon: v, speed: speeds[k] ?? 1 };
+  for (const lum of ['sun', 'moon']) {
+    if (lum in bodies) continue;
+    let spot = null;
+    for (let v = 0.25; v < 360 && spot === null; v += 0.5) if (Object.entries(bodies).every(([k, b]) => !A.aspectBetween(lum, v, k, b.lon))) spot = v;
+    bodies[lum] = { lon: spot ?? 0.25, speed: 1 };
+  }
+  const cusps = Array.from({ length: 12 }, (_, i) => (cusp1 + i * 30) % 360);
+  return A.buildAstroChart({
+    local: { year: 2000, month: 1, day: 1, hour: 12, minute: 0 }, jd: 2451545, utcOffsetMinutes: 0, place: null, timeKnown: true,
+    positions: { bodies, houses: { cusps, asc: cusps[0], mc: cusps[9], vertex: (cusps[6] + 3) % 360 } },
+  });
+}
+const factor = (c, id) => c.weights.factors.find(f => f.id === id);
+const rulesOf = f => f.reasons.map(r => r.rule);
+
+test('weighing: the lights, the rising sign and its ruler govern every chart (K1)', () => {
+  for (const id of ['sun', 'moon', 'asc', 'jupiter']) assert.equal(factor(chart, id).level, 'key', id);
+  assert.ok(rulesOf(factor(chart, 'jupiter')).includes('K1'));
+  // Oprah: Saturn and Neptune in cung 10, Uranus in cung 7, Chiron in cung 1 (K2); Mars in its own Scorpio (K4)
+  for (const id of ['saturn', 'neptune', 'uranus', 'chiron']) assert.ok(rulesOf(factor(chart, id)).includes('K2'), id);
+  assert.ok(rulesOf(factor(chart, 'mars')).includes('K4'));
+  // Venus 0°08′ from the Sun (K6); the quạt xếp of Bảo Bình (K3); Pluto has none of it
+  assert.ok(rulesOf(factor(chart, 'venus')).includes('K6'));
+  assert.equal(factor(chart, 'stellium:sign:aquarius').level, 'key');
+  assert.equal(factor(chart, 'pluto').level, 'normal');
+  // the points on a planet or an angle are read in its part: La Hầu on Chiron, Tử Khí on Sao Thủy, Nguyệt Bột on the MC
+  assert.equal(factor(chart, 'north-node').attachedTo, 'chiron');
+  assert.equal(factor(chart, 'south-node').attachedTo, 'chiron');
+  assert.equal(factor(chart, 'ziqi').attachedTo, 'mercury');
+  assert.equal(factor(chart, 'lilith').attachedTo, 'house:10');
+  for (const id of ['north-node', 'lilith', 'fortune', 'vertex']) assert.equal(factor(chart, id).level, 'normal', id);
+  // a close major aspect to a light is key (K7); the loose Sun–Moon sextile (4°27′, over her 3°) standing alone is minor (M1)
+  assert.equal(factor(chart, 'aspect:saturn|sun').level, 'key');
+  assert.equal(factor(chart, 'aspect:moon|sun').level, 'minor');
+  // every rule a reason names is one of the rules
+  for (const f of chart.weights.factors) for (const r of [...f.reasons, ...f.notes]) if (r.rule) assert.ok(A.WEIGH_RULE[r.rule], r.rule);
+});
+
+test('weighing: a stellium of the slow planets alone is a generation\'s; with a personal planet, or in one house, it governs', () => {
+  // cusps at 15°: Ma Kết (270–300) runs across cung 9 and cung 10
+  let c = sky({ saturn: 280, uranus: 286, neptune: 290 }, { cusp1: 15 });
+  let st = factor(c, 'stellium:sign:capricorn');
+  assert.equal(st.level, 'normal');
+  assert.ok(st.notes.some(n => n.rule === 'K3'));
+  c = sky({ saturn: 280, uranus: 286, neptune: 290, mercury: 283 }, { cusp1: 15 });
+  assert.equal(factor(c, 'stellium:sign:capricorn').level, 'key');
+  c = sky({ saturn: 290, uranus: 296, neptune: 299 }, { cusp1: 15 });
+  assert.equal(factor(c, 'stellium:sign:capricorn').level, 'key');
+  // a member is read in the stellium: the cluster is the key factor, not each planet on its own
+  assert.ok(factor(c, 'saturn').notes.some(n => n.rule === 'K3'));
+});
+
+test('weighing: own sign promotes, but not the slow planets; Tù alone never demotes', () => {
+  // Sao Kim in Bò Cạp (Tù), cung 8, with no close major aspect and no stellium: weak on all counts (M2)
+  const base = { saturn: 205, jupiter: 250, mars: 333 };
+  let c = sky({ ...base, venus: 220 });
+  assert.equal(factor(c, 'venus').level, 'minor');
+  assert.ok(rulesOf(factor(c, 'venus')).includes('M2'));
+  // the same Sao Kim in cung 7, a cung góc: Tù is a note, not a reason
+  c = sky({ ...base, venus: 220 }, { cusp1: 30 });
+  assert.equal(factor(c, 'venus').level, 'key');
+  assert.ok(factor(c, 'venus').notes.some(n => n.rule === 'M2'));
+  // in Thiên Bình, its own sign: K4
+  c = sky({ ...base, venus: 190 });
+  assert.ok(rulesOf(factor(c, 'venus')).includes('K4'));
+  // Diêm Vương in Bò Cạp: the sign is a generation's (hk.b812) — noted, not promoted
+  c = sky({ ...base, pluto: 222 });
+  assert.ok(!rulesOf(factor(c, 'pluto')).includes('K4'));
+  assert.ok(factor(c, 'pluto').notes.some(n => n.rule === 'K4' && /thế hệ/.test(n.why)));
+  // without the time nothing is put among the minor for being weak (angularity cannot be told)
+  const noon = A.buildAstroChart({ ...oprah, timeKnown: false });
+  assert.ok(noon.weights.factors.every(f => !(f.kind === 'body' && f.level === 'minor')));
+  assert.ok(noon.weights.notes.length >= 1);
+});
+
+test('weighing: a stationary planet counts when it has another sign of strength (K6)', () => {
+  let c = sky({ venus: 280, saturn: 100 }, { speeds: { venus: -0.01 } });
+  assert.ok(factor(c, 'venus').reasons.some(r => r.rule === 'K6' && /Đứng yên/.test(r.why)));
+  c = sky({ venus: 220, saturn: 205, jupiter: 250, mars: 333 }, { speeds: { venus: 0.01 } });
+  assert.ok(factor(c, 'venus').notes.some(n => n.rule === 'K6' && /Đứng yên/.test(n.why)));
+});
+
+test('weighing: what changes at the ends of the birth-time window is listed', () => {
+  // the sky 40 minutes on: every cusp and angle 10° further
+  const h = oprah.positions.houses, on = x => (x + 10) % 360;
+  const later = A.buildAstroChart({ ...oprah, positions: { ...oprah.positions, houses: { cusps: h.cusps.map(on), asc: on(h.asc), mc: on(h.mc), vertex: on(h.vertex) } } });
+  const w = A.weighChart(chart, { alternates: [{ label: '+40′', chart: later }] });
+  const changed = w.factors.filter(f => f.varies.some(v => v.startsWith('+40′')));
+  assert.ok(changed.length > 0);
+  // what does not differ is not listed
+  assert.ok(w.factors.some(f => f.kind === 'body' && !f.varies.length));
+});
+
+test('a written reading checked against the weighing', () => {
+  const w = chart.weights;
+  const sec = (title, weight, factors, text = 'x', refs = ['woolfolk.b4']) => ({ title, weight, factors, items: [{ layer: 'primary', text, refs }] });
+  // Pluto put among the minor for "not a planet"-like reasons, and the key factors not all read at key level
+  let warn = A.checkAstrologyReading([sec('Cách cân', 'intro', []), sec('Mặt Trời', 'key', ['sun']), sec('Diêm Vương', 'minor', ['pluto'], 'Điểm phụ, bài test của cô không tính.')], w);
+  assert.ok(warn.some(x => /Ít tác dụng, nhưng pluto là Tô thêm/.test(x)));
+  assert.ok(warn.some(x => /lấy «điểm phụ» làm lý do/.test(x)));
+  assert.ok(warn.some(x => /chưa được đọc ở phần Trọng điểm/.test(x) && /Sao Mộc/.test(x)));
+  // a key section with nothing key in it; no factors at all
+  warn = A.checkAstrologyReading([sec('Cách cân', 'intro', []), sec('Diêm Vương', 'key', ['pluto'])], w);
+  assert.ok(warn.some(x => /ghi Trọng điểm, nhưng/.test(x)));
+  warn = A.checkAstrologyReading([{ title: 'Mặt Trời', weight: 'key', items: [{ layer: 'primary', text: 'x' }] }], w);
+  assert.ok(warn.some(x => /Cách cân/.test(x)) && warn.some(x => /factors/.test(x)) && warn.some(x => /không dẫn đoạn nào/.test(x)));
+  // a minor line the weighing itself puts there is fine
+  warn = A.checkAstrologyReading([sec('Cách cân', 'intro', []), sec('Góc lỏng', 'minor', ['aspect:moon|sun'], 'Lỏng, 4°27′, thấp')], w);
+  assert.ok(!warn.some(x => /làm lý do/.test(x)));
+});
+
+test('a Nhận định: plain prose, long enough to be a reading', async () => {
+  const R = await import('../dist/readings.js');
+  let warn = R.checkSummary([{ title: 'Con người', items: [{ layer: 'added', text: 'Mặt Trời lệch 1°17′, 3°02′ và 6°56′ (hk.b828).' }] }]);
+  assert.ok(warn.some(x => /chữ/.test(x)) && warn.some(x => /số đo độ/.test(x)) && warn.some(x => /mã nguồn/.test(x)));
+  // eleven paragraphs of a hundred words: a reading's length, a paragraph each
+  const para = Array.from({ length: 100 }, (_, i) => (i % 12 ? 'chữ' : 'Bạn')).join(' ');
+  const secs = Array.from({ length: 11 }, (_, i) => ({ title: `Đoạn ${i + 1}`, items: [{ layer: 'added', text: para }] }));
+  assert.deepEqual(R.checkSummary(secs), []);
+  // the page shows a section as one paragraph: two in one section, or one far too long, is said
+  warn = R.checkSummary([{ title: 'Con người', items: [{ layer: 'added', text: `${para}\n\nĐoạn hai.` }] }, ...secs]);
+  assert.ok(warn.some(x => /nhiều đoạn/.test(x)));
+  warn = R.checkSummary([{ title: 'Con người', items: [{ layer: 'added', text: Array(11).fill(para).join(' ') }] }]);
+  assert.ok(warn.some(x => /quá dài/.test(x)));
+});
+
+test('the weighting rules cite passages of the sources, and say where a book disagrees', () => {
+  const block = /^(hk|hk-keywords|hk-dominant|hk-aries|hk-notes|tierney|woolfolk|books)\.b\d+$/;
+  for (const r of A.WEIGH_RULES) {
+    assert.ok(r.refs.length && r.refs.every(x => block.test(x)), r.code);
+    // hers first (her own words, then her class's notes), before Tierney, Woolfolk and the other books
+    const firstOther = r.refs.findIndex(x => !x.startsWith('hk'));
+    assert.ok(firstOther < 0 || !r.refs.slice(firstOther).some(x => x.startsWith('hk')), r.code);
+    for (const x of r.against ?? []) assert.ok(block.test(x) && r.applied?.includes(x), `${r.code}: ${x} is said in its Cách áp`);
+    for (const x of (r.applied ?? '').match(/\b[a-z-]+\.b\d+\b/g) ?? []) assert.ok(block.test(x), `${r.code}: ${x}`);
+  }
+  for (const p of A.WEIGH_PRINCIPLES) assert.ok(p.refs.every(x => block.test(x)), p.text);
+  assert.match(A.ASTROLOGY_READING_SPEC, /Nguyên tắc cân/);
+  assert.ok(!/sách ngoài kho/.test(A.ASTROLOGY_READING_SPEC));
+});

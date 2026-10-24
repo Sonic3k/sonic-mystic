@@ -51,7 +51,15 @@ export interface AstrologyKnowledge {
   order: AstrologyEntry[];
 }
 /** how a reading names whose words a passage is */
-export const VOICE_LABEL: Record<AstrologyVoice, string> = { hk: 'Lời cô', tierney: 'Bản dịch Tierney', woolfolk: 'Woolfolk' };
+export const VOICE_LABEL: Record<AstrologyVoice, string> = {
+  hk: 'Lời cô', notes: 'Ghi chép lớp', tierney: 'Bản dịch Tierney', woolfolk: 'Woolfolk', books: 'Sách khác', claude: 'Claude tổng hợp',
+};
+/** whose words a source is, by its code (cô's own, unless it is one of these) */
+const SOURCE_VOICE: Record<string, AstrologyVoice> = {
+  'astrology.hk-notes': 'notes', 'astrology.tierney': 'tierney', 'astrology.woolfolk': 'woolfolk', 'astrology.books': 'books', 'astrology.method': 'claude',
+};
+/** the sources Claude translated */
+const TRANSLATED = new Set(['astrology.woolfolk', 'astrology.books']);
 const ASTROLOGY_TOPIC_CODES = new Set<string>(ASTROLOGY_TOPICS.map(t => t.code));
 export const entryKey = (source: string, code: string) => `${source}/${code}`;
 
@@ -136,12 +144,12 @@ export class KnowledgeService {
       syms.set(r.code, when ? [...astrologySymbolsOf(parseAstrology(when).node)] : []);
       if (r.active && when) raw.push({ id: r.code, topic, entry: entryKey(src.code, e.code), ord: r.ordinal, page: r.page ?? undefined, source: src.code, kind, text, when });
     }
-    const label = (code: string) => (code === 'astrology.tierney' ? VOICE_LABEL.tierney : code === 'astrology.woolfolk' ? VOICE_LABEL.woolfolk : VOICE_LABEL.hk);
+    const label = (code: string) => VOICE_LABEL[SOURCE_VOICE[code] ?? 'hk'];
     return {
       kb: { rules: compileAstrology(raw), entries: Object.fromEntries(order.map(e => [e.key, { code: e.key, title: e.title, parent: e.parent ? entryKey(e.source, e.parent) : undefined, ord: e.ordinal }])) },
       version: hash.digest('hex').slice(0, 16),
       rules: dtos, symbols: syms, ruleOfPassage, entries: byKey, order,
-      sources: srcs.map(x => ({ id: x.id, code: x.code, title: x.title, author: x.author, description: x.description, note: x.note, label: label(x.code), translator: x.code === 'astrology.woolfolk' ? 'Claude' : null })),
+      sources: srcs.map(x => ({ id: x.id, code: x.code, title: x.title, author: x.author, description: x.description, note: x.note, label: label(x.code), translator: TRANSLATED.has(x.code) ? 'Claude' : null })),
     };
   }
 

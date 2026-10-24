@@ -1,0 +1,13 @@
+{
+ "source": {
+  "code": "astrology.method",
+  "file": "engine/src/astrology/weigh.ts",
+  "title": "Cách cân lá số",
+  "author": "Claude tổng hợp từ lời cô, ghi chép của lớp và các sách",
+  "label": "Claude tổng hợp",
+  "kind": "supplement",
+  "description": "Bộ luật cân dùng cho mọi lá số: yếu tố nào là Trọng điểm, Tô thêm hay Ít tác dụng, mỗi luật kèm những đoạn nó dựa vào và chỗ sách nói khác. Máy tính cân mỗi lá số theo bộ luật này; bài luận dựa vào đó để biết điều gì nói trước, nói kỹ."
+ },
+ "generated": "weigh",
+ "entries": []
+}

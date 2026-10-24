@@ -1,7 +1,7 @@
 /* Huyền học engines. Each discipline lives in its own folder and is imported by name:
      import { buildChart } from '@mystic/engine/tuvi';
    The root lists what exists, for pages that show every discipline. */
-export const ENGINE_VERSION = '1.2.0';
+export const ENGINE_VERSION = '1.3.0';
 
 export const DISCIPLINES = [
   { code: 'tuvi', name: 'Tử vi', ready: true },

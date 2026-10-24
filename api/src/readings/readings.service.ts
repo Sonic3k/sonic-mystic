@@ -9,7 +9,9 @@ import { createHash } from 'node:crypto';
 import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { and, asc, desc, eq, inArray, isNull } from 'drizzle-orm';
 import { z } from 'zod';
-import { WEIGHTS, type AiReadingDto, type AstrologyChartDto, type Layer, type RefSourceDto, type SourceKind, type Weight } from '@mystic/engine/api';
+import { WEIGHTS, type AiReadingDto, type AstrologyChartDto, type Layer, type ReadingPlanDto, type RefSourceDto, type SourceKind, type Weight } from '@mystic/engine/api';
+import { ASTROLOGY_READING_SPEC, WEIGH_RULES, checkAstrologyReading } from '@mystic/engine/astrology';
+import { SUMMARY_SPEC, checkLookup, checkSummary } from '@mystic/engine/readings';
 import { DB, type Db } from '../db/db.js';
 import { entries, passages, readingItemRefs, readingItems, readingSections, readings, rules, sources } from '../db/schema.js';
 import { KnowledgeService } from '../kb/knowledge.service.js';
@@ -28,6 +30,8 @@ export const WrittenBody = z.object({
     title: z.string().trim().min(1).max(200),
     weight: z.enum(WEIGHTS as [Weight, ...Weight[]]).nullable().default(null),
     basis: z.array(z.string().trim().min(1).max(160)).max(10).default([]),
+    /** chiêm tinh: the ids of the chart's factors the section reads — checked against the weighing, not stored */
+    factors: z.array(z.string().trim().min(1).max(80)).max(60).optional(),
     items: z.array(z.object({ layer: z.enum(['primary', 'added']), text: z.string().trim().min(1).max(6000), refs: z.array(z.string().max(60)).max(80).default([]) })).min(1).max(40),
   })).min(1).max(60),
 });
@@ -128,6 +132,7 @@ export class ReadingsService {
     const d = profile.disciplineCode;
     const summary = scope === SUMMARY;
     let year: number, inputHash: string, cite: Citable;
+    let warnings: string[] = [];
     if (d === 'astrology') {
       if (!astrologyScopeOk(scope)) throw new BadRequestException(`Phạm vi không hợp lệ: ${scope} (synthesis, summary)`);
       year = body.viewYear ?? profile.viewYear ?? todayVn().year;
@@ -136,6 +141,7 @@ export class ReadingsService {
       const codes = this.astrology.matched(computed, k);
       inputHash = astrologyHash(computed, summary ? MAIN[d] : scope, codes);
       cite = { allowed: new Set(codes), quote: new Map(codes.map(c => [c, k.rules.get(c)?.text ?? ''])) };
+      warnings = summary ? checkSummary(body.sections) : checkAstrologyReading(body.sections, computed.chart.weights);
     } else if (d === 'numerology') {
       if (!numerologyScopeOk(scope)) throw new BadRequestException(`Phạm vi không hợp lệ: ${scope} (synthesis, summary, hoặc year-YYYY)`);
       year = body.viewYear ?? (scope.startsWith('year-') ? Number(scope.slice(5)) : profile.viewYear ?? todayVn().year);
@@ -159,7 +165,11 @@ export class ReadingsService {
       }
       cite = { allowed, quote };
     }
+    if (d !== 'astrology') warnings = summary ? checkSummary(body.sections) : checkLookup(body.sections);
     const sections = body.sections.map(s => ({ title: s.title, weight: s.weight, basis: s.basis, items: s.items.map(i => ({ layer: i.layer, text: i.text, refs: summary ? [] : i.refs })) }));
+    // "<source>.b<line>": any passage of the sources by its block — kept as the rule's code when it is one, else as its passage
+    const named = await this.blockRefs(d, [...new Set(sections.flatMap(s => s.items.flatMap(i => i.refs)))], cite.allowed);
+    if (named.size) for (const s of sections) for (const i of s.items) i.refs = i.refs.map(r => named.get(r) ?? r);
     const cited = [...new Set(sections.flatMap(s => s.items.flatMap(i => i.refs)))];
     const methods = await this.methods(d, cited.filter(c => !cite.allowed.has(c)));
     const chartRefs = cited.filter(c => passageId(c) === null);
@@ -167,7 +177,36 @@ export class ReadingsService {
     if (chartRefs.length && !chartRefs.some(c => cite.allowed.has(c))) throw new BadRequestException(`Không câu nào được dẫn khớp với lá số này: ${chartRefs.slice(0, 5).join(', ')}`);
     const dropped = cited.filter(c => !cite.allowed.has(c) && !methods.has(c));
     const saved = await this.store({ profileId, subjectId: profile.subjectId }, { scope, viewYear: year, author: body.author, model: body.model, caution: body.caution, inputHash, sections }, cite, methods);
-    return dropped.length ? { ...saved, dropped } : saved;
+    return { ...saved, ...(dropped.length ? { dropped } : {}), ...(warnings.length ? { warnings } : {}) };
+  }
+
+  /** what whoever writes a profile's readings needs beside the chart: how they are written, and (chiêm tinh) how it weighs */
+  async plan(profileId: string): Promise<ReadingPlanDto> {
+    const { profile } = await this.people.profileHead(profileId);
+    const d = profile.disciplineCode;
+    if (d === 'astrology') {
+      const { computed, profile: p } = await this.people.astrologyInput(profileId);
+      return { discipline: d, spec: ASTROLOGY_READING_SPEC, rules: WEIGH_RULES, weights: computed.chart.weights, window: computed.window, timeApprox: p.birthTimeApprox };
+    }
+    return { discipline: d, spec: SUMMARY_SPEC, rules: null, weights: null, window: null, timeApprox: false };
+  }
+
+  /** chiêm tinh: refs written "<source>.b<line>" that are not a rule of the sources: the passage of that block ("p:<id>") */
+  private async blockRefs(discipline: string, codes: string[], allowed: Set<string>): Promise<Map<string, string>> {
+    const out = new Map<string, string>();
+    if (discipline !== 'astrology') return out;
+    const want = codes.filter(c => !allowed.has(c) && /^[a-z][a-z-]*\.b\d+$/.test(c));
+    if (!want.length) return out;
+    const isRule = new Set((await this.db.select({ code: rules.code }).from(rules).where(and(inArray(rules.code, want), eq(rules.disciplineCode, discipline)))).map(r => r.code));
+    const bySource = new Map<string, string[]>();
+    for (const c of want.filter(x => !isRule.has(x))) { const [src, key] = c.split('.'); bySource.set(src, [...(bySource.get(src) ?? []), key]); }
+    for (const [src, keys] of bySource) {
+      const ps = await this.db.select({ id: passages.id, key: passages.key }).from(passages)
+        .innerJoin(entries, eq(entries.id, passages.entryId)).innerJoin(sources, eq(sources.id, entries.sourceId))
+        .where(and(eq(sources.code, `astrology.${src}`), inArray(passages.key, keys)));
+      for (const p of ps) out.set(`${src}.${p.key}`, `p:${p.id}`);
+    }
+    return out;
   }
 
   /** saves the reading of a person as a whole (the Nhận định chung): plain words, no citations */
@@ -176,7 +215,9 @@ export class ReadingsService {
     await this.people.subject(subjectId);
     const year = body.viewYear ?? todayVn().year;
     const sections = body.sections.map(s => ({ title: s.title, weight: null, basis: [], items: s.items.map(i => ({ layer: 'added' as const, text: i.text, refs: [] })) }));
-    return this.store({ profileId: null, subjectId }, { scope, viewYear: year, author: body.author, model: body.model, caution: body.caution, inputHash: null, sections }, { allowed: new Set(), quote: new Map() }, new Map());
+    const warnings = checkSummary(body.sections);
+    const saved = await this.store({ profileId: null, subjectId }, { scope, viewYear: year, author: body.author, model: body.model, caution: body.caution, inputHash: null, sections }, { allowed: new Set(), quote: new Map() }, new Map());
+    return warnings.length ? { ...saved, warnings } : saved;
   }
 
   /** the cited codes that are passages of this discipline's sources — "p:<id>", or a rule of it the chart did not match */
