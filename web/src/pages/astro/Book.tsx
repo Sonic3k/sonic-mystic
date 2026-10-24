@@ -13,7 +13,9 @@ import { useAstroBook } from './Home';
 
 const page = (body: React.ReactNode) => <div className="wrap page tv as">{body}</div>;
 const short = (code: string) => code.replace(/^astrology\./, '');
-const voiceClass = (label: string | null) => (label === 'Woolfolk' ? 'wf' : label === 'Bản dịch Tierney' ? 'tie' : 'hk');
+const LABEL_CLASS: Record<string, string> = { Woolfolk: 'wf', 'Bản dịch Tierney': 'tie', 'Ghi chép lớp': 'notes', 'Sách khác': 'books', 'Claude tổng hợp': 'claude' };
+const voiceClass = (label: string | null) => LABEL_CLASS[label ?? ''] ?? 'hk';
+const COUNT = ['', 'Một', 'Hai', 'Ba', 'Bốn', 'Năm', 'Sáu', 'Bảy', 'Tám', 'Chín', 'Mười'];
 /** a section read whole on one page: the larger ones open as their contents */
 const WHOLE = 160;
 
@@ -34,7 +36,7 @@ export function AstroBookIndex() {
   if (!book.data) return page(<div className="tv-empty">Đang mở tài liệu…</div>);
   const n = book.data.sources.length;
   return page(<>
-    <div className="ptitle"><h1>Tài liệu</h1><span>{n === 6 ? 'Sáu' : n} tài liệu bài đọc dẫn từ</span></div>
+    <div className="ptitle"><h1>Tài liệu</h1><span>{COUNT[n] ?? n} tài liệu bài đọc dẫn từ</span></div>
     <div className="as-books">{book.data.sources.map(({ source: s, toc }) => <BookCard key={s.code} s={s} toc={toc} />)}</div>
   </>);
 }
@@ -142,7 +144,7 @@ export function AstroBookEntry() {
         {!shallow && e.sections.length > 1 && <div className="as-side"><h4>Trong mục này</h4><nav className="ns-toc">{e.sections.slice(1).map(s => (
           <button key={s.code} type="button" style={{ paddingLeft: 8 + Math.max(0, s.depth - 1) * 14 }}
             onClick={() => document.getElementById(`s-${s.code}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>{s.title}</button>))}</nav></div>}
-        <div className="tv-added-box"><h4>Đọc mục này thế nào</h4><p>Dưới mỗi đoạn nói về một người là điều kiện của nó: đoạn ấy chỉ hiện trong bài đọc của ai có lá số như vậy. Đoạn của Woolfolk do Claude dịch, nguyên văn tiếng Anh in nghiêng ngay dưới.</p></div>
+        <div className="tv-added-box"><h4>Đọc mục này thế nào</h4><p>Dưới mỗi đoạn nói về một người là điều kiện của nó: đoạn ấy chỉ hiện trong bài đọc của ai có lá số như vậy. Đoạn của Woolfolk và của các sách khác do Claude dịch, nguyên văn tiếng Anh in nghiêng ngay dưới.</p></div>
       </div>
     </div>
   </>);

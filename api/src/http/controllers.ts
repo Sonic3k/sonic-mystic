@@ -368,6 +368,10 @@ export class PeopleController {
 
   /** saves a reading written with Claude for one scope ('synthesis' for nhân số học and chiêm tinh; a tử vi scope; 'summary',
       the Nhận định, for any); it replaces the one of the same scope and year */
+  /** what whoever writes the profile's readings needs: how they are written, and (chiêm tinh) how the chart weighs */
+  @Get('profiles/:id/readings/plan')
+  readingPlan(@Param('id') id: string) { return this.readings.plan(id); }
+
   @Put('profiles/:id/readings/:scope')
   putReading(@Param('id') id: string, @Param('scope') scope: string, @Body(new ZodPipe(WrittenBody)) body: WrittenBodyT) { return this.readings.put(id, scope, body); }
 

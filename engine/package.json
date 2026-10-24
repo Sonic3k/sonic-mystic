@@ -30,6 +30,10 @@
     "./birth": {
       "types": "./dist/birth.d.ts",
       "default": "./dist/birth.js"
+    },
+    "./readings": {
+      "types": "./dist/readings.d.ts",
+      "default": "./dist/readings.js"
     }
   },
   "scripts": {

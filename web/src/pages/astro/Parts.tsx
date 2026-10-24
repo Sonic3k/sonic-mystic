@@ -25,8 +25,13 @@ export const bookLink = (source: string, entry: string, rule?: string) => `/astr
 const ASP_CLASS: Record<string, string> = { conjunction: 'conj', square: 'hard', opposition: 'hard', trine: 'soft', sextile: 'soft' };
 const aspClass = (k: string) => ASP_CLASS[k] ?? 'weak';
 const DIGN: Record<string, [string, string]> = { ruler: ['Tướng', 'up'], exaltation: ['Vượng', 'up'], detriment: ['Tù', 'down'], fall: ['Tử', 'down'] };
-export const VOICE_NAME: Record<AstrologyVoice | 'other', string> = { hk: 'Lời cô', woolfolk: 'Woolfolk', tierney: 'Tierney', other: 'Tài liệu' };
-const voiceOfCode = (code: string): AstrologyVoice | 'other' => { const p = code.split('.')[0]; return p.startsWith('hk') ? 'hk' : p === 'woolfolk' ? 'woolfolk' : p === 'tierney' ? 'tierney' : 'other'; };
+export const VOICE_NAME: Record<AstrologyVoice | 'other', string> = {
+  hk: 'Lời cô', notes: 'Ghi chép lớp', woolfolk: 'Woolfolk', tierney: 'Tierney', books: 'Sách khác', claude: 'Claude tổng hợp', other: 'Tài liệu',
+};
+/** the voices Claude translated, named so beside them */
+const TRANSLATED = new Set<string>(['woolfolk', 'books']);
+const CODE_VOICE: Record<string, AstrologyVoice> = { 'hk-notes': 'notes', woolfolk: 'woolfolk', tierney: 'tierney', books: 'books', method: 'claude' };
+const voiceOfCode = (code: string): AstrologyVoice | 'other' => { const p = code.split('.')[0]; return CODE_VOICE[p] ?? (p.startsWith('hk') ? 'hk' : 'other'); };
 const patternName = (p: Pattern) => PATTERN_NAME[p.kind].replace(/ \(.*\)$/, '');
 
 /** a body's emblem: its glyph on a lapis medal (AC, MC and the like in letters) */
@@ -233,8 +238,8 @@ export function astroRoom(r: AstrologyReadingDto, hl: (t: string) => React.React
 }
 
 export const astroVoices = (who: string) => <>
-  <span><i className="vc hk" />Lời cô</span><span><i className="vc woolfolk" />Woolfolk, Claude dịch</span>
-  <span><i className="vc tierney" />Bản dịch Tierney</span><span><i className="vc claude" />{who} luận thêm</span>
+  <span><i className="vc hk" />Lời cô</span><span><i className="vc notes" />Ghi chép lớp</span><span><i className="vc woolfolk" />Woolfolk, Claude dịch</span>
+  <span><i className="vc tierney" />Bản dịch Tierney</span><span><i className="vc books" />Sách khác, Claude dịch</span><span><i className="vc claude" />{who} luận thêm</span>
 </>;
 
 /** the bodies a section of the reading is about (or the planets in the sign it names, or the body its basis names) */
@@ -317,7 +322,7 @@ function Group({ g, rules, hl, focus, title }: { g: AstrologyGroupDto; rules: Re
   const v = rules[ms[0].rule].voice, page = rules[ms[0].rule].page;
   return (
     <div className="bk">
-      <div className="bk-h"><h3 className={isCaps(g.title) ? 'caps' : ''}>{title ?? g.title}</h3><span className={`vl ${v}`}>{VOICE_NAME[v]}{v === 'woolfolk' ? ', Claude dịch' : ''}</span>
+      <div className="bk-h"><h3 className={isCaps(g.title) ? 'caps' : ''}>{title ?? g.title}</h3><span className={`vl ${v}`}>{VOICE_NAME[v]}{TRANSLATED.has(v) ? ', Claude dịch' : ''}</span>
         {page !== null && <span className="pg">trang {page}</span>}<Link className="pg" to={bookLink(g.source, g.entry)}>đọc trong tài liệu ›</Link></div>
       {ms.map(m => <Passage key={m.rule} m={m} r={rules[m.rule]} hl={hl} focus={focus === m.rule} />)}
     </div>

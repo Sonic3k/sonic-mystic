@@ -1,17 +1,20 @@
 /* The Chiêm tinh bundle (kb/bundle/astrology), as kb/scripts/build-astrology.mjs writes it and the API imports it:
    every source section by section and passage by passage, and every passage that speaks of a person with its
    condition. */
+import type { AstrologyVoice } from '../api.js';
 import type { Topic, RuleKind } from './reading.js';
 
 export interface BundleSource {
   code: string; file: string; title: string; author: string;
-  /** how a reading names the source: "Lời cô", "Bản dịch Tierney", "Woolfolk" */
+  /** how a reading names the source: "Lời cô", "Ghi chép lớp", "Bản dịch Tierney", "Woolfolk", "Sách khác", "Claude tổng hợp" */
   label: string;
   translator?: string; description?: string; note?: string;
+  /** book (the default), or supplement: what Claude drew up from the others */
+  kind?: 'book' | 'supplement';
 }
 export interface BundlePassage {
   id: number; kind: string; role: RuleKind; page: number | null; pages?: number[]; text: string;
-  voice: 'hk' | 'tierney' | 'woolfolk';
+  voice: AstrologyVoice;
   label?: string; en?: string; labelEn?: string; items?: string[];
   /** a table (her dignities, Woolfolk's tables): its columns as [key, heading] and its rows by key; a cell's first line
       is its label when it has more than one; title: its caption (null: none; left out: the entry's title) */
@@ -28,7 +31,7 @@ export interface BundleEntry {
 export interface BundleRule {
   /** code */ i: string; /** source */ s: string; /** entry */ e: string; /** passage */ p: number; /** page */ pg: number | null;
   /** text */ t: string; /** condition */ w: string; /** kind */ k: RuleKind; /** topic */ tp: Topic; /** order */ o: number;
-  /** symbols */ sy: string[]; /** voice */ v: 'hk' | 'tierney' | 'woolfolk';
+  /** symbols */ sy: string[]; /** voice */ v: AstrologyVoice;
   /** label */ lb?: string; /** the original (English) */ en?: string; /** list items */ it?: string[];
 }
 export interface AstrologyBundle {

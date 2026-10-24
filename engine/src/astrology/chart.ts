@@ -8,6 +8,7 @@ import {
   type AspectCode, type BodyCode, type Dignity, type Element, type Modality, type PlanetCode, type SignCode,
 } from './zodiac.js';
 import { dominantOf, type DominantResult } from './dominant.js';
+import { weighChart, type Weighing } from './weigh.js';
 
 export interface BodyPosition { lon: number; speed?: number | null }
 export type EphemerisBody = PlanetCode | 'chiron' | 'north-node' | 'lilith';
@@ -83,6 +84,8 @@ export interface AstroChart {
   balance: Balance;
   rulers: { chart: PlanetCode[] | null; sun: PlanetCode[]; moon: PlanetCode[] };
   dominant: DominantResult;
+  /** how much each part weighs in a reading: Trọng điểm, Tô thêm, Ít tác dụng, each with the rules it meets (weigh.ts) */
+  weights: Weighing;
   /** what the reader should know about this chart (no time, a Moon that may change sign that day…) */
   notes: string[];
 }
@@ -195,9 +198,10 @@ export function buildAstroChart(input: AstroInput): AstroChart {
   }
   const chart: AstroChart = {
     input, timeKnown: !!H, placements, order, houses, aspects, patterns,
-    balance: { elements, modalities, hemispheres }, rulers, dominant: { tests: [], complete: false }, notes,
+    balance: { elements, modalities, hemispheres }, rulers, dominant: { tests: [], complete: false }, weights: { factors: [], notes: [] }, notes,
   };
   chart.dominant = dominantOf(chart);
+  chart.weights = weighChart(chart);
   return chart;
 }
 

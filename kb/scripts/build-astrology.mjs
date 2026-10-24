@@ -1,9 +1,12 @@
 // Builds the Chiêm tinh bundle the API imports (kb/bundle/astrology):
 //   book.json      every source section by section and passage by passage — cô Hương Kiều's textbook, her table of
-//                  keywords, her test of the dominant planets and her handout on Bạch Dương, the class's translation of
-//                  Bil Tierney's book on aspects, and Woolfolk's book in Claude's translation (with the English kept);
-//                  each passage with what it is to a reader (rule: speaks of a person; general: explains) and whose
-//                  voice it is (hk: cô Hương Kiều, tierney: Bil Tierney in the class's translation, woolfolk)
+//                  keywords, her test of the dominant planets and her handout on Bạch Dương, her class's notes, the
+//                  class's translation of Bil Tierney's book on aspects, Woolfolk's book in Claude's translation (with the
+//                  English kept), the other books' passages on weighing a chart (Claude's translation, the English kept),
+//                  and the weighting rules themselves (drawn up from the engine's WEIGH_RULES, each with the passages it
+//                  rests on); each passage with what it is to a reader (rule: speaks of a person; general: explains) and
+//                  whose voice it is (hk: cô Hương Kiều, notes: her class, tierney: Bil Tierney in the class's
+//                  translation, woolfolk, books: the other books, claude: the rules Claude drew from all of them)
 //   rules.json     every passage that speaks of a person, with the condition under which it does and the part of a
 //                  reading it belongs to — checked here against the engine's condition language
 //   manifest.json  a hash of all of it: the API imports again only when it changes
@@ -15,20 +18,22 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { TOPICS, parse, symbolsOf } from '@mystic/engine/astrology';
+import { TOPICS, WEIGH_LEVEL_NAME, WEIGH_PRINCIPLES, WEIGH_RULES, parse, symbolsOf } from '@mystic/engine/astrology';
 
 const kb = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const srcDir = process.env.ASTROLOGY_SOURCE_DIR ?? path.join(kb, 'sources/astrology');
 const out = path.join(kb, 'bundle/astrology');
 // in this order a reading lists what each source says of the same thing: her words first
-const MAPS = ['huong-kieu-keywords', 'huong-kieu', 'huong-kieu-dominant', 'huong-kieu-aries', 'tierney-aspects', 'woolfolk'];
+// (the rules last: they cite the others)
+const MAPS = ['huong-kieu-keywords', 'huong-kieu', 'huong-kieu-dominant', 'huong-kieu-aries', 'huong-kieu-notes', 'tierney-aspects', 'woolfolk', 'books', 'method'];
 const ROLES = new Set(['rule', 'general']);
 const TOPIC_CODES = new Set(TOPICS.map(t => t.code));
 const errors = [];
 
-/** whose words a passage is: her own, Tierney's (the 12 signs of her textbook are his "All Round the Zodiac"), Woolfolk's */
-const voiceOf = (src, block) => (src === 'astrology.tierney' || (src === 'astrology.hk' && block.page >= 41 && block.page <= 147 && block.kind !== 'heading') ? 'tierney'
-  : src === 'astrology.woolfolk' ? 'woolfolk' : 'hk');
+/** whose words a passage is: her own, her class's, Tierney's (the 12 signs of her textbook are his "All Round the Zodiac"),
+    Woolfolk's, the other books', or the rules Claude drew from them */
+const VOICE_OF_SOURCE = { 'astrology.hk-notes': 'notes', 'astrology.tierney': 'tierney', 'astrology.woolfolk': 'woolfolk', 'astrology.books': 'books', 'astrology.method': 'claude' };
+const voiceOf = (src, block) => (src === 'astrology.hk' && block.page >= 41 && block.page <= 147 && block.kind !== 'heading' ? 'tierney' : VOICE_OF_SOURCE[src] ?? 'hk');
 /** a passage's text: a table's is its rows, one to a line (her dignities in her words; any other cell by cell) */
 const isDignities = b => b.columns[0]?.[0] === 'planet' && b.rows.every(r => Array.isArray(r.exaltation));
 const cellText = v => (Array.isArray(v) ? v.join(', ') : String(v ?? '')).replace(/\n/g, ': ');
@@ -38,14 +43,72 @@ const textOf = b => (b.kind === 'keywords' ? b.items.join('\n')
     : b.rows.map(r => b.columns.map(([k]) => cellText(r[k])).filter(Boolean).join(' · '))).join('\n')
   : b.text);
 
+/** a passage of a source already built, as a reader would look it up: the book (for the other books, the one of the six
+    it is from), where in it, and the page */
+function cite(built, ref) {
+  const m = /^([a-z-]+)\.b(\d+)$/.exec(ref);
+  const book = m && built.find(b => b.source.code === `astrology.${m[1]}`);
+  if (!book) { errors.push(`method: không có nguồn cho ${ref}`); return { name: ref, short: ref, where: '', page: null }; }
+  const id = Number(m[2]);
+  const e = book.entries.find(x => x.paras.some(p => p.id === id));
+  const p = e?.paras.find(x => x.id === id);
+  if (!e || !p) { errors.push(`method: ${ref} không phải một đoạn của ${book.source.title}`); return { name: ref, short: ref, where: '', page: null }; }
+  let top = e;
+  for (let up = e; up; up = up.parent ? book.entries.find(y => y.code === up.parent) : undefined) top = up;
+  const tidy = (t) => t.replace(/[«»]/g, '').replace(/\s*\([^()]*\)$/, '').replace(/[.:]+$/, '').trim();
+  const other = book.source.code === 'astrology.books';
+  const name = tidy(other ? top.title : book.source.title);
+  const where = tidy(other ? (p.label ?? e.title) : e.title);
+  return { name, short: other ? name.replace(/^.* — /, '') : name, where: where === name ? '' : where, page: p.page };
+}
+const at = (c) => `${c.where ? `«${c.where}»` : ''}${c.page !== null ? `${c.where ? ' ' : ''}tr. ${c.page}` : ''}`;
+/** passages cited one after another, book by book: "Chiêm tinh học cơ bản: «Phân nhóm» tr. 14, «…» tr. 154; …" */
+const citeList = (built, refs) => {
+  const groups = new Map();
+  for (const c of refs.map(r => cite(built, r))) { const g = groups.get(c.name) ?? []; const w = at(c); if (!g.includes(w)) g.push(w); groups.set(c.name, g); }
+  // a bare page already named with a passage on it says nothing more
+  const keep = (ws) => ws.filter(w => w && !(/^tr\. /.test(w) && ws.some(x => x !== w && x.endsWith(` ${w}`))));
+  return [...groups].map(([name, ws]) => (keep(ws).length ? `${name}: ${keep(ws).join(', ')}` : name)).join('; ') + '.';
+};
+/** a passage cited inside a sentence: the book's short name and where in it */
+const citeInline = (built, ref) => { const c = cite(built, ref), w = at(c); return w ? `${c.short}, ${w}` : c.short; };
+/** the weighting rules as a source of their own: what they rest on, then each level and each rule with the passages it
+    cites — in words, each citation as a reader would look it up */
+function weighSource(built) {
+  const blocks = [], entries = [];
+  const head = (code, text, level, parent) => { blocks.push({ id: blocks.length + 1, kind: 'heading', level, text }); entries.push({ at: blocks.length, code, title: text, kind: 'general', ...(parent ? { parent } : {}) }); };
+  const para = (text, label) => blocks.push({ id: blocks.length + 1, kind: 'para', text, ...(label ? { label } : {}) });
+  const words = (text) => text.replace(/\b[a-z-]+\.b\d+\b/g, r => citeInline(built, r));
+  const list = (refs) => citeList(built, refs);
+  head('intro', 'Cách cân lá số', 1);
+  para(`Một bộ luật cho mọi lá số, để bài luận biết điều gì nói trước, nói kỹ. Ba mức: ${WEIGH_LEVEL_NAME.key} — điều chi phối lá số; ${WEIGH_LEVEL_NAME.normal} — có tác dụng, không chi phối; ${WEIGH_LEVEL_NAME.minor} — bị làm yếu, hay quá nhỏ. Máy tính chỉ xét yếu tố nào hợp luật nào, không cộng điểm. Mỗi luật dẫn những đoạn nó dựa vào, lời cô trước; chỗ luật áp một đoạn quá chữ của đoạn ấy thì ghi «Cách áp»; chỗ sách nói khác thì ghi ra.`);
+  head('principles', 'Nguyên tắc', 2, 'intro');
+  for (const p of WEIGH_PRINCIPLES) { para(words(p.text)); if (p.refs.length) para(list(p.refs), 'Dựa trên:'); }
+  for (const level of ['key', 'normal', 'minor']) {
+    head(level, WEIGH_LEVEL_NAME[level], 1);
+    for (const r of WEIGH_RULES.filter(x => x.level === level)) {
+      head(r.code.toLowerCase(), `${r.code} · ${r.name}`, 2, level);
+      para(r.text);
+      if (r.applied) para(words(r.applied), 'Cách áp:');
+      para(list(r.refs), 'Dựa trên:');
+      if (r.against?.length) para(list(r.against), 'Sách nói khác:');
+    }
+  }
+  return { blocks, entries };
+}
+
 const books = [];
 const rules = [];
 let ord = 0;
 for (const name of MAPS) {
   const map = JSON.parse(fs.readFileSync(path.join(kb, 'astrology', `${name}.json`), 'utf8'));
-  const file = path.join(srcDir, map.source.file);
-  if (!fs.existsSync(file)) { errors.push(`${name}: thiếu file nguồn ${file}`); continue; }
-  const blocks = fs.readFileSync(file, 'utf8').split('\n').filter(Boolean).map((l, i) => ({ id: i + 1, ...JSON.parse(l) }));
+  let blocks;
+  if (map.generated === 'weigh') ({ blocks, entries: map.entries } = weighSource(books));
+  else {
+    const file = path.join(srcDir, map.source.file);
+    if (!fs.existsSync(file)) { errors.push(`${name}: thiếu file nguồn ${file}`); continue; }
+    blocks = fs.readFileSync(file, 'utf8').split('\n').filter(Boolean).map((l, i) => ({ id: i + 1, ...JSON.parse(l) }));
+  }
   const short = map.source.code.replace(/^astrology\./, '');
   const byAt = new Map(map.entries.map(e => [e.at, e]));
   const byCode = new Map(map.entries.map(e => [e.code, e]));

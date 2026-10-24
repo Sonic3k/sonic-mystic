@@ -94,7 +94,10 @@ export function astroBirthOfDto(b: BirthDto): AstrologyBirthDto | null {
 }
 
 /** whose words a passage is: [class of its colour, its name] */
-export const VOICE: Record<AstrologyVoice, [string, string]> = { hk: ['hk', 'Lời cô'], tierney: ['tie', 'Bản dịch Tierney'], woolfolk: ['wf', 'Woolfolk · Claude dịch'] };
+export const VOICE: Record<AstrologyVoice, [string, string]> = {
+  hk: ['hk', 'Lời cô'], notes: ['notes', 'Ghi chép lớp'], tierney: ['tie', 'Bản dịch Tierney'], woolfolk: ['wf', 'Woolfolk · Claude dịch'],
+  books: ['books', 'Sách khác · Claude dịch'], claude: ['claude', 'Claude tổng hợp'],
+};
 
 /** the parts of a reading, in the order the page shows them */
 export const PART_ORDER: Topic[] = ['sun', 'moon', 'asc', 'planet', 'sign', 'house', 'aspect', 'pattern', 'dominant', 'point', 'love'];

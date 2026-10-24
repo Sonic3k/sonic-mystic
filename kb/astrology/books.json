@@ -1,0 +1,151 @@
+{
+ "source": {
+  "code": "astrology.books",
+  "file": "books.jsonl",
+  "title": "Những sách khác về cách cân lá số",
+  "author": "Steven Forrest, Donna Cunningham, Max Heindel, Dane Rudhyar, Alan Leo, C. Aq. Libra",
+  "translator": "Claude",
+  "label": "Sách khác",
+  "description": "Những đoạn trong sáu cuốn sách tiếng Anh nói về cách cân một lá số: yếu tố nào chi phối, yếu tố nào tô thêm, điểm nào chỉ đọc khi chạm một hành tinh. Claude trích và dịch, nguyên văn tiếng Anh in ngay dưới. Bộ luật «Cách cân lá số» dẫn các đoạn này cạnh lời cô."
+ },
+ "entries": [
+  {
+   "at": 1,
+   "code": "forrest",
+   "title": "Steven Forrest — The Inner Sky",
+   "kind": "general"
+  },
+  {
+   "at": 2,
+   "code": "forrest-triad",
+   "title": "Hướng dẫn số một: bộ ba nền tảng (chương 10)",
+   "parent": "forrest"
+  },
+  {
+   "at": 5,
+   "code": "forrest-hemis",
+   "title": "Hướng dẫn số hai: sự dồn sao vào một bán cầu",
+   "parent": "forrest"
+  },
+  {
+   "at": 8,
+   "code": "forrest-focal",
+   "title": "Hướng dẫn số ba: các hành tinh tiêu điểm",
+   "parent": "forrest"
+  },
+  {
+   "at": 24,
+   "code": "forrest-nodes",
+   "title": "Hướng dẫn số bốn: La Hầu và Kế Đô",
+   "parent": "forrest"
+  },
+  {
+   "at": 28,
+   "code": "forrest-whole",
+   "title": "Hướng dẫn số năm và số sáu: đọc cả lá số như một con người",
+   "parent": "forrest"
+  },
+  {
+   "at": 31,
+   "code": "forrest-orbs",
+   "title": "Độ lệch góc chiếu (chương 9)",
+   "parent": "forrest"
+  },
+  {
+   "at": 34,
+   "code": "cunningham",
+   "title": "Donna Cunningham — Planetary Strength Tests (bản gốc bài test của cô)",
+   "kind": "general"
+  },
+  {
+   "at": 35,
+   "code": "cunningham-why",
+   "title": "Bài test để làm gì, và không để làm gì",
+   "parent": "cunningham"
+  },
+  {
+   "at": 41,
+   "code": "cunningham-scores",
+   "title": "Mấy dòng của bài test gốc",
+   "parent": "cunningham"
+  },
+  {
+   "at": 44,
+   "code": "heindel",
+   "title": "Max Heindel — Simplified Scientific Astrology",
+   "kind": "general"
+  },
+  {
+   "at": 45,
+   "code": "heindel-factors",
+   "title": "Ba yếu tố, và hành tinh ở cung Mọc",
+   "parent": "heindel"
+  },
+  {
+   "at": 49,
+   "code": "heindel-dignity",
+   "title": "Tướng, Tù, Vượng, Tử và chủ tinh lá số",
+   "parent": "heindel"
+  },
+  {
+   "at": 52,
+   "code": "heindel-points",
+   "title": "La Hầu, Kế Đô, Fortuna và giờ sinh",
+   "parent": "heindel"
+  },
+  {
+   "at": 57,
+   "code": "rudhyar",
+   "title": "Dane Rudhyar — The Astrology of Personality",
+   "kind": "general"
+  },
+  {
+   "at": 58,
+   "code": "rudhyar-focal",
+   "title": "Tâm điểm ý nghĩa trước, bảng kê sau (chương 11)",
+   "parent": "rudhyar"
+  },
+  {
+   "at": 65,
+   "code": "rudhyar-sum",
+   "title": "Không cộng điểm, không lấy trung bình (chương 14)",
+   "parent": "rudhyar"
+  },
+  {
+   "at": 69,
+   "code": "leo",
+   "title": "Alan Leo — The Key to Your Own Nativity",
+   "kind": "general"
+  },
+  {
+   "at": 70,
+   "code": "leo-order",
+   "title": "Thứ tự luận và cung Mọc",
+   "parent": "leo"
+  },
+  {
+   "at": 74,
+   "code": "leo-strong",
+   "title": "Góc chiếu mạnh và hành tinh nổi bật",
+   "parent": "leo"
+  },
+  {
+   "at": 79,
+   "code": "libra",
+   "title": "C. Aq. Libra — Astrology, Its Technics and Ethics",
+   "kind": "general"
+  },
+  {
+   "at": 80,
+   "code": "libra-first",
+   "title": "Xét gì trước, cái gì mạnh",
+   "parent": "libra"
+  },
+  {
+   "at": 85,
+   "code": "libra-keynote",
+   "title": "Âm chủ đạo và nét điều chỉnh",
+   "parent": "libra"
+  }
+ ]
+}

@@ -2,7 +2,7 @@
    Types only — the API builds these objects, every web reads them. */
 import type { BirthInput, Chart, ChartOptions, Principle, Tone, View } from './tuvi/index.js';
 import type { NumerologyChart, ParaRole, RuleKind, Topic } from './numerology/index.js';
-import type { AstroChart, RuleKind as AstrologyRuleKind, Topic as AstrologyTopic } from './astrology/index.js';
+import type { AstroChart, RuleKind as AstrologyRuleKind, Topic as AstrologyTopic, WeighRule, Weighing } from './astrology/index.js';
 
 /** grandma's voice (a family source) or anything added on top of it (supplement, other books, AI) */
 export type Layer = 'primary' | 'added';
@@ -183,12 +183,26 @@ export interface AiReadingDto {
   stale: boolean;
   /** on saving a written reading: the refs it cited that its chart did not match (left out) */
   dropped?: string[];
+  /** on saving a written reading: what goes against how readings are written and weighed (it is saved all the same) */
+  warnings?: string[];
+}
+/** what whoever writes a profile's readings needs beside the chart: how they are written, and (chiêm tinh) how the chart weighs */
+export interface ReadingPlanDto {
+  discipline: string;
+  spec: string;
+  /** chiêm tinh: the rules every chart is weighed by, and this chart's weighing (each factor's level and why) */
+  rules: WeighRule[] | null;
+  weights: Weighing | null;
+  /** chiêm tinh: the minutes around the birth time within which the houses and signs read stay the same */
+  window: { from: string; to: string; before: number; after: number; capped: boolean } | null;
+  timeApprox: boolean;
 }
 export interface AiStatusDto { ai: boolean; model: string }
 /** a reading written elsewhere (with Claude) and saved to a profile: each idea that retells the book cites its passages */
 export interface WrittenReadingInput {
   viewYear?: number; author?: string; model?: string | null; caution?: string | null;
-  sections: { title: string; weight?: Weight | null; basis?: string[]; items: { layer: Layer; text: string; refs?: string[] }[] }[];
+  /** factors: chiêm tinh, the ids of the chart's factors a section reads (checked against the weighing, not stored) */
+  sections: { title: string; weight?: Weight | null; basis?: string[]; factors?: string[]; items: { layer: Layer; text: string; refs?: string[] }[] }[];
 }
 
 // ── the brief Sonic Hub keeps beside a person ──
@@ -285,8 +299,10 @@ export interface NumerologyCatalogDto {
 }
 
 // ── Chiêm tinh (cô Hương Kiều's materials, the class's Tierney, Woolfolk in Claude's translation) ──
-/** whose words a passage is: cô Hương Kiều's own, Bil Tierney's (the class's translation), Woolfolk's (Claude's translation) */
-export type AstrologyVoice = 'hk' | 'tierney' | 'woolfolk';
+/** whose words a passage is: cô Hương Kiều's own, her class's notes, Bil Tierney's (the class's translation), Woolfolk's
+    (Claude's translation), the other books on weighing a chart (Claude's translation), the weighting rules Claude drew
+    from all of them */
+export type AstrologyVoice = 'hk' | 'notes' | 'tierney' | 'woolfolk' | 'books' | 'claude';
 export interface AstrologyBirthDto {
   year: number; month: number; day: number;
   /** clock time "HH:MM", null when not known (the chart then has no AC, MC or houses) */
@@ -307,14 +323,14 @@ export interface AstrologyChartDto {
 }
 export interface AstrologySourceDto {
   code: string; title: string; author: string | null; description: string | null; note: string | null;
-  /** how a reading names it: "Lời cô", "Bản dịch Tierney", "Woolfolk" */
+  /** how a reading names it: "Lời cô", "Ghi chép lớp", "Bản dịch Tierney", "Woolfolk", "Sách khác", "Claude tổng hợp" */
   label: string | null;
   translator: string | null;
 }
 export interface AstrologyRuleDto {
   code: string; source: string; voice: AstrologyVoice;
   text: string;
-  /** the original of a translated passage (Woolfolk's English) */
+  /** the original of a translated passage (Woolfolk's English, the other books') */
   en: string | null;
   label: string | null; items: string[] | null; page: number | null;
   /** rule: the source speaking of the person · general: its explanation of the part read, shown once at its top */

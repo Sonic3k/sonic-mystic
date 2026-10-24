@@ -99,8 +99,10 @@ html[data-room="astro"] .added-run { border-left-style: double; border-left-widt
 html[data-room="astro"] .srcs cite button { color: var(--lapis-2); font-weight: 600; }
 .vc { display: inline-block; width: 18px; height: 3px; }
 .vc.hk { background: var(--lapis-2); } .vc.woolfolk { background: var(--ochre); } .vc.tierney { background: var(--mala); } .vc.claude { background: var(--sepia); }
+.vc.notes { background: var(--ultra); } .vc.books { background: #7A4A86; }
 .vl { font-weight: 600; }
 .vl.hk { color: var(--lapis-2); } .vl.woolfolk { color: #8C6513; } .vl.tierney { color: var(--mala); }
+.vl.notes { color: var(--ultra); } .vl.books { color: #7A4A86; } .vl.claude { color: var(--sepia); }
 .cmp-wheel svg { width: 100%; height: auto; display: block; }
 .cmp-wheel { background: #FFFEFB; padding: 6px; border: 1px solid var(--frame); }
 .cmp-now { display: grid; gap: 6px; }
@@ -249,9 +251,11 @@ html[data-room="astro"] .srcs cite button { color: var(--lapis-2); font-weight: 
 html[data-room="astro"] .tv-card h2 { font-family: var(--display); font-size: 26px; }
 html[data-room="astro"] .tv-voice.primary, html[data-room="astro"] .tv-voice.hk { color: var(--lapis-2); }
 html[data-room="astro"] .tv-voice.tie { color: var(--mala); } html[data-room="astro"] .tv-voice.wf { color: #8C6513; } html[data-room="astro"] .tv-voice.ai { color: var(--sepia); }
+html[data-room="astro"] .tv-voice.notes { color: var(--ultra); } html[data-room="astro"] .tv-voice.books { color: #7A4A86; } html[data-room="astro"] .tv-voice.claude { color: var(--sepia); }
 .as-line { position: relative; padding: 9px 0 10px 16px; scroll-margin-top: calc(var(--top) + var(--bar-h) + var(--sub-h) + 40px); border-bottom: 1px dotted var(--rule); }
 .as-line::before { content: ""; position: absolute; left: 0; top: 13px; bottom: 13px; width: 2px; background: var(--lapis-2); }
 .as-line.tierney::before { background: var(--mala); } .as-line.woolfolk::before { background: var(--ochre); }
+.as-line.notes::before { background: var(--ultra); } .as-line.books::before { background: #7A4A86; } .as-line.claude::before { background: var(--sepia); }
 .as-line.hl { background: #FBF3DF; }
 .as-line p { font-family: var(--body); font-size: 18px; line-height: 1.6; color: var(--ink); white-space: pre-line; }
 .as-line p b.lb { font-family: var(--ui); font-size: 13px; font-weight: 600; color: var(--lapis-2); margin-right: 6px; }

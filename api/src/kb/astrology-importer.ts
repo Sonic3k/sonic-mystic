@@ -1,5 +1,6 @@
 /* Loads the Chiêm tinh bundle — cô Hương Kiều's textbook, keyword table, test of the dominant planets and handout on
-   Bạch Dương, the class's translation of Bil Tierney's book on aspects, and Woolfolk's book in Claude's translation —
+   Bạch Dương, her class's notes, the class's translation of Bil Tierney's book on aspects, Woolfolk's book in Claude's
+   translation, the other books' passages on weighing a chart, and the weighting rules drawn up from all of them —
    into the database, one source per book. The sources' text is not kept in the repository, so the bundle comes from
    disk (kb/bundle/astrology, built where the sources are) or is uploaded (PUT /api/astrology/bundle). As with Nhân số học,
    everything is written by its stable key and what was edited in the database is kept. */
@@ -16,7 +17,7 @@ import { BundleError } from './numerology-importer.js';
 
 const TOPIC = z.enum(TOPICS.map(t => t.code) as [string, ...string[]]);
 const KIND = z.enum(['rule', 'general']);
-const VOICE = z.enum(['hk', 'tierney', 'woolfolk']);
+const VOICE = z.enum(['hk', 'notes', 'tierney', 'woolfolk', 'books', 'claude']);
 const BundleSchema = z.object({
   manifest: z.object({ discipline: z.literal('astrology'), version: z.string().min(4), sources: z.number().int(), entries: z.number().int(), passages: z.number().int(), rules: z.number().int(), built: z.string() }),
   book: z.object({
@@ -24,6 +25,7 @@ const BundleSchema = z.object({
       source: z.object({
         code: z.string().regex(/^astrology\.[a-z0-9-]+$/), file: z.string(), title: z.string().min(1), author: z.string(), label: z.string(),
         translator: z.string().optional(), description: z.string().optional(), note: z.string().optional(),
+        kind: z.enum(['book', 'supplement']).optional(),
       }),
       entries: z.array(z.object({
         code: z.string().min(1), title: z.string(), parent: z.string().nullable(), page: z.number().int().nullable(), at: z.number().int(),
@@ -121,7 +123,7 @@ export async function importAstrology(db: Db, raw: AstrologyBundle, opts: { forc
     for (const [order, book] of b.book.books.entries()) {
       const s = book.source;
       const [src] = await tx.insert(sources).values({
-        disciplineCode: 'astrology', code: s.code, title: s.title, author: s.author, kind: 'book', sourceFile: s.file, note: s.note ?? null, sortOrder: order,
+        disciplineCode: 'astrology', code: s.code, title: s.title, author: s.author, kind: s.kind ?? 'book', sourceFile: s.file, note: s.note ?? null, sortOrder: order,
         description: s.description ?? null,
       }).onConflictDoUpdate({ target: sources.code, set: { title: sql`excluded.title`, author: sql`excluded.author`, kind: sql`excluded.kind`, sourceFile: sql`excluded.source_file`, note: sql`excluded.note`, description: sql`excluded.description`, sortOrder: sql`excluded.sort_order`, updatedAt: now } })
         .returning({ id: sources.id });

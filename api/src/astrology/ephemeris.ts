@@ -101,6 +101,12 @@ export function astroInputOf(b: AstroBirth, gender: 'male' | 'female' | null): {
   return { input, offsetMinutes: offset, notes };
 }
 
+/** the same birth some minutes earlier or later (the ends of a birth-time window): the sky recomputed, the rest kept */
+export function shiftedInput(input: AstroInput, minutes: number): AstroInput {
+  const jd = input.jd + minutes / 1440;
+  return { ...input, jd, positions: positionsAt(jd, input.timeKnown && input.place ? input.place : null) };
+}
+
 /** what a chart turns on at a minute: the sign of AC and of Mặt Trăng, and the house of each planet */
 function signature(jd: number, place: { latitude: number; longitude: number }): string {
   const p = positionsAt(jd, place);

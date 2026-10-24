@@ -1,0 +1,1103 @@
+{
+ "source": {
+  "code": "astrology.hk-notes",
+  "file": "huong-kieu-notes.jsonl",
+  "title": "Ghi chép của lớp",
+  "author": "Học viên lớp Chiêm tinh của cô Hương Kiều",
+  "label": "Ghi chép lớp",
+  "description": "Bốn tài liệu học viên ghi trong lớp của cô (thư mục Chiem tinh): buổi «thứ 5 buổi 3», bảng «CT1» cho AC – DC – IC – MC theo cung Mọc, bảng «[Từ khóa] Hành tinh» và bảng «Câu, từ khóa». Lời ghi của lớp, giữ nguyên chữ, không phải lời cô viết."
+ },
+ "entries": [
+  {
+   "at": 1,
+   "code": "t5b3",
+   "title": "Thứ 5 buổi 3: Mặt Trời, Mặt Trăng ở từng cung; bốn góc phần tư",
+   "kind": "general"
+  },
+  {
+   "at": 51,
+   "code": "ct1",
+   "title": "CT1: AC, DC, IC, MC theo cung Mọc",
+   "kind": "general"
+  },
+  {
+   "at": 101,
+   "code": "hanh-tinh",
+   "title": "[Từ khóa] Hành tinh: theo bán cầu, cung ngày – cung đêm và từng cung",
+   "kind": "general"
+  },
+  {
+   "at": 148,
+   "code": "cau-tu-khoa",
+   "title": "Câu, từ khóa: mẫu câu cung địa bàn, từ khóa dấu hiệu, ví dụ theo cung Mọc",
+   "kind": "general"
+  }
+ ],
+ "paras": {
+  "2": {
+   "kind": "general"
+  },
+  "3": {
+   "kind": "general"
+  },
+  "4": {
+   "kind": "rule",
+   "when": "focus(sun)",
+   "topic": "sun"
+  },
+  "5": {
+   "kind": "rule",
+   "when": "house(sun, 10-12) | house(sun, 1-3)",
+   "topic": "sun"
+  },
+  "6": {
+   "kind": "rule",
+   "when": "house(sun, 4-9)",
+   "topic": "sun"
+  },
+  "7": {
+   "kind": "rule",
+   "when": "house(sun, 1)",
+   "topic": "sun"
+  },
+  "8": {
+   "kind": "rule",
+   "when": "house(sun, 2)",
+   "topic": "sun"
+  },
+  "9": {
+   "kind": "rule",
+   "when": "house(sun, 3)",
+   "topic": "sun"
+  },
+  "10": {
+   "kind": "rule",
+   "when": "in(sun, aquarius) & house(sun, 3)",
+   "topic": "sun"
+  },
+  "11": {
+   "kind": "rule",
+   "when": "in(sun, pisces) & house(sun, 3)",
+   "topic": "sun"
+  },
+  "12": {
+   "kind": "rule",
+   "when": "house(sun, 4)",
+   "topic": "sun"
+  },
+  "13": {
+   "kind": "rule",
+   "when": "in(sun, capricorn) & house(sun, 4)",
+   "topic": "sun"
+  },
+  "14": {
+   "kind": "rule",
+   "when": "in(sun, virgo) & house(sun, 4)",
+   "topic": "sun"
+  },
+  "15": {
+   "kind": "rule",
+   "when": "house(sun, 5)",
+   "topic": "sun"
+  },
+  "16": {
+   "kind": "rule",
+   "when": "in(sun, virgo) & house(sun, 5)",
+   "topic": "sun"
+  },
+  "17": {
+   "kind": "rule",
+   "when": "house(sun, 6)",
+   "topic": "sun"
+  },
+  "18": {
+   "kind": "rule",
+   "when": "house(sun, 7)",
+   "topic": "sun"
+  },
+  "19": {
+   "kind": "rule",
+   "when": "house(sun, 9)",
+   "topic": "sun"
+  },
+  "20": {
+   "kind": "rule",
+   "when": "focus_house(10)",
+   "topic": "house"
+  },
+  "21": {
+   "kind": "rule",
+   "when": "house(sun, 10)",
+   "topic": "sun"
+  },
+  "22": {
+   "kind": "rule",
+   "when": "house(sun, 11)",
+   "topic": "sun"
+  },
+  "23": {
+   "kind": "rule",
+   "when": "in(sun, libra)",
+   "topic": "sun"
+  },
+  "24": {
+   "kind": "rule",
+   "when": "in(sun, virgo) & house(sun, 11)",
+   "topic": "sun"
+  },
+  "25": {
+   "kind": "rule",
+   "when": "focus_house(11)",
+   "topic": "house"
+  },
+  "26": {
+   "kind": "rule",
+   "when": "house(sun, 12)",
+   "topic": "sun"
+  },
+  "27": {
+   "kind": "rule",
+   "when": "in(sun, gemini) & house(sun, 12)",
+   "topic": "sun"
+  },
+  "28": {
+   "kind": "general"
+  },
+  "29": {
+   "kind": "rule",
+   "when": "in(sun, virgo)",
+   "topic": "sun"
+  },
+  "30": {
+   "kind": "rule",
+   "when": "in(sun, virgo) & house(sun, 12)",
+   "topic": "sun"
+  },
+  "31": {
+   "kind": "rule",
+   "when": "focus(moon)",
+   "topic": "moon"
+  },
+  "32": {
+   "kind": "rule",
+   "when": "focus(moon)",
+   "topic": "moon"
+  },
+  "33": {
+   "kind": "rule",
+   "when": "(focus(sun) & house(sun, 1)) | (focus(moon) & house(moon, 1))",
+   "topic": [
+    "sun",
+    "moon"
+   ]
+  },
+  "34": {
+   "kind": "rule",
+   "when": "house(moon, 7)",
+   "topic": "moon"
+  },
+  "35": {
+   "kind": "rule",
+   "when": "in(moon, taurus)",
+   "topic": "moon"
+  },
+  "36": {
+   "kind": "rule",
+   "when": "in(moon, pisces)",
+   "topic": "moon"
+  },
+  "37": {
+   "kind": "rule",
+   "when": "in(moon, pisces) & house(moon, 3)",
+   "topic": "moon"
+  },
+  "38": {
+   "kind": "rule",
+   "when": "focus_house(5) & cusp(5, scorpio)",
+   "topic": "house"
+  },
+  "39": {
+   "kind": "rule",
+   "when": "in(moon, libra) & house(moon, 5)",
+   "topic": "moon"
+  },
+  "40": {
+   "kind": "rule",
+   "when": "in(moon, scorpio)",
+   "topic": "moon"
+  },
+  "41": {
+   "kind": "rule",
+   "when": "in(moon, virgo)",
+   "topic": "moon"
+  },
+  "42": {
+   "kind": "general"
+  },
+  "43": {
+   "kind": "rule",
+   "when": "in(moon, capricorn) & house(moon, 7)",
+   "topic": "moon"
+  },
+  "44": {
+   "kind": "rule",
+   "when": "house(moon, 8) | in(moon, taurus)",
+   "topic": "moon"
+  },
+  "45": {
+   "kind": "rule",
+   "when": "house(moon, 9)",
+   "topic": "moon"
+  },
+  "46": {
+   "kind": "general"
+  },
+  "47": {
+   "kind": "rule",
+   "when": "focus_house(10-12)",
+   "topic": "house"
+  },
+  "48": {
+   "kind": "rule",
+   "when": "focus_house(7-9)",
+   "topic": "house"
+  },
+  "49": {
+   "kind": "rule",
+   "when": "focus_house(1-3)",
+   "topic": "house"
+  },
+  "50": {
+   "kind": "rule",
+   "when": "focus_house(4-6)",
+   "topic": "house"
+  },
+  "52": {
+   "kind": "general"
+  },
+  "53": {
+   "kind": "rule",
+   "when": "in(asc, aries)",
+   "topic": "asc"
+  },
+  "54": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, libra)",
+   "topic": "house"
+  },
+  "55": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, cancer)",
+   "topic": "house"
+  },
+  "56": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, capricorn)",
+   "topic": "house"
+  },
+  "57": {
+   "kind": "rule",
+   "when": "in(asc, taurus)",
+   "topic": "asc"
+  },
+  "58": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, scorpio)",
+   "topic": "house"
+  },
+  "59": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, leo)",
+   "topic": "house"
+  },
+  "60": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, aquarius)",
+   "topic": "house"
+  },
+  "61": {
+   "kind": "rule",
+   "when": "in(asc, gemini)",
+   "topic": "asc"
+  },
+  "62": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, sagittarius)",
+   "topic": "house"
+  },
+  "63": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, virgo)",
+   "topic": "house"
+  },
+  "64": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, pisces)",
+   "topic": "house"
+  },
+  "65": {
+   "kind": "rule",
+   "when": "in(asc, cancer)",
+   "topic": "asc"
+  },
+  "66": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, capricorn)",
+   "topic": "house"
+  },
+  "67": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, libra)",
+   "topic": "house"
+  },
+  "68": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, aries)",
+   "topic": "house"
+  },
+  "69": {
+   "kind": "rule",
+   "when": "in(asc, leo)",
+   "topic": "asc"
+  },
+  "70": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, aquarius)",
+   "topic": "house"
+  },
+  "71": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, scorpio)",
+   "topic": "house"
+  },
+  "72": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, taurus)",
+   "topic": "house"
+  },
+  "73": {
+   "kind": "rule",
+   "when": "in(asc, virgo)",
+   "topic": "asc"
+  },
+  "74": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, pisces)",
+   "topic": "house"
+  },
+  "75": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, sagittarius)",
+   "topic": "house"
+  },
+  "76": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, gemini)",
+   "topic": "house"
+  },
+  "77": {
+   "kind": "rule",
+   "when": "in(asc, libra)",
+   "topic": "asc"
+  },
+  "78": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, aries)",
+   "topic": "house"
+  },
+  "79": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, capricorn)",
+   "topic": "house"
+  },
+  "80": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, cancer)",
+   "topic": "house"
+  },
+  "81": {
+   "kind": "rule",
+   "when": "in(asc, scorpio)",
+   "topic": "asc"
+  },
+  "82": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, taurus)",
+   "topic": "house"
+  },
+  "83": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, aquarius)",
+   "topic": "house"
+  },
+  "84": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, leo)",
+   "topic": "house"
+  },
+  "85": {
+   "kind": "rule",
+   "when": "in(asc, sagittarius)",
+   "topic": "asc"
+  },
+  "86": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, gemini)",
+   "topic": "house"
+  },
+  "87": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, pisces)",
+   "topic": "house"
+  },
+  "88": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, virgo)",
+   "topic": "house"
+  },
+  "89": {
+   "kind": "rule",
+   "when": "in(asc, capricorn)",
+   "topic": "asc"
+  },
+  "90": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, cancer)",
+   "topic": "house"
+  },
+  "91": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, aries)",
+   "topic": "house"
+  },
+  "92": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, libra)",
+   "topic": "house"
+  },
+  "93": {
+   "kind": "rule",
+   "when": "in(asc, aquarius)",
+   "topic": "asc"
+  },
+  "94": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, leo)",
+   "topic": "house"
+  },
+  "95": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, taurus)",
+   "topic": "house"
+  },
+  "96": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, scorpio)",
+   "topic": "house"
+  },
+  "97": {
+   "kind": "rule",
+   "when": "in(asc, pisces)",
+   "topic": "asc"
+  },
+  "98": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, virgo)",
+   "topic": "house"
+  },
+  "99": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, gemini)",
+   "topic": "house"
+  },
+  "100": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, sagittarius)",
+   "topic": "house"
+  },
+  "102": {
+   "kind": "general"
+  },
+  "103": {
+   "kind": "rule",
+   "when": "focus(sun)",
+   "topic": "sun"
+  },
+  "104": {
+   "kind": "rule",
+   "when": "focus(sun) & house(sun, 7-12)",
+   "topic": "sun"
+  },
+  "105": {
+   "kind": "rule",
+   "when": "focus(sun) & house(sun, 1-6)",
+   "topic": "sun"
+  },
+  "106": {
+   "kind": "rule",
+   "when": "focus(sun) & (house(sun, 10-12) | house(sun, 1-3))",
+   "topic": "sun"
+  },
+  "107": {
+   "kind": "rule",
+   "when": "focus(sun) & house(sun, 4-9)",
+   "topic": "sun"
+  },
+  "108": {
+   "kind": "rule",
+   "when": "house(sun, 1)",
+   "topic": "sun"
+  },
+  "109": {
+   "kind": "rule",
+   "when": "house(sun, 2)",
+   "topic": "sun"
+  },
+  "110": {
+   "kind": "rule",
+   "when": "house(sun, 3)",
+   "topic": "sun"
+  },
+  "111": {
+   "kind": "rule",
+   "when": "house(sun, 4)",
+   "topic": "sun"
+  },
+  "112": {
+   "kind": "rule",
+   "when": "house(sun, 5)",
+   "topic": "sun"
+  },
+  "113": {
+   "kind": "rule",
+   "when": "house(sun, 6)",
+   "topic": "sun"
+  },
+  "114": {
+   "kind": "rule",
+   "when": "house(sun, 7)",
+   "topic": "sun"
+  },
+  "115": {
+   "kind": "rule",
+   "when": "house(sun, 9)",
+   "topic": "sun"
+  },
+  "116": {
+   "kind": "rule",
+   "when": "house(sun, 10)",
+   "topic": "sun"
+  },
+  "117": {
+   "kind": "rule",
+   "when": "house(sun, 11)",
+   "topic": "sun"
+  },
+  "118": {
+   "kind": "rule",
+   "when": "house(sun, 12)",
+   "topic": "sun"
+  },
+  "119": {
+   "kind": "rule",
+   "when": "in(sun, scorpio)",
+   "topic": "sun"
+  },
+  "120": {
+   "kind": "rule",
+   "when": "in(sun, libra)",
+   "topic": "sun"
+  },
+  "121": {
+   "kind": "rule",
+   "when": "in(sun, virgo)",
+   "topic": "sun"
+  },
+  "122": {
+   "kind": "rule",
+   "when": "in(sun, gemini)",
+   "topic": "sun"
+  },
+  "123": {
+   "kind": "rule",
+   "when": "in(sun, cancer)",
+   "topic": "sun"
+  },
+  "124": {
+   "kind": "rule",
+   "when": "focus(mercury)",
+   "topic": "planet"
+  },
+  "125": {
+   "kind": "rule",
+   "when": "focus(mercury) & house(mercury, 7-12)",
+   "topic": "planet"
+  },
+  "126": {
+   "kind": "rule",
+   "when": "focus(mercury) & house(mercury, 1-6)",
+   "topic": "planet"
+  },
+  "127": {
+   "kind": "rule",
+   "when": "focus(mercury) & (house(mercury, 10-12) | house(mercury, 1-3))",
+   "topic": "planet"
+  },
+  "128": {
+   "kind": "rule",
+   "when": "focus(mercury) & house(mercury, 4-9)",
+   "topic": "planet"
+  },
+  "129": {
+   "kind": "rule",
+   "when": "focus(mercury) & in(mercury, aquarius)",
+   "topic": "planet"
+  },
+  "130": {
+   "kind": "rule",
+   "when": "focus(mercury) & in(mercury, gemini)",
+   "topic": "planet"
+  },
+  "131": {
+   "kind": "rule",
+   "when": "focus(venus)",
+   "topic": "planet"
+  },
+  "132": {
+   "kind": "rule",
+   "when": "focus(venus) & house(venus, 7-12)",
+   "topic": "planet"
+  },
+  "133": {
+   "kind": "rule",
+   "when": "focus(venus) & house(venus, 1-6)",
+   "topic": "planet"
+  },
+  "134": {
+   "kind": "rule",
+   "when": "focus(venus) & (house(venus, 10-12) | house(venus, 1-3))",
+   "topic": "planet"
+  },
+  "135": {
+   "kind": "rule",
+   "when": "focus(venus) & house(venus, 4-9)",
+   "topic": "planet"
+  },
+  "136": {
+   "kind": "rule",
+   "when": "focus(venus) & in(venus, taurus)",
+   "topic": "planet"
+  },
+  "137": {
+   "kind": "rule",
+   "when": "focus(venus) & house(venus, 8)",
+   "topic": "planet"
+  },
+  "138": {
+   "kind": "rule",
+   "when": "focus(moon)",
+   "topic": "moon"
+  },
+  "139": {
+   "kind": "rule",
+   "when": "focus(moon) & house(moon, 7-12)",
+   "topic": "moon"
+  },
+  "140": {
+   "kind": "rule",
+   "when": "focus(moon) & house(moon, 1-6)",
+   "topic": "moon"
+  },
+  "141": {
+   "kind": "rule",
+   "when": "focus(moon) & (house(moon, 10-12) | house(moon, 1-3))",
+   "topic": "moon"
+  },
+  "142": {
+   "kind": "rule",
+   "when": "focus(moon) & house(moon, 4-9)",
+   "topic": "moon"
+  },
+  "143": {
+   "kind": "rule",
+   "when": "focus(mars)",
+   "topic": "planet"
+  },
+  "144": {
+   "kind": "rule",
+   "when": "focus(mars) & house(mars, 7-12)",
+   "topic": "planet"
+  },
+  "145": {
+   "kind": "rule",
+   "when": "focus(mars) & house(mars, 1-6)",
+   "topic": "planet"
+  },
+  "146": {
+   "kind": "rule",
+   "when": "focus(mars) & (house(mars, 10-12) | house(mars, 1-3))",
+   "topic": "planet"
+  },
+  "147": {
+   "kind": "rule",
+   "when": "focus(mars) & house(mars, 4-9)",
+   "topic": "planet"
+  },
+  "149": {
+   "kind": "rule",
+   "when": "focus_house(1)",
+   "topic": "house"
+  },
+  "150": {
+   "kind": "rule",
+   "when": "focus_house(2)",
+   "topic": "house"
+  },
+  "151": {
+   "kind": "rule",
+   "when": "focus_house(3)",
+   "topic": "house"
+  },
+  "152": {
+   "kind": "rule",
+   "when": "focus_house(4)",
+   "topic": "house"
+  },
+  "153": {
+   "kind": "rule",
+   "when": "focus_house(5)",
+   "topic": "house"
+  },
+  "154": {
+   "kind": "rule",
+   "when": "focus_house(7)",
+   "topic": "house"
+  },
+  "155": {
+   "kind": "rule",
+   "when": "focus_house(10)",
+   "topic": "house"
+  },
+  "156": {
+   "kind": "general"
+  },
+  "157": {
+   "kind": "rule",
+   "when": "focus_sign(aquarius)",
+   "topic": "sign"
+  },
+  "158": {
+   "kind": "rule",
+   "when": "focus_sign(capricorn)",
+   "topic": "sign"
+  },
+  "159": {
+   "kind": "rule",
+   "when": "focus_sign(sagittarius)",
+   "topic": "sign"
+  },
+  "160": {
+   "kind": "rule",
+   "when": "focus_sign(scorpio)",
+   "topic": "sign"
+  },
+  "161": {
+   "kind": "rule",
+   "when": "focus_sign(pisces)",
+   "topic": "sign"
+  },
+  "162": {
+   "kind": "rule",
+   "when": "focus_sign(libra)",
+   "topic": "sign"
+  },
+  "163": {
+   "kind": "rule",
+   "when": "focus_sign(aries)",
+   "topic": "sign"
+  },
+  "164": {
+   "kind": "rule",
+   "when": "focus_sign(virgo)",
+   "topic": "sign"
+  },
+  "165": {
+   "kind": "rule",
+   "when": "focus_sign(taurus)",
+   "topic": "sign"
+  },
+  "166": {
+   "kind": "rule",
+   "when": "focus_sign(gemini)",
+   "topic": "sign"
+  },
+  "167": {
+   "kind": "rule",
+   "when": "focus_sign(cancer)",
+   "topic": "sign"
+  },
+  "168": {
+   "kind": "rule",
+   "when": "focus_sign(leo)",
+   "topic": "sign"
+  },
+  "169": {
+   "kind": "rule",
+   "when": "in(asc, aries)",
+   "topic": "asc"
+  },
+  "170": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, libra)",
+   "topic": "house"
+  },
+  "171": {
+   "kind": "rule",
+   "when": "in(asc, taurus)",
+   "topic": "asc"
+  },
+  "172": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, scorpio)",
+   "topic": "house"
+  },
+  "173": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, aquarius)",
+   "topic": "house"
+  },
+  "174": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, leo)",
+   "topic": "house"
+  },
+  "175": {
+   "kind": "rule",
+   "when": "in(asc, gemini)",
+   "topic": "asc"
+  },
+  "176": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, sagittarius)",
+   "topic": "house"
+  },
+  "177": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, pisces)",
+   "topic": "house"
+  },
+  "178": {
+   "kind": "rule",
+   "when": "focus_house(8) & cusp(8, capricorn)",
+   "topic": "house"
+  },
+  "179": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, virgo)",
+   "topic": "house"
+  },
+  "180": {
+   "kind": "rule",
+   "when": "in(asc, cancer)",
+   "topic": "asc"
+  },
+  "181": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, aries)",
+   "topic": "house"
+  },
+  "182": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, libra)",
+   "topic": "house"
+  },
+  "183": {
+   "kind": "rule",
+   "when": "in(asc, leo)",
+   "topic": "asc"
+  },
+  "184": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, aquarius)",
+   "topic": "house"
+  },
+  "185": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, taurus)",
+   "topic": "house"
+  },
+  "186": {
+   "kind": "rule",
+   "when": "focus_house(9) & cusp(9, aries)",
+   "topic": "house"
+  },
+  "187": {
+   "kind": "rule",
+   "when": "focus_house(2) & cusp(2, virgo)",
+   "topic": "house"
+  },
+  "188": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, scorpio)",
+   "topic": "house"
+  },
+  "189": {
+   "kind": "rule",
+   "when": "in(asc, virgo)",
+   "topic": "asc"
+  },
+  "190": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, pisces)",
+   "topic": "house"
+  },
+  "191": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, gemini)",
+   "topic": "house"
+  },
+  "192": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, sagittarius)",
+   "topic": "house"
+  },
+  "193": {
+   "kind": "rule",
+   "when": "in(asc, libra)",
+   "topic": "asc"
+  },
+  "194": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, aries)",
+   "topic": "house"
+  },
+  "195": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, cancer)",
+   "topic": "house"
+  },
+  "196": {
+   "kind": "rule",
+   "when": "focus_house(3) & cusp(3, sagittarius)",
+   "topic": "house"
+  },
+  "197": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, capricorn)",
+   "topic": "house"
+  },
+  "198": {
+   "kind": "rule",
+   "when": "in(asc, scorpio)",
+   "topic": "asc"
+  },
+  "199": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, taurus)",
+   "topic": "house"
+  },
+  "200": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, leo)",
+   "topic": "house"
+  },
+  "201": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, aquarius)",
+   "topic": "house"
+  },
+  "202": {
+   "kind": "rule",
+   "when": "in(asc, sagittarius)",
+   "topic": "asc"
+  },
+  "203": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, gemini)",
+   "topic": "house"
+  },
+  "204": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, virgo)",
+   "topic": "house"
+  },
+  "205": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, pisces)",
+   "topic": "house"
+  },
+  "206": {
+   "kind": "rule",
+   "when": "in(asc, capricorn)",
+   "topic": "asc"
+  },
+  "207": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, cancer)",
+   "topic": "house"
+  },
+  "208": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, libra)",
+   "topic": "house"
+  },
+  "209": {
+   "kind": "rule",
+   "when": "focus_house(2) & cusp(2, aquarius)",
+   "topic": "house"
+  },
+  "210": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, aries)",
+   "topic": "house"
+  },
+  "211": {
+   "kind": "rule",
+   "when": "focus_house(5) & cusp(5, taurus)",
+   "topic": "house"
+  },
+  "212": {
+   "kind": "rule",
+   "when": "in(asc, aquarius)",
+   "topic": "asc"
+  },
+  "213": {
+   "kind": "rule",
+   "when": "focus_house(7) & cusp(7, leo)",
+   "topic": "house"
+  },
+  "214": {
+   "kind": "rule",
+   "when": "focus_house(10) & cusp(10, scorpio)",
+   "topic": "house"
+  },
+  "215": {
+   "kind": "rule",
+   "when": "focus_house(3) & cusp(3, aries)",
+   "topic": "house"
+  },
+  "216": {
+   "kind": "rule",
+   "when": "focus_house(4) & cusp(4, taurus)",
+   "topic": "house"
+  },
+  "217": {
+   "kind": "rule",
+   "when": "focus_house(5) & cusp(5, gemini)",
+   "topic": "house"
+  },
+  "218": {
+   "kind": "rule",
+   "when": "in(asc, pisces)",
+   "topic": "asc"
+  },
+  "219": {
+   "kind": "rule",
+   "when": "focus_house(9) & cusp(9, scorpio)",
+   "topic": "house"
+  },
+  "220": {
+   "kind": "general"
+  }
+ }
+}

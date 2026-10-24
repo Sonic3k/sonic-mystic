@@ -6,7 +6,7 @@ import { asc, count, inArray } from 'drizzle-orm';
 import { z } from 'zod';
 import { ENGINE_VERSION } from '@mystic/engine';
 import { BirthError, solarDateOf } from '@mystic/engine/birth';
-import { TOPICS, buildAstroChart, readAstrology, symbolCatalogue, type Topic } from '@mystic/engine/astrology';
+import { TOPICS, buildAstroChart, readAstrology, symbolCatalogue, weighChart, type Topic } from '@mystic/engine/astrology';
 import type {
   AstrologyBirthDto, AstrologyBookDto, AstrologyCatalogDto, AstrologyChartDto, AstrologyEntryDto, AstrologyLookupDto,
   AstrologyPassageDto, AstrologyReadingDto, AstrologyRuleDto, AstrologySourceDto, AstrologySymbolDto, AstrologyVoice, BirthDto, Gender, TableDto,
@@ -14,7 +14,7 @@ import type {
 import { DB, type Db } from '../db/db.js';
 import { entryTableRows, entryTables, passages } from '../db/schema.js';
 import { KnowledgeService, entryKey, type AstrologyKnowledge } from '../kb/knowledge.service.js';
-import { EphemerisError, astroInputOf, stableWindow } from './ephemeris.js';
+import { EphemerisError, astroInputOf, shiftedInput, stableWindow } from './ephemeris.js';
 
 export const AstrologyBirth = z.object({
   year: z.number().int().min(1800).max(2399), month: z.number().int().min(1).max(12), day: z.number().int().min(1).max(31),
@@ -50,7 +50,13 @@ export function astrologyOf(birth: AstrologyBirthDto, gender: Gender | null): As
   try {
     const { input, offsetMinutes, notes } = astroInputOf(birth, gender);
     const chart = buildAstroChart(input);
-    return { chart, offsetMinutes, notes, window: birth.time && chart.timeKnown ? stableWindow(birth, offsetMinutes) : null };
+    const window = birth.time && chart.timeKnown ? stableWindow(birth, offsetMinutes) : null;
+    // an estimated time: what weighs differently at the ends of the window it may be off by (a point's house, an orb)
+    if (window && birth.timeApprox) {
+      const ends = ([[-window.before, window.from], [window.after, window.to]] as [number, string][]).filter(([d]) => d !== 0);
+      chart.weights = weighChart(chart, { alternates: ends.map(([d, label]) => ({ label, chart: buildAstroChart(shiftedInput(input, d)) })) });
+    }
+    return { chart, offsetMinutes, notes, window };
   } catch (e) {
     if (e instanceof EphemerisError) throw new InternalServerErrorException(e.message);
     throw e;
