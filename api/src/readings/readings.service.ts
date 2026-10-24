@@ -1,5 +1,5 @@
 /* The written readings of a profile — by the app's AI call (Tử vi, for now) or written with Claude and saved here — and
-   the one written of a person as a whole (the Nhận định chung, from all their profiles).
+   the one written of a person as a whole (the Nhận định, from all their profiles).
    An idea that retells the source cites the passages it retells; one that cites none is shown as added, never as the
    source's. A citation is a passage the profile's own reading matched, or a passage of the same discipline's sources on
    how a chart is weighed (grandma's Tuần Triệt, cô Hương Kiều's orbs…): "p:<passage id>", or the code of a rule the
@@ -10,13 +10,14 @@ import { BadRequestException, Inject, Injectable, NotFoundException } from '@nes
 import { and, asc, desc, eq, inArray, isNull } from 'drizzle-orm';
 import { z } from 'zod';
 import { WEIGHTS, type AiReadingDto, type AstrologyChartDto, type Layer, type ReadingPlanDto, type RefSourceDto, type SourceKind, type Weight } from '@mystic/engine/api';
-import { ASTROLOGY_READING_SPEC, WEIGH_RULES, checkAstrologyReading } from '@mystic/engine/astrology';
+import { ASTROLOGY_READING_SPEC, WEIGH_RULES, checkAstrologyReading, transitsOf } from '@mystic/engine/astrology';
 import { SUMMARY_SPEC, checkLookup, checkSummary } from '@mystic/engine/readings';
 import { DB, type Db } from '../db/db.js';
 import { entries, passages, readingItemRefs, readingItems, readingSections, readings, rules, sources } from '../db/schema.js';
 import { KnowledgeService } from '../kb/knowledge.service.js';
 import { NumerologyService, todayVn, type Computed } from '../numerology/numerology.service.js';
 import { AstrologyService } from '../astrology/astrology.service.js';
+import { skyDays } from '../astrology/ephemeris.js';
 import { PeopleService } from '../people/people.service.js';
 import { SyncService } from '../sync/sync.service.js';
 import { allTuviLines, scopeOk, tuviInput } from '../ai/lines.js';
@@ -37,13 +38,13 @@ export const WrittenBody = z.object({
 });
 export type WrittenBodyT = z.infer<typeof WrittenBody>;
 
-/** the Nhận định: what a chart (or a person) says, in plain words, read before the Luận giải */
+/** the Luận giải given to the person (a profile's), or the person's Nhận định: plain words, read first */
 export const SUMMARY = 'summary';
-/** nhân số học: the synthesis of the whole chart, or of one year; its Nhận định */
+/** nhân số học: the Căn cứ of the whole chart, or of one year; its Luận giải */
 export const numerologyScopeOk = (scope: string) => scope === 'synthesis' || scope === SUMMARY || /^year-\d{4}$/.test(scope);
-/** chiêm tinh: the reading of the whole chart; its Nhận định */
+/** chiêm tinh: the Căn cứ of the whole chart; its Luận giải */
 export const astrologyScopeOk = (scope: string) => scope === 'synthesis' || scope === SUMMARY;
-/** the reading a profile's Nhận định is drawn from (its hash says when the chart under both has changed) */
+/** the Căn cứ a profile's Luận giải rests on (its hash says when the chart under both has changed) */
 const MAIN: Record<string, string> = { tuvi: 'overview', astrology: 'synthesis', numerology: 'synthesis' };
 /** the scopes whose reading is the one a brief quotes */
 const OVERVIEW = new Set(['overview', 'synthesis']);
@@ -92,7 +93,7 @@ export class ReadingsService {
     return Promise.all(rs.map(r => this.dto(r, current ? r.inputHash !== current(r.scope, r.viewYear) : false)));
   }
 
-  /** the readings of the person as a whole (the Nhận định chung) */
+  /** the readings of the person as a whole (the Nhận định) */
   async listSubject(subjectId: string): Promise<AiReadingDto[]> {
     await this.people.subject(subjectId);
     const rs = await this.db.select().from(readings).where(and(eq(readings.subjectId, subjectId), isNull(readings.profileId))).orderBy(desc(readings.updatedAt));
@@ -124,8 +125,8 @@ export class ReadingsService {
   /**
    * Saves a reading written elsewhere (with Claude): it replaces the profile's reading of the same scope and year.
    * A ref the profile's chart did not match is kept only when it is a passage of the discipline's sources (on how a
-   * chart is weighed); one that is neither is dropped, and a primary idea left with none is saved as added. A Nhận định
-   * ("summary") cites nothing: it is the writer's own synthesis.
+   * chart is weighed); one that is neither is dropped, and a primary idea left with none is saved as added. The Luận
+   * giải given to the person ("summary") cites nothing: it is written from the Căn cứ, in plain words.
    */
   async put(profileId: string, scope: string, body: WrittenBodyT): Promise<AiReadingDto> {
     const { profile } = await this.people.profileHead(profileId);
@@ -186,9 +187,11 @@ export class ReadingsService {
     const d = profile.disciplineCode;
     if (d === 'astrology') {
       const { computed, profile: p } = await this.people.astrologyInput(profileId);
-      return { discipline: d, spec: ASTROLOGY_READING_SPEC, rules: WEIGH_RULES, weights: computed.chart.weights, window: computed.window, timeApprox: p.birthTimeApprox };
+      const year = p.viewYear ?? todayVn().year;
+      const transits = transitsOf(computed.chart, skyDays(`${year}-01-01`, `${year + 1}-12-31`));
+      return { discipline: d, spec: ASTROLOGY_READING_SPEC, rules: WEIGH_RULES, weights: computed.chart.weights, window: computed.window, timeApprox: p.birthTimeApprox, transits };
     }
-    return { discipline: d, spec: SUMMARY_SPEC, rules: null, weights: null, window: null, timeApprox: false };
+    return { discipline: d, spec: SUMMARY_SPEC, rules: null, weights: null, window: null, timeApprox: false, transits: null };
   }
 
   /** chiêm tinh: refs written "<source>.b<line>" that are not a rule of the sources: the passage of that block ("p:<id>") */
@@ -209,7 +212,7 @@ export class ReadingsService {
     return out;
   }
 
-  /** saves the reading of a person as a whole (the Nhận định chung): plain words, no citations */
+  /** saves the reading of a person as a whole (the Nhận định): plain words, no citations */
   async putSubject(subjectId: string, scope: string, body: WrittenBodyT): Promise<AiReadingDto> {
     if (scope !== SUMMARY) throw new BadRequestException(`Phạm vi không hợp lệ: ${scope} (summary)`);
     await this.people.subject(subjectId);

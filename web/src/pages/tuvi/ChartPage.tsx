@@ -1,7 +1,8 @@
-/* One person's lá số: the chart at a glance, the board, and beside it the panel it is read with — a palace with
-   grandma's sentences star by star, the written reading (Luận giải), or the year with its hạn. The API sets up and
-   reads the chart; this page only shows it. Opened from a link (/tu-vi/chart?…) or a saved profile (/tu-vi/profile/:id).
-   Where one is: ?view=overview (Luận giải) | han (the year), ?cung=<palace>, ?year=, ?variant=grandma|books. */
+/* One person's lá số: the chart at a glance, the board, and beside it the panel it is read with — the reading given
+   to the person (Luận giải), a palace with grandma's sentences star by star, what the reading rests on, weighed and
+   cited (Căn cứ), or the year with its hạn. The API sets up and reads the chart; this page only shows it. Opened from
+   a link (/tu-vi/chart?…) or a saved profile (/tu-vi/profile/:id).
+   Where one is: ?view=summary (Luận giải) | overview (Căn cứ) | han (the year), ?cung=<palace>, ?year=, ?variant=grandma|books. */
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -94,7 +95,7 @@ function ChartView({ r, params, profile, year, loading, sp, setSp }: {
   const ai = useAiReadings(profileId);
   const overview = readingOf(ai.list, 'overview', year);
   const summary = readingOf(ai.list, 'summary', year);
-  /* the Nhận định is read first, when there is one: a saved profile opens on it unless a palace or a tab is asked for */
+  /* the Luận giải is read first, when there is one: a saved profile opens on it unless a palace or a tab is asked for */
   const v = sp.get('view');
   const tab: TvTab = v === 'overview' ? 'luan' : v === 'han' ? 'han' : v === 'summary' && summary ? 'nhan'
     : v === 'cung' || sp.has('cung') || !summary ? 'cung' : 'nhan';
@@ -122,7 +123,7 @@ function ChartView({ r, params, profile, year, loading, sp, setSp }: {
   const birth = i.calendar === 'solar'
     ? `${g}, sinh ngày ${i.day}/${i.month}/${i.year} lúc ${pad(i.hour)}:${pad(i.minute ?? 0)}${b?.timeApprox ? ' (giờ ước chừng)' : ''}${b?.place ? ` tại ${b.place}` : ''}. Âm lịch ${lunarLine}.`
     : `${g}, sinh ${lunarLine} âm lịch${b?.timeApprox ? ' (giờ ước chừng)' : ''}${b?.place ? `, tại ${b.place}` : ''}. Dương lịch ${chart.solar[0]}/${chart.solar[1]}/${chart.solar[2]}.`;
-  const tabs: [TvTab, string][] = [...(summary ? [['nhan', 'Nhận định'] as [TvTab, string]] : []), ['cung', `Cung ${chart.palaces[sel].role}`], ['luan', 'Luận giải'], ['han', `Năm ${H.year}`]];
+  const tabs: [TvTab, string][] = [...(summary ? [['nhan', 'Luận giải'] as [TvTab, string]] : []), ['cung', `Cung ${chart.palaces[sel].role}`], ['luan', 'Căn cứ'], ['han', `Năm ${H.year}`]];
 
   return (
     <HlContext.Provider value={hl}>
@@ -283,25 +284,25 @@ function PaneReading({ ai, r, idp, title }: { ai: AiReadingDto; r: TuViReadingDt
   );
 }
 
-// ── the Nhận định ──
+// ── the Luận giải ──
 
-/** the chart in plain words, read first; under it, the parts of the Luận giải it was drawn from (the panel is narrow) */
+/** the reading given to the person, read first; under it, the parts of the Căn cứ it rests on (the panel is narrow) */
 function NhanPane({ r, room, summary, overview, onRead }: {
   r: TuViReadingDto; room: RoomReading; summary: AiReadingDto; overview: AiReadingDto | undefined; onRead: (i: number | null) => void;
 }) {
   return (
     <div className="nd tv-nd">
-      <div className="nd-main"><SummaryText ai={summary} hl={room.hl} sub="Đọc trước: lá số nói gì, bằng lời thường" /></div>
+      <div className="nd-main"><SummaryText ai={summary} hl={room.hl} sub="Bài giải lá số tử vi" from={overview ? 'căn cứ ở phần Căn cứ' : null} /></div>
       <div className="nd-aside">
-        {keysOf(overview).length > 0 && <><h4>Rút ra từ những trọng điểm này</h4>
+        {keysOf(overview).length > 0 && <><h4>Căn cứ chính</h4>
           <div className="tv-mini-toc"><KeyLinks ai={overview} room={room} onRead={onRead} emblem={s => { const { c, k } = tvSealOf(s, r); return <Seal c={c} k={k} />; }} /></div></>}
-        {overview && <button type="button" className="go" onClick={() => onRead(null)}>Đọc Luận giải ›</button>}
+        {overview && <button type="button" className="go" onClick={() => onRead(null)}>Xem phần Căn cứ ›</button>}
       </div>
     </div>
   );
 }
 
-/** the Luận giải's contents as chips: by weight when it is weighed, what weighs little as one chip at the end */
+/** the Căn cứ's contents as chips: by weight when it is weighed, what weighs little as one chip at the end */
 function TvMiniToc({ ai, r, room, spot }: { ai: AiReadingDto; r: TuViReadingDto; room: RoomReading; spot: number }) {
   const chip = (i: number) => {
     const s = ai.sections[i], { c, k } = tvSealOf(s, r);
@@ -317,7 +318,7 @@ function TvMiniToc({ ai, r, room, spot }: { ai: AiReadingDto; r: TuViReadingDto;
   );
 }
 
-// ── the written reading ──
+// ── the Căn cứ: the reading by grandma's sentences, weighed and cited ──
 
 function LuanPane({ r, room, overview, year, profileId, onSpot, readAt, onRead }: {
   r: TuViReadingDto; room: RoomReading; overview: AiReadingDto | undefined; year: number; profileId: string | null;
@@ -335,7 +336,7 @@ function LuanPane({ r, room, overview, year, profileId, onSpot, readAt, onRead }
   if (!overview) {
     return (
       <>
-        <div className="pp-h"><Seal c="論" k="lg" /><div><h2>Luận giải</h2><p>Bài luận cả lá số, viết từ những câu của bà khớp với sáu cung chính: Mệnh, Thân, Phúc Đức, Quan Lộc, Tài Bạch, Phu Thê.</p></div></div>
+        <div className="pp-h"><Seal c="據" k="lg" /><div><h2>Căn cứ</h2><p>Phần căn cứ của bài Luận giải: những câu của bà khớp với sáu cung chính (Mệnh, Thân, Phúc Đức, Quan Lộc, Tài Bạch, Phu Thê), cân nặng nhẹ, dẫn từng câu.</p></div></div>
         <AiWriter profileId={profileId} scope="overview" year={year} grandmaLines={lines} mine={undefined} what="cả lá số" />
         <Supplement title="Cách đọc lá số" principles={general} />
       </>

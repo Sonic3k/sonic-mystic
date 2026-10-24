@@ -439,6 +439,12 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       assert.ok(plan.data.spec.includes('Nguyên tắc cân') && plan.data.spec.includes('K1'));
       assert.equal(plan.data.rules?.length, 14);
       assert.ok(plan.data.weights!.factors.some(f => f.id === 'sun' && f.level === 'key'));
+      // and the slow planets over the chart through the year read and the next, from the ephemeris
+      const t = plan.data.transits!;
+      assert.ok(t.from.endsWith('-01-01') && t.to.endsWith('-12-31'));
+      for (const b of ['jupiter', 'saturn', 'uranus', 'neptune', 'pluto']) assert.ok(t.stays.some(s => s.body === b && s.house), b);
+      assert.ok(t.contacts.length > 0 && t.contacts.every(c => c.from <= c.to && /gốc/.test(c.text)));
+      assert.ok(t.stations.some(s => s.body === 'saturn'));
       // a passage of the other books is cited by its block, and kept as that passage; the checker says what is off
       const w2 = await api<AiReadingDto>(`/profiles/${p.data.id}/readings/synthesis`, {
         sections: [

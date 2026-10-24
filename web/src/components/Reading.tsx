@@ -3,8 +3,8 @@
    own words one tap away under each paragraph, and what is added (not the source's) set apart in its own voice.
    A reading weighed by the source's rules reads in that order: how it was weighed, what governs the chart (Trọng
    điểm), what only adds to it (Tô thêm), the period being lived, and — folded away, one line each — what weighs little.
-   Its Nhận định (the same chart in plain words) is read before it. Each room brings its emblems, its highlights and
-   how its sources are named. */
+   That is the Căn cứ: what the reading given to the person (its Luận giải, written for them in plain words, read
+   first) rests on. Each room brings its emblems, its highlights and how its sources are named. */
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { AiItemDto, AiReadingDto, AiSectionDto, Weight } from '@mystic/engine/api';
@@ -335,24 +335,28 @@ export function ReadingLayout({ ai, room, companion, voices, fresh, old, top, fo
   );
 }
 
-// ── the Nhận định: the chart in plain words, read first ──
+// ── the Luận giải: the reading given to the person, in plain words, read first ──
 
-const paraText = (s: AiSectionDto) => s.items.map(i => i.text).join(' ');
-
-/** the Nhận định's heading, who wrote it, and its paragraphs (each led by what it is about) */
-export function SummaryText({ ai, hl, title = 'Nhận định', sub, idp = 'nd' }: {
-  ai: AiReadingDto; hl?: (t: string) => React.ReactNode; title?: string; sub: string; idp?: string;
+/** the Luận giải's heading, who wrote it, and its parts: a part's title (what in life it is about), its paragraphs */
+export function SummaryText({ ai, hl, title = 'Luận giải', sub, idp = 'nd', from = 'căn cứ ở phần Căn cứ' }: {
+  ai: AiReadingDto; hl?: (t: string) => React.ReactNode; title?: string; sub: string; idp?: string; from?: string | null;
 }) {
   const who = ai.author === 'claude' ? 'Claude viết trong phiên làm việc' : 'Viết bằng AI';
   return <>
     <header className="nd-h"><h2>{title}</h2><p className="nd-sub">{sub}</p></header>
-    <div className="byline"><span><b>{who}</b>, ngày {dateVi(ai.createdAt)}</span><span>gộp từ phần Luận giải</span>
+    <div className="byline"><span><b>{who}</b>, ngày {dateVi(ai.createdAt)}</span>{from && <span>{from}</span>}
       {ai.stale && <span className="fresh old">lá số đã đổi từ lúc viết, nên viết lại</span>}</div>
-    {ai.sections.map((s, i) => <p key={i} className="nd-p" id={`${idp}${i}`} data-i={i}><b className="nd-lead">{s.title}.</b> {hl ? hl(paraText(s)) : paraText(s)}</p>)}
+    {ai.sections.map((s, i) => (
+      <section key={i} className="nd-sec" id={`${idp}${i}`} data-i={i}>
+        {s.title && <h3 className="nd-t">{s.title}</h3>}
+        {s.items.map((it, j) => <p key={j} className="nd-p">{hl ? hl(it.text) : it.text}</p>)}
+      </section>
+    ))}
+    {ai.caution && <p className="caution nd-caution">{ai.caution}</p>}
   </>;
 }
 
-/** the sections of the Luận giải the Nhận định was drawn from (what governs the chart), each a way into it */
+/** the sections of the Căn cứ that govern the chart, each a way into it */
 export function KeyLinks({ ai, room, onRead, emblem }: { ai: AiReadingDto | null | undefined; room: RoomReading; onRead: (i: number) => void; emblem?: (s: AiSectionDto) => React.ReactNode }) {
   if (!ai) return null;
   return <>{keysOf(ai).map(i => {
@@ -362,22 +366,22 @@ export function KeyLinks({ ai, room, onRead, emblem }: { ai: AiReadingDto | null
 }
 
 /**
- * The Nhận định in three columns, as the Luận giải is read: what it covers (followed while reading), the text, and the
- * sections of the Luận giải it was drawn from. Below 1180px the first column goes; below 900px the last goes under.
+ * The Luận giải in three columns: its parts (followed while reading), the text, and the way into the Căn cứ it rests
+ * on. Below 1180px the first column goes; below 900px the last goes under.
  */
 export function SummaryLayout({ ai, main, room, sub, onRead }: {
   ai: AiReadingDto; main: AiReadingDto | null; room: RoomReading; sub: string; onRead: (i: number | null) => void;
 }) {
   const box = useRef<HTMLDivElement>(null);
-  const spot = useSpy(box, [ai.id], undefined, '.nd-p[data-i]');
+  const spot = useSpy(box, [ai.id], undefined, '.nd-sec[data-i]');
   return (
     <div className="nd-layout" ref={box}>
-      <nav className="toc" aria-label="Trong phần này"><h4>Trong phần này</h4>{ai.sections.map((s, i) => (
+      <nav className="toc" aria-label="Trong bài"><h4>Trong bài</h4>{ai.sections.map((s, i) => (
         <a key={i} href={`#nd${i}`} className={i === spot ? 'on' : ''} onClick={e => { e.preventDefault(); jump(`nd${i}`); }}><span className="nd-num">{i + 1}</span><span>{s.title}</span></a>))}</nav>
-      <div className="nd-main"><SummaryText ai={ai} hl={room.hl} sub={sub} /></div>
+      <div className="nd-main"><SummaryText ai={ai} hl={room.hl} sub={sub} from={main ? 'căn cứ ở phần Căn cứ' : null} /></div>
       <aside className="nd-aside">
-        {keysOf(main).length > 0 && <nav className="toc"><h4>Rút ra từ những trọng điểm này</h4><KeyLinks ai={main} room={room} onRead={onRead} /></nav>}
-        {main && <button type="button" className="go" onClick={() => onRead(null)}>Đọc Luận giải ›</button>}
+        {keysOf(main).length > 0 && <nav className="toc"><h4>Căn cứ chính</h4><KeyLinks ai={main} room={room} onRead={onRead} /></nav>}
+        {main && <button type="button" className="go" onClick={() => onRead(null)}>Xem phần Căn cứ ›</button>}
       </aside>
     </div>
   );

@@ -335,13 +335,14 @@ export const numerologyProfileNames = pgTable('numerology_profile_names', {
 }, t => [primaryKey({ columns: [t.profileId, t.ordinal] })]);
 
 /** a written reading of a profile — by the app's AI call, or written with Claude and saved here — or, with no profile,
-    of the person as a whole (the Nhận định chung, drawn from the readings of all their profiles) */
+    of the person as a whole (the Nhận định, drawn from the readings of all their profiles) */
 export const readings = pgTable('readings', {
   id: uuid('id').primaryKey().defaultRandom(),
   profileId: uuid('profile_id').references(() => profiles.id, { onDelete: 'cascade' }),
   subjectId: uuid('subject_id').notNull().references(() => subjects.id, { onDelete: 'cascade' }),
   /** tử vi: "overview" · a palace ("Quan Lộc") or "Thân" · "han-2026"; nhân số học: "synthesis" · "year-2026"; chiêm tinh:
-      "synthesis"; any profile: "summary" (its Nhận định, read first). The person (no profile): "summary" */
+      "synthesis" (these are the Căn cứ); any profile: "summary" (the Luận giải given to the person, read first). The
+      person (no profile): "summary" (the Nhận định) */
   scope: text('scope').notNull(),
   viewYear: smallint('view_year').notNull(),
   author: text('author').notNull().default('ai'),

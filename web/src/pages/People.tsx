@@ -225,16 +225,16 @@ export function SubjectPage() {
   );
 }
 
-/** the Nhận định chung: the person read through every room at once, in plain words; beside it, the way into each room */
+/** the Nhận định: the person read through every room at once, in plain words; beside it, the way into each room */
 function WholeReading({ ai, rooms }: { ai: AiReadingDto; rooms: [string, React.ReactNode, ProfileSummaryDto | undefined][] }) {
   const have = rooms.filter((x): x is [string, React.ReactNode, ProfileSummaryDto] => !!x[2]);
   const names = have.map(x => x[0]);
   const sub = names.length === 3 ? `Gộp cả ba môn: ${names.join(', ')}` : names.length ? `Gộp từ ${names.join(' và ')}` : 'Gộp từ các lá số của người này';
   return (
     <section className="nd nd-person">
-      <div className="nd-main"><SummaryText ai={ai} title="Nhận định chung" sub={sub} /></div>
+      <div className="nd-main"><SummaryText ai={ai} title="Nhận định" sub={sub} from={null} /></div>
       {have.length > 0 && <aside className="nd-aside"><nav className="toc"><h4>Đọc riêng từng môn</h4>
-        {have.map(([name, em, p]) => <Link key={name} to={PROFILE_URL[p.discipline] + p.id}>{em}<span>{name}</span></Link>)}</nav></aside>}
+        {have.map(([name, em, p]) => <Link key={name} to={PROFILE_URL[p.discipline] + p.id}>{em}<span>Luận giải {name}</span></Link>)}</nav></aside>}
     </section>
   );
 }

@@ -1,6 +1,7 @@
 /* One person's numbers in the Nhân số học room: the plate (the ruling number worked out, the chart with its arrows,
-   the pyramid, the name letter by letter, the nine-year ruler), then three tabs — the reading Claude wrote (Luận
-   giải), the book's passages on the person (Theo sách), and the years and peaks (Thời vận). Opened from a link
+   the pyramid, the name letter by letter, the nine-year ruler), then the tabs — the reading given to the person (Luận
+   giải), what it rests on, weighed and cited (Căn cứ), the book's passages on the person (Theo sách), and the years
+   and peaks (Thời vận). Opened from a link
    (/numerology/view?…) or a saved profile (/numerology/profile/:id).
    Where one is: ?view=synthesis | traits | time, ?part=<topic>, ?peak=<1–4>, ?board=name, ?year=, ?name=. */
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -19,7 +20,7 @@ import { BookBlock, GridFig, L, NameFig, NsCompanion, PyramidFig, Ruling, STAGE,
 import { NamesSheet, ProfileSheet, SaveSheet } from './Sheets';
 
 type Tab = 'summary' | 'synthesis' | 'traits' | 'time';
-const TABS: [Tab, string][] = [['summary', 'Nhận định'], ['synthesis', 'Luận giải'], ['traits', 'Theo sách'], ['time', 'Thời vận']];
+const TABS: [Tab, string][] = [['summary', 'Luận giải'], ['synthesis', 'Căn cứ'], ['traits', 'Theo sách'], ['time', 'Thời vận']];
 export const useNumerologyBook = () => useQuery({ queryKey: ['numerology-book'], queryFn: api.numerologyBook, staleTime: 600_000, retry: false });
 const UTC8 = 'Đổi ngày âm ra dương lịch theo lịch tính cho UTC+8, lịch dùng trước năm 1968 (ở miền Nam đến 1975).';
 const lunarOf = (b: { calendar: string; day: number | null; month: number | null; year: number | null; leapMonth?: boolean }) =>
@@ -145,7 +146,7 @@ function ReadingView({ r, sp, setSp, profile, written, summary, primary = 0, def
   const go = useRef(goTo);
   go.current = goTo;
   const room = useMemo(() => numRoom(r, hlText, who, primary, code => go.current(code), toc), [r, hlText, who, primary, toc]);
-  /* from the Nhận định into the Luận giải, at one of its sections or at its top */
+  /* from the Luận giải into its Căn cứ, at one of its sections or at its top */
   const readFrom = (i: number | null) => {
     set({ view: defTab === 'synthesis' ? null : 'synthesis' });
     setTimeout(() => { if (i === null) document.querySelector('.ns-tabs')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); else jump(`s${i}`); }, 60);
@@ -180,7 +181,7 @@ function ReadingView({ r, sp, setSp, profile, written, summary, primary = 0, def
 
       <nav className="tabs ns-tabs" role="tablist" aria-label="Phần đọc">{tabs.map(([k, t]) => (
         <button key={k} type="button" role="tab" aria-selected={tab === k} className={`tab${tab === k ? ' on' : ''}`} onClick={() => set({ view: k === defTab ? null : k })}>{t}</button>))}</nav>
-      {tab === 'summary' && summary && <SummaryLayout ai={summary} main={written} room={room} sub="Đọc trước: các con số nói gì, bằng lời thường" onRead={readFrom} />}
+      {tab === 'summary' && summary && <SummaryLayout ai={summary} main={written} room={room} sub="Bài giải nhân số học" onRead={readFrom} />}
       {tab === 'synthesis' && (written
         ? <ReadingLayout ai={written} room={room} fresh="còn khớp với hồ sơ" old="hồ sơ đã đổi từ khi viết, nên viết lại"
             voices={<><span><i className="vc" style={{ background: '#151515' }} />Tóm lược lời sách</span><span><i className="vc" style={{ background: 'var(--blue)' }} />{who} luận thêm</span></>}
@@ -198,8 +199,8 @@ function NoReading({ r, profile }: { r: NumerologyReadingDto; profile: ProfileDt
   return (
     <div className="ns-pane no-rd">
       <div className="writer"><p>{profile
-        ? 'Chưa có bài luận giải cho người này. Bài do Claude viết từ những đoạn sách khớp ở hai phần Theo sách và Thời vận, rồi lưu vào hồ sơ; khi có, bài hiện ở đây.'
-        : 'Bài luận giải được viết cho hồ sơ đã lưu: lưu hồ sơ này, rồi Claude viết bài từ những đoạn sách khớp ở hai phần Theo sách và Thời vận; khi có, bài hiện ở đây.'}</p></div>
+        ? 'Chưa có phần căn cứ cho người này. Phần này do Claude viết từ những đoạn sách khớp ở hai phần Theo sách và Thời vận, rồi lưu vào hồ sơ; bài Luận giải giao cho người được xem dựa trên phần này.'
+        : 'Phần căn cứ được viết cho hồ sơ đã lưu: lưu hồ sơ này, rồi Claude viết từ những đoạn sách khớp ở hai phần Theo sách và Thời vận; khi có, nó hiện ở đây.'}</p></div>
       <dl className="counts">{TOPICS.map(t => <div key={t.code}><dt>{t.title}</dt><dd>{n(t.code)} đoạn</dd></div>)}</dl>
     </div>
   );
