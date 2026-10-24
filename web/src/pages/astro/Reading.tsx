@@ -1,7 +1,7 @@
-/* One person's chart in the Chiêm tinh room: the clean chart beside the chart at a glance, then four tabs — the
-   reading Claude wrote (Luận giải), the sources' passages body by body and part by part (Theo tài liệu), the table of
-   positions with the balance and her test of the dominant planets (Bảng vị trí), and the grid of aspects with the
-   structures (Góc chiếu). Opened from a link (/astrology/view?…) or a saved profile (/astrology/profile/:id).
+/* One person's chart in the Chiêm tinh room: the clean chart beside the chart at a glance, then the tabs — the
+   reading given to the person (Luận giải), what it rests on, weighed and cited (Căn cứ), the sources' passages body by
+   body and part by part (Theo tài liệu), the table of positions with the balance and her test of the dominant planets
+   (Bảng vị trí), and the grid of aspects with the structures (Góc chiếu). Opened from a link (/astrology/view?…) or a saved profile (/astrology/profile/:id).
    Where one is: ?view=synthesis | reading | chart | aspects, ?part=<topic>, ?item=<n>. */
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router';
@@ -19,7 +19,7 @@ import { AspectsPane, AstroCompanion, AstroGlance, BodyDot, SectionView, TablePa
 import { AstroProfileSheet, AstroSaveSheet } from './Sheets';
 
 type Tab = 'summary' | 'synthesis' | 'reading' | 'chart' | 'aspects';
-const TABS: [Tab, string][] = [['summary', 'Nhận định'], ['synthesis', 'Luận giải'], ['reading', 'Theo tài liệu'], ['chart', 'Bảng vị trí'], ['aspects', 'Góc chiếu']];
+const TABS: [Tab, string][] = [['summary', 'Luận giải'], ['synthesis', 'Căn cứ'], ['reading', 'Theo tài liệu'], ['chart', 'Bảng vị trí'], ['aspects', 'Góc chiếu']];
 const page = (body: React.ReactNode) => <div className="wrap page as">{body}</div>;
 const wait = (t: string) => page(<div className="card empty tv-wait">{t}</div>);
 
@@ -120,7 +120,7 @@ function ReadingView({ r, sp, setSp, profile, written, summary, defTab, approx, 
   const go = useRef(goTo);
   go.current = goTo;
   const room = useMemo(() => astroRoom(r, hlText, who, code => go.current(code)), [r, hlText, who]);
-  /* from the Nhận định into the Luận giải, at one of its sections or at its top */
+  /* from the Luận giải into its Căn cứ, at one of its sections or at its top */
   const readFrom = (i: number | null) => {
     set({ view: defTab === 'synthesis' ? null : 'synthesis' });
     setTimeout(() => { if (i === null) document.querySelector('.as-tabs')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); else jump(`s${i}`); }, 60);
@@ -144,7 +144,7 @@ function ReadingView({ r, sp, setSp, profile, written, summary, defTab, approx, 
 
       <nav className="tabs as-tabs" role="tablist" aria-label="Đọc lá số">{tabs.map(([k, t]) => (
         <button key={k} type="button" role="tab" aria-selected={tab === k} className={`tab${tab === k ? ' on' : ''}`} onClick={() => set({ view: k === defTab ? null : k })}>{t}</button>))}</nav>
-      {tab === 'summary' && summary && <SummaryLayout ai={summary} main={written} room={room} sub="Đọc trước: lá số nói gì, bằng lời thường" onRead={readFrom} />}
+      {tab === 'summary' && summary && <SummaryLayout ai={summary} main={written} room={room} sub="Bài giải lá số chiêm tinh" onRead={readFrom} />}
       {tab === 'synthesis' && (written
         ? <ReadingLayout ai={written} room={room} voices={astroVoices(who)} companion={k => <AstroCompanion ch={ch} s={written.sections[k]} />} />
         : <NoReading r={r} profile={profile} />)}
@@ -160,8 +160,8 @@ function NoReading({ r, profile }: { r: AstrologyReadingDto; profile: ProfileDto
   return (
     <div className="tab-pane no-rd">
       <div className="writer"><p>{profile
-        ? 'Chưa có bài luận giải cho người này. Bài do Claude viết từ những đoạn khớp ở phần Theo tài liệu: phần tóm lược chỉ kể lại lời cô, Tierney và Woolfolk, mỗi ý dẫn số đoạn; phần luận thêm theo cách tổ hợp từ khóa của cô (chủ thể, cách thức, nơi chốn, mẫu câu cho từng cung địa bàn) và ghi rõ là Claude luận thêm. Khi có, bài hiện ở đây.'
-        : 'Bài luận giải được viết cho hồ sơ đã lưu: lưu hồ sơ này, rồi Claude viết bài từ những đoạn khớp ở phần Theo tài liệu. Khi có, bài hiện ở đây.'}</p></div>
+        ? 'Chưa có phần căn cứ cho người này. Phần này do Claude viết từ những đoạn khớp ở phần Theo tài liệu, cân theo bộ luật cân lá số: phần tóm lược chỉ kể lại lời cô và các sách, mỗi ý dẫn số đoạn; phần luận thêm ghi rõ là Claude luận thêm. Bài Luận giải giao cho người được xem dựa trên phần này.'
+        : 'Phần căn cứ được viết cho hồ sơ đã lưu: lưu hồ sơ này, rồi Claude viết từ những đoạn khớp ở phần Theo tài liệu. Khi có, nó hiện ở đây.'}</p></div>
       <dl className="facts counts">{PART_ORDER.filter(t => r.sections.some(s => s.topic === t)).map(t => (
         <div key={t}><dt>{PART_TITLE[t]}</dt><dd>{r.sections.filter(s => s.topic === t).reduce((n, s) => n + said(s, r.rules), 0)} đoạn</dd></div>))}</dl>
     </div>

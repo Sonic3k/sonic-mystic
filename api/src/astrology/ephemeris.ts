@@ -6,7 +6,7 @@ import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sweph from 'sweph';
-import type { AstroInput, AstroPositions, EphemerisBody } from '@mystic/engine/astrology';
+import type { AstroInput, AstroPositions, EphemerisBody, SkyDay, TransitBody } from '@mystic/engine/astrology';
 
 const C = sweph.constants;
 const FLAGS = C.SEFLG_SWIEPH | C.SEFLG_SPEED;
@@ -132,4 +132,24 @@ export function stableWindow(b: AstroBirth, offsetMinutes: number, limit = 240):
   const before = reach(-1), after = reach(1);
   const clock = (delta: number) => { const t = ((hh * 60 + mm + delta) % 1440 + 1440) % 1440; return `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}`; };
   return { from: clock(-before), to: clock(after), before, after, capped: before === limit || after === limit };
+}
+
+const SLOW: [TransitBody, number][] = [['jupiter', C.SE_JUPITER], ['saturn', C.SE_SATURN], ['uranus', C.SE_URANUS], ['neptune', C.SE_NEPTUNE], ['pluto', C.SE_PLUTO]];
+/** the slow planets day by day at noon UT, from one date to another ("YYYY-MM-DD", both included) */
+export function skyDays(from: string, to: string): SkyDay[] {
+  ensurePath();
+  const [y0, m0, d0] = from.split('-').map(Number), [y1, m1, d1] = to.split('-').map(Number);
+  const start = sweph.julday(y0, m0, d0, 12, C.SE_GREG_CAL), end = sweph.julday(y1, m1, d1, 12, C.SE_GREG_CAL);
+  const out: SkyDay[] = [];
+  for (let jd = start; jd <= end + 1e-6; jd += 1) {
+    const bodies: SkyDay['bodies'] = {};
+    for (const [code, id] of SLOW) {
+      const r = sweph.calc_ut(jd, id, FLAGS);
+      if (r.flag < 0) throw new EphemerisError(`Không tính được vị trí ${code}: ${r.error}`);
+      bodies[code] = { lon: r.data[0], speed: r.data[3] };
+    }
+    const g = sweph.revjul(jd, C.SE_GREG_CAL);
+    out.push({ date: `${g.year}-${String(g.month).padStart(2, '0')}-${String(g.day).padStart(2, '0')}`, bodies });
+  }
+  return out;
 }

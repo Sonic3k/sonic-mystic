@@ -331,19 +331,47 @@ test('a written reading checked against the weighing', () => {
   assert.ok(!warn.some(x => /làm lý do/.test(x)));
 });
 
-test('a Nhận định: plain prose, long enough to be a reading', async () => {
+test('a Luận giải given to the person: plain words, its parts named for what in life they are about', async () => {
   const R = await import('../dist/readings.js');
-  let warn = R.checkSummary([{ title: 'Con người', items: [{ layer: 'added', text: 'Mặt Trời lệch 1°17′, 3°02′ và 6°56′ (hk.b828).' }] }]);
-  assert.ok(warn.some(x => /chữ/.test(x)) && warn.some(x => /số đo độ/.test(x)) && warn.some(x => /mã nguồn/.test(x)));
-  // eleven paragraphs of a hundred words: a reading's length, a paragraph each
-  const para = Array.from({ length: 100 }, (_, i) => (i % 12 ? 'chữ' : 'Bạn')).join(' ');
-  const secs = Array.from({ length: 11 }, (_, i) => ({ title: `Đoạn ${i + 1}`, items: [{ layer: 'added', text: para }] }));
+  let warn = R.checkSummary([{ title: 'Mặt Trời Bảo Bình', items: [{ layer: 'added', text: 'Mặt Trời lệch 1°17′, 3°02′; bài test cho 45 điểm, theo lời cô (hk.b828).' }] }]);
+  for (const re of [/chữ/, /số đo độ/, /mã nguồn/, /tiêu đề là tên vị trí/, /bài test/, /tên nguồn/]) assert.ok(warn.some(x => re.test(x)), re.source);
+  // eleven paragraphs of a hundred words, each an item, under parts named for life: a reading's length, nothing to say
+  const para = Array.from({ length: 100 }, (_, i) => (i % 12 ? 'chữ' : 'Anh')).join(' ');
+  const parts = [['Con người', 3], ['Sự nghiệp', 3], ['Tiền bạc', 1], ['Tình cảm và hôn nhân', 2], ['Năm 2026', 1], ['Lời khuyên', 1]];
+  const secs = parts.map(([title, n]) => ({ title, items: Array.from({ length: n }, () => ({ layer: 'added', text: para })) }));
   assert.deepEqual(R.checkSummary(secs), []);
-  // the page shows a section as one paragraph: two in one section, or one far too long, is said
+  // two paragraphs in one item, or one far too long, is said
   warn = R.checkSummary([{ title: 'Con người', items: [{ layer: 'added', text: `${para}\n\nĐoạn hai.` }] }, ...secs]);
   assert.ok(warn.some(x => /nhiều đoạn/.test(x)));
-  warn = R.checkSummary([{ title: 'Con người', items: [{ layer: 'added', text: Array(11).fill(para).join(' ') }] }]);
+  warn = R.checkSummary([{ title: 'Con người', items: [{ layer: 'added', text: Array(4).fill(para).join(' ') }] }, ...secs]);
   assert.ok(warn.some(x => /quá dài/.test(x)));
+});
+
+test('transits (khách tinh): the houses a slow planet passes, the days it is exact, the day it turns', () => {
+  // a sky of 40 days: Thổ tinh walks over Oprah's AC (29° Nhân Mã) at 0.2° a day, stands, and walks back;
+  // Mộc tinh passes over its own place (hồi vị) at 0.1° a day
+  const ac = chart.placements.asc.lon, jup = chart.placements.jupiter.lon;
+  const day = i => new Date(Date.UTC(2026, 0, 1 + i)).toISOString().slice(0, 10);
+  const days = Array.from({ length: 40 }, (_, i) => {
+    const back = i >= 20, s = back ? ac + 1.75 - 0.2 * (i - 19) : ac - 2.05 + 0.2 * i;
+    return { date: day(i), bodies: { saturn: { lon: (s + 360) % 360, speed: back ? -0.2 : 0.2 }, jupiter: { lon: jup - 0.55 + 0.1 * i, speed: 0.1 } } };
+  });
+  const t = A.transitsOf(chart, days);
+  assert.equal(t.from, '2026-01-01');
+  assert.equal(t.to, day(39));
+  const sat = t.stays.filter(s => s.body === 'saturn');
+  assert.deepEqual([sat[0].house, sat.at(-1).house], [12, 12]);
+  assert.ok(sat.some(s => s.house === 1 && s.sign === 'capricorn'));
+  assert.match(sat[0].text, /^Sao Thổ ở Nhân Mã, cung 12: 1\/1\/2026 – \d+\/1\/2026$/);
+  // over the AC and back: two passes in orb, each exact once
+  const onAc = t.contacts.filter(c => c.body === 'saturn' && c.target === 'asc' && c.aspect === 'conjunction');
+  assert.equal(onAc.length, 2);
+  assert.ok(onAc.every(c => c.exact.length === 1 && c.from <= c.exact[0] && c.exact[0] <= c.to));
+  assert.match(onAc[0].text, /^Sao Thổ đồng vị AC gốc: .+, đúng góc \d+\/1\/2026$/);
+  assert.deepEqual(t.stations.map(s => [s.body, s.date, s.turns]), [['saturn', day(20), 'retro']]);
+  const back = t.contacts.find(c => c.body === 'jupiter' && c.target === 'jupiter');
+  assert.ok(back && back.exact.length === 1 && /\(hồi vị\)/.test(back.text));
+  assert.deepEqual(A.transitLines(t).slice(0, t.stays.length), t.stays.map(s => s.text));
 });
 
 test('the weighting rules cite passages of the sources, and say where a book disagrees', () => {

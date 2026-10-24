@@ -57,9 +57,9 @@ export function checkAstrologyReading(sections: WrittenSectionIn[], w: Weighing)
   return out;
 }
 
-/** how a Chiêm tinh reading is written: the parts, the weights, the sources; with the chart's own weighing beside it */
-export const ASTROLOGY_READING_SPEC = `Luận giải Chiêm tinh (scope "synthesis")
-- Là phần tra cứu có nguồn, có cân: mỗi phần đọc một nhóm yếu tố; ý nào kể lại nguồn thì layer "primary" và refs là các đoạn nó kể lại; ý của người viết là "added".
+/** how a Chiêm tinh Căn cứ is written (the parts, the weights, the sources), and the Luận giải written from it */
+export const ASTROLOGY_READING_SPEC = `Căn cứ Chiêm tinh (scope "synthesis")
+- Là phần tra cứu có nguồn, có cân, để kiểm bài Luận giải (scope "summary") lấy từng ý từ đâu: mỗi phần đọc một nhóm yếu tố; ý nào kể lại nguồn thì layer "primary" và refs là các đoạn nó kể lại; ý của người viết là "added".
 - refs: mã câu luận lá số này khớp, hoặc bất kỳ đoạn nào của nguồn theo khối "<nguồn>.b<dòng>" (hk, hk-keywords, hk-dominant, hk-aries, hk-notes, tierney, woolfolk, books, cùng các nguồn đã nạp). Trích đúng ý đoạn; phân biệt lời cô Hương Kiều, ghi chép của lớp (hk-notes: học viên ghi, không phải lời cô viết), lời Tierney (12 dấu hiệu trong giáo trình của cô), lời Woolfolk, và các sách khác (books: Forrest, Cunningham, Heindel, Rudhyar, Leo, Libra, Claude dịch) — không gán lời sách cho cô.
 - Phần đầu "Cách cân" (weight intro): bộ luật dưới đây, nói ngắn, dẫn đoạn nguồn.
 - Mỗi phần có weight theo luật cân của lá số (plan: weights), basis lấy từ reasons của yếu tố (ngắn, mỗi dòng dưới 160 ký tự), factors là id các yếu tố nó đọc — để bộ kiểm tra đối chiếu.
@@ -68,6 +68,7 @@ export const ASTROLOGY_READING_SPEC = `Luận giải Chiêm tinh (scope "synthes
 - Điểm có attachedTo thì đọc trong phần của yếu tố ấy, như nét tô thêm — không thành yếu tố chi phối riêng.
 - Ít tác dụng: chỉ những gì luật cân xếp vào đó (góc chiếu lỏng đứng riêng, hành tinh yếu mọi mặt); mỗi dòng một câu. Không hạ vì «không phải hành tinh», «bài test không tính», điểm test thấp, hay Tù, Tử một mình.
 - Bài test nhân tố trội chỉ gọi tên mẫu người hành tinh; ô cộng 2–5 điểm thì nêu ra để người đọc tự cân.
+- Vận năm xem và năm sau (weight current, sau Tô thêm): khách tinh trong plan.transits — Mộc tinh, Thổ tinh, Thiên Vương, Hải Vương, Diêm Vương, như cô định nghĩa (hk.b815; hồi vị hk.b821): cung nó đi qua và từ ngày nào đến ngày nào, góc nó chạm vào hành tinh và AC, MC gốc cùng ngày đúng góc, ngày đứng lại đổi chiều. Nguồn không có chương riêng về cách luận transit: nghĩa của hành tinh và cung lấy theo bảng từ khóa của cô (hk-keywords), có dẫn; phần ghép là ý thêm (added). Bài Luận giải lấy phần vận năm từ đây, có mốc tháng năm.
 - Giờ sinh ước lượng: caution ghi khoảng giờ giữ nguyên (window) và những gì đổi trong khoảng ấy (varies của từng yếu tố); yếu tố sát nóc cung thì nói rõ.
 - Giữ nguyên lời nguồn; giọng nhẹ nhàng với chuyện bệnh tật, tai nạn, hôn nhân đổ vỡ, như điều nên lưu tâm.
 

@@ -427,6 +427,11 @@ button.tv-edited { padding: 0; cursor: pointer; text-decoration: underline dotte
 .nd-main .byline { margin: 16px 0 6px; }
 .nd-p { font-family: var(--body); font-size: calc(var(--fs-body) + 1.5px); line-height: 1.74; color: var(--ink); margin-top: 1.05em; hanging-punctuation: first; text-wrap: pretty; scroll-margin-top: calc(var(--sticky) + 16px); }
 .nd-lead { font-family: var(--display); font-weight: 600; color: var(--accent); margin-right: .2em; }
+.nd-sec { scroll-margin-top: calc(var(--sticky) + 16px); }
+.nd-t { font-family: var(--display); font-weight: 600; font-size: calc(var(--fs-body) + 6px); line-height: 1.25; color: var(--accent); margin-top: 1.6em; }
+.nd-sec:first-of-type .nd-t { margin-top: 1.1em; }
+.nd-t + .nd-p { margin-top: .45em; }
+.nd-caution { margin-top: 2em; }
 .nd-aside { position: sticky; top: calc(var(--sticky) + 12px); border-top: 2px solid var(--accent); padding-top: 14px; min-width: 0; }
 .nd-aside h4 { font-size: 12.5px; font-weight: 600; color: var(--ink-3); margin-bottom: 6px; }
 .nd-aside .toc { position: static; }

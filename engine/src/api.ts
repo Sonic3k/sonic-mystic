@@ -2,7 +2,7 @@
    Types only — the API builds these objects, every web reads them. */
 import type { BirthInput, Chart, ChartOptions, Principle, Tone, View } from './tuvi/index.js';
 import type { NumerologyChart, ParaRole, RuleKind, Topic } from './numerology/index.js';
-import type { AstroChart, RuleKind as AstrologyRuleKind, Topic as AstrologyTopic, WeighRule, Weighing } from './astrology/index.js';
+import type { AstroChart, RuleKind as AstrologyRuleKind, Topic as AstrologyTopic, Transits, WeighRule, Weighing } from './astrology/index.js';
 
 /** grandma's voice (a family source) or anything added on top of it (supplement, other books, AI) */
 export type Layer = 'primary' | 'added';
@@ -169,11 +169,11 @@ export interface AiSectionDto {
 }
 export interface AiReadingDto {
   id: string;
-  /** the profile it reads; null for one written of the person as a whole (the Nhận định chung) */
+  /** the profile it reads; null for one written of the person as a whole (the Nhận định) */
   profileId: string | null;
   subjectId: string;
-  /** a profile: tử vi "overview", a palace, "Thân", "han-YYYY"; nhân số học, chiêm tinh "synthesis"; any "summary" (the
-      Nhận định, read first). The person: "summary" */
+  /** a profile: tử vi "overview", a palace, "Thân", "han-YYYY"; nhân số học, chiêm tinh "synthesis" (the Căn cứ); any
+      "summary" (the Luận giải given to the person, read first). The person: "summary" (the Nhận định) */
   scope: string; viewYear: number;
   /** who wrote it: 'ai' (the app's AI call) or 'claude' (written with Claude and saved here) */
   author: string;
@@ -196,6 +196,9 @@ export interface ReadingPlanDto {
   /** chiêm tinh: the minutes around the birth time within which the houses and signs read stay the same */
   window: { from: string; to: string; before: number; after: number; capped: boolean } | null;
   timeApprox: boolean;
+  /** chiêm tinh: the slow planets over the chart from the start of the year read to the end of the next (the period
+      a reading's "năm nay" speaks of) */
+  transits: Transits | null;
 }
 export interface AiStatusDto { ai: boolean; model: string }
 /** a reading written elsewhere (with Claude) and saved to a profile: each idea that retells the book cites its passages */

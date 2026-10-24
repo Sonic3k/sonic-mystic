@@ -295,11 +295,11 @@ export class PeopleController {
   @HttpCode(204)
   async deleteSubject(@Param('id') id: string) { await this.people.deleteSubject(id); }
 
-  /** the readings of the person as a whole (the Nhận định chung, written from all their profiles) */
+  /** the readings of the person as a whole (the Nhận định, written from all their profiles) */
   @Get('subjects/:id/readings')
   subjectReadings(@Param('id') id: string) { return this.readings.listSubject(id); }
 
-  /** saves the Nhận định chung of a person ('summary'), written with Claude; it replaces the one of the same year */
+  /** saves the Nhận định of a person ('summary'), written with Claude; it replaces the one of the same year */
   @Put('subjects/:id/readings/:scope')
   putSubjectReading(@Param('id') id: string, @Param('scope') scope: string, @Body(new ZodPipe(WrittenBody)) body: WrittenBodyT) { return this.readings.putSubject(id, scope, body); }
 
@@ -367,7 +367,7 @@ export class PeopleController {
   generate(@Param('id') id: string, @Body(new ZodPipe(AiBody)) body: z.infer<typeof AiBody>) { return this.ai.generate(id, body.scope, body.viewYear); }
 
   /** saves a reading written with Claude for one scope ('synthesis' for nhân số học and chiêm tinh; a tử vi scope; 'summary',
-      the Nhận định, for any); it replaces the one of the same scope and year */
+      the Luận giải given to the person, for any); it replaces the one of the same scope and year */
   /** what whoever writes the profile's readings needs: how they are written, and (chiêm tinh) how the chart weighs */
   @Get('profiles/:id/readings/plan')
   readingPlan(@Param('id') id: string) { return this.readings.plan(id); }
