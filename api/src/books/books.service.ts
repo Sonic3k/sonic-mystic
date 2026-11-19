@@ -4,8 +4,9 @@ import { BadRequestException, Inject, Injectable, NotFoundException } from '@nes
 import { and, asc, count, eq, gt, inArray, isNotNull, lt, sql } from 'drizzle-orm';
 import { CUC, STARS, findStar, parse, starsOf, tuViPosition, type Tone } from '@mystic/engine/tuvi';
 import { parse as parseNumerology, symbolsOf as numerologySymbolsOf } from '@mystic/engine/numerology';
+import { parse as parseAstrology, symbolsOf as astrologySymbolsOf } from '@mystic/engine/astrology';
 import type {
-  CatalogDto, EntryDto, EntrySummaryDto, LookupResultDto, NumerologyRuleDto, PassageDto, RuleDto, SearchResultDto, SetupDto, SourceDto, SymbolDto, TableDto,
+  AstrologyRuleDto, CatalogDto, EntryDto, EntrySummaryDto, LookupResultDto, NumerologyRuleDto, PassageDto, RuleDto, SearchResultDto, SetupDto, SourceDto, SymbolDto, TableDto,
 } from '@mystic/engine/api';
 import { fold } from '../common/text.js';
 import { DB, type Db } from '../db/db.js';
@@ -218,10 +219,11 @@ export class BooksService {
     return { id: p.id, key: p.key, kind: p.kind, section: p.section, ref: p.sourceRef, text: p.text, originalText: p.editedAt ? p.originalText : null, rules: [] };
   }
 
-  async editRule(code: string, patch: { text?: string; context?: string | null; condition?: string | null; tone?: string; active?: boolean; reviewNote?: string | null }): Promise<RuleDto | NumerologyRuleDto> {
+  async editRule(code: string, patch: { text?: string; context?: string | null; condition?: string | null; tone?: string; active?: boolean; reviewNote?: string | null }): Promise<RuleDto | NumerologyRuleDto | AstrologyRuleDto> {
     const [r] = await this.db.select().from(rules).where(eq(rules.code, code));
     if (!r) throw new NotFoundException(`Không có câu ${code}`);
     if (r.disciplineCode === 'numerology') return this.editNumerologyRule(r, patch);
+    if (r.disciplineCode === 'astrology') return this.editAstrologyRule(r, patch);
     const set: Partial<typeof rules.$inferInsert> = { editedAt: new Date() };
     if (patch.text !== undefined) { const t = patch.text.trim(); if (!t) throw new BadRequestException('Câu luận không được để trống'); set.text = t; }
     if (patch.context !== undefined) set.context = patch.context?.trim() || null;
@@ -279,6 +281,38 @@ export class BooksService {
     });
     this.knowledge.invalidate();
     const dto = (await this.knowledge.numerology())?.rules.get(r.code);
+    if (!dto) throw new NotFoundException(`Không có câu ${r.code}`);
+    return dto;
+  }
+
+  /** a rule of the astrology sources: its condition (checked with the astrology condition language), whether it is
+      read, a review note. Its text is its passage's — reword the passage instead. The sources' text is not in the
+      repository, so this is how a deployed API takes a corrected condition; a later bundle keeps the edit. */
+  private async editAstrologyRule(r: typeof rules.$inferSelect, patch: { text?: string; condition?: string | null; active?: boolean; reviewNote?: string | null }): Promise<AstrologyRuleDto> {
+    if (patch.text !== undefined) throw new BadRequestException('Câu của sách là chính đoạn văn: sửa đoạn văn thay vì sửa câu');
+    const set: Partial<typeof rules.$inferInsert> = { editedAt: new Date() };
+    if (patch.active !== undefined) set.active = !!patch.active;
+    if (patch.reviewNote !== undefined) set.reviewNote = patch.reviewNote?.trim() || null;
+    if (patch.condition !== undefined) {
+      const c = patch.condition?.trim();
+      if (!c) throw new BadRequestException('Câu của sách cần một điều kiện');
+      const p = parseAstrology(c);
+      if (!p.node) throw new BadRequestException(`Điều kiện chưa đúng: ${p.errors.join('; ')}`);
+      set.condition = c;
+    }
+    await this.db.transaction(async tx => {
+      await tx.update(rules).set(set).where(eq(rules.id, r.id));
+      if (set.condition !== undefined) {
+        await tx.delete(ruleSymbols).where(eq(ruleSymbols.ruleId, r.id));
+        const codes = [...astrologySymbolsOf(parseAstrology(set.condition!).node)];
+        if (codes.length) {
+          const syms = await tx.select({ id: symbols.id }).from(symbols).where(and(eq(symbols.disciplineCode, 'astrology'), inArray(symbols.code, codes)));
+          if (syms.length) await tx.insert(ruleSymbols).values(syms.map(s => ({ ruleId: r.id, symbolId: s.id })));
+        }
+      }
+    });
+    this.knowledge.invalidate();
+    const dto = (await this.knowledge.astrology())?.rules.get(r.code);
     if (!dto) throw new NotFoundException(`Không có câu ${r.code}`);
     return dto;
   }

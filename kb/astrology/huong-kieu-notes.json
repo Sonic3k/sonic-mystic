@@ -302,7 +302,7 @@
   },
   "58": {
    "kind": "rule",
-   "when": "focus_house(7) & cusp(7, scorpio)",
+   "when": "focus_house(7) & cusp(7, aquarius)",
    "topic": "house"
   },
   "59": {
@@ -312,7 +312,7 @@
   },
   "60": {
    "kind": "rule",
-   "when": "focus_house(10) & cusp(10, aquarius)",
+   "when": "focus_house(10) & cusp(10, scorpio)",
    "topic": "house"
   },
   "61": {
@@ -322,17 +322,17 @@
   },
   "62": {
    "kind": "rule",
-   "when": "focus_house(7) & cusp(7, sagittarius)",
+   "when": "focus_house(7) & cusp(7, pisces)",
    "topic": "house"
   },
   "63": {
    "kind": "rule",
-   "when": "focus_house(4) & cusp(4, virgo)",
+   "when": "focus_house(4) & cusp(4, scorpio)",
    "topic": "house"
   },
   "64": {
    "kind": "rule",
-   "when": "focus_house(10) & cusp(10, pisces)",
+   "when": "focus_house(10) & cusp(10, sagittarius)",
    "topic": "house"
   },
   "65": {
