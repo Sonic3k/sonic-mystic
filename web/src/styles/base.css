@@ -198,7 +198,9 @@ html[data-room="astro"] .em-astro { color: var(--gold-l); box-shadow: inset 0 0 
 .rd-h { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 16px; align-items: start; margin-bottom: 18px; }
 .rd-h h2 { font-family: var(--display); font-weight: 600; font-size: 27px; line-height: 1.22; text-wrap: balance; }
 .rd-keys { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.key { font-size: 13px; line-height: 1; padding: 6px 10px; color: var(--ink); background: var(--sheet-2); border-radius: var(--btn-r); white-space: nowrap; }
+/* a long key (a Căn cứ title runs up to 200 characters) wraps inside its chip instead of pushing the page sideways on a
+   phone; a short one keeps one line and the same height as before */
+.key { font-size: 13px; line-height: 1.25; padding: 4px 10px; color: var(--ink); background: var(--sheet-2); border-radius: var(--btn-r); max-width: 100%; overflow-wrap: anywhere; }
 .rd-p { position: relative; }
 .rd-p + .rd-p { margin-top: 1.05em; }
 .rd-p p { font-family: var(--body); font-size: var(--fs-body); line-height: var(--lh-body); color: var(--ink); hanging-punctuation: first; }
