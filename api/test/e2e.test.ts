@@ -6,7 +6,7 @@ import { after, before, describe, test } from 'node:test';
 import { gzipSync } from 'node:zlib';
 import pg from 'pg';
 import type {
-  AiReadingDto, AstrologyBookDto, AstrologyChartDto, AstrologyEntryDto, AstrologyLookupDto, AstrologyReadingDto, BriefDto, EntryDto, NumerologyBookDto,
+  AiReadingDto, AstrologyBookDto, AstrologyChartDto, AstrologyEntryDto, AstrologyLookupDto, AstrologyReadingDto, AstrologyRuleDto, BriefDto, EntryDto, NumerologyBookDto,
   NumerologyEntryDto, NumerologyLookupDto, NumerologyReadingDto, ProfileDto, ReadingPlanDto, SearchResultDto, SourceDto, SubjectDto, TuViReadingDto,
 } from '@mystic/engine/api';
 import { jsonIn, scopeOk } from '../src/ai/ai.service.js';
@@ -417,6 +417,24 @@ describe('mystic api', { skip: !adminUrl && 'TEST_DATABASE_URL not set' }, () =>
       assert.ok(ch.data.sections[0].passages.length > 0);
       assert.ok(ch.data.sections.length > 12 && ch.data.sections.slice(1).every(x => x.passages.length === 0 && x.depth === 1));
       assert.ok(ch.data.sections.some(x => x.title === 'Bảo Bình (20/1 – 18/2)'));
+    });
+
+    test('a rule of the sources takes a corrected condition, checked with the astrology language, and keeps it', async () => {
+      // the class's notes put «DC Bảo Bình» in the AC Kim Ngưu group; the row speaks of a DC in Aquarius
+      const code = 'hk-notes.b58';
+      assert.equal((await api(`/rules/${code}`, { condition: 'in(Mặt Trời)' }, 'PATCH')).status, 400);
+      assert.equal((await api(`/rules/${code}`, { text: 'Câu khác.' }, 'PATCH')).status, 400);
+      const r = await api<AstrologyRuleDto>(`/rules/${code}`, { condition: 'focus_house(7) & cusp(7, aquarius)' }, 'PATCH');
+      assert.equal(r.status, 200);
+      assert.equal(r.data.when, 'focus_house(7) & cusp(7, aquarius)');
+      assert.equal(r.data.edited, true);
+      const pool = createPool(appUrl, false);
+      const again = await importAstrology(createDb(pool), readAstrologyBundle(astrologyDir)!, { force: true });
+      await pool.end();
+      assert.ok(again.keptEdited >= 1);
+      // the bundle again: the edit stays
+      const kept = await api<AstrologyRuleDto>(`/rules/${code}`, { reviewNote: 'vở ghi xếp câu này vào nhóm AC Kim Ngưu' }, 'PATCH');
+      assert.equal(kept.data.when, 'focus_house(7) & cusp(7, aquarius)');
     });
 
     test('profiles: a chart of a person, a reading written with Claude, the brief', async () => {
