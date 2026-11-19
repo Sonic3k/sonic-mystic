@@ -15,7 +15,9 @@ const ASPECT_NAME: Record<TransitAspect, string> = { conjunction: 'đồng vị'
 /** what a transit touches: the planets and the angles (AC, MC) */
 const TARGETS: BodyCode[] = ['sun', 'moon', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto', 'asc', 'mc'];
 
-/** the sky on a day (noon UT): each slow planet's longitude and its speed in degrees a day */
+/** the sky of a local day, taken at its end (the API's skyDays: 24:00 in Vietnam): each slow planet's longitude and its
+    speed in degrees a day. What happens between two days' samples — an exact aspect, a change of house, a station —
+    is dated the later day, which is the day it happens on. */
 export interface SkyDay { date: string; bodies: Partial<Record<TransitBody, { lon: number; speed: number }>> }
 /** a planet's stay in a house of the chart (and the sign it moves through there) */
 export interface TransitStay { body: TransitBody; house: number | null; sign: SignCode; from: string; to: string; text: string }
